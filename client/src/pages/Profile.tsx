@@ -18,7 +18,7 @@ const Profile = () => {
       </motion.h1>
 
       <motion.h2 
-        className="text-2xl font-medium tracking-tight mb-6"
+        className="text-2xl font-bold tracking-tight mb-6 text-[#7343d0]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -34,27 +34,27 @@ const Profile = () => {
       >
         <p>
           Today, I am leading Finance & Strategy for the Financial Partnerships team at{" "}
-          <a href="https://cash.app/" className="text-[#482a83] hover:underline transition-colors">
+          <a href="https://cash.app/" className="text-[#7343d0] underline hover:opacity-80 transition-opacity">
             Cash App
           </a>{" "}
           where we're expanding financial access to help users do more with their money. Previously I built Strategic Finance at{" "}
-          <a href="https://www.hudsonrivertrading.com/" className="text-[#482a83] hover:underline transition-colors">
+          <a href="https://www.hudsonrivertrading.com/" className="text-[#7343d0] underline hover:opacity-80 transition-opacity">
             HRT
           </a>{" "}
-          which uses algorithms to drive efficiency in markets. Previously, I was at{" "}
-          <a href="https://www.unit.co/" className="text-[#482a83] hover:underline transition-colors">
+          which uses algorithms to drive efficiency in markets. Prior to that, I drove financial partnerships at{" "}
+          <a href="https://www.unit.co/" className="text-[#7343d0] underline hover:opacity-80 transition-opacity">
             Unit
           </a>
           , which embeds financial features into products. Before that, I built and led the Strategic Finance function at{" "}
-          <a href="https://www.chime.com/" className="text-[#482a83] hover:underline transition-colors">
+          <a href="https://www.chime.com/" className="text-[#7343d0] underline hover:opacity-80 transition-opacity">
             Chime
           </a>
           . Earlier, I was the first finance hire at{" "}
-          <a href="https://sift.com/" className="text-[#482a83] hover:underline transition-colors">
+          <a href="https://sift.com/" className="text-[#7343d0] underline hover:opacity-80 transition-opacity">
             Sift
           </a>
           . I got my start in investment banking in the Financial Institutions Group at{" "}
-          <a href="https://www.jpmorgan.com/investment-banking" className="text-[#482a83] hover:underline transition-colors">
+          <a href="https://www.jpmorgan.com/investment-banking" className="text-[#7343d0] underline hover:opacity-80 transition-opacity">
             JP Morgan
           </a>{" "}
           covering market structure and asset management.
@@ -64,28 +64,28 @@ const Profile = () => {
           In my free time, I write over-engineered threads on{" "}
           <a
             href="https://x.com/heysamir_"
-            className="text-[#482a83] hover:underline transition-colors"
+            className="text-[#7343d0] underline hover:opacity-80 transition-opacity"
           >
             Twitter
           </a>
           , share perspectives on{" "}
           <a
             href="https://perspectives.samir.xyz/"
-            className="text-[#482a83] hover:underline transition-colors"
+            className="text-[#7343d0] underline hover:opacity-80 transition-opacity"
           >
             Substack
           </a>
           {" "}and write over-engineered fintech posts at{" "}
           <a
             href="https://interspace.samir.xyz/"
-            className="text-[#482a83] hover:underline transition-colors"
+            className="text-[#7343d0] underline hover:opacity-80 transition-opacity"
           >
             Interspace
           </a>
           . I'm also learning to{" "}
           <a
             href="https://github.com/hey-samir"
-            className="text-[#482a83] hover:underline transition-colors"
+            className="text-[#7343d0] underline hover:opacity-80 transition-opacity"
           >
             code at the speed of thought
           </a>
