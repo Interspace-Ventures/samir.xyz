@@ -9,7 +9,7 @@ const Profile = () => {
       transition={{ duration: 0.5 }}
     >
       <motion.h1 
-        className="text-4xl font-bold mb-8"
+        className="text-5xl font-bold tracking-tight mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -18,7 +18,7 @@ const Profile = () => {
       </motion.h1>
 
       <motion.h2 
-        className="text-2xl font-medium mb-6"
+        className="text-2xl font-medium tracking-tight mb-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -27,7 +27,7 @@ const Profile = () => {
       </motion.h2>
 
       <motion.div 
-        className="space-y-4 text-lg"
+        className="space-y-4 text-lg tracking-normal"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
