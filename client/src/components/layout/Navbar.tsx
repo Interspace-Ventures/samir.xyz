@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [location] = useLocation();
@@ -12,30 +13,48 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
+    <motion.nav 
+      className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto px-4">
         <div className="h-16 flex items-center justify-between">
           <Link href="/">
-            <a className="text-black text-xl font-medium">Hey Samir</a>
+            <a className="text-black text-xl font-medium transition-colors hover:text-gray-600">
+              Hey Samir
+            </a>
           </Link>
-          
+
           <div className="hidden md:flex space-x-8">
             {links.map((link) => (
               <Link key={link.href} href={link.href}>
-                <a
+                <motion.a
                   className={cn(
-                    "text-sm tracking-wider hover:text-gray-600 transition-colors",
+                    "text-sm tracking-wider hover:text-gray-600 transition-colors relative",
                     location === link.href ? "text-black" : "text-gray-500"
                   )}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {link.label}
-                </a>
+                  {location === link.href && (
+                    <motion.div
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-black"
+                      layoutId="underline"
+                    />
+                  )}
+                </motion.a>
               </Link>
             ))}
           </div>
-          
-          <div className="md:hidden">
-            {/* Mobile menu button - could be expanded in future */}
+
+          <motion.div 
+            className="md:hidden"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <button className="text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,10 +71,10 @@ const Navbar = () => {
                 />
               </svg>
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

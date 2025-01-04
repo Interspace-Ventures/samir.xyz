@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const Portfolio = () => {
   const companies = [
     { name: "AFAR", logo: "AFAR" },
@@ -8,26 +10,66 @@ const Portfolio = () => {
     { name: "GEM", logo: "GEM" }
   ];
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="max-w-4xl mx-auto py-12">
-      <h1 className="text-3xl font-bold mb-6">Portfolio</h1>
-      
-      <p className="text-lg mb-12">
+    <motion.div 
+      className="max-w-4xl mx-auto py-12"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.h1 
+        className="text-3xl font-bold mb-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        Portfolio
+      </motion.h1>
+
+      <motion.p 
+        className="text-lg mb-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
         I advise and invest in ambitious teams building innovative products who focus on
         unit economics optimized business models.
-      </p>
+      </motion.p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
         {companies.map((company) => (
-          <div
+          <motion.div
             key={company.name}
-            className="flex items-center justify-center p-8 bg-white border border-gray-200 rounded-lg"
+            className="flex items-center justify-center p-8 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+            variants={item}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <span className="text-xl font-medium">{company.logo}</span>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
