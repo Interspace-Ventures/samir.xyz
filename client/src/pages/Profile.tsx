@@ -33,24 +33,28 @@ const Profile = () => {
         transition={{ delay: 0.4 }}
       >
         <p>
-          Today, I am building Strategic Finance at{" "}
-          <a href="https://hrt.com" className="text-blue-600 hover:underline transition-colors">
+          Today, I am leading Finance & Strategy for the Financial Partnerships team at{" "}
+          <a href="https://cash.app/" className="text-[#482a83] hover:underline transition-colors">
+            Cash App
+          </a>{" "}
+          where we're expanding financial access to help users do more with their money. Previously I built Strategic Finance at{" "}
+          <a href="https://www.hudsonrivertrading.com/" className="text-[#482a83] hover:underline transition-colors">
             HRT
           </a>{" "}
-          where we're using algorithms to drive efficiency in markets. Previously, I was at{" "}
-          <a href="https://unit.co" className="text-blue-600 hover:underline transition-colors">
+          which uses algorithms to drive efficiency in markets. Previously, I was at{" "}
+          <a href="https://www.unit.co/" className="text-[#482a83] hover:underline transition-colors">
             Unit
           </a>
           , which embeds financial features into products. Before that, I built and led the Strategic Finance function at{" "}
-          <a href="https://chime.com" className="text-blue-600 hover:underline transition-colors">
+          <a href="https://www.chime.com/" className="text-[#482a83] hover:underline transition-colors">
             Chime
           </a>
           . Earlier, I was the first finance hire at{" "}
-          <a href="https://sift.com" className="text-blue-600 hover:underline transition-colors">
+          <a href="https://sift.com/" className="text-[#482a83] hover:underline transition-colors">
             Sift
           </a>
           . I got my start in investment banking in the Financial Institutions Group at{" "}
-          <a href="https://jpmorgan.com" className="text-blue-600 hover:underline transition-colors">
+          <a href="https://www.jpmorgan.com/investment-banking" className="text-[#482a83] hover:underline transition-colors">
             JP Morgan
           </a>{" "}
           covering market structure and asset management.
@@ -59,19 +63,33 @@ const Profile = () => {
         <p>
           In my free time, I write over-engineered threads on{" "}
           <a
-            href="https://twitter.com/samirm"
-            className="text-blue-600 hover:underline transition-colors"
+            href="https://x.com/heysamir_"
+            className="text-[#482a83] hover:underline transition-colors"
           >
             Twitter
-          </a>{" "}
-          and fintech posts at{" "}
+          </a>
+          , share perspectives on{" "}
           <a
-            href="https://interspace.samir.xyz"
-            className="text-blue-600 hover:underline transition-colors"
+            href="https://perspectives.samir.xyz/"
+            className="text-[#482a83] hover:underline transition-colors"
+          >
+            Substack
+          </a>
+          {" "}and write over-engineered fintech posts at{" "}
+          <a
+            href="https://interspace.samir.xyz/"
+            className="text-[#482a83] hover:underline transition-colors"
           >
             Interspace
           </a>
-          .
+          . I'm also learning to{" "}
+          <a
+            href="https://github.com/hey-samir"
+            className="text-[#482a83] hover:underline transition-colors"
+          >
+            code at the speed of thought
+          </a>
+          {" "}via Replit AI.
         </p>
       </motion.div>
     </motion.div>
