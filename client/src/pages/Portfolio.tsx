@@ -60,10 +60,25 @@ const Portfolio = () => {
         {companies.map((company) => (
           <motion.div
             key={company.name}
-            className="flex items-center justify-center p-8 bg-white border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+            className="flex items-center justify-center p-8 bg-white border border-gray-200 rounded-lg transition-all duration-300 ease-out"
             variants={item}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ 
+              scale: 1.05, 
+              rotate: 1,
+              boxShadow: "0 10px 30px -10px rgba(0,0,0,0.1)",
+              borderColor: "rgba(0,0,0,0.2)",
+              y: -5
+            }}
+            whileTap={{ 
+              scale: 0.95,
+              rotate: -1,
+              boxShadow: "0 5px 15px -5px rgba(0,0,0,0.1)",
+              y: 0
+            }}
+            initial={{
+              boxShadow: "0 0 0 0 rgba(0,0,0,0)",
+              y: 0
+            }}
           >
             <span className="text-xl font-medium">{company.logo}</span>
           </motion.div>
