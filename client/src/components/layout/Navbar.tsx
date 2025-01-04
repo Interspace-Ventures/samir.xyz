@@ -41,7 +41,7 @@ const Navbar = () => {
                   {link.label}
                   {location === link.href && (
                     <motion.div
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-black"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#7343d0]"
                       layoutId="underline"
                     />
                   )}
