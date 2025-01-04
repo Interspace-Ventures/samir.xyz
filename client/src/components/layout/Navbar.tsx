@@ -22,7 +22,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="h-16 flex items-center justify-between">
           <Link href="/">
-            <a className="text-black text-lg font-medium tracking-tight transition-colors hover:text-gray-600">
+            <a className="text-black text-lg font-bold tracking-tight transition-colors hover:text-gray-600">
               Hey - I'm Samir
             </a>
           </Link>
