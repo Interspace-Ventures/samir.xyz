@@ -14,13 +14,13 @@ function App() {
           <Route path="/portfolio" component={Portfolio} />
           <Route path="/interspace">
             {() => {
-              window.location.href = "https://interspace.samir.xyz";
+              window.location.href = "https://interspace.samir.xyz/";
               return null;
             }}
           </Route>
           <Route path="/perspectives">
             {() => {
-              window.location.href = "https://perspectives.samir.xyz";
+              window.location.href = "https://perspectives.samir.xyz/";
               return null;
             }}
           </Route>
