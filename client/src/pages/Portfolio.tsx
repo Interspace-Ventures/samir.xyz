@@ -133,10 +133,10 @@ const Portfolio = () => {
                 >
                   <div className="aspect-video flex items-center justify-center p-4">
                     {imageStates[company.name] === false ? (
-                      // Error state
-                      <div className="flex flex-col items-center justify-center text-gray-400">
-                        <ImageOff className="w-8 h-8 mb-2" />
-                        <span className="text-sm">Failed to load</span>
+                      // Error state - show company name instead of error icon
+                      <div className="flex flex-col items-center justify-center text-gray-600">
+                        <span className="text-xl font-semibold text-center">{company.name}</span>
+                        <span className="text-sm text-gray-400 mt-2">{company.category}</span>
                       </div>
                     ) : (
                       // Image with loading state
