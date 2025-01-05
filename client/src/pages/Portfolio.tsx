@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { companies, type CompanyCategory } from "@/types/company";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ImageOff } from "lucide-react";
 
 const Portfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
@@ -77,12 +76,12 @@ const Portfolio = () => {
           <motion.button
             key={category}
             onClick={() => handleCategoryChange(category)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
               ${selectedCategory === category 
                 ? 'bg-[#482a83] text-white' 
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.95 }}
           >
             {category}
@@ -125,19 +124,34 @@ const Portfolio = () => {
                 transition={{ duration: 0.3 }}
                 className="group"
               >
-                <a 
+                <motion.a 
                   href={company.url}
                   target="_blank"
                   rel="noopener noreferrer" 
-                  className="block p-6 bg-white border border-gray-200 rounded-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                  className="block p-6 bg-white border border-gray-200 rounded-lg transition-all duration-300"
+                  whileHover={{ 
+                    y: -4,
+                    boxShadow: "0 10px 30px -15px rgba(0, 0, 0, 0.2)",
+                    transition: { duration: 0.2, ease: "easeOut" }
+                  }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <div className="aspect-video flex items-center justify-center p-4">
+                  <motion.div 
+                    className="aspect-video flex items-center justify-center p-4"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     {imageStates[company.name] === false ? (
                       // Error state - show company name instead of error icon
-                      <div className="flex flex-col items-center justify-center text-gray-600">
+                      <motion.div 
+                        className="flex flex-col items-center justify-center text-gray-600"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <span className="text-xl font-semibold text-center">{company.name}</span>
                         <span className="text-sm text-gray-400 mt-2">{company.category}</span>
-                      </div>
+                      </motion.div>
                     ) : (
                       // Image with loading state
                       <motion.img 
@@ -152,8 +166,8 @@ const Portfolio = () => {
                         transition={{ duration: 0.3 }}
                       />
                     )}
-                  </div>
-                </a>
+                  </motion.div>
+                </motion.a>
               </motion.div>
             ))
           )}
