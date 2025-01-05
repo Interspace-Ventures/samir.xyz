@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
-    "dev": "react-scripts start"
+    "dev": "react-scripts start",
+    "build": "react-scripts build"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.1",
