@@ -1,3 +1,4 @@
+
 const Portfolio = () => {
   return (
     <section id="portfolio" className="mb-20">
@@ -26,3 +27,5 @@ const Portfolio = () => {
     </section>
   );
 }
+
+export default Portfolio;
