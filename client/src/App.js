@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { ThemeProvider } from './components/theme-provider';
-import { ThemeToggle } from './components/theme-toggle';
-import './index.css';
+import { ThemeProvider } from '../components/theme-provider';
+import { ThemeToggle } from '../components/theme-toggle';
+import '../css/index.css';
 
 function App() {
   return (
