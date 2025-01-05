@@ -68,7 +68,7 @@
   }
 
   * {
-    @apply border-border transition-colors duration-300;
+    @apply border-border;
   }
 
   body {
@@ -79,7 +79,7 @@
 
 /* Navigation styles */
 .nav-link {
-  @apply text-gray-900 hover:text-gray-600 dark:text-white dark:hover:text-gray-300 uppercase text-sm tracking-wider transition-colors duration-200;
+  @apply text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 uppercase text-sm tracking-wider transition-colors duration-200;
   letter-spacing: 0.1em;
 }
 
