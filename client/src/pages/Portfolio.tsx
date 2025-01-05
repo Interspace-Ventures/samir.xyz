@@ -42,6 +42,15 @@ const Portfolio = () => {
         Portfolio
       </motion.h1>
 
+      <motion.p
+        className="text-lg text-gray-600 mb-12 max-w-3xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        I advise and invest in ambitious teams building innovative products who focus on unit economics optimized business models.
+      </motion.p>
+
       {/* Category Filter Buttons */}
       <div className="flex flex-wrap gap-4 mb-12">
         {categories.map((category) => (
