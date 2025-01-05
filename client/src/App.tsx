@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react';
+import * as React from 'react';
 import { Switch, Route } from "wouter";
 import { Skeleton } from "./components/ui/skeleton";
 import { ParallaxSection } from "./components/ui/parallax-section";
 import { ThemeToggle } from "./components/theme-toggle";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <nav className="fixed top-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 z-50 transition-colors duration-300">
@@ -12,10 +12,10 @@ function App() {
           <div className="flex justify-between items-center">
             <a href="/" className="text-xl font-bold text-gray-900 dark:text-white transition-colors">HEY SAMIR</a>
             <div className="flex items-center gap-8">
-              <a href="/profile" className="nav-link">PROFILE</a>
-              <a href="/portfolio" className="nav-link">PORTFOLIO</a>
-              <a href="https://interspace.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link">INTERSPACE</a>
-              <a href="https://perspectives.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link">PERSPECTIVES</a>
+              <a href="/profile" className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 uppercase text-sm tracking-wider transition-colors duration-200">PROFILE</a>
+              <a href="/portfolio" className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 uppercase text-sm tracking-wider transition-colors duration-200">PORTFOLIO</a>
+              <a href="https://interspace.samir.xyz" target="_blank" rel="noopener noreferrer" className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 uppercase text-sm tracking-wider transition-colors duration-200">INTERSPACE</a>
+              <a href="https://perspectives.samir.xyz" target="_blank" rel="noopener noreferrer" className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 uppercase text-sm tracking-wider transition-colors duration-200">PERSPECTIVES</a>
               <ThemeToggle />
             </div>
           </div>
@@ -23,20 +23,20 @@ function App() {
       </nav>
 
       <main className="pt-20 px-4">
-        <Suspense fallback={<LoadingSkeleton />}>
+        <React.Suspense fallback={<LoadingSkeleton />}>
           <Switch>
             <Route path="/" component={Profile} />
             <Route path="/profile" component={Profile} />
             <Route path="/portfolio" component={Portfolio} />
             <Route component={NotFound} />
           </Switch>
-        </Suspense>
+        </React.Suspense>
       </main>
     </div>
   );
-}
+};
 
-function LoadingSkeleton() {
+const LoadingSkeleton: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto py-12">
       <div className="max-w-2xl">
@@ -51,9 +51,9 @@ function LoadingSkeleton() {
       </div>
     </div>
   );
-}
+};
 
-function Profile() {
+const Profile: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto py-12">
       <div className="max-w-2xl">
@@ -81,9 +81,9 @@ function Profile() {
       </div>
     </div>
   );
-}
+};
 
-function Portfolio() {
+const Portfolio: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto py-12">
       <ParallaxSection offset={20}>
@@ -97,14 +97,14 @@ function Portfolio() {
       </ParallaxSection>
     </div>
   );
-}
+};
 
-function NotFound() {
+const NotFound: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto py-12">
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors">404 - Page Not Found</h1>
     </div>
   );
-}
+};
 
 export default App;
