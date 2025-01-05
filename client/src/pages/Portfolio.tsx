@@ -5,7 +5,7 @@ import { companies, type CompanyCategory } from "@/types/company";
 const Portfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
 
-  const categories: Array<CompanyCategory | 'All'> = ['All', 'Sports & Wellness', 'CPG', 'SaaS', 'Fintech'];
+  const categories: Array<CompanyCategory | 'All'> = ['All', 'Health', 'Consumer', 'SaaS', 'Fintech'];
 
   const filteredCompanies = companies
     .sort((a, b) => a.name.localeCompare(b.name))
@@ -35,7 +35,7 @@ const Portfolio = () => {
             onClick={() => setSelectedCategory(category)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors
               ${selectedCategory === category 
-                ? 'bg-[#7343d0] text-white' 
+                ? 'bg-[#482a83] text-white' 
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             whileHover={{ scale: 1.05 }}
@@ -70,7 +70,7 @@ const Portfolio = () => {
               >
                 <div className="aspect-video flex items-center justify-center p-4">
                   <img 
-                    src={company.logo} 
+                    src={`/${company.logo}`} 
                     alt={`${company.name} logo`}
                     className="max-h-full w-auto object-contain"
                   />
