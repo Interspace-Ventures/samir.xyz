@@ -7,9 +7,9 @@ run = "npm run dev"
 channel = "stable-23_11"
 
 [deployment]
-run = ["sh", "-c", "npm run dev"]
+build = ["npm", "run", "build"]
+run = ["npm", "start"]
 deploymentTarget = "cloudrun"
-ignorePorts = false
 
 [[ports]]
 localPort = 3000
