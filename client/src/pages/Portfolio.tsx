@@ -128,7 +128,7 @@ const Portfolio = () => {
                   href={company.url}
                   target="_blank"
                   rel="noopener noreferrer" 
-                  className="block p-6 bg-white border border-gray-200 rounded-lg transition-all duration-300"
+                  className="block p-4 bg-white border border-gray-200 rounded-lg transition-all duration-300"
                   whileHover={{ 
                     y: -4,
                     boxShadow: "0 10px 30px -15px rgba(0, 0, 0, 0.2)",
@@ -137,7 +137,7 @@ const Portfolio = () => {
                   whileTap={{ scale: 0.98 }}
                 >
                   <motion.div 
-                    className="aspect-video flex items-center justify-center p-4"
+                    className="aspect-video flex items-center justify-center p-2"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -157,7 +157,7 @@ const Portfolio = () => {
                       <motion.img 
                         src={company.logo} 
                         alt={`${company.name} logo`}
-                        className="max-h-full w-auto object-contain"
+                        className="w-full h-auto max-h-[120px] object-contain"
                         loading="lazy"
                         onLoad={() => handleImageLoad(company.name)}
                         onError={() => handleImageError(company.name)}
