@@ -70,7 +70,7 @@ const Portfolio = () => {
               >
                 <div className="aspect-video flex items-center justify-center p-4">
                   <img 
-                    src={`/${company.logo}`} 
+                    src={company.logo} 
                     alt={`${company.name} logo`}
                     className="max-h-full w-auto object-contain"
                   />

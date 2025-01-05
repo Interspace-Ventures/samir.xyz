@@ -69,6 +69,18 @@ export const companies: Company[] = [
     category: 'Fintech'
   },
   {
+    name: 'Kartera',
+    url: 'https://www.kartera.com',
+    logo: 'attached_assets/Kartera.png',
+    category: 'Fintech'
+  },
+  {
+    name: 'Lunar',
+    url: 'https://drinklunar.com',
+    logo: 'attached_assets/Lunar.png',
+    category: 'Consumer'
+  },
+  {
     name: 'Maridea',
     url: 'https://marideawealth.com/',
     logo: 'attached_assets/Maridea.png',
@@ -114,7 +126,7 @@ export const companies: Company[] = [
     name: 'Soot',
     url: 'https://soot.com',
     logo: 'attached_assets/Soot.png',
-    category: 'Consumer'
+    category: 'SaaS'
   },
   {
     name: 'Sugar',
@@ -126,7 +138,7 @@ export const companies: Company[] = [
     name: 'Sundae',
     url: 'https://sundae.com',
     logo: 'attached_assets/Sundae.png',
-    category: 'Consumer'
+    category: 'Fintech'
   },
   {
     name: 'Superplastic',
