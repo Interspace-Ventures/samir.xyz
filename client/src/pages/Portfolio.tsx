@@ -13,7 +13,7 @@ const Portfolio = () => {
 
   return (
     <motion.div 
-      className="max-w-6xl mx-auto py-12 px-4"
+      className="container mx-auto py-12 px-4 sm:px-6 lg:px-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -48,7 +48,7 @@ const Portfolio = () => {
 
       {/* Company Grid */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
         layout
       >
         <AnimatePresence>
