@@ -2,6 +2,7 @@ import { Switch, Route } from "wouter";
 import Navbar from "@/components/layout/Navbar";
 import Profile from "@/pages/Profile"; 
 import Portfolio from "@/pages/Portfolio";
+import NotFound from "@/pages/NotFound";
 
 function App() {
   return (
@@ -24,9 +25,7 @@ function App() {
               return null;
             }}
           </Route>
-          <Route>
-            <Profile />
-          </Route>
+          <Route component={NotFound} />
         </Switch>
       </main>
     </div>
