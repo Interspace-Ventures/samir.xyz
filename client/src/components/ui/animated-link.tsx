@@ -19,7 +19,12 @@ export function AnimatedLink({ href, children, className, external = false }: An
 
   const content = (
     <motion.span
-      whileHover={{ y: -2 }}
+      initial="initial"
+      whileHover="hover"
+      variants={{
+        initial: { y: 0 },
+        hover: { y: -2 }
+      }}
       transition={{ duration: 0.2 }}
       className={linkStyles}
     >

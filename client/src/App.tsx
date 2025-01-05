@@ -1,6 +1,7 @@
 import { Switch, Route } from "wouter";
-import { Card, CardContent } from "./components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
+import { AnimatedLink } from "@/components/ui/animated-link";
 
 function App() {
   return (
@@ -17,8 +18,13 @@ function App() {
 
 function Home() {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center gap-4">
       <h1 className="text-4xl font-bold">Welcome to the Portfolio</h1>
+      <nav className="flex gap-4">
+        <AnimatedLink href="/projects">Projects</AnimatedLink>
+        <AnimatedLink href="/about">About</AnimatedLink>
+        <AnimatedLink href="/contact">Contact</AnimatedLink>
+      </nav>
     </div>
   );
 }
