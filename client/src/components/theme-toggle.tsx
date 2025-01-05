@@ -1,9 +1,9 @@
-import * as React from "react"
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "./theme-provider"
+import * as React from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "./theme-provider";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   return (
     <button
@@ -12,10 +12,10 @@ export function ThemeToggle() {
       aria-label="Toggle theme"
     >
       {theme === "light" ? (
-        <Moon className="h-5 w-5" />
+        <Moon className="h-5 w-5 text-foreground transition-colors" />
       ) : (
-        <Sun className="h-5 w-5" />
+        <Sun className="h-5 w-5 text-foreground transition-colors" />
       )}
     </button>
-  )
+  );
 }
