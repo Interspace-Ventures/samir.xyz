@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Switch, Route } from "wouter";
+import { Skeleton } from "./components/ui/skeleton";
 
 function App() {
   return (
@@ -19,13 +20,32 @@ function App() {
       </nav>
 
       <main className="pt-20 px-4">
-        <Switch>
-          <Route path="/" component={Profile} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/portfolio" component={Portfolio} />
-          <Route component={NotFound} />
-        </Switch>
+        <Suspense fallback={<LoadingSkeleton />}>
+          <Switch>
+            <Route path="/" component={Profile} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/portfolio" component={Portfolio} />
+            <Route component={NotFound} />
+          </Switch>
+        </Suspense>
       </main>
+    </div>
+  );
+}
+
+function LoadingSkeleton() {
+  return (
+    <div className="max-w-5xl mx-auto py-12">
+      <div className="max-w-2xl">
+        <Skeleton className="h-12 w-3/4 mb-8" />
+        <Skeleton className="h-6 w-1/2 mb-6" />
+        <div className="space-y-4">
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-11/12" />
+          <Skeleton className="h-4 w-10/12" />
+          <Skeleton className="h-4 w-9/12" />
+        </div>
+      </div>
     </div>
   );
 }
@@ -53,7 +73,9 @@ function Portfolio() {
   return (
     <div className="max-w-5xl mx-auto py-12">
       <h2 className="text-3xl font-bold mb-8">Portfolio</h2>
-      {/* Grid of portfolio items will go here */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Portfolio items will go here */}
+      </div>
     </div>
   );
 }
