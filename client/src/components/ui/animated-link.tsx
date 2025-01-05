@@ -1,6 +1,7 @@
+import * as React from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 interface AnimatedLinkProps {
   href: string;
@@ -42,7 +43,7 @@ export function AnimatedLink({ href, children, className, external = false }: An
 
   return (
     <Link href={href}>
-      {content}
+      <a className={linkStyles}>{content}</a>
     </Link>
   );
 }
