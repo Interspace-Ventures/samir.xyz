@@ -13,6 +13,7 @@
 
   body {
     @apply font-inter antialiased bg-white text-black;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 }
 
@@ -24,7 +25,7 @@
 
 /* Link styles */
 .content-link {
-  @apply text-[#482a83] hover:text-opacity-80 transition-opacity;
+  @apply text-purple hover:text-opacity-80 transition-opacity;
 }
 
 /* Custom styles for animated links */
