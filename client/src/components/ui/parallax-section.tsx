@@ -1,7 +1,5 @@
 import * as React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { cn } from "../../lib/utils";
 
 interface ParallaxSectionProps {
   children: React.ReactNode;
@@ -14,7 +12,7 @@ export function ParallaxSection({
   className,
   offset = 50 
 }: ParallaxSectionProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
@@ -26,7 +24,7 @@ export function ParallaxSection({
     <motion.div
       ref={ref}
       style={{ y }}
-      className={cn("will-change-transform", className)}
+      className={className}
     >
       {children}
     </motion.div>
