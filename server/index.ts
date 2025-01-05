@@ -10,8 +10,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Serve static files from the dist directory
-const staticPath = path.join(__dirname, '..', 'dist');
+// Serve static files from the client directory in development
+const staticPath = path.join(__dirname, '..', 'client');
 app.use(express.static(staticPath));
 
 // Log API requests
