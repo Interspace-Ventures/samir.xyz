@@ -9,10 +9,10 @@ function App() {
           <div className="flex justify-between items-center">
             <a href="/" className="text-xl font-bold text-black">HEY SAMIR</a>
             <div className="flex gap-8">
-              <a href="/profile" className="nav-link">Profile</a>
-              <a href="/portfolio" className="nav-link">Portfolio</a>
-              <a href="https://interspace.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link">Interspace</a>
-              <a href="https://perspectives.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link">Perspectives</a>
+              <a href="/profile" className="nav-link">PROFILE</a>
+              <a href="/portfolio" className="nav-link">PORTFOLIO</a>
+              <a href="https://interspace.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link">INTERSPACE</a>
+              <a href="https://perspectives.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link">PERSPECTIVES</a>
             </div>
           </div>
         </div>
@@ -35,14 +35,14 @@ function Profile() {
     <div className="max-w-5xl mx-auto py-12">
       <div className="max-w-2xl">
         <h1 className="text-5xl font-normal mb-8">Hey - I'm Samir.</h1>
-        <p className="text-lg mb-6">
+        <p className="text-xl mb-6">
           I drive business impact at fintechs.
         </p>
         <p className="text-lg mb-6 leading-relaxed">
-          Today, I am building Strategic Finance at <a href="#" className="text-[#482a83] hover:text-opacity-80">HRT</a> where we're using algorithms to drive efficiency in markets. Previously, I was at <a href="#" className="text-[#482a83] hover:text-opacity-80">Unit</a>, which embeds financial features into products. Before that, I built and led the Strategic Finance function at <a href="#" className="text-[#482a83] hover:text-opacity-80">Chime</a>. Earlier, I was the first finance hire at <a href="#" className="text-[#482a83] hover:text-opacity-80">Sift</a>. I got my start in investment banking in the Financial Institutions Group at <a href="#" className="text-[#482a83] hover:text-opacity-80">JP Morgan</a> covering market structure and asset management.
+          Today, I am building Strategic Finance at <a href="#" className="content-link">HRT</a> where we're using algorithms to drive efficiency in markets. Previously, I was at <a href="#" className="content-link">Unit</a>, which embeds financial features into products. Before that, I built and led the Strategic Finance function at <a href="#" className="content-link">Chime</a>. Earlier, I was the first finance hire at <a href="#" className="content-link">Sift</a>. I got my start in investment banking in the Financial Institutions Group at <a href="#" className="content-link">JP Morgan</a> covering market structure and asset management.
         </p>
         <p className="text-lg">
-          In my free time, I write over-engineered threads on <a href="#" className="text-[#482a83] hover:text-opacity-80">Twitter</a> and fintech posts at <a href="#" className="text-[#482a83] hover:text-opacity-80">Interspace</a>.
+          In my free time, I write over-engineered threads on <a href="#" className="content-link">Twitter</a> and fintech posts at <a href="#" className="content-link">Interspace</a>.
         </p>
       </div>
     </div>
