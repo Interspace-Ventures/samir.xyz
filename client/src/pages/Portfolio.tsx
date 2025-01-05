@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { companies, type CompanyCategory } from "@/types/company";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ImageOff } from "lucide-react";
 
 const Portfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
   const [isLoading, setIsLoading] = useState(true);
+  const [imageStates, setImageStates] = useState<Record<string, boolean>>({});
 
   const categories: Array<CompanyCategory | 'All'> = ['All', 'Health', 'Consumer', 'SaaS', 'Fintech'];
 
@@ -17,8 +19,26 @@ const Portfolio = () => {
   const handleCategoryChange = (category: CompanyCategory | 'All') => {
     setIsLoading(true);
     setSelectedCategory(category);
+    // Reset image states when changing categories
+    setImageStates({});
     // Simulate network delay
     setTimeout(() => setIsLoading(false), 500);
+  };
+
+  // Handle image load success
+  const handleImageLoad = (companyName: string) => {
+    setImageStates(prev => ({
+      ...prev,
+      [companyName]: true
+    }));
+  };
+
+  // Handle image load error
+  const handleImageError = (companyName: string) => {
+    setImageStates(prev => ({
+      ...prev,
+      [companyName]: false
+    }));
   };
 
   // Simulate initial load
@@ -112,11 +132,26 @@ const Portfolio = () => {
                   className="block p-6 bg-white border border-gray-200 rounded-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                 >
                   <div className="aspect-video flex items-center justify-center p-4">
-                    <img 
-                      src={company.logo} 
-                      alt={`${company.name} logo`}
-                      className="max-h-full w-auto object-contain"
-                    />
+                    {imageStates[company.name] === false ? (
+                      // Error state
+                      <div className="flex flex-col items-center justify-center text-gray-400">
+                        <ImageOff className="w-8 h-8 mb-2" />
+                        <span className="text-sm">Failed to load</span>
+                      </div>
+                    ) : (
+                      // Image with loading state
+                      <motion.img 
+                        src={company.logo} 
+                        alt={`${company.name} logo`}
+                        className="max-h-full w-auto object-contain"
+                        loading="lazy"
+                        onLoad={() => handleImageLoad(company.name)}
+                        onError={() => handleImageError(company.name)}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: imageStates[company.name] ? 1 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
                   </div>
                 </a>
               </motion.div>
