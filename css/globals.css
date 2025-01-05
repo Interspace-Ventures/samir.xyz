@@ -15,12 +15,12 @@
 /* Link animations */
 .nav-link {
   position: relative;
-  color: theme('colors.gray.600');
+  color: #482a83;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #482a83;
+  color: #5c3a9c;
 }
 
 .nav-link::after {
