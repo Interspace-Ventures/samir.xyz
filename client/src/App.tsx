@@ -2,36 +2,41 @@ import React, { Suspense } from "react";
 import { Switch, Route } from "wouter";
 import { Skeleton } from "./components/ui/skeleton";
 import { ParallaxSection } from "./components/ui/parallax-section";
+import { ThemeProvider } from "./components/theme-provider";
+import { ThemeToggle } from "./components/theme-toggle";
 import { motion } from "framer-motion";
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="fixed top-0 w-full bg-white border-b border-gray-200 z-50">
-        <div className="max-w-5xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <a href="/" className="text-xl font-bold text-black">HEY SAMIR</a>
-            <div className="flex gap-8">
-              <a href="/profile" className="nav-link">PROFILE</a>
-              <a href="/portfolio" className="nav-link">PORTFOLIO</a>
-              <a href="https://interspace.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link">INTERSPACE</a>
-              <a href="https://perspectives.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link">PERSPECTIVES</a>
+    <ThemeProvider defaultTheme="system" storageKey="samir-portfolio-theme">
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        <nav className="fixed top-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 z-50 transition-colors duration-300">
+          <div className="max-w-5xl mx-auto px-4 py-4">
+            <div className="flex justify-between items-center">
+              <a href="/" className="text-xl font-bold text-black dark:text-white">HEY SAMIR</a>
+              <div className="flex items-center gap-8">
+                <a href="/profile" className="nav-link dark:text-white">PROFILE</a>
+                <a href="/portfolio" className="nav-link dark:text-white">PORTFOLIO</a>
+                <a href="https://interspace.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link dark:text-white">INTERSPACE</a>
+                <a href="https://perspectives.samir.xyz" target="_blank" rel="noopener noreferrer" className="nav-link dark:text-white">PERSPECTIVES</a>
+                <ThemeToggle />
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      <main className="pt-20 px-4">
-        <Suspense fallback={<LoadingSkeleton />}>
-          <Switch>
-            <Route path="/" component={Profile} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/portfolio" component={Portfolio} />
-            <Route component={NotFound} />
-          </Switch>
-        </Suspense>
-      </main>
-    </div>
+        <main className="pt-20 px-4">
+          <Suspense fallback={<LoadingSkeleton />}>
+            <Switch>
+              <Route path="/" component={Profile} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/portfolio" component={Portfolio} />
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </main>
+      </div>
+    </ThemeProvider>
   );
 }
 
