@@ -9,25 +9,19 @@ export function registerRoutes(app: Express): Server {
     res.json({ status: 'ok' });
   });
 
-  // Serve static assets from both directories
+  // Serve static assets from attached_assets directory
   app.use('/assets', express.static(path.join(process.cwd(), 'attached_assets')));
-  app.use('/assets', express.static(path.join(process.cwd(), 'public', 'assets')));
 
-  // Serve static files from both dist/public and public directories
+  // Serve static files from the public directory
   app.use(express.static(path.join(process.cwd(), 'public')));
+
+  // Also serve files from dist/public as a fallback
   app.use(express.static(path.join(process.cwd(), 'dist', 'public')));
 
-  // For client-side routing, serve index.html for all non-API routes
+  // Handle client-side routing
   app.get('*', (_req, res) => {
-    // Try serving from public first, then fall back to dist/public
-    const publicPath = path.join(process.cwd(), 'public', 'index.html');
-    const distPath = path.join(process.cwd(), 'dist', 'public', 'index.html');
-
-    if (require('fs').existsSync(publicPath)) {
-      res.sendFile(publicPath);
-    } else {
-      res.sendFile(distPath);
-    }
+    const indexPath = path.join(process.cwd(), 'public', 'index.html');
+    res.sendFile(indexPath);
   });
 
   const httpServer = createServer(app);
