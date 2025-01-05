@@ -1,11 +1,14 @@
+import React from 'react';
 import { Switch, Route } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
+import Portfolio from "@/pages/Portfolio";
 
 function App() {
   return (
     <Switch>
       <Route path="/" component={Home}/>
+      <Route path="/portfolio" component={Portfolio}/>
       <Route component={NotFound} />
     </Switch>
   );
