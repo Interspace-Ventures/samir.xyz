@@ -10,7 +10,7 @@ async function build() {
     await esbuild.build({
       entryPoints: ['client/src/main.tsx'],
       bundle: true,
-      outdir: 'dist',
+      outdir: 'dist/public',
       minify: !isDev,
       sourcemap: isDev,
       format: 'esm',
@@ -19,7 +19,11 @@ async function build() {
         '.png': 'file',
         '.svg': 'file',
         '.jpg': 'file',
-        '.gif': 'file'
+        '.gif': 'file',
+        '.woff': 'file',
+        '.woff2': 'file',
+        '.ttf': 'file',
+        '.eot': 'file'
       },
       define: {
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
@@ -38,7 +42,8 @@ async function build() {
             }
           ]
         })
-      ]
+      ],
+      outbase: 'client'
     });
 
     console.log('⚡ Build complete! ⚡');
