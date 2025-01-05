@@ -1,24 +1,15 @@
-import type { Config } from "tailwindcss";
+
+import type { Config } from 'tailwindcss'
 
 export default {
-  content: [
-    "./client/src/**/*.{js,jsx,ts,tsx}",
-    "./client/index.html"
-  ],
+  content: ["./client/src/**/*.{js,jsx,ts,tsx}"],
+  darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: {
-        inter: ['Inter', 'system-ui', 'sans-serif'],
-      },
       colors: {
-        border: "#e2e8f0",
-        background: "#ffffff",
-        foreground: "#000000",
-        purple: {
-          DEFAULT: '#482a83',
-        }
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-} satisfies Config;
+} satisfies Config
