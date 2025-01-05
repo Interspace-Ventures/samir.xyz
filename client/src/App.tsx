@@ -1,7 +1,7 @@
 import { Switch, Route } from "wouter";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "./components/ui/card";
 import { AlertCircle } from "lucide-react";
-import { AnimatedLink } from "@/components/ui/animated-link";
+import { AnimatedLink } from "./components/ui/animated-link";
 
 function App() {
   return (

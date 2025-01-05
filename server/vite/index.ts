@@ -6,6 +6,7 @@ import { createServer as createViteServer, createLogger } from "vite";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import { type Server } from "http";
+import viteConfig from "../../vite.config";
 
 const viteLogger = createLogger();
 
@@ -23,6 +24,8 @@ export function log(message: string, source = "express") {
 export async function setupVite(app: Express, server: Server) {
   try {
     const vite = await createViteServer({
+      ...viteConfig,
+      configFile: false,
       server: {
         middlewareMode: true,
         hmr: { server },
@@ -35,10 +38,10 @@ export async function setupVite(app: Express, server: Server) {
       const url = req.originalUrl;
 
       try {
+        // Important: Use the correct path to client/index.html
         const templatePath = path.resolve(__dirname, "..", "..", "client", "index.html");
         const template = await fs.promises.readFile(templatePath, "utf-8");
         const html = await vite.transformIndexHtml(url, template);
-
         res.status(200).set({ "Content-Type": "text/html" }).end(html);
       } catch (e) {
         vite.ssrFixStacktrace(e as Error);
