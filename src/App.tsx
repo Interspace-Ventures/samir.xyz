@@ -1,5 +1,5 @@
 import { Switch, Route } from "wouter";
-import Navbar from "./components/layout/Navbar";
+import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile"; 
 import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
