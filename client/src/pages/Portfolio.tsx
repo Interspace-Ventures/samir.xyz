@@ -86,9 +86,8 @@ export const Portfolio: FC = () => {
         >
           <Card className="h-full dark:bg-gray-800 bg-white">
             <CardContent className="h-full p-6 flex items-center justify-center">
-              <div className="w-full flex flex-col items-center gap-2">
-                <Skeleton className="h-20 w-4/5" />
-                <Skeleton className="h-4 w-1/2" />
+              <div className="w-full flex flex-col items-center gap-4">
+                <Skeleton className="h-24 w-4/5" />
               </div>
             </CardContent>
           </Card>
@@ -170,25 +169,25 @@ export const Portfolio: FC = () => {
                     <Card className="h-full dark:bg-gray-800 bg-white hover:shadow-lg transition-all duration-200">
                       <CardContent className="h-full p-4 flex items-center justify-center relative">
                         {!hasFailedImage ? (
-                          <img 
-                            ref={imageRef(company.name)}
-                            data-company={company.name}
-                            alt={`${company.name} logo`}
-                            className={`w-auto h-auto max-h-[120px] max-w-[280px] object-contain transition-opacity duration-200 
-                              ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
-                            onLoad={() => handleImageLoad(company.name)}
-                            onError={() => handleImageError(company.name)}
-                          />
+                          <div className={`flex items-center justify-center ${hasLoadedImage ? 'bg-white rounded-lg p-4 w-full h-full' : ''}`}>
+                            <img 
+                              ref={imageRef(company.name)}
+                              data-company={company.name}
+                              alt={`${company.name} logo`}
+                              className={`w-auto h-auto max-h-[120px] max-w-[280px] object-contain transition-opacity duration-200 
+                                ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
+                              onLoad={() => handleImageLoad(company.name)}
+                              onError={() => handleImageError(company.name)}
+                            />
+                          </div>
                         ) : (
                           <div className="text-center font-semibold">
                             {company.name}
                           </div>
                         )}
                         {!hasLoadedImage && !hasFailedImage && (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="text-center font-semibold text-gray-400">
-                              Loading...
-                            </div>
+                          <div className="absolute inset-0 flex items-center justify-center p-6">
+                            <Skeleton className="h-24 w-4/5" />
                           </div>
                         )}
                       </CardContent>
