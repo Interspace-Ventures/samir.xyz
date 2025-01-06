@@ -1,6 +1,7 @@
 import { Switch, Route } from "wouter";
 import { Layout } from "./components/Layout";
 import { Profile } from "./pages/Profile";
+import { Portfolio } from "./pages/Portfolio";
 
 function App() {
   return (
@@ -8,7 +9,15 @@ function App() {
       <Switch>
         <Route path="/" component={Profile} />
         <Route path="/profile" component={Profile} />
-        {/* Other routes will be added later */}
+        <Route path="/portfolio" component={Portfolio} />
+        <Route path="/interspace" component={() => {
+          window.location.href = "https://interspace.samir.xyz";
+          return null;
+        }} />
+        <Route path="/perspectives" component={() => {
+          window.location.href = "https://perspectives.samir.xyz";
+          return null;
+        }} />
       </Switch>
     </Layout>
   );
