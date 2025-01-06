@@ -10,12 +10,13 @@ export const Portfolio: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   const filteredCompanies = selectedCategory === 'All' 
     ? companies 
     : companies.filter(company => company.category === selectedCategory);
 
-  // Simulate initial loading
+  // Initial loading simulation
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -25,17 +26,21 @@ export const Portfolio: FC = () => {
 
   const handleImageLoad = (companyName: string) => {
     setLoadedImages(prev => new Set([...prev, companyName]));
+    setFailedImages(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(companyName);
+      return newSet;
+    });
   };
 
   const handleImageError = (companyName: string) => {
-    const imgElement = document.querySelector(`img[alt="${companyName}"]`) as HTMLImageElement;
-    if (imgElement) {
-      imgElement.style.display = 'none';
-      const textElement = imgElement.parentElement?.querySelector('.company-name');
-      if (textElement) {
-        textElement.classList.remove('hidden');
-      }
-    }
+    console.log(`Failed to load image for ${companyName}`);
+    setFailedImages(prev => new Set([...prev, companyName]));
+    setLoadedImages(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(companyName);
+      return newSet;
+    });
   };
 
   const LoadingSkeleton = () => (
@@ -44,13 +49,22 @@ export const Portfolio: FC = () => {
         <motion.div
           key={`skeleton-${i}`}
           layout
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ 
+            duration: 0.3,
+            delay: i * 0.1,
+            ease: "easeOut"
+          }}
+          className="h-32"
         >
-          <Card className="w-full h-32 dark:bg-gray-800 bg-white">
-            <CardContent className="p-6 flex items-center justify-center">
-              <Skeleton className="h-16 w-3/4" />
+          <Card className="h-full dark:bg-gray-800 bg-white">
+            <CardContent className="h-full p-6 flex items-center justify-center">
+              <div className="w-full flex flex-col items-center gap-2">
+                <Skeleton className="h-12 w-3/4" />
+                <Skeleton className="h-4 w-1/2" />
+              </div>
             </CardContent>
           </Card>
         </motion.div>
@@ -116,23 +130,31 @@ export const Portfolio: FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.2 }}
+                className="h-32"
               >
-                <a href={company.url} target="_blank" rel="noopener noreferrer">
-                  <Card className="h-32 dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="p-6 flex items-center justify-center">
-                      <img 
-                        src={`/logos/${company.name.toLowerCase().replace(/\s+/g, '')}.svg`}
-                        alt={company.name}
-                        className={`max-h-16 w-auto dark:invert ${
-                          loadedImages.has(company.name) ? 'opacity-100' : 'opacity-0'
-                        } transition-opacity duration-200`}
-                        onLoad={() => handleImageLoad(company.name)}
-                        onError={() => handleImageError(company.name)}
-                        loading="lazy"
-                      />
-                      <span className={`company-name text-lg font-semibold ${
-                        loadedImages.has(company.name) ? 'hidden' : ''
-                      }`}>
+                <a 
+                  href={company.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="h-full block"
+                >
+                  <Card className="h-full dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
+                    <CardContent className="h-full p-6 flex items-center justify-center relative">
+                      {!failedImages.has(company.name) && (
+                        <img 
+                          src={`/logos/${company.name.toLowerCase().replace(/[\s&]+/g, '')}.svg`}
+                          alt={company.name}
+                          className={`max-h-16 w-auto dark:invert ${
+                            loadedImages.has(company.name) ? 'opacity-100' : 'opacity-0'
+                          } transition-opacity duration-200`}
+                          onLoad={() => handleImageLoad(company.name)}
+                          onError={() => handleImageError(company.name)}
+                          loading="lazy"
+                        />
+                      )}
+                      <span className={`text-lg font-semibold absolute ${
+                        !failedImages.has(company.name) && loadedImages.has(company.name) ? 'opacity-0' : 'opacity-100'
+                      } transition-opacity duration-200`}>
                         {company.name}
                       </span>
                     </CardContent>
