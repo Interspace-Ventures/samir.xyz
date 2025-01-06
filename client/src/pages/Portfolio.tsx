@@ -16,7 +16,6 @@ export const Portfolio: FC = () => {
     : companies.filter(company => company.category === selectedCategory);
 
   useEffect(() => {
-    // Shorter initial loading state
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 500);
@@ -133,12 +132,12 @@ export const Portfolio: FC = () => {
                     className="h-full block"
                   >
                     <Card className="h-full dark:bg-gray-800 bg-white hover:shadow-lg transition-all duration-200">
-                      <CardContent className="h-full p-6 flex items-center justify-center relative">
+                      <CardContent className="h-full p-4 flex items-center justify-center relative">
                         {!hasFailedImage ? (
                           <img 
                             src={imagePath}
                             alt={`${company.name} logo`}
-                            className={`w-full h-full object-contain transition-opacity duration-200 
+                            className={`w-auto h-auto max-h-[144px] max-w-[90%] object-contain transition-opacity duration-200 
                               ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
                             onLoad={() => handleImageLoad(company.name)}
                             onError={() => handleImageError(company.name)}
