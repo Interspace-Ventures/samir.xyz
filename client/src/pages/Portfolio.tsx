@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { type FC } from "react";
+import React, { useState, useEffect, type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
 import { companies, categories, type CompanyCategory } from "../types/company";
@@ -16,7 +15,6 @@ export const Portfolio: FC = () => {
     ? companies 
     : companies.filter(company => company.category === selectedCategory);
 
-  // Initial loading simulation
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -34,7 +32,7 @@ export const Portfolio: FC = () => {
   };
 
   const handleImageError = (companyName: string) => {
-    console.log(`Failed to load image for ${companyName}`);
+    console.warn(`Failed to load image for ${companyName}`);
     setFailedImages(prev => new Set([...prev, companyName]));
     setLoadedImages(prev => {
       const newSet = new Set(prev);
@@ -43,20 +41,22 @@ export const Portfolio: FC = () => {
     });
   };
 
+  const getImagePath = (companyName: string): string => {
+    // Convert spaces and special characters to lowercase without spaces
+    const normalizedName = companyName.toLowerCase().replace(/[\s&]+/g, '');
+    return `/logos/${normalizedName}.svg`;
+  };
+
   const LoadingSkeleton = () => (
     <>
-      {[1, 2, 3, 4, 5, 6].map((i) => (
+      {Array.from({ length: 6 }).map((_, i) => (
         <motion.div
           key={`skeleton-${i}`}
           layout
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          transition={{ 
-            duration: 0.3,
-            delay: i * 0.1,
-            ease: "easeOut"
-          }}
+          transition={{ duration: 0.3, delay: i * 0.1 }}
           className="h-32"
         >
           <Card className="h-full dark:bg-gray-800 bg-white">
@@ -122,46 +122,55 @@ export const Portfolio: FC = () => {
           {isLoading ? (
             <LoadingSkeleton />
           ) : (
-            filteredCompanies.map((company) => (
-              <motion.div
-                key={company.name}
-                layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.2 }}
-                className="h-32"
-              >
-                <a 
-                  href={company.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="h-full block"
+            filteredCompanies.map((company) => {
+              const imagePath = getImagePath(company.name);
+              const hasLoadedImage = loadedImages.has(company.name);
+              const hasFailedImage = failedImages.has(company.name);
+
+              return (
+                <motion.div
+                  key={company.name}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-32"
                 >
-                  <Card className="h-full dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="h-full p-6 flex items-center justify-center relative">
-                      {!failedImages.has(company.name) && (
-                        <img 
-                          src={`/logos/${company.name.toLowerCase().replace(/[\s&]+/g, '')}.svg`}
-                          alt={company.name}
-                          className={`max-h-16 w-auto dark:invert ${
-                            loadedImages.has(company.name) ? 'opacity-100' : 'opacity-0'
-                          } transition-opacity duration-200`}
-                          onLoad={() => handleImageLoad(company.name)}
-                          onError={() => handleImageError(company.name)}
-                          loading="lazy"
-                        />
-                      )}
-                      <span className={`text-lg font-semibold absolute ${
-                        !failedImages.has(company.name) && loadedImages.has(company.name) ? 'opacity-0' : 'opacity-100'
-                      } transition-opacity duration-200`}>
-                        {company.name}
-                      </span>
-                    </CardContent>
-                  </Card>
-                </a>
-              </motion.div>
-            ))
+                  <a 
+                    href={company.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="h-full block group"
+                  >
+                    <Card className="h-full dark:bg-gray-800 bg-white hover:shadow-lg transition-all duration-200">
+                      <CardContent className="h-full p-6 flex items-center justify-center relative">
+                        {!hasFailedImage && (
+                          <img 
+                            src={imagePath}
+                            alt={`${company.name} logo`}
+                            className={`max-h-16 w-auto transition-all duration-200 
+                              ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}
+                              ${company.name.toLowerCase() === 'backpack' ? '' : 'dark:invert'}`}
+                            onLoad={() => handleImageLoad(company.name)}
+                            onError={() => handleImageError(company.name)}
+                            loading="lazy"
+                          />
+                        )}
+                        <div className={`font-semibold absolute 
+                          ${!hasFailedImage && hasLoadedImage 
+                            ? 'opacity-0 group-hover:opacity-100' 
+                            : 'opacity-100'}
+                          transition-opacity duration-200`}
+                        >
+                          <span>{company.name}</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </a>
+                </motion.div>
+              );
+            })
           )}
         </AnimatePresence>
       </motion.section>
