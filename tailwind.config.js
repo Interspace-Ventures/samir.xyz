@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'], // Making Inter the default sans font
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

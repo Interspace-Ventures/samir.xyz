@@ -32,16 +32,16 @@ export function Layout({ children }: { children: ReactNode }) {
 
             {/* Desktop navigation */}
             <div className="hidden sm:flex items-center space-x-8">
-              <Link href="/profile" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <Link href="/profile" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Profile
               </Link>
-              <Link href="/portfolio" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <Link href="/portfolio" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <a href="https://interspace.samir.xyz/" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <a href="https://interspace.samir.xyz/" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Interspace
               </a>
-              <a href="https://perspectives.samir.xyz/" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <a href="https://perspectives.samir.xyz/" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Perspectives
               </a>
               <button onClick={toggleTheme} className="ml-4">
@@ -53,16 +53,16 @@ export function Layout({ children }: { children: ReactNode }) {
           {/* Mobile navigation */}
           {isOpen && (
             <div className="sm:hidden py-4 space-y-4">
-              <Link href="/profile" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <Link href="/profile" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Profile
               </Link>
-              <Link href="/portfolio" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <Link href="/portfolio" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <a href="https://interspace.samir.xyz/" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <a href="https://interspace.samir.xyz/" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Interspace
               </a>
-              <a href="https://perspectives.samir.xyz/" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <a href="https://perspectives.samir.xyz/" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Perspectives
               </a>
             </div>
