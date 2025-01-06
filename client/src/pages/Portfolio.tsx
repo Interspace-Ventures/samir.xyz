@@ -1,4 +1,4 @@
-import React, { useState, useEffect, type FC } from "react";
+import React, { useState, useEffect, useRef, type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
 import { companies, categories, type CompanyCategory } from "../types/company";
@@ -10,10 +10,37 @@ export const Portfolio: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const imageRefs = useRef<Map<string, HTMLImageElement>>(new Map());
 
   const filteredCompanies = selectedCategory === 'All' 
     ? companies 
     : companies.filter(company => company.category === selectedCategory);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            const companyName = img.dataset.company;
+            if (companyName && !loadedImages.has(companyName) && !failedImages.has(companyName)) {
+              img.src = getImagePath(companyName);
+              observerRef.current?.unobserve(img);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '100px 0px', 
+        threshold: 0.1
+      }
+    );
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, [loadedImages, failedImages]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,6 +60,16 @@ export const Portfolio: FC = () => {
 
   const getImagePath = (companyName: string): string => {
     return `/logos/${companyName.replace(/\s+/g, '%20')}.png`;
+  };
+
+  const imageRef = (companyName: string) => (element: HTMLImageElement | null) => {
+    if (element) {
+      imageRefs.current.set(companyName, element);
+      element.dataset.company = companyName;
+      observerRef.current?.observe(element);
+    } else {
+      imageRefs.current.delete(companyName);
+    }
   };
 
   const LoadingSkeleton = () => (
@@ -111,7 +148,6 @@ export const Portfolio: FC = () => {
             <LoadingSkeleton />
           ) : (
             filteredCompanies.map((company) => {
-              const imagePath = getImagePath(company.name);
               const hasLoadedImage = loadedImages.has(company.name);
               const hasFailedImage = failedImages.has(company.name);
 
@@ -135,13 +171,13 @@ export const Portfolio: FC = () => {
                       <CardContent className="h-full p-4 flex items-center justify-center relative">
                         {!hasFailedImage ? (
                           <img 
-                            src={imagePath}
+                            ref={imageRef(company.name)}
+                            data-company={company.name}
                             alt={`${company.name} logo`}
-                            className={`w-auto h-auto max-h-[144px] max-w-[90%] object-contain transition-opacity duration-200 
+                            className={`w-auto h-auto max-h-[120px] max-w-[280px] object-contain transition-opacity duration-200 
                               ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
                             onLoad={() => handleImageLoad(company.name)}
                             onError={() => handleImageError(company.name)}
-                            loading="lazy"
                           />
                         ) : (
                           <div className="text-center font-semibold">
