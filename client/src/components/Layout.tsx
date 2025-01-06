@@ -16,7 +16,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <nav className={`sticky top-0 backdrop-blur-sm border-b z-50 ${isDark ? 'border-gray-700 bg-gray-900/80' : 'border-gray-100 bg-white/80'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className={`text-xl font-bold ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+            <Link href="/" className={`text-xl font-bold ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
               Hey - I'm Samir
             </Link>
 
@@ -32,18 +32,18 @@ export function Layout({ children }: { children: ReactNode }) {
 
             {/* Desktop navigation */}
             <div className="hidden sm:flex items-center space-x-8">
-              <Link href="/profile" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+              <Link href="/profile" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Profile
               </Link>
-              <Link href="/portfolio" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+              <Link href="/portfolio" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <Link href="/interspace" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+              <a href="https://interspace.samir.xyz/" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Interspace
-              </Link>
-              <Link href="/perspectives" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+              </a>
+              <a href="https://perspectives.samir.xyz/" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Perspectives
-              </Link>
+              </a>
               <button onClick={toggleTheme} className="ml-4">
                 {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
               </button>
@@ -53,18 +53,18 @@ export function Layout({ children }: { children: ReactNode }) {
           {/* Mobile navigation */}
           {isOpen && (
             <div className="sm:hidden py-4 space-y-4">
-              <Link href="/profile" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+              <Link href="/profile" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Profile
               </Link>
-              <Link href="/portfolio" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+              <Link href="/portfolio" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <Link href="/interspace" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+              <a href="https://interspace.samir.xyz/" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Interspace
-              </Link>
-              <Link href="/perspectives" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+              </a>
+              <a href="https://perspectives.samir.xyz/" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Perspectives
-              </Link>
+              </a>
             </div>
           )}
         </div>
