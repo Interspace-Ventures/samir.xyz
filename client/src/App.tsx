@@ -1,9 +1,10 @@
+import { FC } from "react";
 import { Switch, Route } from "wouter";
 import { Layout } from "./components/Layout";
 import { Profile } from "./pages/Profile";
 import { Portfolio } from "./pages/Portfolio";
 
-function App() {
+const App: FC = () => {
   return (
     <Layout>
       <Switch>
@@ -21,6 +22,6 @@ function App() {
       </Switch>
     </Layout>
   );
-}
+};
 
 export default App;
