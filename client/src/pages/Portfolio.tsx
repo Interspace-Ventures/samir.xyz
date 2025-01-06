@@ -3,6 +3,7 @@ import { type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
 import { companies, categories, type CompanyCategory } from "../types/company";
+import { RevealOnScroll } from "../components/RevealOnScroll";
 
 export const Portfolio: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
@@ -13,42 +14,46 @@ export const Portfolio: FC = () => {
 
   return (
     <div className="space-y-12">
-      <section className="space-y-4">
-        <h1 className="text-5xl sm:text-6xl font-bold">
-          Portfolio
-        </h1>
-        <p className="text-xl sm:text-2xl max-w-3xl">
-          I advise and invest in ambitious teams building innovative products who focus on 
-          unit economics optimized business models.
-        </p>
-      </section>
+      <RevealOnScroll>
+        <section className="space-y-4">
+          <h1 className="text-5xl sm:text-6xl font-bold">
+            Portfolio
+          </h1>
+          <p className="text-xl sm:text-2xl max-w-3xl">
+            I advise and invest in ambitious teams building innovative products who focus on 
+            unit economics optimized business models.
+          </p>
+        </section>
+      </RevealOnScroll>
 
       {/* Category Filter */}
-      <section className="flex flex-wrap gap-4">
-        <button
-          onClick={() => setSelectedCategory('All')}
-          className={`px-4 py-2 rounded-lg transition-colors ${
-            selectedCategory === 'All'
-              ? 'bg-[#7343d0] text-white'
-              : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
-          }`}
-        >
-          All
-        </button>
-        {categories.map(category => (
+      <RevealOnScroll>
+        <section className="flex flex-wrap gap-4">
           <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => setSelectedCategory('All')}
             className={`px-4 py-2 rounded-lg transition-colors ${
-              selectedCategory === category
+              selectedCategory === 'All'
                 ? 'bg-[#7343d0] text-white'
                 : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
             }`}
           >
-            {category}
+            All
           </button>
-        ))}
-      </section>
+          {categories.map(category => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                selectedCategory === category
+                  ? 'bg-[#7343d0] text-white'
+                  : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </section>
+      </RevealOnScroll>
 
       {/* Company Grid */}
       <motion.section 

@@ -38,10 +38,10 @@ export function Layout({ children }: { children: ReactNode }) {
               <Link href="/portfolio" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <a href="https://interspace.samir.xyz/" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Interspace
               </a>
-              <a href="https://perspectives.samir.xyz/" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Perspectives
               </a>
               <button onClick={toggleTheme} className="ml-4">
@@ -59,10 +59,10 @@ export function Layout({ children }: { children: ReactNode }) {
               <Link href="/portfolio" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <a href="https://interspace.samir.xyz/" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Interspace
               </a>
-              <a href="https://perspectives.samir.xyz/" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Perspectives
               </a>
             </div>
