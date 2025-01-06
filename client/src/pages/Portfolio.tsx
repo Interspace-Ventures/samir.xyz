@@ -158,7 +158,7 @@ export const Portfolio: FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.2 }}
-                  className="h-40"
+                  className="h-32"
                 >
                   <a 
                     href={company.url} 

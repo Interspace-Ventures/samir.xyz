@@ -8,9 +8,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export function registerRoutes(app: Express) {
+  // Serve the favicon from attached_assets
+  app.get('/favicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '../attached_assets/Hey I\'m Samir - Favicon.png'));
+  });
+
   // Serve static files from the attached_assets/portfolio directory for logos
   const logoPath = path.join(__dirname, '../attached_assets/portfolio');
-  console.log('Serving logos from:', logoPath); // Debug log
+  console.log('Serving logos from:', logoPath);
   app.use('/logos', express.static(logoPath));
 
   // Serve static files from the client/public directory
