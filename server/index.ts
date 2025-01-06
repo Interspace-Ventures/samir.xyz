@@ -12,6 +12,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Setup CORS for custom domain
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 // Setup request logging (simplified from original)
 app.use((req, res, next) => {
   const start = Date.now();
@@ -69,14 +76,19 @@ app.use((req, res, next) => {
       }
     });
   } else {
-    // In production, serve built files
-    app.use(express.static(path.join(__dirname, '../dist/public')));
+    // In production, serve built files with proper caching headers
+    app.use(express.static(path.join(__dirname, '../dist/public'), {
+      maxAge: '1y',
+      etag: true
+    }));
+
+    // Always return index.html for any unknown paths (SPA routing)
     app.get('*', (req, res) => {
       res.sendFile(path.join(__dirname, '../dist/public/index.html'));
     });
   }
 
-  const PORT = 5000;
+  const PORT = process.env.PORT || 5000;
   server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running at http://0.0.0.0:${PORT}`);
   });
