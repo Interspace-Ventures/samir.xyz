@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from "wouter";
-import { Card, CardContent } from "./components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
-import Portfolio from "./pages/Portfolio";
+import Portfolio from "@/pages/Portfolio";
 
 function App() {
   return (
