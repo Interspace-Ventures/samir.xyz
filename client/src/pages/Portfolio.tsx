@@ -1,3 +1,4 @@
+import React from "react";
 import { type FC } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -56,3 +57,5 @@ export const Portfolio: FC = () => {
     </div>
   );
 };
+
+export default Portfolio;
