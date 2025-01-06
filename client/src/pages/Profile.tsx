@@ -1,6 +1,5 @@
 import React, { type FC } from "react";
 import { RevealOnScroll } from "../components/RevealOnScroll";
-import { ExternalLink } from "lucide-react";
 
 export const Profile: FC = () => {
   return (
@@ -27,7 +26,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               Cash App
-              <ExternalLink className="h-4 w-4" />
             </a>{" "}
             where we're expanding financial access to help users do more with their money. Previously I built Strategic Finance at{" "}
             <a 
@@ -37,7 +35,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               HRT
-              <ExternalLink className="h-4 w-4" />
             </a>{" "}
             which uses algorithms to drive efficiency in markets. Prior to that, I drove financial partnerships at{" "}
             <a 
@@ -47,7 +44,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               Unit
-              <ExternalLink className="h-4 w-4" />
             </a>, 
             which embeds financial features into products. Before that, I built and led the Strategic Finance function at{" "}
             <a 
@@ -57,7 +53,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               Chime
-              <ExternalLink className="h-4 w-4" />
             </a>. 
             Earlier, I was the first finance hire at{" "}
             <a 
@@ -67,7 +62,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               Sift
-              <ExternalLink className="h-4 w-4" />
             </a>. 
             I got my start in investment banking in the Financial Institutions Group at{" "}
             <a 
@@ -77,7 +71,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               JP Morgan
-              <ExternalLink className="h-4 w-4" />
             </a>{" "}
             covering market structure and asset management.
           </p>
@@ -95,7 +88,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               Twitter
-              <ExternalLink className="h-4 w-4" />
             </a>, 
             share perspectives on{" "}
             <a 
@@ -105,7 +97,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               Substack
-              <ExternalLink className="h-4 w-4" />
             </a>{" "}
             and write over-engineered fintech posts at{" "}
             <a 
@@ -115,7 +106,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               Interspace
-              <ExternalLink className="h-4 w-4" />
             </a>. 
             I'm also learning to{" "}
             <a 
@@ -125,7 +115,6 @@ export const Profile: FC = () => {
               className="external-link"
             >
               code at the speed of thought
-              <ExternalLink className="h-4 w-4" />
             </a>{" "}
             via Replit AI.
           </p>

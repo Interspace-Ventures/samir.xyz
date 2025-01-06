@@ -32,7 +32,6 @@ export const Portfolio: FC = () => {
   };
 
   const handleImageError = (companyName: string) => {
-    console.warn(`Failed to load image for ${companyName}`);
     setFailedImages(prev => new Set([...prev, companyName]));
     setLoadedImages(prev => {
       const newSet = new Set(prev);
@@ -157,13 +156,13 @@ export const Portfolio: FC = () => {
                             loading="lazy"
                           />
                         )}
-                        <div className={`font-semibold absolute 
+                        <div className={`w-full text-center font-semibold absolute inset-0 flex items-center justify-center
                           ${!hasFailedImage && hasLoadedImage 
                             ? 'opacity-0 group-hover:opacity-100' 
                             : 'opacity-100'}
                           transition-opacity duration-200`}
                         >
-                          <span>{company.name}</span>
+                          {company.name}
                         </div>
                       </CardContent>
                     </Card>
