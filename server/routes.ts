@@ -9,7 +9,9 @@ const __dirname = path.dirname(__filename);
 
 export function registerRoutes(app: Express) {
   // Serve static files from the attached_assets/portfolio directory for logos
-  app.use('/logos', express.static(path.join(__dirname, '../attached_assets/portfolio')));
+  const logoPath = path.join(__dirname, '../attached_assets/portfolio');
+  console.log('Serving logos from:', logoPath); // Debug log
+  app.use('/logos', express.static(logoPath));
 
   // Serve static files from the client/public directory
   app.use(express.static(path.join(__dirname, '../client/public')));
