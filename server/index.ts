@@ -71,7 +71,7 @@ app.use((req, res, next) => {
     app.use('*', async (req, res, next) => {
       try {
         const template = await fs.promises.readFile(
-          path.resolve(__dirname, "../index.html"),
+          path.resolve(__dirname, "../client/index.html"),
           "utf-8"
         );
         const html = await vite.transformIndexHtml(req.originalUrl, template);
