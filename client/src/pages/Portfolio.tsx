@@ -16,35 +16,24 @@ export const Portfolio: FC = () => {
     : companies.filter(company => company.category === selectedCategory);
 
   useEffect(() => {
+    // Shorter initial loading state
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
 
   const handleImageLoad = (companyName: string) => {
     setLoadedImages(prev => new Set([...prev, companyName]));
-    setFailedImages(prev => {
-      const newSet = new Set(prev);
-      newSet.delete(companyName);
-      return newSet;
-    });
   };
 
   const handleImageError = (companyName: string) => {
     console.error(`Failed to load image for ${companyName}`);
     setFailedImages(prev => new Set([...prev, companyName]));
-    setLoadedImages(prev => {
-      const newSet = new Set(prev);
-      newSet.delete(companyName);
-      return newSet;
-    });
   };
 
   const getImagePath = (companyName: string): string => {
-    // Ensure consistent naming by converting to lowercase and handling special characters
-    const formattedName = companyName.toLowerCase().replace(/[^a-z0-9]/g, '');
-    return `/logos/${formattedName}.png`;
+    return `/logos/${companyName.replace(/\s+/g, '%20')}.png`;
   };
 
   const LoadingSkeleton = () => (
@@ -145,20 +134,26 @@ export const Portfolio: FC = () => {
                   >
                     <Card className="h-full dark:bg-gray-800 bg-white hover:shadow-lg transition-all duration-200">
                       <CardContent className="h-full p-6 flex items-center justify-center relative">
-                        {!hasFailedImage && (
+                        {!hasFailedImage ? (
                           <img 
                             src={imagePath}
                             alt={`${company.name} logo`}
-                            className={`max-h-32 w-auto max-w-full object-contain transition-opacity duration-200 
+                            className={`w-full h-full object-contain transition-opacity duration-200 
                               ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
                             onLoad={() => handleImageLoad(company.name)}
                             onError={() => handleImageError(company.name)}
                             loading="lazy"
                           />
-                        )}
-                        {hasFailedImage && (
+                        ) : (
                           <div className="text-center font-semibold">
                             {company.name}
+                          </div>
+                        )}
+                        {!hasLoadedImage && !hasFailedImage && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-center font-semibold text-gray-400">
+                              Loading...
+                            </div>
                           </div>
                         )}
                       </CardContent>
