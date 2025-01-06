@@ -8,14 +8,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export function registerRoutes(app: Express) {
-  // Serve static files from the client/public directory
-  app.use(express.static(path.join(__dirname, '../client/public')));
-
   // In production, serve from dist/public
   if (process.env.NODE_ENV === 'production') {
-    const distPath = path.join(__dirname, '../dist/public');
+    const distPath = path.resolve(__dirname, '../dist/public');
     console.log('Production mode: Serving static files from:', distPath);
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, {
+      maxAge: '1y',
+      etag: true
+    }));
   }
 
   // Serve the favicon from attached_assets
@@ -32,6 +32,13 @@ export function registerRoutes(app: Express) {
   app.get('/api/health', (req, res) => {
     res.json({ status: 'ok' });
   });
+
+  // In production, always return index.html for any unknown paths (SPA routing)
+  if (process.env.NODE_ENV === 'production') {
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../dist/public/index.html'));
+    });
+  }
 
   const httpServer = createServer(app);
   return httpServer;
