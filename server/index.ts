@@ -12,14 +12,28 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Security headers
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 // Setup CORS for custom domain
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  const allowedOrigins = ['https://samir.xyz', 'http://localhost:5000'];
+  const origin = req.headers.origin;
+
+  if (origin && allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
-// Setup request logging (simplified from original)
+// Setup request logging
 app.use((req, res, next) => {
   const start = Date.now();
   res.on("finish", () => {
@@ -41,7 +55,7 @@ app.use((req, res, next) => {
   });
 
   if (app.get("env") === "development") {
-    // In development, create and configure Vite dev server
+    // Development setup with Vite
     const vite = await createViteServer({
       configFile: false,
       root: path.resolve(__dirname, "../client"),
@@ -52,14 +66,12 @@ app.use((req, res, next) => {
       appType: 'custom'
     });
 
-    // Use vite's connect instance as middleware
     app.use(vite.middlewares);
 
     app.use('*', async (req, res, next) => {
       try {
-        // Load the index.html template from the client directory
         const template = await fs.promises.readFile(
-          path.resolve(__dirname, "../client/index.html"),
+          path.resolve(__dirname, "../index.html"),
           "utf-8"
         );
         const html = await vite.transformIndexHtml(req.originalUrl, template);
@@ -70,7 +82,7 @@ app.use((req, res, next) => {
       }
     });
   } else {
-    // In production, serve built files with proper caching headers
+    // Production setup with static file serving
     const distPath = path.resolve(__dirname, '../dist/public');
     if (!fs.existsSync(distPath)) {
       console.error(`Could not find the build directory: ${distPath}`);
@@ -89,8 +101,9 @@ app.use((req, res, next) => {
     });
   }
 
-  const PORT = process.env.PORT || 5000;
-  server.listen(PORT, () => {
+  // Use Replit's assigned port or fallback to 5000
+  const PORT = parseInt(process.env.PORT || '5000', 10);
+  server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running at http://0.0.0.0:${PORT}`);
   });
 })();
