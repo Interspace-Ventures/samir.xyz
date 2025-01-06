@@ -32,6 +32,7 @@ export const Portfolio: FC = () => {
   };
 
   const handleImageError = (companyName: string) => {
+    console.error(`Failed to load image for ${companyName}`);
     setFailedImages(prev => new Set([...prev, companyName]));
     setLoadedImages(prev => {
       const newSet = new Set(prev);
@@ -41,7 +42,9 @@ export const Portfolio: FC = () => {
   };
 
   const getImagePath = (companyName: string): string => {
-    return `/logos/${companyName}.png`;
+    // Ensure consistent naming by converting to lowercase and handling special characters
+    const formattedName = companyName.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return `/logos/${formattedName}.png`;
   };
 
   const LoadingSkeleton = () => (
@@ -54,12 +57,12 @@ export const Portfolio: FC = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3, delay: i * 0.1 }}
-          className="h-40"
+          className="h-48"
         >
           <Card className="h-full dark:bg-gray-800 bg-white">
             <CardContent className="h-full p-6 flex items-center justify-center">
               <div className="w-full flex flex-col items-center gap-2">
-                <Skeleton className="h-16 w-3/4" />
+                <Skeleton className="h-20 w-4/5" />
                 <Skeleton className="h-4 w-1/2" />
               </div>
             </CardContent>
@@ -132,7 +135,7 @@ export const Portfolio: FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.2 }}
-                  className="h-40"
+                  className="h-48"
                 >
                   <a 
                     href={company.url} 
@@ -146,7 +149,7 @@ export const Portfolio: FC = () => {
                           <img 
                             src={imagePath}
                             alt={`${company.name} logo`}
-                            className={`max-h-24 w-auto max-w-[90%] object-contain transition-all duration-200 
+                            className={`max-h-32 w-auto max-w-full object-contain transition-opacity duration-200 
                               ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
                             onLoad={() => handleImageLoad(company.name)}
                             onError={() => handleImageError(company.name)}
