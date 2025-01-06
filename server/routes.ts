@@ -8,6 +8,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export function registerRoutes(app: Express) {
+  // Serve static files from the attached_assets/portfolio directory for logos
+  app.use('/logos', express.static(path.join(__dirname, '../attached_assets/portfolio')));
+
   // Serve static files from the client/public directory
   app.use(express.static(path.join(__dirname, '../client/public')));
 
