@@ -17,40 +17,40 @@ export const Portfolio: FC = () => {
 
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* First Row */}
-        <Card className="bg-white hover:shadow-lg transition-shadow duration-200">
+        <Card className="dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
           <CardContent className="p-6 flex items-center justify-center h-40">
-            <img src="/logos/afar.svg" alt="AFAR" className="w-32 h-auto" />
+            <img src="/logos/afar.svg" alt="AFAR" className="w-32 h-auto dark:invert" />
           </CardContent>
         </Card>
 
-        <Card className="bg-white hover:shadow-lg transition-shadow duration-200">
+        <Card className="dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
           <CardContent className="p-6 flex items-center justify-center h-40">
-            <img src="/logos/aon3d.svg" alt="AON3D" className="w-32 h-auto" />
+            <img src="/logos/aon3d.svg" alt="AON3D" className="w-32 h-auto dark:invert" />
           </CardContent>
         </Card>
 
-        <Card className="bg-white hover:shadow-lg transition-shadow duration-200">
+        <Card className="dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
           <CardContent className="p-6 flex items-center justify-center h-40">
-            <img src="/logos/aura.svg" alt="AURA" className="w-32 h-auto" />
+            <img src="/logos/aura.svg" alt="AURA" className="w-32 h-auto dark:invert" />
           </CardContent>
         </Card>
 
         {/* Second Row */}
-        <Card className="bg-white hover:shadow-lg transition-shadow duration-200">
+        <Card className="dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
           <CardContent className="p-6 flex items-center justify-center h-40">
-            <img src="/logos/backpack.svg" alt="Backpack" className="w-32 h-auto" />
+            <img src="/logos/backpack.svg" alt="Backpack" className="w-32 h-auto dark:invert" />
           </CardContent>
         </Card>
 
-        <Card className="bg-white hover:shadow-lg transition-shadow duration-200">
+        <Card className="dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
           <CardContent className="p-6 flex items-center justify-center h-40">
-            <img src="/logos/caliber.svg" alt="CALIBER" className="w-32 h-auto" />
+            <img src="/logos/caliber.svg" alt="CALIBER" className="w-32 h-auto dark:invert" />
           </CardContent>
         </Card>
 
-        <Card className="bg-white hover:shadow-lg transition-shadow duration-200">
+        <Card className="dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
           <CardContent className="p-6 flex items-center justify-center h-40">
-            <img src="/logos/gem.svg" alt="GEM" className="w-32 h-auto" />
+            <img src="/logos/gem.svg" alt="GEM" className="w-32 h-auto dark:invert" />
           </CardContent>
         </Card>
       </section>
