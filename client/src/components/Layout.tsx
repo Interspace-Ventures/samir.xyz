@@ -1,34 +1,77 @@
 import React from "react";
 import { Link } from "wouter";
 import { type ReactNode } from "react";
+import { Sun, Moon, Menu } from "lucide-react";
+import { useState } from "react";
 
 export function Layout({ children }: { children: ReactNode }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="sticky top-0 bg-white/80 backdrop-blur-sm border-b border-gray-100 z-50">
+    <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'dark bg-gray-900' : 'bg-white'}`}>
+      <nav className={`sticky top-0 backdrop-blur-sm border-b z-50 ${isDark ? 'border-gray-700 bg-gray-900/80' : 'border-gray-100 bg-white/80'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-xl font-bold text-black">
+            <Link href="/" className={`text-xl font-bold ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
               Hey - I'm Samir
             </Link>
-            <div className="hidden sm:flex space-x-8">
-              <Link href="/profile" className="uppercase text-black hover:text-gray-600">
+
+            {/* Mobile menu button */}
+            <div className="flex items-center gap-4 sm:hidden">
+              <button onClick={toggleTheme}>
+                {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
+              </button>
+              <button onClick={() => setIsOpen(!isOpen)} className={isDark ? 'text-white' : 'text-black'}>
+                <Menu className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Desktop navigation */}
+            <div className="hidden sm:flex items-center space-x-8">
+              <Link href="/profile" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
                 Profile
               </Link>
-              <Link href="/portfolio" className="uppercase text-black hover:text-gray-600">
+              <Link href="/portfolio" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
                 Portfolio
               </Link>
-              <Link href="/interspace" className="uppercase text-black hover:text-gray-600">
+              <Link href="/interspace" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
                 Interspace
               </Link>
-              <Link href="/perspectives" className="uppercase text-black hover:text-gray-600">
+              <Link href="/perspectives" className={`uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+                Perspectives
+              </Link>
+              <button onClick={toggleTheme} className="ml-4">
+                {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile navigation */}
+          {isOpen && (
+            <div className="sm:hidden py-4 space-y-4">
+              <Link href="/profile" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+                Profile
+              </Link>
+              <Link href="/portfolio" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+                Portfolio
+              </Link>
+              <Link href="/interspace" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
+                Interspace
+              </Link>
+              <Link href="/perspectives" className={`block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-purple-600`}>
                 Perspectives
               </Link>
             </div>
-          </div>
+          )}
         </div>
       </nav>
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ${isDark ? 'text-white' : 'text-black'}`}>
         {children}
       </main>
     </div>
