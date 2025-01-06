@@ -9,7 +9,7 @@ export const Profile: FC = () => {
           <h1 className="text-5xl sm:text-6xl font-bold">
             Hey - I'm Samir.
           </h1>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#7343d0]">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#7343d0]">
             I drive business impact at fintechs.
           </h2>
         </section>
