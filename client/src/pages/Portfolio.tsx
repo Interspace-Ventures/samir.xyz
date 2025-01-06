@@ -27,13 +27,14 @@ export const Portfolio: FC = () => {
     setLoadedImages(prev => new Set([...prev, companyName]));
   };
 
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.target as HTMLImageElement;
-    const companyName = img.alt;
-    img.style.display = 'none';
-    const textEl = img.parentElement?.querySelector('.company-name');
-    if (textEl) {
-      textEl.classList.remove('hidden');
+  const handleImageError = (companyName: string) => {
+    const imgElement = document.querySelector(`img[alt="${companyName}"]`) as HTMLImageElement;
+    if (imgElement) {
+      imgElement.style.display = 'none';
+      const textElement = imgElement.parentElement?.querySelector('.company-name');
+      if (textElement) {
+        textElement.classList.remove('hidden');
+      }
     }
   };
 
@@ -47,9 +48,9 @@ export const Portfolio: FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Card className="dark:bg-gray-800 bg-white">
-            <CardContent className="p-6 h-40">
-              <Skeleton className="w-full h-full" />
+          <Card className="w-full h-32 dark:bg-gray-800 bg-white">
+            <CardContent className="p-6 flex items-center justify-center">
+              <Skeleton className="h-16 w-3/4" />
             </CardContent>
           </Card>
         </motion.div>
@@ -117,17 +118,21 @@ export const Portfolio: FC = () => {
                 transition={{ duration: 0.2 }}
               >
                 <a href={company.url} target="_blank" rel="noopener noreferrer">
-                  <Card className="dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="p-6 flex items-center justify-center h-40">
+                  <Card className="h-32 dark:bg-gray-800 bg-white hover:shadow-lg transition-shadow duration-200">
+                    <CardContent className="p-6 flex items-center justify-center">
                       <img 
-                        src={company.logo} 
-                        alt={company.name} 
-                        className="w-32 h-auto dark:invert" 
+                        src={`/logos/${company.name.toLowerCase().replace(/\s+/g, '')}.svg`}
+                        alt={company.name}
+                        className={`max-h-16 w-auto dark:invert ${
+                          loadedImages.has(company.name) ? 'opacity-100' : 'opacity-0'
+                        } transition-opacity duration-200`}
                         onLoad={() => handleImageLoad(company.name)}
-                        onError={handleImageError}
+                        onError={() => handleImageError(company.name)}
                         loading="lazy"
                       />
-                      <span className="company-name hidden text-lg font-semibold">
+                      <span className={`company-name text-lg font-semibold ${
+                        loadedImages.has(company.name) ? 'hidden' : ''
+                      }`}>
                         {company.name}
                       </span>
                     </CardContent>
