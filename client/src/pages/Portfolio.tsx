@@ -54,12 +54,12 @@ export const Portfolio: FC = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3, delay: i * 0.1 }}
-          className="h-32"
+          className="h-40"
         >
           <Card className="h-full dark:bg-gray-800 bg-white">
             <CardContent className="h-full p-6 flex items-center justify-center">
               <div className="w-full flex flex-col items-center gap-2">
-                <Skeleton className="h-12 w-3/4" />
+                <Skeleton className="h-16 w-3/4" />
                 <Skeleton className="h-4 w-1/2" />
               </div>
             </CardContent>
@@ -132,13 +132,13 @@ export const Portfolio: FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.2 }}
-                  className="h-32"
+                  className="h-40"
                 >
                   <a 
                     href={company.url} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="h-full block group"
+                    className="h-full block"
                   >
                     <Card className="h-full dark:bg-gray-800 bg-white hover:shadow-lg transition-all duration-200">
                       <CardContent className="h-full p-6 flex items-center justify-center relative">
@@ -146,21 +146,18 @@ export const Portfolio: FC = () => {
                           <img 
                             src={imagePath}
                             alt={`${company.name} logo`}
-                            className={`max-h-16 w-auto max-w-[80%] transition-all duration-200 
+                            className={`max-h-24 w-auto max-w-[90%] object-contain transition-all duration-200 
                               ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
                             onLoad={() => handleImageLoad(company.name)}
                             onError={() => handleImageError(company.name)}
                             loading="lazy"
                           />
                         )}
-                        <div className={`w-full text-center font-semibold absolute inset-0 flex items-center justify-center
-                          ${!hasFailedImage && hasLoadedImage 
-                            ? 'opacity-0 group-hover:opacity-100' 
-                            : 'opacity-100'}
-                          transition-opacity duration-200`}
-                        >
-                          {company.name}
-                        </div>
+                        {hasFailedImage && (
+                          <div className="text-center font-semibold">
+                            {company.name}
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   </a>
