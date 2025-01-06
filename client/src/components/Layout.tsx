@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "wouter";
 import { type ReactNode } from "react";
 
@@ -8,7 +9,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="text-xl font-bold text-black">
-              HEY SAMIR
+              Hey - I'm Samir
             </Link>
             <div className="hidden sm:flex space-x-8">
               <Link href="/profile" className="uppercase text-black hover:text-gray-600">

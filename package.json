@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.33.1",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.5",
     "@types/react": "^19.0.2",
