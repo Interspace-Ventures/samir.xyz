@@ -78,8 +78,8 @@
 
 /* External link styles */
 .external-link {
-  @apply inline-flex items-center gap-1 text-[#7343d0] hover:text-[#7343d0]/80 
+  @apply text-[#7343d0] hover:text-[#7343d0]/80 
          dark:text-[#7343d0] dark:hover:text-[#7343d0]/80 
          underline decoration-[#7343d0] hover:no-underline 
-         transition-all;
+         transition-all duration-200;
 }
