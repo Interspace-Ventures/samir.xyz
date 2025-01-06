@@ -34,7 +34,6 @@ export const companies: Company[] = [
   { name: 'Sugar', url: 'https://www.sugarliving.com/', category: 'SaaS' },
   { name: 'Hedgehog', url: 'https://www.thehedgehogcompany.com/', category: 'SaaS' },
   { name: 'Soot', url: 'https://www.soot.com', category: 'SaaS' },
-  { name: 'CaliberX', url: 'https://www.caliberx.com', category: 'SaaS' },
   { name: 'Techmate', url: 'https://www.techmate.com', category: 'SaaS' },
 
   // Fintech
