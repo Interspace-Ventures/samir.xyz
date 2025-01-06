@@ -82,12 +82,12 @@ export const Portfolio: FC = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3, delay: i * 0.1 }}
-          className="h-48"
+          className="h-40"
         >
           <Card className="h-full dark:bg-gray-800 bg-white">
             <CardContent className="h-full p-6 flex items-center justify-center">
               <div className="w-full flex flex-col items-center gap-4">
-                <Skeleton className="h-24 w-4/5" />
+                <Skeleton className="h-20 w-4/5" />
               </div>
             </CardContent>
           </Card>
@@ -158,7 +158,7 @@ export const Portfolio: FC = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.2 }}
-                  className="h-48"
+                  className="h-40"
                 >
                   <a 
                     href={company.url} 
@@ -166,15 +166,15 @@ export const Portfolio: FC = () => {
                     rel="noopener noreferrer"
                     className="h-full block"
                   >
-                    <Card className="h-full dark:bg-gray-800 bg-white hover:shadow-lg transition-all duration-200">
-                      <CardContent className="h-full p-4 flex items-center justify-center relative">
+                    <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white">
+                      <CardContent className={`h-full p-4 flex items-center justify-center relative bg-white`}>
                         {!hasFailedImage ? (
-                          <div className={`flex items-center justify-center ${hasLoadedImage ? 'bg-white rounded-lg p-4 w-full h-full' : ''}`}>
+                          <div className={`flex items-center justify-center w-full h-full`}>
                             <img 
                               ref={imageRef(company.name)}
                               data-company={company.name}
                               alt={`${company.name} logo`}
-                              className={`w-auto h-auto max-h-[120px] max-w-[280px] object-contain transition-opacity duration-200 
+                              className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-opacity duration-200 
                                 ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
                               onLoad={() => handleImageLoad(company.name)}
                               onError={() => handleImageError(company.name)}
@@ -187,7 +187,7 @@ export const Portfolio: FC = () => {
                         )}
                         {!hasLoadedImage && !hasFailedImage && (
                           <div className="absolute inset-0 flex items-center justify-center p-6">
-                            <Skeleton className="h-24 w-4/5" />
+                            <Skeleton className="h-20 w-4/5" />
                           </div>
                         )}
                       </CardContent>
