@@ -12,9 +12,9 @@ async function buildProject() {
   try {
     // First build the client
     console.log('Building client...');
-    await execAsync('npx vite build --outDir dist/public', { 
+    await execAsync('npx vite build --emptyOutDir', { 
       stdio: 'inherit',
-      cwd: __dirname
+      cwd: path.join(__dirname, 'client')
     });
 
     // Then build the server
