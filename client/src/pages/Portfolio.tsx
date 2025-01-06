@@ -41,9 +41,7 @@ export const Portfolio: FC = () => {
   };
 
   const getImagePath = (companyName: string): string => {
-    // Convert spaces and special characters to lowercase without spaces
-    const normalizedName = companyName.toLowerCase().replace(/[\s&]+/g, '');
-    return `/logos/${normalizedName}.svg`;
+    return `/logos/${companyName}.png`;
   };
 
   const LoadingSkeleton = () => (
@@ -148,9 +146,8 @@ export const Portfolio: FC = () => {
                           <img 
                             src={imagePath}
                             alt={`${company.name} logo`}
-                            className={`max-h-16 w-auto transition-all duration-200 
-                              ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}
-                              ${company.name.toLowerCase() === 'backpack' ? '' : 'dark:invert'}`}
+                            className={`max-h-16 w-auto max-w-[80%] transition-all duration-200 
+                              ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
                             onLoad={() => handleImageLoad(company.name)}
                             onError={() => handleImageError(company.name)}
                             loading="lazy"
