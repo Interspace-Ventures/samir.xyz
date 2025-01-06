@@ -1,8 +1,6 @@
-import React from "react";
+import React, { type ReactNode, useState } from "react";
 import { Link } from "wouter";
-import { type ReactNode } from "react";
 import { Sun, Moon, Menu } from "lucide-react";
-import { useState } from "react";
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
