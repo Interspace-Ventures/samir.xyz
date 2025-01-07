@@ -54,7 +54,7 @@
     @apply border-[hsl(var(--border))];
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased;
     font-family: 'Inter', sans-serif;
   }
 }
@@ -66,7 +66,7 @@
 
   .nav-link::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-[hsl(var(--primary))] transition-all duration-300;
   }
 
   .nav-link:hover::after {
@@ -74,9 +74,9 @@
   }
 
   .external-link {
-    @apply text-primary hover:text-primary/80 
-           dark:text-primary dark:hover:text-primary/80 
-           underline decoration-primary hover:no-underline 
+    @apply text-[hsl(var(--primary))] hover:text-[hsl(var(--primary)_/_0.8)]
+           dark:text-[hsl(var(--primary))] dark:hover:text-[hsl(var(--primary)_/_0.8)]
+           underline decoration-[hsl(var(--primary))] hover:no-underline 
            transition-all duration-200;
   }
 }
