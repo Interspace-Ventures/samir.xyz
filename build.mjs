@@ -12,8 +12,9 @@ async function buildProject() {
   try {
     // First build the client using Vite's config
     console.log('Building client...');
-    await execAsync('NODE_ENV=production npx vite build', { 
+    await execAsync('NODE_ENV=production npx vite build --config vite.config.ts', { 
       stdio: 'inherit',
+      cwd: path.resolve(__dirname, 'client'),
       env: {
         ...process.env,
         NODE_ENV: 'production'
