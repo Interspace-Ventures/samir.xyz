@@ -51,7 +51,7 @@ app.use((req, res, next) => {
   if (process.env.NODE_ENV !== "production") {
     try {
       const vite = await createViteServer({
-        root: path.resolve(__dirname, "../client"),
+        root: path.resolve(__dirname, ".."),
         server: {
           middlewareMode: true,
           hmr: { server }
@@ -63,7 +63,8 @@ app.use((req, res, next) => {
 
       app.use("*", async (req, res, next) => {
         try {
-          const indexPath = path.resolve(__dirname, "../client/index.html");
+          // Read index.html from the root directory, not client directory
+          const indexPath = path.resolve(__dirname, "../index.html");
           let template = await fs.readFile(indexPath, "utf-8");
           template = await vite.transformIndexHtml(req.originalUrl, template);
           res.status(200).set({ "Content-Type": "text/html" }).end(template);
@@ -77,12 +78,19 @@ app.use((req, res, next) => {
       process.exit(1);
     }
   } else {
-    // Serve static files in production
+    // Serve static files in production from dist/public
     const distPath = path.resolve(__dirname, "../dist/public");
-    app.use(express.static(distPath));
-    app.use("*", (_req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
+    try {
+      await fs.access(distPath);
+      app.use(express.static(distPath));
+      app.use("*", (_req, res) => {
+        res.sendFile(path.join(distPath, "index.html"));
+      });
+    } catch (error) {
+      console.error(`Could not find the build directory: ${distPath}`);
+      console.error("Make sure to run 'npm run build' before starting in production mode");
+      process.exit(1);
+    }
   }
 
   const PORT = 5000;
