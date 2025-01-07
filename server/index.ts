@@ -21,18 +21,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Setup CORS for custom domain
-app.use((req, res, next) => {
-  const allowedOrigins = ['https://samir.xyz', 'http://localhost:5000'];
-  const origin = req.headers.origin;
-
-  if (origin && allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
-
 // Setup request logging
 app.use((req, res, next) => {
   const start = Date.now();
@@ -50,14 +38,14 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
+    console.error(`Error: ${message}`);
     res.status(status).json({ message });
-    console.error(err);
   });
 
-  if (app.get("env") === "development") {
+  if (process.env.NODE_ENV !== "production") {
     // Development setup with Vite
+    console.log('Starting development server with Vite middleware...');
     const vite = await createViteServer({
-      configFile: false,
       root: path.resolve(__dirname, "../client"),
       server: { 
         middlewareMode: true,
@@ -68,6 +56,7 @@ app.use((req, res, next) => {
 
     app.use(vite.middlewares);
 
+    // Serve index.html with Vite transforms in development
     app.use('*', async (req, res, next) => {
       try {
         const template = await fs.promises.readFile(
@@ -82,14 +71,17 @@ app.use((req, res, next) => {
       }
     });
   } else {
-    // Production setup with static file serving
+    // Production setup
     const distPath = path.resolve(__dirname, '../dist/public');
+
+    // Check if build directory exists
     if (!fs.existsSync(distPath)) {
-      console.error(`Could not find the build directory: ${distPath}`);
-      console.error('Please make sure to build the client first using: node build.mjs');
+      console.error(`Error: Build directory not found at ${distPath}`);
+      console.error('Please ensure you have built the project first');
       process.exit(1);
     }
 
+    // Serve static files with caching
     app.use(express.static(distPath, {
       maxAge: '1y',
       etag: true
@@ -97,13 +89,17 @@ app.use((req, res, next) => {
 
     // Always return index.html for any unknown paths (SPA routing)
     app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      res.sendFile(path.join(distPath, 'index.html'), err => {
+        if (err) {
+          console.error(`Error sending index.html: ${err.message}`);
+          res.status(500).send('Error loading application');
+        }
+      });
     });
   }
 
-  // Use Replit's assigned port or fallback to 5000
   const PORT = parseInt(process.env.PORT || '5000', 10);
   server.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running at http://0.0.0.0:${PORT}`);
+    console.log(`Server running at http://0.0.0.0:${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
   });
 })();
