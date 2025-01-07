@@ -14,7 +14,10 @@ async function buildProject() {
     console.log('Building client...');
     await execAsync('npx vite build --emptyOutDir', { 
       stdio: 'inherit',
-      cwd: path.join(__dirname, 'client')
+      env: {
+        ...process.env,
+        VITE_ROOT_DIR: __dirname
+      }
     });
 
     // Then build the server
