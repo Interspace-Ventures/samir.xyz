@@ -12,11 +12,11 @@ async function buildProject() {
   try {
     // First build the client
     console.log('Building client...');
-    await execAsync('npx vite build --emptyOutDir', { 
+    await execAsync('npx vite build', { 
       stdio: 'inherit',
       env: {
         ...process.env,
-        VITE_ROOT_DIR: __dirname
+        NODE_ENV: 'production'
       }
     });
 
