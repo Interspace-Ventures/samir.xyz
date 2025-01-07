@@ -47,8 +47,11 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 265 89% 50%;
   }
+}
+
+@layer base {
   * {
-    @apply border-border;
+    @apply border-[hsl(var(--border))];
   }
   body {
     @apply bg-background text-foreground antialiased;
