@@ -3,7 +3,6 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fs from 'fs';
 
 const execAsync = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
@@ -11,24 +10,11 @@ const __dirname = path.dirname(__filename);
 
 async function buildProject() {
   try {
-    // Ensure dist directory exists and is clean
-    const distPath = path.join(__dirname, 'dist');
-    const publicPath = path.join(distPath, 'public');
-
-    if (fs.existsSync(distPath)) {
-      fs.rmSync(distPath, { recursive: true });
-    }
-    fs.mkdirSync(distPath, { recursive: true });
-    fs.mkdirSync(publicPath, { recursive: true });
-
     // First build the client
     console.log('Building client...');
-    await execAsync('npx vite build', { 
+    await execAsync('npx vite build --emptyOutDir', { 
       stdio: 'inherit',
-      env: {
-        ...process.env,
-        NODE_ENV: 'production'
-      }
+      cwd: path.join(__dirname, 'client')
     });
 
     // Then build the server
