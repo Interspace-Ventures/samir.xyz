@@ -10,10 +10,9 @@ const __dirname = path.dirname(__filename);
 
 async function buildProject() {
   try {
-    // First build the client
+    // First build the client using Vite's config
     console.log('Building client...');
     await execAsync('NODE_ENV=production npx vite build', { 
-      cwd: path.resolve(__dirname),
       stdio: 'inherit',
       env: {
         ...process.env,
