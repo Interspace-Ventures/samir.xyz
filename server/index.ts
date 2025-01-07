@@ -51,7 +51,7 @@ app.use((req, res, next) => {
   if (process.env.NODE_ENV !== "production") {
     try {
       const vite = await createViteServer({
-        root: path.resolve(__dirname, ".."),
+        root: path.resolve(__dirname, "../client"),
         server: {
           middlewareMode: true,
           hmr: { server }
@@ -63,8 +63,7 @@ app.use((req, res, next) => {
 
       app.use("*", async (req, res, next) => {
         try {
-          // Read index.html from the root directory, not client directory
-          const indexPath = path.resolve(__dirname, "../index.html");
+          const indexPath = path.resolve(__dirname, "../client/index.html");
           let template = await fs.readFile(indexPath, "utf-8");
           template = await vite.transformIndexHtml(req.originalUrl, template);
           res.status(200).set({ "Content-Type": "text/html" }).end(template);
