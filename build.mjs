@@ -12,7 +12,7 @@ async function buildProject() {
   try {
     // First build the client
     console.log('Building client...');
-    await execAsync('NODE_ENV=production npx vite build --emptyOutDir', { 
+    await execAsync('NODE_ENV=production npx vite build', { 
       cwd: path.resolve(__dirname),
       stdio: 'inherit',
       env: {
@@ -39,7 +39,6 @@ async function buildProject() {
           import { createRequire } from 'module';
           import { fileURLToPath } from 'url';
           import { dirname } from 'path';
-          import { URL } from 'url';
           const require = createRequire(import.meta.url);
           const __filename = fileURLToPath(import.meta.url);
           const __dirname = dirname(__filename);
