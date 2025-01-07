@@ -86,7 +86,7 @@ app.use((req, res, next) => {
     const distPath = path.resolve(__dirname, '../dist/public');
     if (!fs.existsSync(distPath)) {
       console.error(`Could not find the build directory: ${distPath}`);
-      console.error('Please make sure to build the client first using: npm run build');
+      console.error('Please make sure to build the client first using: node build.mjs');
       process.exit(1);
     }
 
