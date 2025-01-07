@@ -12,7 +12,9 @@ async function buildProject() {
   try {
     // First build the client
     console.log('Building client...');
+    const clientDir = path.join(__dirname, 'client');
     await execAsync('npx vite build', { 
+      cwd: clientDir,
       stdio: 'inherit',
       env: {
         ...process.env,
