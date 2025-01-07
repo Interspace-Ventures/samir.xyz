@@ -8,21 +8,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export function registerRoutes(app: Express) {
-  // In production, serve from dist/public
-  if (process.env.NODE_ENV === 'production') {
-    const distPath = path.resolve(__dirname, '../dist/public');
-    console.log('Production mode: Serving static files from:', distPath);
-    app.use(express.static(distPath, {
-      maxAge: '1y',
-      etag: true
-    }));
-  }
-
-  // Serve the favicon from attached_assets
-  app.get('/favicon.png', (req, res) => {
-    res.sendFile(path.join(__dirname, '../attached_assets/Hey I\'m Samir - Favicon.png'));
-  });
-
   // Serve static files from the attached_assets/portfolio directory for logos
   const logoPath = path.join(__dirname, '../attached_assets/portfolio');
   console.log('Serving logos from:', logoPath);

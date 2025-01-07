@@ -12,8 +12,8 @@ async function buildProject() {
   try {
     // First build the client
     console.log('Building client...');
-    const clientResult = await execAsync('npx vite build', { 
-      cwd: path.resolve(__dirname, 'client'),
+    await execAsync('NODE_ENV=production npx vite build --emptyOutDir', { 
+      cwd: path.resolve(__dirname),
       stdio: 'inherit',
       env: {
         ...process.env,
@@ -29,7 +29,7 @@ async function buildProject() {
       bundle: true,
       platform: 'node',
       target: 'node20',
-      outdir: 'dist',
+      outfile: 'dist/server.mjs',
       format: 'esm',
       packages: 'external',
       sourcemap: true,
@@ -39,6 +39,7 @@ async function buildProject() {
           import { createRequire } from 'module';
           import { fileURLToPath } from 'url';
           import { dirname } from 'path';
+          import { URL } from 'url';
           const require = createRequire(import.meta.url);
           const __filename = fileURLToPath(import.meta.url);
           const __dirname = dirname(__filename);
