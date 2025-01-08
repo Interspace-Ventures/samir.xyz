@@ -54,8 +54,15 @@ export async function setupVite(app: Express, server: Server) {
   app.use('/assets', express.static(path.resolve(__dirname, '../../public/assets')));
 
   app.use(vite.middlewares);
+
+  // Handle all routes in development
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
+
+    // Skip API routes
+    if (url.startsWith('/api')) {
+      return next();
+    }
 
     try {
       // Load and transform the template
@@ -88,8 +95,15 @@ export function serveStatic(app: Express) {
   // Then serve files from public directory (static assets)
   app.use('/assets', express.static(path.join(publicDir, 'assets')));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
+  // Handle all non-API routes in production
+  app.use("*", (req, res, next) => {
+    const url = req.originalUrl;
+
+    // Skip API routes
+    if (url.startsWith('/api')) {
+      return next();
+    }
+
     res.sendFile(path.resolve(distDir, "index.html"));
   });
 }

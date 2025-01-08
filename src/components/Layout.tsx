@@ -38,10 +38,20 @@ export function Layout({ children }: { children: ReactNode }) {
               <Link href="/portfolio" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
+              <a 
+                href="https://interspace.samir.xyz/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}
+              >
                 Interspace <ArrowUpRight className="w-4 h-4" />
               </a>
-              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
+              <a 
+                href="https://perspectives.samir.xyz/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}
+              >
                 Perspectives <ArrowUpRight className="w-4 h-4" />
               </a>
               <button onClick={toggleTheme} className="ml-4">
@@ -52,26 +62,54 @@ export function Layout({ children }: { children: ReactNode }) {
 
           {/* Mobile navigation */}
           {isOpen && (
-            <div className="sm:hidden py-4 space-y-4">
-              <Link href="/profile" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+            <div className="sm:hidden py-4 space-y-6">
+              <Link 
+                href="/profile" 
+                className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}
+                onClick={() => setIsOpen(false)}
+              >
                 Profile
               </Link>
-              <Link href="/portfolio" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
+              <Link 
+                href="/portfolio" 
+                className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}
+                onClick={() => setIsOpen(false)}
+              >
                 Portfolio
               </Link>
-              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
+              <a 
+                href="https://interspace.samir.xyz/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] flex items-center gap-1`}
+              >
                 Interspace <ArrowUpRight className="w-4 h-4" />
               </a>
-              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
+              <a 
+                href="https://perspectives.samir.xyz/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] flex items-center gap-1`}
+              >
                 Perspectives <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
           )}
         </div>
       </nav>
+
       <main className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ${isDark ? 'text-white' : 'text-black'}`}>
         {children}
       </main>
+
+      {/* Footer */}
+      <footer className={`py-8 mt-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            Made with Replit AI in Brooklyn, NY - Interspace Labs 2025
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
