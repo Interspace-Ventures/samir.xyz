@@ -13,8 +13,8 @@ export function registerRoutes(app: Express): Server {
     maxAge: '1d',
     etag: true,
     lastModified: true,
-    fallthrough: true, // Enable fallback to next middleware
-    index: false // Disable directory indexing
+    fallthrough: true,
+    index: false
   };
 
   // Error handler for static files
@@ -23,18 +23,9 @@ export function registerRoutes(app: Express): Server {
     res.status(404).send('Asset not found');
   };
 
-  // Serve optimized assets
+  // Serve all static assets from /public/assets
   app.use('/assets', 
     express.static(path.join(process.cwd(), 'public', 'assets'), staticOptions),
-    (err: any, _req: express.Request, res: express.Response, next: express.NextFunction) => {
-      if (err) handleStaticError(err, res);
-      else next();
-    }
-  );
-
-  // Serve original assets as fallback
-  app.use('/attached_assets', 
-    express.static(path.join(process.cwd(), 'public', 'attached_assets'), staticOptions),
     (err: any, _req: express.Request, res: express.Response, next: express.NextFunction) => {
       if (err) handleStaticError(err, res);
       else next();
