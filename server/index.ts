@@ -71,8 +71,8 @@ app.use((req, res, next) => {
       }
     });
   } else {
-    // Production mode - serve static files from dist/public
-    const publicDir = path.resolve(__dirname, "../public");
+    // Production mode - serve static files from dist
+    const publicDir = path.resolve(process.cwd(), "dist", "public");
     console.log('Serving static files from:', publicDir);
 
     try {
@@ -84,21 +84,29 @@ app.use((req, res, next) => {
       }));
 
       // Handle SPA routing by serving index.html for all non-file routes
-      app.get("*", async (req, res, next) => {
+      app.get("*", (req, res, next) => {
+        // Log all incoming requests in production for debugging
+        console.log(`[Production] Handling request for: ${req.path}`);
+
         // If the request is for a file, let express.static handle it
         if (path.extname(req.path) !== '') {
+          console.log(`[Production] Static file request: ${req.path}`);
           next();
           return;
         }
 
         // For all other routes, serve index.html for client-side routing
         const indexPath = path.join(publicDir, "index.html");
-        try {
-          res.sendFile(indexPath);
-        } catch (error) {
-          console.error(`Error: Could not find index.html at ${indexPath}`);
-          next(error);
-        }
+        console.log(`[Production] Serving index.html from: ${indexPath}`);
+
+        res.sendFile(indexPath, (err) => {
+          if (err) {
+            console.error(`Error serving index.html: ${err.message}`);
+            next(err);
+          } else {
+            console.log(`[Production] Successfully served index.html for: ${req.path}`);
+          }
+        });
       });
     } catch (error) {
       console.error(`Error: Could not find the public directory at ${publicDir}`);
@@ -110,6 +118,7 @@ app.use((req, res, next) => {
   const PORT = parseInt(process.env.PORT || "5000", 10);
   server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`Mode: ${process.env.NODE_ENV || 'development'}`);
   });
 })().catch((error) => {
   console.error("Server startup failed:", error);

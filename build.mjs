@@ -28,7 +28,7 @@ async function buildProject() {
 
     // Build client (Vite)
     console.log('Building client application...');
-    await execAsync('npx vite build client --outDir ../dist/public', {
+    await execAsync('npx vite build', {
       stdio: 'inherit',
       env: { ...process.env, NODE_ENV: 'production' }
     });
@@ -41,24 +41,20 @@ async function buildProject() {
       bundle: true,
       platform: 'node',
       target: 'node20',
-      outfile: path.join(distDir, 'server.js'),
+      outfile: path.join(distDir, 'server.mjs'),
       format: 'esm',
       packages: 'external',
       sourcemap: true,
       banner: {
         js: `
-          import { createRequire } from 'module';
-          import { fileURLToPath } from 'url';
-          import { dirname } from 'path';
-          const require = createRequire(import.meta.url);
-          const __filename = fileURLToPath(import.meta.url);
-          const __dirname = dirname(__filename);
+          // ESM module support
+          process.env.NODE_ENV = process.env.NODE_ENV || 'production';
         `
       }
     });
     console.log('Server build completed');
 
-    // Copy any static assets if they exist
+    // Copy any static assets
     const assetsDir = path.join(rootDir, 'attached_assets');
     if (fs.existsSync(assetsDir)) {
       const publicAssetsDir = path.join(publicDir, 'assets');
