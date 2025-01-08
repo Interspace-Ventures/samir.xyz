@@ -1,7 +1,11 @@
-import React, { type FC } from "react";
+import React, { type FC, useState } from "react";
 import { RevealOnScroll } from "../components/RevealOnScroll";
+import { Skeleton } from "../components/ui/skeleton";
 
 export const Profile: FC = () => {
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
   return (
     <div className="space-y-8">
       <RevealOnScroll>
@@ -15,12 +19,27 @@ export const Profile: FC = () => {
                 I drive business impact at fintechs.
               </h2>
             </div>
-            <div className="hidden sm:flex sm:items-center relative w-40 h-40 flex-shrink-0 ml-4">
-              <img 
-                src="/attached_assets/profile/samir-profile-photo.png"
-                alt="Profile" 
-                className="absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[10px]"
-              />
+            <div className="hidden sm:block relative w-40 h-40 flex-shrink-0 ml-4">
+              {imageLoading && !imageError && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Skeleton className="w-full h-full rounded-full" />
+                </div>
+              )}
+              {!imageError && (
+                <img 
+                  src="/attached_assets/profile/samir-profile-photo.png"
+                  alt="Profile" 
+                  className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[10px] transition-opacity duration-300 ${
+                    imageLoading ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  onLoad={() => setImageLoading(false)}
+                  onError={(e) => {
+                    console.error('Failed to load profile image');
+                    setImageError(true);
+                    setImageLoading(false);
+                  }}
+                />
+              )}
             </div>
           </div>
         </section>
