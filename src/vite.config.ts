@@ -13,11 +13,11 @@ export default defineConfig({
   plugins: [react(), runtimeErrorOverlay(), themePlugin()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "."),
-      "@components": path.resolve(__dirname, "components"),
-      "@pages": path.resolve(__dirname, "pages"),
-      "@lib": path.resolve(__dirname, "lib"),
-      "@assets": path.resolve(rootDir, "public", "assets")
+      "@": path.resolve(rootDir, "src"),
+      "@components": path.resolve(rootDir, "src/components"),
+      "@pages": path.resolve(rootDir, "src/pages"),
+      "@lib": path.resolve(rootDir, "src/lib"),
+      "@assets": path.resolve(rootDir, "public/assets")
     },
   },
   root: rootDir,
@@ -40,9 +40,6 @@ export default defineConfig({
           }
           if (/css/i.test(extType || '')) {
             return `assets/css/[name]-[hash][extname]`;
-          }
-          if (/js|jsx|ts|tsx/i.test(extType || '')) {
-            return `assets/js/[name]-[hash][extname]`;
           }
           return `assets/[name]-[hash][extname]`;
         },
