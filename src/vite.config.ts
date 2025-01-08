@@ -21,25 +21,27 @@ export default defineConfig({
     },
   },
   root: rootDir,
-  publicDir: path.resolve(rootDir, "public"),
+  base: '/',
+  publicDir: 'public',
   build: {
     outDir: path.resolve(rootDir, "dist"),
     emptyOutDir: true,
+    assetsDir: 'assets',
     rollupOptions: {
       input: {
         main: path.resolve(rootDir, "index.html"),
       },
       output: {
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.');
-          const extType = info[info.length - 1];
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+          const info = assetInfo.name?.split('.');
+          const extType = info?.[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType || '')) {
             return `assets/images/[name]-[hash][extname]`;
           }
-          if (/css/i.test(extType)) {
+          if (/css/i.test(extType || '')) {
             return `assets/css/[name]-[hash][extname]`;
           }
-          if (/js|jsx|ts|tsx/i.test(extType)) {
+          if (/js|jsx|ts|tsx/i.test(extType || '')) {
             return `assets/js/[name]-[hash][extname]`;
           }
           return `assets/[name]-[hash][extname]`;
@@ -54,5 +56,9 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5000,
+    fs: {
+      strict: true,
+      allow: ['..']
+    }
   }
 });
