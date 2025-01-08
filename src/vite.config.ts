@@ -12,7 +12,10 @@ export default defineConfig({
   plugins: [react(), runtimeErrorOverlay(), themePlugin()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "js"),
+      "@": path.resolve(__dirname, "."),
+      "@components": path.resolve(__dirname, "components"),
+      "@pages": path.resolve(__dirname, "pages"),
+      "@lib": path.resolve(__dirname, "lib")
     },
   },
   root: path.resolve(__dirname, ".."),
@@ -20,7 +23,6 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, "..", "dist"),
     emptyOutDir: true,
-    assetsDir: "assets",
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, "..", "index.html"),
