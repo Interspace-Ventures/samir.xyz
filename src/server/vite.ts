@@ -58,17 +58,13 @@ export async function setupVite(app: Express, server: Server) {
     const url = req.originalUrl;
 
     try {
-      const clientTemplate = path.resolve(
-        __dirname,
-        "..",
-        "..",
-        "index.html",
+      // Load and transform the template
+      const template = fs.readFileSync(
+        path.resolve(__dirname, '../../index.html'),
+        'utf-8'
       );
-
-      // always reload the index.html file from disk incase it changes
-      const template = await fs.promises.readFile(clientTemplate, "utf-8");
-      const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      const html = await vite.transformIndexHtml(url, template);
+      res.status(200).set({ "Content-Type": "text/html" }).end(html);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
@@ -92,7 +88,6 @@ export function serveStatic(app: Express) {
   // Then serve files from public directory (static assets)
   app.use('/assets', express.static(path.join(publicDir, 'assets')));
 
-  // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {
     res.sendFile(path.resolve(distDir, "index.html"));
   });
