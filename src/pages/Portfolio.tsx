@@ -12,13 +12,19 @@ const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fi
 const getImagePaths = (companyName: string): { webp: string; png: string } => {
   const baseName = companyName.toLowerCase().replace(/\s+/g, '-');
   return {
-    webp: `/assets/images/logos/${baseName}.webp`,
-    png: `/assets/images/logos/${baseName}.png`
+    webp: `/attached_assets/logos/${baseName}.webp`,
+    png: `/attached_assets/logos/${baseName}.png`
   };
 };
 
-// Sort companies alphabetically
+// Sort companies alphabetically by default
 const sortedCompanies = [...companies].sort((a, b) => a.name.localeCompare(b.name));
+
+// Adjust the intersection observer configurations for better performance
+const LOAD_MORE_OPTIONS = {
+  rootMargin: '50px 0px',
+  threshold: 0.1
+};
 
 export const Portfolio: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
@@ -41,14 +47,14 @@ export const Portfolio: FC = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Filter and sort companies based on selected category
+  // Filter companies based on selected category
   const filteredCompanies = selectedCategory === 'All'
     ? sortedCompanies
     : sortedCompanies.filter(company => company.category === selectedCategory);
 
   const displayedCompanies = filteredCompanies.slice(0, displayCount);
 
-  // Image loading observer with improved mobile performance
+  // Improve intersection observer for image loading
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -57,14 +63,26 @@ export const Portfolio: FC = () => {
             const img = entry.target as HTMLImageElement;
             const companyName = img.dataset.company;
             if (companyName && !loadedImages.has(companyName) && !failedImages.has(companyName)) {
-              // Image src is now handled within the picture element
+              // Start loading the image
+              const paths = getImagePaths(companyName);
+              const webpImage = new Image();
+              webpImage.src = paths.webp;
+              webpImage.onload = () => handleImageLoad(companyName);
+              webpImage.onerror = () => {
+                console.log(`WebP failed for ${companyName}, trying PNG`);
+                const pngImage = new Image();
+                pngImage.src = paths.png;
+                pngImage.onload = () => handleImageLoad(companyName);
+                pngImage.onerror = () => handleImageError(companyName);
+              };
+
               observerRef.current?.unobserve(img);
             }
           }
         });
       },
       {
-        rootMargin: isMobile ? '1000px 0px' : '500px 0px',
+        rootMargin: '200px 0px',
         threshold: 0.1
       }
     );
@@ -72,9 +90,9 @@ export const Portfolio: FC = () => {
     return () => {
       observerRef.current?.disconnect();
     };
-  }, [loadedImages, failedImages, isMobile]);
+  }, [loadedImages, failedImages]);
 
-  // Load more observer
+  // Improve load more functionality
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -83,10 +101,7 @@ export const Portfolio: FC = () => {
           setDisplayCount(prev => Math.min(prev + increment, filteredCompanies.length));
         }
       },
-      {
-        rootMargin: isMobile ? '800px 0px' : '500px 0px',
-        threshold: 0.1
-      }
+      LOAD_MORE_OPTIONS
     );
 
     if (loadMoreRef.current) {
@@ -109,14 +124,24 @@ export const Portfolio: FC = () => {
     setDisplayCount(isMobile ? 8 : 12);
   }, [selectedCategory, isMobile]);
 
-  const handleImageLoad = (companyName: string) => {
-    setLoadedImages(prev => new Set([...prev, companyName]));
-    setIsLoading(false);
-  };
-
+  // Update the handleImageError function to be more robust
   const handleImageError = (companyName: string) => {
     console.error(`Failed to load image for ${companyName}`);
     setFailedImages(prev => new Set([...prev, companyName]));
+    setIsLoading(false); // Ensure loading state is cleared even on error
+
+    // Try loading PNG fallback if WebP fails
+    const img = imageRefs.current.get(companyName);
+    if (img && img.src.endsWith('.webp')) {
+      console.log(`Attempting to load PNG fallback for ${companyName}`);
+      const pngPath = getImagePaths(companyName).png;
+      img.src = pngPath;
+    }
+  };
+
+  const handleImageLoad = (companyName: string) => {
+    setLoadedImages(prev => new Set([...prev, companyName]));
+    setIsLoading(false);
   };
 
   const imageRef = (companyName: string) => (element: HTMLImageElement | null) => {
@@ -213,7 +238,13 @@ export const Portfolio: FC = () => {
                         {!hasFailedImage ? (
                           <div className="flex items-center justify-center w-full h-full">
                             <picture>
-                              <source srcSet={imagePaths.webp} type="image/webp" />
+                              <source 
+                                srcSet={imagePaths.webp} 
+                                type="image/webp"
+                                onError={() => {
+                                  console.log(`WebP format not supported or failed for ${company.name}`);
+                                }} 
+                              />
                               <img
                                 ref={imageRef(company.name)}
                                 src={imagePaths.png}

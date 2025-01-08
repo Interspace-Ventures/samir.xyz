@@ -14,6 +14,7 @@ const directories = [
   'public/assets/css',
   'public/attached_assets/icons',
   'public/attached_assets/profile',
+  'public/attached_assets/logos',
   'public/attached_assets/images'
 ];
 

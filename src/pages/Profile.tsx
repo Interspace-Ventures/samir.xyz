@@ -6,6 +6,12 @@ export const Profile: FC = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
 
+  const handleImageError = () => {
+    console.error('Failed to load profile image');
+    setImageError(true);
+    setImageLoading(false);
+  };
+
   return (
     <div className="space-y-8">
       <RevealOnScroll>
@@ -27,19 +33,21 @@ export const Profile: FC = () => {
               )}
               {!imageError ? (
                 <picture>
-                  <source srcSet="/assets/images/profile/samir-profile-photo.webp" type="image/webp" />
+                  <source 
+                    srcSet="/attached_assets/profile/profile-photo.webp" 
+                    type="image/webp"
+                    onError={() => {
+                      console.log('WebP format not supported for profile image, falling back to PNG');
+                    }}
+                  />
                   <img 
-                    src="/assets/images/profile/samir-profile-photo.png"
+                    src="/attached_assets/profile/profile-photo.png"
                     alt="Profile" 
                     className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-300 ${
                       imageLoading ? 'opacity-0' : 'opacity-100'
                     }`}
                     onLoad={() => setImageLoading(false)}
-                    onError={(e) => {
-                      console.error('Failed to load profile image:', e);
-                      setImageError(true);
-                      setImageLoading(false);
-                    }}
+                    onError={handleImageError}
                   />
                 </picture>
               ) : (
