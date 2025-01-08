@@ -3,7 +3,6 @@ import { promisify } from 'util';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import { validateBuildConfig } from '../src/config/validateBuildConfig.js';
 
 const execAsync = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
@@ -13,56 +12,36 @@ async function buildProject() {
   try {
     console.log('Starting build process...');
 
-    // Validate build configuration
-    console.log('Validating build configuration...');
-    const validation = await validateBuildConfig();
-
-    if (!validation.isValid) {
-      console.error('Build configuration validation failed:');
-      validation.errors.forEach(error => console.error(`❌ ${error}`));
-      validation.warnings.forEach(warning => console.warn(`⚠️ ${warning}`));
+    // Run validation first
+    console.log('\nValidating build environment...');
+    try {
+      await execAsync('node scripts/validateEnvironment.mjs');
+    } catch (error) {
+      console.error('Build environment validation failed:', error.message);
       process.exit(1);
     }
-
-    if (validation.warnings.length > 0) {
-      console.warn('\nBuild configuration warnings:');
-      validation.warnings.forEach(warning => console.warn(`⚠️ ${warning}`));
-    }
-
-    console.log('✅ Build configuration validation passed');
 
     // Setup directories
     const distDir = path.resolve(__dirname, '..', 'dist');
     const publicDir = path.resolve(__dirname, '..', 'public');
-    const assetsDirs = ['js', 'css', 'images', 'logos'].map(dir => 
+    const assetsDirs = ['js', 'css', 'images'].map(dir => 
       path.join(distDir, 'assets', dir)
     );
 
     // Create directory structure
-    console.log('Setting up directory structure...');
-    [...assetsDirs, path.join(distDir, 'assets')].forEach(dir => {
+    console.log('\nSetting up directory structure...');
+    [...assetsDirs, publicDir].forEach(dir => {
       fs.mkdirSync(dir, { recursive: true });
     });
 
-    // Copy public assets
-    console.log('Copying public assets...');
-    if (fs.existsSync(publicDir)) {
-      fs.cpSync(publicDir, path.join(distDir, 'assets'), { 
-        recursive: true,
-        force: true
-      });
-    }
-
     // Build the application
-    console.log('Building application...');
+    console.log('\nBuilding application...');
     process.env.NODE_ENV = 'production';
 
-    const { stdout, stderr } = await execAsync(
-      'npx vite build --config src/vite.config.ts'
-    );
+    const { stdout, stderr } = await execAsync('npx vite build');
 
     if (stdout) console.log('Build output:', stdout);
-    if (stderr) console.error('Build warnings/errors:', stderr);
+    if (stderr) console.log('Build warnings:', stderr);
 
     // Verify the build output
     const requiredFiles = ['index.html', 'assets'];
@@ -76,7 +55,7 @@ async function buildProject() {
       );
     }
 
-    console.log('Build completed successfully!');
+    console.log('\nBuild completed successfully!');
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);
