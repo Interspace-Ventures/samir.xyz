@@ -67,7 +67,61 @@ Object.entries(assetMappings).forEach(([type, extensions]) => {
   moveAssets(publicDir, typeDir, extensions);
 });
 
-console.log('Asset organization completed!');
+// Create attached_assets directory structure
+const attachedAssetsDirectories = [
+  'attached_assets/icons',
+  'attached_assets/profile',
+  'attached_assets/images'
+];
+
+console.log('\nCreating attached_assets directory structure...');
+attachedAssetsDirectories.forEach(dir => {
+  const fullPath = path.join(rootDir, dir);
+  if (!fs.existsSync(fullPath)) {
+    fs.mkdirSync(fullPath, { recursive: true });
+    console.log(`Created directory: ${dir}`);
+  }
+});
+
+// Move favicon and generated-icon to attached_assets/icons
+const iconFiles = ['favicon.png', 'generated-icon.png'];
+const sourceDir = path.join(rootDir, 'public');
+const targetDir = path.join(rootDir, 'attached_assets/icons');
+
+console.log('\nMoving icon files...');
+iconFiles.forEach(file => {
+  const sourcePath = path.join(sourceDir, file);
+  const targetPath = path.join(targetDir, file);
+
+  if (fs.existsSync(sourcePath)) {
+    fs.copyFileSync(sourcePath, targetPath);
+    fs.unlinkSync(sourcePath); // Remove the original file
+    console.log(`Moved ${file} to attached_assets/icons`);
+  }
+});
+
+// Update HTML files to reference new icon locations
+const htmlFiles = [
+  'index.html',
+  'src/index.html',
+  'public/index.html'
+];
+
+console.log('\nUpdating HTML files with new icon paths...');
+htmlFiles.forEach(htmlFile => {
+  const filePath = path.join(rootDir, htmlFile);
+  if (fs.existsSync(filePath)) {
+    let content = fs.readFileSync(filePath, 'utf8');
+    content = content.replace(
+      /href="\/(?:public\/)?(?:assets\/)?(?:images\/)?favicon\.png"/,
+      'href="/attached_assets/icons/favicon.png"'
+    );
+    fs.writeFileSync(filePath, content);
+    console.log(`Updated icon path in ${htmlFile}`);
+  }
+});
+
+console.log('\nAsset organization completed!');
 
 
 // Clean up duplicate build files
