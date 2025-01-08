@@ -25,7 +25,10 @@ async function buildProject() {
 
     // Create fresh dist directories
     fs.mkdirSync(publicDir, { recursive: true });
-    console.log('Created build directories');
+    console.log('Created build directories:', {
+      distDir,
+      publicDir
+    });
 
     // Build client (Vite)
     console.log('Building client application...');
@@ -34,19 +37,26 @@ async function buildProject() {
     try {
       // Move to client directory before running Vite build
       process.chdir(path.join(__dirname, 'client'));
-      const { stdout, stderr } = await execAsync('npx vite build --outDir ../dist/public --emptyOutDir', {
-        env: { ...process.env, NODE_ENV: 'production' }
-      });
+      console.log('Changed to client directory:', process.cwd());
+
+      const { stdout, stderr } = await execAsync('npx vite build --outDir ../dist/public --emptyOutDir');
       console.log('Vite build output:', stdout);
       if (stderr) console.error('Vite build stderr:', stderr);
+
       // Move back to root
       process.chdir(__dirname);
+      console.log('Changed back to root directory:', process.cwd());
     } catch (error) {
       console.error('Vite build error:', error);
       throw error;
     }
 
     console.log('Client build completed');
+    console.log('Verifying build output in:', publicDir);
+
+    // List contents of public directory
+    const publicFiles = fs.readdirSync(publicDir);
+    console.log('Files in public directory:', publicFiles);
 
     // Build server
     console.log('Building server...');
@@ -60,10 +70,20 @@ async function buildProject() {
       packages: 'external',
       sourcemap: true,
       banner: {
-        js: '#!/usr/bin/env node\nimport { createRequire } from "module";\nconst require = createRequire(import.meta.url);\nprocess.env.NODE_ENV = "production";'
+        js: '#!/usr/bin/env node\nimport { createRequire } from "module";\nconst require = createRequire(import.meta.url);'
       }
     });
     console.log('Server build completed');
+
+    // Verify the build output
+    const requiredFiles = ['index.html', 'assets'];
+    for (const file of requiredFiles) {
+      const filePath = path.join(publicDir, file);
+      if (!fs.existsSync(filePath)) {
+        throw new Error(`Required file/directory not found: ${file} in ${publicDir}`);
+      }
+      console.log(`Verified ${file} exists in public directory`);
+    }
 
     // Create a startup script
     const startupScript = `#!/usr/bin/env node
@@ -84,14 +104,6 @@ import('./server.mjs').catch(console.error);
     fs.writeFileSync(path.join(distDir, 'index.mjs'), startupScript, 'utf8');
     fs.chmodSync(path.join(distDir, 'index.mjs'), '755');
 
-    // Verify the build output
-    const requiredFiles = ['index.html', 'assets'];
-    for (const file of requiredFiles) {
-      const filePath = path.join(publicDir, file);
-      if (!fs.existsSync(filePath)) {
-        throw new Error(`Required file/directory not found: ${file} in ${publicDir}`);
-      }
-    }
 
     // Copy any additional static assets if needed
     if (fs.existsSync(path.join(__dirname, 'client', 'public'))) {

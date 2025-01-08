@@ -14,14 +14,6 @@ export function registerRoutes(app: Express) {
     res.json({ status: 'ok' });
   });
 
-  // Ensure directory exists before attempting to serve
-  const publicDir = path.join(process.cwd(), "dist", "public");
-
-  // Log the serving directory for debugging
-  console.log('Routes.ts - Checking public directory:', publicDir);
-  console.log('Routes.ts - Public directory exists:', fs.existsSync(publicDir));
-
-
   // Create HTTP server
   const httpServer = createServer(app);
   return httpServer;
