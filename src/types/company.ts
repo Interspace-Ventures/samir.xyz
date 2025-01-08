@@ -46,6 +46,9 @@ export const companies: Company[] = [
   { name: 'Sundae', url: 'https://www.sundae.com', category: 'Fintech' },
   { name: 'Kartera', url: 'https://www.kartera.com', category: 'Fintech' },
   { name: 'Launchpad', url: 'https://www.launchpad.com', category: 'Fintech' }
-].sort((a, b) => a.name.localeCompare(b.name));
+];
 
+// Categories for display, including "All"
+export const displayCategories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const;
+// Typed categories for data only
 export const categories: CompanyCategory[] = ['Fintech', 'Health', 'Retail', 'SaaS'];

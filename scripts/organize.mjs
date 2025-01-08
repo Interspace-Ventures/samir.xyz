@@ -13,7 +13,8 @@ const directories = [
   'src/lib',
   'src/pages',
   'src/types',
-  'public/assets/images',
+  'public/assets/images/profile',
+  'public/assets/images/logos',
   'public/assets/js',
   'public/assets/css'
 ];
@@ -29,7 +30,18 @@ directories.forEach(dir => {
   }
 });
 
-// Clean up any misplaced assets
+// Move assets to their proper locations
+const publicDir = path.join(rootDir, 'public');
+const assetsDir = path.join(publicDir, 'assets');
+
+// Create asset type mappings
+const assetMappings = {
+  images: ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'],
+  js: ['.js', '.jsx', '.ts', '.tsx'],
+  css: ['.css', '.scss', '.sass']
+};
+
+// Move assets to their respective directories
 const moveAssets = (fromDir, toDir, extensions) => {
   if (!fs.existsSync(fromDir)) return;
 
@@ -47,18 +59,6 @@ const moveAssets = (fromDir, toDir, extensions) => {
   });
 };
 
-// Move assets to their proper locations
-const publicDir = path.join(rootDir, 'public');
-const assetsDir = path.join(publicDir, 'assets');
-
-// Create asset type mappings
-const assetMappings = {
-  images: ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'],
-  js: ['.js', '.jsx', '.ts', '.tsx'],
-  css: ['.css', '.scss', '.sass']
-};
-
-// Move assets to their respective directories
 Object.entries(assetMappings).forEach(([type, extensions]) => {
   const typeDir = path.join(assetsDir, type);
   if (!fs.existsSync(typeDir)) {
@@ -67,11 +67,29 @@ Object.entries(assetMappings).forEach(([type, extensions]) => {
   moveAssets(publicDir, typeDir, extensions);
 });
 
+// Move profile image if it exists in attached_assets
+const attachedProfileDir = path.join(rootDir, 'attached_assets', 'profile');
+const profileImagesDir = path.join(publicDir, 'assets', 'images', 'profile');
+
+if (fs.existsSync(attachedProfileDir)) {
+  const profileImages = fs.readdirSync(attachedProfileDir);
+  profileImages.forEach(file => {
+    if (file === 'samir-profile-photo.png') {
+      const sourcePath = path.join(attachedProfileDir, file);
+      const destPath = path.join(profileImagesDir, file);
+      if (fs.existsSync(sourcePath)) {
+        fs.copyFileSync(sourcePath, destPath);
+        console.log(`Moved profile image to ${destPath}`);
+      }
+    }
+  });
+}
+
 // Create attached_assets directory structure
 const attachedAssetsDirectories = [
-  'attached_assets/icons',
-  'attached_assets/profile',
-  'attached_assets/images'
+  'public/attached_assets/icons',
+  'public/attached_assets/profile',
+  'public/attached_assets/images'
 ];
 
 console.log('\nCreating attached_assets directory structure...');
@@ -86,7 +104,7 @@ attachedAssetsDirectories.forEach(dir => {
 // Move favicon and generated-icon to attached_assets/icons
 const iconFiles = ['favicon.png', 'generated-icon.png'];
 const sourceDir = path.join(rootDir, 'public');
-const targetDir = path.join(rootDir, 'attached_assets/icons');
+const targetDir = path.join(rootDir, 'public/attached_assets/icons');
 
 console.log('\nMoving icon files...');
 iconFiles.forEach(file => {

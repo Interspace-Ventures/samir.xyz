@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
-import { companies, categories, type CompanyCategory } from "../types/company";
+import { companies, categories, displayCategories, type CompanyCategory } from "../types/company";
 import { RevealOnScroll } from "../components/RevealOnScroll";
 import { Skeleton } from "../components/ui/skeleton";
 
@@ -10,7 +10,7 @@ export const Portfolio: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
-  const [displayCount, setDisplayCount] = useState(8); 
+  const [displayCount, setDisplayCount] = useState(12); 
   const [isMobile, setIsMobile] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -32,6 +32,7 @@ export const Portfolio: FC = () => {
 
   const displayedCompanies = filteredCompanies.slice(0, displayCount);
 
+  // Image loading observer
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -40,7 +41,6 @@ export const Portfolio: FC = () => {
             const img = entry.target as HTMLImageElement;
             const companyName = img.dataset.company;
             if (companyName && !loadedImages.has(companyName) && !failedImages.has(companyName)) {
-              console.log(`Loading image for ${companyName}`);
               img.src = getImagePath(companyName);
               observerRef.current?.unobserve(img);
             }
@@ -48,7 +48,7 @@ export const Portfolio: FC = () => {
         });
       },
       {
-        rootMargin: isMobile ? '500px 0px' : '300px 0px', 
+        rootMargin: isMobile ? '2000px 0px' : '1000px 0px',  // Much larger margin for mobile
         threshold: 0.01
       }
     );
@@ -58,19 +58,18 @@ export const Portfolio: FC = () => {
     };
   }, [loadedImages, failedImages, isMobile]);
 
-  // Load more observer with improved mobile handling
+  // Load more observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && displayCount < filteredCompanies.length) {
-          console.log('Loading more companies...');
-          const increment = isMobile ? 6 : 12;
+          const increment = isMobile ? 12 : 16;  // Larger batch size
           setDisplayCount(prev => Math.min(prev + increment, filteredCompanies.length));
         }
       },
       { 
-        rootMargin: isMobile ? '600px 0px' : '400px 0px',
-        threshold: 0.1 
+        rootMargin: isMobile ? '1600px 0px' : '1000px 0px',  // Much larger margin for mobile
+        threshold: 0.01  // Lower threshold for earlier triggering
       }
     );
 
@@ -89,9 +88,14 @@ export const Portfolio: FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Initial display count adjusted for mobile
+  useEffect(() => {
+    setDisplayCount(isMobile ? 12 : 16);  // Larger initial count
+  }, [isMobile]);
+
   // Reset display count when category changes
   useEffect(() => {
-    setDisplayCount(isMobile ? 6 : 8);
+    setDisplayCount(isMobile ? 12 : 16);
   }, [selectedCategory, isMobile]);
 
   const handleImageLoad = (companyName: string) => {
@@ -118,30 +122,6 @@ export const Portfolio: FC = () => {
     }
   };
 
-  const LoadingSkeleton = () => (
-    <>
-      {Array.from({ length: isMobile ? 4 : 6 }).map((_, i) => (
-        <motion.div
-          key={`skeleton-${i}`}
-          layout
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3, delay: i * 0.1 }}
-          className="h-40"
-        >
-          <Card className="h-full dark:bg-gray-800 bg-white">
-            <CardContent className="h-full p-6 flex items-center justify-center">
-              <div className="w-full flex flex-col items-center gap-4">
-                <Skeleton className="h-20 w-4/5" />
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      ))}
-    </>
-  );
-
   return (
     <div className="space-y-12">
       <RevealOnScroll>
@@ -158,17 +138,7 @@ export const Portfolio: FC = () => {
 
       <RevealOnScroll>
         <section className="flex flex-wrap gap-4">
-          <button
-            onClick={() => setSelectedCategory('All')}
-            className={`px-4 py-2 rounded-lg transition-colors ${
-              selectedCategory === 'All'
-                ? 'bg-[#7343d0] text-white'
-                : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
-            }`}
-          >
-            All
-          </button>
-          {categories.map(category => (
+          {displayCategories.map(category => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
@@ -190,7 +160,25 @@ export const Portfolio: FC = () => {
       >
         <AnimatePresence mode="popLayout">
           {isLoading ? (
-            <LoadingSkeleton />
+            Array.from({ length: isMobile ? 4 : 6 }).map((_, i) => (
+              <motion.div
+                key={`skeleton-${i}`}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, delay: i * 0.1 }}
+                className="h-40"
+              >
+                <Card className="h-full dark:bg-gray-800 bg-white">
+                  <CardContent className="h-full p-6 flex items-center justify-center">
+                    <div className="w-full flex flex-col items-center gap-4">
+                      <Skeleton className="h-20 w-4/5" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))
           ) : (
             displayedCompanies.map((company) => {
               const hasLoadedImage = loadedImages.has(company.name);
