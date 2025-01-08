@@ -22,7 +22,10 @@
     "baseUrl": "..",
     "types": ["node", "vite/client"],
     "paths": {
-      "@/*": ["./src/js/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@lib/*": ["./src/lib/*"]
     }
   }
 }
