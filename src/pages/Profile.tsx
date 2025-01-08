@@ -5,13 +5,22 @@ export const Profile: FC = () => {
   return (
     <div className="space-y-8">
       <RevealOnScroll>
-        <section className="space-y-4">
-          <h1 className="text-5xl sm:text-6xl font-bold">
-            Hey - I'm Samir.
-          </h1>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#7343d0]">
-            I drive business impact at fintechs.
-          </h2>
+        <section className="flex items-center gap-8">
+          <div className="hidden sm:block">
+            <img 
+              src="/assets/images/samir-profile-photo.png"
+              alt="Profile" 
+              className="w-32 h-32 rounded-full border-4 border-[#7343d0] object-cover object-center"
+            />
+          </div>
+          <div className="space-y-4">
+            <h1 className="text-5xl sm:text-6xl font-bold">
+              Hey - I'm Samir.
+            </h1>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#7343d0]">
+              I drive business impact at fintechs.
+            </h2>
+          </div>
         </section>
       </RevealOnScroll>
 

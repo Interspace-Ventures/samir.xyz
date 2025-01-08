@@ -1,6 +1,6 @@
 import React, { type ReactNode, useState } from "react";
 import { Link } from "wouter";
-import { Sun, Moon, Menu } from "lucide-react";
+import { Sun, Moon, Menu, ArrowUpRight } from "lucide-react";
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,11 +38,11 @@ export function Layout({ children }: { children: ReactNode }) {
               <Link href="/portfolio" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
-                Interspace
+              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
+                Interspace <ArrowUpRight className="w-4 h-4" />
               </a>
-              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
-                Perspectives
+              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
+                Perspectives <ArrowUpRight className="w-4 h-4" />
               </a>
               <button onClick={toggleTheme} className="ml-4">
                 {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
@@ -59,11 +59,11 @@ export function Layout({ children }: { children: ReactNode }) {
               <Link href="/portfolio" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
-                Interspace
+              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
+                Interspace <ArrowUpRight className="w-4 h-4" />
               </a>
-              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
-                Perspectives
+              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link block uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
+                Perspectives <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
           )}
