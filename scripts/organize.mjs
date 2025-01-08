@@ -34,14 +34,13 @@ directories.forEach(dir => {
 // Move configuration files to config directory
 const configFiles = [
   { from: 'tailwind.config.js', to: 'config/tailwind.config.js' },
-  { from: 'postcss.config.js', to: 'config/postcss.config.js' },
-  { from: 'vite.config.ts', to: 'config/vite.config.ts' }
+  { from: 'postcss.config.js', to: 'config/postcss.config.js' }
 ];
 
 configFiles.forEach(({ from, to }) => {
   const sourcePath = path.join(rootDir, from);
   const destPath = path.join(rootDir, to);
-  
+
   if (fs.existsSync(sourcePath) && !fs.existsSync(destPath)) {
     fs.copyFileSync(sourcePath, destPath);
     console.log(`Moved ${from} to ${to}`);

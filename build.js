@@ -13,15 +13,15 @@ async function buildProject() {
     console.log('Starting build process...');
 
     // Setup directories
-    const distDir = path.resolve(__dirname, '..', 'dist');
-    const publicDir = path.resolve(__dirname, '..', 'public');
+    const distDir = path.resolve(__dirname, 'dist');
+    const publicDir = path.resolve(__dirname, 'public');
     const assetsDirs = ['js', 'css', 'images', 'logos'].map(dir => 
       path.join(distDir, 'assets', dir)
     );
 
     // Create directory structure
     console.log('Setting up directory structure...');
-    [...assetsDirs, publicDir].forEach(dir => {
+    [...assetsDirs, path.join(distDir, 'assets')].forEach(dir => {
       fs.mkdirSync(dir, { recursive: true });
     });
 
@@ -38,10 +38,8 @@ async function buildProject() {
     console.log('Building application...');
     process.env.NODE_ENV = 'production';
 
-    const { stdout, stderr } = await execAsync(
-      'npx vite build --config src/vite.config.ts'
-    );
-
+    const { stdout, stderr } = await execAsync('npx vite build');
+    
     if (stdout) console.log('Build output:', stdout);
     if (stderr) console.error('Build warnings/errors:', stderr);
 
