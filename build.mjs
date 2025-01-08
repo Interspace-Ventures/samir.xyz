@@ -3,6 +3,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const execAsync = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
@@ -14,11 +15,31 @@ async function buildProject() {
     console.log('Building client...');
     const rootDir = __dirname;
     const clientDir = path.resolve(rootDir, 'client');
+    const distDir = path.resolve(rootDir, 'dist');
+    const publicDir = path.resolve(distDir, 'public');
+    const indexHtmlPath = path.join(clientDir, 'index.html');
 
-    // Run vite build from the root directory where vite.config.ts exists
-    await execAsync('NODE_ENV=production npx vite build', { 
+    // Verify index.html exists
+    if (!fs.existsSync(indexHtmlPath)) {
+      throw new Error(`Could not find index.html at ${indexHtmlPath}`);
+    }
+    console.log('Found index.html at:', indexHtmlPath);
+
+    // Create dist and public directories if they don't exist
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir, { recursive: true });
+    }
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
+    console.log('Ensured build directories exist:', { distDir, publicDir });
+
+    // Run vite build from the client directory where index.html is located
+    process.chdir(clientDir);
+    console.log('Changed working directory to:', process.cwd());
+
+    await execAsync('npx vite build', { 
       stdio: 'inherit',
-      cwd: rootDir,
       env: {
         ...process.env,
         NODE_ENV: 'production'
