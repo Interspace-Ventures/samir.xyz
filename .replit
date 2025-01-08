@@ -7,8 +7,8 @@ channel = "stable-23_11"
 
 [deployment]
 build = ["npm", "run", "build"]
-run = ["npm", "start"]
-deploymentTarget = "cloudrun"
+deploymentTarget = "static"
+publicDir = "dist"
 
 [[ports]]
 localPort = 3000
