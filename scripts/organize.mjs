@@ -9,9 +9,9 @@ const rootDir = path.resolve(__dirname, '..');
 // Source and target directories for assets
 const directories = {
   source: {
-    logos: path.join(rootDir, 'attached_assets', 'logos'),
-    profile: path.join(rootDir, 'attached_assets', 'profile'),
-    images: path.join(rootDir, 'attached_assets', 'images')
+    logos: path.join(rootDir, 'assets', 'logos'),
+    profile: path.join(rootDir, 'assets', 'profile'),
+    images: path.join(rootDir, 'assets', 'images')
   },
   target: {
     logos: path.join(rootDir, 'public', 'assets', 'images', 'logos'),
@@ -53,11 +53,14 @@ if (fs.existsSync(existingLogosDir)) {
   });
 }
 
-
 // Move favicon and other icons to assets/icons
 const iconFiles = ['favicon.png', 'favicon.ico'];
 const sourceDir = path.join(rootDir, 'public');
 const targetDir = path.join(rootDir, 'public/assets/icons');
+
+if (!fs.existsSync(targetDir)) {
+  fs.mkdirSync(targetDir, { recursive: true });
+}
 
 console.log('\nMoving icon files...');
 iconFiles.forEach(file => {

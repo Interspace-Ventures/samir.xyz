@@ -46,17 +46,24 @@ export async function setupVite(app: Express, server: Server) {
     server: {
       middlewareMode: true,
       hmr: { server },
+      port: 5000,
+      host: '0.0.0.0',
+      watch: {
+        usePolling: true
+      }
     },
     appType: "custom",
   });
 
-  // Serve static files from public directory first
-  app.use('/assets', express.static(path.resolve(__dirname, '../../public/assets')));
-  app.use('/attached_assets', express.static(path.resolve(__dirname, '../../public/attached_assets')));
+  // Serve static files from public directory first with caching
+  app.use('/assets', express.static(path.resolve(__dirname, '../../public/assets'), {
+    maxAge: '1d',
+    etag: true,
+    lastModified: true
+  }));
 
   app.use(vite.middlewares);
 
-  // Handle all non-API routes by serving the index.html
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -90,9 +97,12 @@ export function serveStatic(app: Express) {
     );
   }
 
-  // Serve static assets first
-  app.use('/assets', express.static(path.join(publicDir, 'assets')));
-  app.use('/attached_assets', express.static(path.join(publicDir, 'attached_assets')));
+  // Serve static assets with caching
+  app.use('/assets', express.static(path.join(publicDir, 'assets'), {
+    maxAge: '1d',
+    etag: true,
+    lastModified: true
+  }));
 
   // Then serve built assets
   app.use(express.static(distDir));
