@@ -8,10 +8,22 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export function registerRoutes(app: Express) {
-  // Serve static files from the attached_assets/portfolio directory for logos
-  const logoPath = path.join(__dirname, '../attached_assets/portfolio');
-  console.log('Serving logos from:', logoPath);
-  app.use('/logos', express.static(logoPath));
+  // In production, assets will be served from dist/public
+  // In development, we'll serve from attached_assets
+  const assetsBasePath = process.env.NODE_ENV === 'production'
+    ? path.join(__dirname, '../dist/public/assets')
+    : path.join(__dirname, '../attached_assets');
+
+  console.log('Serving assets from:', assetsBasePath);
+
+  // Serve assets with proper CORS and caching headers
+  app.use('/assets', express.static(assetsBasePath, {
+    maxAge: '1d',
+    setHeaders: (res) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    }
+  }));
 
   // API routes
   app.get('/api/health', (req, res) => {

@@ -3,22 +3,24 @@ import { Switch, Route } from "wouter";
 import { Layout } from "./components/Layout";
 import { Profile } from "./pages/Profile";
 import { Portfolio } from "./pages/Portfolio";
+import Home from "./pages/Home";
 
 const App: FC = () => {
   return (
     <Layout>
       <Switch>
-        <Route path="/" component={Profile} />
+        <Route path="/" component={Home} />
         <Route path="/profile" component={Profile} />
         <Route path="/portfolio" component={Portfolio} />
-        <Route path="/interspace" component={() => {
-          window.location.href = "https://interspace.samir.xyz";
-          return null;
-        }} />
-        <Route path="/perspectives" component={() => {
-          window.location.href = "https://perspectives.samir.xyz";
-          return null;
-        }} />
+        <Route>
+          {/* 404 fallback */}
+          <div className="min-h-screen w-full flex items-center justify-center bg-background">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold text-foreground">404</h1>
+              <p className="text-muted-foreground mt-2">Page not found</p>
+            </div>
+          </div>
+        </Route>
       </Switch>
     </Layout>
   );
