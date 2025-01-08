@@ -46,41 +46,8 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
   });
 
-  if (process.env.NODE_ENV !== "production") {
-    // Development mode - use Vite's dev server
-    try {
-      const vite = await import('vite');
-      const viteConfigPath = path.resolve(__dirname, '..', 'vite.config.ts');
-      const viteConfig = (await import(viteConfigPath)).default;
-
-      const viteServer = await vite.createServer({
-        ...viteConfig,
-        server: {
-          middlewareMode: true,
-          hmr: { server }
-        },
-        appType: "custom"
-      });
-
-      app.use(viteServer.middlewares);
-
-      // Handle SPA routes in development
-      app.use("*", async (req, res, next) => {
-        try {
-          const indexPath = path.resolve(__dirname, "../client/index.html");
-          const template = await import('fs/promises').then(fs => fs.readFile(indexPath, "utf-8"));
-          const html = await viteServer.transformIndexHtml(req.originalUrl, template);
-          res.status(200).set({ "Content-Type": "text/html" }).end(html);
-        } catch (e) {
-          next(e);
-        }
-      });
-    } catch (error) {
-      console.error('Failed to initialize Vite dev server:', error);
-      process.exit(1);
-    }
-  } else {
-    // Production mode - serve static files from dist
+  if (process.env.NODE_ENV === "production") {
+    // Production mode - serve static files from dist/public
     const publicDir = path.resolve(process.cwd(), "dist", "public");
     console.log('Serving static files from:', publicDir);
 
@@ -88,9 +55,8 @@ app.use((req, res, next) => {
     app.use(express.static(publicDir, {
       maxAge: '1d',
       etag: true,
-      index: false, // Let our custom handler deal with serving index.html
+      index: false,
       setHeaders: (res, path) => {
-        // Add immutable cache control for assets
         if (path.includes('/assets/')) {
           res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
         } else {
@@ -101,7 +67,6 @@ app.use((req, res, next) => {
 
     // Handle SPA routing
     app.get("*", (req, res, next) => {
-      // Skip API routes
       if (req.path.startsWith('/api')) {
         return next();
       }
@@ -120,10 +85,38 @@ app.use((req, res, next) => {
         }
       });
     });
+  } else {
+    // Development mode - use Vite's dev server
+    try {
+      const vite = await import('vite');
+      const viteServer = await vite.createServer({
+        server: {
+          middlewareMode: true,
+          hmr: { server }
+        },
+        appType: "custom"
+      });
+
+      app.use(viteServer.middlewares);
+
+      app.use("*", async (req, res, next) => {
+        try {
+          const indexPath = path.resolve(__dirname, "../client/index.html");
+          const template = await import('fs/promises').then(fs => fs.readFile(indexPath, "utf-8"));
+          const html = await viteServer.transformIndexHtml(req.originalUrl, template);
+          res.status(200).set({ "Content-Type": "text/html" }).end(html);
+        } catch (e) {
+          next(e);
+        }
+      });
+    } catch (error) {
+      console.error('Failed to initialize Vite dev server:', error);
+      process.exit(1);
+    }
   }
 
   const PORT = parseInt(process.env.PORT || "5000", 10);
-  const HOST = process.env.HOST || "0.0.0.0";
+  const HOST = "0.0.0.0";
 
   server.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);

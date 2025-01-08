@@ -14,46 +14,45 @@ export function registerRoutes(app: Express) {
     res.json({ status: 'ok' });
   });
 
-  // Asset handling
+  // Static file and SPA handling for production
   if (process.env.NODE_ENV === 'production') {
     const publicDir = path.join(process.cwd(), "dist", "public");
-    const assetsDir = path.join(publicDir, "assets");
 
-    // Validate directories exist
+    // Ensure directory exists before attempting to serve
     if (!fs.existsSync(publicDir)) {
-      throw new Error(`Public directory not found at ${publicDir}. Please run build first.`);
+      console.error(`Public directory not found at ${publicDir}`);
+      throw new Error('Public directory not found. Please run build first.');
     }
 
-    console.log('Serving production assets from:', assetsDir);
+    // Log the serving directory for debugging
+    console.log('Serving static files from:', publicDir);
 
-    // Serve static assets with proper caching and immutable flag for better performance
-    app.use('/assets', express.static(assetsDir, {
-      maxAge: '1d',
-      etag: true,
-      immutable: true,
-      setHeaders: (res) => {
-        res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
-      }
-    }));
-
-    // Serve other static files from public directory
+    // Serve static files from the public directory
     app.use(express.static(publicDir, {
-      index: false, // Let the SPA handler deal with index.html
-      maxAge: '1h',
-      etag: true
+      index: false // Don't serve index.html directly, let our SPA handler do it
     }));
 
-    // Handle SPA routes
+    // SPA fallback - serve index.html for all non-file requests
     app.get('*', (req, res, next) => {
-      if (path.extname(req.path)) {
-        next();
-        return;
+      // Skip API routes
+      if (req.path.startsWith('/api')) {
+        return next();
       }
-      res.sendFile(path.join(publicDir, 'index.html'));
+
+      // If it's a file request, let express.static handle it
+      if (path.extname(req.path)) {
+        return next();
+      }
+
+      // For all other routes, serve index.html
+      const indexPath = path.join(publicDir, 'index.html');
+      res.sendFile(indexPath, err => {
+        if (err) {
+          console.error('Error serving index.html:', err);
+          next(err);
+        }
+      });
     });
-  } else {
-    // In development, assets are handled by Vite
-    console.log('Development mode: assets handled by Vite');
   }
 
   const httpServer = createServer(app);
