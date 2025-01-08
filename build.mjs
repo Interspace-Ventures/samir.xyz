@@ -31,19 +31,16 @@ async function buildProject() {
     console.log('Building client application...');
     process.env.NODE_ENV = 'production';
 
-    // Run Vite build with explicit config path
-    const viteConfigPath = path.resolve(__dirname, 'vite.config.ts');
-    if (!fs.existsSync(viteConfigPath)) {
-      throw new Error(`Vite config not found at ${viteConfigPath}`);
-    }
-
-    console.log('Using Vite config at:', viteConfigPath);
     try {
-      const { stdout, stderr } = await execAsync(`npx vite build`, {
+      // Move to client directory before running Vite build
+      process.chdir(path.join(__dirname, 'client'));
+      const { stdout, stderr } = await execAsync(`npx vite build --outDir ../dist/public --emptyOutDir`, {
         env: { ...process.env, NODE_ENV: 'production' }
       });
       console.log('Vite build output:', stdout);
       if (stderr) console.error('Vite build stderr:', stderr);
+      // Move back to root
+      process.chdir(__dirname);
     } catch (error) {
       console.error('Vite build error:', error);
       throw error;
@@ -73,10 +70,18 @@ async function buildProject() {
     for (const file of requiredFiles) {
       const filePath = path.join(publicDir, file);
       if (!fs.existsSync(filePath)) {
-        console.error(`Missing required file/directory: ${file}`);
-        console.error('Contents of public directory:', fs.readdirSync(publicDir));
-        throw new Error(`Required file/directory not found: ${file}`);
+        throw new Error(`Required file/directory not found: ${file} in ${publicDir}`);
       }
+    }
+
+    // Copy any additional static assets if needed
+    if (fs.existsSync(path.join(__dirname, 'client', 'public'))) {
+      fs.cpSync(
+        path.join(__dirname, 'client', 'public'),
+        publicDir,
+        { recursive: true }
+      );
+      console.log('Copied static assets');
     }
 
     console.log('Build process completed successfully!');
