@@ -9,10 +9,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export function registerRoutes(app: Express) {
-  // API routes first
-  app.get('/api/health', (req, res) => {
+  // API routes
+  const apiRouter = express.Router();
+
+  apiRouter.get('/health', (req, res) => {
     res.json({ status: 'ok' });
   });
+
+  // Register API routes under /api prefix
+  app.use('/api', apiRouter);
 
   // Create HTTP server
   const httpServer = createServer(app);
