@@ -5,21 +5,21 @@ export const Profile: FC = () => {
   return (
     <div className="space-y-8">
       <RevealOnScroll>
-        <section className="flex items-start gap-6">
-          <div className="hidden sm:block relative w-20 h-20">
+        <section className="flex gap-6 justify-between items-center">
+          <div className="flex flex-col">
+            <h1 className="text-5xl sm:text-6xl font-bold">
+              Hey - I'm Samir.
+            </h1>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#7343d0] mt-4">
+              I drive business impact at fintechs.
+            </h2>
+          </div>
+          <div className="hidden sm:flex sm:items-center relative w-24 h-24 flex-shrink-0">
             <img 
               src="/attached_assets/profile/samir-profile-photo.png"
               alt="Profile" 
               className="absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px]"
             />
-          </div>
-          <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl font-bold">
-              Hey - I'm Samir.
-            </h1>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#7343d0]">
-              I drive business impact at fintechs.
-            </h2>
           </div>
         </section>
       </RevealOnScroll>
@@ -85,7 +85,6 @@ export const Profile: FC = () => {
           </p>
         </section>
       </RevealOnScroll>
-
       <RevealOnScroll>
         <section className="max-w-3xl space-y-4 text-lg">
           <p>
