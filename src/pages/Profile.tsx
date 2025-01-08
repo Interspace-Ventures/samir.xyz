@@ -10,7 +10,7 @@ export const Profile: FC = () => {
             <img 
               src="attached_assets/Samir-Desai.png" 
               alt="Profile" 
-              className="w-24 h-24 rounded-full border-4 border-[#7343d0] object-cover object-center scale-125"
+              className="w-24 h-24 rounded-full border-4 border-[#7343d0] object-cover object-[center_top]"
             />
           </div>
           <div className="space-y-4">
