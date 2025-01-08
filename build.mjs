@@ -11,53 +11,45 @@ const __dirname = path.dirname(__filename);
 
 async function buildProject() {
   try {
-    // First build the client using Vite
-    console.log('Building client...');
+    console.log('Starting build process...');
     const rootDir = __dirname;
-    const clientDir = path.join(rootDir, 'client');
     const distDir = path.join(rootDir, 'dist');
     const publicDir = path.join(distDir, 'public');
+    const clientDir = path.join(rootDir, 'client');
 
-    // Verify client/index.html exists
-    const indexHtmlPath = path.join(clientDir, 'index.html');
-    if (!fs.existsSync(indexHtmlPath)) {
-      throw new Error(`Could not find index.html at ${indexHtmlPath}`);
-    }
-    console.log('Found index.html at:', indexHtmlPath);
-
-    // Clean dist directory if it exists
+    // Clean dist directory
     if (fs.existsSync(distDir)) {
       fs.rmSync(distDir, { recursive: true });
-      console.log('Cleaned dist directory');
+      console.log('Cleaned existing dist directory');
     }
 
-    // Create fresh dist and public directories
-    fs.mkdirSync(distDir, { recursive: true });
-    console.log('Created build directory:', distDir);
+    // Create fresh dist directories
+    fs.mkdirSync(publicDir, { recursive: true });
+    console.log('Created build directories');
 
-    // Build the client
+    // Build client (Vite)
     console.log('Building client application...');
-    await execAsync('npx vite build', {
+    await execAsync('npx vite build client', {
       stdio: 'inherit',
-      env: { ...process.env, NODE_ENV: 'production' },
-      cwd: clientDir
+      env: { ...process.env, NODE_ENV: 'production' }
     });
-    console.log('Client build completed successfully');
+    console.log('Client build completed');
 
-    // Move the built client files to dist/public
+    // Move client build to public directory
     const clientBuildDir = path.join(clientDir, 'dist');
     if (!fs.existsSync(clientBuildDir)) {
       throw new Error('Client build directory not found');
     }
 
-    // Move the built files to the correct location
-    fs.renameSync(clientBuildDir, publicDir);
-    console.log('Moved client build to:', publicDir);
+    // Move all files from client build to public directory
+    fs.cpSync(clientBuildDir, publicDir, { recursive: true });
+    fs.rmSync(clientBuildDir, { recursive: true });
+    console.log('Moved client build to public directory');
 
-    // Build the server
+    // Build server
     console.log('Building server...');
     await build({
-      entryPoints: [path.join(rootDir, 'server/index.ts')],
+      entryPoints: ['server/index.ts'],
       bundle: true,
       platform: 'node',
       target: 'node20',
@@ -65,7 +57,6 @@ async function buildProject() {
       format: 'esm',
       packages: 'external',
       sourcemap: true,
-      minify: true,
       banner: {
         js: `
           import { createRequire } from 'module';
@@ -77,18 +68,18 @@ async function buildProject() {
         `
       }
     });
-    console.log('Server build completed successfully');
+    console.log('Server build completed');
 
-    // Copy attached_assets if they exist
+    // Copy assets if they exist
     const assetsDir = path.join(rootDir, 'attached_assets');
     if (fs.existsSync(assetsDir)) {
       const publicAssetsDir = path.join(publicDir, 'assets');
       fs.mkdirSync(publicAssetsDir, { recursive: true });
       fs.cpSync(assetsDir, publicAssetsDir, { recursive: true });
-      console.log('Copied assets to:', publicAssetsDir);
+      console.log('Copied assets to public directory');
     }
 
-    console.log('Full build process completed!');
+    console.log('Build process completed successfully!');
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);
