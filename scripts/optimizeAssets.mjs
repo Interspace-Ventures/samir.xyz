@@ -57,7 +57,7 @@ async function optimizeAssets() {
             }
 
             console.log(`Optimizing ${file}...`);
-            
+
             // Optimize using sharp module
             const sharp = (await import('sharp')).default;
             await sharp(inputFile)
