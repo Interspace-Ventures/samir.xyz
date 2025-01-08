@@ -23,6 +23,10 @@ export function Layout({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle('dark');
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'dark bg-gray-900' : 'bg-white'}`}>
       <nav className={`sticky top-0 backdrop-blur-sm border-b z-50 ${isDark ? 'border-gray-700 bg-gray-900/80' : 'border-gray-100 bg-white/80'}`}>
@@ -37,12 +41,15 @@ export function Layout({ children }: { children: ReactNode }) {
               <button 
                 onClick={toggleTheme}
                 className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Toggle theme"
               >
                 {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
               </button>
               <button 
-                onClick={() => setIsOpen(!isOpen)} 
+                onClick={toggleMenu} 
                 className={`p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${isDark ? 'text-white' : 'text-black'}`}
+                aria-label="Toggle menu"
+                aria-expanded={isOpen}
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -75,6 +82,7 @@ export function Layout({ children }: { children: ReactNode }) {
               <button 
                 onClick={toggleTheme} 
                 className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Toggle theme"
               >
                 {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
               </button>
@@ -84,9 +92,15 @@ export function Layout({ children }: { children: ReactNode }) {
           {/* Mobile navigation */}
           <div
             ref={menuRef}
-            className={`sm:hidden overflow-hidden transition-all duration-200 ease-in-out ${
-              isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
-            }`}
+            className="sm:hidden"
+            style={{
+              maxHeight: isOpen ? '300px' : '0',
+              opacity: isOpen ? '1' : '0',
+              overflow: 'hidden',
+              transition: 'max-height 0.3s ease-in-out, opacity 0.2s ease-in-out',
+              visibility: isOpen ? 'visible' : 'hidden'
+            }}
+            aria-hidden={!isOpen}
           >
             <div className="py-4 space-y-4">
               <Link 
@@ -136,7 +150,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <footer className={`py-8 mt-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Built with Replit AI at the speed of thought - Interspace Labs 2025
+            Built with <a href="https://www.replit.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#7343d0] transition-colors">Replit AI</a> at the speed of thought - Interspace Labs 2025
           </p>
         </div>
       </footer>
