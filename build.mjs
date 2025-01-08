@@ -27,7 +27,7 @@ async function buildProject() {
     console.log('Building static site...');
     process.env.NODE_ENV = 'production';
 
-    const { stdout, stderr } = await execAsync('npx vite build --outDir ./public');
+    const { stdout, stderr } = await execAsync('npx vite build');
     console.log('Build output:', stdout);
     if (stderr) console.error('Build stderr:', stderr);
 
