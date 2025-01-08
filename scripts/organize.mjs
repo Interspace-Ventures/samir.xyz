@@ -13,11 +13,9 @@ const directories = [
   'src/lib',
   'src/pages',
   'src/types',
-  'config',
   'public/assets/images',
-  'public/assets/logos',
-  'public/assets/css',
   'public/assets/js',
+  'public/assets/css'
 ];
 
 console.log('Creating directory structure...');
@@ -31,25 +29,46 @@ directories.forEach(dir => {
   }
 });
 
-// Move files to their correct locations
-const filesToMove = [
-  { from: 'build.js', to: 'scripts/build.js' },
-  { from: 'build.mjs', to: 'scripts/build.mjs' },
-  { from: 'config/build.js', to: 'scripts/build.js' },
-  { from: 'config/build.mjs', to: 'scripts/build.mjs' }
-];
+// Clean up any misplaced assets
+const moveAssets = (fromDir, toDir, extensions) => {
+  if (!fs.existsSync(fromDir)) return;
 
-console.log('\nOrganizing build files...');
-filesToMove.forEach(({ from, to }) => {
-  const sourcePath = path.join(rootDir, from);
-  const destPath = path.join(rootDir, to);
+  const files = fs.readdirSync(fromDir);
+  files.forEach(file => {
+    const ext = path.extname(file).toLowerCase();
+    if (extensions.includes(ext)) {
+      const sourcePath = path.join(fromDir, file);
+      const destPath = path.join(toDir, file);
+      if (!fs.existsSync(destPath)) {
+        fs.copyFileSync(sourcePath, destPath);
+        console.log(`Moved ${file} to ${toDir}`);
+      }
+    }
+  });
+};
 
-  if (fs.existsSync(sourcePath) && !fs.existsSync(destPath)) {
-    fs.mkdirSync(path.dirname(destPath), { recursive: true });
-    fs.renameSync(sourcePath, destPath);
-    console.log(`Moved ${from} to ${to}`);
+// Move assets to their proper locations
+const publicDir = path.join(rootDir, 'public');
+const assetsDir = path.join(publicDir, 'assets');
+
+// Create asset type mappings
+const assetMappings = {
+  images: ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'],
+  js: ['.js', '.jsx', '.ts', '.tsx'],
+  css: ['.css', '.scss', '.sass']
+};
+
+// Move assets to their respective directories
+Object.entries(assetMappings).forEach(([type, extensions]) => {
+  const typeDir = path.join(assetsDir, type);
+  if (!fs.existsSync(typeDir)) {
+    fs.mkdirSync(typeDir, { recursive: true });
   }
+  moveAssets(publicDir, typeDir, extensions);
 });
+
+console.log('Asset organization completed!');
+
 
 // Clean up duplicate build files
 const filesToClean = [

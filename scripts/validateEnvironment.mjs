@@ -2,6 +2,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import fs from 'fs';
 
 const execAsync = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
@@ -11,7 +12,23 @@ async function validateEnvironment() {
   console.log('Validating build environment...\n');
 
   try {
-    // Execute the validation using tsx to support TypeScript
+    // First ensure the asset directories exist
+    const rootDir = path.resolve(__dirname, '..');
+    const assetDirs = [
+      'public/assets/images',
+      'public/assets/js',
+      'public/assets/css'
+    ];
+
+    assetDirs.forEach(dir => {
+      const fullPath = path.join(rootDir, dir);
+      if (!fs.existsSync(fullPath)) {
+        fs.mkdirSync(fullPath, { recursive: true });
+        console.log(`Created missing asset directory: ${dir}`);
+      }
+    });
+
+    // Execute the build config validation
     const { stdout, stderr } = await execAsync(
       `npx tsx ${path.resolve(__dirname, '..', 'src', 'config', 'validateBuildConfig.ts')}`
     );
