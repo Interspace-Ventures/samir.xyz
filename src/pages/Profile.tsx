@@ -8,9 +8,9 @@ export const Profile: FC = () => {
         <section className="flex items-center gap-8">
           <div className="hidden sm:block">
             <img 
-              src="/assets/images/profile.png"
+              src="./assets/images/profile.png"
               alt="Profile" 
-              className="w-32 h-32 rounded-full border-4 border-[#7343d0] object-cover object-[center_30%]"
+              className="w-32 h-32 rounded-full border-4 border-[#7343d0] object-cover"
             />
           </div>
           <div className="space-y-4">
