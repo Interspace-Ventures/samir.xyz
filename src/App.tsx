@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Switch, Route } from "wouter";
-import { Layout } from "@components/Layout";
-import { Profile } from "@pages/Profile";
-import { Portfolio } from "@pages/Portfolio";
-import Home from "@pages/Home";
+import { Layout } from "@/components/Layout";
+import { Profile } from "@/pages/Profile";
+import { Portfolio } from "@/pages/Portfolio";
+import Home from "@/pages/Home";
 
 const App: FC = () => {
   return (

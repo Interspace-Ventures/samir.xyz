@@ -6,16 +6,17 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react(), runtimeErrorOverlay(), themePlugin()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "..", "src"),
-      "@components": path.resolve(__dirname, "..", "src/components"),
-      "@pages": path.resolve(__dirname, "..", "src/pages"),
-      "@lib": path.resolve(__dirname, "..", "src/lib")
+      "@components": path.resolve(__dirname, "..", "src", "components"),
+      "@pages": path.resolve(__dirname, "..", "src", "pages"),
+      "@lib": path.resolve(__dirname, "..", "src", "lib"),
+      "@assets": path.resolve(__dirname, "..", "public", "assets")
     },
   },
   root: path.resolve(__dirname, ".."),
@@ -29,15 +30,24 @@ export default defineConfig({
       },
       output: {
         assetFileNames: (assetInfo) => {
-          let extType = assetInfo.name.split('.').at(1);
+          const info = assetInfo.name.split('.');
+          const extType = info[info.length - 1];
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            extType = 'img';
+            return `assets/images/[name]-[hash][extname]`;
           }
-          return `assets/${extType}/[name]-[hash][extname]`;
+          if (/css/i.test(extType)) {
+            return `assets/css/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
+    sourcemap: true
   },
+  server: {
+    host: '0.0.0.0',
+    port: 5000,
+  }
 });
