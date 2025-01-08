@@ -12,8 +12,9 @@ const __dirname = path.dirname(__filename);
 async function buildProject() {
   try {
     console.log('Starting build process...');
-    const rootDir = __dirname;
-    const distDir = path.join(rootDir, 'dist');
+
+    // Setup directories
+    const distDir = path.join(__dirname, 'dist');
     const publicDir = path.join(distDir, 'public');
 
     // Clean dist directory
@@ -28,10 +29,26 @@ async function buildProject() {
 
     // Build client (Vite)
     console.log('Building client application...');
-    await execAsync('npx vite build', {
-      stdio: 'inherit',
-      env: { ...process.env, NODE_ENV: 'production' }
-    });
+    process.env.NODE_ENV = 'production';
+
+    // Run Vite build with explicit config path
+    const viteConfigPath = path.resolve(__dirname, 'vite.config.ts');
+    if (!fs.existsSync(viteConfigPath)) {
+      throw new Error(`Vite config not found at ${viteConfigPath}`);
+    }
+
+    console.log('Using Vite config at:', viteConfigPath);
+    try {
+      const { stdout, stderr } = await execAsync(`npx vite build`, {
+        env: { ...process.env, NODE_ENV: 'production' }
+      });
+      console.log('Vite build output:', stdout);
+      if (stderr) console.error('Vite build stderr:', stderr);
+    } catch (error) {
+      console.error('Vite build error:', error);
+      throw error;
+    }
+
     console.log('Client build completed');
 
     // Build server
@@ -41,23 +58,25 @@ async function buildProject() {
       bundle: true,
       platform: 'node',
       target: 'node20',
-      outfile: path.join(distDir, 'server.mjs'),
+      outfile: path.join(distDir, 'index.js'),
       format: 'esm',
       packages: 'external',
       sourcemap: true,
       banner: {
-        js: '// ESM module support\nprocess.env.NODE_ENV = process.env.NODE_ENV || "production";'
+        js: 'process.env.NODE_ENV = "production";'
       }
     });
     console.log('Server build completed');
 
-    // Copy static assets if they exist
-    const assetsDir = path.join(rootDir, 'attached_assets');
-    if (fs.existsSync(assetsDir)) {
-      const publicAssetsDir = path.join(publicDir, 'assets');
-      fs.mkdirSync(publicAssetsDir, { recursive: true });
-      fs.cpSync(assetsDir, publicAssetsDir, { recursive: true });
-      console.log('Copied static assets to public directory');
+    // Verify the build output
+    const requiredFiles = ['index.html', 'assets'];
+    for (const file of requiredFiles) {
+      const filePath = path.join(publicDir, file);
+      if (!fs.existsSync(filePath)) {
+        console.error(`Missing required file/directory: ${file}`);
+        console.error('Contents of public directory:', fs.readdirSync(publicDir));
+        throw new Error(`Required file/directory not found: ${file}`);
+      }
     }
 
     console.log('Build process completed successfully!');
@@ -67,4 +86,4 @@ async function buildProject() {
   }
 }
 
-buildProject().catch(console.error);
+buildProject();
