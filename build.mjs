@@ -14,12 +14,11 @@ async function buildProject() {
     // First build the client using Vite's config
     console.log('Building client...');
     const rootDir = __dirname;
-    const clientDir = path.resolve(rootDir, 'client');
     const distDir = path.resolve(rootDir, 'dist');
     const publicDir = path.resolve(distDir, 'public');
-    const indexHtmlPath = path.join(clientDir, 'index.html');
+    const indexHtmlPath = path.join(rootDir, 'index.html');
 
-    // Verify index.html exists
+    // Verify index.html exists in root
     if (!fs.existsSync(indexHtmlPath)) {
       throw new Error(`Could not find index.html at ${indexHtmlPath}`);
     }
@@ -34,9 +33,9 @@ async function buildProject() {
     }
     console.log('Ensured build directories exist:', { distDir, publicDir });
 
-    // Run vite build from the client directory where index.html is located
-    process.chdir(clientDir);
-    console.log('Changed working directory to:', process.cwd());
+    // Run vite build directly from root where index.html is located
+    process.chdir(rootDir);
+    console.log('Working directory:', process.cwd());
 
     await execAsync('npx vite build', { 
       stdio: 'inherit',
