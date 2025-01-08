@@ -135,21 +135,21 @@ export function Layout({ children }: { children: ReactNode }) {
       </main>
 
       <footer className={`py-8 mt-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            © Interspace Labs 2025. Built with{' '}
-            <a 
-              href="https://www.replit.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-[#7343d0] hover:text-[#5f35b5] font-medium transition-colors"
-            >
-              Replit AI
-            </a>{' '}
-            at the speed of thought
-          </p>
-        </div>
-      </footer>
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                © Interspace Labs 2025. Built with{' '}
+                <a 
+                  href="https://www.replit.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#7343d0] hover:text-[#5f35b5] font-medium transition-colors"
+                >
+                  Replit AI
+                </a>{' '}
+                at the speed of thought
+              </p>
+            </div>
+          </footer>
     </div>
   );
 }
