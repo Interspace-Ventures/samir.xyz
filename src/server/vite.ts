@@ -56,7 +56,7 @@ export async function setupVite(app: Express, server: Server) {
 
   app.use(vite.middlewares);
 
-  // Handle all non-API routes
+  // Handle all non-API routes by serving the index.html
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -66,6 +66,7 @@ export async function setupVite(app: Express, server: Server) {
     }
 
     try {
+      // Always serve index.html for client-side routing
       const template = fs.readFileSync(
         path.resolve(__dirname, '../../index.html'),
         'utf-8'
@@ -96,7 +97,7 @@ export function serveStatic(app: Express) {
   // Then serve built assets
   app.use(express.static(distDir));
 
-  // Handle all non-API routes
+  // Serve index.html for all non-API routes to support client-side routing
   app.use("*", (req, res, next) => {
     const url = req.originalUrl;
 
