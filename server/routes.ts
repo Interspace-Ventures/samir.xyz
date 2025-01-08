@@ -15,8 +15,8 @@ export function registerRoutes(app: Express) {
 
   // Asset handling
   if (process.env.NODE_ENV === 'production') {
-    // In production, assets are in public/assets relative to the server file
-    const assetsPath = path.join(__dirname, '../public/assets');
+    // In production, assets are in dist/public/assets
+    const assetsPath = path.join(process.cwd(), "dist", "public", "assets");
     console.log('Serving production assets from:', assetsPath);
 
     app.use('/assets', express.static(assetsPath, {
@@ -28,7 +28,7 @@ export function registerRoutes(app: Express) {
     }));
   } else {
     // In development, serve from attached_assets
-    const devAssetsPath = path.join(__dirname, '../attached_assets');
+    const devAssetsPath = path.join(process.cwd(), "attached_assets");
     console.log('Serving development assets from:', devAssetsPath);
 
     app.use('/assets', express.static(devAssetsPath, {
