@@ -18,7 +18,24 @@ export default defineConfig({
   root: path.resolve(__dirname, ".."),
   publicDir: "public",
   build: {
-    outDir: path.resolve(__dirname, "..", "public", "assets"),
+    outDir: path.resolve(__dirname, "..", "dist"),
     emptyOutDir: true,
+    assetsDir: "assets",
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "..", "index.html"),
+      },
+      output: {
+        assetFileNames: (assetInfo) => {
+          let extType = assetInfo.name.split('.').at(1);
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            extType = 'img';
+          }
+          return `assets/${extType}/[name]-[hash][extname]`;
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+      },
+    },
   },
 });

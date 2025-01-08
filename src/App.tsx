@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Switch, Route } from "wouter";
-import { Layout } from "./components/Layout";
+import { Layout } from "@/Layout";
 import { Profile } from "./pages/Profile";
 import { Portfolio } from "./pages/Portfolio";
 import Home from "./pages/Home";
