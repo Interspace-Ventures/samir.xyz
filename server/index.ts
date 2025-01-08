@@ -39,26 +39,36 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Check if port is in use and exit if it is
+  // Check if port is in use and kill the process if it is
   try {
     const net = await import('net');
-    const server = net.createServer();
+    const tester = net.createServer();
 
-    await new Promise((resolve, reject) => {
-      server.once('error', (err: NodeJS.ErrnoException) => {
+    await new Promise<void>((resolve, reject) => {
+      tester.once('error', (err: NodeJS.ErrnoException) => {
         if (err.code === 'EADDRINUSE') {
-          console.error('Port 5000 is already in use. Please ensure no other server is running.');
-          process.exit(1);
+          console.log('Port 5000 is already in use. Attempting to close existing connection...');
+          // Kill any existing process on port 5000
+          const { execSync } = require('child_process');
+          try {
+            execSync('npx kill-port 5000');
+            console.log('Successfully killed process on port 5000');
+            resolve();
+          } catch (killError) {
+            console.error('Failed to kill process:', killError);
+            reject(killError);
+          }
+        } else {
+          reject(err);
         }
-        reject(err);
       });
 
-      server.once('listening', () => {
-        server.close();
-        resolve(true);
+      tester.once('listening', () => {
+        tester.close();
+        resolve();
       });
 
-      server.listen(5000, '0.0.0.0');
+      tester.listen(5000, '0.0.0.0');
     });
   } catch (err) {
     console.error('Error checking port availability:', err);
@@ -76,7 +86,7 @@ app.use((req, res, next) => {
   });
 
   // Production mode - serve static files from dist/public
-  const publicDir = path.join(process.cwd(), "dist", "public");
+  const publicDir = process.env.PUBLIC_DIR || path.resolve(__dirname, "..", "dist", "public");
   console.log('Attempting to serve static files from:', publicDir);
 
   try {
@@ -96,16 +106,7 @@ app.use((req, res, next) => {
     app.use(express.static(publicDir, {
       maxAge: '1d',
       etag: true,
-      index: false,
-      setHeaders: (res, filePath) => {
-        // Cache assets for 1 year
-        if (filePath.includes('/assets/')) {
-          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-        } else {
-          // Cache other files for 1 hour
-          res.setHeader('Cache-Control', 'public, max-age=3600');
-        }
-      }
+      index: false
     }));
 
     // SPA fallback - serve index.html for all non-file requests
@@ -148,6 +149,7 @@ app.use((req, res, next) => {
       console.log(`Production server running on http://${HOST}:${PORT}`);
       console.log(`Mode: ${process.env.NODE_ENV}`);
       console.log('Current working directory:', process.cwd());
+      console.log('Public directory path:', publicDir);
     });
 
   } catch (error) {

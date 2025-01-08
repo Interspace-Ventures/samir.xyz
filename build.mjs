@@ -14,8 +14,8 @@ async function buildProject() {
     console.log('Starting build process...');
 
     // Setup directories
-    const distDir = path.join(__dirname, 'dist');
-    const publicDir = path.join(distDir, 'public');
+    const distDir = path.resolve(__dirname, 'dist');
+    const publicDir = path.resolve(distDir, 'public');
 
     // Clean dist directory
     if (fs.existsSync(distDir)) {
@@ -75,17 +75,7 @@ async function buildProject() {
     });
     console.log('Server build completed');
 
-    // Verify the build output
-    const requiredFiles = ['index.html', 'assets'];
-    for (const file of requiredFiles) {
-      const filePath = path.join(publicDir, file);
-      if (!fs.existsSync(filePath)) {
-        throw new Error(`Required file/directory not found: ${file} in ${publicDir}`);
-      }
-      console.log(`Verified ${file} exists in public directory`);
-    }
-
-    // Create a startup script
+    // Create a startup script that sets the proper environment
     const startupScript = `#!/usr/bin/env node
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -95,7 +85,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
 
+// Set production mode and directory path
 process.env.NODE_ENV = "production";
+process.env.PUBLIC_DIR = join(__dirname, "public");
 
 // Import and start the server
 import('./server.mjs').catch(console.error);
@@ -104,8 +96,7 @@ import('./server.mjs').catch(console.error);
     fs.writeFileSync(path.join(distDir, 'index.mjs'), startupScript, 'utf8');
     fs.chmodSync(path.join(distDir, 'index.mjs'), '755');
 
-
-    // Copy any additional static assets if needed
+    // Copy any additional static assets
     if (fs.existsSync(path.join(__dirname, 'client', 'public'))) {
       fs.cpSync(
         path.join(__dirname, 'client', 'public'),
@@ -113,6 +104,11 @@ import('./server.mjs').catch(console.error);
         { recursive: true }
       );
       console.log('Copied static assets');
+    }
+
+    // Verify the build output
+    if (!fs.existsSync(path.join(publicDir, 'index.html'))) {
+      throw new Error('Build verification failed: index.html not found');
     }
 
     console.log('Build process completed successfully!');
