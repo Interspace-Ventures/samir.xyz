@@ -48,4 +48,4 @@ export const companies: Company[] = [
   { name: 'Launchpad', url: 'https://www.launchpad.com', category: 'Fintech' }
 ].sort((a, b) => a.name.localeCompare(b.name));
 
-export const categories: CompanyCategory[] = ['Health', 'Retail', 'SaaS', 'Fintech'];
+export const categories: CompanyCategory[] = ['Fintech', 'Health', 'Retail', 'SaaS'];

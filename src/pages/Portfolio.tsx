@@ -10,10 +10,21 @@ export const Portfolio: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
-  const [displayCount, setDisplayCount] = useState(12);
+  const [displayCount, setDisplayCount] = useState(8); 
+  const [isMobile, setIsMobile] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<Map<string, HTMLImageElement>>(new Map());
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const filteredCompanies = selectedCategory === 'All' 
     ? companies 
@@ -29,6 +40,7 @@ export const Portfolio: FC = () => {
             const img = entry.target as HTMLImageElement;
             const companyName = img.dataset.company;
             if (companyName && !loadedImages.has(companyName) && !failedImages.has(companyName)) {
+              console.log(`Loading image for ${companyName}`);
               img.src = getImagePath(companyName);
               observerRef.current?.unobserve(img);
             }
@@ -36,25 +48,30 @@ export const Portfolio: FC = () => {
         });
       },
       {
-        rootMargin: '100px 0px', 
-        threshold: 0.1
+        rootMargin: isMobile ? '500px 0px' : '300px 0px', 
+        threshold: 0.01
       }
     );
 
     return () => {
       observerRef.current?.disconnect();
     };
-  }, [loadedImages, failedImages]);
+  }, [loadedImages, failedImages, isMobile]);
 
-  // Load more observer
+  // Load more observer with improved mobile handling
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && displayCount < filteredCompanies.length) {
-          setDisplayCount(prev => Math.min(prev + 12, filteredCompanies.length));
+          console.log('Loading more companies...');
+          const increment = isMobile ? 6 : 12;
+          setDisplayCount(prev => Math.min(prev + increment, filteredCompanies.length));
         }
       },
-      { rootMargin: '200px' }
+      { 
+        rootMargin: isMobile ? '600px 0px' : '400px 0px',
+        threshold: 0.1 
+      }
     );
 
     if (loadMoreRef.current) {
@@ -62,8 +79,9 @@ export const Portfolio: FC = () => {
     }
 
     return () => observer.disconnect();
-  }, [displayCount, filteredCompanies.length]);
+  }, [displayCount, filteredCompanies.length, isMobile]);
 
+  // Initial loading state
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -73,10 +91,11 @@ export const Portfolio: FC = () => {
 
   // Reset display count when category changes
   useEffect(() => {
-    setDisplayCount(12);
-  }, [selectedCategory]);
+    setDisplayCount(isMobile ? 6 : 8);
+  }, [selectedCategory, isMobile]);
 
   const handleImageLoad = (companyName: string) => {
+    console.log(`Successfully loaded image for ${companyName}`);
     setLoadedImages(prev => new Set([...prev, companyName]));
   };
 
@@ -101,7 +120,7 @@ export const Portfolio: FC = () => {
 
   const LoadingSkeleton = () => (
     <>
-      {Array.from({ length: 6 }).map((_, i) => (
+      {Array.from({ length: isMobile ? 4 : 6 }).map((_, i) => (
         <motion.div
           key={`skeleton-${i}`}
           layout
@@ -227,7 +246,6 @@ export const Portfolio: FC = () => {
         </AnimatePresence>
       </motion.section>
 
-      {/* Load more trigger */}
       {displayCount < filteredCompanies.length && (
         <div ref={loadMoreRef} className="h-20" />
       )}
