@@ -21,6 +21,15 @@ async function buildProject() {
       process.exit(1);
     }
 
+    // Organize assets first
+    console.log('\nOrganizing assets...');
+    try {
+      await execAsync('node scripts/organize.mjs');
+    } catch (error) {
+      console.error('Asset organization failed:', error.message);
+      process.exit(1);
+    }
+
     // Optimize assets
     console.log('\nOptimizing assets...');
     try {
