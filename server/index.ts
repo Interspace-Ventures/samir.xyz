@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,6 +13,19 @@ process.env.NODE_ENV = 'production';
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Add directory resolution helper
+const resolvePublicDir = () => {
+  if (process.env.PUBLIC_DIR) {
+    return path.resolve(process.env.PUBLIC_DIR);
+  }
+  // In production, use the dist/public directory
+  if (process.env.NODE_ENV === 'production') {
+    return path.resolve(process.cwd(), 'dist', 'public');
+  }
+  // In development, use the client/public directory
+  return path.resolve(process.cwd(), 'client', 'public');
+};
 
 // Setup request logging
 app.use((req, res, next) => {
@@ -85,71 +99,65 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
   });
 
-  // Production mode - serve static files from dist/public
-  const publicDir = process.env.PUBLIC_DIR || path.resolve(__dirname, "..", "dist", "public");
-  console.log('Attempting to serve static files from:', publicDir);
+  // Resolve and verify public directory
+  const publicDir = resolvePublicDir();
+  console.log('Resolved public directory path:', publicDir);
 
   try {
-    // Verify public directory exists
-    const fs = await import('fs');
+    // Ensure the public directory exists
     if (!fs.existsSync(publicDir)) {
-      console.error(`Error: Public directory not found at ${publicDir}`);
-      console.error('Please ensure you have run the build process first');
-      process.exit(1);
+      console.log('Public directory not found, attempting to create:', publicDir);
+      fs.mkdirSync(publicDir, { recursive: true });
     }
 
     // Log directory contents for debugging
     const files = fs.readdirSync(publicDir);
     console.log('Files in public directory:', files);
 
-    // Serve static files with proper caching
+    if (files.length === 0) {
+      console.warn('Warning: Public directory is empty. Make sure to run the build process first.');
+    }
+
+    // Configure static file serving with caching and proper options
     app.use(express.static(publicDir, {
-      maxAge: '1d',
+      maxAge: process.env.NODE_ENV === 'production' ? '1d' : 0,
       etag: true,
-      index: false
+      index: false, // Don't serve index.html automatically
+      fallthrough: true // Allow falling through to next middleware
     }));
 
-    // SPA fallback - serve index.html for all non-file requests
+    // Handle SPA routes
     app.get("*", (req, res, next) => {
-      // Skip API routes
-      if (req.path.startsWith('/api')) {
+      // Skip API routes and static files
+      if (req.path.startsWith('/api') || path.extname(req.path)) {
         return next();
       }
 
-      // If it's a file request with extension, let express.static handle it
-      if (path.extname(req.path)) {
-        return next();
-      }
-
-      // For all other routes, serve index.html
       const indexPath = path.join(publicDir, "index.html");
-      console.log(`Serving SPA fallback for path: ${req.path}`);
 
+      // Verify index.html exists
+      if (!fs.existsSync(indexPath)) {
+        console.error('Error: index.html not found at', indexPath);
+        console.error('Directory contents:', fs.readdirSync(publicDir));
+        return res.status(500).send('Server configuration error: index.html not found');
+      }
+
+      // Serve index.html for client-side routing
       res.sendFile(indexPath, (err) => {
         if (err) {
-          console.error(`Error serving index.html for ${req.path}:`, err);
+          console.error('Error serving index.html:', err);
           next(err);
         }
       });
     });
 
+    // Start server
     const PORT = parseInt(process.env.PORT || "5000", 10);
-    const HOST = "0.0.0.0";
-
-    // Add graceful shutdown handler
-    process.on('SIGTERM', () => {
-      console.log('Received SIGTERM signal, shutting down gracefully');
-      server.close(() => {
-        console.log('Server closed');
-        process.exit(0);
-      });
-    });
-
-    server.listen(PORT, HOST, () => {
-      console.log(`Production server running on http://${HOST}:${PORT}`);
-      console.log(`Mode: ${process.env.NODE_ENV}`);
-      console.log('Current working directory:', process.cwd());
-      console.log('Public directory path:', publicDir);
+    server.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running at http://0.0.0.0:${PORT}`);
+      console.log('Environment:', process.env.NODE_ENV);
+      console.log('Working directory:', process.cwd());
+      console.log('Public directory:', publicDir);
     });
 
   } catch (error) {
