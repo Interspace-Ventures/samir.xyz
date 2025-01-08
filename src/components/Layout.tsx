@@ -18,6 +18,17 @@ export function Layout({ children }: { children: ReactNode }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Handle escape key press
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => document.removeEventListener('keydown', handleEscapeKey);
+  }, []);
+
   const toggleTheme = () => {
     setIsDark(!isDark);
     document.documentElement.classList.toggle('dark');
@@ -34,10 +45,19 @@ export function Layout({ children }: { children: ReactNode }) {
 
             {/* Mobile menu button */}
             <div className="flex items-center gap-4 sm:hidden">
-              <button onClick={toggleTheme} className={isDark ? 'text-white' : 'text-black'}>
+              <button 
+                onClick={toggleTheme} 
+                className={isDark ? 'text-white' : 'text-black'}
+                aria-label="Toggle theme"
+              >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
-              <button onClick={() => setIsOpen(!isOpen)} className={isDark ? 'text-white' : 'text-black'}>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
+                className={`${isDark ? 'text-white' : 'text-black'} p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7343d0]`}
+                aria-label="Toggle menu"
+              >
                 <Menu className="w-6 h-6" />
               </button>
             </div>
@@ -56,7 +76,11 @@ export function Layout({ children }: { children: ReactNode }) {
               <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
                 Perspectives <ArrowUpRight className="w-4 h-4" />
               </a>
-              <button onClick={toggleTheme} className="ml-4">
+              <button 
+                onClick={toggleTheme} 
+                className="ml-4"
+                aria-label="Toggle theme"
+              >
                 {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
               </button>
             </div>
@@ -65,8 +89,8 @@ export function Layout({ children }: { children: ReactNode }) {
           {/* Mobile navigation */}
           <div
             ref={menuRef}
-            className={`sm:hidden transition-all duration-300 ease-in-out ${
-              isOpen ? 'max-h-[400px] opacity-100 visible' : 'max-h-0 opacity-0 invisible'
+            className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+              isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
             }`}
           >
             <div className="py-4 space-y-2">
@@ -83,6 +107,7 @@ export function Layout({ children }: { children: ReactNode }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`block w-full py-2 px-3 ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'} rounded-md transition-colors`}
+                    onClick={() => setIsOpen(false)}
                   >
                     <span className="flex items-center justify-between">
                       {label}
@@ -113,7 +138,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <footer className={`py-8 mt-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Built with{' '}
+            © Interspace Labs 2025. Built with{' '}
             <a 
               href="https://www.replit.com" 
               target="_blank" 
@@ -122,7 +147,7 @@ export function Layout({ children }: { children: ReactNode }) {
             >
               Replit AI
             </a>{' '}
-            at the speed of thought - Interspace Labs 2025
+            at the speed of thought
           </p>
         </div>
       </footer>

@@ -21,6 +21,15 @@ async function buildProject() {
       process.exit(1);
     }
 
+    // Optimize assets
+    console.log('\nOptimizing assets...');
+    try {
+      await execAsync('node scripts/optimizeAssets.mjs');
+    } catch (error) {
+      console.error('Asset optimization failed:', error.message);
+      process.exit(1);
+    }
+
     // Setup directories
     const distDir = path.resolve(__dirname, '..', 'dist');
     const publicDir = path.resolve(__dirname, '..', 'public');
