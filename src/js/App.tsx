@@ -1,9 +1,11 @@
 import { FC } from "react";
 import { Switch, Route } from "wouter";
 import { Layout } from "./components/Layout";
-import { Profile } from "./pages/Profile";
-import { Portfolio } from "./pages/Portfolio";
 import Home from "./pages/Home";
+
+// These imports will be added once we move the files
+const Portfolio = () => <div>Portfolio Page</div>;
+const Profile = () => <div>Profile Page</div>;
 
 const App: FC = () => {
   return (
