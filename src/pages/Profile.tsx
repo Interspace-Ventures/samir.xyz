@@ -8,7 +8,7 @@ export const Profile: FC = () => {
         <section className="flex items-center gap-8">
           <div className="hidden sm:block">
             <img 
-              src={`${import.meta.env.BASE_URL}assets/images/profile-icon.png`}
+              src="/assets/images/profile-icon.png"
               alt="Profile" 
               className="w-24 h-24 rounded-full border-4 border-[#7343d0] object-cover"
             />
