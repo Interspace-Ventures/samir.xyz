@@ -40,11 +40,15 @@ export const Profile: FC = () => {
                   }}
                 />
               )}
+              {imageError && (
+                <div className="absolute inset-0 flex items-center justify-center rounded-full border-2 border-[#7343d0] bg-gray-100">
+                  <span className="text-3xl">S</span>
+                </div>
+              )}
             </div>
           </div>
         </section>
       </RevealOnScroll>
-
       <RevealOnScroll>
         <section className="max-w-3xl space-y-4 text-lg">
           <p>
