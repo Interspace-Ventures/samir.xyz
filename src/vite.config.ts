@@ -15,11 +15,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "js"),
     },
   },
-  configFile: path.resolve(__dirname, "vite.config.ts"),
   root: path.resolve(__dirname, ".."),
-  publicDir: path.resolve(__dirname, "..", "public"),
+  publicDir: "public",
   build: {
-    outDir: path.resolve(__dirname, "..", "public"),
+    outDir: "public/assets",
     emptyOutDir: true,
   },
 });
