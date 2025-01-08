@@ -34,7 +34,7 @@ async function buildProject() {
     try {
       // Move to client directory before running Vite build
       process.chdir(path.join(__dirname, 'client'));
-      const { stdout, stderr } = await execAsync(`npx vite build --outDir ../dist/public --emptyOutDir`, {
+      const { stdout, stderr } = await execAsync('npx vite build --outDir ../dist/public --emptyOutDir', {
         env: { ...process.env, NODE_ENV: 'production' }
       });
       console.log('Vite build output:', stdout);
@@ -55,15 +55,34 @@ async function buildProject() {
       bundle: true,
       platform: 'node',
       target: 'node20',
-      outfile: path.join(distDir, 'index.js'),
+      outfile: path.join(distDir, 'server.mjs'),
       format: 'esm',
       packages: 'external',
       sourcemap: true,
       banner: {
-        js: 'process.env.NODE_ENV = "production";'
+        js: '#!/usr/bin/env node\nimport { createRequire } from "module";\nconst require = createRequire(import.meta.url);\nprocess.env.NODE_ENV = "production";'
       }
     });
     console.log('Server build completed');
+
+    // Create a startup script
+    const startupScript = `#!/usr/bin/env node
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { createRequire } from 'module';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
+process.env.NODE_ENV = "production";
+
+// Import and start the server
+import('./server.mjs').catch(console.error);
+`;
+
+    fs.writeFileSync(path.join(distDir, 'index.mjs'), startupScript, 'utf8');
+    fs.chmodSync(path.join(distDir, 'index.mjs'), '755');
 
     // Verify the build output
     const requiredFiles = ['index.html', 'assets'];

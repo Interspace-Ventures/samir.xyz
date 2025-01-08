@@ -48,7 +48,16 @@ app.use((req, res, next) => {
 
   if (process.env.NODE_ENV === "production") {
     // Production mode - serve static files from dist/public
-    const publicDir = path.resolve(process.cwd(), "dist", "public");
+    const publicDir = path.join(process.cwd(), "dist", "public");
+
+    // Verify public directory exists
+    const fs = await import('fs');
+    if (!fs.existsSync(publicDir)) {
+      console.error(`Error: Public directory not found at ${publicDir}`);
+      console.error('Please ensure you have run the build process first');
+      process.exit(1);
+    }
+
     console.log('Serving static files from:', publicDir);
 
     // Serve static files with proper caching
@@ -56,63 +65,68 @@ app.use((req, res, next) => {
       maxAge: '1d',
       etag: true,
       index: false,
-      setHeaders: (res, path) => {
-        if (path.includes('/assets/')) {
+      setHeaders: (res, filePath) => {
+        // Cache assets for 1 year
+        if (filePath.includes('/assets/')) {
           res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
         } else {
+          // Cache other files for 1 hour
           res.setHeader('Cache-Control', 'public, max-age=3600');
         }
       }
     }));
 
-    // Handle SPA routing
+    // SPA fallback - serve index.html for all non-file requests
     app.get("*", (req, res, next) => {
+      // Skip API routes
       if (req.path.startsWith('/api')) {
         return next();
       }
 
-      // If the request is for a file with extension, let express.static handle it
-      if (path.extname(req.path) !== '') {
+      // If it's a file request with extension, let express.static handle it
+      if (path.extname(req.path)) {
         return next();
       }
 
-      // For all other routes, serve index.html for client-side routing
+      // For all other routes, serve index.html
       const indexPath = path.join(publicDir, "index.html");
+      console.log(`Serving SPA fallback for path: ${req.path}`);
+
       res.sendFile(indexPath, (err) => {
         if (err) {
-          console.error(`Error serving index.html: ${err.message}`);
+          console.error(`Error serving index.html for ${req.path}:`, err);
           next(err);
         }
       });
     });
   } else {
     // Development mode - use Vite's dev server
-    try {
-      const vite = await import('vite');
-      const viteServer = await vite.createServer({
-        server: {
-          middlewareMode: true,
-          hmr: { server }
-        },
-        appType: "custom"
-      });
+    const { createServer: createViteServer } = await import('vite');
+    const viteServer = await createViteServer({
+      server: {
+        middlewareMode: true,
+        hmr: { server }
+      },
+      appType: "custom"
+    });
 
-      app.use(viteServer.middlewares);
+    app.use(viteServer.middlewares);
 
-      app.use("*", async (req, res, next) => {
-        try {
-          const indexPath = path.resolve(__dirname, "../client/index.html");
-          const template = await import('fs/promises').then(fs => fs.readFile(indexPath, "utf-8"));
-          const html = await viteServer.transformIndexHtml(req.originalUrl, template);
-          res.status(200).set({ "Content-Type": "text/html" }).end(html);
-        } catch (e) {
-          next(e);
-        }
-      });
-    } catch (error) {
-      console.error('Failed to initialize Vite dev server:', error);
-      process.exit(1);
-    }
+    // Handle SPA in development
+    app.use("*", async (req, res, next) => {
+      try {
+        const fs = await import('fs/promises');
+        const template = await fs.readFile(
+          path.resolve(__dirname, "../client/index.html"),
+          "utf-8"
+        );
+        const html = await viteServer.transformIndexHtml(req.originalUrl, template);
+        res.status(200).set({ "Content-Type": "text/html" }).end(html);
+      } catch (e) {
+        console.error('Error serving development index.html:', e);
+        next(e);
+      }
+    });
   }
 
   const PORT = parseInt(process.env.PORT || "5000", 10);
@@ -121,6 +135,7 @@ app.use((req, res, next) => {
   server.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);
     console.log(`Mode: ${process.env.NODE_ENV || 'development'}`);
+    console.log('Current working directory:', process.cwd());
   });
 })().catch((error) => {
   console.error("Server startup failed:", error);
