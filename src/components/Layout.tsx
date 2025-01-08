@@ -77,22 +77,24 @@ export function Layout({ children }: { children: ReactNode }) {
               >
                 Portfolio
               </Link>
-              <a 
-                href="https://interspace.samir.xyz/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] flex items-center gap-1`}
-              >
-                Interspace <ArrowUpRight className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://perspectives.samir.xyz/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] flex items-center gap-1`}
-              >
-                Perspectives <ArrowUpRight className="w-4 h-4" />
-              </a>
+              <div className="flex flex-col gap-6">
+                <a 
+                  href="https://interspace.samir.xyz/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}
+                >
+                  Interspace <ArrowUpRight className="w-4 h-4" />
+                </a>
+                <a 
+                  href="https://perspectives.samir.xyz/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}
+                >
+                  Perspectives <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           )}
         </div>
@@ -106,7 +108,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <footer className={`py-8 mt-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Made with Replit AI in Brooklyn, NY - Interspace Labs 2025
+            Built with Replit AI at the speed of thought - Interspace Labs 2025
           </p>
         </div>
       </footer>

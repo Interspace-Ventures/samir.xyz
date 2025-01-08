@@ -50,12 +50,12 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-  // Serve static files from public directory in development
+  // Serve static files from public directory
   app.use('/assets', express.static(path.resolve(__dirname, '../../public/assets')));
 
   app.use(vite.middlewares);
 
-  // Handle all routes in development
+  // Handle all non-API routes in development
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -65,7 +65,6 @@ export async function setupVite(app: Express, server: Server) {
     }
 
     try {
-      // Load and transform the template
       const template = fs.readFileSync(
         path.resolve(__dirname, '../../index.html'),
         'utf-8'

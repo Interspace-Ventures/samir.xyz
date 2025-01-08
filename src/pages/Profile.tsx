@@ -27,14 +27,14 @@ export const Profile: FC = () => {
               )}
               {!imageError && (
                 <img 
-                  src="/attached_assets/profile/samir-profile-photo.png"
+                  src="/assets/images/profile/samir-profile-photo.png"
                   alt="Profile" 
                   className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[10px] transition-opacity duration-300 ${
                     imageLoading ? 'opacity-0' : 'opacity-100'
                   }`}
                   onLoad={() => setImageLoading(false)}
                   onError={(e) => {
-                    console.error('Failed to load profile image');
+                    console.error('Failed to load profile image:', e);
                     setImageError(true);
                     setImageLoading(false);
                   }}
