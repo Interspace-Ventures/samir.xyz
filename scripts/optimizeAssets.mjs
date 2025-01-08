@@ -12,9 +12,9 @@ async function optimizeAssets() {
     const rootDir = path.resolve(__dirname, '..');
     const directories = {
       source: {
-        logos: path.join(rootDir, 'attached_assets', 'logos'),
-        profile: path.join(rootDir, 'attached_assets', 'profile'),
-        images: path.join(rootDir, 'attached_assets', 'images')
+        logos: path.join(rootDir, 'assets', 'logos'),
+        profile: path.join(rootDir, 'assets', 'profile'),
+        images: path.join(rootDir, 'assets', 'images')
       },
       target: {
         logos: path.join(rootDir, 'public', 'assets', 'images', 'logos'),

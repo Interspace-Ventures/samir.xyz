@@ -14,21 +14,16 @@ export function registerRoutes(app: Express): Server {
     etag: true,
     lastModified: true,
     fallthrough: true,
-    index: false
   };
 
-  // Error handler for static files
-  const handleStaticError = (err: any, res: express.Response) => {
-    console.error('Static file serving error:', err);
-    res.status(404).send('Asset not found');
-  };
-
-  // Serve all static assets from /public/assets
+  // Serve static assets from public/assets directory
   app.use('/assets', 
     express.static(path.join(process.cwd(), 'public', 'assets'), staticOptions),
     (err: any, _req: express.Request, res: express.Response, next: express.NextFunction) => {
-      if (err) handleStaticError(err, res);
-      else next();
+      if (err) {
+        console.error('Static file serving error:', err);
+        res.status(404).send('Asset not found');
+      } else next();
     }
   );
 

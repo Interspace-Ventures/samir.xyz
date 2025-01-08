@@ -45,7 +45,7 @@ export const Profile: FC = () => {
                 <div className={`relative w-full h-full ${imageLoadingHighRes ? 'blur-sm' : ''}`}>
                   {/* Low-res placeholder */}
                   <img
-                    src="/assets/images/profile/profile-photo-placeholder.png"
+                    src="/assets/images/profile/samir-profile-photo-placeholder.png"
                     alt=""
                     className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-300
                       ${imageLoading ? 'opacity-0' : imageLoadingHighRes ? 'opacity-100' : 'opacity-0'}`}
@@ -55,14 +55,14 @@ export const Profile: FC = () => {
                   {/* High-res image */}
                   <picture>
                     <source 
-                      srcSet="/assets/images/profile/profile-photo.webp" 
+                      srcSet="/assets/images/profile/samir-profile-photo.webp" 
                       type="image/webp"
                       onError={() => {
                         console.log('WebP format not supported for profile image, falling back to PNG');
                       }}
                     />
                     <img 
-                      src="/assets/images/profile/profile-photo.png"
+                      src="/assets/images/profile/samir-profile-photo.png"
                       alt="Profile" 
                       className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-500
                         ${imageLoadingHighRes ? 'opacity-0' : 'opacity-100'}`}
