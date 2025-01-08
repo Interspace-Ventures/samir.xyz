@@ -10,12 +10,16 @@ export const Portfolio: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+  const [displayCount, setDisplayCount] = useState(12);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<Map<string, HTMLImageElement>>(new Map());
 
   const filteredCompanies = selectedCategory === 'All' 
     ? companies 
     : companies.filter(company => company.category === selectedCategory);
+
+  const displayedCompanies = filteredCompanies.slice(0, displayCount);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -42,12 +46,35 @@ export const Portfolio: FC = () => {
     };
   }, [loadedImages, failedImages]);
 
+  // Load more observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && displayCount < filteredCompanies.length) {
+          setDisplayCount(prev => Math.min(prev + 12, filteredCompanies.length));
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [displayCount, filteredCompanies.length]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Reset display count when category changes
+  useEffect(() => {
+    setDisplayCount(12);
+  }, [selectedCategory]);
 
   const handleImageLoad = (companyName: string) => {
     setLoadedImages(prev => new Set([...prev, companyName]));
@@ -59,7 +86,7 @@ export const Portfolio: FC = () => {
   };
 
   const getImagePath = (companyName: string): string => {
-    return `/logos/${companyName.replace(/\s+/g, '%20')}.png`;
+    return `/assets/images/logos/${companyName.toLowerCase().replace(/\s+/g, '-')}.png`;
   };
 
   const imageRef = (companyName: string) => (element: HTMLImageElement | null) => {
@@ -146,7 +173,7 @@ export const Portfolio: FC = () => {
           {isLoading ? (
             <LoadingSkeleton />
           ) : (
-            filteredCompanies.map((company) => {
+            displayedCompanies.map((company) => {
               const hasLoadedImage = loadedImages.has(company.name);
               const hasFailedImage = failedImages.has(company.name);
 
@@ -199,6 +226,11 @@ export const Portfolio: FC = () => {
           )}
         </AnimatePresence>
       </motion.section>
+
+      {/* Load more trigger */}
+      {displayCount < filteredCompanies.length && (
+        <div ref={loadMoreRef} className="h-20" />
+      )}
     </div>
   );
 };
