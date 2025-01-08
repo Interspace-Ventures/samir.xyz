@@ -72,22 +72,20 @@ app.use((req, res, next) => {
     });
   } else {
     // Production mode - serve static files from dist/public
-    const publicDir = path.resolve(__dirname, "../dist/public");
+    const publicDir = path.resolve(__dirname, "../public");
     console.log('Serving static files from:', publicDir);
 
     try {
-      await import('fs/promises').then(fs => fs.access(publicDir));
-
       // Serve static files with proper caching
       app.use(express.static(publicDir, {
-        index: false, // Let our custom handler deal with serving index.html
-        maxAge: '1d', // Cache static assets for 1 day
-        etag: true
+        maxAge: '1d',
+        etag: true,
+        index: false // Let our custom handler deal with serving index.html
       }));
 
       // Handle SPA routing by serving index.html for all non-file routes
       app.get("*", async (req, res, next) => {
-        // If path has file extension, let express.static handle it
+        // If the request is for a file, let express.static handle it
         if (path.extname(req.path) !== '') {
           next();
           return;
@@ -96,7 +94,6 @@ app.use((req, res, next) => {
         // For all other routes, serve index.html for client-side routing
         const indexPath = path.join(publicDir, "index.html");
         try {
-          await import('fs/promises').then(fs => fs.access(indexPath));
           res.sendFile(indexPath);
         } catch (error) {
           console.error(`Error: Could not find index.html at ${indexPath}`);

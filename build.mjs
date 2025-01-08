@@ -15,7 +15,6 @@ async function buildProject() {
     const rootDir = __dirname;
     const distDir = path.join(rootDir, 'dist');
     const publicDir = path.join(distDir, 'public');
-    const clientDir = path.join(rootDir, 'client');
 
     // Clean dist directory
     if (fs.existsSync(distDir)) {
@@ -29,22 +28,11 @@ async function buildProject() {
 
     // Build client (Vite)
     console.log('Building client application...');
-    await execAsync('npx vite build client', {
+    await execAsync('npx vite build client --outDir ../dist/public', {
       stdio: 'inherit',
       env: { ...process.env, NODE_ENV: 'production' }
     });
     console.log('Client build completed');
-
-    // Move client build to public directory
-    const clientBuildDir = path.join(clientDir, 'dist');
-    if (!fs.existsSync(clientBuildDir)) {
-      throw new Error('Client build directory not found');
-    }
-
-    // Move all files from client build to public directory
-    fs.cpSync(clientBuildDir, publicDir, { recursive: true });
-    fs.rmSync(clientBuildDir, { recursive: true });
-    console.log('Moved client build to public directory');
 
     // Build server
     console.log('Building server...');
@@ -70,7 +58,7 @@ async function buildProject() {
     });
     console.log('Server build completed');
 
-    // Copy assets if they exist
+    // Copy any static assets if they exist
     const assetsDir = path.join(rootDir, 'attached_assets');
     if (fs.existsSync(assetsDir)) {
       const publicAssetsDir = path.join(publicDir, 'assets');
