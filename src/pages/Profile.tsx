@@ -5,12 +5,12 @@ export const Profile: FC = () => {
   return (
     <div className="space-y-8">
       <RevealOnScroll>
-        <section className="flex items-center gap-6">
+        <section className="flex items-start gap-6">
           <div className="hidden sm:block relative w-20 h-20">
             <img 
               src="/attached_assets/profile/samir-profile-photo.png"
               alt="Profile" 
-              className="absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover"
+              className="absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px]"
             />
           </div>
           <div className="space-y-4">
