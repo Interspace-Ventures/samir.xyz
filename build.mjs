@@ -15,7 +15,6 @@ async function buildProject() {
 
     // Setup directories
     const distDir = path.resolve(__dirname, 'dist');
-    const publicDir = path.resolve(distDir, 'public');
 
     // Clean dist directory
     if (fs.existsSync(distDir)) {
@@ -23,12 +22,9 @@ async function buildProject() {
       console.log('Cleaned existing dist directory');
     }
 
-    // Create fresh dist directories
-    fs.mkdirSync(publicDir, { recursive: true });
-    console.log('Created build directories:', {
-      distDir,
-      publicDir
-    });
+    // Create fresh dist directory
+    fs.mkdirSync(distDir, { recursive: true });
+    console.log('Created build directory:', distDir);
 
     // Build client (Vite)
     console.log('Building client application...');
@@ -39,7 +35,7 @@ async function buildProject() {
       process.chdir(path.join(__dirname, 'client'));
       console.log('Changed to client directory:', process.cwd());
 
-      const { stdout, stderr } = await execAsync('npx vite build --outDir ../dist/public --emptyOutDir');
+      const { stdout, stderr } = await execAsync('npx vite build --outDir ../dist --emptyOutDir');
       console.log('Vite build output:', stdout);
       if (stderr) console.error('Vite build stderr:', stderr);
 
@@ -51,63 +47,18 @@ async function buildProject() {
       throw error;
     }
 
-    console.log('Client build completed');
-    console.log('Verifying build output in:', publicDir);
-
-    // List contents of public directory
-    const publicFiles = fs.readdirSync(publicDir);
-    console.log('Files in public directory:', publicFiles);
-
-    // Build server
-    console.log('Building server...');
-    await build({
-      entryPoints: ['server/index.ts'],
-      bundle: true,
-      platform: 'node',
-      target: 'node20',
-      outfile: path.join(distDir, 'server.mjs'),
-      format: 'esm',
-      packages: 'external',
-      sourcemap: true,
-      banner: {
-        js: '#!/usr/bin/env node\nimport { createRequire } from "module";\nconst require = createRequire(import.meta.url);'
-      }
-    });
-    console.log('Server build completed');
-
-    // Create a startup script that sets the proper environment
-    const startupScript = `#!/usr/bin/env node
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import { createRequire } from 'module';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const require = createRequire(import.meta.url);
-
-// Set production mode and directory path
-process.env.NODE_ENV = "production";
-process.env.PUBLIC_DIR = join(__dirname, "public");
-
-// Import and start the server
-import('./server.mjs').catch(console.error);
-`;
-
-    fs.writeFileSync(path.join(distDir, 'index.mjs'), startupScript, 'utf8');
-    fs.chmodSync(path.join(distDir, 'index.mjs'), '755');
-
     // Copy any additional static assets
     if (fs.existsSync(path.join(__dirname, 'client', 'public'))) {
       fs.cpSync(
         path.join(__dirname, 'client', 'public'),
-        publicDir,
+        distDir,
         { recursive: true }
       );
       console.log('Copied static assets');
     }
 
     // Verify the build output
-    if (!fs.existsSync(path.join(publicDir, 'index.html'))) {
+    if (!fs.existsSync(path.join(distDir, 'index.html'))) {
       throw new Error('Build verification failed: index.html not found');
     }
 
