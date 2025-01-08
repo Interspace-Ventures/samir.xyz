@@ -23,10 +23,6 @@ export function Layout({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle('dark');
   };
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'dark bg-gray-900' : 'bg-white'}`}>
       <nav className={`sticky top-0 backdrop-blur-sm border-b z-50 ${isDark ? 'border-gray-700 bg-gray-900/80' : 'border-gray-100 bg-white/80'}`}>
@@ -38,19 +34,10 @@ export function Layout({ children }: { children: ReactNode }) {
 
             {/* Mobile menu button */}
             <div className="flex items-center gap-4 sm:hidden">
-              <button 
-                onClick={toggleTheme}
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
+              <button onClick={toggleTheme} className={isDark ? 'text-white' : 'text-black'}>
+                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
-              <button 
-                onClick={toggleMenu} 
-                className={`p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${isDark ? 'text-white' : 'text-black'}`}
-                aria-label="Toggle menu"
-                aria-expanded={isOpen}
-              >
+              <button onClick={() => setIsOpen(!isOpen)} className={isDark ? 'text-white' : 'text-black'}>
                 <Menu className="w-6 h-6" />
               </button>
             </div>
@@ -63,27 +50,13 @@ export function Layout({ children }: { children: ReactNode }) {
               <Link href="/portfolio" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}>
                 Portfolio
               </Link>
-              <a 
-                href="https://interspace.samir.xyz/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}
-              >
+              <a href="https://interspace.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
                 Interspace <ArrowUpRight className="w-4 h-4" />
               </a>
-              <a 
-                href="https://perspectives.samir.xyz/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}
-              >
+              <a href="https://perspectives.samir.xyz/" target="_blank" rel="noopener noreferrer" className={`nav-link uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}>
                 Perspectives <ArrowUpRight className="w-4 h-4" />
               </a>
-              <button 
-                onClick={toggleTheme} 
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                aria-label="Toggle theme"
-              >
+              <button onClick={toggleTheme} className="ml-4">
                 {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
               </button>
             </div>
@@ -92,51 +65,41 @@ export function Layout({ children }: { children: ReactNode }) {
           {/* Mobile navigation */}
           <div
             ref={menuRef}
-            className="sm:hidden"
-            style={{
-              maxHeight: isOpen ? '300px' : '0',
-              opacity: isOpen ? '1' : '0',
-              overflow: 'hidden',
-              transition: 'max-height 0.3s ease-in-out, opacity 0.2s ease-in-out',
-              visibility: isOpen ? 'visible' : 'hidden'
-            }}
-            aria-hidden={!isOpen}
+            className={`sm:hidden transition-all duration-300 ease-in-out ${
+              isOpen ? 'max-h-[400px] opacity-100 visible' : 'max-h-0 opacity-0 invisible'
+            }`}
           >
-            <div className="py-4 space-y-4">
-              <Link 
-                href="/profile" 
-                className={`block py-2 px-3 rounded-md uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors`}
-                onClick={() => setIsOpen(false)}
-              >
-                Profile
-              </Link>
-              <Link 
-                href="/portfolio" 
-                className={`block py-2 px-3 rounded-md uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors`}
-                onClick={() => setIsOpen(false)}
-              >
-                Portfolio
-              </Link>
-              <div className="space-y-4">
-                <a 
-                  href="https://interspace.samir.xyz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className={`block py-2 px-3 rounded-md uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center justify-between`}
-                >
-                  <span>Interspace</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-                <a 
-                  href="https://perspectives.samir.xyz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className={`block py-2 px-3 rounded-md uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center justify-between`}
-                >
-                  <span>Perspectives</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </div>
+            <div className="py-4 space-y-2">
+              {[
+                { href: "/profile", label: "Profile" },
+                { href: "/portfolio", label: "Portfolio" },
+                { href: "https://interspace.samir.xyz/", label: "Interspace", external: true },
+                { href: "https://perspectives.samir.xyz/", label: "Perspectives", external: true }
+              ].map(({ href, label, external }) => (
+                external ? (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block w-full py-2 px-3 ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'} rounded-md transition-colors`}
+                  >
+                    <span className="flex items-center justify-between">
+                      {label}
+                      <ArrowUpRight className="w-4 h-4" />
+                    </span>
+                  </a>
+                ) : (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block w-full py-2 px-3 ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'} rounded-md transition-colors`}
+                  >
+                    {label}
+                  </Link>
+                )
+              ))}
             </div>
           </div>
         </div>
@@ -146,11 +109,20 @@ export function Layout({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      {/* Footer */}
+      {/* Footer with Replit link */}
       <footer className={`py-8 mt-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Built with <a href="https://www.replit.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#7343d0] transition-colors">Replit AI</a> at the speed of thought - Interspace Labs 2025
+            Built with{' '}
+            <a 
+              href="https://www.replit.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[#7343d0] hover:text-[#5f35b5] font-medium transition-colors"
+            >
+              Replit AI
+            </a>{' '}
+            at the speed of thought - Interspace Labs 2025
           </p>
         </div>
       </footer>
