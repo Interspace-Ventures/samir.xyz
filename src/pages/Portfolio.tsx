@@ -8,6 +8,18 @@ import { Skeleton } from "../components/ui/skeleton";
 // Sort categories alphabetically with "All" first, then "Fintech"
 const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
 
+// Add picture source set helper
+const getImagePaths = (companyName: string): { webp: string; png: string } => {
+  const baseName = companyName.toLowerCase().replace(/\s+/g, '-');
+  return {
+    webp: `/assets/images/logos/${baseName}.webp`,
+    png: `/assets/images/logos/${baseName}.png`
+  };
+};
+
+// Sort companies alphabetically
+const sortedCompanies = [...companies].sort((a, b) => a.name.localeCompare(b.name));
+
 export const Portfolio: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
   const [isLoading, setIsLoading] = useState(true);
@@ -29,9 +41,10 @@ export const Portfolio: FC = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Filter and sort companies based on selected category
   const filteredCompanies = selectedCategory === 'All'
-    ? companies
-    : companies.filter(company => company.category === selectedCategory);
+    ? sortedCompanies
+    : sortedCompanies.filter(company => company.category === selectedCategory);
 
   const displayedCompanies = filteredCompanies.slice(0, displayCount);
 
@@ -44,15 +57,15 @@ export const Portfolio: FC = () => {
             const img = entry.target as HTMLImageElement;
             const companyName = img.dataset.company;
             if (companyName && !loadedImages.has(companyName) && !failedImages.has(companyName)) {
-              img.src = getImagePath(companyName);
+              // Image src is now handled within the picture element
               observerRef.current?.unobserve(img);
             }
           }
         });
       },
       {
-        rootMargin: isMobile ? '1000px 0px' : '500px 0px',  // Reduced margin for better performance
-        threshold: 0.1  // Increased threshold for earlier loading
+        rootMargin: isMobile ? '1000px 0px' : '500px 0px',
+        threshold: 0.1
       }
     );
 
@@ -61,18 +74,18 @@ export const Portfolio: FC = () => {
     };
   }, [loadedImages, failedImages, isMobile]);
 
-  // Load more observer with improved mobile performance
+  // Load more observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && displayCount < filteredCompanies.length) {
-          const increment = isMobile ? 8 : 12;  // Smaller batch size for mobile
+          const increment = isMobile ? 8 : 12;
           setDisplayCount(prev => Math.min(prev + increment, filteredCompanies.length));
         }
       },
       {
-        rootMargin: isMobile ? '800px 0px' : '500px 0px',  // Reduced margin for better performance
-        threshold: 0.1  // Increased threshold for earlier loading
+        rootMargin: isMobile ? '800px 0px' : '500px 0px',
+        threshold: 0.1
       }
     );
 
@@ -83,18 +96,13 @@ export const Portfolio: FC = () => {
     return () => observer.disconnect();
   }, [displayCount, filteredCompanies.length, isMobile]);
 
-  // Initial loading state
+  // Initial loading state with shorter timeout
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 500);
+    }, 300);
     return () => clearTimeout(timer);
   }, []);
-
-  // Initial display count adjusted for mobile
-  useEffect(() => {
-    setDisplayCount(isMobile ? 8 : 12);  // Smaller initial count for mobile
-  }, [isMobile]);
 
   // Reset display count when category changes
   useEffect(() => {
@@ -103,15 +111,12 @@ export const Portfolio: FC = () => {
 
   const handleImageLoad = (companyName: string) => {
     setLoadedImages(prev => new Set([...prev, companyName]));
+    setIsLoading(false);
   };
 
   const handleImageError = (companyName: string) => {
     console.error(`Failed to load image for ${companyName}`);
     setFailedImages(prev => new Set([...prev, companyName]));
-  };
-
-  const getImagePath = (companyName: string): string => {
-    return `/assets/images/logos/${companyName.toLowerCase().replace(/\s+/g, '-')}.png`;
   };
 
   const imageRef = (companyName: string) => (element: HTMLImageElement | null) => {
@@ -185,6 +190,7 @@ export const Portfolio: FC = () => {
             displayedCompanies.map((company) => {
               const hasLoadedImage = loadedImages.has(company.name);
               const hasFailedImage = failedImages.has(company.name);
+              const imagePaths = getImagePaths(company.name);
 
               return (
                 <motion.div
@@ -206,15 +212,19 @@ export const Portfolio: FC = () => {
                       <CardContent className="h-full p-4 flex items-center justify-center relative">
                         {!hasFailedImage ? (
                           <div className="flex items-center justify-center w-full h-full">
-                            <img
-                              ref={imageRef(company.name)}
-                              data-company={company.name}
-                              alt={`${company.name} logo`}
-                              className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-opacity duration-200 
-                                ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
-                              onLoad={() => handleImageLoad(company.name)}
-                              onError={() => handleImageError(company.name)}
-                            />
+                            <picture>
+                              <source srcSet={imagePaths.webp} type="image/webp" />
+                              <img
+                                ref={imageRef(company.name)}
+                                src={imagePaths.png}
+                                data-company={company.name}
+                                alt={`${company.name} logo`}
+                                className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-opacity duration-200 
+                                  ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
+                                onLoad={() => handleImageLoad(company.name)}
+                                onError={() => handleImageError(company.name)}
+                              />
+                            </picture>
                           </div>
                         ) : (
                           <div className="text-center font-semibold">
