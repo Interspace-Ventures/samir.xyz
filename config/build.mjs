@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import { validateBuildConfig } from '../src/config/validateBuildConfig.js';
+import { validateBuildConfig } from '../dist/config/validateBuildConfig.js';
 
 const execAsync = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
@@ -12,6 +12,10 @@ const __dirname = path.dirname(__filename);
 async function buildProject() {
   try {
     console.log('Starting build process...');
+
+    // Compile the validation script first
+    console.log('Compiling validation script...');
+    await execAsync('npx tsc src/config/validateBuildConfig.ts --outDir dist/config --module ES2020 --target ES2020');
 
     // Validate build configuration
     console.log('Validating build configuration...');

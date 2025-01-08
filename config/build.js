@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import { validateBuildConfig } from '../src/config/validateBuildConfig.js';
+import { validateBuildConfig } from './validateBuildConfig.js';
 
 const execAsync = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
