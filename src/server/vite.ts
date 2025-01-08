@@ -52,6 +52,7 @@ export async function setupVite(app: Express, server: Server) {
 
   // Serve static files from public directory
   app.use('/assets', express.static(path.resolve(__dirname, '../../public/assets')));
+  app.use('/attached_assets', express.static(path.resolve(__dirname, '../../public/attached_assets')));
 
   app.use(vite.middlewares);
 
@@ -93,6 +94,7 @@ export function serveStatic(app: Express) {
 
   // Then serve files from public directory (static assets)
   app.use('/assets', express.static(path.join(publicDir, 'assets')));
+  app.use('/attached_assets', express.static(path.join(publicDir, 'attached_assets')));
 
   // Handle all non-API routes in production
   app.use("*", (req, res, next) => {
