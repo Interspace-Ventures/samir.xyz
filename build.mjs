@@ -13,7 +13,6 @@ async function buildProject() {
     console.log('Starting build process...');
 
     // Setup directories
-    const srcDir = path.resolve(__dirname, 'src');
     const publicDir = path.resolve(__dirname, 'public');
     const assetsDir = path.join(publicDir, 'assets');
 
