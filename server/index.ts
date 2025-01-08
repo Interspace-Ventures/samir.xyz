@@ -48,76 +48,85 @@ app.use((req, res, next) => {
 
   if (process.env.NODE_ENV !== "production") {
     // Development mode - use Vite's dev server
-    const vite = await import('vite');
-    const viteServer = await vite.createServer({
-      root: path.resolve(__dirname, "../client"),
-      server: {
-        middlewareMode: true,
-        hmr: { server }
-      },
-      appType: "custom"
-    });
+    try {
+      const vite = await import('vite');
+      const viteConfigPath = path.resolve(__dirname, '..', 'vite.config.ts');
+      const viteConfig = (await import(viteConfigPath)).default;
 
-    app.use(viteServer.middlewares);
+      const viteServer = await vite.createServer({
+        ...viteConfig,
+        server: {
+          middlewareMode: true,
+          hmr: { server }
+        },
+        appType: "custom"
+      });
 
-    app.use("*", async (req, res, next) => {
-      try {
-        const indexPath = path.resolve(__dirname, "../client/index.html");
-        const template = await import('fs/promises').then(fs => fs.readFile(indexPath, "utf-8"));
-        const html = await viteServer.transformIndexHtml(req.originalUrl, template);
-        res.status(200).set({ "Content-Type": "text/html" }).end(html);
-      } catch (e) {
-        next(e);
-      }
-    });
+      app.use(viteServer.middlewares);
+
+      // Handle SPA routes in development
+      app.use("*", async (req, res, next) => {
+        try {
+          const indexPath = path.resolve(__dirname, "../client/index.html");
+          const template = await import('fs/promises').then(fs => fs.readFile(indexPath, "utf-8"));
+          const html = await viteServer.transformIndexHtml(req.originalUrl, template);
+          res.status(200).set({ "Content-Type": "text/html" }).end(html);
+        } catch (e) {
+          next(e);
+        }
+      });
+    } catch (error) {
+      console.error('Failed to initialize Vite dev server:', error);
+      process.exit(1);
+    }
   } else {
     // Production mode - serve static files from dist
     const publicDir = path.resolve(process.cwd(), "dist", "public");
     console.log('Serving static files from:', publicDir);
 
-    try {
-      // Serve static files with proper caching
-      app.use(express.static(publicDir, {
-        maxAge: '1d',
-        etag: true,
-        index: false // Let our custom handler deal with serving index.html
-      }));
-
-      // Handle SPA routing by serving index.html for all non-file routes
-      app.get("*", (req, res, next) => {
-        // Log all incoming requests in production for debugging
-        console.log(`[Production] Handling request for: ${req.path}`);
-
-        // If the request is for a file, let express.static handle it
-        if (path.extname(req.path) !== '') {
-          console.log(`[Production] Static file request: ${req.path}`);
-          next();
-          return;
+    // Serve static files with proper caching
+    app.use(express.static(publicDir, {
+      maxAge: '1d',
+      etag: true,
+      index: false, // Let our custom handler deal with serving index.html
+      setHeaders: (res, path) => {
+        // Add immutable cache control for assets
+        if (path.includes('/assets/')) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        } else {
+          res.setHeader('Cache-Control', 'public, max-age=3600');
         }
+      }
+    }));
 
-        // For all other routes, serve index.html for client-side routing
-        const indexPath = path.join(publicDir, "index.html");
-        console.log(`[Production] Serving index.html from: ${indexPath}`);
+    // Handle SPA routing
+    app.get("*", (req, res, next) => {
+      // Skip API routes
+      if (req.path.startsWith('/api')) {
+        return next();
+      }
 
-        res.sendFile(indexPath, (err) => {
-          if (err) {
-            console.error(`Error serving index.html: ${err.message}`);
-            next(err);
-          } else {
-            console.log(`[Production] Successfully served index.html for: ${req.path}`);
-          }
-        });
+      // If the request is for a file with extension, let express.static handle it
+      if (path.extname(req.path) !== '') {
+        return next();
+      }
+
+      // For all other routes, serve index.html for client-side routing
+      const indexPath = path.join(publicDir, "index.html");
+      res.sendFile(indexPath, (err) => {
+        if (err) {
+          console.error(`Error serving index.html: ${err.message}`);
+          next(err);
+        }
       });
-    } catch (error) {
-      console.error(`Error: Could not find the public directory at ${publicDir}`);
-      console.error("Make sure to run the build process before starting in production mode");
-      throw error;
-    }
+    });
   }
 
   const PORT = parseInt(process.env.PORT || "5000", 10);
-  server.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
+  const HOST = process.env.HOST || "0.0.0.0";
+
+  server.listen(PORT, HOST, () => {
+    console.log(`Server running on http://${HOST}:${PORT}`);
     console.log(`Mode: ${process.env.NODE_ENV || 'development'}`);
   });
 })().catch((error) => {

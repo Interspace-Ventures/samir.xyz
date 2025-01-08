@@ -46,21 +46,18 @@ async function buildProject() {
       packages: 'external',
       sourcemap: true,
       banner: {
-        js: `
-          // ESM module support
-          process.env.NODE_ENV = process.env.NODE_ENV || 'production';
-        `
+        js: '// ESM module support\nprocess.env.NODE_ENV = process.env.NODE_ENV || "production";'
       }
     });
     console.log('Server build completed');
 
-    // Copy any static assets
+    // Copy static assets if they exist
     const assetsDir = path.join(rootDir, 'attached_assets');
     if (fs.existsSync(assetsDir)) {
       const publicAssetsDir = path.join(publicDir, 'assets');
       fs.mkdirSync(publicAssetsDir, { recursive: true });
       fs.cpSync(assetsDir, publicAssetsDir, { recursive: true });
-      console.log('Copied assets to public directory');
+      console.log('Copied static assets to public directory');
     }
 
     console.log('Build process completed successfully!');
