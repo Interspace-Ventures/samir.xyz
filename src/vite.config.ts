@@ -1,12 +1,13 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
-import path, { dirname } from "path";
+import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
 
 export default defineConfig({
   plugins: [react(), runtimeErrorOverlay(), themePlugin()],
@@ -16,17 +17,17 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "components"),
       "@pages": path.resolve(__dirname, "pages"),
       "@lib": path.resolve(__dirname, "lib"),
-      "@assets": path.resolve(__dirname, "..", "public", "assets")
+      "@assets": path.resolve(rootDir, "public", "assets")
     },
   },
-  root: path.resolve(__dirname, ".."),
-  publicDir: "public",
+  root: rootDir,
+  publicDir: path.resolve(rootDir, "public"),
   build: {
-    outDir: path.resolve(__dirname, "..", "dist"),
+    outDir: path.resolve(rootDir, "dist"),
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "..", "index.html"),
+        main: path.resolve(rootDir, "index.html"),
       },
       output: {
         assetFileNames: (assetInfo) => {
@@ -38,13 +39,17 @@ export default defineConfig({
           if (/css/i.test(extType)) {
             return `assets/css/[name]-[hash][extname]`;
           }
+          if (/js|jsx|ts|tsx/i.test(extType)) {
+            return `assets/js/[name]-[hash][extname]`;
+          }
           return `assets/[name]-[hash][extname]`;
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
-    sourcemap: true
+    sourcemap: true,
+    manifest: true
   },
   server: {
     host: '0.0.0.0',
