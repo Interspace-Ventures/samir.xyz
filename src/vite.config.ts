@@ -18,7 +18,7 @@ export default defineConfig({
   root: path.resolve(__dirname, ".."),
   publicDir: "public",
   build: {
-    outDir: "public/assets",
+    outDir: path.resolve(__dirname, "..", "public", "assets"),
     emptyOutDir: true,
   },
 });
