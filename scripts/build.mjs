@@ -13,12 +13,12 @@ async function buildProject() {
     console.log('Starting build process...');
 
     // Setup directories
-    const publicDir = path.resolve(__dirname, '..', 'public');
-    const assetsDir = path.join(publicDir, 'assets');
+    const distPath = path.resolve(__dirname, '..', 'dist');
+    const assetsDir = path.join(distPath, 'assets');
 
     // Create directory structure if it doesn't exist
-    fs.mkdirSync(path.join(assetsDir, 'css'), { recursive: true });
     fs.mkdirSync(path.join(assetsDir, 'js'), { recursive: true });
+    fs.mkdirSync(path.join(assetsDir, 'css'), { recursive: true });
     fs.mkdirSync(path.join(assetsDir, 'img'), { recursive: true });
     fs.mkdirSync(path.join(assetsDir, 'logos'), { recursive: true });
     console.log('Created/verified directory structure');
@@ -32,7 +32,7 @@ async function buildProject() {
     if (stderr) console.error('Build stderr:', stderr);
 
     // Verify the build output
-    if (!fs.existsSync(path.join(publicDir, 'index.html'))) {
+    if (!fs.existsSync(path.join(distPath, 'index.html'))) {
       throw new Error('Build verification failed: index.html not found');
     }
 
