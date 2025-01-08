@@ -1,10 +1,22 @@
-import React, { type ReactNode, useState } from "react";
+import React, { type ReactNode, useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Sun, Moon, Menu, ArrowUpRight } from "lucide-react";
 
 export function Layout({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -22,10 +34,16 @@ export function Layout({ children }: { children: ReactNode }) {
 
             {/* Mobile menu button */}
             <div className="flex items-center gap-4 sm:hidden">
-              <button onClick={toggleTheme}>
+              <button 
+                onClick={toggleTheme}
+                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
                 {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
               </button>
-              <button onClick={() => setIsOpen(!isOpen)} className={isDark ? 'text-white' : 'text-black'}>
+              <button 
+                onClick={() => setIsOpen(!isOpen)} 
+                className={`p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${isDark ? 'text-white' : 'text-black'}`}
+              >
                 <Menu className="w-6 h-6" />
               </button>
             </div>
@@ -54,49 +72,59 @@ export function Layout({ children }: { children: ReactNode }) {
               >
                 Perspectives <ArrowUpRight className="w-4 h-4" />
               </a>
-              <button onClick={toggleTheme} className="ml-4">
+              <button 
+                onClick={toggleTheme} 
+                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
                 {isDark ? <Sun className="w-5 h-5 text-white" /> : <Moon className="w-5 h-5" />}
               </button>
             </div>
           </div>
 
           {/* Mobile navigation */}
-          {isOpen && (
-            <div className="sm:hidden py-4 space-y-6">
+          <div
+            ref={menuRef}
+            className={`sm:hidden overflow-hidden transition-all duration-200 ease-in-out ${
+              isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+            }`}
+          >
+            <div className="py-4 space-y-4">
               <Link 
                 href="/profile" 
-                className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}
+                className={`block py-2 px-3 rounded-md uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors`}
                 onClick={() => setIsOpen(false)}
               >
                 Profile
               </Link>
               <Link 
                 href="/portfolio" 
-                className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0]`}
+                className={`block py-2 px-3 rounded-md uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors`}
                 onClick={() => setIsOpen(false)}
               >
                 Portfolio
               </Link>
-              <div className="flex flex-col gap-6">
+              <div className="space-y-4">
                 <a 
                   href="https://interspace.samir.xyz/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}
+                  className={`block py-2 px-3 rounded-md uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center justify-between`}
                 >
-                  Interspace <ArrowUpRight className="w-4 h-4" />
+                  <span>Interspace</span>
+                  <ArrowUpRight className="w-4 h-4" />
                 </a>
                 <a 
                   href="https://perspectives.samir.xyz/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className={`block py-2 uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1`}
+                  className={`block py-2 px-3 rounded-md uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center justify-between`}
                 >
-                  Perspectives <ArrowUpRight className="w-4 h-4" />
+                  <span>Perspectives</span>
+                  <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </nav>
 

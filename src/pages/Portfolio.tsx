@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useRef, type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
-import { companies, categories, displayCategories, type CompanyCategory } from "../types/company";
+import { companies, categories, type CompanyCategory } from "../types/company";
 import { RevealOnScroll } from "../components/RevealOnScroll";
 import { Skeleton } from "../components/ui/skeleton";
+
+// Sort categories alphabetically with "All" first, then "Fintech"
+const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
 
 export const Portfolio: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
   const [isLoading, setIsLoading] = useState(true);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
-  const [displayCount, setDisplayCount] = useState(12); 
+  const [displayCount, setDisplayCount] = useState(12);
   const [isMobile, setIsMobile] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -26,13 +29,13 @@ export const Portfolio: FC = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const filteredCompanies = selectedCategory === 'All' 
-    ? companies 
+  const filteredCompanies = selectedCategory === 'All'
+    ? companies
     : companies.filter(company => company.category === selectedCategory);
 
   const displayedCompanies = filteredCompanies.slice(0, displayCount);
 
-  // Image loading observer
+  // Image loading observer with improved mobile performance
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -48,8 +51,8 @@ export const Portfolio: FC = () => {
         });
       },
       {
-        rootMargin: isMobile ? '2000px 0px' : '1000px 0px',  // Much larger margin for mobile
-        threshold: 0.01
+        rootMargin: isMobile ? '1000px 0px' : '500px 0px',  // Reduced margin for better performance
+        threshold: 0.1  // Increased threshold for earlier loading
       }
     );
 
@@ -58,18 +61,18 @@ export const Portfolio: FC = () => {
     };
   }, [loadedImages, failedImages, isMobile]);
 
-  // Load more observer
+  // Load more observer with improved mobile performance
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && displayCount < filteredCompanies.length) {
-          const increment = isMobile ? 12 : 16;  // Larger batch size
+          const increment = isMobile ? 8 : 12;  // Smaller batch size for mobile
           setDisplayCount(prev => Math.min(prev + increment, filteredCompanies.length));
         }
       },
-      { 
-        rootMargin: isMobile ? '1600px 0px' : '1000px 0px',  // Much larger margin for mobile
-        threshold: 0.01  // Lower threshold for earlier triggering
+      {
+        rootMargin: isMobile ? '800px 0px' : '500px 0px',  // Reduced margin for better performance
+        threshold: 0.1  // Increased threshold for earlier loading
       }
     );
 
@@ -90,16 +93,15 @@ export const Portfolio: FC = () => {
 
   // Initial display count adjusted for mobile
   useEffect(() => {
-    setDisplayCount(isMobile ? 12 : 16);  // Larger initial count
+    setDisplayCount(isMobile ? 8 : 12);  // Smaller initial count for mobile
   }, [isMobile]);
 
   // Reset display count when category changes
   useEffect(() => {
-    setDisplayCount(isMobile ? 12 : 16);
+    setDisplayCount(isMobile ? 8 : 12);
   }, [selectedCategory, isMobile]);
 
   const handleImageLoad = (companyName: string) => {
-    console.log(`Successfully loaded image for ${companyName}`);
     setLoadedImages(prev => new Set([...prev, companyName]));
   };
 
@@ -130,7 +132,7 @@ export const Portfolio: FC = () => {
             Portfolio
           </h1>
           <p className="text-xl sm:text-2xl max-w-3xl">
-            I advise and invest in ambitious teams building innovative products who focus on 
+            I advise and invest in ambitious teams building innovative products who focus on
             unit economics optimized business models.
           </p>
         </section>
@@ -154,7 +156,7 @@ export const Portfolio: FC = () => {
         </section>
       </RevealOnScroll>
 
-      <motion.section 
+      <motion.section
         layout
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
       >
@@ -194,17 +196,17 @@ export const Portfolio: FC = () => {
                   transition={{ duration: 0.2 }}
                   className="h-32"
                 >
-                  <a 
-                    href={company.url} 
-                    target="_blank" 
+                  <a
+                    href={company.url}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="h-full block"
                   >
-                    <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white">
-                      <CardContent className={`h-full p-4 flex items-center justify-center relative bg-white`}>
+                    <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800">
+                      <CardContent className="h-full p-4 flex items-center justify-center relative">
                         {!hasFailedImage ? (
-                          <div className={`flex items-center justify-center w-full h-full`}>
-                            <img 
+                          <div className="flex items-center justify-center w-full h-full">
+                            <img
                               ref={imageRef(company.name)}
                               data-company={company.name}
                               alt={`${company.name} logo`}

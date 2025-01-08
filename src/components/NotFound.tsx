@@ -20,7 +20,7 @@ export const NotFound: FC = () => {
               </p>
             </div>
           </div>
-          
+
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
               variant="outline"
@@ -43,3 +43,5 @@ export const NotFound: FC = () => {
     </div>
   );
 };
+
+export default NotFound;
