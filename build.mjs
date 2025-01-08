@@ -13,42 +13,27 @@ async function buildProject() {
     console.log('Starting build process...');
 
     // Setup directories
-    const distDir = path.resolve(__dirname, 'dist');
     const srcDir = path.resolve(__dirname, 'src');
     const publicDir = path.resolve(__dirname, 'public');
+    const assetsDir = path.join(publicDir, 'assets');
 
-    // Clean dist directory
-    if (fs.existsSync(distDir)) {
-      fs.rmSync(distDir, { recursive: true });
-      console.log('Cleaned existing dist directory');
-    }
-
-    // Create fresh dist directory and its subdirectories
-    fs.mkdirSync(distDir, { recursive: true });
-    fs.mkdirSync(path.join(distDir, 'assets', 'css'), { recursive: true });
-    fs.mkdirSync(path.join(distDir, 'assets', 'img'), { recursive: true });
-    fs.mkdirSync(path.join(distDir, 'assets', 'js'), { recursive: true });
-    console.log('Created build directory structure');
+    // Create directory structure if it doesn't exist
+    fs.mkdirSync(path.join(assetsDir, 'css'), { recursive: true });
+    fs.mkdirSync(path.join(assetsDir, 'js'), { recursive: true });
+    fs.mkdirSync(path.join(assetsDir, 'img'), { recursive: true });
+    fs.mkdirSync(path.join(assetsDir, 'logos'), { recursive: true });
+    console.log('Created/verified directory structure');
 
     // Build static site
     console.log('Building static site...');
     process.env.NODE_ENV = 'production';
 
-    const { stdout, stderr } = await execAsync('npx vite build');
-    console.log('Vite build output:', stdout);
-    if (stderr) console.error('Vite build stderr:', stderr);
-
-    // Copy public assets
-    if (fs.existsSync(publicDir)) {
-      fs.cpSync(publicDir, path.join(distDir, 'assets'), { 
-        recursive: true,
-        filter: (src) => !src.includes('node_modules')
-      });
-      console.log('Copied public assets');
-    }
+    const { stdout, stderr } = await execAsync('npx vite build --outDir ./public');
+    console.log('Build output:', stdout);
+    if (stderr) console.error('Build stderr:', stderr);
 
     // Verify the build output
-    if (!fs.existsSync(path.join(distDir, 'index.html'))) {
+    if (!fs.existsSync(path.join(publicDir, 'index.html'))) {
       throw new Error('Build verification failed: index.html not found');
     }
 
