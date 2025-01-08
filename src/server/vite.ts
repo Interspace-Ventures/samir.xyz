@@ -50,6 +50,9 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
+  // Serve static files from public directory in development
+  app.use('/assets', express.static(path.resolve(__dirname, '../../public/assets')));
+
   app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
@@ -74,18 +77,23 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const publicDir = path.resolve(__dirname, "..", "..", "public");
+  const distDir = path.resolve(__dirname, '../../dist');
+  const publicDir = path.resolve(__dirname, '../../public');
 
-  if (!fs.existsSync(publicDir)) {
+  if (!fs.existsSync(distDir)) {
     throw new Error(
-      `Could not find the build directory: ${publicDir}, make sure to build the client first`,
+      `Could not find the build directory: ${distDir}, make sure to build the client first`,
     );
   }
 
-  app.use(express.static(publicDir));
+  // Serve files from dist directory first (built assets)
+  app.use(express.static(distDir));
+
+  // Then serve files from public directory (static assets)
+  app.use('/assets', express.static(path.join(publicDir, 'assets')));
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(publicDir, "index.html"));
+    res.sendFile(path.resolve(distDir, "index.html"));
   });
 }
