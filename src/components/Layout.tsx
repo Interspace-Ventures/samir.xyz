@@ -38,8 +38,9 @@ export function Layout({ children }: { children: ReactNode }) {
     <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'dark bg-gray-900' : 'bg-white'}`}>
       <nav className={`sticky top-0 backdrop-blur-sm border-b z-50 ${isDark ? 'border-gray-700 bg-gray-900/80' : 'border-gray-100 bg-white/80'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className={`text-base sm:text-lg md:text-xl font-bold ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors`}>
+          <div className="flex justify-between items-center h-16 md:h-20">
+            {/* Logo/Brand - Adjusted text sizes */}
+            <Link href="/" className={`text-lg md:text-xl lg:text-2xl font-bold ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200`}>
               Hey - I'm Samir
             </Link>
 
@@ -62,19 +63,25 @@ export function Layout({ children }: { children: ReactNode }) {
               </button>
             </div>
 
-            {/* Desktop navigation */}
-            <div className="hidden sm:flex items-center space-x-6 md:space-x-8">
-              <Link href="/profile" className={`nav-link text-sm sm:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors`}>
+            {/* Desktop navigation - Improved spacing and text sizes */}
+            <div className="hidden sm:flex items-center space-x-4 md:space-x-6 lg:space-x-8">
+              <Link 
+                href="/profile" 
+                className={`nav-link text-sm md:text-base lg:text-lg uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200 px-2 py-1`}
+              >
                 Profile
               </Link>
-              <Link href="/portfolio" className={`nav-link text-sm sm:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors`}>
+              <Link 
+                href="/portfolio" 
+                className={`nav-link text-sm md:text-base lg:text-lg uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200 px-2 py-1`}
+              >
                 Portfolio
               </Link>
               <a 
                 href="https://interspace.samir.xyz/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`nav-link text-sm sm:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors`}
+                className={`nav-link text-sm md:text-base lg:text-lg uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors duration-200 px-2 py-1`}
               >
                 Interspace <ArrowUpRight className="w-4 h-4" />
               </a>
@@ -82,7 +89,7 @@ export function Layout({ children }: { children: ReactNode }) {
                 href="https://perspectives.samir.xyz/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`nav-link text-sm sm:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors`}
+                className={`nav-link text-sm md:text-base lg:text-lg uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors duration-200 px-2 py-1`}
               >
                 Perspectives <ArrowUpRight className="w-4 h-4" />
               </a>
@@ -96,7 +103,7 @@ export function Layout({ children }: { children: ReactNode }) {
             </div>
           </div>
 
-          {/* Mobile navigation */}
+          {/* Mobile navigation - Improved transitions and spacing */}
           <div
             ref={menuRef}
             className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${

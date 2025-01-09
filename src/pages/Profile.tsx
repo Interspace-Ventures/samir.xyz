@@ -23,20 +23,19 @@ export const Profile: FC = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 md:space-y-12">
       <RevealOnScroll>
-        <section className="space-y-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
-            <div className="flex-1 min-w-0">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold">
+        <section className="space-y-6 md:space-y-8">
+          <div className="flex flex-col-reverse md:flex-row items-center gap-6 md:gap-8 md:items-start">
+            <div className="flex-1 min-w-0 text-center md:text-left">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                 Hey - I'm Samir.
               </h1>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#7343d0] mt-4">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-[#7343d0] mt-3 md:mt-4">
                 I drive business impact at fintechs.
               </h2>
             </div>
-
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 flex-shrink-0 relative">
               {imageLoading && !imageError && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Skeleton className="w-full h-full rounded-full" />
@@ -44,16 +43,14 @@ export const Profile: FC = () => {
               )}
               {!imageError ? (
                 <div className={`relative w-full h-full ${imageLoadingHighRes ? 'blur-sm' : ''}`}>
-                  {/* Low-res placeholder */}
                   <img
                     src="/assets/images/profile/samir-profile-photo-placeholder.png"
                     alt=""
-                    className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-300
+                    className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[6px] transition-opacity duration-300
                       ${imageLoading ? 'opacity-0' : imageLoadingHighRes ? 'opacity-100' : 'opacity-0'}`}
                     onLoad={handlePlaceholderLoad}
                     onError={handleImageError}
                   />
-                  {/* High-res image */}
                   <picture>
                     <source 
                       srcSet="/assets/images/profile/samir-profile-photo.webp"
@@ -62,7 +59,7 @@ export const Profile: FC = () => {
                     <img 
                       src="/assets/images/profile/samir-profile-photo.png"
                       alt="Profile" 
-                      className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-500
+                      className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[6px] transition-opacity duration-500
                         ${imageLoadingHighRes ? 'opacity-0' : 'opacity-100'}`}
                       onLoad={handleHighResLoad}
                       onError={handleImageError}
@@ -70,18 +67,17 @@ export const Profile: FC = () => {
                   </picture>
                 </div>
               ) : (
-                <div className="absolute inset-0 flex items-center justify-center rounded-full border-2 border-[#7343d0] bg-gray-100">
-                  <span className="text-3xl">S</span>
+                <div className="w-full h-full flex items-center justify-center rounded-full border-2 border-[#7343d0] bg-gray-100 dark:bg-gray-800">
+                  <span className="text-2xl md:text-3xl font-bold">S</span>
                 </div>
               )}
             </div>
           </div>
         </section>
       </RevealOnScroll>
-
       <RevealOnScroll>
-        <section className="max-w-3xl space-y-4">
-          <p className="text-base sm:text-lg">
+        <section className="max-w-3xl space-y-4 md:space-y-6">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
             Today, I am leading Finance & Strategy for the Financial Partnerships team at{" "}
             <a 
               href="https://cash.app" 
@@ -102,7 +98,7 @@ export const Profile: FC = () => {
             </a>{" "}
             which uses algorithms to drive efficiency in markets.
           </p>
-          <p className="text-base sm:text-lg">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
             Prior to that, I drove financial partnerships at{" "}
             <a 
               href="https://www.unit.co" 
@@ -141,7 +137,7 @@ export const Profile: FC = () => {
             </a>{" "}
             covering market structure and asset management.
           </p>
-          <p className="text-base sm:text-lg">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
             In my free time, I write over-engineered threads on{" "}
             <a 
               href="https://x.com/heysamir_" 

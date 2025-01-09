@@ -43,13 +43,15 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
   });
 
-  // Important: Serve static assets before any other middleware
+  // Important: Setup static file serving first
   app.use('/assets', express.static(path.join(process.cwd(), 'public', 'assets'), {
     maxAge: '1d',
     etag: true,
     lastModified: true,
+    immutable: true,
     fallthrough: true,
     setHeaders: (res, filePath) => {
+      // Set proper MIME types
       if (filePath.endsWith('.webp')) {
         res.setHeader('Content-Type', 'image/webp');
       } else if (filePath.endsWith('.png')) {
@@ -57,6 +59,8 @@ app.use((req, res, next) => {
       }
       // Enable CORS for assets
       res.setHeader('Access-Control-Allow-Origin', '*');
+      // Cache control
+      res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
     }
   }));
 
@@ -67,17 +71,18 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // Important: This catch-all route must be registered last
+  // Handle all other routes (SPA client-side routing)
   app.get('*', (req, res, next) => {
     // Skip API routes
     if (req.path.startsWith('/api')) {
       return next();
     }
 
-    // Send the index.html for client-side routing
+    // In development, use the source index.html
+    // In production, use the built index.html
     const indexPath = app.get("env") === "development" 
       ? path.join(process.cwd(), 'src', 'index.html')
-      : path.join(process.cwd(), 'dist', 'index.html');
+      : path.join(process.cwd(), 'dist', 'public', 'index.html');
 
     res.sendFile(indexPath, (err) => {
       if (err) {
