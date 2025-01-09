@@ -22,54 +22,44 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
+  const publicAssetsPath = path.resolve(__dirname, '../../public/assets');
+
+  // Serve static files from public directory first
+  app.use('/assets', express.static(publicAssetsPath, {
+    maxAge: '1d',
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.webp')) {
+        res.setHeader('Content-Type', 'image/webp');
+      } else if (filePath.endsWith('.png')) {
+        res.setHeader('Content-Type', 'image/png');
+      }
+      // Enable CORS for assets
+      res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+  }));
+
   const vite = await createViteServer({
     ...viteConfig,
     configFile: false,
-    customLogger: {
-      ...viteLogger,
-      error: (msg, options) => {
-        if (msg.includes("[TypeScript] Found 0 errors. Watching for file changes")) {
-          log("no errors found", "tsc");
-          return;
-        }
-
-        if (msg.includes("[TypeScript] ")) {
-          const [errors, summary] = msg.split("[TypeScript] ", 2);
-          log(`${summary} ${errors}\u001b[0m`, "tsc");
-          return;
-        } else {
-          viteLogger.error(msg, options);
-          process.exit(1);
-        }
-      },
-    },
+    customLogger: viteLogger,
     server: {
       middlewareMode: true,
       hmr: { server },
       port: 5000,
       host: '0.0.0.0',
       watch: {
-        usePolling: true
+        usePolling: true,
+        interval: 100
       }
     },
     appType: "custom",
   });
 
-  // Serve static files from public directory first with proper MIME types and caching
-  app.use('/assets', express.static(path.resolve(__dirname, '../../public/assets'), {
-    maxAge: '1d',
-    etag: true,
-    lastModified: true,
-    setHeaders: (res, path) => {
-      if (path.endsWith('.webp')) {
-        res.setHeader('Content-Type', 'image/webp');
-      }
-    }
-  }));
-
   app.use(vite.middlewares);
 
-  // Handle all other routes (SPA)
+  // Handle all routes for SPA
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -79,7 +69,6 @@ export async function setupVite(app: Express, server: Server) {
     }
 
     try {
-      // Serve index.html for all client-side routes
       const template = fs.readFileSync(
         path.resolve(__dirname, '../../index.html'),
         'utf-8'
@@ -95,7 +84,7 @@ export async function setupVite(app: Express, server: Server) {
 
 export function serveStatic(app: Express) {
   const distDir = path.resolve(__dirname, '../../dist');
-  const publicDir = path.resolve(__dirname, '../../public');
+  const publicAssetsPath = path.resolve(__dirname, '../../public/assets');
 
   if (!fs.existsSync(distDir)) {
     throw new Error(
@@ -103,22 +92,26 @@ export function serveStatic(app: Express) {
     );
   }
 
-  // Serve static assets with caching
-  app.use('/assets', express.static(path.join(publicDir, 'assets'), {
+  // Serve static assets with proper MIME types
+  app.use('/assets', express.static(publicAssetsPath, {
     maxAge: '1d',
     etag: true,
     lastModified: true,
-    setHeaders: (res, path) => {
-      if (path.endsWith('.webp')) {
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.webp')) {
         res.setHeader('Content-Type', 'image/webp');
+      } else if (filePath.endsWith('.png')) {
+        res.setHeader('Content-Type', 'image/png');
       }
+      // Enable CORS for assets
+      res.setHeader('Access-Control-Allow-Origin', '*');
     }
   }));
 
   // Serve built assets
   app.use(express.static(distDir));
 
-  // Serve index.html for all non-API routes (SPA client-side routing)
+  // Always serve index.html for all non-API routes (SPA client-side routing)
   app.use("*", (req, res, next) => {
     const url = req.originalUrl;
 

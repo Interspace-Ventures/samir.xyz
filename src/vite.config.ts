@@ -21,8 +21,8 @@ export default defineConfig({
     },
   },
   root: rootDir,
-  base: '/',
-  publicDir: 'public',
+  base: '',  // Changed from '/' to '' to handle relative paths better
+  publicDir: path.resolve(rootDir, 'public'),
   build: {
     outDir: path.resolve(rootDir, "dist"),
     emptyOutDir: true,
@@ -36,15 +36,15 @@ export default defineConfig({
           const info = assetInfo.name?.split('.');
           const extType = info?.[info.length - 1];
           if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/i.test(extType || '')) {
-            return `assets/images/[name]-[hash][extname]`;
+            return `assets/images/[name][extname]`;  // Removed hash for easier debugging
           }
           if (/css/i.test(extType || '')) {
-            return `assets/css/[name]-[hash][extname]`;
+            return `assets/css/[name][extname]`;  // Removed hash for easier debugging
           }
-          return `assets/[name]-[hash][extname]`;
+          return `assets/[name][extname]`;  // Removed hash for easier debugging
         },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
+        chunkFileNames: 'assets/js/[name].js',
+        entryFileNames: 'assets/js/[name].js',
       },
     },
     sourcemap: true,
@@ -54,8 +54,8 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5000,
     fs: {
-      strict: true,
-      allow: ['..']
+      strict: false,
+      allow: ['.']
     },
     watch: {
       usePolling: true,
