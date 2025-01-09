@@ -8,14 +8,18 @@ import { Skeleton } from "../components/ui/skeleton";
 // Sort categories alphabetically with "All" first, then "Fintech"
 const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
 
-// Update the getImagePaths function to handle relative paths
+// Update the getImagePaths function to handle case-sensitive paths
 const getImagePaths = (companyName: string): { webp: string; png: string; placeholder: string } => {
-  const baseName = companyName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  const baseUrl = ''; // Changed from import.meta.env.BASE_URL to use relative paths
+  // Function to preserve exact case and spacing, only replace invalid characters
+  const formatName = (name: string) => {
+    return name.replace(/[^\w\s-]/g, '').trim();
+  };
+
+  const baseName = formatName(companyName);
   return {
-    webp: `${baseUrl}assets/images/logos/${baseName}.webp`,
-    png: `${baseUrl}assets/images/logos/${baseName}.png`,
-    placeholder: `${baseUrl}assets/images/logos/${baseName}-placeholder.png`
+    webp: `/assets/images/logos/${baseName}.webp`,
+    png: `/assets/images/logos/${baseName}.png`,
+    placeholder: `/assets/images/logos/${baseName}-placeholder.png`
   };
 };
 
@@ -48,6 +52,25 @@ export const Portfolio: FC = () => {
     : sortedCompanies.filter(company => company.category === selectedCategory);
 
   const displayedCompanies = filteredCompanies.slice(0, displayCount);
+
+  const handleImageError = (companyName: string) => {
+    console.error(`Failed to load image for ${companyName}`);
+    setFailedImages(prev => new Set([...prev, companyName]));
+  };
+
+  const handleImageLoad = (companyName: string) => {
+    setLoadedImages(prev => new Set([...prev, companyName]));
+  };
+
+  const imageRef = (companyName: string) => (element: HTMLImageElement | null) => {
+    if (element) {
+      imageRefs.current.set(companyName, element);
+      element.dataset.company = companyName;
+      observerRef.current?.observe(element);
+    } else {
+      imageRefs.current.delete(companyName);
+    }
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -104,25 +127,6 @@ export const Portfolio: FC = () => {
   useEffect(() => {
     setDisplayCount(isMobile ? 8 : 12);
   }, [selectedCategory, isMobile]);
-
-  const handleImageError = (companyName: string) => {
-    console.error(`Failed to load image for ${companyName}`);
-    setFailedImages(prev => new Set([...prev, companyName]));
-  };
-
-  const handleImageLoad = (companyName: string) => {
-    setLoadedImages(prev => new Set([...prev, companyName]));
-  };
-
-  const imageRef = (companyName: string) => (element: HTMLImageElement | null) => {
-    if (element) {
-      imageRefs.current.set(companyName, element);
-      element.dataset.company = companyName;
-      observerRef.current?.observe(element);
-    } else {
-      imageRefs.current.delete(companyName);
-    }
-  };
 
   return (
     <div className="space-y-12">

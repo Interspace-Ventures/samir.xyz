@@ -32,9 +32,10 @@ export const NotFound: FC = () => {
               </motion.div>
               <div>
                 <h1 className="text-4xl font-bold tracking-tight">404</h1>
-                <p className="text-xl font-semibold mt-2">Page Not Found</p>
+                <p className="text-xl font-semibold mt-2">Oops! Page Not Found</p>
                 <p className="mt-2 text-muted-foreground">
-                  Oops! The page you're looking for doesn't exist or has been moved.
+                  Looks like this page took a coffee break! ☕️ <br />
+                  Want to head back to somewhere that exists?
                 </p>
               </div>
             </div>

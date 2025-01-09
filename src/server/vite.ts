@@ -24,11 +24,12 @@ export function log(message: string, source = "express") {
 export async function setupVite(app: Express, server: Server) {
   const publicAssetsPath = path.resolve(__dirname, '../../public/assets');
 
-  // Serve static files from public directory first
+  // Serve static files from public directory first with better error handling
   app.use('/assets', express.static(publicAssetsPath, {
     maxAge: '1d',
     etag: true,
     lastModified: true,
+    fallthrough: true,
     setHeaders: (res, filePath) => {
       if (filePath.endsWith('.webp')) {
         res.setHeader('Content-Type', 'image/webp');
@@ -38,7 +39,14 @@ export async function setupVite(app: Express, server: Server) {
       // Enable CORS for assets
       res.setHeader('Access-Control-Allow-Origin', '*');
     }
-  }));
+  }), (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (err) {
+      console.error('Static file serving error:', err);
+      res.status(404).send('Asset not found');
+    } else {
+      next();
+    }
+  });
 
   const vite = await createViteServer({
     ...viteConfig,
@@ -86,17 +94,12 @@ export function serveStatic(app: Express) {
   const distDir = path.resolve(__dirname, '../../dist');
   const publicAssetsPath = path.resolve(__dirname, '../../public/assets');
 
-  if (!fs.existsSync(distDir)) {
-    throw new Error(
-      `Could not find the build directory: ${distDir}, make sure to build the client first`
-    );
-  }
-
-  // Serve static assets with proper MIME types
+  // Serve static assets with proper MIME types and error handling
   app.use('/assets', express.static(publicAssetsPath, {
     maxAge: '1d',
     etag: true,
     lastModified: true,
+    fallthrough: true,
     setHeaders: (res, filePath) => {
       if (filePath.endsWith('.webp')) {
         res.setHeader('Content-Type', 'image/webp');
@@ -106,7 +109,14 @@ export function serveStatic(app: Express) {
       // Enable CORS for assets
       res.setHeader('Access-Control-Allow-Origin', '*');
     }
-  }));
+  }), (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (err) {
+      console.error('Static file serving error:', err);
+      res.status(404).send('Asset not found');
+    } else {
+      next();
+    }
+  });
 
   // Serve built assets
   app.use(express.static(distDir));
