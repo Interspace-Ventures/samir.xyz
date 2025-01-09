@@ -9,9 +9,8 @@ const rootDir = path.resolve(__dirname, '..');
 // Source and target directories for assets
 const directories = {
   source: {
-    logos: path.join(rootDir, 'assets', 'logos'),
-    profile: path.join(rootDir, 'assets', 'profile'),
-    images: path.join(rootDir, 'assets', 'images')
+    attached: path.join(rootDir, 'attached_assets'),
+    assets: path.join(rootDir, 'assets'),
   },
   target: {
     logos: path.join(rootDir, 'public', 'assets', 'images', 'logos'),
@@ -21,37 +20,64 @@ const directories = {
 };
 
 // Create all necessary directories
-Object.values(directories).forEach(dirGroup => {
-  Object.values(dirGroup).forEach(dir => {
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-      console.log(`Created directory: ${dir}`);
-    }
-  });
-});
-
-// Move profile image if it exists in root
-['png', 'webp'].forEach(ext => {
-  const sourcePath = path.join(rootDir, `profile-photo.${ext}`);
-  if (fs.existsSync(sourcePath)) {
-    const targetPath = path.join(directories.source.profile, `profile-photo.${ext}`);
-    fs.copyFileSync(sourcePath, targetPath);
-    console.log(`Moved profile-photo.${ext} to source directory`);
+Object.values(directories.target).forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+    console.log(`Created directory: ${dir}`);
   }
 });
 
-// Move any existing logos to source directory
-const existingLogosDir = path.join(rootDir, 'logos');
-if (fs.existsSync(existingLogosDir)) {
-  fs.readdirSync(existingLogosDir).forEach(file => {
-    if (file.match(/\.(png|jpg|webp)$/i)) {
-      const sourcePath = path.join(existingLogosDir, file);
-      const targetPath = path.join(directories.source.logos, file);
-      fs.copyFileSync(sourcePath, targetPath);
-      console.log(`Moved ${file} to source logos directory`);
-    }
-  });
+// Move files from attached_assets to appropriate target directories
+if (fs.existsSync(directories.source.attached)) {
+  console.log('\nMoving files from attached_assets...');
+  fs.readdirSync(directories.source.attached, { withFileTypes: true })
+    .forEach(dirent => {
+      if (dirent.isFile() && /\.(png|jpe?g|gif|webp)$/i.test(dirent.name)) {
+        const sourcePath = path.join(directories.source.attached, dirent.name);
+        let targetDir = directories.target.general;
+
+        // Determine appropriate target directory based on filename
+        if (dirent.name.includes('logo')) {
+          targetDir = directories.target.logos;
+        } else if (dirent.name.includes('profile')) {
+          targetDir = directories.target.profile;
+        }
+
+        const targetPath = path.join(targetDir, dirent.name);
+        fs.copyFileSync(sourcePath, targetPath);
+        console.log(`Moved ${dirent.name} to ${path.relative(rootDir, targetDir)}`);
+      }
+    });
+
+  // Clean up attached_assets directory after moving files
+  fs.rmSync(directories.source.attached, { recursive: true, force: true });
+  console.log('Removed attached_assets directory');
 }
+
+// Move files from assets directory
+if (fs.existsSync(directories.source.assets)) {
+  console.log('\nMoving files from assets directory...');
+  fs.readdirSync(directories.source.assets, { withFileTypes: true })
+    .forEach(dirent => {
+      if (dirent.isFile() && /\.(png|jpe?g|gif|webp)$/i.test(dirent.name)) {
+        const sourcePath = path.join(directories.source.assets, dirent.name);
+        let targetDir = directories.target.general;
+
+        // Determine appropriate target directory based on filename
+        if (dirent.name.includes('logo')) {
+          targetDir = directories.target.logos;
+        } else if (dirent.name.includes('profile')) {
+          targetDir = directories.target.profile;
+        }
+
+        const targetPath = path.join(targetDir, dirent.name);
+        fs.copyFileSync(sourcePath, targetPath);
+        console.log(`Moved ${dirent.name} to ${path.relative(rootDir, targetDir)}`);
+      }
+    });
+}
+
+console.log('\nAsset organization completed!');
 
 // Move favicon and other icons to assets/icons
 const iconFiles = ['favicon.png', 'favicon.ico'];

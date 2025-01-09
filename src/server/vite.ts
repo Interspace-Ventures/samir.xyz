@@ -55,11 +55,16 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-  // Serve static files from public directory first with caching
+  // Serve static files from public directory first with proper MIME types and caching
   app.use('/assets', express.static(path.resolve(__dirname, '../../public/assets'), {
     maxAge: '1d',
     etag: true,
-    lastModified: true
+    lastModified: true,
+    setHeaders: (res, path) => {
+      if (path.endsWith('.webp')) {
+        res.setHeader('Content-Type', 'image/webp');
+      }
+    }
   }));
 
   app.use(vite.middlewares);
