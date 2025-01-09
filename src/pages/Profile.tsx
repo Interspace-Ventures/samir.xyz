@@ -26,16 +26,17 @@ export const Profile: FC = () => {
     <div className="space-y-8">
       <RevealOnScroll>
         <section className="space-y-4">
-          <div className="max-w-3xl flex items-center justify-between">
-            <div>
-              <h1 className="text-5xl sm:text-6xl font-bold">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+            <div className="flex-1 min-w-0">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold">
                 Hey - I'm Samir.
               </h1>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#7343d0] mt-4">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#7343d0] mt-4">
                 I drive business impact at fintechs.
               </h2>
             </div>
-            <div className="hidden sm:block relative w-40 h-40 flex-shrink-0 ml-4">
+
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
               {imageLoading && !imageError && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Skeleton className="w-full h-full rounded-full" />
@@ -50,10 +51,7 @@ export const Profile: FC = () => {
                     className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-300
                       ${imageLoading ? 'opacity-0' : imageLoadingHighRes ? 'opacity-100' : 'opacity-0'}`}
                     onLoad={handlePlaceholderLoad}
-                    onError={() => {
-                      console.error('Failed to load placeholder image');
-                      handleImageError();
-                    }}
+                    onError={handleImageError}
                   />
                   {/* High-res image */}
                   <picture>
@@ -67,10 +65,7 @@ export const Profile: FC = () => {
                       className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-500
                         ${imageLoadingHighRes ? 'opacity-0' : 'opacity-100'}`}
                       onLoad={handleHighResLoad}
-                      onError={() => {
-                        console.error('Failed to load high-res image');
-                        handleImageError();
-                      }}
+                      onError={handleImageError}
                     />
                   </picture>
                 </div>
@@ -83,9 +78,10 @@ export const Profile: FC = () => {
           </div>
         </section>
       </RevealOnScroll>
+
       <RevealOnScroll>
-        <section className="max-w-3xl space-y-4 text-lg">
-          <p>
+        <section className="max-w-3xl space-y-4">
+          <p className="text-base sm:text-lg">
             Today, I am leading Finance & Strategy for the Financial Partnerships team at{" "}
             <a 
               href="https://cash.app" 
@@ -104,7 +100,10 @@ export const Profile: FC = () => {
             >
               HRT
             </a>{" "}
-            which uses algorithms to drive efficiency in markets. Prior to that, I drove financial partnerships at{" "}
+            which uses algorithms to drive efficiency in markets.
+          </p>
+          <p className="text-base sm:text-lg">
+            Prior to that, I drove financial partnerships at{" "}
             <a 
               href="https://www.unit.co" 
               target="_blank" 
@@ -142,7 +141,7 @@ export const Profile: FC = () => {
             </a>{" "}
             covering market structure and asset management.
           </p>
-          <p>
+          <p className="text-base sm:text-lg">
             In my free time, I write over-engineered threads on{" "}
             <a 
               href="https://x.com/heysamir_" 
