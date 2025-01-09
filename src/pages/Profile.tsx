@@ -23,11 +23,11 @@ export const Profile: FC = () => {
   };
 
   return (
-    <div className="space-y-8 md:space-y-12">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
       <RevealOnScroll>
-        <section className="space-y-6 md:space-y-8">
-          <div className="flex flex-col-reverse md:flex-row items-center gap-6 md:gap-8 md:items-start">
-            <div className="flex-1 min-w-0 text-center md:text-left">
+        <section className="py-8 md:py-12">
+          <div className="flex flex-col-reverse md:flex-row items-center md:justify-between gap-6">
+            <div className="flex-1 text-center md:text-left md:max-w-2xl">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                 Hey - I'm Samir.
               </h1>
@@ -35,7 +35,7 @@ export const Profile: FC = () => {
                 I drive business impact at fintechs.
               </h2>
             </div>
-            <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 flex-shrink-0 relative">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 flex-shrink-0 relative mb-6 md:mb-0">
               {imageLoading && !imageError && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Skeleton className="w-full h-full rounded-full" />
