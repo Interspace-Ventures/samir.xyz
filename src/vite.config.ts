@@ -13,14 +13,14 @@ export default defineConfig({
   plugins: [react(), runtimeErrorOverlay(), themePlugin()],
   resolve: {
     alias: {
-      "@": path.resolve(rootDir, "src"),
-      "@components": path.resolve(rootDir, "src/components"),
-      "@pages": path.resolve(rootDir, "src/pages"),
-      "@lib": path.resolve(rootDir, "src/lib"),
+      "@": path.resolve(__dirname),
+      "@components": path.resolve(__dirname, "components"),
+      "@pages": path.resolve(__dirname, "pages"),
+      "@lib": path.resolve(__dirname, "lib"),
       "@assets": path.resolve(rootDir, "public/assets")
     },
   },
-  root: rootDir,
+  root: __dirname,
   publicDir: path.resolve(rootDir, 'public'),
   build: {
     outDir: path.resolve(rootDir, "dist/public"),
@@ -29,7 +29,7 @@ export default defineConfig({
     manifest: true,
     rollupOptions: {
       input: {
-        main: path.resolve(rootDir, "src/index.html"),
+        main: path.resolve(__dirname, "index.html"),
       },
       output: {
         assetFileNames: (assetInfo) => {

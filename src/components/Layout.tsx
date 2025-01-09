@@ -39,17 +39,17 @@ export function Layout({ children }: { children: ReactNode }) {
       <nav className={`sticky top-0 backdrop-blur-sm border-b z-50 ${isDark ? 'border-gray-700 bg-gray-900/80' : 'border-gray-100 bg-white/80'}`}>
         <div className="max-w-6xl mx-auto px-2 xs:px-3 sm:px-4 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            {/* Logo/Brand - Improved responsive text sizing and nowrap */}
+            {/* Logo/Brand */}
             <Link 
               href="/" 
-              className={`text-[11px] xs:text-[13px] sm:text-lg md:text-xl whitespace-nowrap font-bold ${
+              className={`text-lg md:text-xl whitespace-nowrap font-bold ${
                 isDark ? 'text-white' : 'text-black'
-              } hover:text-[#7343d0] transition-colors duration-200 pr-0.5 xs:pr-1.5 sm:pr-2`}
+              } hover:text-[#7343d0] transition-colors duration-200`}
             >
               Hey - I'm Samir
             </Link>
 
-            {/* Mobile menu button with adjusted spacing */}
+            {/* Mobile menu button */}
             <div className="flex items-center gap-1 sm:hidden">
               <button 
                 onClick={toggleTheme} 
