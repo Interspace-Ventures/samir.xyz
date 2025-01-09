@@ -42,15 +42,15 @@ export function Layout({ children }: { children: ReactNode }) {
             {/* Logo/Brand - Improved responsive text sizing and nowrap */}
             <Link 
               href="/" 
-              className={`text-[13px] xs:text-[14px] sm:text-lg md:text-xl whitespace-nowrap font-bold ${
+              className={`text-[11px] xs:text-[13px] sm:text-lg md:text-xl whitespace-nowrap font-bold ${
                 isDark ? 'text-white' : 'text-black'
-              } hover:text-[#7343d0] transition-colors duration-200 pr-1.5 xs:pr-2`}
+              } hover:text-[#7343d0] transition-colors duration-200 pr-0.5 xs:pr-1.5 sm:pr-2`}
             >
               Hey - I'm Samir
             </Link>
 
             {/* Mobile menu button with adjusted spacing */}
-            <div className="flex items-center gap-2 sm:hidden">
+            <div className="flex items-center gap-1 sm:hidden">
               <button 
                 onClick={toggleTheme} 
                 className={`p-1.5 rounded-md transition-colors ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'}`}
