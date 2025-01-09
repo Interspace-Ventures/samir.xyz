@@ -20,28 +20,27 @@ export default defineConfig({
       "@assets": path.resolve(rootDir, "public/assets")
     },
   },
-  root: rootDir,
-  base: '',  // Changed from '/' to '' to handle relative paths better
+  root: path.resolve(rootDir, 'src'),
   publicDir: path.resolve(rootDir, 'public'),
   build: {
-    outDir: path.resolve(rootDir, "dist"),
+    outDir: path.resolve(rootDir, "dist/public"),
     emptyOutDir: true,
     assetsDir: 'assets',
     rollupOptions: {
       input: {
-        main: path.resolve(rootDir, "index.html"),
+        main: path.resolve(rootDir, "src/index.html"),
       },
       output: {
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.');
           const extType = info?.[info.length - 1];
           if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/i.test(extType || '')) {
-            return `assets/images/[name][extname]`;  // Removed hash for easier debugging
+            return `assets/images/[name][extname]`;
           }
           if (/css/i.test(extType || '')) {
-            return `assets/css/[name][extname]`;  // Removed hash for easier debugging
+            return `assets/css/[name][extname]`;
           }
-          return `assets/[name][extname]`;  // Removed hash for easier debugging
+          return `assets/[name][extname]`;
         },
         chunkFileNames: 'assets/js/[name].js',
         entryFileNames: 'assets/js/[name].js',
