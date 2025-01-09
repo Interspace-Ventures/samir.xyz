@@ -69,6 +69,7 @@ export async function setupVite(app: Express, server: Server) {
 
   app.use(vite.middlewares);
 
+  // Handle all other routes (SPA)
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -78,7 +79,7 @@ export async function setupVite(app: Express, server: Server) {
     }
 
     try {
-      // Always serve index.html for client-side routing
+      // Serve index.html for all client-side routes
       const template = fs.readFileSync(
         path.resolve(__dirname, '../../index.html'),
         'utf-8'
@@ -98,7 +99,7 @@ export function serveStatic(app: Express) {
 
   if (!fs.existsSync(distDir)) {
     throw new Error(
-      `Could not find the build directory: ${distDir}, make sure to build the client first`,
+      `Could not find the build directory: ${distDir}, make sure to build the client first`
     );
   }
 
@@ -106,13 +107,18 @@ export function serveStatic(app: Express) {
   app.use('/assets', express.static(path.join(publicDir, 'assets'), {
     maxAge: '1d',
     etag: true,
-    lastModified: true
+    lastModified: true,
+    setHeaders: (res, path) => {
+      if (path.endsWith('.webp')) {
+        res.setHeader('Content-Type', 'image/webp');
+      }
+    }
   }));
 
-  // Then serve built assets
+  // Serve built assets
   app.use(express.static(distDir));
 
-  // Serve index.html for all non-API routes to support client-side routing
+  // Serve index.html for all non-API routes (SPA client-side routing)
   app.use("*", (req, res, next) => {
     const url = req.originalUrl;
 

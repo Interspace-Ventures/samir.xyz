@@ -12,7 +12,7 @@ const App: FC = () => {
         <Route path="/" component={Profile} />
         <Route path="/profile" component={Profile} />
         <Route path="/portfolio" component={Portfolio} />
-        <Route component={NotFound} />
+        <Route path="/:rest*" component={NotFound} />
       </Switch>
     </Layout>
   );
