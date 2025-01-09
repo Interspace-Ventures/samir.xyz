@@ -20,12 +20,13 @@ export default defineConfig({
       "@assets": path.resolve(rootDir, "public/assets")
     },
   },
-  root: path.resolve(rootDir, 'src'),
+  root: rootDir,
   publicDir: path.resolve(rootDir, 'public'),
   build: {
     outDir: path.resolve(rootDir, "dist/public"),
     emptyOutDir: true,
-    assetsDir: 'assets',
+    sourcemap: true,
+    manifest: true,
     rollupOptions: {
       input: {
         main: path.resolve(rootDir, "src/index.html"),
@@ -46,8 +47,6 @@ export default defineConfig({
         entryFileNames: 'assets/js/[name].js',
       },
     },
-    sourcemap: true,
-    manifest: true
   },
   server: {
     host: '0.0.0.0',

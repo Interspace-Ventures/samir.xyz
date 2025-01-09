@@ -37,43 +37,48 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className={`min-h-screen transition-colors duration-200 ${isDark ? 'dark bg-gray-900' : 'bg-white'}`}>
       <nav className={`sticky top-0 backdrop-blur-sm border-b z-50 ${isDark ? 'border-gray-700 bg-gray-900/80' : 'border-gray-100 bg-white/80'}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-2 xs:px-3 sm:px-4 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            {/* Logo/Brand - Adjusted text sizes */}
-            <Link href="/" className={`text-lg md:text-xl lg:text-2xl font-bold ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200`}>
+            {/* Logo/Brand - Improved responsive text sizing and nowrap */}
+            <Link 
+              href="/" 
+              className={`text-[13px] xs:text-[14px] sm:text-lg md:text-xl whitespace-nowrap font-bold ${
+                isDark ? 'text-white' : 'text-black'
+              } hover:text-[#7343d0] transition-colors duration-200 pr-1.5 xs:pr-2`}
+            >
               Hey - I'm Samir
             </Link>
 
-            {/* Mobile menu button */}
-            <div className="flex items-center gap-4 sm:hidden">
+            {/* Mobile menu button with adjusted spacing */}
+            <div className="flex items-center gap-2 sm:hidden">
               <button 
                 onClick={toggleTheme} 
-                className={`p-2 rounded-md transition-colors ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'}`}
+                className={`p-1.5 rounded-md transition-colors ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'}`}
                 aria-label="Toggle theme"
               >
-                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 aria-expanded={isOpen}
-                className={`p-2 rounded-md transition-colors ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'}`}
+                className={`p-1.5 rounded-md transition-colors ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'}`}
                 aria-label="Toggle menu"
               >
-                <Menu className="w-5 h-5" />
+                <Menu className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Desktop navigation - Improved spacing and text sizes */}
-            <div className="hidden sm:flex items-center space-x-4 md:space-x-6 lg:space-x-8">
+            {/* Desktop navigation - Adjusted spacing and text sizes */}
+            <div className="hidden sm:flex items-center space-x-3 md:space-x-4 lg:space-x-6">
               <Link 
                 href="/profile" 
-                className={`nav-link text-sm md:text-base lg:text-lg uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200 px-2 py-1`}
+                className={`nav-link text-xs sm:text-sm md:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200 px-1.5 py-1`}
               >
                 Profile
               </Link>
               <Link 
                 href="/portfolio" 
-                className={`nav-link text-sm md:text-base lg:text-lg uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200 px-2 py-1`}
+                className={`nav-link text-xs sm:text-sm md:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200 px-1.5 py-1`}
               >
                 Portfolio
               </Link>
@@ -81,24 +86,24 @@ export function Layout({ children }: { children: ReactNode }) {
                 href="https://interspace.samir.xyz/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`nav-link text-sm md:text-base lg:text-lg uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors duration-200 px-2 py-1`}
+                className={`nav-link text-xs sm:text-sm md:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors duration-200 px-1.5 py-1`}
               >
-                Interspace <ArrowUpRight className="w-4 h-4" />
+                Interspace <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4" />
               </a>
               <a 
                 href="https://perspectives.samir.xyz/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className={`nav-link text-sm md:text-base lg:text-lg uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors duration-200 px-2 py-1`}
+                className={`nav-link text-xs sm:text-sm md:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors duration-200 px-1.5 py-1`}
               >
-                Perspectives <ArrowUpRight className="w-4 h-4" />
+                Perspectives <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4" />
               </a>
               <button 
                 onClick={toggleTheme} 
-                className={`p-2 rounded-md transition-colors ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'}`}
+                className={`p-1.5 rounded-md transition-colors ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'}`}
                 aria-label="Toggle theme"
               >
-                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {isDark ? <Sun className="w-4 h-4 md:w-5 md:h-5" /> : <Moon className="w-4 h-4 md:w-5 md:h-5" />}
               </button>
             </div>
           </div>
@@ -110,11 +115,11 @@ export function Layout({ children }: { children: ReactNode }) {
               isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
             }`}
           >
-            <div className="py-4 space-y-2">
+            <div className="py-3 space-y-1.5">
               <Link
                 href="/profile"
                 onClick={() => setIsOpen(false)}
-                className={`block w-full py-2 px-3 text-base rounded-md transition-colors ${
+                className={`block w-full py-2 px-3 text-sm rounded-md transition-colors ${
                   isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'
                 }`}
               >
@@ -123,7 +128,7 @@ export function Layout({ children }: { children: ReactNode }) {
               <Link
                 href="/portfolio"
                 onClick={() => setIsOpen(false)}
-                className={`block w-full py-2 px-3 text-base rounded-md transition-colors ${
+                className={`block w-full py-2 px-3 text-sm rounded-md transition-colors ${
                   isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'
                 }`}
               >
@@ -133,7 +138,7 @@ export function Layout({ children }: { children: ReactNode }) {
                 href="https://interspace.samir.xyz/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`block w-full py-2 px-3 text-base rounded-md transition-colors ${
+                className={`block w-full py-2 px-3 text-sm rounded-md transition-colors ${
                   isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'
                 }`}
                 onClick={() => setIsOpen(false)}
@@ -147,7 +152,7 @@ export function Layout({ children }: { children: ReactNode }) {
                 href="https://perspectives.samir.xyz/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`block w-full py-2 px-3 text-base rounded-md transition-colors ${
+                className={`block w-full py-2 px-3 text-sm rounded-md transition-colors ${
                   isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'
                 }`}
                 onClick={() => setIsOpen(false)}
@@ -162,7 +167,7 @@ export function Layout({ children }: { children: ReactNode }) {
         </div>
       </nav>
 
-      <main className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 ${isDark ? 'text-white' : 'text-black'}`}>
+      <main className={`max-w-6xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-8 sm:py-12 ${isDark ? 'text-white' : 'text-black'}`}>
         {children}
       </main>
 
