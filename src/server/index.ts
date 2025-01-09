@@ -69,11 +69,7 @@ app.use((req, res, next) => {
     if (req.path.startsWith('/api')) {
       return next();
     }
-    if (app.get("env") === "development") {
-      res.sendFile(path.join(process.cwd(), 'index.html'));
-    } else {
-      res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
-    }
+    res.sendFile(path.join(process.cwd(), 'index.html'));
   });
 
   // Always serve on port 5000
