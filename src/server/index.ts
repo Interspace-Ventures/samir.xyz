@@ -1,10 +1,28 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import compression from "compression";
+import path from "path";
 
 const app = express();
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Serve static files from public directory with proper MIME types
+const staticOptions = {
+  maxAge: '1d',
+  etag: true,
+  lastModified: true,
+  setHeaders: (res: Response, filePath: string) => {
+    if (filePath.endsWith('.webp')) {
+      res.setHeader('Content-Type', 'image/webp');
+    }
+  }
+};
+
+// Serve static assets from public/assets directory
+app.use('/assets', express.static(path.join(process.cwd(), 'public', 'assets'), staticOptions));
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -42,24 +60,30 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-
+    console.error('Server error:', err);
     res.status(status).json({ message });
-    throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client
-  const PORT = 5000;
-  server.listen(PORT, "0.0.0.0", () => {
-    log(`serving on port ${PORT}`);
+  const PORT = Number(process.env.PORT || 5000);
+  const server_instance = server.listen(PORT, "0.0.0.0", () => {
+    log(`Server running at http://0.0.0.0:${PORT}`);
   });
-})();
+
+  // Enable graceful shutdown
+  process.on('SIGTERM', () => {
+    server_instance.close(() => {
+      console.log('Server closed');
+      process.exit(0);
+    });
+  });
+
+})().catch(error => {
+  console.error('Failed to start server:', error);
+  process.exit(1);
+});

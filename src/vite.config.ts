@@ -35,7 +35,7 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.');
           const extType = info?.[info.length - 1];
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType || '')) {
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/i.test(extType || '')) {
             return `assets/images/[name]-[hash][extname]`;
           }
           if (/css/i.test(extType || '')) {
@@ -56,6 +56,10 @@ export default defineConfig({
     fs: {
       strict: true,
       allow: ['..']
+    },
+    watch: {
+      usePolling: true,
+      interval: 100
     }
   }
 });

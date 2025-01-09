@@ -9,11 +9,11 @@ import { Skeleton } from "../components/ui/skeleton";
 const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
 
 const getImagePaths = (companyName: string): { webp: string; png: string; placeholder: string } => {
-  const baseName = companyName.toLowerCase().replace(/\s+/g, '-');
+  const baseName = companyName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
   return {
-    webp: `/assets/images/logos/${baseName}.webp`,
-    png: `/assets/images/logos/${baseName}.png`,
-    placeholder: `/assets/images/logos/${baseName}-placeholder.png`
+    webp: `/assets/images/logos/${baseName}-logo.webp`,
+    png: `/assets/images/logos/${baseName}-logo.png`,
+    placeholder: `/assets/images/logos/${baseName}-logo-placeholder.png`
   };
 };
 
