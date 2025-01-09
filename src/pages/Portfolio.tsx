@@ -8,12 +8,14 @@ import { Skeleton } from "../components/ui/skeleton";
 // Sort categories alphabetically with "All" first, then "Fintech"
 const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
 
+// Update the getImagePaths function to handle relative paths
 const getImagePaths = (companyName: string): { webp: string; png: string; placeholder: string } => {
   const baseName = companyName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const baseUrl = ''; // Changed from import.meta.env.BASE_URL to use relative paths
   return {
-    webp: `/assets/images/logos/${baseName}-logo.webp`,
-    png: `/assets/images/logos/${baseName}-logo.png`,
-    placeholder: `/assets/images/logos/${baseName}-logo-placeholder.png`
+    webp: `${baseUrl}assets/images/logos/${baseName}.webp`,
+    png: `${baseUrl}assets/images/logos/${baseName}.png`,
+    placeholder: `${baseUrl}assets/images/logos/${baseName}-placeholder.png`
   };
 };
 

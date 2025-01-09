@@ -45,29 +45,32 @@ export const Profile: FC = () => {
                 <div className={`relative w-full h-full ${imageLoadingHighRes ? 'blur-sm' : ''}`}>
                   {/* Low-res placeholder */}
                   <img
-                    src="/assets/images/profile/profile-placeholder.webp"
+                    src="/assets/images/profile/samir-profile-photo-placeholder.png"
                     alt=""
                     className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-300
                       ${imageLoading ? 'opacity-0' : imageLoadingHighRes ? 'opacity-100' : 'opacity-0'}`}
                     onLoad={handlePlaceholderLoad}
-                    onError={handleImageError}
+                    onError={() => {
+                      console.error('Failed to load placeholder image');
+                      handleImageError();
+                    }}
                   />
                   {/* High-res image */}
                   <picture>
                     <source 
-                      srcSet="/assets/images/profile/profile.webp" 
-                      type="image/webp"
-                      onError={() => {
-                        console.log('WebP format not supported for profile image, falling back to PNG');
-                      }}
+                      srcSet="/assets/images/profile/samir-profile-photo.webp"
+                      type="image/webp" 
                     />
                     <img 
-                      src="/assets/images/profile/profile.png"
+                      src="/assets/images/profile/samir-profile-photo.png"
                       alt="Profile" 
                       className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[7px] transition-opacity duration-500
                         ${imageLoadingHighRes ? 'opacity-0' : 'opacity-100'}`}
                       onLoad={handleHighResLoad}
-                      onError={handleImageError}
+                      onError={() => {
+                        console.error('Failed to load high-res image');
+                        handleImageError();
+                      }}
                     />
                   </picture>
                 </div>

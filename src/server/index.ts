@@ -9,55 +9,26 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Serve static files from public directory with proper MIME types
-const staticOptions = {
-  maxAge: '1d',
-  etag: true,
-  lastModified: true,
-  setHeaders: (res: Response, filePath: string) => {
-    if (filePath.endsWith('.webp')) {
-      res.setHeader('Content-Type', 'image/webp');
-    }
-  }
-};
-
-// Serve static assets from public/assets directory with proper error handling
-app.use('/assets', 
-  express.static(path.join(process.cwd(), 'public', 'assets'), staticOptions),
-  (err: any, _req: Request, res: Response, next: NextFunction) => {
-    if (err) {
-      console.error('Static file serving error:', err);
-      res.status(404).send('Asset not found');
-    } else next();
-  }
-);
-
 // Request logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
-
+  // Log requests and responses
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
-      log(logLine);
-    }
+    const status = res.statusCode;
+    log(`${req.method} ${path} ${status} ${duration}ms`);
   });
 
+  next();
+});
+
+// Configure proper MIME types for WebP images
+app.use((req, res, next) => {
+  if (req.path.endsWith('.webp')) {
+    res.type('image/webp');
+  }
   next();
 });
 
@@ -72,12 +43,38 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
   });
 
+  // Serve static assets before setting up Vite or client routes
+  app.use('/assets', express.static(path.join(process.cwd(), 'public', 'assets'), {
+    maxAge: '1d',
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.webp')) {
+        res.setHeader('Content-Type', 'image/webp');
+      } else if (filePath.endsWith('.png')) {
+        res.setHeader('Content-Type', 'image/png');
+      }
+    }
+  }));
+
   // Setup Vite or serve static files based on environment
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
+
+  // Always serve index.html for non-API routes (this enables client-side routing)
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    if (app.get("env") === "development") {
+      res.sendFile(path.join(process.cwd(), 'index.html'));
+    } else {
+      res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+    }
+  });
 
   // Always serve on port 5000
   const PORT = Number(process.env.PORT || 5000);
