@@ -60,6 +60,10 @@ export async function setupVite(app: Express, server: Server) {
       watch: {
         usePolling: true,
         interval: 100
+      },
+      fs: {
+        strict: false,
+        allow: ['.']
       }
     },
     appType: "custom",
@@ -78,7 +82,7 @@ export async function setupVite(app: Express, server: Server) {
 
     try {
       const template = fs.readFileSync(
-        path.resolve(__dirname, '../../index.html'),
+        path.resolve(__dirname, '../../src/index.html'),
         'utf-8'
       );
       const html = await vite.transformIndexHtml(url, template);

@@ -13,17 +13,34 @@ export function registerRoutes(app: Express): Server {
     maxAge: '1d',
     etag: true,
     lastModified: true,
+    immutable: true,
     fallthrough: true,
   };
 
   // Serve static assets from public/assets directory
   app.use('/assets', 
-    express.static(path.join(process.cwd(), 'public', 'assets'), staticOptions),
+    express.static(path.join(process.cwd(), 'public', 'assets'), {
+      ...staticOptions,
+      setHeaders: (res, filePath) => {
+        // Set proper MIME types
+        if (filePath.endsWith('.webp')) {
+          res.setHeader('Content-Type', 'image/webp');
+        } else if (filePath.endsWith('.png')) {
+          res.setHeader('Content-Type', 'image/png');
+        }
+        // Enable CORS for assets
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        // Cache control
+        res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
+      }
+    }),
     (err: any, _req: express.Request, res: express.Response, next: express.NextFunction) => {
       if (err) {
         console.error('Static file serving error:', err);
         res.status(404).send('Asset not found');
-      } else next();
+      } else {
+        next();
+      }
     }
   );
 

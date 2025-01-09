@@ -43,17 +43,20 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
   });
 
-  // Serve static assets before setting up Vite or client routes
+  // Important: Serve static assets before any other middleware
   app.use('/assets', express.static(path.join(process.cwd(), 'public', 'assets'), {
     maxAge: '1d',
     etag: true,
     lastModified: true,
+    fallthrough: true,
     setHeaders: (res, filePath) => {
       if (filePath.endsWith('.webp')) {
         res.setHeader('Content-Type', 'image/webp');
       } else if (filePath.endsWith('.png')) {
         res.setHeader('Content-Type', 'image/png');
       }
+      // Enable CORS for assets
+      res.setHeader('Access-Control-Allow-Origin', '*');
     }
   }));
 
@@ -64,12 +67,24 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // Always serve index.html for non-API routes (this enables client-side routing)
+  // Important: This catch-all route must be registered last
   app.get('*', (req, res, next) => {
+    // Skip API routes
     if (req.path.startsWith('/api')) {
       return next();
     }
-    res.sendFile(path.join(process.cwd(), 'index.html'));
+
+    // Send the index.html for client-side routing
+    const indexPath = app.get("env") === "development" 
+      ? path.join(process.cwd(), 'src', 'index.html')
+      : path.join(process.cwd(), 'dist', 'index.html');
+
+    res.sendFile(indexPath, (err) => {
+      if (err) {
+        console.error('Error sending index.html:', err);
+        next(err);
+      }
+    });
   });
 
   // Always serve on port 5000
