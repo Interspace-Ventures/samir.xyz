@@ -27,8 +27,8 @@ export const Profile: FC = () => {
       <RevealOnScroll>
         <section className="py-8 md:py-12">
           <div className="max-w-3xl mx-auto">
-            <div className="relative flex flex-col-reverse md:flex-row items-center md:items-start gap-8">
-              <div className="w-full md:w-[calc(100%-140px)] text-center md:text-left">
+            <div className="relative flex flex-col-reverse md:flex-row items-center md:items-start gap-8 md:justify-between">
+              <div className="w-full md:w-2/3 text-center md:text-left">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                   Hey - I'm Samir.
                 </h1>
@@ -36,7 +36,7 @@ export const Profile: FC = () => {
                   I drive business impact at fintechs.
                 </h2>
               </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 flex-shrink-0 relative mb-6 md:mb-0 md:-mt-16">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 flex-shrink-0 relative mb-6 md:mb-0">
                 {imageLoading && !imageError && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Skeleton className="w-full h-full rounded-full" />
