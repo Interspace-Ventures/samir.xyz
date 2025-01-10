@@ -27,8 +27,8 @@ export const Profile: FC = () => {
       <RevealOnScroll>
         <section className="py-8 md:py-12">
           <div className="max-w-3xl mx-auto">
-            <div className="relative flex flex-col-reverse md:flex-row items-center md:items-start gap-8 md:justify-between">
-              <div className="w-full md:w-2/3 text-center md:text-left">
+            <div className="relative flex flex-col-reverse md:flex-row md:items-center gap-8">
+              <div className="w-full md:w-2/3 text-center md:text-left flex flex-col">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                   Hey - I'm Samir.
                 </h1>
@@ -36,18 +36,18 @@ export const Profile: FC = () => {
                   I drive business impact at fintechs.
                 </h2>
               </div>
-              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 flex-shrink-0 relative mb-6 md:mb-0">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 flex-shrink-0 relative mb-6 md:mb-0 md:-mt-8 transition-all duration-300 ease-in-out">
                 {imageLoading && !imageError && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Skeleton className="w-full h-full rounded-full" />
                   </div>
                 )}
                 {!imageError ? (
-                  <div className={`relative w-full h-full ${imageLoadingHighRes ? 'blur-sm' : ''}`}>
+                  <div className={`relative w-full h-full ${imageLoadingHighRes ? 'blur-sm' : ''} transition-all duration-300`}>
                     <img
                       src="/assets/images/profile/samir-profile-photo-placeholder.png"
                       alt=""
-                      className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[6px] transition-opacity duration-300
+                      className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[6px] transition-all duration-300 ease-in-out
                         ${imageLoading ? 'opacity-0' : imageLoadingHighRes ? 'opacity-100' : 'opacity-0'}`}
                       onLoad={handlePlaceholderLoad}
                       onError={handleImageError}
@@ -60,7 +60,7 @@ export const Profile: FC = () => {
                       <img 
                         src="/assets/images/profile/samir-profile-photo.png"
                         alt="Profile" 
-                        className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[6px] transition-opacity duration-500
+                        className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[6px] transition-all duration-300 ease-in-out
                           ${imageLoadingHighRes ? 'opacity-0' : 'opacity-100'}`}
                         onLoad={handleHighResLoad}
                         onError={handleImageError}
@@ -68,7 +68,7 @@ export const Profile: FC = () => {
                     </picture>
                   </div>
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center rounded-full border-2 border-[#7343d0] bg-gray-100 dark:bg-gray-800">
+                  <div className="w-full h-full flex items-center justify-center rounded-full border-2 border-[#7343d0] bg-gray-100 dark:bg-gray-800 transition-all duration-300">
                     <span className="text-2xl md:text-3xl font-bold">S</span>
                   </div>
                 )}
