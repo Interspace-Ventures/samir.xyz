@@ -177,12 +177,12 @@ export const Portfolio: FC = () => {
               >
                 {company.exited ? (
                   <div className="h-full block relative">
-                    <div className="absolute -top-2 -left-2 bg-purple-600 text-white text-xs px-2 py-1 rounded-md z-10">
-                      Exit
-                    </div>
                     <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
                       <CardContent className="h-full p-4 flex items-center justify-center relative">
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center">
+                        <div className="absolute top-2 left-2 bg-gray-500 text-white text-xs px-2 py-1 rounded-md">
+                          Exit
+                        </div>
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
                           <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                             {company.description}
                           </p>
@@ -233,7 +233,7 @@ export const Portfolio: FC = () => {
                   >
                     <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
                       <CardContent className="h-full p-4 flex items-center justify-center relative">
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
                           <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                             {company.description}
                           </p>
