@@ -178,7 +178,7 @@ export const Portfolio: FC = () => {
                   <div className="h-full block relative">
                     <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
                       <CardContent className="h-full p-4 flex items-center justify-center relative">
-                        <div className="absolute top-0 left-0 bg-gray-500 text-white text-xs px-2 py-1 rounded-br-md">
+                        <div className="absolute top-0 left-0 bg-gray-500 text-white text-xs px-2 py-1">
                           Exit
                         </div>
                         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">

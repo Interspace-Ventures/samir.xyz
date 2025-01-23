@@ -13,7 +13,7 @@ export interface Company {
 
 export const companies: Company[] = [
   // Health
-  { name: 'Afar', url: 'https://www.afarfoods.com/', category: 'Health', description: 'Plant-based ready-to-eat meals that combine nutrition and convenience for the modern lifestyle.' },
+  { name: 'Afar', url: 'https://www.afarfoods.com/', category: 'Health', description: 'Low sugar high protein savory snack bars.' },
   { name: 'GEM', url: 'https://dailygem.com/', category: 'Health', description: 'Real food daily bites made from algae, plants, and probiotics to optimize your daily nutrition.' },
   { name: 'Aura', url: 'https://www.aurahealth.io/', category: 'Health', description: 'Digital mental health platform offering mindfulness meditation, life coaching, and therapy.' },
   { name: 'RPM', url: 'https://rpmtraining.com/', category: 'Health', description: 'At-home fitness programming combining functional movement with high-intensity training.' },
@@ -35,10 +35,10 @@ export const companies: Company[] = [
   { name: 'Metadata', url: 'https://www.metadata.io', category: 'SaaS', description: 'AI-powered B2B marketing operations platform automating customer acquisition.' },
   { name: 'Restream', url: 'https://www.restream.io', category: 'SaaS', description: 'Multi-platform streaming solution for content creators and businesses.' },
   { name: 'Sugar', url: 'https://www.sugarliving.com/', category: 'SaaS', description: 'Property management platform streamlining operations and resident experience.' },
-  { name: 'Hedgehog', url: 'https://www.thehedgehogcompany.com/', category: 'SaaS', description: 'Investment platform simplifying digital asset portfolio management.' },
-  { name: 'Soot', url: 'https://www.soot.com', category: 'SaaS', description: 'Cloud-based business intelligence and analytics platform.' },
+  { name: 'Hedgehog', url: 'https://www.thehedgehogcompany.com/', category: 'SaaS', description: 'DTC ecommerce platform buying rising retail brands.' },
+  { name: 'Soot', url: 'https://www.soot.com', category: 'SaaS', description: 'Visual-first filing system powered by AI.' },
   { name: 'Techmate', url: 'https://www.techmate.com', category: 'SaaS', description: 'AI-powered technical support automation platform.' },
-  { name: 'Launchpad', category: 'Health', description: 'Developer platform for building and scaling web applications.', exited: true },
+  { name: 'Launchpad', category: 'Health', description: 'Smart AI-powered at home fitness platform for young athletes.', exited: true },
 
   // Fintech
   { name: 'Backpack', url: 'https://www.backpack529.com/', category: 'Fintech', description: 'Modern 529 college savings platform making education investing accessible.' },
@@ -46,7 +46,7 @@ export const companies: Company[] = [
   { name: 'Juno', url: 'https://www.withjuno.com', category: 'Fintech', description: 'Digital banking platform offering high-yield accounts and cash back rewards.' },
   { name: 'Maridea', url: 'https://marideawealth.com/', category: 'Fintech', description: 'Wealth management platform for high-net-worth individuals.' },
   { name: 'Swan', url: 'https://www.swanbitcoin.com/', category: 'Fintech', description: 'Bitcoin savings and investment platform for long-term wealth building.' },
-  { name: 'Waldo', url: 'https://www.waldo.ai/', category: 'Fintech', description: 'AI-powered expense management and reimbursement platform.' },
+  { name: 'Waldo', url: 'https://www.waldo.ai/', category: 'Fintech', description: 'Next-gen fraud and compliance monitoring tools.' },
   { name: 'Sundae', url: 'https://www.sundae.com', category: 'Fintech', description: 'Marketplace for distressed property sales connecting sellers with investors.' },
   { name: 'Kartera', url: 'https://www.kartera.com', category: 'Fintech', description: 'Digital asset management platform for institutional investors.' }
 ];
