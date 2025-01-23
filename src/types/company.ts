@@ -38,7 +38,7 @@ export const companies: Company[] = [
   { name: 'Hedgehog', url: 'https://www.thehedgehogcompany.com/', category: 'SaaS', description: 'Investment platform simplifying digital asset portfolio management.' },
   { name: 'Soot', url: 'https://www.soot.com', category: 'SaaS', description: 'Cloud-based business intelligence and analytics platform.' },
   { name: 'Techmate', url: 'https://www.techmate.com', category: 'SaaS', description: 'AI-powered technical support automation platform.' },
-  { name: 'Launchpad', category: 'SaaS', description: 'Developer platform for building and scaling web applications.', exited: true },
+  { name: 'Launchpad', category: 'Health', description: 'Developer platform for building and scaling web applications.', exited: true },
 
   // Fintech
   { name: 'Backpack', url: 'https://www.backpack529.com/', category: 'Fintech', description: 'Modern 529 college savings platform making education investing accessible.' },
