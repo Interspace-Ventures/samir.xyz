@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
