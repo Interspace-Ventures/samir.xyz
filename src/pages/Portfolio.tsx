@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
@@ -105,7 +106,6 @@ export const Portfolio: FC = () => {
     return () => observerRef.current?.disconnect();
   }, [loadedImages, failedImages]);
 
-  // Load more functionality
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -187,7 +187,41 @@ export const Portfolio: FC = () => {
                             {company.description}
                           </p>
                         </div>
-                  </CardContent>
+                        {!hasFailedImage ? (
+                          <div className="flex items-center justify-center w-full h-full">
+                            <div className={`relative w-full h-full flex items-center justify-center ${
+                              !hasLoadedImage ? 'blur-sm' : ''
+                            }`}>
+                              {!hasLoadedImage && (
+                                <img
+                                  src={imagePaths.placeholder}
+                                  alt=""
+                                  className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
+                                />
+                              )}
+                              <picture>
+                                <source 
+                                  srcSet={imagePaths.webp} 
+                                  type="image/webp"
+                                />
+                                <img
+                                  ref={imageRef(company.name)}
+                                  src={imagePaths.png}
+                                  alt={`${company.name} logo`}
+                                  className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
+                                    ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
+                                  onLoad={() => handleImageLoad(company.name)}
+                                  onError={() => handleImageError(company.name)}
+                                />
+                              </picture>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="text-center font-semibold">
+                            {company.name}
+                          </div>
+                        )}
+                      </CardContent>
                     </Card>
                   </div>
                 ) : (
@@ -204,45 +238,44 @@ export const Portfolio: FC = () => {
                             {company.description}
                           </p>
                         </div>
-                      {!hasFailedImage ? (
-                        <div className="flex items-center justify-center w-full h-full">
-                          <div className={`relative w-full h-full flex items-center justify-center ${
-                            !hasLoadedImage ? 'blur-sm' : ''
-                          }`}>
-                            {/* Placeholder image (low-res, blurred) */}
-                            {!hasLoadedImage && (
-                              <img
-                                src={imagePaths.placeholder}
-                                alt=""
-                                className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
-                              />
-                            )}
-                            {/* Main image */}
-                            <picture>
-                              <source 
-                                srcSet={imagePaths.webp} 
-                                type="image/webp"
-                              />
-                              <img
-                                ref={imageRef(company.name)}
-                                src={imagePaths.png}
-                                alt={`${company.name} logo`}
-                                className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
-                                  ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
-                                onLoad={() => handleImageLoad(company.name)}
-                                onError={() => handleImageError(company.name)}
-                              />
-                            </picture>
+                        {!hasFailedImage ? (
+                          <div className="flex items-center justify-center w-full h-full">
+                            <div className={`relative w-full h-full flex items-center justify-center ${
+                              !hasLoadedImage ? 'blur-sm' : ''
+                            }`}>
+                              {!hasLoadedImage && (
+                                <img
+                                  src={imagePaths.placeholder}
+                                  alt=""
+                                  className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
+                                />
+                              )}
+                              <picture>
+                                <source 
+                                  srcSet={imagePaths.webp} 
+                                  type="image/webp"
+                                />
+                                <img
+                                  ref={imageRef(company.name)}
+                                  src={imagePaths.png}
+                                  alt={`${company.name} logo`}
+                                  className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
+                                    ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
+                                  onLoad={() => handleImageLoad(company.name)}
+                                  onError={() => handleImageError(company.name)}
+                                />
+                              </picture>
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <div className="text-center font-semibold">
-                          {company.name}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </a>
+                        ) : (
+                          <div className="text-center font-semibold">
+                            {company.name}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </a>
+                )}
               </motion.div>
             );
           })}
