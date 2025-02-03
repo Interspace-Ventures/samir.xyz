@@ -158,7 +158,7 @@ export const Profile: FC = () => {
             >
               Substack
             </a>{" "}
-            and write over-engineered fintech posts at{" "}
+            and write fintech and stratfin posts and perspectives at{" "}
             <a 
               href="https://interspace.samir.xyz" 
               target="_blank" 
