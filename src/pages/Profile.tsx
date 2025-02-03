@@ -157,8 +157,8 @@ export const Profile: FC = () => {
               className="external-link"
             >
               Substack
-            </a>{" "}
-            and write fintech and stratfin posts and perspectives at{" "}
+            </a>, 
+            write fintech & stratfin posts at{" "}
             <a 
               href="https://interspace.samir.xyz" 
               target="_blank" 
