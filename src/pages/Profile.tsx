@@ -140,9 +140,9 @@ export const Profile: FC = () => {
             covering market structure and asset management.
           </p>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
-            In my free time, I write over-engineered threads on{" "}
+            In my free time, Outside of work, I write over-engineered fintech threads on{" "}
             <a 
-              href="https://x.com/heysamir_" 
+              href="https://x.com/heyinterspace" 
               target="_blank" 
               rel="noopener noreferrer"
               className="external-link"
