@@ -134,20 +134,14 @@ export const Portfolio: FC = () => {
           <div className="space-y-4 flex-1">
             <h1 className="text-5xl sm:text-6xl font-bold">Portfolio</h1>
             <p className="text-xl sm:text-2xl max-w-3xl">
-              I advise and invest in ambitious teams building innovative products who focus on
-              unit economics optimized business models.
+              I have advised and invested in ambitious teams building innovative products who focus on
+              unit economics optimized business models since 2019.
             </p>
           </div>
 
           <div className="w-full md:w-auto">
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-[#7343d0]">
-                  <tr>
-                    <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">Metric</th>
-                    <th scope="col" className="px-4 py-2 text-right text-xs font-medium text-white uppercase tracking-wider">Value</th>
-                  </tr>
-                </thead>
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
                 <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {[
                     { label: '# Investments', value: portfolioMetrics.totalInvestments },
@@ -157,12 +151,11 @@ export const Portfolio: FC = () => {
                     { label: 'Gross Multiple', value: `${portfolioMetrics.grossMultiple}x` },
                     { label: 'Net Multiple, Net of Carry', value: `${portfolioMetrics.netMultipleNetOfCarry}x` },
                     { label: 'Return, net of fees', value: `${portfolioMetrics.returnNetOfFees}%` },
-                    { label: '# years invested', value: portfolioMetrics.yearsInvested },
                     { label: 'IRR', value: `${portfolioMetrics.irr}%` }
                   ].map((item, idx) => (
                     <tr key={item.label} className={idx % 2 === 0 ? 'bg-gray-50 dark:bg-gray-900' : ''}>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">{item.label}</td>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-100">{item.value}</td>
+                      <td className="px-3 py-1.5 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">{item.label}</td>
+                      <td className="px-3 py-1.5 whitespace-nowrap text-sm text-right text-gray-900 dark:text-gray-100">{item.value}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -207,65 +200,74 @@ export const Portfolio: FC = () => {
                 transition={{ duration: 0.2 }}
                 className="h-32"
               >
-                <a
-                  href={company.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-full block"
-                >
-                  <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
-                    <CardContent className="h-full p-4 flex items-center justify-center relative">
-                      {company.tag && (
-                        <div className={`absolute top-0 right-0 text-white text-xs px-2 py-1 ${
-                          company.tag === 'Markup' ? 'bg-[#7343d0]' :
-                          company.tag === 'IPO' ? 'bg-blue-500' :
-                          'bg-gray-500' // Acquired
-                        }`}>
-                          {company.tag}
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
-                        <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                          {company.description}
-                        </p>
-                      </div>
-                      {!hasFailedImage ? (
-                        <div className="flex items-center justify-center w-full h-full">
-                          <div className={`relative w-full h-full flex items-center justify-center ${
-                            !hasLoadedImage ? 'blur-sm' : ''
+                {/* Wrap card with anchor tag only if not acquired */}
+                {(() => {
+                  const cardContent = (
+                    <Card className={`h-full ${company.tag !== 'Acquired' ? 'hover:shadow-lg' : ''} transition-all duration-200 bg-white dark:bg-gray-800 group`}>
+                      <CardContent className="h-full p-4 flex items-center justify-center relative">
+                        {company.tag && (
+                          <div className={`absolute top-0 right-0 text-white text-xs px-2 py-1 ${
+                            company.tag === 'Markup' ? 'bg-[#7343d0]' :
+                            company.tag === 'IPO' ? 'bg-blue-500' :
+                            'bg-gray-500' // Acquired
                           }`}>
-                            {!hasLoadedImage && (
-                              <img
-                                src={imagePaths.placeholder}
-                                alt=""
-                                className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
-                              />
-                            )}
-                            <picture>
-                              <source 
-                                srcSet={imagePaths.webp} 
-                                type="image/webp"
-                              />
-                              <img
-                                ref={imageRef(company.name)}
-                                src={imagePaths.png}
-                                alt={`${company.name} logo`}
-                                className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
-                                  ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
-                                onLoad={() => handleImageLoad(company.name)}
-                                onError={() => handleImageError(company.name)}
-                              />
-                            </picture>
+                            {company.tag}
                           </div>
+                        )}
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
+                          <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            {company.description}
+                          </p>
                         </div>
-                      ) : (
-                        <div className="text-center font-semibold">
-                          {company.name}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </a>
+                        {!hasFailedImage ? (
+                          <div className="flex items-center justify-center w-full h-full">
+                            <div className={`relative w-full h-full flex items-center justify-center ${
+                              !hasLoadedImage ? 'blur-sm' : ''
+                            }`}>
+                              {!hasLoadedImage && (
+                                <img
+                                  src={imagePaths.placeholder}
+                                  alt=""
+                                  className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
+                                />
+                              )}
+                              <picture>
+                                <source
+                                  srcSet={imagePaths.webp}
+                                  type="image/webp"
+                                />
+                                <img
+                                  ref={imageRef(company.name)}
+                                  src={imagePaths.png}
+                                  alt={`${company.name} logo`}
+                                  className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
+                                    ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
+                                  onLoad={() => handleImageLoad(company.name)}
+                                  onError={() => handleImageError(company.name)}
+                                />
+                              </picture>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="text-center font-semibold">
+                            {company.name}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  );
+
+                  return company.tag !== 'Acquired' ? (
+                    <a
+                      href={company.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="h-full block"
+                    >
+                      {cardContent}
+                    </a>
+                  ) : cardContent;
+                })()}
               </motion.div>
             );
           })}
