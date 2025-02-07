@@ -105,7 +105,6 @@ export const Portfolio: FC = () => {
     return () => observerRef.current?.disconnect();
   }, [loadedImages, failedImages]);
 
-  // Load more functionality
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -175,53 +174,107 @@ export const Portfolio: FC = () => {
                 transition={{ duration: 0.2 }}
                 className="h-32"
               >
-                <a
-                  href={company.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-full block"
-                >
-                  <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800">
-                    <CardContent className="h-full p-4 flex items-center justify-center relative">
-                      {!hasFailedImage ? (
-                        <div className="flex items-center justify-center w-full h-full">
-                          <div className={`relative w-full h-full flex items-center justify-center ${
-                            !hasLoadedImage ? 'blur-sm' : ''
-                          }`}>
-                            {/* Placeholder image (low-res, blurred) */}
-                            {!hasLoadedImage && (
-                              <img
-                                src={imagePaths.placeholder}
-                                alt=""
-                                className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
-                              />
-                            )}
-                            {/* Main image */}
-                            <picture>
-                              <source 
-                                srcSet={imagePaths.webp} 
-                                type="image/webp"
-                              />
-                              <img
-                                ref={imageRef(company.name)}
-                                src={imagePaths.png}
-                                alt={`${company.name} logo`}
-                                className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
-                                  ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
-                                onLoad={() => handleImageLoad(company.name)}
-                                onError={() => handleImageError(company.name)}
-                              />
-                            </picture>
+                {company.exited ? (
+                  <div className="h-full block relative">
+                    <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
+                      <CardContent className="h-full p-4 flex items-center justify-center relative">
+                        <div className="absolute top-0 left-0 bg-gray-500 text-white text-xs px-2 py-1">
+                          Exit
+                        </div>
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
+                          <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            {company.description}
+                          </p>
+                        </div>
+                        {!hasFailedImage ? (
+                          <div className="flex items-center justify-center w-full h-full">
+                            <div className={`relative w-full h-full flex items-center justify-center ${
+                              !hasLoadedImage ? 'blur-sm' : ''
+                            }`}>
+                              {!hasLoadedImage && (
+                                <img
+                                  src={imagePaths.placeholder}
+                                  alt=""
+                                  className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
+                                />
+                              )}
+                              <picture>
+                                <source 
+                                  srcSet={imagePaths.webp} 
+                                  type="image/webp"
+                                />
+                                <img
+                                  ref={imageRef(company.name)}
+                                  src={imagePaths.png}
+                                  alt={`${company.name} logo`}
+                                  className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
+                                    ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
+                                  onLoad={() => handleImageLoad(company.name)}
+                                  onError={() => handleImageError(company.name)}
+                                />
+                              </picture>
+                            </div>
                           </div>
+                        ) : (
+                          <div className="text-center font-semibold">
+                            {company.name}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
+                ) : (
+                  <a
+                    href={company.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-full block"
+                  >
+                    <Card className="h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
+                      <CardContent className="h-full p-4 flex items-center justify-center relative">
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
+                          <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            {company.description}
+                          </p>
                         </div>
-                      ) : (
-                        <div className="text-center font-semibold">
-                          {company.name}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </a>
+                        {!hasFailedImage ? (
+                          <div className="flex items-center justify-center w-full h-full">
+                            <div className={`relative w-full h-full flex items-center justify-center ${
+                              !hasLoadedImage ? 'blur-sm' : ''
+                            }`}>
+                              {!hasLoadedImage && (
+                                <img
+                                  src={imagePaths.placeholder}
+                                  alt=""
+                                  className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
+                                />
+                              )}
+                              <picture>
+                                <source 
+                                  srcSet={imagePaths.webp} 
+                                  type="image/webp"
+                                />
+                                <img
+                                  ref={imageRef(company.name)}
+                                  src={imagePaths.png}
+                                  alt={`${company.name} logo`}
+                                  className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
+                                    ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
+                                  onLoad={() => handleImageLoad(company.name)}
+                                  onError={() => handleImageError(company.name)}
+                                />
+                              </picture>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="text-center font-semibold">
+                            {company.name}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </a>
+                )}
               </motion.div>
             );
           })}
