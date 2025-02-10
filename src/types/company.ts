@@ -39,6 +39,7 @@ export const companies: Company[] = [
   // Fintech - sorted alphabetically
   { name: 'Backpack', url: 'https://www.backpack529.com/', category: 'Fintech', description: 'Modern 529 college savings platform making education investing accessible.' },
   { name: 'Harper', url: 'https://www.harperinsure.com/', category: 'Fintech', description: 'Digital-first insurance platform for modern businesses.' },
+  { name: 'Juno', url: 'https://juno.finance/', category: 'Fintech', description: 'the all-in-one banking platform for crypto natives' },
   { name: 'Kartera', url: 'https://www.kartera.com', category: 'Fintech', description: 'Digital asset management platform for institutional investors.' },
   { name: 'Keep', url: 'http://trykeep.com/', category: 'Fintech', description: 'All-in-one banking for any business' },
   { name: 'Maridea', url: 'https://marideawealth.com/', category: 'Fintech', description: 'Wealth management platform for high-net-worth individuals.', tag: 'Markup' },
@@ -57,7 +58,6 @@ export const companies: Company[] = [
   { name: 'RPM', url: 'https://rpmtraining.com/', category: 'Health', description: 'At-home fitness programming combining functional movement with high-intensity training.', tag: 'Acquired' },
 
   // Retail - sorted alphabetically
-  { name: 'Juno', url: 'https://www.juno.com/', category: 'Retail', description: 'Direct-to-consumer wine club focused on natural and sustainable wines.' },
   { name: 'Juneshine', url: 'https://www.juneshine.com', category: 'Retail', description: 'Premium hard kombucha brewed with real organic ingredients and probiotics.', tag: 'Markup' },
   { name: 'Lunar', url: 'https://drinklunar.com', category: 'Retail', description: 'Asian-inspired hard seltzer celebrating authentic flavors and cultural heritage.' },
   { name: 'Moku', url: 'https://mokufoods.com/', category: 'Retail', description: 'Plant-based jerky made from mushrooms, offering a sustainable protein alternative.', tag: 'Markup' },
