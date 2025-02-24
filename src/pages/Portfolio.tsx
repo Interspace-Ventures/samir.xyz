@@ -7,10 +7,11 @@ import { RevealOnScroll } from "../components/RevealOnScroll";
 // Sort categories alphabetically with "All" first, then "Fintech"
 const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
 
-// Simple image path function
+// Simple image path function with cache busting
 const getImagePath = (companyName: string): string => {
   const formatName = (name: string) => name.replace(/[^\w\s-]/g, '').trim();
-  return `/assets/images/logos/${formatName(companyName)}.png`;
+  // Add timestamp to force browser to fetch new version
+  return `/assets/images/logos/${formatName(companyName)}.png?v=${Date.now()}`;
 };
 
 // Sort companies alphabetically by default
