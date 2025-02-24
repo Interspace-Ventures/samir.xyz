@@ -26,7 +26,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // Serve static files from the build directory
-app.use(express.static(path.join(__dirname, '../build')));
+const staticPath = path.join(__dirname, '../build');
+console.log(`Static files being served from: ${staticPath}`);
+app.use(express.static(staticPath));
 
 // SPA fallback - this should be after static file middleware
 app.get('*', (_req: Request, res: Response) => {
@@ -34,6 +36,6 @@ app.get('*', (_req: Request, res: Response) => {
 });
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Production server running on port ${port}`);
-  console.log(`Static files being served from: ${path.join(__dirname, '../build')}`);
+  console.log(`Server is listening on port ${port}`);
+  console.log(`Static files served from ${staticPath}`);
 });
