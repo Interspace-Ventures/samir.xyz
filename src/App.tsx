@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { Switch, Route } from "wouter";
-import { Layout } from "./components/Layout";
+import { Layout } from "./components/layout/Layout";
 import { Profile } from "./pages/Profile";
 import { Portfolio } from "./pages/Portfolio";
-import { NotFound } from "./components/NotFound";
+import { NotFound } from "./components/layout/NotFound";
 
 const App: FC = () => (
   <Layout>

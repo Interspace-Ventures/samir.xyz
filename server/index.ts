@@ -24,7 +24,7 @@ async function createServer() {
   // SPA fallback
   app.use('*', async (req, res) => {
     const url = req.originalUrl;
-    const indexHtml = resolve(__dirname, '../index.html');
+    const indexHtml = resolve(__dirname, '../public/index.html');
     res.sendFile(indexHtml);
   });
 
