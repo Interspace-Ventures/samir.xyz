@@ -9,7 +9,7 @@ const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fi
 
 // Simple image path function - no cache busting or transforms
 const getImagePath = (companyName: string): string => {
-  return `/public/assets/images/logos/${companyName}.png`;
+  return `/assets/images/logos/${companyName}.png`;
 };
 
 // Sort companies alphabetically by default
