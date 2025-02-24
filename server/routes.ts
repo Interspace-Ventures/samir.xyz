@@ -8,12 +8,11 @@ export function registerRoutes(app: Express): Server {
   // Enable compression for all requests
   app.use(compression());
 
-  // Serve static files from public directory with caching headers
+  // Serve static files from public directory with updated caching headers
   const staticOptions = {
-    maxAge: '1d',
+    maxAge: '0',  // Disable caching temporarily while we update images
     etag: true,
     lastModified: true,
-    immutable: true,
     fallthrough: true,
   };
 
@@ -28,10 +27,9 @@ export function registerRoutes(app: Express): Server {
         } else if (filePath.endsWith('.png')) {
           res.setHeader('Content-Type', 'image/png');
         }
-        // Enable CORS for assets
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        // Cache control
-        res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
+        // Force revalidation of assets
+        res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
       }
     }),
     (err: any, _req: express.Request, res: express.Response, next: express.NextFunction) => {
