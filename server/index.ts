@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Run the build process first
-console.log('Building the application...');
+console.log('Starting build process...');
 try {
   execSync('npm run build', { stdio: 'inherit' });
   console.log('Build completed successfully!');
