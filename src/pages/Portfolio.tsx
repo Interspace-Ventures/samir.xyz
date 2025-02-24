@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef, type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
 import { companies, categories, portfolioMetrics, type CompanyCategory } from "../types/company";
-import { RevealOnScroll } from "../components/RevealOnScroll";
+import { RevealOnScroll } from "../components/ui/RevealOnScroll";
 
 // Sort categories alphabetically with "All" first, then "Fintech"
 const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
 
 // Simple image path function - no cache busting or transforms
 const getImagePath = (companyName: string): string => {
-  return `/assets/images/logos/${companyName}.png`;
+  return `/public/assets/images/logos/${companyName}.png`;
 };
 
 // Sort companies alphabetically by default

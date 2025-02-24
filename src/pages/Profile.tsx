@@ -1,5 +1,5 @@
 import React, { type FC, useState } from "react";
-import { RevealOnScroll } from "../components/RevealOnScroll";
+import { RevealOnScroll } from "../components/ui/RevealOnScroll";
 import { Skeleton } from "../components/ui/skeleton";
 
 export const Profile: FC = () => {
@@ -45,7 +45,7 @@ export const Profile: FC = () => {
                 {!imageError ? (
                   <div className={`relative w-full h-full ${imageLoadingHighRes ? 'blur-sm' : ''} transition-all duration-300`}>
                     <img
-                      src="/assets/images/profile/samir-profile-photo-placeholder.png"
+                      src="/public/assets/images/profile/samir-profile-photo-placeholder.png"
                       alt=""
                       className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[6px] transition-all duration-300 ease-in-out
                         ${imageLoading ? 'opacity-0' : imageLoadingHighRes ? 'opacity-100' : 'opacity-0'}`}
@@ -54,11 +54,11 @@ export const Profile: FC = () => {
                     />
                     <picture>
                       <source 
-                        srcSet="/assets/images/profile/samir-profile-photo.webp"
+                        srcSet="/public/assets/images/profile/samir-profile-photo.webp"
                         type="image/webp" 
                       />
                       <img 
-                        src="/assets/images/profile/samir-profile-photo.png"
+                        src="/public/assets/images/profile/samir-profile-photo.png"
                         alt="Profile" 
                         className={`absolute inset-0 w-full h-full rounded-full border-2 border-[#7343d0] object-cover p-[6px] transition-all duration-300 ease-in-out
                           ${imageLoadingHighRes ? 'opacity-0' : 'opacity-100'}`}
