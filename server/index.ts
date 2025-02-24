@@ -21,11 +21,9 @@ async function createServer() {
   // Serve static files from public directory
   app.use('/assets', express.static(resolve(__dirname, '../public/assets')));
 
-  // SPA fallback
+  // SPA fallback - serve index.html from public directory
   app.use('*', async (req, res) => {
-    const url = req.originalUrl;
-    const indexHtml = resolve(__dirname, '../public/index.html');
-    res.sendFile(indexHtml);
+    res.sendFile(resolve(__dirname, '../public/index.html'));
   });
 
   const port = Number(process.env.PORT) || 5000;
