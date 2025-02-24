@@ -6,16 +6,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
-// Serve static files from the dist/public directory
-app.use(express.static(path.join(__dirname, '../dist/public')));
+// Add logging middleware to debug static file serving
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
 
-// SPA fallback
+// Serve static files from the build directory
+app.use(express.static(path.join(__dirname, '../build')));
+
+// SPA fallback - this should be after static file middleware
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/public/index.html'));
+  res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Production server running on port ${port}`);
+  console.log(`Static files being served from: ${path.join(__dirname, '../build')}`);
 });
