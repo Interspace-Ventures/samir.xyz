@@ -20,7 +20,7 @@ export default defineConfig({
     },
   },
   root: path.resolve(__dirname, "..", "client"),
-  publicDir: "public",
+  publicDir: path.resolve(__dirname, "..", "public"),
   build: {
     outDir: path.resolve(__dirname, "..", "build"),
     emptyOutDir: true,
@@ -49,6 +49,6 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 5000,
+    port: 5000
   }
 });
