@@ -1,26 +1,16 @@
 import React, { useState, useEffect, useRef, type FC } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { AnimatePresence, motion } from "framer-motion";
-import { companies, categories, portfolioMetrics, type CompanyCategory, type CompanyTag } from "../types/company";
+import { companies, categories, portfolioMetrics, type CompanyCategory } from "../types/company";
 import { RevealOnScroll } from "../components/RevealOnScroll";
-import { Skeleton } from "../components/ui/skeleton";
 
 // Sort categories alphabetically with "All" first, then "Fintech"
 const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
 
-// Update the getImagePaths function to handle case-sensitive paths
-const getImagePaths = (companyName: string): { webp: string; png: string; placeholder: string } => {
-  // Function to preserve exact case and spacing, only replace invalid characters
-  const formatName = (name: string) => {
-    return name.replace(/[^\w\s-]/g, '').trim();
-  };
-
-  const baseName = formatName(companyName);
-  return {
-    webp: `/assets/images/logos/${baseName}.webp`,
-    png: `/assets/images/logos/${baseName}.png`,
-    placeholder: `/assets/images/logos/${baseName}-placeholder.png`
-  };
+// Simple image path function
+const getImagePath = (companyName: string): string => {
+  const formatName = (name: string) => name.replace(/[^\w\s-]/g, '').trim();
+  return `/assets/images/logos/${formatName(companyName)}.png`;
 };
 
 // Sort companies alphabetically by default
@@ -29,18 +19,13 @@ const sortedCompanies = [...companies].sort((a, b) => a.name.localeCompare(b.nam
 export const Portfolio: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<CompanyCategory | 'All'>('All');
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
-  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const [displayCount, setDisplayCount] = useState(12);
   const [isMobile, setIsMobile] = useState(false);
-  const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
-  const imageRefs = useRef<Map<string, HTMLImageElement>>(new Map());
 
   // Detect mobile viewport
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -52,58 +37,6 @@ export const Portfolio: FC = () => {
     : sortedCompanies.filter(company => company.category === selectedCategory);
 
   const displayedCompanies = filteredCompanies.slice(0, displayCount);
-
-  const handleImageError = (companyName: string) => {
-    console.error(`Failed to load image for ${companyName}`);
-    setFailedImages(prev => new Set([...prev, companyName]));
-  };
-
-  const handleImageLoad = (companyName: string) => {
-    setLoadedImages(prev => new Set([...prev, companyName]));
-  };
-
-  const imageRef = (companyName: string) => (element: HTMLImageElement | null) => {
-    if (element) {
-      imageRefs.current.set(companyName, element);
-      element.dataset.company = companyName;
-      observerRef.current?.observe(element);
-    } else {
-      imageRefs.current.delete(companyName);
-    }
-  };
-
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const img = entry.target as HTMLImageElement;
-            const companyName = img.dataset.company;
-            if (companyName && !loadedImages.has(companyName) && !failedImages.has(companyName)) {
-              const paths = getImagePaths(companyName);
-              // Start with placeholder
-              const placeholderImg = new Image();
-              placeholderImg.src = paths.placeholder;
-              // Then load WebP with PNG fallback
-              const webpImage = new Image();
-              webpImage.src = paths.webp;
-              webpImage.onload = () => handleImageLoad(companyName);
-              webpImage.onerror = () => {
-                const pngImage = new Image();
-                pngImage.src = paths.png;
-                pngImage.onload = () => handleImageLoad(companyName);
-                pngImage.onerror = () => handleImageError(companyName);
-              };
-              observerRef.current?.unobserve(img);
-            }
-          }
-        });
-      },
-      { rootMargin: '200px 0px', threshold: 0.1 }
-    );
-
-    return () => observerRef.current?.disconnect();
-  }, [loadedImages, failedImages]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -187,8 +120,6 @@ export const Portfolio: FC = () => {
         <AnimatePresence mode="popLayout">
           {displayedCompanies.map((company) => {
             const hasLoadedImage = loadedImages.has(company.name);
-            const hasFailedImage = failedImages.has(company.name);
-            const imagePaths = getImagePaths(company.name);
 
             return (
               <motion.div
@@ -218,40 +149,16 @@ export const Portfolio: FC = () => {
                             {company.description}
                           </p>
                         </div>
-                        {!hasFailedImage ? (
-                          <div className="flex items-center justify-center w-full h-full">
-                            <div className={`relative w-full h-full flex items-center justify-center ${
-                              !hasLoadedImage ? 'blur-sm' : ''
-                            }`}>
-                              {!hasLoadedImage && (
-                                <img
-                                  src={imagePaths.placeholder}
-                                  alt=""
-                                  className="absolute inset-0 w-auto h-auto max-h-[100px] max-w-[280px] object-contain"
-                                />
-                              )}
-                              <picture>
-                                <source
-                                  srcSet={imagePaths.webp}
-                                  type="image/webp"
-                                />
-                                <img
-                                  ref={imageRef(company.name)}
-                                  src={imagePaths.png}
-                                  alt={`${company.name} logo`}
-                                  className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
-                                    ${hasLoadedImage ? 'opacity-100' : 'opacity-0'}`}
-                                  onLoad={() => handleImageLoad(company.name)}
-                                  onError={() => handleImageError(company.name)}
-                                />
-                              </picture>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="text-center font-semibold text-gray-900 dark:text-gray-900">
-                            {company.name}
-                          </div>
-                        )}
+                        <div className="flex items-center justify-center w-full h-full">
+                          <img
+                            src={getImagePath(company.name)}
+                            alt={`${company.name} logo`}
+                            className={`w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-opacity duration-500 ${
+                              hasLoadedImage ? 'opacity-100' : 'opacity-0'
+                            }`}
+                            onLoad={() => setLoadedImages(prev => new Set([...prev, company.name]))}
+                          />
+                        </div>
                       </CardContent>
                     </Card>
                   );
