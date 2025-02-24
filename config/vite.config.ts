@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -8,11 +7,28 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Custom plugin for asset and 404 logging
+const assetLoggingPlugin = () => ({
+  name: 'asset-logging',
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      const handleResponse = () => {
+        if (res.statusCode === 404) {
+          console.warn(`[Asset Not Found] ${req.url}`);
+        }
+      };
+      res.on('finish', handleResponse);
+      next();
+    });
+  }
+});
+
+// Simplified configuration focused on portfolio site needs
 export default defineConfig({
   plugins: [
     react(),
     runtimeErrorOverlay(),
-    themePlugin({ themeFile: path.resolve(__dirname, "..", "theme.json") })
+    assetLoggingPlugin()
   ],
   resolve: {
     alias: {
@@ -25,34 +41,25 @@ export default defineConfig({
   },
   root: path.resolve(__dirname, ".."),
   publicDir: path.resolve(__dirname, "..", "public"),
+  server: {
+    host: "0.0.0.0",
+    port: 5000,
+    strictPort: true,
+    // Add SPA fallback for client-side routing
+    proxy: {},
+    middlewareMode: false,
+    // Add proper SPA fallback
+    fs: {
+      strict: true,
+      allow: ['..']
+    }
+  },
   build: {
     outDir: path.resolve(__dirname, "..", "build"),
     emptyOutDir: true,
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, "..", "index.html"),
-      },
-      output: {
-        assetFileNames: (assetInfo) => {
-          if (!assetInfo.name) return 'assets/[name]-[hash][extname]';
-          const info = assetInfo.name.split('.');
-          const extType = info[info.length - 1];
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            return `assets/images/[name]-[hash][extname]`;
-          }
-          if (/css/i.test(extType)) {
-            return `assets/css/[name]-[hash][extname]`;
-          }
-          return `assets/[name]-[hash][extname]`;
-        },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-      },
-    },
-    sourcemap: true
+    sourcemap: true,
+    reportCompressedSize: true,
+    chunkSizeWarningLimit: 1000
   },
-  server: {
-    host: '0.0.0.0',
-    port: 5000
-  }
+  logLevel: "info"
 });
