@@ -200,11 +200,10 @@ export const Portfolio: FC = () => {
                 transition={{ duration: 0.2 }}
                 className="h-32"
               >
-                {/* Wrap card with anchor tag only if not acquired */}
                 {(() => {
                   const cardContent = (
-                    <Card className={`h-full ${company.tag !== 'Acquired' ? 'hover:shadow-lg' : ''} transition-all duration-200 bg-white dark:bg-gray-800 group`}>
-                      <CardContent className="h-full p-4 flex items-center justify-center relative">
+                    <Card className={`h-full ${company.tag !== 'Acquired' ? 'hover:shadow-lg' : ''} transition-all duration-200 !bg-white dark:!bg-white group`}>
+                      <CardContent className="h-full p-4 flex items-center justify-center relative !bg-white dark:!bg-white">
                         {company.tag && (
                           <div className={`absolute top-0 right-0 text-white text-xs px-2 py-1 ${
                             company.tag === 'Markup' ? 'bg-[#7343d0]' :
@@ -214,7 +213,7 @@ export const Portfolio: FC = () => {
                             {company.tag}
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200 flex items-center justify-center z-20">
                           <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                             {company.description}
                           </p>
@@ -249,7 +248,7 @@ export const Portfolio: FC = () => {
                             </div>
                           </div>
                         ) : (
-                          <div className="text-center font-semibold">
+                          <div className="text-center font-semibold text-gray-900 dark:text-gray-900">
                             {company.name}
                           </div>
                         )}
