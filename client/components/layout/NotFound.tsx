@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useLocation } from 'wouter';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
+import { Card } from '../ui/card';
+import { Button } from '../ui/button';
 import { AlertCircle, Home, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 
