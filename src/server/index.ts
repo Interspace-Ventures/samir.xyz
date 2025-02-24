@@ -24,10 +24,17 @@ app.use((req, res, next) => {
   next();
 });
 
-// Configure proper MIME types for WebP images
+// Configure proper MIME types and disable caching for images
 app.use((req, res, next) => {
-  if (req.path.endsWith('.webp')) {
-    res.type('image/webp');
+  if (req.path.includes('/assets/images/')) {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    if (req.path.endsWith('.webp')) {
+      res.type('image/webp');
+    } else if (req.path.endsWith('.png')) {
+      res.type('image/png');
+    }
   }
   next();
 });
@@ -45,23 +52,11 @@ app.use((req, res, next) => {
 
   // Important: Setup static file serving first
   app.use('/assets', express.static(path.join(process.cwd(), 'public', 'assets'), {
-    maxAge: '1d',
-    etag: true,
-    lastModified: true,
-    immutable: true,
+    maxAge: '0',
+    etag: false,
+    lastModified: false,
+    immutable: false,
     fallthrough: true,
-    setHeaders: (res, filePath) => {
-      // Set proper MIME types
-      if (filePath.endsWith('.webp')) {
-        res.setHeader('Content-Type', 'image/webp');
-      } else if (filePath.endsWith('.png')) {
-        res.setHeader('Content-Type', 'image/png');
-      }
-      // Enable CORS for assets
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      // Cache control
-      res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
-    }
   }));
 
   // Setup Vite or serve static files based on environment
@@ -78,8 +73,6 @@ app.use((req, res, next) => {
       return next();
     }
 
-    // In development, use the source index.html
-    // In production, use the built index.html
     const indexPath = app.get("env") === "development" 
       ? path.join(process.cwd(), 'src', 'index.html')
       : path.join(process.cwd(), 'dist', 'public', 'index.html');
@@ -92,13 +85,11 @@ app.use((req, res, next) => {
     });
   });
 
-  // Always serve on port 5000
   const PORT = Number(process.env.PORT || 5000);
   const server_instance = server.listen(PORT, "0.0.0.0", () => {
     log(`Server running at http://0.0.0.0:${PORT}`);
   });
 
-  // Enable graceful shutdown
   process.on('SIGTERM', () => {
     server_instance.close(() => {
       console.log('Server closed');
