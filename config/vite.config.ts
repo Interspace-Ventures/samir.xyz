@@ -9,7 +9,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-  plugins: [react(), runtimeErrorOverlay(), themePlugin()],
+  plugins: [
+    react(),
+    runtimeErrorOverlay(),
+    themePlugin({ themeFile: path.resolve(__dirname, "..", "theme.json") })
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "..", "client"),
@@ -19,14 +23,14 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "..", "public", "assets")
     },
   },
-  root: path.resolve(__dirname, "..", "client"),
+  root: path.resolve(__dirname, ".."),
   publicDir: path.resolve(__dirname, "..", "public"),
   build: {
     outDir: path.resolve(__dirname, "..", "build"),
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "..", "public", "index.html"),
+        main: path.resolve(__dirname, "..", "index.html"),
       },
       output: {
         assetFileNames: (assetInfo) => {
