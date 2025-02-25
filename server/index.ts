@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express, { Express, Request, Response } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -10,11 +10,14 @@ const app: Express = express();
 const port = process.env.PORT || 3000;
 
 // In development, we don't need to build - Vite's dev server handles it
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   console.log('Starting Vite dev server...');
   try {
-    // Start Vite's dev server directly
-    execSync('npx vite', { stdio: 'inherit' });
+    // Force development mode
+    process.env.NODE_ENV = 'development';
+    // Start Vite's dev server directly with port 5000
+    console.log('Starting fast dev server on port 5000...');
+    execSync('npx vite --port 5000 --host 0.0.0.0', { stdio: 'inherit' });
   } catch (error) {
     console.error('Failed to start Vite dev server:', error);
     process.exit(1);
@@ -30,17 +33,6 @@ if (process.env.NODE_ENV === 'development') {
     process.exit(1);
   }
 
-  // Simplified logging middleware
-  app.use((req: Request, res: Response, next: NextFunction) => {
-    // Only log CSS 404s to help debug styling issues
-    res.on('finish', () => {
-      if (req.url.endsWith('.css') && res.statusCode === 404) {
-        console.warn(`[CSS 404] ${req.url}`);
-      }
-    });
-    next();
-  });
-
   // Serve static files from the build directory
   const staticPath = path.join(__dirname, '../build');
   app.use(express.static(staticPath));
@@ -51,7 +43,6 @@ if (process.env.NODE_ENV === 'development') {
   });
 
   app.listen(port, '0.0.0.0', () => {
-    console.log(`Server is listening on port ${port}`);
-    console.log(`Static files served from ${staticPath}`);
+    console.log(`Production server is running on port ${port}`);
   });
 }
