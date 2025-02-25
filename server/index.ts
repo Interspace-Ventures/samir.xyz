@@ -17,7 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
     process.env.NODE_ENV = 'development';
     // Start Vite's dev server directly with port 5000
     console.log('Starting fast dev server on port 5000...');
-    execSync('npx vite --port 5000 --host 0.0.0.0', { stdio: 'inherit' });
+    execSync('npx vite --port 5000 --host 0.0.0.0 --strictPort', { stdio: 'inherit' });
   } catch (error) {
     console.error('Failed to start Vite dev server:', error);
     process.exit(1);
