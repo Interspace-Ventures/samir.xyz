@@ -9,8 +9,34 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
+// Custom plugin for asset and 404 logging
+const assetLoggingPlugin = () => ({
+  name: 'asset-logging',
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      console.log(`[Request] ${req.url}`);
+      const handleResponse = () => {
+        if (res.statusCode === 404) {
+          console.warn(`[Asset Not Found] ${req.url}`);
+        }
+      };
+      res.on('finish', handleResponse);
+      next();
+    });
+  }
+});
+
 export default defineConfig({
-  plugins: [react(), runtimeErrorOverlay(), themePlugin()],
+  // Add explicit base URL
+  base: '/',
+
+  plugins: [
+    react(), 
+    runtimeErrorOverlay(), 
+    themePlugin(),
+    assetLoggingPlugin()
+  ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname),
@@ -20,16 +46,18 @@ export default defineConfig({
       "@assets": path.resolve(rootDir, "public/assets")
     },
   },
-  root: __dirname,
+
+  // Set explicitly to root dir and not client dir for proper file resolution
+  root: rootDir,
   publicDir: path.resolve(rootDir, 'public'),
+
   build: {
-    outDir: path.resolve(rootDir, "dist/public"),
+    outDir: path.resolve(rootDir, "build"),
     emptyOutDir: true,
     sourcemap: true,
-    manifest: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "index.html"),
+        main: path.resolve(rootDir, "index.html"),
       },
       output: {
         assetFileNames: (assetInfo) => {
@@ -48,6 +76,7 @@ export default defineConfig({
       },
     },
   },
+
   server: {
     host: '0.0.0.0',
     port: 5000,
