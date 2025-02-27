@@ -16,7 +16,7 @@ externalPort = 5000
 run = ["sh", "-c", "npm run dev"]
 
 [workflows]
-runButton = "Project"
+runButton = "Start application"
 
 [[workflows.workflow]]
 name = "Project"
@@ -40,3 +40,14 @@ task = "packager.installForAll"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "echo 'Proposing workflow creation' && cat .replit"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
