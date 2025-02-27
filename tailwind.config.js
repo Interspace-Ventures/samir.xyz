@@ -3,8 +3,7 @@ export default {
   darkMode: ["class"],
   content: [
     "./client/**/*.{js,jsx,ts,tsx}",
-    "./index.html",
-    "./client/index.html"
+    "./index.html"
   ],
   theme: {
     container: {
