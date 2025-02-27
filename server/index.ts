@@ -8,8 +8,7 @@ const __dirname = path.dirname(__filename);
 console.log('Starting Vite development server...');
 
 // Use spawn instead of exec to keep the process running
-// Explicitly point to the client/vite.config.ts file
-const vite = spawn('npx', ['vite', '--config', path.resolve(__dirname, '..', 'client', 'vite.config.ts')], {
+const vite = spawn('npx', ['vite'], {
   stdio: 'inherit',
   shell: true,
   cwd: path.resolve(__dirname, '..')
