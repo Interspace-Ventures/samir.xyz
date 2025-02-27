@@ -80,7 +80,7 @@ export const companies: Company[] = [
     url: "https://juneshine.com",
     category: "Health",
     description: "Hard kombucha and spirits",
-    tag: "IPO"
+    tag: "Markup" 
   },
   {
     name: "Juno",
@@ -171,7 +171,7 @@ export const companies: Company[] = [
     url: "https://rpm.com",
     category: "Health",
     description: "Virtual physical therapy",
-    tag: "IPO"
+    tag: "Markup" 
   },
   {
     name: "Sanzo",
@@ -241,7 +241,7 @@ export const companies: Company[] = [
     url: "https://thefoodcompany.com",
     category: "Commerce",
     description: "Sustainable food production",
-    tag: "IPO"
+    tag: "Markup" 
   },
   {
     name: "Waldo",
@@ -252,9 +252,10 @@ export const companies: Company[] = [
   }
 ];
 
+// Updated metrics with correctly counted markups
 export const portfolioMetrics = {
   totalInvestments: 34,
-  markups: 26,
+  markups: 28, 
   busts: 3,
   tvpi: 2.8,
   grossMultiple: 3.2,
