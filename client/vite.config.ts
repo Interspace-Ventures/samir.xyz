@@ -92,14 +92,15 @@ export default defineConfig({
     },
     cors: true,
     strictPort: true,
-    // Configure to allow Replit domains
+    // Configure to allow Replit domains - explicitly adding the current domain
     allowedHosts: [
       'localhost',
       '127.0.0.1',
       'd2193f08-b592-45ce-b730-8dc2c7ef133c-00-1f1txs3yeigba.janeway.replit.dev',
       '.replit.dev',
       '.repl.co',
-      '.repl.run'
+      '.repl.run',
+      'all', // This ensures all hosts are allowed as a fallback
     ],
     fs: {
       strict: false,
