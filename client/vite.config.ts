@@ -80,6 +80,22 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5000,
+    // Add allowedHosts configuration to include Replit domains
+    hmr: {
+      clientPort: 443,
+      host: 'localhost',
+    },
+    cors: true,
+    strictPort: true,
+    // Configure to allow Replit domains
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'd2193f08-b592-45ce-b730-8dc2c7ef133c-00-1f1txs3yeigba.janeway.replit.dev',
+      '.replit.dev',
+      '.repl.co',
+      '.repl.run'
+    ],
     fs: {
       strict: false,
       allow: ['.']
