@@ -7,6 +7,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "./components/ui/toaster";
 import App from './App';
 import "./index.css";
+console.log("CSS imported successfully - checking if styles are applied"); 
 
 // Additional debug logging
 console.log("Loading React application components...");
