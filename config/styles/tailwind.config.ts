@@ -2,7 +2,11 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./src/index.html"],
+  content: [
+    "../../client/**/*.{js,jsx,ts,tsx}",
+    "../../index.html",
+    "../../client/index.html"
+  ],
   theme: {
     screens: {
       'xs': '375px',
