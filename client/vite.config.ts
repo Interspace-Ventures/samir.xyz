@@ -51,6 +51,11 @@ export default defineConfig({
   root: rootDir,
   publicDir: path.resolve(rootDir, 'public'),
 
+  // Add this CSS configuration to explicitly point to our PostCSS config
+  css: {
+    postcss: path.resolve(rootDir, "postcss.config.js")
+  },
+
   build: {
     outDir: path.resolve(rootDir, "build"),
     emptyOutDir: true,
