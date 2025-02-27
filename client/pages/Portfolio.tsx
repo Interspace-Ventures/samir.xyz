@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { companies, categories, portfolioMetrics, type CompanyCategory } from "../types/company";
 import { RevealOnScroll } from "../components/ui/RevealOnScroll";
 
-// Sort categories alphabetically with "All" first, then "Fintech"
-const displayCategories = ['All', 'Fintech', ...categories.filter(c => c !== 'Fintech').sort()] as const;
+// Maintain the original order with "All" first
+const displayCategories = ['All', ...categories] as const;
 
 // Simple image path function - no cache busting or transforms
 const getImagePath = (companyName: string): string => {
@@ -156,6 +156,11 @@ export const Portfolio: FC = () => {
                               hasLoadedImage ? 'opacity-100' : 'opacity-0'
                             }`}
                             onLoad={() => setLoadedImages(prev => new Set([...prev, company.name]))}
+                            onError={(e) => {
+                              console.warn(`Failed to load logo for ${company.name}`);
+                              // Keep the element in the DOM but make it transparent
+                              e.currentTarget.style.display = 'none';
+                            }}
                           />
                         </div>
                       </CardContent>
