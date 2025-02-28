@@ -42,9 +42,7 @@ export function Layout({ children }: { children: ReactNode }) {
             {/* Logo/Brand */}
             <Link 
               href="/" 
-              className={`text-lg md:text-xl whitespace-nowrap font-bold ${
-                isDark ? 'text-white' : 'text-black'
-              } hover:text-[#7343d0] transition-colors duration-200`}
+              className="text-lg md:text-xl whitespace-nowrap font-bold bg-gradient-to-r from-purple-600 to-blue-600 text-transparent bg-clip-text hover:from-purple-500 hover:to-blue-500 transition-all duration-200"
             >
               Hey - I'm Samir
             </Link>
@@ -71,10 +69,10 @@ export function Layout({ children }: { children: ReactNode }) {
             {/* Desktop navigation - Adjusted spacing and text sizes */}
             <div className="hidden sm:flex items-center space-x-3 md:space-x-4 lg:space-x-6">
               <Link 
-                href="/profile" 
+                href="/about" 
                 className={`nav-link text-xs sm:text-sm md:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200 px-1.5 py-1`}
               >
-                Profile
+                About
               </Link>
               <Link 
                 href="/portfolio" 
@@ -82,22 +80,12 @@ export function Layout({ children }: { children: ReactNode }) {
               >
                 Portfolio
               </Link>
-              <a 
-                href="https://interspace.samir.xyz/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={`nav-link text-xs sm:text-sm md:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors duration-200 px-1.5 py-1`}
+              <Link 
+                href="/ventures" 
+                className={`nav-link text-xs sm:text-sm md:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] transition-colors duration-200 px-1.5 py-1`}
               >
-                Interspace <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4" />
-              </a>
-              <a 
-                href="https://perspectives.samir.xyz/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className={`nav-link text-xs sm:text-sm md:text-base uppercase ${isDark ? 'text-white' : 'text-black'} hover:text-[#7343d0] inline-flex items-center gap-1 transition-colors duration-200 px-1.5 py-1`}
-              >
-                Perspectives <ArrowUpRight className="w-3 h-3 md:w-4 md:h-4" />
-              </a>
+                Ventures
+              </Link>
               <button 
                 onClick={toggleTheme} 
                 className={`p-1.5 rounded-md transition-colors ${isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'}`}
@@ -117,13 +105,13 @@ export function Layout({ children }: { children: ReactNode }) {
           >
             <div className="py-3 space-y-1.5">
               <Link
-                href="/profile"
+                href="/about"
                 onClick={() => setIsOpen(false)}
                 className={`block w-full py-2 px-3 text-sm rounded-md transition-colors ${
                   isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'
                 }`}
               >
-                Profile
+                About
               </Link>
               <Link
                 href="/portfolio"
@@ -134,34 +122,15 @@ export function Layout({ children }: { children: ReactNode }) {
               >
                 Portfolio
               </Link>
-              <a
-                href="https://interspace.samir.xyz/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/ventures"
+                onClick={() => setIsOpen(false)}
                 className={`block w-full py-2 px-3 text-sm rounded-md transition-colors ${
                   isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'
                 }`}
-                onClick={() => setIsOpen(false)}
               >
-                <span className="flex items-center justify-between">
-                  Interspace
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
-              </a>
-              <a
-                href="https://perspectives.samir.xyz/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`block w-full py-2 px-3 text-sm rounded-md transition-colors ${
-                  isDark ? 'text-white hover:bg-gray-800' : 'text-black hover:bg-gray-100'
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                <span className="flex items-center justify-between">
-                  Perspectives
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
-              </a>
+                Ventures
+              </Link>
             </div>
           </div>
         </div>
@@ -174,7 +143,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <footer className={`py-8 mt-12 border-t ${isDark ? 'border-gray-800' : 'border-gray-100'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            © Interspace Ventures 2025. Built with{' '}
+            © <Link href="/ventures" className="text-[#7343d0] hover:text-[#5f35b5] font-medium transition-colors">Interspace Ventures</Link> 2025. Built with{' '}
             <a 
               href="https://www.replit.com" 
               target="_blank" 
