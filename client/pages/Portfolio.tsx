@@ -138,7 +138,7 @@ export const Portfolio: FC = () => {
                           <div className={`absolute top-0 right-0 text-white text-xs px-2 py-1 ${
                             company.tag === 'Markup' ? 'bg-[#7343d0]' :
                             company.tag === 'IPO' ? 'bg-blue-500' :
-                            'bg-gray-500' // Acquired
+                            company.tag === 'Acquired' ? 'bg-gray-500' : ''
                           }`}>
                             {company.tag}
                           </div>
