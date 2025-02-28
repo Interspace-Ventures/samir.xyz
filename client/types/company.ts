@@ -1,5 +1,5 @@
-export type CompanyCategory = 'Fintech' | 'AI' | 'Infrastructure' | 'Developer Tools' | 'Enterprise' | 'Crypto' | 'Commerce' | 'Health';
-export type CompanyTag = 'Markup' | 'IPO' | 'Acquired' | undefined;
+export type CompanyCategory = 'Health' | 'SaaS' | 'Retail' | 'Fintech';
+export type CompanyTag = 'Markup' | 'Acquired' | 'IPO';
 
 export interface Company {
   name: string;
@@ -9,48 +9,39 @@ export interface Company {
   tag?: CompanyTag;
 }
 
-export const categories: CompanyCategory[] = ['Fintech', 'AI', 'Infrastructure', 'Developer Tools', 'Enterprise', 'Crypto', 'Commerce', 'Health'];
+export const categories: CompanyCategory[] = ['Health', 'SaaS', 'Retail', 'Fintech'];
 
 export const companies: Company[] = [
   {
     name: "Afar",
     url: "https://afar.io",
-    category: "Infrastructure",
-    description: "Remote access infrastructure",
-    tag: "Markup"
+    category: "Health",
+    description: "Remote access infrastructure"
   },
   {
     name: "AON3D",
     url: "https://aon3d.com",
-    category: "Enterprise",
+    category: "SaaS",
     description: "Industrial 3D printing solutions",
     tag: "Markup"
   },
   {
     name: "Aura",
     url: "https://aura.com",
-    category: "Fintech",
+    category: "Health",
     description: "All-in-one digital security",
     tag: "Markup"
   },
   {
     name: "Backpack",
     url: "https://backpack.app",
-    category: "Crypto",
-    description: "Crypto wallet and exchange",
-    tag: "Markup"
-  },
-  {
-    name: "CaliberX",
-    url: "https://caliberx.com",
     category: "Fintech",
-    description: "Financial optimization platform",
-    tag: "Markup"
+    description: "Crypto wallet and exchange"
   },
   {
     name: "GEM",
     url: "https://gem.co",
-    category: "Crypto",
+    category: "Health",
     description: "Cryptocurrency investment platform",
     tag: "Markup"
   },
@@ -58,155 +49,135 @@ export const companies: Company[] = [
     name: "Goodmylk",
     url: "https://goodmylk.co",
     category: "Health",
-    description: "Plant-based dairy alternatives",
-    tag: "Markup"
+    description: "Plant-based dairy alternatives"
   },
   {
     name: "Harper",
     url: "https://harper.io",
-    category: "Developer Tools",
-    description: "Developer productivity platform",
-    tag: "Acquired"
+    category: "Fintech",
+    description: "Developer productivity platform"
   },
   {
     name: "Hedgehog",
     url: "https://hedgehog.app",
-    category: "Crypto",
-    description: "Automated crypto investing",
-    tag: "Markup"
+    category: "Health",
+    description: "Automated crypto investing"
   },
   {
     name: "Juneshine",
     url: "https://juneshine.com",
-    category: "Health",
+    category: "Retail",
     description: "Hard kombucha and spirits",
-    tag: "Markup" 
+    tag: "Markup"
   },
   {
     name: "Juno",
     url: "https://juno.finance",
-    category: "Fintech",
-    description: "Digital banking platform",
-    tag: "Markup"
+    category: "Retail",
+    description: "Digital banking platform"
   },
   {
     name: "Kartera",
     url: "https://kartera.finance",
     category: "Fintech",
-    description: "Investment portfolio management",
-    tag: "Markup"
+    description: "Investment portfolio management"
   },
   {
     name: "Keep",
     url: "https://keep.network",
-    category: "Crypto",
-    description: "Secure, private data on public blockchains",
-    tag: "Markup"
-  },
-  {
-    name: "Launchpad",
-    url: "https://launchpad.xyz",
-    category: "Developer Tools",
-    description: "Developer workflow optimization",
-    tag: "Acquired"
+    category: "Fintech",
+    description: "Secure, private data on public blockchains"
   },
   {
     name: "Lunar",
     url: "https://lunar.app",
-    category: "Fintech",
-    description: "Nordic banking app",
-    tag: "Markup"
+    category: "Retail",
+    description: "Nordic banking app"
   },
   {
     name: "Margin",
     url: "https://margin.co",
-    category: "Fintech",
-    description: "Trading and investment platform",
-    tag: "Markup"
+    category: "SaaS",
+    description: "Trading and investment platform"
   },
   {
     name: "Maridea",
     url: "https://maridea.co",
-    category: "Enterprise",
+    category: "Fintech",
     description: "AI-powered idea generation",
     tag: "Markup"
   },
   {
     name: "Metadata",
     url: "https://metadata.io",
-    category: "AI",
+    category: "SaaS",
     description: "AI-powered B2B marketing",
     tag: "Markup"
   },
   {
     name: "Moku",
     url: "https://moku.io",
-    category: "Infrastructure",
+    category: "Retail",
     description: "Cloud infrastructure optimization",
-    tag: "Acquired"
+    tag: "Markup"
   },
   {
     name: "Playbook",
     url: "https://playbook.com",
-    category: "Enterprise",
-    description: "Creative file management",
-    tag: "Markup"
+    category: "Health",
+    description: "Creative file management"
   },
   {
     name: "Rely",
     url: "https://rely.io",
     category: "Fintech",
-    description: "Buy now, pay later solutions",
-    tag: "Acquired"
+    description: "Buy now, pay later solutions"
   },
   {
     name: "Restream",
     url: "https://restream.io",
-    category: "Infrastructure",
-    description: "Multi-platform streaming",
-    tag: "Markup"
+    category: "SaaS",
+    description: "Multi-platform streaming"
   },
   {
     name: "RPM",
     url: "https://rpm.com",
     category: "Health",
     description: "Virtual physical therapy",
-    tag: "Markup" 
+    tag: "Acquired"
   },
   {
     name: "Sanzo",
     url: "https://drinksanzo.com",
-    category: "Commerce",
+    category: "Retail",
     description: "Asian-inspired sparkling water",
     tag: "Markup"
   },
   {
     name: "Soot",
     url: "https://soot.com",
-    category: "Enterprise",
+    category: "SaaS",
     description: "Carbon footprint management",
     tag: "Markup"
   },
   {
     name: "Sugar",
     url: "https://sugar.app",
-    category: "Commerce",
+    category: "SaaS",
     description: "Mobile commerce platform",
-    tag: "Markup"
+    tag: "Acquired"
   },
   {
     name: "Sundae",
     url: "https://sundae.com",
-    category: "Commerce",
-    description: "Marketplace for distressed properties",
-    tag: "Markup"
+    category: "Fintech",
+    description: "Marketplace for distressed properties"
   },
   {
     name: "Superplastic",
     url: "https://superplastic.co",
-    category: "Commerce",
-    description: "Digital collectibles and vinyl toys",
-    tag: "Markup"
+    category: "Retail",
+    description: "Digital collectibles and vinyl toys"
   },
   {
     name: "Swan",
@@ -218,48 +189,38 @@ export const companies: Company[] = [
   {
     name: "Swansea City AFC",
     url: "https://swanseacity.com",
-    category: "Enterprise",
-    description: "Professional football club",
-    tag: "Acquired"
+    category: "Retail",
+    description: "Professional football club"
   },
   {
     name: "Techmate",
     url: "https://techmate.io",
-    category: "Developer Tools",
-    description: "Technical documentation platform",
-    tag: "Markup"
+    category: "SaaS",
+    description: "Technical documentation platform"
   },
   {
     name: "The Coffee",
     url: "https://thecoffee.co",
-    category: "Commerce",
+    category: "Retail",
     description: "Specialty coffee subscription",
     tag: "Markup"
   },
   {
-    name: "The Food Company",
-    url: "https://thefoodcompany.com",
-    category: "Commerce",
-    description: "Sustainable food production",
-    tag: "Markup" 
-  },
-  {
     name: "Waldo",
     url: "https://waldo.io",
-    category: "Developer Tools",
-    description: "Mobile app testing platform",
-    tag: "Markup"
+    category: "Fintech",
+    description: "Mobile app testing platform"
   }
 ];
 
-// Updated metrics with correctly counted markups
+// Updated metrics with the correct values provided by the user
 export const portfolioMetrics = {
-  totalInvestments: 34,
-  markups: 28, 
-  busts: 3,
-  tvpi: 2.8,
-  grossMultiple: 3.2,
-  netMultipleNetOfCarry: 2.6,
-  returnNetOfFees: 160,
-  irr: 45
+  totalInvestments: 32,
+  markups: 13, 
+  busts: 4,
+  tvpi: 1.44,
+  grossMultiple: 1.22,
+  netMultipleNetOfCarry: 1.12,
+  returnNetOfFees: 32,
+  irr: 10
 };
