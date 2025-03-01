@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 // Define the static files directory - use public directory only
 const publicDir = path.resolve(__dirname, '../public');
