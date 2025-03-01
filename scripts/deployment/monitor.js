@@ -1,7 +1,12 @@
 // Simple process monitor to restart the server if it crashes
-const { spawn } = require('child_process');
-const path = require('path');
-const fs = require('fs');
+import { spawn } from 'child_process';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuration
 let SERVER_SCRIPT = path.resolve(__dirname, '../../deploy.js');
