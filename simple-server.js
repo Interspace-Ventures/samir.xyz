@@ -1,1 +1,0 @@
-scripts/deployment/simple-server.js
