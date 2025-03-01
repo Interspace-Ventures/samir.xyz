@@ -13,11 +13,7 @@ localPort = 5000
 externalPort = 5000
 
 [deployment]
-run = [
-  "sh",
-  "-c",
-  "mkdir -p public && cp -r build/* public/ && cp index.html public/ && NODE_ENV=production tsx server/index.ts",
-]
+run = ["sh", "-c", "node server.js"]
 
 [workflows]
 runButton = "Project"
