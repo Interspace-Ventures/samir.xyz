@@ -1,27 +1,24 @@
 # Portfolio Website
 
-A simplified personal portfolio website for Samir that embodies true simplicity.
+A radically simplified personal portfolio website for Samir that embodies true simplicity.
 
 ## Tech Stack
 
-- React.js
-- Tailwind CSS
 - Express.js (simplified server)
-- Framer Motion for animations
-- Mobile-first responsive design
+- Pre-built static assets
 
 ## Project Structure
 
-The project has been radically simplified to follow a clean, straightforward structure:
+The project has been radically simplified to the bare essentials:
 
 - `public/`: Contains all static assets served directly to the client
   - `assets/css/`: Stylesheet files
-  - `assets/js/`: JavaScript files
+  - `assets/js/`: JavaScript files including pre-built React components
   - `assets/images/`: Image assets
   - `assets/icons/`: Icon files
   - `index.html`: Main HTML entry point
 
-- `server/`: Contains the server implementation
+- `server/`: Contains the minimal server implementation
   - `index.ts`: Simple Express server that serves static files from the public directory
 
 ## Development & Deployment
@@ -34,13 +31,17 @@ npm run dev
 
 This starts the Express server which serves the static files from the public directory on port 3000.
 
-## Simplification Philosophy
+## Radical Simplification
 
-This project has been deliberately simplified to eliminate unnecessary complexity:
-- No build process - static assets are served directly
+This project has been deliberately simplified to the absolute minimum:
+- No build process - pre-built static assets are served directly
 - One server approach - simple Express configuration
-- Clear separation of concerns - server code vs static assets
-- No staging or complex deployment pipelines
+- No config files, no client code, no build scripts
+- All unnecessary directories have been removed:
+  - ✓ Removed `client/` directory (React source)
+  - ✓ Removed `config/` directory (build configurations)
+  - ✓ Removed `attached_assets/` directory (duplicate assets)
+  - ✓ Removed `screenshots/` directory (documentation only)
 
 ## Notes
 
