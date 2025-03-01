@@ -1,87 +1,49 @@
 # Portfolio Website
 
-A modern portfolio website that embodies over-engineered simplicity, enabling users to write, design, code, and build ventures powered by artificial intelligence.
+A simplified personal portfolio website for Samir that embodies true simplicity.
 
 ## Tech Stack
 
 - React.js
-- Vite
 - Tailwind CSS
+- Express.js (simplified server)
 - Framer Motion for animations
-- AI-enhanced project building tools
 - Mobile-first responsive design
-- Advanced interactive project presentation
-- Domain redirection capabilities
 
-## Development
+## Project Structure
 
-To start the development server:
+The project has been radically simplified to follow a clean, straightforward structure:
+
+- `public/`: Contains all static assets served directly to the client
+  - `assets/css/`: Stylesheet files
+  - `assets/js/`: JavaScript files
+  - `assets/images/`: Image assets
+  - `assets/icons/`: Icon files
+  - `index.html`: Main HTML entry point
+
+- `server/`: Contains the server implementation
+  - `index.ts`: Simple Express server that serves static files from the public directory
+
+## Development & Deployment
+
+The project runs with a single command:
 
 ```bash
 npm run dev
 ```
 
-This will start the development server on port 3000.
+This starts the Express server which serves the static files from the public directory on port 3000.
 
-## Building for Production
+## Simplification Philosophy
 
-To build the project for production:
-
-```bash
-npm run build
-```
-
-This will create a production build in the `build` directory.
-
-## Deployment
-
-This project is designed to be easily deployed on Replit. There are several deployment options available:
-
-### Option 1: Using Replit Deployment
-
-The project is configured to deploy using the `deploy.js` script, which is a production-ready Express server that serves the static files from the `public` directory.
-
-### Option 2: Using Deployment Monitor (recommended)
-
-For more robust deployment with automatic restart capability:
-
-```bash
-node deployment-monitor.js
-```
-
-The deployment monitor will automatically restart the server if it crashes, making the deployment more resilient.
-
-### Option 3: Using the Simple Server
-
-For a minimalistic approach:
-
-```bash
-node server.js
-```
-
-### Deployment Helper
-
-A useful helper script is included to make deployment easier:
-
-```bash
-node deploy-helper.js
-```
-
-This script will:
-- Check if all necessary deployment files are available
-- Verify the public directory and its contents
-- Provide guidance on the different deployment options
-
-## Project Structure
-
-- `/client`: Frontend React application
-- `/public`: Static assets served in production
-- `/build`: Production build output
-- `/scripts/deployment`: Deployment-related scripts
-- `/server`: Backend server code
+This project has been deliberately simplified to eliminate unnecessary complexity:
+- No build process - static assets are served directly
+- One server approach - simple Express configuration
+- Clear separation of concerns - server code vs static assets
+- No staging or complex deployment pipelines
 
 ## Notes
 
-- The application is designed to work in both development and production environments.
-- Static assets are served from the `public` directory in production.
-- For SPA routing, all unknown routes will serve the main `index.html` file.
+- The application uses SPA routing where all unknown routes serve the main `index.html` file
+- All assets are pre-built and ready to serve from the `public` directory
+- The server is designed to run on Replit with minimal configuration
