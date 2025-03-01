@@ -16,8 +16,9 @@ console.log('Environment variables:');
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`PORT: ${process.env.PORT}`);
 
-// Check if the public directory exists
-const publicDir = path.join(__dirname, 'public');
+// Check if the public directory exists at root level (2 directories up from deployment script)
+const rootPath = path.resolve(__dirname, '../..');
+const publicDir = path.join(rootPath, 'public');
 console.log(`Checking for public directory at: ${publicDir}`);
 
 if (fs.existsSync(publicDir)) {
@@ -29,7 +30,8 @@ if (fs.existsSync(publicDir)) {
 } else {
   console.log(`Public directory NOT found at: ${publicDir}`);
   console.log(`Current directory: ${__dirname}`);
-  console.log(`Directory contents: ${fs.readdirSync(__dirname).join(', ')}`);
+  console.log(`Root directory: ${rootPath}`);
+  console.log(`Directory contents at root: ${fs.readdirSync(rootPath).join(', ')}`);
   
   // Try to create public directory if it doesn't exist
   try {
@@ -41,7 +43,7 @@ if (fs.existsSync(publicDir)) {
 }
 
 // Copy build files to public directory if build exists but public doesn't have files
-const buildDir = path.join(__dirname, 'build');
+const buildDir = path.join(rootPath, 'build');
 if (fs.existsSync(buildDir) && (!fs.existsSync(publicDir) || fs.readdirSync(publicDir).length === 0)) {
   console.log('Copying files from build to public directory...');
   try {
