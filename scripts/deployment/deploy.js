@@ -130,6 +130,16 @@ app.get('*', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+// Try to handle the case where the port might already be in use
+const server = app.listen(PORT, () => {
   console.log(`Deployment server running on port ${PORT}`);
+}).on('error', (error) => {
+  if (error.code === 'EADDRINUSE') {
+    console.log(`Port ${PORT} is already in use, trying port ${PORT + 1}`);
+    app.listen(PORT + 1, () => {
+      console.log(`Deployment server running on port ${PORT + 1}`);
+    });
+  } else {
+    console.error('Server error:', error);
+  }
 });
