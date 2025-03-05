@@ -2,9 +2,12 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html lang="en">
-      <Head />
-      <body>
+    <Html lang="en" suppressHydrationWarning>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Personal portfolio website showcasing professional projects" />
+      </Head>
+      <body className="min-h-screen bg-background antialiased">
         <Main />
         <NextScript />
       </body>
