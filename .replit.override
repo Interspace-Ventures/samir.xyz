@@ -1,4 +1,0 @@
-[deployment]
-run = ["npm", "start"]
-deploymentTarget = "static"
-publicDir = "public"
