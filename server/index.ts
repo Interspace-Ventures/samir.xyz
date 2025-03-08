@@ -13,15 +13,15 @@ const app = express();
 const PORT = parseInt(process.env.PORT || '5000', 10);
 
 // Serve static files from the public directory
-const publicDir = path.resolve(__dirname, '../public');
-app.use(express.static(publicDir));
+app.use(express.static(path.join(__dirname, '../public')));
 
-// Default route to serve index.html
+// Serve index.html for all routes to support client-side routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(publicDir, 'index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// Start server
+// Start server with detailed logging
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running at http://0.0.0.0:${PORT}`);
+  console.log('Serving static files from:', path.join(__dirname, '../public'));
 });
