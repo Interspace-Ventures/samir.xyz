@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { Link } from 'wouter'
+import { SiGithub, SiLinkedin } from 'react-icons/si'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -14,28 +16,71 @@ const slideIn = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground p-8">
+    <main className="min-h-screen bg-background text-foreground">
       <motion.div
         {...fadeInUp}
-        className="max-w-4xl mx-auto space-y-8"
+        className="max-w-5xl mx-auto p-8 space-y-12"
       >
-        <h1 className="text-4xl font-bold mb-4">Welcome to My Portfolio</h1>
-        <p className="text-lg mb-6">
-          Showcasing my professional projects and technical expertise
-        </p>
+        {/* Hero Section */}
+        <section className="flex items-center gap-8">
+          <div className="w-48 h-48 overflow-hidden">
+            <img 
+              src="/assets/images/profile.jpg" 
+              alt="Samir" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="space-y-4">
+            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+              Hey - I'm Samir
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl">
+              I drive business impact at fintechs through innovative solutions and technical expertise.
+            </p>
+          </div>
+        </section>
 
+        {/* Projects Grid */}
         <motion.section
           {...slideIn}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {/* Project cards will go here */}
-          <div className="p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors">
+          {/* Project Card 1 */}
+          <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
             <h3 className="text-xl font-semibold mb-2">AI-Enhanced Design</h3>
             <p className="text-muted-foreground">
               Interactive portfolio with AI-powered project presentations
             </p>
           </div>
+
+          {/* Project Card 2 */}
+          <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
+            <h3 className="text-xl font-semibold mb-2">Responsive Web Apps</h3>
+            <p className="text-muted-foreground">
+              Mobile-first design with modern UI/UX principles
+            </p>
+          </div>
+
+          {/* Project Card 3 */}
+          <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
+            <h3 className="text-xl font-semibold mb-2">Technical Writing</h3>
+            <p className="text-muted-foreground">
+              Documentation and technical blog posts
+            </p>
+          </div>
         </motion.section>
+
+        {/* Social Links */}
+        <section className="flex justify-center space-x-6">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-primary transition-colors">
+            <SiGithub className="w-8 h-8" />
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-primary transition-colors">
+            <SiLinkedin className="w-8 h-8" />
+          </a>
+        </section>
       </motion.div>
     </main>
   )
