@@ -22,21 +22,29 @@ export default function Home() {
         className="max-w-5xl mx-auto p-8 space-y-12"
       >
         {/* Hero Section */}
-        <section className="flex items-center gap-8">
-          <div className="w-48 h-48 overflow-hidden">
+        <section className="flex flex-col md:flex-row md:items-center md:gap-8">
+          {/* Profile Photo - Square format with responsive sizing */}
+          <div className="w-40 h-40 md:w-48 md:h-48 mb-6 md:mb-0 bg-muted/10">
             <img 
               src="/assets/images/profile.jpg" 
               alt="Samir" 
               className="w-full h-full object-cover"
             />
           </div>
+
+          {/* Text Content - Left aligned with consistent spacing */}
           <div className="space-y-4">
-            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
               Hey - I'm Samir
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
               I drive business impact at fintechs through innovative solutions and technical expertise.
             </p>
+            <nav className="flex gap-4">
+              <Link href="/ventures" className="text-primary hover:text-primary/80">
+                View Ventures →
+              </Link>
+            </nav>
           </div>
         </section>
 
