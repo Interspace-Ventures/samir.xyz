@@ -55,7 +55,7 @@ export default function Ventures() {
                 <img
                   src={project.imageUrl}
                   alt={project.name}
-                  className="object-cover w-full h-full transition-transform group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform group-hover:scale-105"
                 />
               </div>
               <h3 className="text-xl font-semibold mb-2">{project.name}</h3>

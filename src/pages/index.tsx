@@ -22,9 +22,9 @@ export default function Home() {
         className="max-w-5xl mx-auto p-8 space-y-12"
       >
         {/* Hero Section */}
-        <section className="flex flex-col md:flex-row md:items-center md:gap-8">
+        <section className="flex flex-col md:flex-row md:items-start md:gap-8">
           {/* Profile Photo - Square format with responsive sizing */}
-          <div className="w-40 h-40 md:w-48 md:h-48 mb-6 md:mb-0 bg-muted/10">
+          <div className="w-40 h-40 md:w-48 md:h-48 mb-6 md:mb-0">
             <img 
               src="/assets/images/profile.jpg" 
               alt="Samir" 
@@ -53,7 +53,7 @@ export default function Home() {
           {...slideIn}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {/* Project Card 1 */}
+          {/* Project Cards */}
           <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
             <h3 className="text-xl font-semibold mb-2">AI-Enhanced Design</h3>
             <p className="text-muted-foreground">
@@ -61,7 +61,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Project Card 2 */}
           <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
             <h3 className="text-xl font-semibold mb-2">Responsive Web Apps</h3>
             <p className="text-muted-foreground">
@@ -69,7 +68,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Project Card 3 */}
           <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
             <h3 className="text-xl font-semibold mb-2">Technical Writing</h3>
             <p className="text-muted-foreground">
