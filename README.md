@@ -4,47 +4,55 @@ A radically simplified personal portfolio website for Samir that embodies true s
 
 ## Tech Stack
 
-- Express.js (simplified server)
-- Pre-built static assets
+- React + Vite for fast development and optimized builds
+- Tailwind CSS for styling
+- Framer Motion for animations
+- Static file hosting
 
 ## Project Structure
 
-The project has been radically simplified to the bare essentials:
+The project is organized for maximum simplicity:
 
-- `public/`: Contains all static assets served directly to the client
-  - `assets/css/`: Stylesheet files
-  - `assets/js/`: JavaScript files including pre-built React components
+- `src/`: React components and application code
+  - `pages/`: Page components (Home, Ventures)
+  - `components/`: Reusable UI components
+
+- `public/`: Static assets served directly to the client
   - `assets/images/`: Image assets
+    - `profile/`: Profile photos
+    - `ventures/`: Venture-related images
   - `assets/icons/`: Icon files
-  - `index.html`: Main HTML entry point
 
-- `server/`: Contains the minimal server implementation
-  - `index.ts`: Simple Express server that serves static files from the public directory
+## Development
 
-## Development & Deployment
-
-The project runs with a single command:
+Run the development server:
 
 ```bash
 npm run dev
 ```
 
-This starts the Express server which serves the static files from the public directory on port 3000.
+This starts Vite's development server with hot module replacement.
 
-## Radical Simplification
+## Building for Production
 
-This project has been deliberately simplified to the absolute minimum:
-- No build process - pre-built static assets are served directly
-- One server approach - simple Express configuration
-- No config files, no client code, no build scripts
-- All unnecessary directories have been removed:
-  - ✓ Removed `client/` directory (React source)
-  - ✓ Removed `config/` directory (build configurations)
-  - ✓ Removed `attached_assets/` directory (duplicate assets)
-  - ✓ Removed `screenshots/` directory (documentation only)
+Build the static site:
+
+```bash
+npm run build
+```
+
+This generates optimized static files in the `dist` directory.
+
+## Features
+
+- Responsive design
+- Dark/light mode support
+- Animated transitions
+- Optimized images and assets
+- Simple and maintainable codebase
 
 ## Notes
 
-- The application uses SPA routing where all unknown routes serve the main `index.html` file
-- All assets are pre-built and ready to serve from the `public` directory
-- The server is designed to run on Replit with minimal configuration
+- Leverages Vite for development and production builds
+- All assets are optimized during build
+- Static site deployment ready
