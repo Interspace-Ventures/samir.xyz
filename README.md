@@ -16,19 +16,20 @@ The project follows a clean, organized structure:
 ```
 ├── public/
 │   └── assets/
-│       ├── images/
-│       │   ├── profile/    # Profile photos
-│       │   └── ventures/   # Venture-related images
-│       └── icons/         # Icon assets
+│       └── images/
+│           ├── profile/    # Profile photos
+│           └── ventures/   # Venture-related images
 ├── src/
-│   ├── config/           # Configuration files
-│   │   ├── next.config.mjs
-│   │   ├── tailwind.config.js
-│   │   └── tsconfig.json
+│   ├── config/           # Project configuration files
+│   │   ├── postcss.config.cjs
+│   │   └── tailwind.config.js
 │   ├── pages/           # Next.js page components
 │   ├── components/      # Reusable UI components
 │   └── styles/         # Global styles and themes
-└── package.json        # Project dependencies
+└── [Root Configuration] # Essential Next.js files
+    ├── next.config.mjs
+    ├── tsconfig.json
+    └── next-env.d.ts   # Auto-generated Next.js types
 ```
 
 ## Development
@@ -39,7 +40,7 @@ Run the development server:
 npm run dev
 ```
 
-This starts Next.js development server with hot module replacement.
+This starts Next.js development server with hot module replacement on port 5000.
 
 ## Building for Production
 

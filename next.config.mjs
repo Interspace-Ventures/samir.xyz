@@ -9,13 +9,12 @@ const nextConfig = {
   serverRuntimeConfig: {
     port: 5000
   },
-  // Point to configuration files in src/config
-  experimental: {
-    // Note: keeping essential configs in root as Next.js requires
-    configFileName: './src/config/next.config.mjs'
-  },
   // Ensure pages are served from the correct base path
   basePath: '',
+  // Reference configuration files in their new locations
+  typescript: {
+    tsconfigPath: './tsconfig.json'
+  },
   // Disable any redirects that might interfere with routing
   async redirects() {
     return []
