@@ -5,19 +5,15 @@ const nextConfig = {
     domains: ['localhost'],
     unoptimized: process.env.NODE_ENV === 'development'
   },
-  // Configure server to use environment port or default to 5000
+  // Configure server to use port 3000
   serverRuntimeConfig: {
-    port: parseInt(process.env.PORT || '5000', 10)
+    port: 3000
   },
   // Ensure pages are served from the correct base path
   basePath: '',
   // Disable any redirects that might interfere with routing
   async redirects() {
     return []
-  },
-  // Enable static file serving from the public directory
-  experimental: {
-    appDir: false
   }
 };
 
