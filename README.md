@@ -17,10 +17,12 @@ The project follows a clean, organized structure:
 ├── public/
 │   └── assets/
 │       └── images/
-│           ├── brand/     # Logos, favicons, and brand assets
-│           ├── content/   # General content images
-│           ├── profile/   # Profile photos
-│           └── ventures/  # Venture-related images
+│           ├── brand/           # Brand-related assets
+│           │   ├── portfolio-logos/  # Company logos used in portfolio
+│           │   └── [brand assets]    # Favicons and personal brand logos
+│           ├── content/         # General content images
+│           ├── profile/         # Profile photos
+│           └── ventures/        # Venture-related images
 ├── src/
 │   ├── config/           # Project configuration files
 │   │   ├── postcss.config.cjs
@@ -67,3 +69,5 @@ This generates optimized static files for production deployment.
 - Leverages Next.js for server-side rendering and routing
 - All assets are optimized during build
 - Static site deployment ready
+- Organized asset structure for easy maintenance
+- Separated portfolio company logos for better organization
