@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
+import PortfolioLogos from '@/components/PortfolioLogos'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -22,6 +23,11 @@ export default function Portfolio() {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
             A collection of my professional work and projects
           </p>
+        </section>
+
+        <section className="space-y-8">
+          <h2 className="text-2xl font-semibold">Companies I've Worked With</h2>
+          <PortfolioLogos />
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
