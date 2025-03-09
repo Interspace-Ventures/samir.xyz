@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'wouter'
+import Link from 'next/link'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
 import type { NextPage } from 'next'
 
