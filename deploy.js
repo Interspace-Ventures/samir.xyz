@@ -1,9 +1,16 @@
-// Special deployment script for Replit
+// [DEPRECATED] This deployment script was used for Vite and is no longer needed
+// Next.js handles deployment through its own build process
+// Please use next start for production deployment instead
+
 import { fileURLToPath } from 'url';
 import path from 'path';
 import express from 'express';
 import fs from 'fs';
 
+// This file is kept for reference but should not be used
+// Next.js deployment is handled through next start command
+
+// Previous Vite deployment code below
 // Setup dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

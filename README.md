@@ -4,7 +4,7 @@ A radically simplified personal portfolio website for Samir that embodies true s
 
 ## Tech Stack
 
-- React + Vite for fast development and optimized builds
+- Next.js for server-side rendering and optimized builds
 - Tailwind CSS for styling
 - Framer Motion for animations
 - Static file hosting
@@ -14,7 +14,7 @@ A radically simplified personal portfolio website for Samir that embodies true s
 The project is organized for maximum simplicity:
 
 - `src/`: React components and application code
-  - `pages/`: Page components (Home, Ventures)
+  - `pages/`: Next.js page components (index, ventures)
   - `components/`: Reusable UI components
 
 - `public/`: Static assets served directly to the client
@@ -31,7 +31,7 @@ Run the development server:
 npm run dev
 ```
 
-This starts Vite's development server with hot module replacement.
+This starts Next.js development server with hot module replacement.
 
 ## Building for Production
 
@@ -41,7 +41,7 @@ Build the static site:
 npm run build
 ```
 
-This generates optimized static files in the `dist` directory.
+This generates optimized static files for production deployment.
 
 ## Features
 
@@ -53,6 +53,6 @@ This generates optimized static files in the `dist` directory.
 
 ## Notes
 
-- Leverages Vite for development and production builds
+- Leverages Next.js for server-side rendering and routing
 - All assets are optimized during build
 - Static site deployment ready
