@@ -9,6 +9,7 @@ const fadeInUp = {
 }
 
 export default function Portfolio() {
+  console.log('Portfolio page mounting') // Debug log
   return (
     <main className="min-h-screen bg-background text-foreground">
       <motion.div
