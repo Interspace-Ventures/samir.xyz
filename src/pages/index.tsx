@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'wouter'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
+import type { NextPage } from 'next'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -14,11 +15,13 @@ const slideIn = {
   transition: { delay: 0.2, duration: 0.6 }
 }
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <motion.div
-        {...fadeInUp}
+        initial="initial"
+        animate="animate"
+        variants={fadeInUp}
         className="max-w-5xl mx-auto p-8 space-y-12"
       >
         {/* Hero Section */}
@@ -50,7 +53,7 @@ export default function Home() {
 
         {/* Projects Grid */}
         <motion.section
-          {...slideIn}
+          variants={slideIn}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {/* Project Cards */}
@@ -91,3 +94,5 @@ export default function Home() {
     </main>
   )
 }
+
+export default Home
