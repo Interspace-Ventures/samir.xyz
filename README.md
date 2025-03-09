@@ -11,17 +11,25 @@ A radically simplified personal portfolio website for Samir that embodies true s
 
 ## Project Structure
 
-The project is organized for maximum simplicity:
+The project follows a clean, organized structure:
 
-- `src/`: React components and application code
-  - `pages/`: Next.js page components (index, ventures)
-  - `components/`: Reusable UI components
-
-- `public/`: Static assets served directly to the client
-  - `assets/images/`: Image assets
-    - `profile/`: Profile photos
-    - `ventures/`: Venture-related images
-  - `assets/icons/`: Icon files
+```
+├── public/
+│   └── assets/
+│       ├── images/
+│       │   ├── profile/    # Profile photos
+│       │   └── ventures/   # Venture-related images
+│       └── icons/         # Icon assets
+├── src/
+│   ├── config/           # Configuration files
+│   │   ├── next.config.mjs
+│   │   ├── tailwind.config.js
+│   │   └── tsconfig.json
+│   ├── pages/           # Next.js page components
+│   ├── components/      # Reusable UI components
+│   └── styles/         # Global styles and themes
+└── package.json        # Project dependencies
+```
 
 ## Development
 

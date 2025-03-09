@@ -1,6 +1,0 @@
-[deployment]
-run = ["node", "deploy.js"]
-deploymentTarget = "node"
-
-[languages.javascript]
-pattern = "**/*.{js,ts,jsx,tsx}"

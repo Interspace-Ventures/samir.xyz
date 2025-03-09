@@ -1,5 +1,0 @@
-[build]
-command = "echo No build step needed"
-
-[secrets]
-PRODUCTION_MODE = "true"

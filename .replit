@@ -1,33 +1,4 @@
-run = "npx next dev -p 5000"
 modules = ["nodejs-20"]
 
 [nix]
 channel = "stable-24_05"
-
-[deployment]
-build = ["npm", "run", "build"]
-run = ["npx", "next", "start", "-p", "5000"]
-
-[[ports]]
-localPort = 3000
-externalPort = 80
-
-[[ports]]
-localPort = 5000
-externalPort = 5000
-
-[env]
-NEXT_TELEMETRY_DISABLED = "1"
-
-[languages.javascript]
-pattern = "**/{*.js,*.jsx,*.ts,*.tsx,*.json}"
- 
-[languages.javascript.languageServer]
-start = ["typescript-language-server", "--stdio"]
-
-[processes]
-dev = "npx next dev -p 5000"
-
-[startup]
-startCommand = ["npm", "run", "dev"]
-waitForPort = 5000
