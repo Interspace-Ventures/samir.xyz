@@ -17,8 +17,10 @@ The project follows a clean, organized structure:
 ├── public/
 │   └── assets/
 │       └── images/
-│           ├── profile/    # Profile photos
-│           └── ventures/   # Venture-related images
+│           ├── brand/     # Logos, favicons, and brand assets
+│           ├── content/   # General content images
+│           ├── profile/   # Profile photos
+│           └── ventures/  # Venture-related images
 ├── src/
 │   ├── config/           # Project configuration files
 │   │   ├── postcss.config.cjs
@@ -55,7 +57,7 @@ This generates optimized static files for production deployment.
 ## Features
 
 - Responsive design
-- Dark/light mode support
+- Dark/light mode support 
 - Animated transitions
 - Optimized images and assets
 - Simple and maintainable codebase
