@@ -1,2 +1,2 @@
 [config]
-command = tsx server/index.ts
+command = npx next start -p 5000
