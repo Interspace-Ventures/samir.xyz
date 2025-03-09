@@ -19,7 +19,7 @@ const ventureProjects: VentureProject[] = [
   {
     name: "Interspace",
     description: "Technology and venture capital insights platform",
-    imageUrl: "/assets/ventures/interspace.jpg",
+    imageUrl: "/assets/images/ventures/interspace.jpg",
     link: "https://posts.interspace.ventures"
   },
   // Add other venture projects here
