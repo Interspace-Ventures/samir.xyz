@@ -6,6 +6,8 @@ export default function Document() {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Personal portfolio website showcasing professional projects" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="utf-8" />
       </Head>
       <body className="min-h-screen bg-background antialiased">
         <Main />
