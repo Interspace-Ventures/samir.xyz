@@ -12,6 +12,12 @@ const Home: NextPage = () => {
             </h1>
             <nav className="flex gap-4">
               <Link 
+                href="/portfolio" 
+                className="text-primary hover:text-primary/80 inline-flex items-center"
+              >
+                View Portfolio →
+              </Link>
+              <Link 
                 href="/ventures" 
                 className="text-primary hover:text-primary/80 inline-flex items-center"
               >
