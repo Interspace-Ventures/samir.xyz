@@ -29,9 +29,9 @@ const Home: NextPage = () => {
           {/* Profile Photo - Square format with responsive sizing */}
           <div className="w-40 h-40 md:w-48 md:h-48 mb-6 md:mb-0">
             <img 
-              src="/assets/images/profile.jpg" 
+              src="/assets/images/profile.svg" 
               alt="Samir" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
 
