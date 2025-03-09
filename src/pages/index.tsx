@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 
 const Home: NextPage = () => {
+  console.log('Home page mounting') // Debug log
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="max-w-5xl mx-auto p-8 space-y-12">

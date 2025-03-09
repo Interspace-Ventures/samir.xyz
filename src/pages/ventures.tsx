@@ -25,6 +25,7 @@ const ventureProjects: VentureProject[] = [
 ]
 
 export default function Ventures() {
+  console.log('Ventures page mounting') // Debug log
   return (
     <main className="min-h-screen bg-background text-foreground">
       <motion.div
