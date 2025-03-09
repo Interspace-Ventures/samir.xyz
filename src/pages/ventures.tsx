@@ -19,10 +19,21 @@ const ventureProjects: VentureProject[] = [
   {
     name: "Interspace",
     description: "Technology and venture capital insights platform",
-    imageUrl: "/assets/images/ventures/interspace.jpg",
+    imageUrl: "/assets/images/ventures/interspace.svg",
     link: "https://posts.interspace.ventures"
   },
-  // Add other venture projects here
+  {
+    name: "AI Research Lab",
+    description: "Advanced artificial intelligence research and development",
+    imageUrl: "/assets/images/ventures/ai-research.svg",
+    link: "https://ai-research.lab"
+  },
+  {
+    name: "Green Tech Fund",
+    description: "Sustainable technology investment initiative",
+    imageUrl: "/assets/images/ventures/green-tech.svg",
+    link: "https://green.tech.fund"
+  }
 ]
 
 export default function Ventures() {
@@ -45,12 +56,14 @@ export default function Ventures() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {ventureProjects.map((project, index) => (
-            <a
+            <motion.a
               key={index}
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
               className="group block"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="relative aspect-video mb-4 overflow-hidden rounded-lg bg-muted/10">
                 <Image
@@ -58,12 +71,13 @@ export default function Ventures() {
                   alt={project.name}
                   width={400}
                   height={225}
-                  className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                  className="object-cover transition-transform group-hover:scale-105"
+                  priority={index < 3}
                 />
               </div>
               <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
               <p className="text-muted-foreground">{project.description}</p>
-            </a>
+            </motion.a>
           ))}
         </motion.section>
 
