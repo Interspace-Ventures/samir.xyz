@@ -1,64 +1,28 @@
-modules = ["nodejs-20"]
-run = "npm run dev"
+run = "npx next dev -p 5000"
 
 [nix]
 channel = "stable-24_05"
 
-[[ports]]
-localPort = 3000
-externalPort = 80
-
-[[ports]]
-localPort = 3001
-externalPort = 3001
+[deployment]
+build = ["npm", "run", "build"]
+run = ["npx", "next", "start", "-p", "5000"]
 
 [[ports]]
 localPort = 5000
 externalPort = 5000
 
-[deployment]
-run = ["tsx", "server/index.ts"]
+[env]
+NEXT_TELEMETRY_DISABLED = "1"
 
-[workflows]
-runButton = "Project"
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx,*.json}"
+ 
+[languages.javascript.languageServer]
+start = ["typescript-language-server", "--stdio"]
 
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
+[processes]
+dev = "npx next dev -p 5000"
 
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "None"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "None"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "echo 'Proposing workflow creation' && cat .replit"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
+[startup]
+startCommand = ["npm", "run", "dev"]
+waitForPort = 5000
