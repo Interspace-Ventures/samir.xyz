@@ -1,96 +1,15 @@
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { SiGithub, SiLinkedin } from 'react-icons/si'
-import type { NextPage } from 'next'
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8 }
-}
-
-const slideIn = {
-  initial: { opacity: 0, x: -20 },
-  animate: { opacity: 1, x: 0 },
-  transition: { delay: 0.2, duration: 0.6 }
-}
+import { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <motion.div
-        initial="initial"
-        animate="animate"
-        variants={fadeInUp}
-        className="max-w-5xl mx-auto p-8 space-y-12"
-      >
-        {/* Hero Section */}
+      <div className="max-w-5xl mx-auto p-8 space-y-12">
         <section className="flex flex-col md:flex-row md:items-start md:gap-8">
-          {/* Profile Photo - Square format with responsive sizing */}
-          <div className="w-40 h-40 md:w-48 md:h-48 mb-6 md:mb-0">
-            <img 
-              src="/assets/images/profile.svg" 
-              alt="Samir" 
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-
-          {/* Text Content - Left aligned with consistent spacing */}
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
-              Hey - I'm Samir
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-              I drive business impact at fintechs through innovative solutions and technical expertise.
-            </p>
-            <nav className="flex gap-4">
-              <Link href="/ventures" className="text-primary hover:text-primary/80">
-                View Ventures →
-              </Link>
-            </nav>
-          </div>
+          <h1 className="text-4xl font-bold">
+            Hey - I&apos;m Samir
+          </h1>
         </section>
-
-        {/* Projects Grid */}
-        <motion.section
-          variants={slideIn}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {/* Project Cards */}
-          <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
-            <h3 className="text-xl font-semibold mb-2">AI-Enhanced Design</h3>
-            <p className="text-muted-foreground">
-              Interactive portfolio with AI-powered project presentations
-            </p>
-          </div>
-
-          <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
-            <h3 className="text-xl font-semibold mb-2">Responsive Web Apps</h3>
-            <p className="text-muted-foreground">
-              Mobile-first design with modern UI/UX principles
-            </p>
-          </div>
-
-          <div className="group p-6 rounded-lg border border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg bg-card">
-            <h3 className="text-xl font-semibold mb-2">Technical Writing</h3>
-            <p className="text-muted-foreground">
-              Documentation and technical blog posts
-            </p>
-          </div>
-        </motion.section>
-
-        {/* Social Links */}
-        <section className="flex justify-center space-x-6">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors">
-            <SiGithub className="w-8 h-8" />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors">
-            <SiLinkedin className="w-8 h-8" />
-          </a>
-        </section>
-      </motion.div>
+      </div>
     </main>
   )
 }
