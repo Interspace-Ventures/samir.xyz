@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -18,14 +19,13 @@ const ventureProjects: VentureProject[] = [
   {
     name: "Interspace",
     description: "Technology and venture capital insights platform",
-    imageUrl: "/assets/images/ventures/interspace.jpg",
+    imageUrl: "/assets/ventures/interspace.jpg",
     link: "https://posts.interspace.ventures"
   },
   // Add other venture projects here
 ]
 
 export default function Ventures() {
-  console.log('Ventures page mounting') // Debug log
   return (
     <main className="min-h-screen bg-background text-foreground">
       <motion.div
@@ -53,9 +53,11 @@ export default function Ventures() {
               className="group block"
             >
               <div className="relative aspect-video mb-4 overflow-hidden rounded-lg bg-muted/10">
-                <img
+                <Image
                   src={project.imageUrl}
                   alt={project.name}
+                  width={400}
+                  height={225}
                   className="w-full h-full object-cover transition-transform group-hover:scale-105"
                 />
               </div>
