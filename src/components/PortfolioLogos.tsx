@@ -2,15 +2,14 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const companies = [
-  { name: 'Afar', logo: '/assets/images/brand/portfolio-logos/Afar.png' },
-  { name: 'AON3D', logo: '/assets/images/brand/portfolio-logos/AON3D.png' },
-  { name: 'Aura', logo: '/assets/images/brand/portfolio-logos/Aura.png' },
-  { name: 'Backpack', logo: '/assets/images/brand/portfolio-logos/Backpack.png' },
-  { name: 'CaliberX', logo: '/assets/images/brand/portfolio-logos/CaliberX.png' },
-  { name: 'GEM', logo: '/assets/images/brand/portfolio-logos/GEM.png' },
-  { name: 'Goodmylk', logo: '/assets/images/brand/portfolio-logos/Goodmylk.png' },
-  { name: 'Harper', logo: '/assets/images/brand/portfolio-logos/Harper.png' },
-  // Add more companies as needed
+  { name: 'Afar', logo: '/assets/images/brand/portfolio-logos/Afar.svg' },
+  { name: 'AON3D', logo: '/assets/images/brand/portfolio-logos/AON3D.svg' },
+  { name: 'Aura', logo: '/assets/images/brand/portfolio-logos/Aura.svg' },
+  { name: 'Backpack', logo: '/assets/images/brand/portfolio-logos/Backpack.svg' },
+  { name: 'CaliberX', logo: '/assets/images/brand/portfolio-logos/CaliberX.svg' },
+  { name: 'GEM', logo: '/assets/images/brand/portfolio-logos/GEM.svg' },
+  { name: 'Goodmylk', logo: '/assets/images/brand/portfolio-logos/Goodmylk.svg' },
+  { name: 'Harper', logo: '/assets/images/brand/portfolio-logos/Harper.svg' }
 ]
 
 export default function PortfolioLogos() {
