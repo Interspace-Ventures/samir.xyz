@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-03-10
+
+### Added
+- Implemented responsive navbar with purple underline indicators
+- Added dark mode toggle with system preference support
+- Integrated new profile image in homepage layout
+- Created responsive layout with Tailwind CSS
+- Added version display in footer
+
+### Changed
+- Updated profile page layout to match new design
+- Improved theme switching implementation
+- Enhanced mobile responsiveness
+
+### Fixed
+- Resolved casing issue with Footer component import
+- Fixed theme provider configuration
+
 ## [1.0.0] - 2025-03-09
 
 ### Added
