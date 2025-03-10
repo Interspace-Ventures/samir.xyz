@@ -3,21 +3,19 @@ import { parse } from 'url';
 import next from 'next';
 
 const dev = process.env.NODE_ENV !== 'production';
-const hostname = process.env.HOSTNAME || '0.0.0.0';
+const hostname = '0.0.0.0';
 const port = parseInt(process.env.PORT || '5000', 10);
 
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-let server;
-
 const startServer = async () => {
   try {
     await app.prepare();
-
-    server = createServer(async (req, res) => {
+    const server = createServer(async (req, res) => {
       try {
-        const parsedUrl = parse(req.url, true);
+        // Ensure req.url exists before parsing
+        const parsedUrl = parse(req.url || '/', true);
         await handle(req, res, parsedUrl);
       } catch (err) {
         console.error('Error occurred handling', req.url, err);
@@ -26,8 +24,12 @@ const startServer = async () => {
       }
     });
 
+    server.listen(port, hostname, () => {
+      console.log(`> Ready on http://${hostname}:${port}`);
+    });
+
     // Handle server errors
-    server.on('error', (err) => {
+    server.on('error', (err: NodeJS.ErrnoException) => {
       if (err.code === 'EADDRINUSE') {
         console.error(`Port ${port} is already in use. Trying to close existing connections...`);
         process.exit(1);
@@ -35,10 +37,6 @@ const startServer = async () => {
         console.error('Server error:', err);
         process.exit(1);
       }
-    });
-
-    server.listen(port, hostname, () => {
-      console.log(`> Ready on http://${hostname}:${port}`);
     });
 
     // Handle shutdown signals
@@ -51,7 +49,6 @@ const startServer = async () => {
         });
       });
     });
-
   } catch (err) {
     console.error('Error starting server:', err);
     process.exit(1);
