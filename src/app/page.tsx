@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { SiGithub, SiLinkedin } from "react-icons/si"
 
 export default function Home() {
   return (
@@ -12,7 +13,6 @@ export default function Home() {
           </h2>
 
           <div className="space-y-6 text-gray-600 dark:text-gray-300">
-            {/* Content sections */}
             <p>
               Today, I am leading Finance & Strategy for the Financial Partnerships team at{" "}
               <Link href="#" className="text-purple-600 dark:text-purple-400 hover:underline">
@@ -65,6 +65,27 @@ export default function Home() {
               </Link>{" "}
               via Replit AI.
             </p>
+          </div>
+
+          <div className="mt-8 flex gap-4">
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-600 hover:text-purple-500 dark:text-purple-400 dark:hover:text-purple-300"
+            >
+              <SiGithub className="w-6 h-6" />
+              <span className="sr-only">GitHub</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-600 hover:text-purple-500 dark:text-purple-400 dark:hover:text-purple-300"
+            >
+              <SiLinkedin className="w-6 h-6" />
+              <span className="sr-only">LinkedIn</span>
+            </a>
           </div>
         </div>
 
