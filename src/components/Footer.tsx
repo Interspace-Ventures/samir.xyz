@@ -1,19 +1,13 @@
-import { motion } from 'framer-motion'
+import Link from "next/link"
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <motion.footer 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.5 }}
-      className="w-full py-6 mt-12 border-t border-border"
-    >
-      <div className="max-w-5xl mx-auto px-8 flex justify-between items-center text-sm text-muted-foreground">
-        <p>© {new Date().getFullYear()} Samir. All rights reserved.</p>
-        <p className="text-xs">Version 1.0.0</p>
+    <footer className="w-full border-t border-gray-200 bg-white/50 backdrop-blur dark:border-gray-800 dark:bg-gray-950/50">
+      <div className="container mx-auto px-4 py-4">
+        <div className="text-sm text-gray-500 dark:text-gray-400 text-center">
+          © <Link href="/ventures" className="hover:text-purple-600 dark:hover:text-purple-400">Interspace Ventures</Link> {new Date().getFullYear()}. Built with Replit AI at the speed of thought • v1.1.3
+        </div>
       </div>
-    </motion.footer>
+    </footer>
   )
 }
-
-export default Footer

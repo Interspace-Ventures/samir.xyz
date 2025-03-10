@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-import { SiGithub, SiLinkedin } from "react-icons/si"
 
 export default function Profile() {
   return (
@@ -75,27 +74,6 @@ export default function Profile() {
               </Link>
               .
             </p>
-          </div>
-
-          <div className="mt-8 flex gap-4">
-            <a
-              href="https://github.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-purple-600 hover:text-purple-500 dark:text-purple-400 dark:hover:text-purple-300"
-            >
-              <SiGithub className="w-6 h-6" />
-              <span className="sr-only">GitHub</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-purple-600 hover:text-purple-500 dark:text-purple-400 dark:hover:text-purple-300"
-            >
-              <SiLinkedin className="w-6 h-6" />
-              <span className="sr-only">LinkedIn</span>
-            </a>
           </div>
         </div>
       </div>
