@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
 
 const navItems = [
-  { href: "/", label: "PROFILE" },
+  { href: "/profile", label: "PROFILE" },
   { href: "/portfolio", label: "PORTFOLIO" },
   { href: "/interspace", label: "INTERSPACE" },
   { href: "/perspectives", label: "PERSPECTIVES" },
@@ -18,10 +18,10 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/50 backdrop-blur dark:border-gray-800 dark:bg-gray-950/50">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-lg font-semibold">
+          <Link href="/profile" className="text-lg font-semibold">
             Hey - I'm Samir
           </Link>
-          
+
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
