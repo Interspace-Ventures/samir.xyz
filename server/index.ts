@@ -6,8 +6,14 @@ const dev = process.env.NODE_ENV !== 'production'
 const hostname = '0.0.0.0'  // Bind to all network interfaces
 const port = 5000
 
-// Initialize Next.js
-const app = next({ dev, hostname, port })
+// Initialize Next.js with the proper configuration
+const app = next({ 
+  dev,
+  hostname,
+  port,
+  dir: process.cwd(), // Ensure Next.js finds the correct project root
+})
+
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {

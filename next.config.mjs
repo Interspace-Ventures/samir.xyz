@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true
-  },
-  // Removed deprecated serverActions flag as it's now default
+    unoptimized: true,
+    domains: ['cash.app', 'hudsonrivertrading.com', 'unit.co', 'chime.com', 'sift.com', 'jpmorgan.com']
+  }
 };
 
 export default nextConfig;
