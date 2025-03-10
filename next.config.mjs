@@ -1,7 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['cash.app', 'hudsonrivertrading.com', 'unit.co', 'chime.com', 'sift.com', 'jpmorgan.com']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.app',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.co',
+      }
+    ]
   }
 };
 
