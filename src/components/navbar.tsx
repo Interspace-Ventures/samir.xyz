@@ -3,54 +3,79 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
+import { Menu, X } from "lucide-react"
+import { useState } from "react"
 
 const navItems = [
-  { href: "/profile", label: "PROFILE" },
-  { href: "/portfolio", label: "PORTFOLIO" },
-  { href: "/test-route-1", label: "TEST 1" },
-  { href: "/test-route-2", label: "TEST 2" },
-  { href: "/interspace", label: "INTERSPACE ↗" },
-  { href: "/perspectives", label: "PERSPECTIVES ↗" },
+  { href: "/profile", label: "ABOUT", isExternal: false },
+  { href: "/portfolio", label: "PORTFOLIO", isExternal: false },
+  { href: "/ventures", label: "VENTURES", isExternal: false }
 ]
 
 export default function Navbar() {
   const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          <Link 
-            href="/" 
-            className="text-lg font-normal hover:text-primary transition-colors"
+    <nav className="w-full h-16 flex items-center justify-between px-4 bg-white/50 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <Link 
+        href="/" 
+        className="text-sm font-normal tracking-widest hover:text-purple-600 dark:hover:text-purple-400"
+      >
+        Hey - I'm Samir
+      </Link>
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center space-x-6">
+        {navItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={`
+              text-[13px] font-normal tracking-[0.1em] transition-colors
+              hover:text-purple-600 dark:hover:text-purple-400
+              ${pathname === item.href ? 'text-purple-600 dark:text-purple-400' : 'text-gray-500 dark:text-gray-400'}
+            `}
           >
-            Hey - I'm Samir
+            {item.label}
           </Link>
-
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`
-                  relative py-2 text-sm font-normal transition-colors
-                  hover:text-primary
-                  ${pathname === item.href ? 'text-primary' : 'text-foreground'}
-                  after:absolute after:bottom-0 after:left-0 after:h-[2px] 
-                  after:w-full after:origin-left after:scale-x-0 
-                  after:bg-primary after:transition-transform after:duration-200
-                  ${pathname === item.href ? 'after:scale-x-100' : ''}
-                  hover:after:scale-x-100
-                `}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          <ThemeToggle />
-        </div>
+        ))}
       </div>
+
+      <div className="flex items-center gap-4">
+        <ThemeToggle />
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden p-1.5 hover:bg-muted/10 transition-colors"
+        >
+          {isMenuOpen ? (
+            <X className="h-4 w-4" />
+          ) : (
+            <Menu className="h-4 w-4" />
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-white/95 dark:bg-gray-950/95 backdrop-blur py-4 px-4 space-y-4">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+              className={`
+                block text-[13px] font-normal tracking-[0.1em] transition-colors
+                hover:text-purple-600 dark:hover:text-purple-400
+                ${pathname === item.href ? 'text-purple-600 dark:text-purple-400' : 'text-gray-500 dark:text-gray-400'}
+              `}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   )
 }
