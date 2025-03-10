@@ -15,7 +15,7 @@ export default function Navbar() {
   const pathname = usePathname()
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link 
@@ -30,11 +30,16 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative py-2 text-sm font-normal transition-colors hover:text-primary
+                className={`
+                  relative py-2 text-sm font-normal transition-colors
+                  hover:text-primary
                   ${pathname === item.href ? 'text-primary' : 'text-foreground'}
-                  after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-200
+                  after:absolute after:bottom-0 after:left-0 after:h-[2px] 
+                  after:w-full after:origin-left after:scale-x-0 
+                  after:bg-primary after:transition-transform after:duration-200
                   ${pathname === item.href ? 'after:scale-x-100' : ''}
-                  hover:after:scale-x-100`}
+                  hover:after:scale-x-100
+                `}
               >
                 {item.label}
               </Link>
