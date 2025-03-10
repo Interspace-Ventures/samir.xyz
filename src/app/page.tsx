@@ -12,6 +12,7 @@ export default function Home() {
           </h2>
 
           <div className="space-y-6 text-gray-600 dark:text-gray-300">
+            {/* Content sections */}
             <p>
               Today, I am leading Finance & Strategy for the Financial Partnerships team at{" "}
               <Link href="#" className="text-purple-600 dark:text-purple-400 hover:underline">
@@ -69,7 +70,7 @@ export default function Home() {
 
         <div className="w-full md:w-48 flex-shrink-0">
           <Image
-            src="/Hey I'm Samir 2025.png"
+            src="/avatar.png"
             alt="Samir's avatar"
             width={192}
             height={192}
