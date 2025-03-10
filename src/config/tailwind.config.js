@@ -1,2 +1,2 @@
-// This file is being removed as it's a duplicate of the root tailwind.config.js
-// The root configuration file is the correct location for Next.js projects
+// This file has been removed
+// Please use the root tailwind.config.js file for all Tailwind CSS configuration
