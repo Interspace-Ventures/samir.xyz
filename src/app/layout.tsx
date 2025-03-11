@@ -6,7 +6,11 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/Footer";
 import { PageTransition } from "@/components/page-transition";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: '--font-inter', 
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Samir - Finance & Strategy Leader",
@@ -23,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-background antialiased`}>
+      <body className={`${inter.className} ${inter.variable} min-h-screen bg-background antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
