@@ -4,9 +4,9 @@ export default function Portfolio() {
   const stats = [
     { label: "# Investments", value: "32" },
     { label: "# Markups", value: "13" },
-    { label: "# Busts", value: "4" },
-    { label: "TVPI", value: "1.44x" },
+    { label: "# Busts | # Acquisitions", value: "4 | 2" },
     { label: "Gross Multiple", value: "1.22x" },
+    { label: "TVPI", value: "1.44x" },
     { label: "Net Multiple, Net of Carry", value: "1.12x" },
     { label: "Return, net of fees", value: "32%" },
     { label: "IRR", value: "10%" }
@@ -25,8 +25,8 @@ export default function Portfolio() {
           <dl className="grid grid-cols-2 gap-x-12 gap-y-4 text-sm">
             {stats.map((stat) => (
               <div key={stat.label} className="flex justify-between gap-8">
-                <dt className="text-gray-600 dark:text-gray-400">{stat.label}</dt>
-                <dd className="font-medium">{stat.value}</dd>
+                <dt className="text-muted-foreground">{stat.label}</dt>
+                <dd className="font-medium text-foreground">{stat.value}</dd>
               </div>
             ))}
           </dl>
