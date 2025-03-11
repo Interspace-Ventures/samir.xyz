@@ -17,10 +17,10 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 w-full h-16 flex items-center container mx-auto px-4 bg-white/50 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full h-16 flex items-center container mx-auto px-4 bg-background/50 backdrop-blur-sm border-b border-border/40">
       <Link 
         href="/" 
-        className="text-sm font-bold tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400 dark:from-purple-400 dark:to-purple-200 font-inter"
+        className="text-sm font-bold tracking-widest gradient-text font-inter"
       >
         Hey - I'm Samir
       </Link>
@@ -32,9 +32,13 @@ export default function Navbar() {
             key={item.href}
             href={item.href}
             className={`
-              text-[13px] font-inter font-normal tracking-[0.1em] transition-colors
-              hover:text-purple-600 dark:hover:text-purple-400
-              ${pathname === item.href ? 'text-purple-600 dark:text-purple-400' : 'text-gray-500 dark:text-gray-400'}
+              relative text-[13px] font-inter font-normal tracking-[0.1em] transition-colors
+              hover:text-primary dark:hover:text-primary
+              ${pathname === item.href ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
+              after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-full 
+              after:origin-left after:scale-x-0 after:bg-primary after:transition-transform
+              ${pathname === item.href ? 'after:scale-x-100' : ''}
+              hover:after:scale-x-100
             `}
           >
             {item.label}
@@ -49,7 +53,8 @@ export default function Navbar() {
         <ThemeToggle />
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-1.5 hover:bg-muted/10 transition-colors"
+          className="p-1.5 hover:bg-muted/10 rounded-md transition-colors"
+          aria-label="Toggle menu"
         >
           {isMenuOpen ? (
             <X className="h-4 w-4" />
@@ -61,7 +66,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 z-50 bg-white/95 dark:bg-gray-950/95 backdrop-blur py-4 px-4 space-y-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="absolute top-16 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm py-4 px-4 space-y-4 border-b border-border/40">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -69,8 +74,8 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
               className={`
                 block text-[13px] font-inter font-normal tracking-[0.1em] transition-colors
-                hover:text-purple-600 dark:hover:text-purple-400
-                ${pathname === item.href ? 'text-purple-600 dark:text-purple-400' : 'text-gray-500 dark:text-gray-400'}
+                hover:text-primary dark:hover:text-primary
+                ${pathname === item.href ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
               `}
             >
               {item.label}

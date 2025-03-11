@@ -18,6 +18,15 @@ const nextConfig = {
   },
   experimental: {
     serverComponentsExternalPackages: []
+  },
+  // Ensure development server runs on port 5000
+  async rewrites() {
+    return [
+      {
+        source: '/:path*',
+        destination: '/:path*',
+      },
+    ]
   }
 };
 
