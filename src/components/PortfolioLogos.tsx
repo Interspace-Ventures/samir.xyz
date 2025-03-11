@@ -57,12 +57,12 @@ export default function PortfolioLogos() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap gap-4 justify-end">
+      <div className="flex flex-wrap gap-4 justify-start">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 rounded-full transition-colors ${
+            className={`px-4 py-2 transition-colors ${
               selectedCategory === category
                 ? 'bg-purple-600 text-white'
                 : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -77,7 +77,7 @@ export default function PortfolioLogos() {
         {filteredCompanies.map((company, index) => (
           <motion.div
             key={company.name}
-            className="relative flex items-center justify-center p-4 bg-white dark:bg-white/95 rounded-lg hover:bg-gray-50 dark:hover:bg-white/80 transition-colors border border-border/10"
+            className="relative flex items-center justify-center p-4 bg-white dark:bg-white rounded-lg hover:bg-gray-50 dark:hover:bg-gray-50 transition-colors border border-border/10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
@@ -98,8 +98,8 @@ export default function PortfolioLogos() {
               <div className="absolute top-2 right-2">
                 <span className={`px-2 py-1 text-xs rounded ${
                   company.acquired
-                    ? 'bg-blue-100 dark:bg-blue-100 text-blue-600'
-                    : 'bg-purple-100 dark:bg-purple-100 text-purple-600'
+                    ? 'bg-blue-100 text-blue-600'
+                    : 'bg-purple-100 text-purple-600'
                 }`}>
                   {company.acquired ? 'Acquired' : 'Markup'}
                 </span>
