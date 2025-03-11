@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -19,26 +21,26 @@ const ventureProjects: VentureProject[] = [
   {
     name: "Interspace",
     description: "Technology and venture capital insights platform",
-    imageUrl: "/assets/images/ventures/interspace.svg",
+    imageUrl: "/images/ventures/interspace.svg",
     link: "https://posts.interspace.ventures"
   },
   {
     name: "AI Research Lab",
     description: "Advanced artificial intelligence research and development",
-    imageUrl: "/assets/images/ventures/ai-research.svg",
+    imageUrl: "/images/ventures/ai-research.svg",
     link: "https://ai-research.lab"
   },
   {
     name: "Green Tech Fund",
     description: "Sustainable technology investment initiative",
-    imageUrl: "/assets/images/ventures/green-tech.svg",
+    imageUrl: "/images/ventures/green-tech.svg",
     link: "https://green.tech.fund"
   }
 ]
 
 export default function Ventures() {
   return (
-    <div className="max-w-5xl mx-auto space-y-12">
+    <div className="max-w-5xl mx-auto px-4 py-12">
       <section className="space-y-4">
         <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
           Ventures
@@ -66,6 +68,7 @@ export default function Ventures() {
                 width={400}
                 height={225}
                 className="object-cover transition-transform group-hover:scale-105"
+                loading="lazy"
                 priority={index < 3}
               />
             </div>
@@ -75,7 +78,7 @@ export default function Ventures() {
         ))}
       </section>
 
-      <div className="text-center">
+      <div className="text-center mt-12">
         <Link href="/" className="text-primary hover:text-primary/80 inline-flex items-center">
           ← Back to Home
         </Link>
