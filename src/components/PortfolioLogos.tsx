@@ -77,7 +77,7 @@ export default function PortfolioLogos() {
         {filteredCompanies.map((company, index) => (
           <motion.div
             key={company.name}
-            className="relative flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="relative flex items-center justify-center p-4 bg-white dark:bg-white/95 rounded-lg hover:bg-gray-50 dark:hover:bg-white/80 transition-colors border border-border/10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
@@ -98,8 +98,8 @@ export default function PortfolioLogos() {
               <div className="absolute top-2 right-2">
                 <span className={`px-2 py-1 text-xs rounded ${
                   company.acquired
-                    ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                    : 'bg-purple-100 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400'
+                    ? 'bg-blue-100 dark:bg-blue-100 text-blue-600'
+                    : 'bg-purple-100 dark:bg-purple-100 text-purple-600'
                 }`}>
                   {company.acquired ? 'Acquired' : 'Markup'}
                 </span>
