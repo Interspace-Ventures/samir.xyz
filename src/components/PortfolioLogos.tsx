@@ -13,43 +13,44 @@ interface Company {
 }
 
 const companies: Company[] = [
-  { name: 'Afar', logo: '/assets/images/brand/portfolio-logos/Afar.svg', category: 'Health' },
-  { name: 'AON3D', logo: '/assets/images/brand/portfolio-logos/AON3D.svg', category: 'SaaS', markup: true },
-  { name: 'Aura', logo: '/assets/images/brand/portfolio-logos/Aura.svg', category: 'Health', markup: true },
-  { name: 'Backpack', logo: '/assets/images/brand/portfolio-logos/Backpack.svg', category: 'Fintech' },
-  { name: 'GEM', logo: '/assets/images/brand/portfolio-logos/GEM.svg', category: 'Health', markup: true },
-  { name: 'Goodmylk', logo: '/assets/images/brand/portfolio-logos/Goodmylk.svg', category: 'Health' },
-  { name: 'Harper', logo: '/assets/images/brand/portfolio-logos/Harper.svg', category: 'Fintech' },
-  { name: 'Hedgehog', logo: '/assets/images/brand/portfolio-logos/Hedgehog.svg', category: 'Health' },
-  { name: 'Juneshine', logo: '/assets/images/brand/portfolio-logos/Juneshine.svg', category: 'Retail', markup: true },
-  { name: 'Juno', logo: '/assets/images/brand/portfolio-logos/Juno.svg', category: 'Retail' },
-  { name: 'Kartera', logo: '/assets/images/brand/portfolio-logos/Kartera.svg', category: 'Fintech' },
-  { name: 'Keep', logo: '/assets/images/brand/portfolio-logos/Keep.svg', category: 'Fintech' },
-  { name: 'Lunar', logo: '/assets/images/brand/portfolio-logos/Lunar.svg', category: 'Retail' },
-  { name: 'Margin', logo: '/assets/images/brand/portfolio-logos/Margin.svg', category: 'SaaS' },
-  { name: 'Maridea', logo: '/assets/images/brand/portfolio-logos/Maridea.svg', category: 'Fintech', markup: true },
-  { name: 'Metadata', logo: '/assets/images/brand/portfolio-logos/Metadata.svg', category: 'SaaS', markup: true },
-  { name: 'Moku', logo: '/assets/images/brand/portfolio-logos/Moku.svg', category: 'Retail', markup: true },
-  { name: 'Playbook', logo: '/assets/images/brand/portfolio-logos/Playbook.svg', category: 'Health' },
-  { name: 'Rely', logo: '/assets/images/brand/portfolio-logos/Rely.svg', category: 'Fintech' },
-  { name: 'Restream', logo: '/assets/images/brand/portfolio-logos/Restream.svg', category: 'SaaS' },
-  { name: 'RPM', logo: '/assets/images/brand/portfolio-logos/RPM.svg', category: 'Health', acquired: true },
-  { name: 'Sanzo', logo: '/assets/images/brand/portfolio-logos/Sanzo.svg', category: 'Retail', markup: true },
-  { name: 'Soot', logo: '/assets/images/brand/portfolio-logos/Soot.svg', category: 'SaaS', markup: true },
-  { name: 'Sugar', logo: '/assets/images/brand/portfolio-logos/Sugar.svg', category: 'SaaS', acquired: true },
-  { name: 'Sundae', logo: '/assets/images/brand/portfolio-logos/Sundae.svg', category: 'Fintech' },
-  { name: 'Superplastic', logo: '/assets/images/brand/portfolio-logos/Superplastic.svg', category: 'Retail' },
-  { name: 'Swan', logo: '/assets/images/brand/portfolio-logos/Swan.svg', category: 'Fintech', markup: true },
-  { name: 'Swansea City AFC', logo: '/assets/images/brand/portfolio-logos/SwanseaCityAFC.svg', category: 'Retail' },
-  { name: 'Techmate', logo: '/assets/images/brand/portfolio-logos/Techmate.svg', category: 'SaaS' },
-  { name: 'The Coffee', logo: '/assets/images/brand/portfolio-logos/TheCoffee.svg', category: 'Retail', markup: true },
-  { name: 'Waldo', logo: '/assets/images/brand/portfolio-logos/Waldo.svg', category: 'Fintech' }
+  { name: 'Afar', logo: '/images/portfolio/Afar.svg', category: 'Health' },
+  { name: 'AON3D', logo: '/images/portfolio/AON3D.svg', category: 'SaaS', markup: true },
+  { name: 'Aura', logo: '/images/portfolio/Aura.svg', category: 'Health', markup: true },
+  { name: 'Backpack', logo: '/images/portfolio/Backpack.svg', category: 'Fintech' },
+  { name: 'GEM', logo: '/images/portfolio/GEM.svg', category: 'Health', markup: true },
+  { name: 'Goodmylk', logo: '/images/portfolio/Goodmylk.svg', category: 'Health' },
+  { name: 'Harper', logo: '/images/portfolio/Harper.svg', category: 'Fintech' },
+  { name: 'Hedgehog', logo: '/images/portfolio/Hedgehog.svg', category: 'Health' },
+  { name: 'Juneshine', logo: '/images/portfolio/Juneshine.svg', category: 'Retail', markup: true },
+  { name: 'Juno', logo: '/images/portfolio/Juno.svg', category: 'Retail' },
+  { name: 'Kartera', logo: '/images/portfolio/Kartera.svg', category: 'Fintech' },
+  { name: 'Keep', logo: '/images/portfolio/Keep.svg', category: 'Fintech' },
+  { name: 'Lunar', logo: '/images/portfolio/Lunar.svg', category: 'Retail' },
+  { name: 'Margin', logo: '/images/portfolio/Margin.svg', category: 'SaaS' },
+  { name: 'Maridea', logo: '/images/portfolio/Maridea.svg', category: 'Fintech', markup: true },
+  { name: 'Metadata', logo: '/images/portfolio/Metadata.svg', category: 'SaaS', markup: true },
+  { name: 'Moku', logo: '/images/portfolio/Moku.svg', category: 'Retail', markup: true },
+  { name: 'Playbook', logo: '/images/portfolio/Playbook.svg', category: 'Health' },
+  { name: 'Rely', logo: '/images/portfolio/Rely.svg', category: 'Fintech' },
+  { name: 'Restream', logo: '/images/portfolio/Restream.svg', category: 'SaaS' },
+  { name: 'RPM', logo: '/images/portfolio/RPM.svg', category: 'Health', acquired: true },
+  { name: 'Sanzo', logo: '/images/portfolio/Sanzo.svg', category: 'Retail', markup: true },
+  { name: 'Soot', logo: '/images/portfolio/Soot.svg', category: 'SaaS', markup: true },
+  { name: 'Sugar', logo: '/images/portfolio/Sugar.svg', category: 'SaaS', acquired: true },
+  { name: 'Sundae', logo: '/images/portfolio/Sundae.svg', category: 'Fintech' },
+  { name: 'Superplastic', logo: '/images/portfolio/Superplastic.svg', category: 'Retail' },
+  { name: 'Swan', logo: '/images/portfolio/Swan.svg', category: 'Fintech', markup: true },
+  { name: 'Swansea City AFC', logo: '/images/portfolio/SwanseaCityAFC.svg', category: 'Retail' },
+  { name: 'Techmate', logo: '/images/portfolio/Techmate.svg', category: 'SaaS' },
+  { name: 'The Coffee', logo: '/images/portfolio/TheCoffee.svg', category: 'Retail', markup: true },
+  { name: 'Waldo', logo: '/images/portfolio/Waldo.svg', category: 'Fintech' }
 ]
 
 const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const
 
 export default function PortfolioLogos() {
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All')
+  const [isLoading, setIsLoading] = useState(true)
 
   const filteredCompanies = companies.filter(company => 
     selectedCategory === 'All' || company.category === selectedCategory
@@ -57,7 +58,7 @@ export default function PortfolioLogos() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 justify-end">
         {categories.map((category) => (
           <button
             key={category}
@@ -74,20 +75,29 @@ export default function PortfolioLogos() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {filteredCompanies.map((company) => (
+        {filteredCompanies.map((company, index) => (
           <motion.div
             key={company.name}
             className="relative flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
             whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
           >
             <Image
               src={company.logo}
               alt={`${company.name} logo`}
               width={120}
               height={60}
-              className="object-contain"
+              className="object-contain transition-opacity"
+              loading="lazy"
+              onLoadingComplete={() => setIsLoading(false)}
             />
+            {isLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg">
+                <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
             {(company.markup || company.acquired) && (
               <div className="absolute top-2 right-2">
                 <span className={`px-2 py-1 text-xs rounded ${

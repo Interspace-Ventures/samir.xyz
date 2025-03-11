@@ -8,16 +8,18 @@ export default function Profile() {
         <div className="flex-1">
           <div className="flex items-center gap-6 mb-4">
             <Image
-              src="/Hey I'm Samir 2025.png"
+              src="/images/profile/hero.png"
               alt="Samir's animated avatar"
               width={96}
               height={96}
               className="rounded-full"
               priority
             />
-            <h1 className="text-4xl md:text-5xl font-bold">Hey - I'm Samir.</h1>
+            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400">
+              Hey - I'm Samir.
+            </h1>
           </div>
-          <h2 className="text-2xl md:text-3xl text-purple-600 dark:text-purple-400 mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400 mb-8">
             I drive business impact at fintechs.
           </h2>
 
