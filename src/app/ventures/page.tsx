@@ -2,22 +2,9 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ProjectCard } from '@/components/ventures/ProjectCard'
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8 }
-}
-
-interface VentureProject {
-  name: string
-  description: string
-  imageUrl: string
-  link: string
-}
-
-const ventureProjects: VentureProject[] = [
+const ventureProjects = [
   {
     name: "Interspace",
     description: "Technology and venture capital insights platform",
@@ -50,31 +37,9 @@ export default function Ventures() {
         </p>
       </section>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         {ventureProjects.map((project, index) => (
-          <motion.a
-            key={index}
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group block"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <div className="relative aspect-video mb-4 overflow-hidden rounded-lg bg-muted/10">
-              <Image
-                src={project.imageUrl}
-                alt={project.name}
-                width={400}
-                height={225}
-                className="object-cover transition-transform group-hover:scale-105"
-                loading="lazy"
-                priority={index < 3}
-              />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
-            <p className="text-muted-foreground">{project.description}</p>
-          </motion.a>
+          <ProjectCard key={index} {...project} />
         ))}
       </section>
 

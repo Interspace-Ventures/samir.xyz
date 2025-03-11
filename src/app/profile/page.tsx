@@ -7,15 +7,16 @@ export default function Profile() {
       <div className="flex flex-col md:flex-row items-start justify-between gap-8">
         <div className="flex-1">
           <div className="flex items-center gap-6 mb-4">
-            <Image
-              src="/images/profile/hero.png"
-              alt="Samir's animated avatar"
-              width={96}
-              height={96}
-              className="rounded-full"
-              priority
-            />
-            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400">
+            <div className="relative w-24 h-24">
+              <Image
+                src="/assets/images/profile/hero-main.png"
+                alt="Samir's profile"
+                fill
+                className="rounded-full object-cover"
+                priority
+              />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold">
               Hey - I'm Samir.
             </h1>
           </div>

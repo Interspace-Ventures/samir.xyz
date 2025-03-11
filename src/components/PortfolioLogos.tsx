@@ -50,11 +50,15 @@ const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const
 
 export default function PortfolioLogos() {
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All')
-  const [isLoading, setIsLoading] = useState(true)
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
 
   const filteredCompanies = companies.filter(company => 
     selectedCategory === 'All' || company.category === selectedCategory
   )
+
+  const handleImageLoad = (name: string) => {
+    setLoadedImages(prev => new Set(prev).add(name))
+  }
 
   return (
     <div className="space-y-8">
@@ -84,20 +88,23 @@ export default function PortfolioLogos() {
             transition={{ delay: index * 0.1 }}
             whileHover={{ scale: 1.05 }}
           >
-            <Image
-              src={company.logo}
-              alt={`${company.name} logo`}
-              width={120}
-              height={60}
-              className="object-contain transition-opacity"
-              loading="lazy"
-              onLoadingComplete={() => setIsLoading(false)}
-            />
-            {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg">
-                <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
-              </div>
-            )}
+            <div className="relative w-full h-16">
+              <Image
+                src={company.logo}
+                alt={`${company.name} logo`}
+                fill
+                className={`object-contain transition-opacity duration-300 ${
+                  loadedImages.has(company.name) ? 'opacity-100' : 'opacity-0'
+                }`}
+                loading="lazy"
+                onLoadingComplete={() => handleImageLoad(company.name)}
+              />
+              {!loadedImages.has(company.name) && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+            </div>
             {(company.markup || company.acquired) && (
               <div className="absolute top-2 right-2">
                 <span className={`px-2 py-1 text-xs rounded ${
