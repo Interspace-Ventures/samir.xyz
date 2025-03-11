@@ -26,13 +26,13 @@ export default function Navbar() {
       </Link>
 
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center space-x-6 ml-auto">
+      <div className="flex items-center space-x-6 ml-auto max-w-[600px] overflow-x-auto">
         {navItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             className={`
-              relative text-[13px] font-inter font-normal tracking-[0.1em] transition-colors
+              relative text-[13px] font-inter font-medium tracking-[0.1em] transition-colors whitespace-nowrap
               hover:text-primary dark:hover:text-primary
               ${pathname === item.href ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
               after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-full 
@@ -48,8 +48,8 @@ export default function Navbar() {
         <ThemeToggle />
       </div>
 
-      {/* Mobile Navigation */}
-      <div className="md:hidden ml-auto flex items-center gap-4">
+      {/* Mobile Navigation - Only shown at very small screens */}
+      <div className="hidden max-[480px]:flex ml-auto items-center gap-4">
         <ThemeToggle />
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -66,14 +66,14 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm py-4 px-4 space-y-4 border-b border-border/40">
+        <div className="absolute top-16 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm py-4 px-4 space-y-4 border-b border-border/40 max-[480px]:block hidden">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
               className={`
-                block text-[13px] font-inter font-normal tracking-[0.1em] transition-colors
+                block text-[13px] font-inter font-medium tracking-[0.1em] transition-colors
                 hover:text-primary dark:hover:text-primary
                 ${pathname === item.href ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
               `}
