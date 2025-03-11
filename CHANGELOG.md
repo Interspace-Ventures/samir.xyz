@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.6] - 2025-03-11
+
+### Changed
+- Updated navbar layout and positioning
+- Fixed mobile menu and theme toggle alignment
+- Added dark mode support for navbar gradient text
+- Implemented Inter font in navigation
+- Fixed z-index issues with mobile menu
+- Updated profile image path to use correct asset
+
 ## [1.1.5] - 2025-03-10
 
 ### Changed

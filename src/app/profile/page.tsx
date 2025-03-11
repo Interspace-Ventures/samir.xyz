@@ -6,23 +6,25 @@ export default function Profile() {
     <div className="max-w-4xl mx-auto">
       <div className="flex flex-col md:flex-row items-start justify-between gap-8">
         <div className="flex-1">
-          <div className="flex items-center gap-6 mb-4">
-            <div className="relative w-24 h-24">
+          <div className="flex gap-8 mb-8">
+            <div className="relative w-32 h-32 flex-shrink-0">
               <Image
                 src="/assets/images/profile/hero-main.png"
                 alt="Samir's profile"
                 fill
-                className="rounded-full object-cover"
+                className="object-cover"
                 priority
               />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold">
-              Hey - I'm Samir.
-            </h1>
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-5xl font-bold">
+                Hey - I'm Samir.
+              </h1>
+              <h2 className="text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">
+                I drive business impact at fintechs.
+              </h2>
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400 mb-8">
-            I drive business impact at fintechs.
-          </h2>
 
           <div className="space-y-6 text-gray-600 dark:text-gray-300">
             <p>
