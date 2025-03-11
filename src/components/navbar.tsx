@@ -20,7 +20,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 w-full h-16 flex items-center container mx-auto px-4 bg-background/50 backdrop-blur-sm border-b border-border/40">
       <Link 
         href="/" 
-        className="text-sm font-black tracking-widest gradient-text font-inter"
+        className="text-sm font-black tracking-widest gradient-text font-inter leading-none"
       >
         Hey - I'm Samir
       </Link>
