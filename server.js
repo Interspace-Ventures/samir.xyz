@@ -1,2 +1,2 @@
-// This file has been removed in favor of server/index.ts
-// The TypeScript version provides better type safety and maintainability
+// Removing custom server implementation
+// Next.js handles server functionality out of the box
