@@ -1,2 +1,2 @@
 #!/bin/bash
-npx next dev -p 5000
+NODE_ENV=development exec npx next dev -p 5000
