@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { default as NextLink } from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
 import { Menu, X } from "lucide-react"
@@ -18,17 +18,17 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full h-16 flex items-center container mx-auto px-4 bg-background/50 backdrop-blur-sm border-b border-border/40">
-      <Link 
+      <NextLink 
         href="/" 
         className="text-sm font-black tracking-widest gradient-text font-inter leading-none"
       >
         Hey - I'm Samir
-      </Link>
+      </NextLink>
 
       {/* Desktop Navigation */}
       <div className="flex items-center space-x-6 ml-auto max-w-[600px] overflow-x-auto">
         {navItems.map((item) => (
-          <Link
+          <NextLink
             key={item.href}
             href={item.href}
             className={`
@@ -42,13 +42,13 @@ export default function Navbar() {
             `}
           >
             {item.label}
-          </Link>
+          </NextLink>
         ))}
 
         <ThemeToggle />
       </div>
 
-      {/* Mobile Navigation - Only shown at very small screens */}
+      {/* Mobile Navigation */}
       <div className="hidden max-[480px]:flex ml-auto items-center gap-4">
         <ThemeToggle />
         <button
@@ -68,7 +68,7 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="absolute top-16 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm py-4 px-4 space-y-4 border-b border-border/40 max-[480px]:block hidden">
           {navItems.map((item) => (
-            <Link
+            <NextLink
               key={item.href}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
@@ -79,7 +79,7 @@ export default function Navbar() {
               `}
             >
               {item.label}
-            </Link>
+            </NextLink>
           ))}
         </div>
       )}
