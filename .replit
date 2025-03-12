@@ -9,15 +9,15 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 41175
-externalPort = 3001
-
-[[ports]]
-localPort = 45605
+localPort = 33543
 externalPort = 3000
 
 [[ports]]
-localPort = 45867
+localPort = 39005
+externalPort = 3003
+
+[[ports]]
+localPort = 40163
 externalPort = 3002
 
 [deployment]
