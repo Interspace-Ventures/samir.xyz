@@ -6,38 +6,38 @@ import { ProjectCard } from '@/components/ventures/ProjectCard'
 const ventureProjects = [
   {
     name: "2 Days Early",
-    description: "Track and optimize your development velocity",
-    imageUrl: "/placeholder-logo.svg", // Will be replaced with actual logo
+    description: "Current and former Chime operator community built by operators for operators",
+    imageUrl: "/placeholder-logo.svg",
     link: "https://2daysearly.com"
   },
   {
     name: "Solo",
-    description: "The modern platform for indie creators",
-    imageUrl: "/placeholder-logo.svg", // Will be replaced with actual logo
+    description: "The first design-forward climbing app",
+    imageUrl: "/placeholder-logo.svg",
     link: "https://gosolo.nyc"
   },
   {
     name: "Predictive",
-    description: "AI-powered film production insights",
-    imageUrl: "/placeholder-logo.svg", // Will be replaced with actual logo
+    description: "AI-powered film predictions",
+    imageUrl: "/placeholder-logo.svg",
     link: "https://predictive.film"
   },
   {
     name: "Interspace",
-    description: "Tech and venture capital insights platform",
-    imageUrl: "/attached_assets/Interspace Square - 2025.png",
+    description: "Over-engineered fintech and stratfin perspectives",
+    imageUrl: "/images/logos/interspace-square.png",
     link: "https://posts.interspace.ventures"
   },
   {
     name: "Hey I'm Samir",
-    description: "Personal brand and portfolio",
-    imageUrl: "/attached_assets/Hey I'm Samir 2025.png",
+    description: "I drive business impact in fintechs",
+    imageUrl: "/images/logos/samir.png",
     link: "https://samir.xyz"
   },
   {
     name: "Interspace Ventures",
-    description: "Innovation and venture studio",
-    imageUrl: "/attached_assets/Perspectives Favicon.png",
+    description: "Over-engineered apps and concepts",
+    imageUrl: "/images/logos/perspectives.png",
     link: "https://interspace.ventures"
   }
 ]
