@@ -1,23 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '*.app',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.co',
-      }
-    ]
-  },
-  experimental: {
-    serverComponentsExternalPackages: []
+    domains: ['*.app', '*.com', '*.co'],
+    unoptimized: true
   },
   // Ensure development server runs on port 5000
   async rewrites() {
