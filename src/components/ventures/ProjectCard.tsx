@@ -16,22 +16,21 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block"
+      className="group relative rounded-xl border border-border/40 bg-background/50 p-6 backdrop-blur-sm transition-colors hover:bg-muted/20"
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <div className="relative aspect-video mb-4 overflow-hidden rounded-lg bg-muted/10">
+      <div className="relative h-12 w-12 mb-4 overflow-hidden">
         <Image
           src={imageUrl}
-          alt={name}
-          width={400}
-          height={225}
-          className="object-cover transition-transform group-hover:scale-105"
-          loading="lazy"
+          alt={`${name} logo`}
+          fill
+          className="object-contain"
+          sizes="(max-width: 768px) 48px, 48px"
         />
       </div>
       <h3 className="text-xl font-semibold mb-2">{name}</h3>
-      <p className="text-muted-foreground">{description}</p>
+      <p className="text-muted-foreground text-sm">{description}</p>
     </motion.a>
   )
 }
