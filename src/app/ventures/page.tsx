@@ -1,53 +1,74 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import { ProjectCard } from '@/components/ventures/ProjectCard'
 
 const ventureProjects = [
   {
+    name: "2 Days Early",
+    description: "Track and optimize your development velocity",
+    imageUrl: "/placeholder-logo.svg", // Will be replaced with actual logo
+    link: "https://2daysearly.com"
+  },
+  {
+    name: "Solo",
+    description: "The modern platform for indie creators",
+    imageUrl: "/placeholder-logo.svg", // Will be replaced with actual logo
+    link: "https://gosolo.nyc"
+  },
+  {
+    name: "Predictive",
+    description: "AI-powered film production insights",
+    imageUrl: "/placeholder-logo.svg", // Will be replaced with actual logo
+    link: "https://predictive.film"
+  },
+  {
     name: "Interspace",
-    description: "Technology and venture capital insights platform",
-    imageUrl: "/images/ventures/interspace.svg",
+    description: "Tech and venture capital insights platform",
+    imageUrl: "/attached_assets/Interspace Square - 2025.png",
     link: "https://posts.interspace.ventures"
   },
   {
-    name: "AI Research Lab",
-    description: "Advanced artificial intelligence research and development",
-    imageUrl: "/images/ventures/ai-research.svg",
-    link: "https://ai-research.lab"
+    name: "Hey I'm Samir",
+    description: "Personal brand and portfolio",
+    imageUrl: "/attached_assets/Hey I'm Samir 2025.png",
+    link: "https://samir.xyz"
   },
   {
-    name: "Green Tech Fund",
-    description: "Sustainable technology investment initiative",
-    imageUrl: "/images/ventures/green-tech.svg",
-    link: "https://green.tech.fund"
+    name: "Interspace Ventures",
+    description: "Innovation and venture studio",
+    imageUrl: "/attached_assets/Perspectives Favicon.png",
+    link: "https://interspace.ventures"
   }
 ]
 
 export default function Ventures() {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
-      <section className="space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
-          Ventures
+    <div className="container mx-auto px-4 py-12 min-h-[calc(100vh-4rem)]">
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="space-y-4 mb-12"
+      >
+        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400">
+          Interspace Ventures
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-          Exploring and investing in innovative technology companies
+          I create apps and concepts by coding at the speed of thought using Replit
         </p>
-      </section>
+      </motion.section>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         {ventureProjects.map((project, index) => (
-          <ProjectCard key={index} {...project} />
+          <ProjectCard key={project.name} {...project} />
         ))}
-      </section>
-
-      <div className="text-center mt-12">
-        <Link href="/" className="text-primary hover:text-primary/80 inline-flex items-center">
-          ← Back to Home
-        </Link>
-      </div>
+      </motion.section>
     </div>
   )
 }
