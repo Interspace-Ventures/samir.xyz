@@ -1,2 +1,2 @@
 #!/bin/bash
-PORT=5000 npx next dev
+npx next dev -p 5000

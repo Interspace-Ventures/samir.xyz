@@ -17,7 +17,7 @@ const ventureProjects = [
     link: "https://gosolo.nyc"
   },
   {
-    name: "Predictive",
+    name: "Predictive:film",
     description: "AI-powered film predictions",
     imageUrl: "/assets/images/portfolio-logos/placeholder.svg",
     link: "https://predictive.film"
@@ -25,19 +25,19 @@ const ventureProjects = [
   {
     name: "Interspace",
     description: "Over-engineered fintech and stratfin perspectives",
-    imageUrl: "/assets/images/brand/interspace-square.png",
+    imageUrl: "/assets/images/portfolio-logos/placeholder.svg",
     link: "https://posts.interspace.ventures"
   },
   {
     name: "Hey I'm Samir",
     description: "I drive business impact in fintechs",
-    imageUrl: "/assets/images/brand/samir.png",
+    imageUrl: "/assets/images/portfolio-logos/placeholder.svg",
     link: "https://samir.xyz"
   },
   {
     name: "Interspace Ventures",
     description: "Over-engineered apps and concepts",
-    imageUrl: "/assets/images/brand/perspectives.png",
+    imageUrl: "/assets/images/portfolio-logos/placeholder.svg",
     link: "https://interspace.ventures"
   }
 ]
@@ -49,7 +49,7 @@ export default function Ventures() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-4 mb-12"
+        className="space-y-4 mb-16"
       >
         <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400">
           Interspace Ventures
@@ -59,16 +59,16 @@ export default function Ventures() {
         </p>
       </motion.section>
 
-      <motion.section 
+      <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
       >
         {ventureProjects.map((project, index) => (
           <ProjectCard key={project.name} {...project} />
         ))}
-      </motion.section>
+      </motion.div>
     </div>
   )
 }
