@@ -1,2 +1,2 @@
-// This file is being removed in favor of src/components/Footer.tsx
-// Please use the PascalCase version of the Footer component to maintain React naming conventions
+// This file is deprecated. Please use Footer.tsx (PascalCase) instead.
+// Removing this file to avoid confusion and casing conflicts.
