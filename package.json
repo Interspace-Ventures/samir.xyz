@@ -13,7 +13,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20.17.24",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
