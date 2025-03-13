@@ -46,11 +46,11 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
 
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300" />
 
-      <div className="absolute inset-0 p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <h3 className="text-lg font-semibold mb-1 text-white">
+      <div className="absolute inset-0 p-3 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <h3 className="text-base font-semibold mb-1 text-white">
           {name}
         </h3>
-        <p className="text-sm text-gray-200 line-clamp-2">
+        <p className="text-xs text-gray-200 line-clamp-2">
           {description}
         </p>
       </div>
