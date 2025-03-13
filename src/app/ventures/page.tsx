@@ -34,12 +34,6 @@ const ventureProjects = [
     description: "I drive business impact in fintechs",
     imageUrl: "/assets/images/brand/samir.png",
     link: "https://samir.xyz"
-  },
-  {
-    name: "Interspace Ventures",
-    description: "Over-engineered apps and concepts",
-    imageUrl: "/assets/images/brand/interspace-square.png",
-    link: "https://interspace.ventures"
   }
 ]
 
@@ -57,26 +51,21 @@ const container = {
 
 export default function Ventures() {
   return (
-    <div className="container mx-auto px-4 py-12 min-h-[calc(100vh-4rem)]">
-      <motion.section 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="space-y-4 mb-16"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-400">
-          Interspace Ventures
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl" role="doc-subtitle">
-          I create apps and concepts by coding at the speed of thought using Replit
-        </p>
-      </motion.section>
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
+        <div className="flex-1 space-y-6">
+          <h1 className="text-5xl md:text-6xl font-bold">Ventures</h1>
+          <p className="text-xl md:text-2xl max-w-3xl">
+            I create apps and concepts by coding at the speed of thought using Replit
+          </p>
+        </div>
+      </div>
 
       <motion.div 
         variants={container}
         initial="hidden"
         animate="show"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         role="list"
         aria-label="Venture projects"
       >

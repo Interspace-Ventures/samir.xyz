@@ -16,11 +16,11 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative flex flex-col h-[220px] rounded-xl border border-border/40 bg-background/50 p-6 backdrop-blur-sm transition-all hover:bg-muted/20"
+      className="group relative flex flex-col h-[280px] rounded-xl border border-border/40 bg-background/50 overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.02, y: -4 }}
+      whileHover={{ scale: 1.02 }}
       transition={{ 
         type: "spring",
         stiffness: 300,
@@ -30,37 +30,32 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       role="listitem"
       aria-label={`${name} - ${description}`}
     >
-      <div className="relative h-12 w-12 mb-4 overflow-hidden rounded-lg group-hover:shadow-lg transition-shadow">
-        <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 animate-pulse" />
-        <Image
-          src={imageUrl}
-          alt={`${name} project logo`}
-          fill
-          className="object-contain transition-transform group-hover:scale-110 opacity-0"
-          sizes="48px"
-          priority
-          onLoadingComplete={(img) => {
-            img.classList.remove('opacity-0')
-          }}
-          onError={(e) => {
-            // Fallback to placeholder if image fails to load
-            e.currentTarget.src = '/assets/images/portfolio-logos/placeholder.svg'
-          }}
-        />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+      <div className="relative h-full w-full p-6">
+        <div className="relative h-16 w-16 mb-4">
+          <Image
+            src={imageUrl}
+            alt={`${name} project logo`}
+            fill
+            className="object-contain"
+            sizes="64px"
+            priority
+            onError={(e) => {
+              e.currentTarget.src = '/assets/images/portfolio-logos/placeholder.svg'
+            }}
+          />
+        </div>
+
+        <div className="absolute bottom-6 left-6 right-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-200">
+          <h3 className="text-xl font-semibold mb-2 text-white">
+            {name}
+          </h3>
+          <p className="text-sm text-gray-200 line-clamp-2">
+            {description}
+          </p>
+        </div>
       </div>
-      <h3 className="text-xl font-semibold mb-2 line-clamp-1 transition-colors group-hover:text-primary">
-        {name}
-      </h3>
-      <p className="text-muted-foreground text-sm line-clamp-2 transition-colors group-hover:text-foreground">
-        {description}
-      </p>
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-purple-700 rounded-b-xl opacity-0 transition-opacity"
-        initial={{ scaleX: 0 }}
-        whileHover={{ scaleX: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 30 }}
-        aria-hidden="true"
-      />
     </motion.a>
   )
 }
