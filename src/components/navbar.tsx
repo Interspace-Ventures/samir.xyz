@@ -20,7 +20,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 w-full h-16 flex items-center container mx-auto px-4 bg-background/50 backdrop-blur-sm border-b border-border/40">
       <NextLink 
         href="/" 
-        className="text-sm font-black tracking-widest gradient-text font-inter leading-none"
+        className="font-inter text-sm font-black tracking-widest gradient-text leading-none"
       >
         Hey - I'm Samir
       </NextLink>
@@ -32,7 +32,7 @@ export default function Navbar() {
             key={item.href}
             href={item.href}
             className={`
-              relative text-[13px] font-inter font-medium tracking-[0.1em] transition-colors whitespace-nowrap
+              relative font-inter text-[13px] font-medium tracking-[0.1em] transition-colors whitespace-nowrap
               hover:text-primary dark:hover:text-primary
               ${pathname === item.href ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
               after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-full 
@@ -73,7 +73,7 @@ export default function Navbar() {
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
               className={`
-                block text-[13px] font-inter font-medium tracking-[0.1em] transition-colors
+                block font-inter text-[13px] font-medium tracking-[0.1em] transition-colors
                 hover:text-primary dark:hover:text-primary
                 ${pathname === item.href ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
               `}

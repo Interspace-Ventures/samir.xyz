@@ -88,10 +88,13 @@ export default function PortfolioLogos() {
                 src={company.logo}
                 alt={`${company.name} logo`}
                 fill
-                className="object-contain"
+                className="object-contain opacity-0"
                 loading="eager"
                 priority={index < 8}
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                onLoad={(e) => {
+                  e.currentTarget.classList.remove('opacity-0')
+                }}
               />
             </div>
             {(company.markup || company.acquired) && (
