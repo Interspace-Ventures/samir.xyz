@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { ProjectCard } from '@/components/ventures/ProjectCard'
-import Head from 'next/head'
 
 const ventureProjects = [
   {
@@ -20,26 +19,26 @@ const ventureProjects = [
   {
     name: "Predictive:film",
     description: "AI-powered film predictions",
-    imageUrl: "/assets/images/ventures/predictive-film.png",
+    imageUrl: "/assets/images/ventures/predictive-film-icon-2025.png",
     link: "https://predictive.film"
+  },
+  {
+    name: "Interspace",
+    description: "Over-engineered fintech and stratfin perspectives",
+    imageUrl: "/assets/images/logos/interspace-square.png",
+    link: "https://posts.interspace.ventures"
+  },
+  {
+    name: "Perspectives",
+    description: "Fintech & stratfin deep dives",
+    imageUrl: "/assets/images/logos/perspectives.png",
+    link: "https://perspectives.samir.xyz"
   }
 ]
 
-// Animation variants for staggered children
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3
-    }
-  }
-}
-
 export default function Ventures() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-4 py-12">
       <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
         <div className="flex-1 space-y-6">
           <h1 className="text-5xl md:text-6xl font-bold">Ventures</h1>
@@ -50,12 +49,12 @@ export default function Ventures() {
       </div>
 
       <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         role="list"
         aria-label="Venture projects"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
         {ventureProjects.map((project) => (
           <ProjectCard key={project.name} {...project} />

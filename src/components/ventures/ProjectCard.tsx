@@ -1,7 +1,7 @@
 "use client"
 
-import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 interface ProjectCardProps {
   name: string
@@ -16,7 +16,7 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative flex flex-col h-[280px] rounded-xl overflow-hidden"
+      className="group relative aspect-square rounded-lg overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -44,10 +44,10 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/20 to-black/90 opacity-100" />
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300" />
 
-      <div className="absolute bottom-6 left-6 right-6">
-        <h3 className="text-xl font-semibold mb-2 text-white">
+      <div className="absolute inset-0 p-4 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <h3 className="text-lg font-semibold mb-1 text-white">
           {name}
         </h3>
         <p className="text-sm text-gray-200 line-clamp-2">
