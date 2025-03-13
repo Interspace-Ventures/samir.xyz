@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.12] - 2025-03-13
+
+### Changed
+- Reorganized venture icons into dedicated directory
+- Removed test routes and unused files
+- Updated venture cards to use full-background images
+- Enhanced navbar font styling with proper Inter font integration
+- Improved image loading performance with proper sizing
+- Organized public assets directory structure
+
+### Removed
+- Removed test routes (test-route-1, test-route-2)
+- Cleaned up unused server configuration
+
+## [1.1.11] - 2025-03-13
+
+### Changed
+- Fixed deprecated `onLoadingComplete` Image property, replaced with `onLoad`
+- Updated image loading animation in project cards
+
+### Technical Notes
+- Application runs on workflow "Start application" using start-dev.sh
+- Development server configured to run on port 5000 with proper host binding
+
 ## [1.1.10] - 2025-03-13
 
 ### Changed

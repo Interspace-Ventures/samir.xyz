@@ -46,6 +46,13 @@ npm run dev
 
 This starts Next.js development server with hot module replacement on port 5000.
 
+### Important Development Notes
+
+1. The application runs through the "Start application" workflow which executes start-dev.sh
+2. Development server is configured to run on port 5000 with proper host binding (0.0.0.0)
+3. When using Next.js Image component, always use `onLoad` instead of the deprecated `onLoadingComplete`
+4. All assets are optimized during build time
+
 ## Building for Production
 
 Build the static site:
