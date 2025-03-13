@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "@/app/globals.css";  
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
-import Footer from "@/components/footer"; // Fixed casing to match file
+import Footer from "@/components/Footer"; 
 import { PageTransition } from "@/components/page-transition";
 
 const inter = Inter({ 
