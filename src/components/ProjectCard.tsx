@@ -16,7 +16,7 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative aspect-square rounded-md overflow-hidden bg-white dark:bg-white/10 border border-border/10"
+      className="group relative h-64 rounded-lg overflow-hidden bg-card border"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -33,27 +33,20 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       <div className="relative w-full h-full">
         <Image
           src={imageUrl}
-          alt={`${name} project background`}
+          alt={`${name} project preview`}
           fill
-          className="object-contain p-1.5 opacity-0 transition-opacity duration-500"
-          loading="eager"
-          priority
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-          onLoad={(e) => {
-            e.currentTarget.classList.remove('opacity-0')
-          }}
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-      </div>
-
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300" />
-
-      <div className="absolute inset-0 p-1.5 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <h3 className="text-xs font-semibold mb-0.5 text-white">
-          {name}
-        </h3>
-        <p className="text-[10px] text-gray-200 line-clamp-2">
-          {description}
-        </p>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <h3 className="text-lg font-semibold text-white mb-2">
+            {name}
+          </h3>
+          <p className="text-sm text-gray-200">
+            {description}
+          </p>
+        </div>
       </div>
     </motion.a>
   )
