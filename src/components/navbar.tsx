@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react"
 import { useState } from "react"
 
 const navItems = [
-  { href: "/profile", label: "ABOUT", isExternal: false },
+  { href: "/", label: "ABOUT", isExternal: false },
   { href: "/portfolio", label: "PORTFOLIO", isExternal: false },
   { href: "/ventures", label: "VENTURES", isExternal: false }
 ]
@@ -26,7 +26,7 @@ export default function Navbar() {
       </NextLink>
 
       {/* Desktop Navigation */}
-      <div className="flex items-center space-x-6 ml-auto max-w-[600px] overflow-x-auto">
+      <div className="hidden md:flex items-center space-x-6 ml-auto max-w-[600px] overflow-x-auto">
         {navItems.map((item) => (
           <NextLink
             key={item.href}
@@ -49,7 +49,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="hidden max-[480px]:flex ml-auto items-center gap-4">
+      <div className="md:hidden ml-auto flex items-center gap-4">
         <ThemeToggle />
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -66,7 +66,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm py-4 px-4 space-y-4 border-b border-border/40 max-[480px]:block hidden">
+        <div className="absolute top-16 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm py-4 px-4 space-y-4 border-b border-border/40 md:hidden">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
