@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.13] - 2025-03-14
+
+### Changed
+- Consolidated CSS files into a single global.css file
+- Removed redundant globals.css in favor of global.css
+- Simplified public directory structure by removing redundant assets folder
+- Reorganized venture brand images into dedicated ventures-brands directory
+- Updated image paths to reflect new directory structure
+
+### Technical Notes
+- All global styles now live in src/app/global.css
+- Image assets now follow a flatter, more intuitive directory structure
+
 ## [1.1.12] - 2025-03-13
 
 ### Changed
