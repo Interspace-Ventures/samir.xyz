@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.15] - 2025-03-14
+
+### Changed
+- Fixed root route to properly display Profile page
+- Marked redundant page components for removal
+- Consolidated routing to use Next.js App Router exclusively
+
+## [1.1.14] - 2025-03-14
+
+### Changed
+- Consolidated routing to use Next.js App Router exclusively
+- Set Profile page as default route at app/page.tsx
+- Deprecated pages/profile-page.tsx in favor of app/page.tsx
+- Fixed 404 error on root path by setting Profile as index page
+
 ## [1.1.13] - 2025-03-14
 
 ### Changed
