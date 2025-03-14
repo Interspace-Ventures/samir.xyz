@@ -9,6 +9,10 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+  },
+  // Configure server to use port 5000
+  server: {
+    port: 5000,
   }
 };
 
