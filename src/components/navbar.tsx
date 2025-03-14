@@ -8,8 +8,8 @@ import { useState } from "react"
 
 const navItems = [
   { href: "/", label: "ABOUT", isExternal: false },
-  { href: "/portfolio", label: "PORTFOLIO", isExternal: false },
-  { href: "/ventures", label: "VENTURES", isExternal: false }
+  { href: "/portfolio-page", label: "PORTFOLIO", isExternal: false },
+  { href: "/ventures-page", label: "VENTURES", isExternal: false }
 ]
 
 export default function Navbar() {
