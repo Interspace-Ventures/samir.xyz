@@ -38,18 +38,20 @@ const projects = [
 
 export default function Ventures() {
   return (
-    <div className="max-w-xl mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12">
       <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12">
         <div className="flex-1 space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">Interspace Ventures</h1>
-          <p className="text-lg md:text-xl max-w-2xl">
+          <h1 className="text-4xl md:text-5xl font-bold gradient-text">
+            Interspace Ventures
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground">
             I create apps and concepts by coding at the speed of thought using Replit
           </p>
         </div>
       </div>
 
       <motion.div 
-        className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-1.5"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         role="list"
         aria-label="Venture projects"
         initial={{ opacity: 0, y: 20 }}
