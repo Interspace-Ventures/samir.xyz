@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import ProjectCard from '@/components/ventures/ProjectCard'
+import { ProjectCard } from '@/components/ProjectCard'
 
 const projects = [
   {
