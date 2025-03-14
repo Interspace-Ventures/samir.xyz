@@ -1,3 +1,5 @@
+"use client"
+
 import PortfolioLogos from '@/components/PortfolioLogos'
 
 export default function Portfolio() {
