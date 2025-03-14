@@ -11,9 +11,8 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    appDir: true,
-  },
+  // The appDir flag is no longer needed in Next.js 13+
+  // as the App Router is stable and enabled by default
 };
 
 export default nextConfig;
