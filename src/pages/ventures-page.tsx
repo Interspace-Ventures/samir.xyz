@@ -1,37 +1,37 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import ProjectCard from '@/components/ventures/ProjectCard'
+import { ProjectCard } from '@/components/ventures/ProjectCard'
 
-const projects = [
+const ventureProjects = [
   {
     name: "2 Days Early",
     description: "Current and former Chime operator community built by operators for operators",
-    imageUrl: "/images/ventures-brands/2DE Interspace.png",
+    imageUrl: "/assets/images/brand/2DE Interspace.png",
     link: "https://2daysearly.com"
   },
   {
     name: "Solo",
     description: "The first design-forward climbing app",
-    imageUrl: "/images/ventures-brands/Solo Logo 2025 Square.png",
+    imageUrl: "/assets/images/brand/Solo Logo 2025 Square.png",
     link: "https://gosolo.nyc"
   },
   {
     name: "Predictive:film",
     description: "AI-powered film predictions",
-    imageUrl: "/images/ventures-brands/Predictive.film (40 x 40 px).png",
+    imageUrl: "/assets/images/brand/Predictive.film (40 x 40 px).png",
     link: "https://predictive.film"
   },
   {
     name: "Interspace",
     description: "Over-engineered fintech and stratfin perspectives",
-    imageUrl: "/images/ventures-brands/Interspace Square - 2025.png",
+    imageUrl: "/images/logos/interspace-square.png",
     link: "https://posts.interspace.ventures"
   },
   {
     name: "Perspectives",
     description: "Fintech & stratfin deep dives",
-    imageUrl: "/images/ventures-brands/Perspectives Favicon.png",
+    imageUrl: "/images/logos/perspectives.png",
     link: "https://perspectives.samir.xyz"
   }
 ]
@@ -54,8 +54,9 @@ export default function Ventures() {
         aria-label="Venture projects"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        {projects.map((project) => (
+        {ventureProjects.map((project) => (
           <ProjectCard key={project.name} {...project} />
         ))}
       </motion.div>
