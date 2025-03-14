@@ -9,11 +9,12 @@ export default function Profile() {
           <div className="flex gap-8 mb-8">
             <div className="relative w-32 h-32 flex-shrink-0">
               <Image
-                src="/assets/images/profile/hero-main.png"
+                src="/images/portfolio-logos/placeholder.svg"
                 alt="Samir's profile"
                 fill
-                className="object-cover"
+                className="object-cover rounded-lg"
                 priority
+                sizes="(max-width: 768px) 128px, 128px"
               />
             </div>
             <div className="space-y-4">
