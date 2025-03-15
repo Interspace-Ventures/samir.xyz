@@ -6,8 +6,10 @@ import { PageTransition } from "@/components/page-transition";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
+// Performance optimized dynamic imports
 const Navbar = dynamic(() => import("@/components/navbar"), {
-  loading: () => <div className="h-16" />
+  loading: () => <div className="h-16" />,
+  ssr: true, // Enable SSR for faster initial load
 });
 
 const Footer = dynamic(() => import("@/components/Footer"), {
@@ -18,7 +20,7 @@ const Footer = dynamic(() => import("@/components/Footer"), {
 const inter = Inter({ 
   subsets: ["latin"],
   weight: ['400', '500', '600', '700', '800', '900'],
-  display: 'block',
+  display: 'swap', // Change to 'swap' for faster text rendering
   fallback: ['system-ui', 'sans-serif'],
   adjustFontFallback: true,
 });
@@ -31,18 +33,30 @@ export const metadata: Metadata = {
   },
 };
 
+// Add performance monitoring
+let pageLoadStart = 0;
+if (typeof window !== 'undefined') {
+  pageLoadStart = performance.now();
+}
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Monitor page load performance
+  if (typeof window !== 'undefined') {
+    const loadTime = performance.now() - pageLoadStart;
+    console.log(`[Performance] Total page load time: ${loadTime.toFixed(2)}ms`);
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} min-h-screen bg-background antialiased`}>
+      <body className={`${inter.className} min-h-screen bg-background text-foreground antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

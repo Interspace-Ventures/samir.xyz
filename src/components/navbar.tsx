@@ -90,7 +90,7 @@ export default function Navbar() {
       <div className="container mx-auto px-6 flex items-center justify-between">
         <NextLink
           href="/"
-          className="text-[28px] font-black text-foreground leading-none hover:opacity-80 transition-opacity"
+          className="text-[28px] text-foreground leading-none hover:opacity-80 transition-opacity"
           prefetch={false}
         >
           Hey - I'm Samir
