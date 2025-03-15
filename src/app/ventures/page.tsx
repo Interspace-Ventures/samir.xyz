@@ -54,7 +54,7 @@ export default function Ventures() {
           <p 
             className="text-lg md:text-xl text-gray-700 dark:text-gray-200"
           >
-            I create apps and concepts by coding at the speed of thought using Replit
+            I create apps and concepts by coding at the speed of thought using Replit.
           </p>
         </div>
       </div>

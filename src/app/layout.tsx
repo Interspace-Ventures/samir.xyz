@@ -64,7 +64,7 @@ export default function RootLayout({
             <Suspense fallback={<div className="h-16" />}>
               <Navbar />
             </Suspense>
-            <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-12">
+            <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8">
               <Suspense 
                 fallback={
                   <div className="animate-pulse bg-muted/10 rounded-lg h-[600px] w-full" />
@@ -75,7 +75,7 @@ export default function RootLayout({
                 </PageTransition>
               </Suspense>
             </main>
-            <div className="h-12"></div> {/* Extra space before footer */}
+            <div className="h-8" /> {/* Reduced space before footer */}
             <Suspense fallback={<footer className="h-16 bg-background" />}>
               <Footer />
             </Suspense>

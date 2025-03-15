@@ -3,32 +3,34 @@ import Link from "next/link"
 
 export default function Profile() {
   return (
-    <div>
-      <div className="flex flex-col md:flex-row items-center gap-8 min-h-[calc(100vh-20rem)]">
-        <div className="flex-1 space-y-8">
-          <div className="flex items-center gap-8">
-            <div className="relative w-32 h-32 flex-shrink-0">
+    <div className="transform-gpu">
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
+        <div className="flex-1 space-y-6 sm:space-y-8">
+          <div className="flex items-center gap-4 sm:gap-8">
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
               <Image
                 src="/images/profile/hero-main.png"
                 alt="Samir's profile"
                 fill
                 className="object-cover rounded-lg"
                 priority
-                sizes="(max-width: 768px) 128px, 128px"
+                sizes="(max-width: 768px) 96px, 128px"
               />
             </div>
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl font-bold">
+            <div className="space-y-2 sm:space-y-4">
+              <h1 
+                className="text-3xl sm:text-4xl md:text-5xl font-bold"
+              >
                 Hey - I'm Samir.
               </h1>
-              <h2 className="text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">
                 I drive business impact at fintechs.
               </h2>
             </div>
           </div>
 
-          <div className="space-y-6 text-gray-700 dark:text-gray-200">
-            <p>
+          <div className="space-y-4 sm:space-y-6 text-gray-700 dark:text-gray-200">
+            <p className="text-sm sm:text-base md:text-lg">
               Today, I am leading Strategic Finance for the Financial Partnerships team at{" "}
               <Link href="https://cash.app" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
                 Cash App
@@ -41,7 +43,7 @@ export default function Profile() {
               which uses algorithms to drive efficiency in markets.
             </p>
 
-            <p>
+            <p className="text-sm sm:text-base md:text-lg">
               Prior to that, I drove financial partnerships at{" "}
               <Link href="https://unit.co" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
                 Unit
@@ -61,7 +63,7 @@ export default function Profile() {
               covering market structure and asset management.
             </p>
 
-            <p>
+            <p className="text-sm sm:text-base md:text-lg">
               Outside of work, I write over-engineered fintech threads on{" "}
               <Link href="https://x.com/heyinterspace" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
                 Twitter
