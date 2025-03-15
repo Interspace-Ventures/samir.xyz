@@ -41,12 +41,12 @@ export default function Ventures() {
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6 mb-8">
         <div className="flex-1 space-y-4">
           <h1 
-            className="text-4xl md:text-5xl font-bold animate-in fade-in slide-in-from-bottom-4 duration-300"
+            className="text-4xl md:text-5xl font-bold"
           >
             Interspace Ventures
           </h1>
           <p 
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 animate-in fade-in slide-in-from-bottom-4 duration-300 delay-150"
+            className="text-lg md:text-xl text-gray-600 dark:text-gray-300"
           >
             I create apps and concepts by coding at the speed of thought using Replit
           </p>
@@ -61,13 +61,13 @@ export default function Ventures() {
         {projects.map((project, index) => (
           <div
             key={project.name}
-            className="animate-in fade-in slide-in-from-bottom-4 duration-300"
+            className="animate-in fade-in duration-300"
             style={{ 
-              animationDelay: `${index * 100}ms`,
+              animationDelay: `${index * 50}ms`, 
               animationFillMode: 'forwards' 
             }}
           >
-            <ProjectCard {...project} />
+            <ProjectCard {...project} priority={index < 3} /> 
           </div>
         ))}
       </div>

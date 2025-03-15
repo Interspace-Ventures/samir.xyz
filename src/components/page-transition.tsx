@@ -1,34 +1,56 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 
-// Performance monitoring
-const logTransitionPerformance = (action: string, path: string | null) => {
+// Enhanced performance monitoring with timing details
+const logTransitionPerformance = (action: string, path: string | null, markName?: string) => {
   if (process.env.NODE_ENV === 'development') {
-    console.log(`[Navigation] ${action} to ${path ?? 'unknown'}: ${performance.now()}ms`);
+    const timestamp = performance.now();
+    if (markName) {
+      performance.mark(markName);
+    }
+    console.log(`[Navigation] ${action} to ${path ?? 'unknown'} at ${timestamp.toFixed(2)}ms`);
   }
 };
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+  const mountTimeRef = useRef(performance.now())
 
-  // Monitor page transitions
+  // Enhanced mount monitoring
   useEffect(() => {
-    logTransitionPerformance('transition-start', pathname);
-    return () => logTransitionPerformance('transition-complete', pathname);
+    const mountDuration = performance.now() - mountTimeRef.current;
+    const markName = `transition-start-${pathname}`;
+
+    logTransitionPerformance('transition-start', pathname, markName);
+    performance.mark(markName);
+
+    console.log(`[Performance] Component mount duration: ${mountDuration.toFixed(2)}ms`);
+
+    return () => {
+      const unmountTime = performance.now();
+      logTransitionPerformance('transition-complete', pathname);
+      console.log(`[Performance] Component total lifecycle: ${(unmountTime - mountTimeRef.current).toFixed(2)}ms`);
+
+      if (performance.getEntriesByName(markName).length) {
+        performance.measure(`Page Transition - ${pathname}`, markName);
+      }
+    };
   }, [pathname]);
 
   return (
     <div
       key={pathname}
-      className="animate-in fade-in slide-in-from-bottom-4 duration-300 w-full h-full"
+      className="animate-in fade-in duration-300 ease-in-out"
       style={{
-        willChange: 'opacity, transform',
+        willChange: 'opacity',
         isolation: 'isolate',
+        // Remove transform to reduce compositing costs
+        transform: 'translateZ(0)'
       }}
-      onTransitionStart={() => logTransitionPerformance('transition-start', pathname)}
-      onTransitionEnd={() => logTransitionPerformance('transition-complete', pathname)}
+      onTransitionStart={() => logTransitionPerformance('animation-start', pathname)}
+      onTransitionEnd={() => logTransitionPerformance('animation-complete', pathname)}
     >
       {children}
     </div>
