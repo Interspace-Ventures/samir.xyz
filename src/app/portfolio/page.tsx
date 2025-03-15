@@ -1,23 +1,63 @@
 "use client"
 
-import PortfolioLogos from '@/components/PortfolioLogos'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+
+// Lazy load the PortfolioLogos component
+const PortfolioLogos = dynamic(() => import('@/components/PortfolioLogos'), {
+  loading: () => (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      {[...Array(10)].map((_, i) => (
+        <div key={i} className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+          <div className="aspect-[3/2] relative p-4">
+            <div className="w-full h-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md" />
+          </div>
+        </div>
+      ))}
+    </div>
+  ),
+  ssr: false // Disable SSR for this component to reduce initial load time
+})
+
+// Pre-render static content
+const stats = {
+  top: [
+    { label: "# Investments", value: "32" },
+    { label: "# Markups", value: "13" },
+    { label: "# Acquisitions", value: "2" },
+    { label: "# Busts", value: "4" },
+  ],
+  bottom: [
+    { label: "TVPI", value: "1.44x" },
+    { label: "Gross Multiple", value: "1.22x" },
+    { label: "Net Multiple", value: "1.12x" },
+    { label: "IRR", value: "10%" },
+  ]
+}
+
+// Stats section component for better code organization
+const StatsSection = () => (
+  <div className="w-full lg:w-auto grid gap-3 rounded-xl p-3 bg-card/50 backdrop-blur-sm">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {stats.top.map((stat) => (
+        <div key={stat.label} className="space-y-1">
+          <dt className="text-sm text-muted-foreground font-medium">{stat.label}</dt>
+          <dd className="text-lg font-semibold">{stat.value}</dd>
+        </div>
+      ))}
+    </div>
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {stats.bottom.map((stat) => (
+        <div key={stat.label} className="space-y-1">
+          <dt className="text-sm text-muted-foreground font-medium">{stat.label}</dt>
+          <dd className="text-lg font-semibold">{stat.value}</dd>
+        </div>
+      ))}
+    </div>
+  </div>
+)
 
 export default function Portfolio() {
-  const stats = {
-    top: [
-      { label: "# Investments", value: "32" },
-      { label: "# Markups", value: "13" },
-      { label: "# Acquisitions", value: "2" },
-      { label: "# Busts", value: "4" },
-    ],
-    bottom: [
-      { label: "TVPI", value: "1.44x" },
-      { label: "Gross Multiple", value: "1.22x" },
-      { label: "Net Multiple", value: "1.12x" },
-      { label: "IRR", value: "10%" },
-    ]
-  }
-
   return (
     <div>
       <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
@@ -27,32 +67,12 @@ export default function Portfolio() {
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
         </div>
-
-        {/* Stats card with more compact layout */}
-        <div className="w-full lg:w-auto grid gap-3 rounded-xl p-3 bg-card/50 backdrop-blur-sm">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {stats.top.map((stat) => (
-              <div key={stat.label} className="space-y-1">
-                <dt className="text-sm text-muted-foreground font-medium">{stat.label}</dt>
-                <dd className="text-lg font-semibold">{stat.value}</dd>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {stats.bottom.map((stat) => (
-              <div key={stat.label} className="space-y-1">
-                <dt className="text-sm text-muted-foreground font-medium">{stat.label}</dt>
-                <dd className="text-lg font-semibold">{stat.value}</dd>
-              </div>
-            ))}
-          </div>
-        </div>
+        <StatsSection />
       </div>
 
-      <div>
+      <Suspense fallback={null}>
         <PortfolioLogos />
-      </div>
+      </Suspense>
     </div>
   )
 }

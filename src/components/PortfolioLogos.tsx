@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image'
-import { useState, memo, useEffect, Suspense } from 'react'
+import { useState, memo, useEffect, Suspense, lazy } from 'react'
 
 // Performance monitoring with more detailed metrics
 const logPerformance = (component: string, action: string, details?: Record<string, any>) => {
@@ -22,6 +22,29 @@ const CompanyCardSkeleton = () => (
     </div>
   </div>
 );
+
+// Separate category filters into their own component for better initial load
+const CategoryFilters = memo(({ selectedCategory, onCategoryChange }: {
+  selectedCategory: string;
+  onCategoryChange: (category: string) => void;
+}) => {
+  const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const;
+
+  return (
+    <div className="flex flex-wrap gap-4">
+      {categories.map((category) => (
+        <CategoryButton
+          key={category}
+          category={category}
+          isSelected={selectedCategory === category}
+          onClick={() => onCategoryChange(category)}
+        />
+      ))}
+    </div>
+  );
+});
+
+CategoryFilters.displayName = 'CategoryFilters';
 
 const CategoryButton = memo(({ category, isSelected, onClick }: {
   category: string;
@@ -61,92 +84,10 @@ interface Company {
   acquired?: boolean;
 }
 
-const CompanyCard = memo(({ company }: { company: Company }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
+// Lazy load the company card for better initial page load
+const LazyCompanyCard = lazy(() => import('./CompanyCard'));
 
-  useEffect(() => {
-    logPerformance('CompanyCard', 'render', {
-      company: company.name,
-      loaded: imageLoaded,
-      error: imageError
-    });
-  }, [imageLoaded, imageError, company.name]);
-
-  return (
-    <div
-      className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="aspect-[3/2] relative p-4">
-        {!imageLoaded && !imageError && <CompanyCardSkeleton />}
-        {!imageError && (
-          <Image
-            src={company.logo}
-            alt={`${company.name} logo`}
-            fill
-            className={`
-              object-contain transition-opacity duration-300
-              ${imageLoaded ? 'opacity-100' : 'opacity-0'}
-            `}
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-            priority={company.markup || company.acquired}
-            onLoad={() => {
-              setImageLoaded(true);
-              logPerformance('CompanyCard', 'image-loaded', { 
-                company: company.name,
-                timestamp: Date.now()
-              });
-            }}
-            onError={() => {
-              setImageError(true);
-              logPerformance('CompanyCard', 'image-error', { 
-                company: company.name,
-                timestamp: Date.now()
-              });
-            }}
-          />
-        )}
-        {imageError && (
-          <div className="w-full h-full flex items-center justify-center text-gray-400">
-            <span>Failed to load image</span>
-          </div>
-        )}
-      </div>
-
-      {/* Hover overlay with description */}
-      <div
-        className={`
-          absolute inset-0 bg-black/80 flex items-center justify-center p-4
-          transition-all duration-300 ease-in-out
-          ${isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-        `}
-      >
-        <p className="text-white text-sm text-center">{company.description}</p>
-      </div>
-
-      {/* Badge for markup/acquired status */}
-      {(company.markup || company.acquired) && (
-        <div className="absolute top-2 right-2 z-10">
-          <span className={`
-            px-2 py-1 text-xs rounded font-medium
-            ${company.acquired
-              ? 'bg-blue-100 text-blue-600'
-              : 'bg-purple-100 text-purple-600'
-            }
-          `}>
-            {company.acquired ? 'Acquired' : 'Markup'}
-          </span>
-        </div>
-      )}
-    </div>
-  );
-});
-
-CompanyCard.displayName = 'CompanyCard';
-
+// Moved companies data outside component to prevent re-creation on re-renders
 const companies: Company[] = [
   { name: 'Afar', logo: '/images/portfolio-logos/Afar.png', category: 'Health', description: 'Low sugar high protein savory snack bars.' },
   { name: 'AON3D', logo: '/images/portfolio-logos/AON3D.png', category: 'SaaS', markup: true, description: 'Industrial 3D printing solutions for high-performance thermoplastics.' },
@@ -181,8 +122,7 @@ const companies: Company[] = [
   { name: 'Waldo', logo: '/images/portfolio-logos/Waldo.png', category: 'Fintech', description: 'Next-gen fraud and compliance monitoring tools.' }
 ];
 
-const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const;
-
+// Export default component with performance optimizations
 export default function PortfolioLogos() {
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All');
   const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -216,21 +156,17 @@ export default function PortfolioLogos() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap gap-4">
-        {categories.map((category) => (
-          <CategoryButton
-            key={category}
-            category={category}
-            isSelected={selectedCategory === category}
-            onClick={() => setSelectedCategory(category)}
-          />
-        ))}
-      </div>
+      <Suspense fallback={null}>
+        <CategoryFilters
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+        />
+      </Suspense>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {filteredCompanies.map((company) => (
           <Suspense key={company.name} fallback={<CompanyCardSkeleton />}>
-            <CompanyCard company={company} />
+            <LazyCompanyCard company={company} />
           </Suspense>
         ))}
       </div>
