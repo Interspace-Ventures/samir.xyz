@@ -1,8 +1,7 @@
 "use client"
 
 import Image from 'next/image'
-import { AnimatePresence } from "framer-motion/dist/framer-motion"
-import { m as motion } from "framer-motion/dist/framer-motion"
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState, memo, useEffect } from 'react'
 
 // Performance monitoring
