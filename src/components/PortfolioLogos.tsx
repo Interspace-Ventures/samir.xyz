@@ -1,6 +1,7 @@
 "use client"
 
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 interface Company {
@@ -63,7 +64,7 @@ export default function PortfolioLogos() {
             key={category}
             onClick={() => setSelectedCategory(category)}
             className={`
-              px-4 py-2 rounded font-medium
+              w-[90px] h-[36px] rounded text-sm font-medium
               ${selectedCategory === category
                 ? 'bg-purple-600 text-white'
                 : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
@@ -76,13 +77,17 @@ export default function PortfolioLogos() {
       </div>
 
       {/* Company Logo Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <motion.div 
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
         {filteredCompanies.map((company) => (
           <div
             key={company.name}
-            className="bg-white dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700/50 h-[200px] relative flex flex-col items-center"
+            className="bg-white rounded-lg border border-gray-200 overflow-hidden"
           >
-            <div className="w-full h-32 relative mb-2">
+            <div className="aspect-[4/3] relative p-4">
               <Image
                 src={company.logo}
                 alt={`${company.name} logo`}
@@ -92,17 +97,19 @@ export default function PortfolioLogos() {
               />
             </div>
 
-            <p className="text-sm font-medium text-gray-900 dark:text-gray-100 text-center">
-              {company.name}
-            </p>
+            <div className="px-4 pb-4">
+              <p className="text-sm font-medium text-gray-900 text-center">
+                {company.name}
+              </p>
+            </div>
 
             {(company.markup || company.acquired) && (
               <div className="absolute top-2 right-2">
                 <span className={`
                   px-2 py-1 text-xs rounded font-medium
                   ${company.acquired
-                    ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
-                    : 'bg-purple-100 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400'
+                    ? 'bg-blue-100 text-blue-600'
+                    : 'bg-purple-100 text-purple-600'
                   }
                 `}>
                   {company.acquired ? 'Acquired' : 'Markup'}
@@ -111,7 +118,7 @@ export default function PortfolioLogos() {
             )}
           </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }
