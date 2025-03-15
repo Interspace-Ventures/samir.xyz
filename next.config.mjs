@@ -2,8 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    unoptimized: true,
-    domains: ['**'],
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: 'https',
@@ -11,8 +10,23 @@ const nextConfig = {
       },
     ],
   },
-  // The appDir flag is no longer needed in Next.js 13+
-  // as the App Router is stable and enabled by default
+  // Enable React strict mode for better performance debugging
+  reactStrictMode: true,
+  // Enable build-time performance optimization
+  swcMinify: true,
+  // Configure experimental features
+  experimental: {
+    // Enable CSS optimization
+    optimizeCss: true,
+    // Enable proper font optimization
+    optimizePackageImports: ['@/components'],
+    // Enable better JS optimization
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+  },
+  // Configure proper compression
+  compress: true,
 };
 
 export default nextConfig;
