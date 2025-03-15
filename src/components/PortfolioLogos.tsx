@@ -78,16 +78,23 @@ export default function PortfolioLogos() {
         ))}
       </div>
 
-      {/* Company Logo Grid */}
+      {/* Company Logo Grid with optimized loading states */}
       <motion.div 
         className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
+        layout // Enable smooth transitions when filtering
+        layoutRoot // Optimize layout animations
       >
         {filteredCompanies.map((company) => (
-          <div
+          <motion.div
             key={company.name}
+            layout // Enable smooth transitions for individual items
             className="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
           >
             <div className="aspect-[4/3] relative p-4">
               {imageLoadError[company.name] ? (
@@ -107,11 +114,14 @@ export default function PortfolioLogos() {
                     fill
                     className="object-contain"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    priority
-                    onLoad={() => setImageLoading(prev => ({ ...prev, [company.name]: false }))}
+                    priority={company.markup || company.acquired} // Prioritize loading of important logos
+                    loading={company.markup || company.acquired ? "eager" : "lazy"}
+                    onLoadingComplete={() => {
+                      setImageLoading(prev => ({ ...prev, [company.name]: false }))
+                    }}
                     onError={() => {
-                      setImageLoadError(prev => ({ ...prev, [company.name]: true }));
-                      setImageLoading(prev => ({ ...prev, [company.name]: false }));
+                      setImageLoadError(prev => ({ ...prev, [company.name]: true }))
+                      setImageLoading(prev => ({ ...prev, [company.name]: false }))
                     }}
                   />
                 </>
@@ -137,7 +147,7 @@ export default function PortfolioLogos() {
                 </span>
               </div>
             )}
-          </div>
+          </motion.div>
         ))}
       </motion.div>
     </div>

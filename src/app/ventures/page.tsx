@@ -41,12 +41,22 @@ export default function Ventures() {
     <div className="container mx-auto px-4 py-12">
       <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12">
         <div className="flex-1 space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">
+          <motion.h1 
+            className="text-4xl md:text-5xl font-bold"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             Interspace Ventures
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground">
+          </motion.h1>
+          <motion.p 
+            className="text-lg md:text-xl text-muted-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+          >
             I create apps and concepts by coding at the speed of thought using Replit
-          </p>
+          </motion.p>
         </div>
       </div>
 
@@ -56,9 +66,23 @@ export default function Ventures() {
         aria-label="Venture projects"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ 
+          duration: 0.5,
+          staggerChildren: 0.1 
+        }}
       >
-        {projects.slice(0, 6).map((project) => (
-          <ProjectCard key={project.name} {...project} />
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 0.3,
+              delay: index * 0.1
+            }}
+          >
+            <ProjectCard {...project} />
+          </motion.div>
         ))}
       </motion.div>
     </div>
