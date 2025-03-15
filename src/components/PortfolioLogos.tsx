@@ -1,33 +1,54 @@
 "use client"
 
 import Image from 'next/image'
-import { useState, memo, useEffect } from 'react'
+import { useState, memo, useEffect, Suspense } from 'react'
 
-// Performance monitoring
-const logPerformance = (component: string, action: string) => {
+// Performance monitoring with more detailed metrics
+const logPerformance = (component: string, action: string, details?: Record<string, any>) => {
   if (process.env.NODE_ENV === 'development') {
-    console.log(`[Performance] ${component} - ${action}: ${performance.now()}ms`);
+    const timestamp = performance.now();
+    console.log(`[Performance] ${component} - ${action}:`, {
+      timestamp,
+      ...details
+    });
   }
 };
+
+// Loading skeleton for company cards
+const CompanyCardSkeleton = () => (
+  <div className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+    <div className="aspect-[3/2] relative p-4">
+      <div className="w-full h-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md" />
+    </div>
+  </div>
+);
 
 const CategoryButton = memo(({ category, isSelected, onClick }: {
   category: string;
   isSelected: boolean;
   onClick: () => void;
-}) => (
-  <button
-    onClick={onClick}
-    className={`
-      w-[90px] h-[36px] rounded text-sm font-medium transition-colors duration-150
-      ${isSelected
-        ? 'bg-purple-600 text-white'
-        : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200'
-      }
-    `}
-  >
-    {category}
-  </button>
-));
+}) => {
+  useEffect(() => {
+    if (isSelected) {
+      logPerformance('CategoryButton', 'selected', { category });
+    }
+  }, [isSelected, category]);
+
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        w-[90px] h-[36px] rounded text-sm font-medium transition-all duration-150
+        ${isSelected
+          ? 'bg-purple-600 text-white shadow-md scale-105'
+          : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200'
+        }
+      `}
+    >
+      {category}
+    </button>
+  );
+});
 
 CategoryButton.displayName = 'CategoryButton';
 
@@ -42,22 +63,57 @@ interface Company {
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    logPerformance('CompanyCard', 'render', {
+      company: company.name,
+      loaded: imageLoaded,
+      error: imageError
+    });
+  }, [imageLoaded, imageError, company.name]);
 
   return (
     <div
-      className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+      className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="aspect-[3/2] relative p-4">
-        <Image
-          src={company.logo}
-          alt={`${company.name} logo`}
-          fill
-          className="object-contain"
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-          priority={company.markup || company.acquired}
-        />
+        {!imageLoaded && !imageError && <CompanyCardSkeleton />}
+        {!imageError && (
+          <Image
+            src={company.logo}
+            alt={`${company.name} logo`}
+            fill
+            className={`
+              object-contain transition-opacity duration-300
+              ${imageLoaded ? 'opacity-100' : 'opacity-0'}
+            `}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+            priority={company.markup || company.acquired}
+            onLoad={() => {
+              setImageLoaded(true);
+              logPerformance('CompanyCard', 'image-loaded', { 
+                company: company.name,
+                timestamp: Date.now()
+              });
+            }}
+            onError={() => {
+              setImageError(true);
+              logPerformance('CompanyCard', 'image-error', { 
+                company: company.name,
+                timestamp: Date.now()
+              });
+            }}
+          />
+        )}
+        {imageError && (
+          <div className="w-full h-full flex items-center justify-center text-gray-400">
+            <span>Failed to load image</span>
+          </div>
+        )}
       </div>
 
       {/* Hover overlay with description */}
@@ -128,20 +184,35 @@ const companies: Company[] = [
 const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const;
 
 export default function PortfolioLogos() {
-  const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All')
+  const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All');
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [loadedImages, setLoadedImages] = useState(0);
 
   useEffect(() => {
-    logPerformance('PortfolioLogos', 'mount');
+    logPerformance('PortfolioLogos', 'mount', { 
+      initialLoad: true,
+      timestamp: Date.now()
+    });
+    setIsInitialLoad(false);
+
+    console.log('Portfolio component mounted and ready');
     return () => logPerformance('PortfolioLogos', 'unmount');
   }, []);
 
   useEffect(() => {
-    logPerformance('PortfolioLogos', `category-change-${selectedCategory}`);
-  }, [selectedCategory]);
+    if (!isInitialLoad) {
+      logPerformance('PortfolioLogos', 'category-change', {
+        category: selectedCategory,
+        timestamp: Date.now(),
+        loadedImages
+      });
+      console.log(`Category changed to: ${selectedCategory}`);
+    }
+  }, [selectedCategory, isInitialLoad, loadedImages]);
 
   const filteredCompanies = companies.filter(company =>
     selectedCategory === 'All' || company.category === selectedCategory
-  )
+  );
 
   return (
     <div className="space-y-8">
@@ -158,12 +229,11 @@ export default function PortfolioLogos() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {filteredCompanies.map((company) => (
-          <CompanyCard
-            key={company.name}
-            company={company}
-          />
+          <Suspense key={company.name} fallback={<CompanyCardSkeleton />}>
+            <CompanyCard company={company} />
+          </Suspense>
         ))}
       </div>
     </div>
-  )
+  );
 }
