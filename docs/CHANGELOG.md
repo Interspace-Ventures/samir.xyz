@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.17] - 2025-03-15
+
+### Changed
+- Fixed routing to use Next.js App Router paths consistently
+- Added proper image loading states and error handling for portfolio logos
+- Standardized ventures page layout to 2x3 grid
+- Enhanced dark mode support across components
+- Updated stats display in portfolio page
+
+### Fixed
+- Resolved portfolio logo loading issues
+- Fixed navigation links to use correct routes
+- Standardized header styling across pages
+
 ## [1.1.16] - 2025-03-14
 
 ### Changed
@@ -39,7 +53,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Technical Notes
 - All global styles now live in src/app/global.css
 - Image assets now follow a flatter, more intuitive directory structure
-
 
 ## [1.1.12] - 2025-03-13
 

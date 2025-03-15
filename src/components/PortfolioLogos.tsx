@@ -108,7 +108,6 @@ export default function PortfolioLogos() {
                     className="object-contain"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                     priority
-                    onLoadingComplete={() => setImageLoading(prev => ({ ...prev, [company.name]: false }))}
                     onLoad={() => setImageLoading(prev => ({ ...prev, [company.name]: false }))}
                     onError={() => {
                       setImageLoadError(prev => ({ ...prev, [company.name]: true }));
