@@ -1,8 +1,16 @@
 "use client"
 
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState, memo } from 'react'
+import { AnimatePresence } from "framer-motion/dist/framer-motion"
+import { m as motion } from "framer-motion/dist/framer-motion"
+import { useState, memo, useEffect } from 'react'
+
+// Performance monitoring
+const logPerformance = (component: string, action: string) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[Performance] ${component} - ${action}: ${performance.now()}ms`);
+  }
+};
 
 // Memoize the category button to prevent unnecessary re-renders
 const CategoryButton = memo(({ category, isSelected, onClick }: {
@@ -119,6 +127,17 @@ const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const;
 
 export default function PortfolioLogos() {
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All')
+
+  // Add performance monitoring
+  useEffect(() => {
+    logPerformance('PortfolioLogos', 'mount');
+    return () => logPerformance('PortfolioLogos', 'unmount');
+  }, []);
+
+  // Monitor category changes
+  useEffect(() => {
+    logPerformance('PortfolioLogos', `category-change-${selectedCategory}`);
+  }, [selectedCategory]);
 
   const filteredCompanies = companies.filter(company =>
     selectedCategory === 'All' || company.category === selectedCategory

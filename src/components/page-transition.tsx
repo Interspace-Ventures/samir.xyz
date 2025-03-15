@@ -1,10 +1,25 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence } from "framer-motion/dist/framer-motion"
+import { m as motion } from "framer-motion/dist/framer-motion"
 import { usePathname } from "next/navigation"
+import { useEffect } from "react"
+
+// Performance monitoring
+const logTransitionPerformance = (action: string, path: string | null) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[Navigation] ${action} to ${path ?? 'unknown'}: ${performance.now()}ms`);
+  }
+};
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+
+  // Monitor page transitions
+  useEffect(() => {
+    logTransitionPerformance('transition-start', pathname);
+    return () => logTransitionPerformance('transition-complete', pathname);
+  }, [pathname]);
 
   return (
     <AnimatePresence mode="wait">
@@ -22,6 +37,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           isolation: 'isolate',  // Create stacking context for better performance
         }}
         className="w-full h-full"
+        onAnimationStart={() => logTransitionPerformance('animation-start', pathname)}
+        onAnimationComplete={() => logTransitionPerformance('animation-complete', pathname)}
       >
         {children}
       </motion.div>

@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-03-15
+
+### Added
+- CSS optimization with Critters package
+- Advanced image optimization configuration in Next.js
+- Streamlined build process with modularized imports
+
+### Changed
+- Complete architectural overhaul of portfolio page loading
+- Reimplemented animation system for better performance
+- Simplified and optimized component rendering logic
+- Enhanced server startup configuration for better reliability
+- Optimized image loading strategy
+- Improved bundle size through better code splitting
+
+### Technical Debt
+- Consider implementing proper monitoring for performance metrics
+- Review CDN strategy for image delivery
+- Consider implementing proper error boundaries for failed image loads
+
 ## [1.1.17] - 2025-03-15
 
 ### Changed
