@@ -28,6 +28,12 @@ const projects = [
     link: "https://posts.interspace.ventures"
   },
   {
+    name: "Hey I'm Samir",
+    description: "I drive business impact in fintech.",
+    imageUrl: "/images/profile/hero-main.png",
+    link: "https://samir.xyz"
+  },
+  {
     name: "Perspectives",
     description: "Fintech & stratfin deep dives",
     imageUrl: "/images/brand/perspectives.png",
@@ -46,7 +52,7 @@ export default function Ventures() {
             Interspace Ventures
           </h1>
           <p 
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-300"
+            className="text-lg md:text-xl text-gray-700 dark:text-gray-200"
           >
             I create apps and concepts by coding at the speed of thought using Replit
           </p>
@@ -54,7 +60,7 @@ export default function Ventures() {
       </div>
 
       <div 
-        className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6"
+        className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto"
         role="list"
         aria-label="Venture projects"
       >

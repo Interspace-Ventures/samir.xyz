@@ -20,7 +20,7 @@ export function ProjectCard({ name, description, imageUrl, link, priority = fals
       role="listitem"
       aria-label={`${name} - ${description}`}
     >
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full p-10">
         <Image
           src={imageUrl}
           alt={`${name} project preview`}
