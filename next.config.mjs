@@ -47,6 +47,14 @@ const nextConfig = {
       },
     ];
   },
+  // Optimize page loading
+  poweredByHeader: false,
+  // Improve bundle size
+  modularizeImports: {
+    'framer-motion': {
+      transform: 'framer-motion/{{member}}',
+    },
+  },
 };
 
 export default nextConfig;
