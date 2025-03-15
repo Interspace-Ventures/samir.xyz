@@ -2,24 +2,30 @@
 
 import Image from 'next/image'
 import { useState, memo, useEffect, Suspense, lazy, useRef, useCallback } from 'react'
-import { companies, categories, type Company } from './data/portfolio'
-
-// Performance monitoring with more detailed metrics
-const logPerformance = (component: string, action: string, details?: Record<string, any>) => {
-  if (process.env.NODE_ENV === 'development') {
-    const timestamp = performance.now();
-    console.log(`[Performance] ${component} - ${action}:`, {
-      timestamp,
-      ...details
-    });
-  }
-};
+import { companies, categories } from './data/portfolio'
+import type { Company } from './types'
 
 // Loading skeleton for company cards
 const CompanyCardSkeleton = () => (
   <div className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
     <div className="aspect-[3/2] relative p-4">
       <div className="w-full h-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md" />
+    </div>
+  </div>
+);
+
+// Initial skeleton grid for better visual loading state
+const InitialLoadingSkeleton = () => (
+  <div className="space-y-8">
+    <div className="flex flex-wrap gap-4">
+      {[...Array(5)].map((_, i) => (
+        <div key={i} className="w-[90px] h-[36px] bg-gray-200 dark:bg-gray-700 animate-pulse rounded" />
+      ))}
+    </div>
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      {[...Array(15)].map((_, i) => (
+        <CompanyCardSkeleton key={i} />
+      ))}
     </div>
   </div>
 );
@@ -50,12 +56,6 @@ const CategoryButton = memo(({ category, isSelected, onClick }: {
   isSelected: boolean;
   onClick: () => void;
 }) => {
-  useEffect(() => {
-    if (isSelected) {
-      logPerformance('CategoryButton', 'selected', { category });
-    }
-  }, [isSelected, category]);
-
   return (
     <button
       onClick={onClick}
@@ -77,44 +77,12 @@ CategoryButton.displayName = 'CategoryButton';
 // Lazy load the company card for better initial page load
 const LazyCompanyCard = lazy(() => import('./CompanyCard'));
 
-// Cache for storing loaded images
-const imageCache = new Map<string, boolean>();
-
-// Initial skeleton grid for better visual loading state
-const InitialLoadingSkeleton = () => (
-  <div className="space-y-8">
-    <div className="flex flex-wrap gap-4">
-      {[...Array(5)].map((_, i) => (
-        <div
-          key={i}
-          className="w-[90px] h-[36px] bg-gray-200 dark:bg-gray-700 animate-pulse rounded"
-        />
-      ))}
-    </div>
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-      {[...Array(15)].map((_, i) => (
-        <CompanyCardSkeleton key={i} />
-      ))}
-    </div>
-  </div>
-);
-
-// Export default component with performance optimizations
 export default function PortfolioLogos() {
-  const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>(() => {
-    // Restore category from localStorage if available
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('selectedCategory');
-      return (saved as typeof categories[number]) || 'All';
-    }
-    return 'All';
-  });
+  const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All');
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const [loadedImages, setLoadedImages] = useState(0);
   const [visibleCompanies, setVisibleCompanies] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const [isFilterChanging, setIsFilterChanging] = useState(false);
 
   // Setup intersection observer for lazy loading
   const lastElementRef = useCallback((node: HTMLDivElement | null) => {
@@ -126,10 +94,6 @@ export default function PortfolioLogos() {
             const companyName = entry.target.getAttribute('data-company');
             if (companyName) {
               setVisibleCompanies(prev => new Set([...prev, companyName]));
-              logPerformance('PortfolioLogos', 'company-visible', { 
-                company: companyName,
-                timestamp: Date.now()
-              });
             }
           }
         });
@@ -141,43 +105,18 @@ export default function PortfolioLogos() {
   }, []);
 
   useEffect(() => {
-    logPerformance('PortfolioLogos', 'mount', { 
-      initialLoad: true,
-      timestamp: Date.now()
-    });
     setIsInitialLoad(false);
-
-    // Preload first few images and remove loading state
-    const preloadTimeout = setTimeout(() => {
-      companies.slice(0, 4).forEach(company => {
-        const img = new Image();
-        img.src = company.logo;
-        imageCache.set(company.logo, true);
-        logPerformance('PortfolioLogos', 'preload-image', {
-          company: company.name,
-          timestamp: Date.now()
-        });
-      });
-      setIsLoading(false);
-    }, 100); // Short delay for smoother transition
-
+    // Remove loading state after initial render
+    const timeout = setTimeout(() => setIsLoading(false), 500);
     return () => {
-      clearTimeout(preloadTimeout);
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
+      clearTimeout(timeout);
+      if (observerRef.current) observerRef.current.disconnect();
     };
   }, []);
 
   // Handle category changes with animation
   const handleCategoryChange = useCallback((category: typeof categories[number]) => {
-    setIsFilterChanging(true);
     setSelectedCategory(category);
-    // Save category to localStorage
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('selectedCategory', category);
-    }
-    setTimeout(() => setIsFilterChanging(false), 300);
   }, []);
 
   const filteredCompanies = companies.filter(company =>
@@ -210,7 +149,6 @@ export default function PortfolioLogos() {
             className={`
               transform-gpu transition-all duration-300 ease-out will-change-transform
               ${visibleCompanies.has(company.name) ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}
-              ${isFilterChanging ? 'scale-95 opacity-50' : ''}
             `}
           >
             <Suspense fallback={<CompanyCardSkeleton />}>
