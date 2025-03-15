@@ -37,8 +37,8 @@ const projects = [
 
 export default function Ventures() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-6 mb-8">
         <div className="flex-1 space-y-4">
           <h1 
             className="text-4xl md:text-5xl font-bold animate-in fade-in slide-in-from-bottom-4 duration-300"
@@ -46,7 +46,7 @@ export default function Ventures() {
             Interspace Ventures
           </h1>
           <p 
-            className="text-lg md:text-xl text-muted-foreground animate-in fade-in slide-in-from-bottom-4 duration-300 delay-150"
+            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 animate-in fade-in slide-in-from-bottom-4 duration-300 delay-150"
           >
             I create apps and concepts by coding at the speed of thought using Replit
           </p>
@@ -54,7 +54,7 @@ export default function Ventures() {
       </div>
 
       <div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] mx-auto"
+        className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6"
         role="list"
         aria-label="Venture projects"
       >
