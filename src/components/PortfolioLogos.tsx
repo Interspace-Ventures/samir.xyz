@@ -1,7 +1,8 @@
 "use client"
 
 import Image from 'next/image'
-import { useState, memo, useEffect, Suspense, lazy } from 'react'
+import { useState, memo, useEffect, Suspense, lazy, useRef, useCallback } from 'react'
+import { companies, categories, type Company } from './data/portfolio'
 
 // Performance monitoring with more detailed metrics
 const logPerformance = (component: string, action: string, details?: Record<string, any>) => {
@@ -28,8 +29,6 @@ const CategoryFilters = memo(({ selectedCategory, onCategoryChange }: {
   selectedCategory: string;
   onCategoryChange: (category: string) => void;
 }) => {
-  const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const;
-
   return (
     <div className="flex flex-wrap gap-4">
       {categories.map((category) => (
@@ -61,10 +60,10 @@ const CategoryButton = memo(({ category, isSelected, onClick }: {
     <button
       onClick={onClick}
       className={`
-        w-[90px] h-[36px] rounded text-sm font-medium transition-all duration-150
+        w-[90px] h-[36px] rounded text-sm font-medium transform-gpu transition-all duration-150 ease-out will-change-transform
         ${isSelected
-          ? 'bg-purple-600 text-white shadow-md scale-105'
-          : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200'
+          ? 'bg-purple-600 text-white shadow-md translate-y-[-1px] scale-105'
+          : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 hover:scale-102 hover:translate-y-[-1px]'
         }
       `}
     >
@@ -75,58 +74,71 @@ const CategoryButton = memo(({ category, isSelected, onClick }: {
 
 CategoryButton.displayName = 'CategoryButton';
 
-interface Company {
-  name: string;
-  logo: string;
-  description: string;
-  category: 'Fintech' | 'Health' | 'Retail' | 'SaaS';
-  markup?: boolean;
-  acquired?: boolean;
-}
-
 // Lazy load the company card for better initial page load
 const LazyCompanyCard = lazy(() => import('./CompanyCard'));
 
-// Moved companies data outside component to prevent re-creation on re-renders
-const companies: Company[] = [
-  { name: 'Afar', logo: '/images/portfolio-logos/Afar.png', category: 'Health', description: 'Low sugar high protein savory snack bars.' },
-  { name: 'AON3D', logo: '/images/portfolio-logos/AON3D.png', category: 'SaaS', markup: true, description: 'Industrial 3D printing solutions for high-performance thermoplastics.' },
-  { name: 'Aura', logo: '/images/portfolio-logos/Aura.png', category: 'Health', markup: true, description: 'Digital mental health platform offering mindfulness meditation, life coaching, and therapy.' },
-  { name: 'Backpack', logo: '/images/portfolio-logos/Backpack.png', category: 'Fintech', description: 'Modern 529 college savings platform making education investing accessible' },
-  { name: 'GEM', logo: '/images/portfolio-logos/GEM.png', category: 'Health', markup: true, description: 'Real food daily bites made from algae, plants, and probiotics to optimize your daily nutrition.' },
-  { name: 'Goodmylk', logo: '/images/portfolio-logos/Goodmylk.png', category: 'Health', description: 'Plant-based dairy alternatives made from simple, wholesome ingredients.' },
-  { name: 'Harper', logo: '/images/portfolio-logos/Harper.png', category: 'Fintech', description: 'Digital-first insurance platform for modern businesses.' },
-  { name: 'Hedgehog', logo: '/images/portfolio-logos/Hedgehog.png', category: 'Health', description: 'Digital health platform for personalized wellness and preventive care.' },
-  { name: 'Juneshine', logo: '/images/portfolio-logos/Juneshine.png', category: 'Retail', markup: true, description: 'Premium hard kombucha brewed with real organic ingredients and probiotics.' },
-  { name: 'Juno', logo: '/images/portfolio-logos/Juno.png', category: 'Retail', description: 'Direct-to-consumer wine club focused on natural and sustainable wines.' },
-  { name: 'Kartera', logo: '/images/portfolio-logos/Kartera.png', category: 'Fintech', description: 'Digital asset management platform for institutional investors.' },
-  { name: 'Keep', logo: '/images/portfolio-logos/Keep.png', category: 'Fintech', description: 'All-in-one banking for any business' },
-  { name: 'Lunar', logo: '/images/portfolio-logos/Lunar.png', category: 'Retail', description: 'Asian-inspired hard seltzer celebrating authentic flavors and cultural heritage.' },
-  { name: 'Margin', logo: '/images/portfolio-logos/Margin.png', category: 'SaaS', description: 'Increase profitability by measuring cost & revenue of every user action' },
-  { name: 'Maridea', logo: '/images/portfolio-logos/Maridea.png', category: 'Fintech', markup: true, description: 'Wealth management platform for high-net-worth individuals.' },
-  { name: 'Metadata', logo: '/images/portfolio-logos/Metadata.png', category: 'SaaS', markup: true, description: 'AI-powered B2B marketing operations platform automating customer acquisition.' },
-  { name: 'Moku', logo: '/images/portfolio-logos/Moku.png', category: 'Retail', markup: true, description: 'Plant-based jerky made from mushrooms, offering a sustainable protein alternative.' },
-  { name: 'Playbook', logo: '/images/portfolio-logos/Playbook.png', category: 'Health', description: 'Platform enabling fitness creators to build, manage and grow their digital business.' },
-  { name: 'Rely', logo: '/images/portfolio-logos/Rely.png', category: 'Fintech', description: 'An AI-powered knowledge base and automation platform for the property management industry' },
-  { name: 'Restream', logo: '/images/portfolio-logos/Restream.png', category: 'SaaS', description: 'Multi-platform streaming solution for content creators and businesses.' },
-  { name: 'RPM', logo: '/images/portfolio-logos/RPM.png', category: 'Health', acquired: true, description: 'At-home fitness programming combining functional movement with high-intensity training.' },
-  { name: 'Sanzo', logo: '/images/portfolio-logos/Sanzo.png', category: 'Retail', markup: true, description: 'Asian-inspired sparkling water made with real fruit and no added sugar.' },
-  { name: 'Soot', logo: '/images/portfolio-logos/Soot.png', category: 'SaaS', markup: true, description: 'Visual-first filing system powered by AI.' },
-  { name: 'Sugar', logo: '/images/portfolio-logos/Sugar.png', category: 'SaaS', acquired: true, description: 'Property management platform streamlining operations and resident experience.' },
-  { name: 'Sundae', logo: '/images/portfolio-logos/Sundae.png', category: 'Fintech', description: 'Marketplace for distressed property sales connecting sellers with investors.' },
-  { name: 'Superplastic', logo: '/images/portfolio-logos/Superplastic.png', category: 'Retail', description: 'Digital-first luxury brand creating synthetic celebrities and collectible art toys.' },
-  { name: 'Swan', logo: '/images/portfolio-logos/Swan.png', category: 'Fintech', markup: true, description: 'Bitcoin savings and investment platform for long-term wealth building.' },
-  { name: 'Swansea City AFC', logo: '/images/portfolio-logos/Swansea City AFC.png', category: 'Retail', description: 'Professional football club competing in the English Football League Championship.' },
-  { name: 'Techmate', logo: '/images/portfolio-logos/Techmate.png', category: 'SaaS', description: 'AI-powered technical support automation platform.' },
-  { name: 'The Coffee', logo: '/images/portfolio-logos/The Coffee.png', category: 'Retail', markup: true, description: 'Premium coffee brand focused on quality beans and innovative brewing methods.' },
-  { name: 'Waldo', logo: '/images/portfolio-logos/Waldo.png', category: 'Fintech', description: 'Next-gen fraud and compliance monitoring tools.' }
-];
+// Cache for storing loaded images
+const imageCache = new Map<string, boolean>();
+
+// Initial skeleton grid for better visual loading state
+const InitialLoadingSkeleton = () => (
+  <div className="space-y-8">
+    <div className="flex flex-wrap gap-4">
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="w-[90px] h-[36px] bg-gray-200 dark:bg-gray-700 animate-pulse rounded"
+        />
+      ))}
+    </div>
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      {[...Array(15)].map((_, i) => (
+        <CompanyCardSkeleton key={i} />
+      ))}
+    </div>
+  </div>
+);
 
 // Export default component with performance optimizations
 export default function PortfolioLogos() {
-  const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All');
+  const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>(() => {
+    // Restore category from localStorage if available
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('selectedCategory');
+      return (saved as typeof categories[number]) || 'All';
+    }
+    return 'All';
+  });
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [loadedImages, setLoadedImages] = useState(0);
+  const [visibleCompanies, setVisibleCompanies] = useState<Set<string>>(new Set());
+  const [isLoading, setIsLoading] = useState(true);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const [isFilterChanging, setIsFilterChanging] = useState(false);
+
+  // Setup intersection observer for lazy loading
+  const lastElementRef = useCallback((node: HTMLDivElement | null) => {
+    if (observerRef.current) observerRef.current.disconnect();
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const companyName = entry.target.getAttribute('data-company');
+            if (companyName) {
+              setVisibleCompanies(prev => new Set([...prev, companyName]));
+              logPerformance('PortfolioLogos', 'company-visible', { 
+                company: companyName,
+                timestamp: Date.now()
+              });
+            }
+          }
+        });
+      },
+      { rootMargin: '100px', threshold: 0.1 }
+    );
+
+    if (node) observerRef.current.observe(node);
+  }, []);
 
   useEffect(() => {
     logPerformance('PortfolioLogos', 'mount', { 
@@ -135,39 +147,79 @@ export default function PortfolioLogos() {
     });
     setIsInitialLoad(false);
 
-    console.log('Portfolio component mounted and ready');
-    return () => logPerformance('PortfolioLogos', 'unmount');
+    // Preload first few images and remove loading state
+    const preloadTimeout = setTimeout(() => {
+      companies.slice(0, 4).forEach(company => {
+        const img = new Image();
+        img.src = company.logo;
+        imageCache.set(company.logo, true);
+        logPerformance('PortfolioLogos', 'preload-image', {
+          company: company.name,
+          timestamp: Date.now()
+        });
+      });
+      setIsLoading(false);
+    }, 100); // Short delay for smoother transition
+
+    return () => {
+      clearTimeout(preloadTimeout);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
   }, []);
 
-  useEffect(() => {
-    if (!isInitialLoad) {
-      logPerformance('PortfolioLogos', 'category-change', {
-        category: selectedCategory,
-        timestamp: Date.now(),
-        loadedImages
-      });
-      console.log(`Category changed to: ${selectedCategory}`);
+  // Handle category changes with animation
+  const handleCategoryChange = useCallback((category: typeof categories[number]) => {
+    setIsFilterChanging(true);
+    setSelectedCategory(category);
+    // Save category to localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('selectedCategory', category);
     }
-  }, [selectedCategory, isInitialLoad, loadedImages]);
+    setTimeout(() => setIsFilterChanging(false), 300);
+  }, []);
 
   const filteredCompanies = companies.filter(company =>
     selectedCategory === 'All' || company.category === selectedCategory
   );
 
+  if (isLoading) {
+    return <InitialLoadingSkeleton />;
+  }
+
   return (
     <div className="space-y-8">
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="flex flex-wrap gap-4">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="w-[90px] h-[36px] bg-gray-200 dark:bg-gray-700 animate-pulse rounded" />
+        ))}
+      </div>}>
         <CategoryFilters
           selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
+          onCategoryChange={handleCategoryChange}
         />
       </Suspense>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-        {filteredCompanies.map((company) => (
-          <Suspense key={company.name} fallback={<CompanyCardSkeleton />}>
-            <LazyCompanyCard company={company} />
-          </Suspense>
+        {filteredCompanies.map((company, index) => (
+          <div
+            key={company.name}
+            ref={index === filteredCompanies.length - 1 ? lastElementRef : null}
+            data-company={company.name}
+            className={`
+              transform-gpu transition-all duration-300 ease-out will-change-transform
+              ${visibleCompanies.has(company.name) ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}
+              ${isFilterChanging ? 'scale-95 opacity-50' : ''}
+            `}
+          >
+            <Suspense fallback={<CompanyCardSkeleton />}>
+              <LazyCompanyCard 
+                company={company}
+                isVisible={visibleCompanies.has(company.name)}
+              />
+            </Suspense>
+          </div>
         ))}
       </div>
     </div>
