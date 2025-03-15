@@ -3,8 +3,45 @@
 import { default as NextLink } from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
-import { Menu, X } from "lucide-react"
 import { useState, useCallback, memo } from "react"
+
+// SVG icons as components
+const MenuIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <line x1="4" x2="20" y1="12" y2="12" />
+    <line x1="4" x2="20" y1="6" y2="6" />
+    <line x1="4" x2="20" y1="18" y2="18" />
+  </svg>
+)
+
+const XIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
+  </svg>
+)
 
 const navItems = [
   { href: "/", label: "ABOUT", isExternal: false },
@@ -81,9 +118,9 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           {isMenuOpen ? (
-            <X className="h-4 w-4" />
+            <XIcon />
           ) : (
-            <Menu className="h-4 w-4" />
+            <MenuIcon />
           )}
         </button>
       </div>
