@@ -21,6 +21,7 @@ export default function Navbar() {
       <NextLink 
         href="/" 
         className="font-inter text-sm font-black tracking-widest gradient-text leading-none"
+        prefetch={false} // Only prefetch on hover
       >
         Hey - I'm Samir
       </NextLink>
@@ -31,6 +32,7 @@ export default function Navbar() {
           <NextLink
             key={item.href}
             href={item.href}
+            prefetch={false} // Only prefetch on hover
             className={`
               relative font-inter text-[13px] font-medium tracking-[0.1em] transition-colors whitespace-nowrap
               hover:text-primary dark:hover:text-primary
@@ -71,6 +73,7 @@ export default function Navbar() {
             <NextLink
               key={item.href}
               href={item.href}
+              prefetch={false} // Only prefetch on hover
               onClick={() => setIsMenuOpen(false)}
               className={`
                 block font-inter text-[13px] font-medium tracking-[0.1em] transition-colors
