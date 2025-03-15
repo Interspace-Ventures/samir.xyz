@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
 import { useState, useCallback, memo } from "react"
 
-// SVG icons as components
 const MenuIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +48,6 @@ const navItems = [
   { href: "/ventures", label: "VENTURES", isExternal: false }
 ]
 
-// Memoize NavLink component for better performance
 const NavLink = memo(({ href, label, isActive, isMobile = false }: {
   href: string;
   label: string;
@@ -61,7 +59,7 @@ const NavLink = memo(({ href, label, isActive, isMobile = false }: {
     prefetch={false}
     className={`
       ${isMobile ? 'block py-4' : 'relative'} 
-      font-inter text-[16px] font-medium tracking-wider transition-colors
+      text-base font-medium tracking-wide transition-colors
       hover:text-primary dark:hover:text-primary whitespace-nowrap
       ${isActive ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
       ${!isMobile ? `
@@ -92,12 +90,8 @@ export default function Navbar() {
       <div className="container mx-auto px-6 flex items-center justify-between">
         <NextLink
           href="/"
-          className="font-inter text-lg md:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-400 dark:from-purple-400 dark:to-purple-200 leading-none hover:opacity-80 transition-opacity antialiased"
+          className="text-[28px] font-black text-foreground leading-none hover:opacity-80 transition-opacity"
           prefetch={false}
-          style={{ 
-            fontSmooth: 'always',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.3)' //Improved text shadow
-          }}
         >
           Hey - I'm Samir
         </NextLink>
