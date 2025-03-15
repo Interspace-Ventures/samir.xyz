@@ -63,10 +63,10 @@ export default function PortfolioLogos() {
             key={category}
             onClick={() => setSelectedCategory(category)}
             className={`
-              px-6 py-2.5 rounded-lg font-medium
+              px-4 py-2 rounded font-medium
               ${selectedCategory === category
-                ? 'bg-purple-600 text-white dark:bg-purple-500 shadow-sm'
-                : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800/50 dark:hover:bg-gray-700/50 text-gray-700 dark:text-gray-300'
+                ? 'bg-purple-600 text-white'
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
               }
             `}
           >
@@ -80,18 +80,16 @@ export default function PortfolioLogos() {
         {filteredCompanies.map((company) => (
           <div
             key={company.name}
-            className="relative flex flex-col gap-2 items-center justify-center p-4 bg-white dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700/50"
+            className="bg-white dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700/50 h-[200px] relative flex flex-col items-center"
           >
-            <div className="w-full h-24 relative bg-gray-50 dark:bg-gray-900/50 rounded-md flex items-center justify-center">
-              <div className="w-20 h-20 relative">
-                <Image
-                  src={company.logo}
-                  alt={`${company.name} logo`}
-                  fill
-                  className="object-contain"
-                  sizes="80px"
-                />
-              </div>
+            <div className="w-full h-32 relative mb-2">
+              <Image
+                src={company.logo}
+                alt={`${company.name} logo`}
+                fill
+                className="object-contain"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+              />
             </div>
 
             <p className="text-sm font-medium text-gray-900 dark:text-gray-100 text-center">
@@ -101,7 +99,7 @@ export default function PortfolioLogos() {
             {(company.markup || company.acquired) && (
               <div className="absolute top-2 right-2">
                 <span className={`
-                  px-2 py-1 text-xs rounded-md font-medium
+                  px-2 py-1 text-xs rounded font-medium
                   ${company.acquired
                     ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
                     : 'bg-purple-100 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400'
