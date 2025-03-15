@@ -27,7 +27,7 @@ export default function Profile() {
             </div>
           </div>
 
-          <div className="space-y-6 text-gray-600 dark:text-gray-300">
+          <div className="space-y-6 text-gray-700 dark:text-gray-200">
             <p>
               Today, I am leading Strategic Finance for the Financial Partnerships team at{" "}
               <Link href="https://cash.app" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
