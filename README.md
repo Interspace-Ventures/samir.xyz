@@ -1,6 +1,15 @@
-# Portfolio Website
+# Portfolio Website (v2.0.0)
 
 A radically simplified personal portfolio website for Samir that embodies true simplicity.
+
+## Version Information
+
+This project follows [Semantic Versioning](https://semver.org/):
+- Patch updates (x.x.1): Every single commit
+- Minor updates (x.1.x): Every chat/feature session
+- Major updates (1.x.x): Significant architectural changes
+
+For detailed changes, see [CHANGELOG.md](docs/CHANGELOG.md).
 
 ## Tech Stack
 
