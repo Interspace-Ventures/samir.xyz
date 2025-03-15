@@ -62,39 +62,43 @@ export default function PortfolioLogos() {
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 rounded-md transition-colors ${
-              selectedCategory === category
-                ? 'bg-purple-600 text-white'
-                : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
-            }`}
+            className={`px-6 py-2.5 rounded-lg transition-all font-medium 
+              ${selectedCategory === category
+                ? 'bg-purple-600 text-white dark:bg-purple-500 shadow-md scale-105'
+                : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800/50 dark:hover:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:scale-105'
+              }`}
           >
             {category}
           </button>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <motion.div 
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+        layout
+      >
         {filteredCompanies.map((company, index) => (
           <motion.div
             key={company.name}
-            className="relative flex items-center justify-center p-4 bg-white dark:bg-white/10 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors border border-border/10"
+            className="relative flex items-center justify-center p-6 bg-white dark:bg-gray-800/50 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors border border-gray-200 dark:border-gray-700/50"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ scale: 1.05 }}
+            transition={{ delay: index * 0.05 }}
+            whileHover={{ scale: 1.02 }}
+            layout
           >
-            <div className="relative w-full h-16">
+            <div className="relative w-full h-12">
               <Image
                 src={company.logo}
                 alt={`${company.name} logo`}
                 fill
                 className="object-contain"
-                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
               />
             </div>
             {(company.markup || company.acquired) && (
               <div className="absolute top-2 right-2">
-                <span className={`px-2 py-1 text-xs rounded ${
+                <span className={`px-2 py-1 text-xs rounded-md font-medium ${
                   company.acquired
                     ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
                     : 'bg-purple-100 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400'
@@ -105,7 +109,7 @@ export default function PortfolioLogos() {
             )}
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }

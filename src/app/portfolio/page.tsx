@@ -26,22 +26,22 @@ export default function Portfolio() {
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
         </div>
-        <div className="w-full lg:w-auto grid grid-cols-2 gap-x-12 border rounded-lg p-6 bg-card">
+        <div className="w-full lg:w-auto grid grid-cols-2 gap-x-12 gap-y-6 border rounded-xl p-8 bg-card/50 backdrop-blur-sm shadow-sm">
           {/* Left Column */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             {leftColumnStats.map((stat) => (
-              <div key={stat.label} className="flex flex-col gap-1">
-                <dt className="text-muted-foreground text-sm">{stat.label}</dt>
-                <dd className="font-semibold text-foreground">{stat.value}</dd>
+              <div key={stat.label} className="flex flex-col gap-2">
+                <dt className="text-sm text-muted-foreground font-medium">{stat.label}</dt>
+                <dd className="text-lg font-semibold text-foreground">{stat.value}</dd>
               </div>
             ))}
           </div>
           {/* Right Column */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             {rightColumnStats.map((stat) => (
-              <div key={stat.label} className="flex flex-col gap-1">
-                <dt className="text-muted-foreground text-sm">{stat.label}</dt>
-                <dd className="font-semibold text-foreground">{stat.value}</dd>
+              <div key={stat.label} className="flex flex-col gap-2">
+                <dt className="text-sm text-muted-foreground font-medium">{stat.label}</dt>
+                <dd className="text-lg font-semibold text-foreground">{stat.value}</dd>
               </div>
             ))}
           </div>
