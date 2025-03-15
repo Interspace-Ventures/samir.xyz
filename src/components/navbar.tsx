@@ -86,8 +86,8 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className="sticky top-0 z-50 w-full h-20 flex items-center bg-background/95 backdrop-blur-2xl border-b border-border/40 shadow-sm">
-      <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 w-full h-20 navbar-bg border-b border-border/40 shadow-sm">
+      <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
         <NextLink
           href="/"
           className="text-2xl font-bold text-foreground leading-none hover:opacity-80 transition-opacity"
@@ -124,7 +124,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="absolute top-20 left-0 right-0 z-50 bg-background/95 backdrop-blur-2xl py-4 px-6 space-y-2 border-b border-border/40 shadow-sm xs:hidden">
+        <div className="absolute top-20 left-0 right-0 z-50 navbar-bg py-4 px-6 space-y-2 border-b border-border/40 shadow-sm xs:hidden">
           {navItems.map((item) => (
             <NavLink
               key={item.href}
