@@ -9,7 +9,6 @@ export default function Portfolio() {
     { label: "# Busts", value: "4" },
     { label: "TVPI", value: "1.44x" },
     { label: "Gross Multiple", value: "1.22x" },
-    { label: "# Acquisitions", value: "2" },
     { label: "Net Multiple, Net of Carry", value: "1.12x" },
     { label: "Return, net of fees", value: "32%" },
     { label: "IRR", value: "10%" }
