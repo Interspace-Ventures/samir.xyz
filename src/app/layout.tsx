@@ -6,21 +6,21 @@ import { PageTransition } from "@/components/page-transition";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-// Dynamically import non-critical components
 const Navbar = dynamic(() => import("@/components/navbar"), {
-  loading: () => <div className="h-16" /> // Placeholder while loading
+  loading: () => <div className="h-16" />
 });
 
 const Footer = dynamic(() => import("@/components/Footer"), {
-  ssr: true, // Enable SSR for footer as it's visible on first load
-  loading: () => <footer className="h-16 bg-background" /> // Placeholder while loading
+  ssr: true,
+  loading: () => <footer className="h-16 bg-background" />
 });
 
 const inter = Inter({ 
   subsets: ["latin"],
-  variable: '--font-inter', 
-  display: 'swap', // Ensure text remains visible during webfont load
-  preload: true,  // Preload the font file
+  weight: ['400', '500', '600', '700', '800', '900'],
+  display: 'block',
+  fallback: ['system-ui', 'sans-serif'],
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -39,14 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Preconnect to origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body 
-        className={`${inter.className} ${inter.variable} min-h-screen bg-background antialiased`}
-        style={{ isolation: 'isolate' }} // Create new stacking context for better performance
-      >
+      <body className={`${inter.className} min-h-screen bg-background antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
