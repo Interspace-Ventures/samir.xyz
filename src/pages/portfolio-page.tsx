@@ -1,2 +1,2 @@
-// This file has been deprecated.
-// Please use the App Router version at /src/app/portfolio/page.tsx
+// This file has been removed.
+// Please use /src/app/portfolio/page.tsx for the portfolio route.

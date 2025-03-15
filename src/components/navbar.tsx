@@ -7,9 +7,9 @@ import { Menu, X } from "lucide-react"
 import { useState } from "react"
 
 const navItems = [
-  { href: "/profile-page", label: "ABOUT", isExternal: false },
-  { href: "/portfolio-page", label: "PORTFOLIO", isExternal: false },
-  { href: "/ventures-page", label: "VENTURES", isExternal: false }
+  { href: "/", label: "ABOUT", isExternal: false },
+  { href: "/portfolio", label: "PORTFOLIO", isExternal: false },
+  { href: "/ventures", label: "VENTURES", isExternal: false }
 ]
 
 export default function Navbar() {
@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full h-16 flex items-center container mx-auto px-4 bg-background/50 backdrop-blur-sm border-b border-border/40">
       <NextLink 
-        href="/profile-page" 
+        href="/" 
         className="font-inter text-sm font-black tracking-widest gradient-text leading-none"
       >
         Hey - I'm Samir
