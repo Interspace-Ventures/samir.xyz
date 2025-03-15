@@ -9,41 +9,39 @@ interface ProjectCardProps {
   link: string
 }
 
-// Performance monitoring
-const logPerformance = (action: string, name: string) => {
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`[ProjectCard] ${action} for ${name}: ${performance.now()}ms`);
-  }
-};
-
 export function ProjectCard({ name, description, imageUrl, link }: ProjectCardProps) {
   return (
     <a
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative aspect-square rounded-lg overflow-hidden bg-white border border-gray-200 animate-in fade-in slide-in-from-bottom-4 duration-300 hover:scale-[1.02] transition-transform"
+      className="group block relative aspect-square rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
       role="listitem"
       aria-label={`${name} - ${description}`}
-      onTransitionStart={() => logPerformance('animation-start', name)}
-      onTransitionEnd={() => logPerformance('animation-complete', name)}
     >
-      <div className="relative w-full h-full p-6">
+      <div className="relative w-full h-full">
+        {/* Add placeholder div that matches image padding */}
+        <div className="absolute inset-0 bg-white dark:bg-gray-800 p-4" />
         <Image
           src={imageUrl}
           alt={`${name} project preview`}
           fill
-          className="object-contain transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover p-4 transition-opacity duration-300"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           priority
-          onLoad={() => logPerformance('image-loaded', name)}
+          placeholder="blur"
+          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <h3 className="text-lg font-semibold text-white mb-2">
+        <div 
+          className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        />
+        <div 
+          className="absolute inset-0 p-4 flex flex-col justify-end text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <h3 className="text-lg font-semibold mb-1">
             {name}
           </h3>
-          <p className="text-sm text-gray-200">
+          <p className="text-sm text-gray-200 line-clamp-3">
             {description}
           </p>
         </div>
