@@ -36,14 +36,16 @@ export function ProjectCard({ name, description, imageUrl, link, priority = fals
           className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         />
         <div 
-          className="absolute inset-0 flex flex-col items-center justify-center p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          className="absolute inset-0 flex items-center justify-center"
         >
-          <h3 className="text-lg font-semibold mb-2 text-center">
-            {name}
-          </h3>
-          <p className="text-sm text-center text-gray-200 line-clamp-3">
-            {description}
-          </p>
+          <div className="max-w-[85%] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center px-4">
+            <h3 className="text-lg font-semibold mb-2 text-white">
+              {name}
+            </h3>
+            <p className="text-sm text-gray-200 line-clamp-3">
+              {description}
+            </p>
+          </div>
         </div>
       </div>
     </a>

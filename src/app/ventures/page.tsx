@@ -37,7 +37,7 @@ const projects = [
 
 export default function Ventures() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <div>
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6 mb-8">
         <div className="flex-1 space-y-4">
           <h1 

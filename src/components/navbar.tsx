@@ -87,10 +87,10 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full h-20 flex items-center bg-background/95 backdrop-blur-2xl border-b border-border/40 shadow-sm">
-      <div className="container mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between">
         <NextLink
           href="/"
-          className="text-[28px] text-foreground leading-none hover:opacity-80 transition-opacity"
+          className="text-2xl font-bold text-foreground leading-none hover:opacity-80 transition-opacity"
           prefetch={false}
         >
           Hey - I'm Samir
