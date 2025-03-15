@@ -1,7 +1,6 @@
 "use client"
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 
 interface ProjectCardProps {
   name: string
@@ -19,25 +18,15 @@ const logPerformance = (action: string, name: string) => {
 
 export function ProjectCard({ name, description, imageUrl, link }: ProjectCardProps) {
   return (
-    <motion.a
+    <a
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative aspect-square rounded-lg overflow-hidden bg-white border border-gray-200"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ 
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-        opacity: { duration: 0.2 }
-      }}
+      className="group relative aspect-square rounded-lg overflow-hidden bg-white border border-gray-200 animate-in fade-in slide-in-from-bottom-4 duration-300 hover:scale-[1.02] transition-transform"
       role="listitem"
       aria-label={`${name} - ${description}`}
-      onAnimationStart={() => logPerformance('animation-start', name)}
-      onAnimationComplete={() => logPerformance('animation-complete', name)}
+      onTransitionStart={() => logPerformance('animation-start', name)}
+      onTransitionEnd={() => logPerformance('animation-complete', name)}
     >
       <div className="relative w-full h-full p-6">
         <Image
@@ -59,6 +48,6 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
           </p>
         </div>
       </div>
-    </motion.a>
+    </a>
   )
 }

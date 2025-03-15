@@ -14,11 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Complete architectural overhaul of portfolio page loading
-- Reimplemented animation system for better performance
+- Reimplemented animation system using native CSS/Tailwind instead of framer-motion
 - Simplified and optimized component rendering logic
 - Enhanced server startup configuration for better reliability
 - Optimized image loading strategy
 - Improved bundle size through better code splitting
+- Removed framer-motion dependency in favor of native CSS animations
+- Added performance monitoring to track page transitions and animations
 
 ### Technical Debt
 - Consider implementing proper monitoring for performance metrics

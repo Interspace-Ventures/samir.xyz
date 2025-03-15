@@ -1,7 +1,6 @@
 "use client"
 
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useState, memo, useEffect } from 'react'
 
 // Performance monitoring
@@ -35,13 +34,8 @@ CategoryButton.displayName = 'CategoryButton';
 
 // Memoize the company card to prevent unnecessary re-renders
 const CompanyCard = memo(({ company }: { company: Company }) => (
-  <motion.div
-    layout
-    className="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
-    initial={{ opacity: 0, scale: 0.98 }}
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.98 }}
-    transition={{ duration: 0.15 }}
+  <div
+    className="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
     style={{ willChange: 'transform, opacity' }}
   >
     <div className="aspect-[4/3] relative p-4">
@@ -53,6 +47,7 @@ const CompanyCard = memo(({ company }: { company: Company }) => (
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
         priority={company.markup || company.acquired}
         loading={company.markup || company.acquired ? "eager" : "lazy"}
+        onLoad={() => logPerformance('CompanyCard', `image-loaded-${company.name}`)}
       />
     </div>
 
@@ -75,7 +70,7 @@ const CompanyCard = memo(({ company }: { company: Company }) => (
         </span>
       </div>
     )}
-  </motion.div>
+  </div>
 ));
 
 CompanyCard.displayName = 'CompanyCard';
@@ -145,11 +140,8 @@ export default function PortfolioLogos() {
   return (
     <div className="space-y-6">
       {/* Category Filters */}
-      <motion.div 
-        className="flex flex-wrap gap-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.15 }}
+      <div 
+        className="flex flex-wrap gap-4 animate-in fade-in duration-300"
       >
         {categories.map((category) => (
           <CategoryButton
@@ -159,23 +151,19 @@ export default function PortfolioLogos() {
             onClick={() => setSelectedCategory(category)}
           />
         ))}
-      </motion.div>
+      </div>
 
       {/* Company Logo Grid */}
-      <motion.div 
+      <div 
         className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
-        layout
-        style={{ willChange: 'transform' }}
       >
-        <AnimatePresence mode="popLayout" initial={false}>
-          {filteredCompanies.map((company) => (
-            <CompanyCard
-              key={company.name}
-              company={company}
-            />
-          ))}
-        </AnimatePresence>
-      </motion.div>
+        {filteredCompanies.map((company) => (
+          <CompanyCard
+            key={company.name}
+            company={company}
+          />
+        ))}
+      </div>
     </div>
   )
 }
