@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2025-03-15
 
 ### Added
-- CSS optimization with Critters package
+- CSS optimization with Next.js built-in features
 - Advanced image optimization configuration in Next.js
 - Streamlined build process with modularized imports
 
@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed framer-motion dependency in favor of native CSS animations
 - Added performance monitoring to track page transitions and animations
 - Replaced lucide-react icons with optimized inline SVGs
+- Removed unnecessary dependencies (critters, tsx, kill-port)
+- Streamlined dependency management
 
 ### Technical Debt
 - Consider implementing proper monitoring for performance metrics
