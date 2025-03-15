@@ -61,7 +61,7 @@ const NavLink = memo(({ href, label, isActive, isMobile = false }: {
     prefetch={false}
     className={`
       ${isMobile ? 'block py-4' : 'relative'} 
-      font-inter text-[15px] font-medium tracking-wider transition-colors
+      font-inter text-[11px] font-medium tracking-wider transition-colors
       subpixel-antialiased
       hover:text-primary dark:hover:text-primary whitespace-nowrap
       ${isActive ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
@@ -100,7 +100,7 @@ export default function Navbar() {
         </NextLink>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-8">
+        <div className="hidden xs:flex items-center space-x-4">
           {navItems.map((item) => (
             <NavLink
               key={item.href}
@@ -113,7 +113,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="lg:hidden flex items-center gap-4">
+        <div className="xs:hidden flex items-center gap-4">
           <ThemeToggle />
           <button
             onClick={toggleMenu}
@@ -127,7 +127,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="absolute top-20 left-0 right-0 z-50 bg-background/95 backdrop-blur-2xl py-4 px-6 space-y-2 border-b border-border/40 shadow-sm lg:hidden">
+        <div className="absolute top-20 left-0 right-0 z-50 bg-background/95 backdrop-blur-2xl py-4 px-6 space-y-2 border-b border-border/40 shadow-sm xs:hidden">
           {navItems.map((item) => (
             <NavLink
               key={item.href}
