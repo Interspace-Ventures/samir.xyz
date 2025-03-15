@@ -6,10 +6,9 @@ import { PageTransition } from "@/components/page-transition";
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-// Performance optimized dynamic imports
 const Navbar = dynamic(() => import("@/components/navbar"), {
   loading: () => <div className="h-16" />,
-  ssr: true, // Enable SSR for faster initial load
+  ssr: true,
 });
 
 const Footer = dynamic(() => import("@/components/Footer"), {
@@ -20,7 +19,7 @@ const Footer = dynamic(() => import("@/components/Footer"), {
 const inter = Inter({ 
   subsets: ["latin"],
   weight: ['400', '500', '600', '700', '800', '900'],
-  display: 'swap', // Change to 'swap' for faster text rendering
+  display: 'swap',
   fallback: ['system-ui', 'sans-serif'],
   adjustFontFallback: true,
 });
@@ -33,7 +32,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Add performance monitoring
 let pageLoadStart = 0;
 if (typeof window !== 'undefined') {
   pageLoadStart = performance.now();
@@ -44,7 +42,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Monitor page load performance
   if (typeof window !== 'undefined') {
     const loadTime = performance.now() - pageLoadStart;
     console.log(`[Performance] Total page load time: ${loadTime.toFixed(2)}ms`);
@@ -67,7 +64,7 @@ export default function RootLayout({
             <Suspense fallback={<div className="h-16" />}>
               <Navbar />
             </Suspense>
-            <main className="flex-grow container mx-auto px-4 py-8">
+            <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-12">
               <Suspense 
                 fallback={
                   <div className="animate-pulse bg-muted/10 rounded-lg h-[600px] w-full" />
@@ -78,6 +75,7 @@ export default function RootLayout({
                 </PageTransition>
               </Suspense>
             </main>
+            <div className="h-12"></div> {/* Extra space before footer */}
             <Suspense fallback={<footer className="h-16 bg-background" />}>
               <Footer />
             </Suspense>

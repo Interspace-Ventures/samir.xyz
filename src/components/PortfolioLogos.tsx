@@ -49,7 +49,7 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="aspect-[4/3] relative p-4">
+      <div className="aspect-[3/2] relative p-4">
         <Image
           src={company.logo}
           alt={`${company.name} logo`}

@@ -3,10 +3,10 @@ import Link from "next/link"
 
 export default function Profile() {
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="flex flex-col md:flex-row items-start justify-between gap-8">
-        <div className="flex-1">
-          <div className="flex gap-8 mb-8">
+    <div>
+      <div className="flex flex-col md:flex-row items-center gap-8 min-h-[calc(100vh-20rem)]">
+        <div className="flex-1 space-y-8">
+          <div className="flex items-center gap-8">
             <div className="relative w-32 h-32 flex-shrink-0">
               <Image
                 src="/images/profile/hero-main.png"

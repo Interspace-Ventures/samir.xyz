@@ -19,7 +19,7 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div>
       <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
         <div className="flex-1 space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold">Portfolio</h1>
