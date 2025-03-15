@@ -1,11 +1,4 @@
 #!/bin/bash
-# First kill any existing process on port 5000
-echo "Checking for existing processes on port 5000..."
-npx kill-port 5000 || true
-
-# Wait a moment for the port to be fully released
-sleep 2
-
 # Function to check if port is available
 check_port() {
   nc -z localhost 5000 2>/dev/null

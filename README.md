@@ -1,6 +1,6 @@
-# Portfolio Website (v2.0.0)
+# Hey I'm Samir
 
-A radically simplified personal portfolio website for Samir that embodies true simplicity.
+I'm building design-forward, high performance apps and concepts by coding at the speed of thought with Replit.
 
 ## Version Information
 
@@ -15,8 +15,36 @@ For detailed changes, see [CHANGELOG.md](docs/CHANGELOG.md).
 
 - Next.js for server-side rendering and optimized builds
 - Tailwind CSS for styling
-- Framer Motion for animations
 - Static file hosting
+
+## Dependencies
+
+### Core Framework
+- `next` - The React framework for production web applications
+- `react` & `react-dom` - Core React libraries
+- `typescript` - Programming language adding static types to JavaScript
+- `@types/node`, `@types/react`, `@types/react-dom` - TypeScript type definitions
+
+### Styling & UI
+- `tailwindcss` - Utility-first CSS framework
+- `tailwindcss-animate` - Animation utilities for Tailwind CSS
+- `@tailwindcss/typography` - Typography plugin for consistent text styling
+- `postcss` - Tool for transforming CSS with JavaScript (required by Tailwind)
+- `autoprefixer` - PostCSS plugin to parse CSS and add vendor prefixes
+
+### Form Handling & Validation
+- `@hookform/resolvers` - Validation resolvers for React Hook Form
+- `zod` - TypeScript-first schema validation
+
+### Theming
+- `next-themes` - Feature-rich theme system for Next.js
+
+Each dependency serves a specific purpose in our stack:
+- PostCSS and Autoprefixer are required for Tailwind CSS to function properly
+- Tailwind and its plugins provide our core styling capabilities
+- TypeScript and its type definitions ensure type safety
+- Zod handles runtime type validation
+- Next.js and React form our application foundation
 
 ## Project Structure
 
@@ -24,25 +52,30 @@ The project follows a clean, organized structure:
 
 ```
 ├── public/
-│   └── assets/
-│       └── images/
-│           ├── brand/           # Brand-related assets
-│           │   ├── portfolio-logos/  # Company logos used in portfolio
-│           │   └── [brand assets]    # Favicons and personal brand logos
-│           ├── content/         # General content images
-│           ├── profile/         # Profile photos
-│           └── ventures/        # Venture-related images
+│   └── images/
+│       ├── brand/           # Brand-related assets
+│       ├── portfolio-logos/ # Company logos
+│       ├── profile/         # Profile photos
+│       └── ventures-brands/ # Venture project logos
 ├── src/
-│   ├── config/           # Project configuration files
-│   │   ├── postcss.config.cjs
-│   │   └── tailwind.config.js
-│   ├── pages/           # Next.js page components
-│   ├── components/      # Reusable UI components
-│   └── styles/         # Global styles and themes
-└── [Root Configuration] # Essential Next.js files
-    ├── next.config.mjs
-    ├── tsconfig.json
-    └── next-env.d.ts   # Auto-generated Next.js types
+│   ├── app/                # Next.js App Router pages
+│   │   ├── portfolio/      # Portfolio section
+│   │   ├── ventures/       # Ventures section
+│   │   ├── layout.tsx      # Root layout
+│   │   ├── page.tsx        # Home page
+│   │   └── globals.css     # Global styles
+│   └── components/         # Reusable UI components
+│       ├── Footer.tsx      # Site footer
+│       ├── PortfolioLogos/ # Portfolio grid
+│       ├── ProjectCard/    # Project cards
+│       ├── navbar.tsx      # Navigation
+│       └── theme/          # Theme components
+├── docs/                   # Documentation
+│   └── CHANGELOG.md        # Version history
+└── [Configuration]         # Project configuration
+    ├── next.config.mjs     # Next.js config
+    ├── tailwind.config.js  # Tailwind config
+    └── tsconfig.json       # TypeScript config
 ```
 
 ## Development
@@ -76,13 +109,13 @@ This generates optimized static files for production deployment.
 
 - Responsive design
 - Dark/light mode support 
-- Animated transitions
+- Animated transitions with native CSS
 - Optimized images and assets
 - Simple and maintainable codebase
 
 ## Notes
 
-- Leverages Next.js for server-side rendering and routing
+- Leverages Next.js App Router for improved routing and layouts
 - All assets are optimized during build
 - Static site deployment ready
 - Organized asset structure for easy maintenance
