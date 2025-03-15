@@ -10,6 +10,13 @@ interface ProjectCardProps {
   link: string
 }
 
+// Performance monitoring
+const logPerformance = (action: string, name: string) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[ProjectCard] ${action} for ${name}: ${performance.now()}ms`);
+  }
+};
+
 export function ProjectCard({ name, description, imageUrl, link }: ProjectCardProps) {
   return (
     <motion.a
@@ -29,6 +36,8 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       }}
       role="listitem"
       aria-label={`${name} - ${description}`}
+      onAnimationStart={() => logPerformance('animation-start', name)}
+      onAnimationComplete={() => logPerformance('animation-complete', name)}
     >
       <div className="relative w-full h-full p-6">
         <Image
@@ -38,6 +47,7 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
           className="object-contain transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
+          onLoad={() => logPerformance('image-loaded', name)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
