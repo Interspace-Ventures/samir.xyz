@@ -16,7 +16,7 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative h-64 rounded-lg overflow-hidden bg-card border"
+      className="group relative aspect-square rounded-lg overflow-hidden bg-white border border-gray-200"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -30,13 +30,14 @@ export function ProjectCard({ name, description, imageUrl, link }: ProjectCardPr
       role="listitem"
       aria-label={`${name} - ${description}`}
     >
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full p-6">
         <Image
           src={imageUrl}
           alt={`${name} project preview`}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-contain transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
