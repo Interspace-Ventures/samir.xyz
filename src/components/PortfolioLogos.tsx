@@ -50,6 +50,8 @@ const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const
 
 export default function PortfolioLogos() {
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All')
+  const [imageLoadError, setImageLoadError] = useState<Record<string, boolean>>({})
+  const [imageLoading, setImageLoading] = useState<Record<string, boolean>>({})
 
   const filteredCompanies = companies.filter(company =>
     selectedCategory === 'All' || company.category === selectedCategory
@@ -64,10 +66,10 @@ export default function PortfolioLogos() {
             key={category}
             onClick={() => setSelectedCategory(category)}
             className={`
-              w-[90px] h-[36px] rounded text-sm font-medium
+              w-[90px] h-[36px] rounded text-sm font-medium transition-colors
               ${selectedCategory === category
                 ? 'bg-purple-600 text-white'
-                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200'
               }
             `}
           >
@@ -85,21 +87,40 @@ export default function PortfolioLogos() {
         {filteredCompanies.map((company) => (
           <div
             key={company.name}
-            className="bg-white rounded-lg border border-gray-200 overflow-hidden"
+            className="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
           >
             <div className="aspect-[4/3] relative p-4">
-              <Image
-                src={company.logo}
-                alt={`${company.name} logo`}
-                fill
-                className="object-contain"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                priority
-              />
+              {imageLoadError[company.name] ? (
+                <div className="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+                  <p className="text-sm text-gray-400">{company.name}</p>
+                </div>
+              ) : (
+                <>
+                  {imageLoading[company.name] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+                      <div className="w-6 h-6 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  )}
+                  <Image
+                    src={company.logo}
+                    alt={`${company.name} logo`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                    priority
+                    onLoadingComplete={() => setImageLoading(prev => ({ ...prev, [company.name]: false }))}
+                    onLoad={() => setImageLoading(prev => ({ ...prev, [company.name]: false }))}
+                    onError={() => {
+                      setImageLoadError(prev => ({ ...prev, [company.name]: true }));
+                      setImageLoading(prev => ({ ...prev, [company.name]: false }));
+                    }}
+                  />
+                </>
+              )}
             </div>
 
             <div className="px-4 pb-4">
-              <p className="text-sm font-medium text-gray-900 text-center">
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100 text-center">
                 {company.name}
               </p>
             </div>
@@ -109,8 +130,8 @@ export default function PortfolioLogos() {
                 <span className={`
                   px-2 py-1 text-xs rounded font-medium
                   ${company.acquired
-                    ? 'bg-blue-100 text-blue-600'
-                    : 'bg-purple-100 text-purple-600'
+                    ? 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300'
+                    : 'bg-purple-100 text-purple-600 dark:bg-purple-900 dark:text-purple-300'
                   }
                 `}>
                   {company.acquired ? 'Acquired' : 'Markup'}
