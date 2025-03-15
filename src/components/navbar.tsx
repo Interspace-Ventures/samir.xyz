@@ -62,7 +62,6 @@ const NavLink = memo(({ href, label, isActive, isMobile = false }: {
     className={`
       ${isMobile ? 'block py-4' : 'relative'} 
       font-inter text-[16px] font-medium tracking-wider transition-colors
-      subpixel-antialiased
       hover:text-primary dark:hover:text-primary whitespace-nowrap
       ${isActive ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
       ${!isMobile ? `
@@ -91,10 +90,14 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full h-20 flex items-center bg-background/95 backdrop-blur-2xl border-b border-border/40 shadow-sm">
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <NextLink 
-          href="/" 
-          className="font-inter text-lg md:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-400 dark:from-purple-400 dark:to-purple-200 leading-none hover:opacity-80 transition-opacity subpixel-antialiased"
+        <NextLink
+          href="/"
+          className="font-inter text-lg md:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-400 dark:from-purple-400 dark:to-purple-200 leading-none hover:opacity-80 transition-opacity antialiased"
           prefetch={false}
+          style={{ 
+            fontSmooth: 'always',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.3)' //Improved text shadow
+          }}
         >
           Hey - I'm Samir
         </NextLink>
