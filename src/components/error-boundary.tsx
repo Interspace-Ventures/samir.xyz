@@ -19,7 +19,7 @@ export default function ErrorBoundary({
       <div className="space-y-2">
         <h2 className="text-lg font-medium">Something went wrong!</h2>
         <p className="text-sm text-muted-foreground">
-          Don't worry - we've been notified and will fix this issue soon.
+          {error.message || "Don't worry - we've been notified and will fix this issue soon."}
         </p>
       </div>
       <button
