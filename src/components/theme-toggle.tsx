@@ -3,8 +3,12 @@
 import * as React from "react"
 import { useTheme } from "next-themes"
 
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  className?: string;
+}
+
 // SVG icons as components
-const SunIcon = () => (
+const SunIcon = React.forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -16,6 +20,8 @@ const SunIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     aria-hidden="true"
+    ref={ref}
+    {...props}
   >
     <circle cx="12" cy="12" r="4" />
     <path d="M12 2v2" />
@@ -27,9 +33,11 @@ const SunIcon = () => (
     <path d="m6.34 17.66-1.41 1.41" />
     <path d="m19.07 4.93-1.41 1.41" />
   </svg>
-)
+))
 
-const MoonIcon = () => (
+SunIcon.displayName = 'SunIcon'
+
+const MoonIcon = React.forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -41,10 +49,14 @@ const MoonIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     aria-hidden="true"
+    ref={ref}
+    {...props}
   >
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
   </svg>
-)
+))
+
+MoonIcon.displayName = 'MoonIcon'
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()

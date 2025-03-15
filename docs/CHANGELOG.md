@@ -24,6 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced lucide-react icons with optimized inline SVGs
 - Removed unnecessary dependencies (critters, tsx, kill-port)
 - Streamlined dependency management
+- Fixed TypeScript errors in theme components:
+  - Added proper interfaces for SVG props
+  - Implemented React.forwardRef for SVG components
+  - Added displayNames for better debugging
+- Updated README with clearer project structure and dependencies documentation
 
 ### Technical Debt
 - Consider implementing proper monitoring for performance metrics
