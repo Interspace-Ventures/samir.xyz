@@ -7,13 +7,13 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 const Navbar = dynamic(() => import("@/components/navbar"), {
-  loading: () => <div className="h-16" />,
+  loading: () => <div className="h-16 bg-background/80 backdrop-blur-sm border-b" />,
   ssr: true,
 });
 
 const Footer = dynamic(() => import("@/components/footer"), {
   ssr: true,
-  loading: () => <footer className="h-16 bg-background" />
+  loading: () => <footer className="h-16 bg-background/80 backdrop-blur-sm border-t" />
 });
 
 export function RootLayout({
@@ -28,8 +28,8 @@ export function RootLayout({
       enableSystem
       disableTransitionOnChange
     >
-      <div className="min-h-screen flex flex-col">
-        <Suspense fallback={<div className="h-16" />}>
+      <div className="min-h-screen flex flex-col bg-background text-foreground">
+        <Suspense fallback={<div className="h-16 bg-background/80 backdrop-blur-sm border-b" />}>
           <Navbar />
         </Suspense>
         <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8">
@@ -43,8 +43,8 @@ export function RootLayout({
             </PageTransition>
           </Suspense>
         </main>
-        <div className="h-8" /> {/* Reduced space before footer */}
-        <Suspense fallback={<footer className="h-16 bg-background" />}>
+        <div className="h-8" />
+        <Suspense fallback={<footer className="h-16 bg-background/80 backdrop-blur-sm border-t" />}>
           <Footer />
         </Suspense>
       </div>

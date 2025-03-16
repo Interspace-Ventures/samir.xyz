@@ -19,28 +19,18 @@ export const metadata: Metadata = {
   },
 };
 
-let pageLoadStart = 0;
-if (typeof window !== 'undefined') {
-  pageLoadStart = performance.now();
-}
-
 export default function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  if (typeof window !== 'undefined') {
-    const loadTime = performance.now() - pageLoadStart;
-    console.log(`[Performance] Total page load time: ${loadTime.toFixed(2)}ms`);
-  }
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} min-h-screen bg-background text-foreground antialiased`}>
+      <body className={`${inter.className} antialiased bg-background text-foreground min-h-screen`}>
         <RootLayout>{children}</RootLayout>
       </body>
     </html>
