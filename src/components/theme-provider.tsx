@@ -3,27 +3,12 @@
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 
-type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0]
-
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Prevent flash of unstyled content
-  if (!mounted) {
-    return null
-  }
-
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider 
-      attribute="class" 
+      attribute="class"
       defaultTheme="dark"
       enableSystem
-      disableTransitionOnChange
-      {...props}
     >
       {children}
     </NextThemesProvider>

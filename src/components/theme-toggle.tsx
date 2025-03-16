@@ -4,10 +4,16 @@ import * as React from "react"
 import { useTheme } from "next-themes"
 
 export function ThemeToggle() {
+  const [mounted, setMounted] = React.useState(false)
   const { theme, setTheme } = useTheme()
 
-  if (!theme) {
-    return null
+  // useEffect only runs on the client, so now we can safely show the UI
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null // avoid hydration mismatch
   }
 
   return (
