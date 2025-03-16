@@ -17,12 +17,12 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="aspect-[3/2] relative p-4">
+      <div className="aspect-[5/4] relative p-2">
         <Image
           src={company.logo}
           alt={`${company.name} logo`}
           fill
-          className="object-contain"
+          className="object-contain p-2"
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           priority={company.markup || company.acquired}
         />

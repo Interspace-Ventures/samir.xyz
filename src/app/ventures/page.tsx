@@ -60,20 +60,13 @@ export default function Ventures() {
       </div>
 
       <div 
-        className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto"
+        className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto animate-in fade-in duration-500"
         role="list"
         aria-label="Venture projects"
       >
-        {projects.map((project, index) => (
-          <div
-            key={project.name}
-            className="animate-in fade-in duration-300"
-            style={{ 
-              animationDelay: `${index * 50}ms`, 
-              animationFillMode: 'forwards' 
-            }}
-          >
-            <ProjectCard {...project} priority={index < 3} /> 
+        {projects.map((project) => (
+          <div key={project.name}>
+            <ProjectCard {...project} priority={true} />
           </div>
         ))}
       </div>
