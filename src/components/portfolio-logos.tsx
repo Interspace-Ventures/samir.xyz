@@ -5,7 +5,7 @@ import { companies, categories } from './data/portfolio'
 import CompanyCard from './company-card'
 
 export default function PortfolioLogos() {
-  const [selectedCategory, setSelectedCategory] = useState<(typeof categories)[number]>(categories[0])
+  const [category, setCategory] = useState<string>(categories[0])
 
   return (
     <div className="w-full">
@@ -15,9 +15,9 @@ export default function PortfolioLogos() {
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              onClick={() => setCategory(cat)}
               className={`px-4 h-[36px] rounded text-sm font-medium ${
-                selectedCategory === cat
+                category === cat
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200'
               }`}
@@ -30,8 +30,8 @@ export default function PortfolioLogos() {
         {/* Company Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {companies
-            .filter(company => selectedCategory === 'All' || company.category === selectedCategory)
-            .map(company => (
+            .filter((company) => category === 'All' || company.category === category)
+            .map((company) => (
               <CompanyCard key={company.name} company={company} />
             ))}
         </div>
