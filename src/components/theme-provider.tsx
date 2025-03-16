@@ -6,8 +6,16 @@ import { ThemeProvider as NextThemesProvider } from "next-themes"
 type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0]
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  // Memoize the provider to prevent unnecessary re-renders
-  const memoizedChildren = React.useMemo(() => children, [children])
+  const [mounted, setMounted] = React.useState(false)
+
+  // Avoid hydration mismatch by only rendering after mount
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <NextThemesProvider 
@@ -17,7 +25,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       disableTransitionOnChange
       {...props}
     >
-      {memoizedChildren}
+      {children}
     </NextThemesProvider>
   )
 }
