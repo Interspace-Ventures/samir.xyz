@@ -2,6 +2,7 @@
 
 import { useState, memo } from 'react'
 import type { Company } from './types'
+import Image from 'next/image'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
   const [loadState, setLoadState] = useState<'loading' | 'loaded' | 'error'>('loading')
@@ -14,6 +15,9 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
         text-anchor="middle" dominant-baseline="middle">${company.name}</text>
     </svg>
   `)}`
+
+  // Properly encode the logo URL to handle spaces and special characters
+  const logoUrl = company.logo ? encodeURI(company.logo) : placeholderLogo
 
   return (
     <div className="relative h-full">
@@ -42,16 +46,18 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
             )}
 
             <div className="relative w-full h-full flex items-center justify-center">
-              <img
-                src={company.logo || placeholderLogo}
+              <Image
+                src={logoUrl}
                 alt={`${company.name} logo`}
+                width={200}
+                height={80}
                 className={`
-                  max-h-16 max-w-[180px] object-contain
+                  max-h-[80px] max-w-[200px] object-contain
                   transition-all duration-300 ease-out
                   ${loadState === 'loaded' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
                 `}
                 onError={() => setLoadState('error')}
-                onLoad={() => setLoadState('loaded')}
+                onLoadingComplete={() => setLoadState('loaded')}
               />
 
               {loadState === 'error' && (
