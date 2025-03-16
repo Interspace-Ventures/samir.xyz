@@ -19,6 +19,8 @@ const PortfolioLogos = dynamic(() => import('@/components/portfolio-logos'), {
 });
 
 export default function Portfolio() {
+  console.log('Rendering Portfolio page'); // Debug log
+
   return (
     <div className="transform-gpu">
       <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
