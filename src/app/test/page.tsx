@@ -1,6 +1,5 @@
 "use client"
 
-import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function TestPage() {

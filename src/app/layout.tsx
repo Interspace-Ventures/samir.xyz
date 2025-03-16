@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";  
+import { ThemeProvider } from "@/components/theme-provider";
 import { RootLayout } from "@/components/root-layout";
 
 const inter = Inter({ 
@@ -26,12 +27,10 @@ export default function Layout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={`${inter.className} antialiased bg-background text-foreground min-h-screen`} suppressHydrationWarning>
-        <RootLayout>{children}</RootLayout>
+      <body className={inter.className} suppressHydrationWarning>
+        <ThemeProvider>
+          <RootLayout>{children}</RootLayout>
+        </ThemeProvider>
       </body>
     </html>
   );
