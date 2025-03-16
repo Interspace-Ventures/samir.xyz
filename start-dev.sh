@@ -8,7 +8,7 @@ cleanup() {
   # Kill any Next.js dev processes
   pkill -f "next dev" || true
   # Wait to ensure processes are terminated
-  sleep 3
+  sleep 2
 }
 
 # Clean up on script exit
@@ -18,14 +18,16 @@ trap cleanup EXIT
 cleanup
 
 echo "Starting Next.js development server..."
+
+# Start Next.js in the background
 NODE_ENV=development npx next dev -p 5000 --hostname 0.0.0.0 &
 
 # Store the background process PID
 SERVER_PID=$!
 
-# Wait for the port to be available using wait-port
+# Wait for the port to be available
 echo "Waiting for server to start..."
-npx wait-port -t 30000 0.0.0.0:5000
+npx wait-port -t 30000 localhost:5000
 
 if [ $? -eq 0 ]; then
   echo "Server is ready! Running on http://localhost:5000"
