@@ -2,12 +2,10 @@ import Image from 'next/image'
 import type { Company } from './types'
 
 export default function CompanyCard({ company }: { company: Company }) {
-  const websiteUrl = `https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`
-
   return (
     <div className="h-[160px] rounded-lg border bg-white dark:bg-gray-800">
       <a
-        href={websiteUrl}
+        href={`https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
         rel="noopener noreferrer"
         className="block h-full p-6 relative"
