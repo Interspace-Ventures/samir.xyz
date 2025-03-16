@@ -93,7 +93,7 @@ export default function Navbar() {
           className="text-2xl font-bold text-foreground leading-none hover:opacity-80 transition-opacity"
           prefetch={false}
         >
-          Hey - I'm Samir
+          <span suppressHydrationWarning>Hey - I'm Samir</span>
         </NextLink>
 
         {/* Desktop Navigation */}

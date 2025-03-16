@@ -30,7 +30,7 @@ export default function Layout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} antialiased bg-background text-foreground min-h-screen`}>
+      <body className={`${inter.className} antialiased bg-background text-foreground min-h-screen`} suppressHydrationWarning>
         <RootLayout>{children}</RootLayout>
       </body>
     </html>
