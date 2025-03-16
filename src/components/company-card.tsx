@@ -5,59 +5,74 @@ import type { Company } from './types'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
   const [loadState, setLoadState] = useState<'loading' | 'loaded' | 'error'>('loading')
-  console.log(`Loading state for ${company.name}: ${loadState}`); // Debug log
+
+  // Generate a placeholder SVG with the company name
+  const placeholderLogo = `data:image/svg+xml,${encodeURIComponent(`
+    <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="none"/>
+      <text x="50%" y="50%" font-family="Arial" font-size="16" fill="#666"
+        text-anchor="middle" dominant-baseline="middle">${company.name}</text>
+    </svg>
+  `)}`
 
   return (
-    <a
-      href={`https://www.${company.name.toLowerCase()}.com`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="h-full block"
-    >
-      <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
-        <div className="p-6 h-full p-4 flex items-center justify-center relative">
-          {/* Markup/Acquired badge */}
-          {(company.markup || company.acquired) && (
-            <div className="absolute top-2 right-2 text-white text-xs px-2 py-1 rounded bg-purple-600">
-              {company.acquired ? 'Acquired' : 'Markup'}
-            </div>
-          )}
+    <div className="relative h-full">
+      <a
+        href={`https://.${company.name.toLowerCase()}.com`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block h-full"
+      >
+        <div className="rounded-lg border bg-white dark:bg-gray-800 h-[160px] 
+          transform transition-all duration-300 ease-out hover:-translate-y-1
+          hover:shadow-lg dark:shadow-purple-500/20">
+          <div className="p-6 h-full flex items-center justify-center relative">
+            {(company.markup || company.acquired) && (
+              <div className="absolute top-2 right-2 text-xs px-2 py-1 rounded-full
+                bg-purple-600 text-white transform transition-transform duration-300
+                hover:scale-110">
+                {company.acquired ? 'Acquired' : 'Markup'}
+              </div>
+            )}
 
-          {/* Description overlay on hover */}
-          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20 rounded-lg">
-            <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              {company.description}
-            </p>
-          </div>
-
-          {/* Content area */}
-          <div className="flex items-center justify-center w-full h-full">
             {loadState === 'loading' && (
-              <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent absolute" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
+              </div>
             )}
 
-            <img
-              src={company.logo}
-              alt={`${company.name} logo`}
-              className={`w-auto h-auto max-h-[60px] max-w-[180px] object-contain transition-opacity duration-300
-                ${loadState === 'loaded' ? 'opacity-100' : 'opacity-0'}`}
-              onError={() => {
-                console.error(`Failed to load logo for ${company.name}`); // Debug log
-                setLoadState('error');
-              }}
-              onLoad={() => {
-                console.log(`Successfully loaded logo for ${company.name}`); // Debug log
-                setLoadState('loaded');
-              }}
-            />
+            <div className="relative w-full h-full flex items-center justify-center">
+              <img
+                src={company.logo || placeholderLogo}
+                alt={`${company.name} logo`}
+                className={`
+                  max-h-16 max-w-[180px] object-contain
+                  transition-all duration-300 ease-out
+                  ${loadState === 'loaded' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
+                `}
+                onError={() => setLoadState('error')}
+                onLoad={() => setLoadState('loaded')}
+              />
 
-            {loadState === 'error' && (
-              <div className="text-gray-700 dark:text-gray-300 font-medium text-center">{company.name}</div>
-            )}
+              {loadState === 'error' && (
+                <div className="text-gray-700 dark:text-gray-300 font-medium text-center">
+                  {company.name}
+                </div>
+              )}
+            </div>
+
+            <div className="absolute inset-0 flex items-center justify-center rounded-lg
+              bg-black/0 hover:bg-black/75 transition-all duration-300">
+              <p className="text-white text-sm text-center px-4 py-2
+                opacity-0 hover:opacity-100 transition-opacity duration-300
+                transform translate-y-2 hover:translate-y-0">
+                {company.description}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   )
 })
 

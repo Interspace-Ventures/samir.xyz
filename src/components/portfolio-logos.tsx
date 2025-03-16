@@ -7,13 +7,7 @@ import dynamic from 'next/dynamic'
 
 const CompanyCard = dynamic(() => import('./company-card'), {
   loading: () => (
-    <div className="h-32">
-      <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800">
-        <div className="p-6 h-full p-4 flex items-center justify-center">
-          <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
-        </div>
-      </div>
-    </div>
+    <div className="h-[160px] bg-card/50 rounded-lg animate-pulse" />
   )
 });
 
@@ -56,13 +50,11 @@ export default function PortfolioLogos() {
         onCategoryChange={setSelectedCategory}
       />
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredCompanies.map((company) => (
-          <div key={company.name} className="h-32">
-            <CompanyCard company={company} />
-          </div>
+          <CompanyCard key={company.name} company={company} />
         ))}
-      </section>
+      </div>
     </div>
   );
 }
