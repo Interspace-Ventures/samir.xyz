@@ -59,16 +59,39 @@ const MoonIcon = React.forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 MoonIcon.displayName = 'MoonIcon'
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  // Wrap hook usage in try-catch to catch potential initialization errors
+  try {
+    const { theme, setTheme } = useTheme()
 
-  return (
-    <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative w-6 h-6 flex items-center justify-center"
-    >
-      <SunIcon className="h-[1.1rem] w-[1.1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <MoonIcon className="absolute h-[1.1rem] w-[1.1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Toggle theme</span>
-    </button>
-  )
+    // Validate hook values before usage
+    if (typeof theme === 'undefined' || typeof setTheme !== 'function') {
+      console.error('[ThemeToggle] Theme context not properly initialized:', {
+        hasTheme: typeof theme !== 'undefined',
+        hasSetTheme: typeof setTheme === 'function'
+      })
+      return null // Return null if theme context is not properly initialized
+    }
+
+    console.log('[ThemeToggle] Rendering with theme:', theme)
+
+    return (
+      <button
+        onClick={() => {
+          try {
+            setTheme(theme === "dark" ? "light" : "dark")
+          } catch (error) {
+            console.error('[ThemeToggle] Error during theme toggle:', error)
+          }
+        }}
+        className="relative w-6 h-6 flex items-center justify-center"
+      >
+        <SunIcon className="h-[1.1rem] w-[1.1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+        <MoonIcon className="absolute h-[1.1rem] w-[1.1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <span className="sr-only">Toggle theme</span>
+      </button>
+    )
+  } catch (error) {
+    console.error('[ThemeToggle] Error initializing theme hook:', error)
+    return null // Return null if hook initialization fails
+  }
 }

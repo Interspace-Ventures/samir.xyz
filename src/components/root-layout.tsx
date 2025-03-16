@@ -23,15 +23,23 @@ export function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Initialize all hooks at the top level
   const [mounted, setMounted] = React.useState(false)
+  const [initError, setInitError] = React.useState<Error | null>(null)
 
   React.useEffect(() => {
     try {
+      // Verify React is properly initialized
+      if (!React || !React.useState || !React.useEffect) {
+        throw new Error('React is not properly initialized')
+      }
+
       console.log('[RootLayout] Initializing component')
       setMounted(true)
       console.log('[RootLayout] Component mounted successfully')
     } catch (error) {
       console.error('[RootLayout] Error during mount:', error)
+      setInitError(error as Error)
     }
 
     return () => {
@@ -43,7 +51,19 @@ export function RootLayout({
     }
   }, [])
 
-  // Show a loading state while client-side code is hydrating
+  // Show error state if initialization failed
+  if (initError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+        <div className="space-y-4 text-center">
+          <h1 className="text-xl font-bold">Failed to initialize application</h1>
+          <p className="text-sm text-muted-foreground">{initError.message}</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Show loading state while client-side code is hydrating
   if (!mounted) {
     console.log('[RootLayout] Waiting for hydration')
     return (
@@ -59,38 +79,40 @@ export function RootLayout({
   }
 
   return (
-    <ErrorBoundary>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="dark"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <div className="min-h-screen flex flex-col bg-background text-foreground">
-          <div className="fixed top-0 left-0 right-0 z-50">
-            <ErrorBoundary>
-              <Navbar />
+    <ErrorBoundary name="root">
+      <ErrorBoundary name="theme-provider">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen flex flex-col bg-background text-foreground">
+            <div className="fixed top-0 left-0 right-0 z-50">
+              <ErrorBoundary name="navbar">
+                <Navbar />
+              </ErrorBoundary>
+            </div>
+            <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
+              <React.Suspense 
+                fallback={
+                  <div className="animate-pulse bg-muted/10 rounded-lg h-[600px] w-full" />
+                }
+              >
+                <ErrorBoundary name="page-content">
+                  <PageTransition>
+                    {children}
+                  </PageTransition>
+                </ErrorBoundary>
+              </React.Suspense>
+            </main>
+            <div className="h-8" />
+            <ErrorBoundary name="footer">
+              <Footer />
             </ErrorBoundary>
           </div>
-          <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
-            <React.Suspense 
-              fallback={
-                <div className="animate-pulse bg-muted/10 rounded-lg h-[600px] w-full" />
-              }
-            >
-              <ErrorBoundary>
-                <PageTransition>
-                  {children}
-                </PageTransition>
-              </ErrorBoundary>
-            </React.Suspense>
-          </main>
-          <div className="h-8" />
-          <ErrorBoundary>
-            <Footer />
-          </ErrorBoundary>
-        </div>
-      </ThemeProvider>
+        </ThemeProvider>
+      </ErrorBoundary>
     </ErrorBoundary>
   )
 }
