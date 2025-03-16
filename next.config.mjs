@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    unoptimized: true, 
+    unoptimized: true, // Keep unoptimized for Replit deployment
     remotePatterns: [
       {
         protocol: 'https',
@@ -27,11 +27,11 @@ const nextConfig = {
   },
   // Configure proper compression
   compress: true,
-  // Add performance headers
+  // Configure static file serving
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: '/attached_assets/:path*',
         headers: [
           {
             key: 'Cache-Control',
