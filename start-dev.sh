@@ -16,7 +16,7 @@ npx wait-port -t 30000 localhost:5000
 
 if [ $? -eq 0 ]; then
   echo "Server is ready! Running on http://localhost:5000"
-
+  
   # Keep the script running and forward signals to the server process
   wait $SERVER_PID
 else
