@@ -5,12 +5,11 @@ import { companies, categories } from './data/portfolio'
 import type { Company } from './types'
 import dynamic from 'next/dynamic'
 
-// Load CompanyCard dynamically but with SSR enabled for better initial load
+// Load CompanyCard dynamically with consistent loading state
 const CompanyCard = dynamic(() => import('./CompanyCard'), {
-  ssr: true,
   loading: () => (
     <div className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-      <div className="aspect-[3/2] relative p-4">
+      <div className="aspect-[5/4] relative p-2">
         <div className="w-full h-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md" />
       </div>
     </div>
@@ -51,7 +50,7 @@ export default function PortfolioLogos() {
   );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-in fade-in duration-500">
       <CategoryFilters
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
