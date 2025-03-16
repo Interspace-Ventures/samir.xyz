@@ -6,6 +6,7 @@ import type { Company } from './types'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   return (
     <div
@@ -22,10 +23,20 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
           src={company.logo}
           alt={`${company.name} logo`}
           fill
-          className="object-contain p-2"
+          className={`
+            object-contain p-2
+            transition-opacity duration-300
+            ${imageError ? 'opacity-0' : 'opacity-100'}
+          `}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           priority={company.markup || company.acquired}
+          onError={() => setImageError(true)}
         />
+        {imageError && (
+          <div className="absolute inset-0 flex items-center justify-center p-4 text-gray-400">
+            {company.name}
+          </div>
+        )}
       </div>
 
       {/* Hover overlay with description */}
