@@ -4,11 +4,11 @@ import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 
 // Lazy load components with simpler loading states
-const StatsSection = dynamic(() => import('@/components/StatsSection'), {
+const StatsSection = dynamic(() => import('@/components/stats-section'), {
   loading: () => <div className="w-full lg:w-auto grid gap-3 rounded-xl p-3 bg-card/50" />
 });
 
-const PortfolioLogos = dynamic(() => import('@/components/PortfolioLogos'), {
+const PortfolioLogos = dynamic(() => import('@/components/portfolio-logos'), {
   loading: () => (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
       {[...Array(10)].map((_, i) => (
