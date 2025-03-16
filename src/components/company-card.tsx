@@ -17,6 +17,13 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
     >
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
         <div className="p-6 h-full p-4 flex items-center justify-center relative">
+          {/* Loading indicator */}
+          {isLoading && !imageError && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
+              <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
+            </div>
+          )}
+
           {/* Markup/Acquired badge */}
           {(company.markup || company.acquired) && (
             <div className="absolute top-0 right-0 text-white text-xs px-2 py-1 bg-[#7343d0]">
@@ -33,17 +40,17 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
 
           {/* Logo container */}
           <div className="flex items-center justify-center w-full h-full">
-            <div className="relative w-full h-full flex items-center justify-center ">
-              <picture>
-                <source srcSet={`${company.logo.replace('.png', '.webp')}`} type="image/webp" />
+            <div className="relative w-full h-full flex items-center justify-center">
+              {!imageError ? (
                 <img
+                  src={company.logo}
                   alt={`${company.name} logo`}
                   className={`
-                    w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
+                    w-auto h-auto max-h-[60px] max-w-[200px] object-contain
+                    transition-all duration-500
                     ${isLoading ? 'opacity-0' : 'opacity-100'}
                   `}
-                  src={company.logo}
-                  onError={() => {
+                  onError={(e) => {
                     console.error(`Failed to load image for ${company.name}:`, company.logo);
                     setImageError(true);
                     setIsLoading(false);
@@ -52,9 +59,10 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
                     console.log(`Successfully loaded image for ${company.name}`);
                     setIsLoading(false);
                   }}
-                  data-company={company.name}
                 />
-              </picture>
+              ) : (
+                <div className="text-gray-400 text-sm">{company.name}</div>
+              )}
             </div>
           </div>
         </div>
