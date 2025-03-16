@@ -5,84 +5,61 @@ import { useState, memo } from 'react'
 import type { Company } from './types'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
 
   return (
-    <div
-      className={`
-        relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden 
-        transition-all duration-300 ease-out
-        ${isHovered ? 'scale-[1.02] shadow-lg' : ''}
-      `}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <a
+      href={`https://www.${company.name.toLowerCase()}.com`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="h-full block"
     >
-      <div className="aspect-[5/4] relative p-2">
-        {isLoading && !imageError && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
-            <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
+        <div className="p-6 h-full p-4 flex items-center justify-center relative">
+          {/* Markup/Acquired badge */}
+          {(company.markup || company.acquired) && (
+            <div className="absolute top-0 right-0 text-white text-xs px-2 py-1 bg-[#7343d0]">
+              {company.acquired ? 'Acquired' : 'Markup'}
+            </div>
+          )}
+
+          {/* Description overlay on hover */}
+          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
+            <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              {company.description}
+            </p>
           </div>
-        )}
-        <Image
-          src={company.logo}
-          alt={`${company.name} logo`}
-          fill
-          className={`
-            object-contain p-2
-            transition-all duration-300
-            ${imageError ? 'opacity-0' : 'opacity-100'}
-            ${isLoading ? 'opacity-0' : 'opacity-100'}
-          `}
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-          priority={company.markup || company.acquired}
-          onError={() => {
-            console.error(`Failed to load image for ${company.name}:`, company.logo);
-            setImageError(true);
-            setIsLoading(false);
-          }}
-          onLoad={() => {
-            console.log(`Successfully loaded image for ${company.name}`);
-            setIsLoading(false);
-          }}
-        />
-        {imageError && (
-          <div className="absolute inset-0 flex items-center justify-center p-4">
-            <div className="text-center">
-              <div className="text-gray-400 font-medium">{company.name}</div>
-              <div className="text-gray-400 text-sm mt-1">Logo unavailable</div>
+
+          {/* Logo container */}
+          <div className="flex items-center justify-center w-full h-full">
+            <div className="relative w-full h-full flex items-center justify-center ">
+              <picture>
+                <source srcSet={`${company.logo.replace('.png', '.webp')}`} type="image/webp" />
+                <img
+                  alt={`${company.name} logo`}
+                  className={`
+                    w-auto h-auto max-h-[100px] max-w-[280px] object-contain transition-all duration-500
+                    ${isLoading ? 'opacity-0' : 'opacity-100'}
+                  `}
+                  src={company.logo}
+                  onError={() => {
+                    console.error(`Failed to load image for ${company.name}:`, company.logo);
+                    setImageError(true);
+                    setIsLoading(false);
+                  }}
+                  onLoad={() => {
+                    console.log(`Successfully loaded image for ${company.name}`);
+                    setIsLoading(false);
+                  }}
+                  data-company={company.name}
+                />
+              </picture>
             </div>
           </div>
-        )}
-      </div>
-
-      {/* Hover overlay with description */}
-      <div
-        className={`
-          absolute inset-0 bg-black/80 flex items-center justify-center p-4
-          transition-all duration-300 ease-in-out
-          ${isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-        `}
-      >
-        <p className="text-white text-sm text-center">{company.description}</p>
-      </div>
-
-      {/* Badge for markup/acquired status */}
-      {(company.markup || company.acquired) && (
-        <div className="absolute top-2 right-2 z-10">
-          <span className={`
-            px-2 py-1 text-xs rounded font-medium
-            ${company.acquired
-              ? 'bg-blue-100 text-blue-600'
-              : 'bg-purple-100 text-purple-600'
-            }
-          `}>
-            {company.acquired ? 'Acquired' : 'Markup'}
-          </span>
         </div>
-      )}
-    </div>
+      </div>
+    </a>
   );
 });
 

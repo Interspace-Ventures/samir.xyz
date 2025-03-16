@@ -8,9 +8,11 @@ import dynamic from 'next/dynamic'
 // Load CompanyCard dynamically with consistent loading state
 const CompanyCard = dynamic(() => import('./company-card'), {
   loading: () => (
-    <div className="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-      <div className="aspect-[5/4] relative p-2">
-        <div className="w-full h-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md" />
+    <div className="h-32">
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800">
+        <div className="p-6 h-full p-4 flex items-center justify-center">
+          <div className="w-full h-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md" />
+        </div>
       </div>
     </div>
   )
@@ -56,11 +58,13 @@ export default function PortfolioLogos() {
         onCategoryChange={setSelectedCategory}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredCompanies.map((company) => (
-          <CompanyCard key={company.name} company={company} />
+          <div key={company.name} className="h-32">
+            <CompanyCard company={company} />
+          </div>
         ))}
-      </div>
+      </section>
     </div>
   );
 }
