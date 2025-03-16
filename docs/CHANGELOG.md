@@ -5,22 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0] - 2025-03-16
+## [2.4.1] - 2025-03-16
 
-### Changed
-- Major performance improvements to portfolio and ventures pages:
-  - Optimized image loading strategy with proper priorities
-  - Enhanced logo card dimensions and spacing
-  - Implemented consistent loading animations
-  - Removed progressive loading in favor of unified transitions
-  - Added better loading states and placeholders
-- Improved mobile responsiveness in profile page:
-  - Optimized header text and profile image sizing
-  - Enhanced text hierarchy and spacing
-- Enhanced visual consistency:
-  - Standardized vertical alignment across all pages
-  - Implemented unified animation patterns
-  - Set dark mode as default theme
+### Fixed
+- Resolved routing conflicts between App Router and Pages Router
+- Fixed About page (root route) 404 error
+- Standardized component file naming and import paths
+- Corrected dynamic imports in portfolio and ventures pages
+- Enhanced start script with better process management
 
 ## [2.4.0] - 2025-03-15
 
