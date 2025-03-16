@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, memo } from 'react'
+import { useState, memo, useEffect } from 'react'
 import { companies, categories } from './data/portfolio'
 import type { Company } from './types'
 import dynamic from 'next/dynamic'
@@ -38,22 +38,38 @@ CategoryFilters.displayName = 'CategoryFilters';
 
 export default function PortfolioLogos() {
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All');
+  const [screenWidth, setScreenWidth] = useState<number>(0);
+
+  useEffect(() => {
+    // Update screen width on mount and resize
+    const updateWidth = () => setScreenWidth(window.innerWidth);
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
 
   const filteredCompanies = companies.filter(company =>
     selectedCategory === 'All' || company.category === selectedCategory
   );
 
   return (
-    <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-      <CategoryFilters
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-      />
+    <div className="min-h-screen w-full">
+      <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <CategoryFilters
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+        />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredCompanies.map((company) => (
-          <CompanyCard key={company.name} company={company} />
-        ))}
+        {/* Debug info */}
+        <div className="text-sm text-gray-600 mb-4">
+          Screen width: {screenWidth}px
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+          {filteredCompanies.map((company) => (
+            <CompanyCard key={company.name} company={company} />
+          ))}
+        </div>
       </div>
     </div>
   );
