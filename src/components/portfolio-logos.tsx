@@ -10,7 +10,7 @@ const CompanyCard = dynamic(() => import('./company-card'), {
     <div className="h-32">
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800">
         <div className="p-6 h-full p-4 flex items-center justify-center">
-          <div className="text-gray-400">Loading...</div>
+          <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
         </div>
       </div>
     </div>

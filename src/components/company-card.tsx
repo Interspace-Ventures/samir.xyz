@@ -4,7 +4,7 @@ import { useState, memo } from 'react'
 import type { Company } from './types'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
-  const [showFallback, setShowFallback] = useState(false)
+  const [loadState, setLoadState] = useState<'loading' | 'loaded' | 'error'>('loading')
 
   return (
     <a
@@ -31,14 +31,20 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
 
           {/* Content area */}
           <div className="flex items-center justify-center w-full h-full">
-            {!showFallback ? (
-              <img
-                src={company.logo}
-                alt={`${company.name} logo`}
-                className="w-auto h-auto max-h-[60px] max-w-[200px] object-contain"
-                onError={() => setShowFallback(true)}
-              />
-            ) : (
+            {loadState === 'loading' && (
+              <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
+            )}
+
+            <img
+              src={company.logo}
+              alt={`${company.name} logo`}
+              className={`w-auto h-auto max-h-[60px] max-w-[200px] object-contain transition-opacity duration-300
+                ${loadState === 'loaded' ? 'opacity-100' : 'opacity-0 absolute'}`}
+              onError={() => setLoadState('error')}
+              onLoad={() => setLoadState('loaded')}
+            />
+
+            {loadState === 'error' && (
               <div className="text-gray-700 dark:text-gray-300 font-medium text-center">{company.name}</div>
             )}
           </div>
