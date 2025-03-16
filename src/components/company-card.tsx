@@ -1,11 +1,15 @@
 "use client"
 
-import { useState, memo } from 'react'
+import { useState, memo, useEffect } from 'react'
 import type { Company } from './types'
-import Image from 'next/image'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
   const [loadState, setLoadState] = useState<'loading' | 'loaded' | 'error'>('loading')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Generate a placeholder SVG with the company name
   const placeholderLogo = `data:image/svg+xml,${encodeURIComponent(`
@@ -18,6 +22,10 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
 
   // Properly encode the logo URL to handle spaces and special characters
   const logoUrl = company.logo ? encodeURI(company.logo) : placeholderLogo
+
+  if (!mounted) {
+    return null; // Prevent hydration mismatch by not rendering anything on server
+  }
 
   return (
     <div className="relative h-full">
@@ -46,18 +54,16 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
             )}
 
             <div className="relative w-full h-full flex items-center justify-center">
-              <Image
+              <img
                 src={logoUrl}
                 alt={`${company.name} logo`}
-                width={200}
-                height={80}
                 className={`
                   max-h-[80px] max-w-[200px] object-contain
                   transition-all duration-300 ease-out
                   ${loadState === 'loaded' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
                 `}
                 onError={() => setLoadState('error')}
-                onLoadingComplete={() => setLoadState('loaded')}
+                onLoad={() => setLoadState('loaded')}
               />
 
               {loadState === 'error' && (
