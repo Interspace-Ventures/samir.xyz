@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2025-03-16
+
+### Changed
+- Major performance improvements to portfolio and ventures pages:
+  - Optimized image loading strategy with proper priorities
+  - Enhanced logo card dimensions and spacing
+  - Implemented consistent loading animations
+  - Removed progressive loading in favor of unified transitions
+  - Added better loading states and placeholders
+- Improved mobile responsiveness in profile page:
+  - Optimized header text and profile image sizing
+  - Enhanced text hierarchy and spacing
+- Enhanced visual consistency:
+  - Standardized vertical alignment across all pages
+  - Implemented unified animation patterns
+  - Set dark mode as default theme
+
 ## [2.4.0] - 2025-03-15
 
 ### Changed
@@ -96,7 +113,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Consolidated all CSS into src/app/globals.css
 - Updated/marked other CSS files as deprecated
-
 
 ## [1.1.15] - 2025-03-14
 
