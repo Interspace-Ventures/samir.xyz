@@ -42,13 +42,19 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
                 src={logoUrl}
                 alt={`${company.name} logo`}
                 className="max-h-[80px] max-w-[200px] object-contain opacity-0 transition-opacity duration-300"
-                onLoad={(e) => {
-                  const img = e.target as HTMLImageElement;
-                  img.classList.remove('opacity-0');
-                  img.classList.add('opacity-100');
-                  const spinner = img.previousElementSibling as HTMLElement;
-                  if (spinner) {
-                    spinner.style.display = 'none';
+                onLoad={(event) => {
+                  try {
+                    const target = event.currentTarget;
+                    if (target instanceof HTMLImageElement) {
+                      target.classList?.remove?.('opacity-0');
+                      target.classList?.add?.('opacity-100');
+                      const spinner = target.previousElementSibling;
+                      if (spinner instanceof HTMLElement) {
+                        spinner.style.display = 'none';
+                      }
+                    }
+                  } catch (error) {
+                    console.error('Error handling image load:', error);
                   }
                 }}
               />
