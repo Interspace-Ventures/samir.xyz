@@ -11,7 +11,7 @@ const Navbar = dynamic(() => import("@/components/navbar"), {
   ssr: true,
 });
 
-const Footer = dynamic(() => import("@/components/Footer"), {
+const Footer = dynamic(() => import("@/components/footer"), {
   ssr: true,
   loading: () => <footer className="h-16 bg-background" />
 });
