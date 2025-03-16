@@ -7,6 +7,7 @@ import type { Company } from './types'
 const CompanyCard = memo(({ company }: { company: Company }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div
@@ -19,22 +20,39 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="aspect-[5/4] relative p-2">
+        {isLoading && !imageError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
+            <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
+          </div>
+        )}
         <Image
           src={company.logo}
           alt={`${company.name} logo`}
           fill
           className={`
             object-contain p-2
-            transition-opacity duration-300
+            transition-all duration-300
             ${imageError ? 'opacity-0' : 'opacity-100'}
+            ${isLoading ? 'opacity-0' : 'opacity-100'}
           `}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           priority={company.markup || company.acquired}
-          onError={() => setImageError(true)}
+          onError={() => {
+            console.error(`Failed to load image for ${company.name}:`, company.logo);
+            setImageError(true);
+            setIsLoading(false);
+          }}
+          onLoad={() => {
+            console.log(`Successfully loaded image for ${company.name}`);
+            setIsLoading(false);
+          }}
         />
         {imageError && (
-          <div className="absolute inset-0 flex items-center justify-center p-4 text-gray-400">
-            {company.name}
+          <div className="absolute inset-0 flex items-center justify-center p-4">
+            <div className="text-center">
+              <div className="text-gray-400 font-medium">{company.name}</div>
+              <div className="text-gray-400 text-sm mt-1">Logo unavailable</div>
+            </div>
           </div>
         )}
       </div>
