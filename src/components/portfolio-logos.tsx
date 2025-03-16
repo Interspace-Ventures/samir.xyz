@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, memo, useEffect } from 'react'
+import { useState, memo } from 'react'
 import { companies, categories } from './data/portfolio'
 import type { Company } from './types'
 import dynamic from 'next/dynamic'
 
+// Use dynamic import with no SSR for CompanyCard
 const CompanyCard = dynamic(() => import('./company-card'), {
-  loading: () => (
-    <div className="h-[160px] bg-card/50 rounded-lg animate-pulse" />
-  )
+  loading: () => <div className="h-[160px] bg-card/50 rounded-lg animate-pulse" />,
+  ssr: false
 });
 
 const CategoryFilters = memo(({ selectedCategory, onCategoryChange }: {
@@ -38,15 +38,6 @@ CategoryFilters.displayName = 'CategoryFilters';
 
 export default function PortfolioLogos() {
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>('All');
-  const [screenWidth, setScreenWidth] = useState<number>(0);
-
-  useEffect(() => {
-    // Update screen width on mount and resize
-    const updateWidth = () => setScreenWidth(window.innerWidth);
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
-  }, []);
 
   const filteredCompanies = companies.filter(company =>
     selectedCategory === 'All' || company.category === selectedCategory
@@ -59,11 +50,6 @@ export default function PortfolioLogos() {
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
         />
-
-        {/* Debug info */}
-        <div className="text-sm text-gray-600 mb-4">
-          Screen width: {screenWidth}px
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
           {filteredCompanies.map((company) => (

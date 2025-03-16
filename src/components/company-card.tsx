@@ -1,31 +1,20 @@
 "use client"
 
-import { useState, memo, useEffect } from 'react'
+import { memo } from 'react'
 import type { Company } from './types'
 
+// Generate a placeholder SVG outside the component
+const createPlaceholderSVG = (name: string) => `data:image/svg+xml,${encodeURIComponent(`
+  <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100%" height="100%" fill="none"/>
+    <text x="50%" y="50%" font-family="Arial" font-size="16" fill="#666"
+      text-anchor="middle" dominant-baseline="middle">${name}</text>
+  </svg>
+`)}`;
+
 const CompanyCard = memo(({ company }: { company: Company }) => {
-  const [loadState, setLoadState] = useState<'loading' | 'loaded' | 'error'>('loading')
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Generate a placeholder SVG with the company name
-  const placeholderLogo = `data:image/svg+xml,${encodeURIComponent(`
-    <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="none"/>
-      <text x="50%" y="50%" font-family="Arial" font-size="16" fill="#666"
-        text-anchor="middle" dominant-baseline="middle">${company.name}</text>
-    </svg>
-  `)}`
-
   // Properly encode the logo URL to handle spaces and special characters
-  const logoUrl = company.logo ? encodeURI(company.logo) : placeholderLogo
-
-  if (!mounted) {
-    return null; // Prevent hydration mismatch by not rendering anything on server
-  }
+  const logoUrl = company.logo ? encodeURI(company.logo) : createPlaceholderSVG(company.name);
 
   return (
     <div className="relative h-full">
@@ -47,30 +36,22 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
               </div>
             )}
 
-            {loadState === 'loading' && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
-              </div>
-            )}
-
             <div className="relative w-full h-full flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent absolute" />
               <img
                 src={logoUrl}
                 alt={`${company.name} logo`}
-                className={`
-                  max-h-[80px] max-w-[200px] object-contain
-                  transition-all duration-300 ease-out
-                  ${loadState === 'loaded' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
-                `}
-                onError={() => setLoadState('error')}
-                onLoad={() => setLoadState('loaded')}
+                className="max-h-[80px] max-w-[200px] object-contain opacity-0 transition-opacity duration-300"
+                onLoad={(e) => {
+                  const img = e.target as HTMLImageElement;
+                  img.classList.remove('opacity-0');
+                  img.classList.add('opacity-100');
+                  const spinner = img.previousElementSibling as HTMLElement;
+                  if (spinner) {
+                    spinner.style.display = 'none';
+                  }
+                }}
               />
-
-              {loadState === 'error' && (
-                <div className="text-gray-700 dark:text-gray-300 font-medium text-center">
-                  {company.name}
-                </div>
-              )}
             </div>
 
             <div className="absolute inset-0 flex items-center justify-center rounded-lg
@@ -85,9 +66,9 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
         </div>
       </a>
     </div>
-  )
-})
+  );
+});
 
-CompanyCard.displayName = 'CompanyCard'
+CompanyCard.displayName = 'CompanyCard';
 
-export default CompanyCard
+export default CompanyCard;
