@@ -6,7 +6,7 @@ import type { Company } from './types'
 import dynamic from 'next/dynamic'
 
 // Load CompanyCard dynamically with consistent loading state
-const CompanyCard = dynamic(() => import('./CompanyCard'), {
+const CompanyCard = dynamic(() => import('./company-card'), {
   loading: () => (
     <div className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
       <div className="aspect-[5/4] relative p-2">
