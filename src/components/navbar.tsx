@@ -3,7 +3,7 @@
 import { default as NextLink } from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
-import { useState, useCallback, memo } from "react"
+import { useState, useCallback, memo, useEffect } from "react"
 
 const MenuIcon = () => (
   <svg
@@ -80,10 +80,33 @@ NavLink.displayName = 'NavLink';
 export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev)
   }, [])
+
+  if (!mounted) {
+    return (
+      <nav className="sticky top-0 z-50 w-full h-20 navbar-bg border-b border-border/40 shadow-sm">
+        <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
+          <div className="text-2xl font-bold text-foreground leading-none">
+            <span suppressHydrationWarning>Hey - I'm Samir</span>
+          </div>
+          {/* Show a placeholder for the menu items */}
+          <div className="hidden md:flex items-center space-x-4">
+            {navItems.map((_, i) => (
+              <div key={i} className="w-20 h-4 bg-muted/10 rounded animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </nav>
+    )
+  }
 
   return (
     <nav className="sticky top-0 z-50 w-full h-20 navbar-bg border-b border-border/40 shadow-sm">
@@ -96,8 +119,8 @@ export default function Navbar() {
           <span suppressHydrationWarning>Hey - I'm Samir</span>
         </NextLink>
 
-        {/* Desktop Navigation */}
-        <div className="hidden xs:flex items-center space-x-4">
+        {/* Desktop Navigation - Changed from sm to md breakpoint */}
+        <div className="hidden md:flex items-center space-x-4">
           {navItems.map((item) => (
             <NavLink
               key={item.href}
@@ -109,8 +132,8 @@ export default function Navbar() {
           <ThemeToggle />
         </div>
 
-        {/* Mobile Navigation */}
-        <div className="xs:hidden flex items-center gap-4">
+        {/* Mobile Navigation - Changed from sm to md breakpoint */}
+        <div className="md:hidden flex items-center gap-4">
           <ThemeToggle />
           <button
             onClick={toggleMenu}
@@ -122,9 +145,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown - Changed from sm to md breakpoint */}
       {isMenuOpen && (
-        <div className="absolute top-20 left-0 right-0 z-50 navbar-bg py-4 px-6 space-y-2 border-b border-border/40 shadow-sm xs:hidden">
+        <div className="absolute top-20 left-0 right-0 z-50 navbar-bg py-4 px-6 space-y-2 border-b border-border/40 shadow-sm md:hidden">
           {navItems.map((item) => (
             <NavLink
               key={item.href}
