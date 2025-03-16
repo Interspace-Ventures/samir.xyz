@@ -1,11 +1,10 @@
 "use client"
 
-import Image from 'next/image'
 import { useState, memo } from 'react'
 import type { Company } from './types'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
-  const [imageError, setImageError] = useState(false);
+  const [showFallback, setShowFallback] = useState(false)
 
   return (
     <a
@@ -30,33 +29,25 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
             </p>
           </div>
 
-          {/* Logo container */}
+          {/* Content area */}
           <div className="flex items-center justify-center w-full h-full">
-            <div className="relative w-full h-full flex items-center justify-center">
-              {!imageError ? (
-                <img
-                  src={company.logo}
-                  alt={`${company.name} logo`}
-                  className="w-auto h-auto max-h-[60px] max-w-[200px] object-contain"
-                  onError={(e) => {
-                    console.error(`Failed to load image for ${company.name}:`, company.logo);
-                    setImageError(true);
-                  }}
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center text-center p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg w-full">
-                  <div className="text-gray-900 dark:text-gray-100 font-medium text-sm mb-1">{company.name}</div>
-                  <div className="text-gray-500 dark:text-gray-400 text-xs">Logo unavailable</div>
-                </div>
-              )}
-            </div>
+            {!showFallback ? (
+              <img
+                src={company.logo}
+                alt={`${company.name} logo`}
+                className="w-auto h-auto max-h-[60px] max-w-[200px] object-contain"
+                onError={() => setShowFallback(true)}
+              />
+            ) : (
+              <div className="text-gray-700 dark:text-gray-300 font-medium text-center">{company.name}</div>
+            )}
           </div>
         </div>
       </div>
     </a>
-  );
-});
+  )
+})
 
-CompanyCard.displayName = 'CompanyCard';
+CompanyCard.displayName = 'CompanyCard'
 
-export default CompanyCard;
+export default CompanyCard
