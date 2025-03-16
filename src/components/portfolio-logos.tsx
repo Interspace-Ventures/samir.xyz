@@ -44,13 +44,13 @@ export default function PortfolioLogos() {
   );
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <CategoryFilters
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCompanies.map((company) => (
           <CompanyCard key={company.name} company={company} />
         ))}
