@@ -4,7 +4,6 @@ import * as React from "react"
 import { ThemeProvider } from "@/components/theme-provider";
 import { PageTransition } from "@/components/page-transition";
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
 
 // Load navbar with no SSR to avoid hydration mismatches
 const Navbar = dynamic(() => import("@/components/navbar"), {
@@ -29,6 +28,7 @@ export function RootLayout({
     setMounted(true);
   }, []);
 
+  // Show a loading state while client-side code is hydrating
   if (!mounted) {
     return (
       <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -54,7 +54,7 @@ export function RootLayout({
           <Navbar />
         </div>
         <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
-          <Suspense 
+          <React.Suspense 
             fallback={
               <div className="animate-pulse bg-muted/10 rounded-lg h-[600px] w-full" />
             }
@@ -62,7 +62,7 @@ export function RootLayout({
             <PageTransition>
               {children}
             </PageTransition>
-          </Suspense>
+          </React.Suspense>
         </main>
         <div className="h-8" />
         <Footer />
