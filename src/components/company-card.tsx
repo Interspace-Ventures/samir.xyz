@@ -18,7 +18,7 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
   return (
     <div className="relative h-full">
       <a
-        href={`https://.${company.name.toLowerCase()}.com`}
+        href={`https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
         rel="noopener noreferrer"
         className="block h-full"
