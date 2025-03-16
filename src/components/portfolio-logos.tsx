@@ -5,20 +5,18 @@ import { companies, categories } from './data/portfolio'
 import type { Company } from './types'
 import dynamic from 'next/dynamic'
 
-// Load CompanyCard dynamically with consistent loading state
 const CompanyCard = dynamic(() => import('./company-card'), {
   loading: () => (
     <div className="h-32">
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800">
         <div className="p-6 h-full p-4 flex items-center justify-center">
-          <div className="w-full h-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md" />
+          <div className="text-gray-400">Loading...</div>
         </div>
       </div>
     </div>
   )
 });
 
-// Separate category filters for better performance
 const CategoryFilters = memo(({ selectedCategory, onCategoryChange }: {
   selectedCategory: string;
   onCategoryChange: (category: typeof categories[number]) => void;
