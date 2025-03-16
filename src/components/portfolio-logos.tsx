@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic'
 // Load CompanyCard dynamically with consistent loading state
 const CompanyCard = dynamic(() => import('./company-card'), {
   loading: () => (
-    <div className="relative bg-white dark:bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+    <div className="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 shadow-sm overflow-hidden">
       <div className="aspect-[5/4] relative p-2">
         <div className="w-full h-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md" />
       </div>
@@ -21,13 +21,13 @@ const CategoryFilters = memo(({ selectedCategory, onCategoryChange }: {
   selectedCategory: string;
   onCategoryChange: (category: typeof categories[number]) => void;
 }) => (
-  <div className="flex flex-wrap gap-4">
+  <div className="flex flex-wrap gap-4 mb-8">
     {categories.map((category) => (
       <button
         key={category}
         onClick={() => onCategoryChange(category)}
         className={`
-          w-[90px] h-[36px] rounded text-sm font-medium transition-all duration-150 ease-out
+          px-4 h-[36px] rounded text-sm font-medium transition-all duration-150 ease-out
           ${selectedCategory === category
             ? 'bg-purple-600 text-white shadow-md'
             : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200'
@@ -56,7 +56,7 @@ export default function PortfolioLogos() {
         onCategoryChange={setSelectedCategory}
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredCompanies.map((company) => (
           <CompanyCard key={company.name} company={company} />
         ))}
