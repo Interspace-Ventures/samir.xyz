@@ -5,7 +5,6 @@ import { useState, memo } from 'react'
 import type { Company } from './types'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -17,13 +16,6 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
     >
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-full hover:shadow-lg transition-all duration-200 bg-white dark:bg-gray-800 group">
         <div className="p-6 h-full p-4 flex items-center justify-center relative">
-          {/* Loading indicator */}
-          {isLoading && !imageError && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
-              <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
-            </div>
-          )}
-
           {/* Markup/Acquired badge */}
           {(company.markup || company.acquired) && (
             <div className="absolute top-0 right-0 text-white text-xs px-2 py-1 bg-[#7343d0]">
@@ -45,23 +37,17 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
                 <img
                   src={company.logo}
                   alt={`${company.name} logo`}
-                  className={`
-                    w-auto h-auto max-h-[60px] max-w-[200px] object-contain
-                    transition-all duration-500
-                    ${isLoading ? 'opacity-0' : 'opacity-100'}
-                  `}
+                  className="w-auto h-auto max-h-[60px] max-w-[200px] object-contain"
                   onError={(e) => {
                     console.error(`Failed to load image for ${company.name}:`, company.logo);
                     setImageError(true);
-                    setIsLoading(false);
-                  }}
-                  onLoad={() => {
-                    console.log(`Successfully loaded image for ${company.name}`);
-                    setIsLoading(false);
                   }}
                 />
               ) : (
-                <div className="text-gray-400 text-sm">{company.name}</div>
+                <div className="flex flex-col items-center justify-center text-center p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg w-full">
+                  <div className="text-gray-900 dark:text-gray-100 font-medium text-sm mb-1">{company.name}</div>
+                  <div className="text-gray-500 dark:text-gray-400 text-xs">Logo unavailable</div>
+                </div>
               )}
             </div>
           </div>
