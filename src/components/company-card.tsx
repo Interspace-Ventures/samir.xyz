@@ -1,20 +1,10 @@
 "use client"
 
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import type { Company } from './types'
 
-// Generate a placeholder SVG outside the component
-const createPlaceholderSVG = (name: string) => `data:image/svg+xml,${encodeURIComponent(`
-  <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100%" height="100%" fill="none"/>
-    <text x="50%" y="50%" font-family="Arial" font-size="16" fill="#666"
-      text-anchor="middle" dominant-baseline="middle">${name}</text>
-  </svg>
-`)}`;
-
 const CompanyCard = memo(({ company }: { company: Company }) => {
-  // Properly encode the logo URL to handle spaces and special characters
-  const logoUrl = company.logo ? encodeURI(company.logo) : createPlaceholderSVG(company.name);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
     <div className="relative h-full">
@@ -37,27 +27,25 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
             )}
 
             <div className="relative w-full h-full flex items-center justify-center">
-              <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent absolute" />
-              <img
-                src={logoUrl}
-                alt={`${company.name} logo`}
-                className="max-h-[80px] max-w-[200px] object-contain opacity-0 transition-opacity duration-300"
-                onLoad={(event) => {
-                  try {
-                    const target = event.currentTarget;
-                    if (target instanceof HTMLImageElement) {
-                      target.classList?.remove?.('opacity-0');
-                      target.classList?.add?.('opacity-100');
-                      const spinner = target.previousElementSibling;
-                      if (spinner instanceof HTMLElement) {
-                        spinner.style.display = 'none';
-                      }
-                    }
-                  } catch (error) {
-                    console.error('Error handling image load:', error);
-                  }
-                }}
-              />
+              {!isImageLoaded && (
+                <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
+              )}
+              {company.logo && (
+                <img
+                  src={company.logo}
+                  alt={`${company.name} logo`}
+                  className={`max-h-[80px] max-w-[200px] object-contain transition-opacity duration-300 ${
+                    isImageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={() => setIsImageLoaded(true)}
+                  onError={() => setIsImageLoaded(true)}
+                />
+              )}
+              {(!company.logo || !isImageLoaded) && (
+                <div className="text-gray-600 dark:text-gray-400 text-center">
+                  {company.name}
+                </div>
+              )}
             </div>
 
             <div className="absolute inset-0 flex items-center justify-center rounded-lg
