@@ -5,30 +5,49 @@ import { useEffect, useRef, useState } from "react"
 
 // Enhanced performance monitoring with timing details and error tracking
 const logTransitionPerformance = (action: string, path: string | null, markName?: string) => {
-  const timestamp = performance.now();
-  if (markName) {
-    try {
-      performance.mark(markName);
-    } catch (error) {
-      console.error(`[Navigation] Failed to create performance mark: ${error}`);
+  try {
+    const timestamp = performance.now();
+    if (markName) {
+      try {
+        performance.mark(markName);
+      } catch (error) {
+        console.error(`[Navigation] Failed to create performance mark: ${error}`);
+      }
     }
+    console.log(`[Navigation] ${action} to ${path ?? 'unknown'} at ${timestamp.toFixed(2)}ms`);
+  } catch (error) {
+    console.error('[Navigation] Error in performance logging:', error);
   }
-  console.log(`[Navigation] ${action} to ${path ?? 'unknown'} at ${timestamp.toFixed(2)}ms`);
 };
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
+  // Initialize all hooks at the top level
   const pathname = usePathname()
-  const mountTimeRef = useRef(performance.now())
+  const mountTimeRef = useRef<number>(performance.now())
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
   // Enhanced mount monitoring with error handling
   useEffect(() => {
+    if (!pathname) {
+      console.error('[PageTransition] pathname is undefined');
+      return;
+    }
+
     try {
       const mountDuration = performance.now() - mountTimeRef.current;
       const markName = `transition-start-${pathname}`;
 
       setIsTransitioning(true);
-      console.log(`[PageTransition] Mounting component for path: ${pathname}`);
+      setHasError(false);
+
+      console.log(`[PageTransition] Component context:`, {
+        pathname,
+        mountDuration: `${mountDuration.toFixed(2)}ms`,
+        transitionState: isTransitioning,
+        hasError
+      });
+
       logTransitionPerformance('transition-start', pathname, markName);
 
       return () => {
@@ -43,13 +62,19 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           setIsTransitioning(false);
         } catch (error) {
           console.error('[PageTransition] Error during unmount:', error);
+          setHasError(true);
         }
       };
     } catch (error) {
       console.error('[PageTransition] Error during mount:', error);
+      setHasError(true);
       setIsTransitioning(false);
     }
-  }, [pathname]);
+  }, [pathname, isTransitioning, hasError]);
+
+  if (hasError) {
+    return <div>Error during transition</div>;
+  }
 
   return (
     <div
