@@ -5,6 +5,7 @@ import type { Company } from './types'
 
 const CompanyCard = memo(({ company }: { company: Company }) => {
   const [loadState, setLoadState] = useState<'loading' | 'loaded' | 'error'>('loading')
+  console.log(`Loading state for ${company.name}: ${loadState}`); // Debug log
 
   return (
     <a
@@ -17,13 +18,13 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
         <div className="p-6 h-full p-4 flex items-center justify-center relative">
           {/* Markup/Acquired badge */}
           {(company.markup || company.acquired) && (
-            <div className="absolute top-0 right-0 text-white text-xs px-2 py-1 bg-[#7343d0]">
+            <div className="absolute top-2 right-2 text-white text-xs px-2 py-1 rounded bg-purple-600">
               {company.acquired ? 'Acquired' : 'Markup'}
             </div>
           )}
 
           {/* Description overlay on hover */}
-          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20">
+          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-200 flex items-center justify-center z-20 rounded-lg">
             <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               {company.description}
             </p>
@@ -32,16 +33,22 @@ const CompanyCard = memo(({ company }: { company: Company }) => {
           {/* Content area */}
           <div className="flex items-center justify-center w-full h-full">
             {loadState === 'loading' && (
-              <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent" />
+              <div className="w-8 h-8 border-2 border-purple-600 rounded-full animate-spin border-t-transparent absolute" />
             )}
 
             <img
               src={company.logo}
               alt={`${company.name} logo`}
-              className={`w-auto h-auto max-h-[60px] max-w-[200px] object-contain transition-opacity duration-300
-                ${loadState === 'loaded' ? 'opacity-100' : 'opacity-0 absolute'}`}
-              onError={() => setLoadState('error')}
-              onLoad={() => setLoadState('loaded')}
+              className={`w-auto h-auto max-h-[60px] max-w-[180px] object-contain transition-opacity duration-300
+                ${loadState === 'loaded' ? 'opacity-100' : 'opacity-0'}`}
+              onError={() => {
+                console.error(`Failed to load logo for ${company.name}`); // Debug log
+                setLoadState('error');
+              }}
+              onLoad={() => {
+                console.log(`Successfully loaded logo for ${company.name}`); // Debug log
+                setLoadState('loaded');
+              }}
             />
 
             {loadState === 'error' && (
