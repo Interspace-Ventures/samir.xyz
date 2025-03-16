@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
+// Moving root page.tsx to (profile) group
 export default function Profile() {
   return (
     <div className="transform-gpu">
