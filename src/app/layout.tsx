@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";  
-import { ThemeProvider } from "@/components/theme-provider";
 import { RootLayout } from "@/components/root-layout";
 
 const inter = Inter({ 
   subsets: ["latin"],
   weight: ['400', '500', '600', '700', '800', '900'],
   display: 'swap',
+  fallback: ['system-ui', 'sans-serif'],
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -24,16 +25,13 @@ export default function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="antialiased">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className}>
-        <ThemeProvider>
-          <div id="app-root">
-            <RootLayout>{children}</RootLayout>
-          </div>
-        </ThemeProvider>
+      <body className={`${inter.className} antialiased bg-background text-foreground min-h-screen`} suppressHydrationWarning>
+        <RootLayout>{children}</RootLayout>
       </body>
     </html>
   );
