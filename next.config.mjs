@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  distDir: '.next',
+  // Configure static file serving and asset handling
   images: {
-    unoptimized: true, // Keep unoptimized for Replit deployment
+    unoptimized: true,
+    domains: ['*'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -10,20 +13,11 @@ const nextConfig = {
       },
     ],
   },
-  // Configure experimental features
-  experimental: {
-    // Enable CSS optimization
-    optimizeCss: true,
-    // Enable proper font optimization
-    optimizePackageImports: ['@/components'],
-  },
-  // Configure proper compression
-  compress: true,
-  // Configure static file serving
+  // Ensure proper static file handling
   async headers() {
     return [
       {
-        source: '/portfolio-logos/:path*',
+        source: '/:path*',
         headers: [
           {
             key: 'Cache-Control',
@@ -33,7 +27,28 @@ const nextConfig = {
       },
     ];
   },
-  // Optimize page loading
+  // Configure proper public directory handling
+  webpack: (config) => {
+    config.watchOptions = {
+      poll: 1000,
+      aggregateTimeout: 300,
+    };
+    // Ensure public directory is included in the build
+    config.module.rules.push({
+      test: /\.(png|jpg|gif|svg|ico)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            publicPath: '/_next',
+            outputPath: 'static/images/',
+          },
+        },
+      ],
+    });
+    return config;
+  },
+  // Disable powered by header
   poweredByHeader: false,
 };
 

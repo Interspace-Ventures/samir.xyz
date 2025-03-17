@@ -25,6 +25,9 @@ fi
 
 echo "Port 5000 is now free"
 
+# Ensure public directory exists
+mkdir -p public/images public/icons public/portfolio-logos public/profile public/ventures-brands
+
 # Start Next.js development server in background
 echo "Starting Next.js development server..."
 NODE_ENV=development npx next dev -p 5000 --hostname 0.0.0.0 &
