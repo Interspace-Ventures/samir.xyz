@@ -6,19 +6,26 @@ check_port() {
   return $?
 }
 
-# Kill any process using port 5000
+# Kill any process using port 5000 with retries
+MAX_RETRIES=5
+RETRY_COUNT=0
 echo "Cleaning up port 5000..."
-npx kill-port 5000 || true
 
-# Wait for port to be actually free
-echo "Ensuring port 5000 is free..."
-while check_port; do
-  echo "Port 5000 still in use, waiting..."
-  sleep 1
+while check_port && [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+  echo "Attempt $((RETRY_COUNT + 1)) to free port 5000..."
+  npx kill-port 5000 || true
+  sleep 2
+  RETRY_COUNT=$((RETRY_COUNT + 1))
 done
+
+if check_port; then
+  echo "Failed to free port 5000 after $MAX_RETRIES attempts"
+  exit 1
+fi
+
 echo "Port 5000 is now free"
 
-# Start Next.js development server
+# Start Next.js development server in background
 echo "Starting Next.js development server..."
 NODE_ENV=development npx next dev -p 5000 --hostname 0.0.0.0 &
 
@@ -31,7 +38,9 @@ npx wait-port -t 30000 localhost:5000
 
 if [ $? -eq 0 ]; then
   echo "Server is ready! Running on http://localhost:5000"
-  echo "PORT_READY=5000"  # Add explicit signal for workflow
+  # Export the port ready signal for the workflow
+  export PORT_READY=5000
+  echo "PORT_READY=5000"
 
   # Keep the script running and forward signals to the server process
   wait $SERVER_PID
