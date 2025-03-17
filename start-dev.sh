@@ -25,7 +25,16 @@ fi
 
 echo "Port 5000 is now free"
 
-# Start Next.js development server
+# Start Next.js development server and wait for port to be ready
 echo "Starting Next.js development server..."
+NODE_ENV=development npx next dev -p 5000 --hostname 0.0.0.0 & 
+
+# Wait for the port to be available (timeout after 30 seconds)
+echo "Waiting for port 5000 to be ready..."
+npx wait-port -t 30000 localhost:5000
+
+# Export the ready port for the workflow
 export PORT_READY=5000
-NODE_ENV=development exec npx next dev -p 5000 --hostname 0.0.0.0
+
+# Keep the script running
+wait
