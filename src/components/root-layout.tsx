@@ -43,12 +43,7 @@ export function RootLayout({
   }
 
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      disableTransitionOnChange
-    >
+    <ThemeProvider>
       <div className="min-h-screen flex flex-col bg-background text-foreground">
         <div className="fixed top-0 left-0 right-0 z-50">
           <Navbar />
