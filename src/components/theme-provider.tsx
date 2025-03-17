@@ -9,8 +9,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       attribute="class" 
       defaultTheme="dark"
       enableSystem
+      forcedTheme={process.env.NEXT_PUBLIC_FORCE_THEME || undefined}
     >
-      {children}
+      <div className="contents">
+        {children}
+      </div>
     </NextThemesProvider>
   )
 }
