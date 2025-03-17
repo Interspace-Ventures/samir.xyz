@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 // Added version logging
-console.log('ProjectCard component version: 2025-03-17-A');
+console.log('ProjectCard component version: 2025-03-17-TEST');
 
 interface ProjectCardProps {
   name: string
@@ -17,9 +17,9 @@ export function ProjectCard({ name, description, imageUrl, link, priority = fals
     <Link 
       href={link}
       target="_blank"
-      className="block group relative aspect-square overflow-hidden rounded-xl bg-card hover:shadow-xl transition-all duration-300"
+      className="block group relative aspect-square overflow-hidden rounded-xl bg-red-500 dark:bg-red-600 hover:shadow-xl transition-all duration-300"
     >
-      <div className="relative w-full h-full p-8">
+      <div className="relative w-full h-full p-8 border-4 border-red-600 dark:border-red-500">
         <Image
           src={imageUrl}
           alt={name}
