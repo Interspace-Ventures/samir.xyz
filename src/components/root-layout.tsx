@@ -36,8 +36,20 @@ export function RootLayout({
       console.log('Environment:', {
         userAgent,
         isWebview: userAgent.includes('wv') || userAgent.includes('webview'),
-        hasLocalStorage: typeof window !== 'undefined' && !!window.localStorage,
-        hasSessionStorage: typeof window !== 'undefined' && !!window.sessionStorage,
+        hasLocalStorage: (() => {
+          try {
+            return !!window.localStorage;
+          } catch (e) {
+            return false;
+          }
+        })(),
+        hasSessionStorage: (() => {
+          try {
+            return !!window.sessionStorage;
+          } catch (e) {
+            return false;
+          }
+        })(),
         windowDimensions: typeof window !== 'undefined' ? {
           innerWidth: window.innerWidth,
           innerHeight: window.innerHeight,
@@ -72,8 +84,12 @@ export function RootLayout({
               try {
                 // Clear any potential corrupted state
                 if (typeof window !== 'undefined') {
-                  localStorage.clear();
-                  sessionStorage.clear();
+                  try {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                  } catch (e) {
+                    console.error('Failed to clear storage:', e);
+                  }
                 }
                 window.location.reload();
               } catch (e) {

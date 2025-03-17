@@ -1,9 +1,15 @@
+"use client"
+
 import Image from 'next/image'
 import type { Company } from './types'
+import { useState } from 'react'
 
 export default function CompanyCard({ company }: { company: Company }) {
+  const [imageError, setImageError] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+
   return (
-    <div className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+    <div className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
       <a
         href={`https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
@@ -21,7 +27,7 @@ export default function CompanyCard({ company }: { company: Company }) {
 
         {/* Logo or Name */}
         <div className="h-full flex items-center justify-center">
-          {company.logo ? (
+          {company.logo && !imageError ? (
             <div className="relative h-[80px] w-[200px]">
               <Image
                 src={company.logo}
@@ -30,10 +36,23 @@ export default function CompanyCard({ company }: { company: Company }) {
                 sizes="200px"
                 style={{ objectFit: 'contain' }}
                 priority
+                onError={() => {
+                  console.error(`Failed to load image for ${company.name}`);
+                  setImageError(true);
+                }}
+                onLoad={() => setImageLoaded(true)}
+                className={`transition-opacity duration-300 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
               />
+              {!imageLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="animate-pulse bg-gray-200 dark:bg-gray-200 h-12 w-32 rounded" />
+                </div>
+              )}
             </div>
           ) : (
-            <span className="text-gray-600 dark:text-gray-400">
+            <span className="text-gray-600 dark:text-gray-600 text-lg font-medium">
               {company.name}
             </span>
           )}

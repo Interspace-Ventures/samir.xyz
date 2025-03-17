@@ -5,12 +5,24 @@ import { Suspense } from 'react'
 import { ErrorBoundary } from '@/components/error-boundary'
 
 // Lazy load components with better error handling
-const StatsSection = dynamic(() => import('@/components/stats-section'), {
+const StatsSection = dynamic(() => import('@/components/stats-section').catch(err => {
+  console.error('Failed to load StatsSection:', err);
+  return () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />;
+}), {
   loading: () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />,
   ssr: false // Disable SSR for this component to prevent hydration issues
 });
 
-const PortfolioLogos = dynamic(() => import('@/components/portfolio-logos'), {
+const PortfolioLogos = dynamic(() => import('@/components/portfolio-logos').catch(err => {
+  console.error('Failed to load PortfolioLogos:', err);
+  return () => (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      {[...Array(10)].map((_, i) => (
+        <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
+      ))}
+    </div>
+  );
+}), {
   loading: () => (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
       {[...Array(10)].map((_, i) => (

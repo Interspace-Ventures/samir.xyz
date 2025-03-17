@@ -23,7 +23,7 @@ export default function Page() {
               >
                 Hey - I'm Samir.
               </h1>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-purple-600 dark:text-purple-400">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold gradient-text">
                 I drive business impact at fintechs.
               </h2>
             </div>
