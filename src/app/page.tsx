@@ -9,7 +9,7 @@ export default function Page() {
           <div className="flex items-center gap-4 sm:gap-8">
             <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
               <Image
-                src="/attached_assets/Hey I'm Samir 2025.png"
+                src="/images/ventures-brands/samir-favicon.png"
                 alt="Samir's profile"
                 fill
                 className="object-cover rounded-lg"

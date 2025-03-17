@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.3] - 2025-03-17
+
+### Changed
+- Enhanced portfolio gallery layout with consistent max-width
+- Updated filter categories' inactive color for better contrast
+- Differentiated "Acquired" badge color from "Markup" badge
+- Consolidated image assets into single ventures-brands directory
+- Updated README to reflect current project structure and tech stack
+- Fixed asset references to use consistent paths
+
+### Fixed
+- Corrected profile image and favicon paths
+- Standardized container widths across portfolio sections
+- Improved light mode contrast for filter categories
+
 ## [2.4.2] - 2025-03-17
 
 ### Fixed
