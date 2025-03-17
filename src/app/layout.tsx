@@ -8,8 +8,6 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ['400', '500', '600', '700', '800', '900'],
   display: 'swap',
-  fallback: ['system-ui', 'sans-serif'],
-  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -27,7 +25,7 @@ export default function Layout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={inter.className}>
         <ThemeProvider>
           <RootLayout>{children}</RootLayout>
         </ThemeProvider>

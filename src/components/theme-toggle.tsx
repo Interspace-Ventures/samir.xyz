@@ -7,21 +7,29 @@ export function ThemeToggle() {
   const [mounted, setMounted] = React.useState(false)
   const { theme, setTheme } = useTheme()
 
-  // useEffect only runs on the client, so now we can safely show the UI
   React.useEffect(() => {
     setMounted(true)
   }, [])
 
+  // During SSR and hydration, return a static button
   if (!mounted) {
-    return null // avoid hydration mismatch
+    return (
+      <button
+        className="px-4 py-2 rounded bg-primary text-primary-foreground"
+        aria-label="Theme toggle"
+      >
+        Theme
+      </button>
+    )
   }
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       className="px-4 py-2 rounded bg-primary text-primary-foreground"
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
     >
-      {theme === "dark" ? "Light" : "Dark"} Mode
+      {theme === "light" ? "Dark" : "Light"}
     </button>
   )
 }
