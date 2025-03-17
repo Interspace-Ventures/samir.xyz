@@ -1,11 +1,8 @@
 "use client"
 
-import { ProjectCard } from '@/components/project-card'
+import { VenturesCard } from '@/components/ventures-cards'
 import { useState, useEffect } from 'react'
 import { ErrorBoundary } from '@/components/error-boundary'
-
-// Added version logging
-console.log('Ventures page version: 2025-03-17-B');
 
 const projects = [
   {
@@ -70,7 +67,7 @@ export default function Ventures() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
           <ErrorBoundary key={project.name}>
-            <ProjectCard {...project} priority={true} />
+            <VenturesCard {...project} priority={true} />
           </ErrorBoundary>
         ))}
       </div>
