@@ -70,10 +70,18 @@ export default function Ventures() {
       setMounted(true);
 
       console.log('Environment:', {
+        userAgent,
         window: typeof window !== 'undefined',
         document: typeof document !== 'undefined',
         navigator: typeof navigator !== 'undefined',
-        isWebview: isWebviewEnv
+        isWebview: isWebviewEnv,
+        browserFeatures: {
+          supportsCSSGrid: CSS.supports('display: grid'),
+          supportsFlexbox: CSS.supports('display: flex'),
+          supportsTransform: CSS.supports('transform'),
+          supportsTransition: CSS.supports('transition'),
+          supportsAnimation: CSS.supports('animation')
+        }
       });
     } catch (error) {
       console.error('Error during mount:', error)
