@@ -14,11 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Consolidated image assets into single ventures-brands directory
 - Updated README to reflect current project structure and tech stack
 - Fixed asset references to use consistent paths
+- Removed duplicate StatsSection.tsx file to standardize on kebab-case naming
+- Enhanced start-dev.sh script to properly handle port waiting
 
 ### Fixed
 - Corrected profile image and favicon paths
 - Standardized container widths across portfolio sections
 - Improved light mode contrast for filter categories
+- Improved development workflow port handling for better feedback tool support
 
 ## [2.4.2] - 2025-03-17
 
