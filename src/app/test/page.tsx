@@ -1,20 +1,24 @@
 "use client"
 
-import { ThemeToggle } from "@/components/theme-toggle"
+import * as React from "react"
+import { useTheme } from "next-themes"
 
 export default function TestPage() {
+  const [mounted, setMounted] = React.useState(false)
+  const { theme } = useTheme()
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Until mounted, show a simple loading state
+  if (!mounted) {
+    return <div>Loading theme...</div>
+  }
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        <h1 className="text-4xl font-bold mb-4">Theme Test Page</h1>
-        <div className="flex items-center gap-4">
-          <p>Toggle theme:</p>
-          <ThemeToggle />
-        </div>
-        <div className="mt-8 p-4 bg-card text-card-foreground border rounded-lg">
-          <p>This is a test card to verify theme colors</p>
-        </div>
-      </div>
+    <div>
+      <p>Theme is: {theme}</p>
     </div>
   )
 }
