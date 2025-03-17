@@ -4,6 +4,9 @@ import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import { ErrorBoundary } from '@/components/error-boundary'
 
+// Added version logging
+console.log('Portfolio page version: 2025-03-17-TEST');
+
 const StatsSection = dynamic(() => import('@/components/stats-section').catch(err => {
   console.error('Failed to load StatsSection:', err);
   return () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />;
@@ -37,7 +40,7 @@ export default function Portfolio() {
     <div className="transform-gpu">
       <div className="flex flex-col gap-8 mb-8">
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">Portfolio</h1>
+          <h1 className="text-4xl md:text-5xl font-bold">TEST PORTFOLIO PAGE CHANGE</h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
