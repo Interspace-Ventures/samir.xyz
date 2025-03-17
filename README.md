@@ -12,6 +12,12 @@ This project follows [Semantic Versioning](https://semver.org/):
 Current Version: 2.4.1
 For detailed changes, see [CHANGELOG.md](docs/CHANGELOG.md).
 
+## Tech Stack
+
+- Next.js for server-side rendering and optimized builds
+- Tailwind CSS for styling
+- Static file hosting
+
 ## Dependencies
 
 ### Core Framework
@@ -99,6 +105,14 @@ npm run build
 ```
 
 This generates optimized static files for production deployment.
+
+## Features
+
+- Responsive design
+- Dark/light mode support 
+- Animated transitions with native CSS
+- Optimized images and assets
+- Simple and maintainable codebase
 
 ## Notes
 
