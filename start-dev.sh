@@ -26,7 +26,7 @@ fi
 echo "Port 5000 is now free"
 
 # Ensure public directory exists
-mkdir -p public/images public/icons public/portfolio-logos public/profile public/ventures-brands
+mkdir -p public/images public/icons public/portfolio-logos public/profile
 
 # Start Next.js development server in background
 echo "Starting Next.js development server..."
