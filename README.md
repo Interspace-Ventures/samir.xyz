@@ -9,7 +9,7 @@ This project follows [Semantic Versioning](https://semver.org/):
 - Minor updates (x.1.x): Every chat/feature session
 - Major updates (1.x.x): Significant architectural changes
 
-Current Version: 2.4.2
+Current Version: 2.4.5
 For detailed changes, see [CHANGELOG.md](docs/CHANGELOG.md).
 
 ## Tech Stack

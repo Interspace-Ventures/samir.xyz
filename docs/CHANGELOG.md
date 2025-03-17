@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.5] - 2025-03-17
+
+### Changed
+- Updated website title metadata to "Hey - I'm Samir"
+
+## [2.4.4] - 2025-03-17
+
+### Changed
+- Enhanced error handling and recovery mechanisms
+- Improved webview compatibility with better mounted state handling
+- Added comprehensive browser capability checks
+- Enhanced environment detection and adaptation
+- Improved dynamic component loading with better error fallbacks
+
+### Fixed
+- Resolved hydration mismatches in portfolio components
+- Fixed webview-specific rendering issues
+- Enhanced storage API access in webview environments
+- Improved fallback UI for failed component loads
+
 ## [2.4.3] - 2025-03-17
 
 ### Changed
@@ -58,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed image loading issues in webview environments
 - Added proper loading states for failed dynamic imports
 - Enhanced error recovery for browser API access failures
+
 
 ## [2.4.2] - 2025-03-17
 
