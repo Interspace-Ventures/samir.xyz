@@ -112,7 +112,7 @@ export default function Navbar() {
       <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
         <NextLink
           href="/"
-          className="text-2xl font-extrabold text-foreground leading-none hover:opacity-80 transition-opacity"
+          className="text-2xl font-bold text-foreground leading-none hover:opacity-80 transition-opacity"
           prefetch={false}
         >
           <span suppressHydrationWarning>Hey - I'm Samir</span>

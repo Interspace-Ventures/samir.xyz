@@ -58,12 +58,7 @@
     @apply bg-background text-foreground min-h-screen antialiased;
   }
 
-  /* Add gradient text utility */
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400;
-  }
-
-  /* Add custom background classes */
+  /* Add navbar background class */
   .navbar-bg {
     @apply bg-[hsl(var(--navbar-bg))] backdrop-blur-sm;
   }

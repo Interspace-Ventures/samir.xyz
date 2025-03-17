@@ -4,13 +4,12 @@ import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import { ErrorBoundary } from '@/components/error-boundary'
 
-// Lazy load components with better error handling
 const StatsSection = dynamic(() => import('@/components/stats-section').catch(err => {
   console.error('Failed to load StatsSection:', err);
   return () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />;
 }), {
   loading: () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />,
-  ssr: false // Disable SSR for this component to prevent hydration issues
+  ssr: false
 });
 
 const PortfolioLogos = dynamic(() => import('@/components/portfolio-logos').catch(err => {
@@ -30,7 +29,7 @@ const PortfolioLogos = dynamic(() => import('@/components/portfolio-logos').catc
       ))}
     </div>
   ),
-  ssr: false // Disable SSR for this component to prevent hydration issues
+  ssr: false
 });
 
 export default function Portfolio() {
@@ -38,7 +37,7 @@ export default function Portfolio() {
     <div className="transform-gpu">
       <div className="flex flex-col gap-8 mb-8">
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold">Portfolio</h1>
+          <h1 className="text-4xl md:text-5xl font-bold">Portfolio</h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
