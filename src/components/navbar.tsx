@@ -83,6 +83,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    console.log('Navbar mounting...')
     setMounted(true)
   }, [])
 
@@ -95,7 +96,7 @@ export default function Navbar() {
       <nav className="sticky top-0 z-50 w-full h-20 navbar-bg border-b border-border/40 shadow-sm">
         <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
           <div className="text-2xl font-bold text-foreground leading-none">
-            <span suppressHydrationWarning>Hey - I'm Samir</span>
+            Hey - I'm Samir
           </div>
           <div className="hidden md:flex items-center space-x-4">
             {navItems.map((_, i) => (
@@ -115,7 +116,7 @@ export default function Navbar() {
           className="text-2xl font-bold text-foreground leading-none hover:opacity-80 transition-opacity"
           prefetch={false}
         >
-          <span suppressHydrationWarning>Hey - I'm Samir</span>
+          Hey - I'm Samir
         </NextLink>
 
         <div className="hidden md:flex items-center space-x-8">
