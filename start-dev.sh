@@ -25,6 +25,7 @@ fi
 
 echo "Port 5000 is now free"
 
-# Start Next.js development server in background
+# Start Next.js development server
 echo "Starting Next.js development server..."
+export PORT_READY=5000
 NODE_ENV=development exec npx next dev -p 5000 --hostname 0.0.0.0
