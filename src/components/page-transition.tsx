@@ -11,7 +11,7 @@ const logTransitionPerformance = (action: string, path: string | null, markName?
       try {
         performance.mark(markName);
       } catch (error) {
-        console.error(`[Navigation] Failed to create performance mark: ${error}`);
+        console.error(`[Navigation] Failed to create performance mark:`, error);
       }
     }
     console.log(`[Navigation] ${action} to ${path ?? 'unknown'} at ${timestamp.toFixed(2)}ms`);
@@ -45,7 +45,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         pathname,
         mountDuration: `${mountDuration.toFixed(2)}ms`,
         transitionState: isTransitioning,
-        hasError
+        hasError,
+        timestamp: new Date().toISOString()
       });
 
       logTransitionPerformance('transition-start', pathname, markName);
@@ -73,6 +74,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   }, [pathname, isTransitioning, hasError]);
 
   if (hasError) {
+    console.error('[PageTransition] Rendering error state');
     return <div>Error during transition</div>;
   }
 
