@@ -5,31 +5,33 @@ import { useTheme } from "next-themes"
 
 export function ThemeToggle() {
   const [mounted, setMounted] = React.useState(false)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
 
+  // useEffect only runs on the client, so we can safely show the UI
   React.useEffect(() => {
     setMounted(true)
   }, [])
 
-  // During SSR and hydration, return a static button
+  // During SSR and initial client render, show a placeholder
   if (!mounted) {
     return (
-      <button
+      <button 
         className="px-4 py-2 rounded bg-primary text-primary-foreground"
-        aria-label="Theme toggle"
+        aria-label="Loading theme toggle"
+        disabled
       >
-        Theme
+        Loading...
       </button>
     )
   }
 
   return (
     <button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className="px-4 py-2 rounded bg-primary text-primary-foreground"
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+      aria-label="Toggle theme"
     >
-      {theme === "light" ? "Dark" : "Light"}
+      {resolvedTheme === "dark" ? "Light" : "Dark"}
     </button>
   )
 }
