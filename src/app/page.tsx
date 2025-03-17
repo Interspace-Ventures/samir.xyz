@@ -19,11 +19,11 @@ export default function Page() {
             </div>
             <div className="space-y-2 sm:space-y-4">
               <h1 
-                className="text-3xl sm:text-4xl md:text-5xl font-extrabold"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold"
               >
                 Hey - I'm Samir.
               </h1>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold gradient-text">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">
                 I drive business impact at fintechs.
               </h2>
             </div>
@@ -36,11 +36,6 @@ export default function Page() {
                 Cash App
               </Link>{" "}
               where we're expanding financial access to help users do more with their money.
-              Previously I built Strategic Finance at{" "}
-              <Link href="https://hudsonrivertrading.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                HRT
-              </Link>{" "}
-              which uses algorithms to drive efficiency in markets.
             </p>
 
             <p className="text-sm sm:text-base md:text-lg">
@@ -59,10 +54,9 @@ export default function Page() {
               . I got my start in investment banking in the Financial Institutions Group at{" "}
               <Link href="https://jpmorgan.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
                 JP Morgan
-              </Link>{" "}
-              covering market structure and asset management.
+              </Link>
+              {" "}covering market structure and asset management.
             </p>
-
             <p className="text-sm sm:text-base md:text-lg">
               Outside of work, I write over-engineered fintech threads on{" "}
               <Link href="https://x.com/heyinterspace" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
