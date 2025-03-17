@@ -17,17 +17,17 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/attached_assets/Hey I'm Samir 2025.png",
+        url: "/images/ventures-brands/samir-favicon.png",
         sizes: "32x32",
         type: "image/png"
       },
       {
-        url: "/attached_assets/Hey I'm Samir 2025.png",
+        url: "/images/ventures-brands/samir-favicon.png",
         sizes: "16x16",
         type: "image/png"
       }
     ],
-    apple: "/attached_assets/Hey I'm Samir 2025.png",
+    apple: "/images/ventures-brands/samir-favicon.png",
   },
 };
 
