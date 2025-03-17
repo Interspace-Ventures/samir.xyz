@@ -19,8 +19,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved runtime stability in webview by disabling SSR for dynamic components
 - Added error boundaries to catch and debug webview rendering issues
 - Enhanced error boundary component with detailed development mode error reporting
-- Added retry mechanism for port cleanup in development workflow
-- Improved process management in start-dev.sh
+- Added root-level error handling for webview compatibility
+- Enhanced error recovery with localStorage cleanup
+- Improved webview compatibility with better mounted state handling
+- Added webview detection and specific handling
+- Enhanced browser API access with proper error boundaries
+- Added detailed environment logging for webview debugging
+- Converted ErrorBoundary to class component for proper error lifecycle handling
+- Fixed ErrorBoundary usage in portfolio page
+- Enhanced environment logging with window dimensions and browser feature detection
+- Added comprehensive browser capability checks for webview debugging
 
 ### Fixed
 - Corrected profile image and favicon paths
@@ -29,8 +37,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved development workflow port handling for better feedback tool support
 - Resolved hydration mismatches in portfolio components
 - Enhanced error handling for dynamic component loading
-- Fixed port ready signal handling in development workflow
-- Added robust port cleanup with verification in start-dev.sh
+- Fixed webview-specific rendering issues in RootLayout
+- Added proper error recovery for theme persistence
+- Enhanced error boundary cleanup on reset
+- Added comprehensive storage cleanup during error recovery
+- Improved webview environment detection and adaptation
+- Added detailed logging for webview environment troubleshooting
+- Fixed incorrect ErrorBoundary implementation in portfolio page
+- Improved error handling for dynamically loaded components
+- Enhanced environment detection with detailed browser capability checks
 
 ## [2.4.2] - 2025-03-17
 

@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
-import ErrorBoundary from '@/components/error-boundary'
+import { ErrorBoundary } from '@/components/error-boundary'
 
 // Lazy load components with better error handling
 const StatsSection = dynamic(() => import('@/components/stats-section'), {
