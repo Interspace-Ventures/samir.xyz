@@ -9,8 +9,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       attribute="class" 
       defaultTheme="dark"
       enableSystem
+      storageKey="theme"
+      forcedTheme={undefined}
+      disableTransitionOnChange
     >
-      {children}
+      <div suppressHydrationWarning>
+        {children}
+      </div>
     </NextThemesProvider>
   )
 }
