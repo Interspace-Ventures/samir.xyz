@@ -12,7 +12,9 @@ export default function CompanyCard({ company }: { company: Company }) {
       >
         {/* Badge */}
         {(company.markup || company.acquired) && (
-          <div className="absolute top-2 right-2 text-xs px-2 py-1 bg-purple-600 text-white">
+          <div className={`absolute top-2 right-2 text-xs px-2 py-1 text-white ${
+            company.acquired ? 'bg-gray-700' : 'bg-purple-600'
+          }`}>
             {company.acquired ? 'Acquired' : 'Markup'}
           </div>
         )}
