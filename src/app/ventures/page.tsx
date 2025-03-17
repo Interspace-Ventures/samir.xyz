@@ -45,11 +45,9 @@ const projects = [
 ]
 
 const LoadingGrid = () => (
-  <div className="flex flex-wrap -mx-3">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {[...Array(6)].map((_, i) => (
-      <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-3 mb-6">
-        <div className="h-[200px] bg-card/50 rounded-lg animate-pulse" />
-      </div>
+      <div key={i} className="aspect-square bg-card/50 rounded-lg animate-pulse" />
     ))}
   </div>
 )
@@ -89,35 +87,31 @@ export default function Ventures() {
   }, [])
 
   return (
-    <div className="min-h-screen px-4 md:px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col gap-8 mb-8">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold">
-              Interspace Ventures
-            </h1>
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
-              I create apps and concepts by coding at the speed of thought using Replit.
-            </p>
-          </div>
+    <div className="transform-gpu">
+      <div className="flex flex-col gap-8 mb-8">
+        <div className="space-y-4">
+          <h1 className="text-4xl md:text-5xl font-bold">
+            Interspace Ventures
+          </h1>
+          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
+            I create apps and concepts by coding at the speed of thought using Replit.
+          </p>
         </div>
-
-        <ErrorBoundary>
-          {!mounted ? (
-            <LoadingGrid />
-          ) : (
-            <div className={`flex flex-wrap -mx-3 ${isWebview ? 'transform-none' : ''}`}>
-              {projects.map((project) => (
-                <ErrorBoundary key={project.name}>
-                  <div className="w-full sm:w-1/2 lg:w-1/3 px-3 mb-6">
-                    <ProjectCard {...project} priority={true} />
-                  </div>
-                </ErrorBoundary>
-              ))}
-            </div>
-          )}
-        </ErrorBoundary>
       </div>
+
+      <ErrorBoundary>
+        {!mounted ? (
+          <LoadingGrid />
+        ) : (
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${isWebview ? 'transform-none' : ''}`}>
+            {projects.map((project) => (
+              <ErrorBoundary key={project.name}>
+                <ProjectCard {...project} priority={true} />
+              </ErrorBoundary>
+            ))}
+          </div>
+        )}
+      </ErrorBoundary>
     </div>
   )
 }
