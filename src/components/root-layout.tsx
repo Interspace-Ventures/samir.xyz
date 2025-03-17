@@ -23,10 +23,71 @@ export function RootLayout({
   children: React.ReactNode;
 }) {
   const [mounted, setMounted] = React.useState(false);
+  const [error, setError] = React.useState<Error | null>(null);
+  const [isWebview, setIsWebview] = React.useState(false);
 
   React.useEffect(() => {
-    setMounted(true);
+    try {
+      // Check if we're in a webview environment
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      setIsWebview(userAgent.includes('wv') || userAgent.includes('webview'));
+
+      // Log environment details for debugging
+      console.log('Environment:', {
+        userAgent,
+        isWebview: userAgent.includes('wv') || userAgent.includes('webview'),
+        hasLocalStorage: typeof window !== 'undefined' && !!window.localStorage,
+        hasSessionStorage: typeof window !== 'undefined' && !!window.sessionStorage,
+        windowDimensions: typeof window !== 'undefined' ? {
+          innerWidth: window.innerWidth,
+          innerHeight: window.innerHeight,
+          devicePixelRatio: window.devicePixelRatio
+        } : null,
+        browserFeatures: {
+          hasIntersectionObserver: typeof IntersectionObserver !== 'undefined',
+          hasResizeObserver: typeof ResizeObserver !== 'undefined',
+          hasMutationObserver: typeof MutationObserver !== 'undefined'
+        }
+      });
+
+      // Safe to mark as mounted after environment check
+      setMounted(true);
+    } catch (e) {
+      console.error('Error during initialization:', e);
+      setError(e as Error);
+    }
   }, []);
+
+  // Add error boundary at root level
+  if (error) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-background">
+        <div className="space-y-4 text-center">
+          <h1 className="text-xl font-bold">Something went wrong</h1>
+          <p className="text-muted-foreground">
+            {process.env.NODE_ENV === 'development' ? error.message : 'An error occurred while loading the application.'}
+          </p>
+          <button 
+            onClick={() => {
+              try {
+                // Clear any potential corrupted state
+                if (typeof window !== 'undefined') {
+                  localStorage.clear();
+                  sessionStorage.clear();
+                }
+                window.location.reload();
+              } catch (e) {
+                console.error('Error during recovery:', e);
+              }
+            }} 
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          >
+            Reload page
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // Show a loading state while client-side code is hydrating
   if (!mounted) {
@@ -44,7 +105,7 @@ export function RootLayout({
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <div className={`min-h-screen flex flex-col bg-background text-foreground ${isWebview ? 'webview' : ''}`}>
         <div className="fixed top-0 left-0 right-0 z-50">
           <Navbar />
         </div>
