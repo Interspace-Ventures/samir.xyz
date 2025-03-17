@@ -4,13 +4,23 @@ import * as React from "react"
 import { ThemeProvider } from "@/components/theme-provider"
 import dynamic from "next/dynamic"
 
-const Navbar = dynamic(() => import("@/components/navbar"))
-const Footer = dynamic(() => import("@/components/footer"))
+const Navbar = dynamic(() => import("@/components/navbar"), {
+  loading: () => (
+    <div className="h-20 bg-background/80 backdrop-blur-sm border-b" />
+  )
+})
+
+const Footer = dynamic(() => import("@/components/footer"), {
+  loading: () => (
+    <div className="h-16 bg-background/80 backdrop-blur-sm border-t" />
+  )
+})
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
+    console.log('ClientLayout mounting...')
     setMounted(true)
   }, [])
 
@@ -21,8 +31,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
           <div className="animate-pulse bg-muted/10 rounded-lg h-[600px] w-full" />
         </main>
-        <div className="h-8" />
-        <footer className="h-16 bg-background/80 backdrop-blur-sm border-t" />
+        <div className="h-16 bg-background/80 backdrop-blur-sm border-t" />
       </div>
     )
   }
@@ -33,10 +42,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <div className="fixed top-0 left-0 right-0 z-50">
           <Navbar />
         </div>
-        <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20 animate-in fade-in duration-300">
+        <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
           {children}
         </main>
-        <div className="h-8" />
         <Footer />
       </div>
     </ThemeProvider>

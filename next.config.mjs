@@ -2,10 +2,10 @@
 const nextConfig = {
   output: 'standalone',
   distDir: '.next',
-  // Configure static file serving and asset handling
+  // Configure image optimization and domains
   images: {
     unoptimized: true,
-    domains: ['*'],
+    domains: ['*'], //Preserving the original functionality
     remotePatterns: [
       {
         protocol: 'https',
@@ -13,7 +13,7 @@ const nextConfig = {
       },
     ],
   },
-  // Ensure proper static file handling
+  // Cache control headers for static assets
   async headers() {
     return [
       {
@@ -27,25 +27,12 @@ const nextConfig = {
       },
     ];
   },
-  // Configure proper public directory handling
+  // Configure webpack for development
   webpack: (config) => {
     config.watchOptions = {
       poll: 1000,
       aggregateTimeout: 300,
     };
-    // Ensure public directory is included in the build
-    config.module.rules.push({
-      test: /\.(png|jpg|gif|svg|ico)$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            publicPath: '/_next',
-            outputPath: 'static/images/',
-          },
-        },
-      ],
-    });
     return config;
   },
   // Disable powered by header
