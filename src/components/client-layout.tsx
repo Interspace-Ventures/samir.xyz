@@ -5,31 +5,27 @@ import { ThemeProvider } from "@/components/theme-provider"
 import dynamic from "next/dynamic"
 
 const Navbar = dynamic(() => import("@/components/navbar"), {
-  loading: () => (
-    <div className="h-20 bg-background/80 backdrop-blur-sm border-b" />
-  )
+  loading: () => <div className="h-20 bg-background/80 backdrop-blur-sm border-b" />
 })
 
 const Footer = dynamic(() => import("@/components/footer"), {
-  loading: () => (
-    <div className="h-16 bg-background/80 backdrop-blur-sm border-t" />
-  )
+  loading: () => <div className="h-16 bg-background/80 backdrop-blur-sm border-t" />
 })
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
-    console.log('ClientLayout mounting...')
     setMounted(true)
   }, [])
 
+  // Return a simpler loading state while not mounted
   if (!mounted) {
     return (
       <div className="min-h-screen flex flex-col bg-background text-foreground">
-        <div className="h-20 bg-background/80 backdrop-blur-sm border-b fixed top-0 left-0 right-0 z-50" />
-        <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
-          <div className="animate-pulse bg-muted/10 rounded-lg h-[600px] w-full" />
+        <div className="h-20 bg-background/80 backdrop-blur-sm border-b" />
+        <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8">
+          <div className="animate-pulse bg-muted/10 rounded-lg h-[600px]" />
         </main>
         <div className="h-16 bg-background/80 backdrop-blur-sm border-t" />
       </div>
@@ -39,9 +35,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <ThemeProvider>
       <div className="min-h-screen flex flex-col bg-background text-foreground">
-        <div className="fixed top-0 left-0 right-0 z-50">
+        <header className="fixed top-0 left-0 right-0 z-50">
           <Navbar />
-        </div>
+        </header>
         <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
           {children}
         </main>
