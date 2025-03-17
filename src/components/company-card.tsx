@@ -3,7 +3,7 @@ import type { Company } from './types'
 
 export default function CompanyCard({ company }: { company: Company }) {
   return (
-    <div className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white shadow-sm">
+    <div className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
       <a
         href={`https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
@@ -12,7 +12,7 @@ export default function CompanyCard({ company }: { company: Company }) {
       >
         {/* Badge */}
         {(company.markup || company.acquired) && (
-          <div className="absolute top-2 right-2 text-xs px-2 py-1 rounded-full bg-purple-600 text-white">
+          <div className="absolute top-2 right-2 text-xs px-2 py-1 bg-purple-600 text-white">
             {company.acquired ? 'Acquired' : 'Markup'}
           </div>
         )}

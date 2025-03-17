@@ -13,9 +13,21 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Samir - Finance & Strategy Leader",
-  description: "Personal portfolio showcasing professional projects and expertise in fintech",
+  description: "Hey I'm Samir. I drive business impact at fintechs.",
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      {
+        url: "/attached_assets/Hey I'm Samir 2025.png",
+        sizes: "32x32",
+        type: "image/png"
+      },
+      {
+        url: "/attached_assets/Hey I'm Samir 2025.png",
+        sizes: "16x16",
+        type: "image/png"
+      }
+    ],
+    apple: "/attached_assets/Hey I'm Samir 2025.png",
   },
 };
 
