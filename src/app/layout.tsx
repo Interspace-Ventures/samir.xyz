@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Samir - Finance & Strategy Leader",
+  title: "Hey - I'm Samir",
   description: "Hey I'm Samir. I drive business impact at fintechs.",
   icons: {
     icon: [
