@@ -44,28 +44,26 @@ const projects = [
 
 export default function Ventures() {
   return (
-    <div className="min-h-screen">
-      <div className="flex flex-col lg:flex-row justify-between items-start gap-6 mb-8">
-        <div className="flex-1 space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            Interspace Ventures
-          </h1>
-          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
-            I create apps and concepts by coding at the speed of thought using Replit.
-          </p>
-        </div>
-      </div>
-
-      <div 
-        className="grid grid-cols-3 grid-rows-2 gap-6 max-w-4xl mx-auto px-4 md:px-6"
-        role="list"
-        aria-label="Venture projects"
-      >
-        {projects.map((project) => (
-          <div key={project.name} className="w-full">
-            <ProjectCard {...project} priority={true} />
+    <div className="min-h-screen px-4 md:px-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex flex-col gap-8 mb-8">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold">
+              Interspace Ventures
+            </h1>
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
+              I create apps and concepts by coding at the speed of thought using Replit.
+            </p>
           </div>
-        ))}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-6">
+          {projects.map((project) => (
+            <div key={project.name}>
+              <ProjectCard {...project} priority={true} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
