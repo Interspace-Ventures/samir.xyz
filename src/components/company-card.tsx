@@ -3,7 +3,7 @@ import type { Company } from './types'
 
 export default function CompanyCard({ company }: { company: Company }) {
   return (
-    <div className="h-[160px] rounded-lg border bg-white dark:bg-gray-800">
+    <div className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white shadow-sm">
       <a
         href={`https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
@@ -38,7 +38,7 @@ export default function CompanyCard({ company }: { company: Company }) {
         </div>
 
         {/* Description Hover Overlay */}
-        <div className="absolute inset-0 opacity-0 hover:opacity-100 bg-black/75 transition-opacity duration-300 flex items-center justify-center rounded-lg">
+        <div className="absolute inset-0 opacity-0 hover:opacity-100 bg-purple-600/80 transition-opacity duration-300 flex items-center justify-center rounded-lg">
           <p className="text-white text-sm text-center px-4">
             {company.description}
           </p>
