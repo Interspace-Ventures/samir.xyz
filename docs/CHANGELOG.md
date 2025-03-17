@@ -15,10 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated README to reflect current project structure and tech stack
 - Fixed asset references to use consistent paths
 - Removed duplicate StatsSection.tsx file to standardize on kebab-case naming
-- Enhanced start-dev.sh script to properly handle port waiting
+- Enhanced start-dev.sh script to properly handle port waiting and environment variables
 - Improved runtime stability in webview by disabling SSR for dynamic components
 - Added error boundaries to catch and debug webview rendering issues
 - Enhanced error boundary component with detailed development mode error reporting
+- Added retry mechanism for port cleanup in development workflow
+- Improved process management in start-dev.sh
 
 ### Fixed
 - Corrected profile image and favicon paths
@@ -27,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved development workflow port handling for better feedback tool support
 - Resolved hydration mismatches in portfolio components
 - Enhanced error handling for dynamic component loading
+- Fixed port ready signal handling in development workflow
+- Added robust port cleanup with verification in start-dev.sh
 
 ## [2.4.2] - 2025-03-17
 
@@ -79,7 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.1.0] - 2025-03-15
 
 ### Changed
-- Enhanced font rendering across the application
+- Enhanced font rendering across the application:
   - Optimized Inter font loading configuration
   - Simplified navbar typography for improved clarity
   - Refined font weights and sizes for better readability
