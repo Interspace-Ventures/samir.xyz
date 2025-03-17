@@ -2,6 +2,8 @@
 
 import Image from 'next/image'
 import { ProjectCard } from '@/components/project-card'
+import { useState, useEffect } from 'react'
+import { ErrorBoundary } from '@/components/error-boundary'
 
 const projects = [
   {
@@ -42,7 +44,42 @@ const projects = [
   }
 ]
 
+const LoadingGrid = () => (
+  <div className="flex flex-wrap -mx-3">
+    {[...Array(6)].map((_, i) => (
+      <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-3 mb-6">
+        <div className="h-[200px] bg-card/50 rounded-lg animate-pulse" />
+      </div>
+    ))}
+  </div>
+)
+
 export default function Ventures() {
+  const [mounted, setMounted] = useState(false)
+  const [isWebview, setIsWebview] = useState(false)
+
+  useEffect(() => {
+    try {
+      console.log('Mounting Ventures component...');
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      const isWebviewEnv = userAgent.includes('wv') || 
+                          userAgent.includes('webview') ||
+                          (userAgent.includes('safari') && !userAgent.includes('chrome'));
+
+      setIsWebview(isWebviewEnv);
+      setMounted(true);
+
+      console.log('Environment:', {
+        window: typeof window !== 'undefined',
+        document: typeof document !== 'undefined',
+        navigator: typeof navigator !== 'undefined',
+        isWebview: isWebviewEnv
+      });
+    } catch (error) {
+      console.error('Error during mount:', error)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen px-4 md:px-6">
       <div className="max-w-4xl mx-auto">
@@ -57,13 +94,21 @@ export default function Ventures() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-6">
-          {projects.map((project) => (
-            <div key={project.name}>
-              <ProjectCard {...project} priority={true} />
+        <ErrorBoundary>
+          {!mounted ? (
+            <LoadingGrid />
+          ) : (
+            <div className={`flex flex-wrap -mx-3 ${isWebview ? 'transform-none' : ''}`}>
+              {projects.map((project) => (
+                <ErrorBoundary key={project.name}>
+                  <div className="w-full sm:w-1/2 lg:w-1/3 px-3 mb-6">
+                    <ProjectCard {...project} priority={true} />
+                  </div>
+                </ErrorBoundary>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </ErrorBoundary>
       </div>
     </div>
   )
