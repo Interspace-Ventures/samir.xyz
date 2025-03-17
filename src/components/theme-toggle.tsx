@@ -12,15 +12,7 @@ export function ThemeToggle() {
   }, [])
 
   if (!mounted) {
-    return (
-      <button 
-        className="px-4 py-2 rounded bg-primary text-primary-foreground"
-        aria-label="Loading theme toggle"
-        disabled
-      >
-        Loading...
-      </button>
-    )
+    return null // Simpler loading state to avoid hydration mismatch
   }
 
   return (
