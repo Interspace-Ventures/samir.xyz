@@ -28,14 +28,18 @@ export function RootLayout({
 
   React.useEffect(() => {
     try {
-      // Check if we're in a webview environment
+      // Enhanced webview detection
       const userAgent = window.navigator.userAgent.toLowerCase();
-      setIsWebview(userAgent.includes('wv') || userAgent.includes('webview'));
+      const isWebviewEnv = userAgent.includes('wv') || 
+                          userAgent.includes('webview') ||
+                          (userAgent.includes('safari') && !userAgent.includes('chrome'));
 
-      // Log environment details for debugging
+      setIsWebview(isWebviewEnv);
+
+      // Log detailed environment information
       console.log('Environment:', {
         userAgent,
-        isWebview: userAgent.includes('wv') || userAgent.includes('webview'),
+        isWebview: isWebviewEnv,
         hasLocalStorage: (() => {
           try {
             return !!window.localStorage;
@@ -50,19 +54,21 @@ export function RootLayout({
             return false;
           }
         })(),
-        windowDimensions: typeof window !== 'undefined' ? {
+        windowDimensions: {
           innerWidth: window.innerWidth,
           innerHeight: window.innerHeight,
           devicePixelRatio: window.devicePixelRatio
-        } : null,
+        },
         browserFeatures: {
           hasIntersectionObserver: typeof IntersectionObserver !== 'undefined',
           hasResizeObserver: typeof ResizeObserver !== 'undefined',
-          hasMutationObserver: typeof MutationObserver !== 'undefined'
+          hasMutationObserver: typeof MutationObserver !== 'undefined',
+          supportsCSSGrid: CSS.supports('display: grid'),
+          supportsBackdropFilter: CSS.supports('backdrop-filter: blur(10px)'),
+          supportsScrollBehavior: CSS.supports('scroll-behavior: smooth')
         }
       });
 
-      // Safe to mark as mounted after environment check
       setMounted(true);
     } catch (e) {
       console.error('Error during initialization:', e);
@@ -121,7 +127,19 @@ export function RootLayout({
 
   return (
     <ThemeProvider>
-      <div className={`min-h-screen flex flex-col bg-background text-foreground ${isWebview ? 'webview' : ''}`}>
+      <div 
+        className={`min-h-screen flex flex-col bg-background text-foreground ${
+          isWebview ? 'webview' : ''
+        }`}
+        style={isWebview ? {
+          backgroundColor: 'var(--background)',
+          color: 'var(--foreground)',
+          transform: 'none',
+          WebkitBackdropFilter: 'none',
+          backdropFilter: 'none',
+          transition: 'none'
+        } as React.CSSProperties : undefined}
+      >
         <div className="fixed top-0 left-0 right-0 z-50">
           <Navbar />
         </div>
