@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "@/app/globals.css";  
 import { ThemeProvider } from "@/components/theme-provider";
 import { RootLayout } from "@/components/root-layout";
+import { ErrorBoundary } from "@/components/error-boundary";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -26,9 +27,11 @@ export default function Layout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider>
-          <RootLayout>{children}</RootLayout>
-        </ThemeProvider>
+        <ErrorBoundary name="RootLayout">
+          <ThemeProvider>
+            <RootLayout>{children}</RootLayout>
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );
