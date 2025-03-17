@@ -1,9 +1,24 @@
 #!/bin/bash
 
+# Function to check if port is in use
+check_port() {
+  nc -z localhost 5000 2>/dev/null
+  return $?
+}
+
 # Kill any process using port 5000
 echo "Cleaning up port 5000..."
 npx kill-port 5000 || true
 
+# Wait for port to be actually free
+echo "Ensuring port 5000 is free..."
+while check_port; do
+  echo "Port 5000 still in use, waiting..."
+  sleep 1
+done
+echo "Port 5000 is now free"
+
+# Start Next.js development server
 echo "Starting Next.js development server..."
 NODE_ENV=development npx next dev -p 5000 --hostname 0.0.0.0 &
 
