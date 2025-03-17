@@ -2,7 +2,7 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',  // Catch all components in src directory
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
@@ -62,10 +62,15 @@ module.exports = {
           "0%": { transform: "translateY(20px)" },
           "100%": { transform: "translateY(0)" },
         },
+        "card-hover": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-8px)" }
+        }
       },
       animation: {
         "fade-in": "fade-in 0.3s ease-in-out",
         "slide-in-from-bottom": "slide-in-from-bottom 0.3s ease-out",
+        "card-hover": "card-hover 0.2s ease-out forwards"
       },
       borderRadius: {
         lg: "var(--radius)",

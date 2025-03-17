@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 
 // Lazy load components with simpler loading states
 const StatsSection = dynamic(() => import('@/components/stats-section'), {
-  loading: () => <div className="w-full lg:w-auto grid gap-3 rounded-xl p-3 bg-card/50" />
+  loading: () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />
 });
 
 const PortfolioLogos = dynamic(() => import('@/components/portfolio-logos'), {
@@ -19,19 +19,17 @@ const PortfolioLogos = dynamic(() => import('@/components/portfolio-logos'), {
 });
 
 export default function Portfolio() {
-  console.log('Rendering Portfolio page'); // Debug log
-
   return (
     <div className="transform-gpu">
-      <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
-        <div className="flex-1 space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">Portfolio</h1>
+      <div className="flex flex-col gap-8 mb-8">
+        <div className="space-y-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold">Portfolio</h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
         </div>
 
-        <Suspense fallback={<div className="w-full lg:w-auto grid gap-3 rounded-xl p-3 bg-card/50" />}>
+        <Suspense fallback={<div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />}>
           <StatsSection />
         </Suspense>
       </div>

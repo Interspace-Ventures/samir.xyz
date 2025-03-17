@@ -19,11 +19,11 @@ export default function Page() {
             </div>
             <div className="space-y-2 sm:space-y-4">
               <h1 
-                className="text-3xl sm:text-4xl md:text-5xl font-bold"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold"
               >
                 Hey - I'm Samir.
               </h1>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-purple-600 dark:text-purple-400">
                 I drive business impact at fintechs.
               </h2>
             </div>

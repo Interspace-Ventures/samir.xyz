@@ -16,7 +16,7 @@ export default function PortfolioLogos() {
             <button
               key={cat}
               onClick={() => setCategory(cat)}
-              className={`px-4 h-[36px] rounded text-sm font-medium ${
+              className={`px-4 h-[36px] text-sm font-medium transition-colors duration-200 ${
                 category === cat
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200'

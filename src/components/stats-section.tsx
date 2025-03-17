@@ -1,20 +1,5 @@
 "use client"
 
-interface StatProps {
-  label: string;
-  value: string;
-}
-
-//This function is no longer needed as the edited code uses a different structure
-// function Stat({ label, value }: StatProps) {
-//   return (
-//     <div className="text-center">
-//       <div className="text-2xl font-bold">{value}</div>
-//       <div className="text-sm text-gray-600 dark:text-gray-400">{label}</div>
-//     </div>
-//   );
-// }
-
 const stats = {
   top: [
     { label: "# Investments", value: "32" },
@@ -32,7 +17,7 @@ const stats = {
 
 export default function StatsSection() {
   return (
-    <div className="w-full lg:w-auto grid gap-3 rounded-xl p-3 bg-card/50 backdrop-blur-sm transform-gpu">
+    <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50 backdrop-blur-sm transform-gpu">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {stats.top.map((stat) => (
           <div key={stat.label} className="space-y-1">
