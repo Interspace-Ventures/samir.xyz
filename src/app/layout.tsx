@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
-import dynamic from 'next/dynamic';
-
-const LayoutWrapper = dynamic(() => import("@/components/layout-wrapper"));
+import ClientLayout from "@/components/client-layout";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -45,7 +43,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
