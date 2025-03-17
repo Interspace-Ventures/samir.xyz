@@ -1,9 +1,11 @@
 "use client"
 
-import Image from 'next/image'
 import { ProjectCard } from '@/components/project-card'
 import { useState, useEffect } from 'react'
 import { ErrorBoundary } from '@/components/error-boundary'
+
+// Added version logging
+console.log('Ventures page version: 2025-03-17-B');
 
 const projects = [
   {
@@ -44,40 +46,25 @@ const projects = [
   }
 ]
 
-const LoadingGrid = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {[...Array(6)].map((_, i) => (
-      <div key={i} className="aspect-square bg-card/50 rounded-lg animate-pulse" />
-    ))}
-  </div>
-)
-
 export default function Ventures() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    console.log('Ventures component mounted');
     setMounted(true)
   }, [])
 
-  if (!mounted) {
-    return (
-      <div className="max-w-5xl mx-auto px-6">
-        <LoadingGrid />
-      </div>
-    )
-  }
+  if (!mounted) return null
 
   return (
-    <div className="max-w-5xl mx-auto px-6">
+    <div className="max-w-5xl mx-auto px-6 py-8">
       <div className="mb-12">
-        <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            Interspace Ventures
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground">
-            I create apps and concepts by coding at the speed of thought using Replit.
-          </p>
-        </div>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          TEST CHANGE - Interspace Ventures - TEST CHANGE
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground">
+          I create apps and concepts by coding at the speed of thought using Replit.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
