@@ -28,7 +28,8 @@ const nextConfig = {
     ];
   },
   // Configure webpack for development
-  webpack: (config) => {
+  webpack: (config, { dev, isServer }) => {
+    // Let Next.js handle the devtool configuration
     config.watchOptions = {
       poll: 1000,
       aggregateTimeout: 300,
