@@ -18,35 +18,33 @@ const Footer = dynamic(() => import("@/components/footer"), {
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false)
+  const [isWebview, setIsWebview] = React.useState(false)
   const [error, setError] = React.useState<Error | null>(null)
 
   React.useEffect(() => {
     try {
+      const userAgent = window.navigator.userAgent.toLowerCase()
+      const isWebviewEnv = /wv|webview/.test(userAgent)
+      setIsWebview(isWebviewEnv)
+
       // Enhanced environment logging for debugging
-      if (typeof window !== 'undefined') {
-        const env = {
-          userAgent: window.navigator.userAgent,
-          viewport: {
-            width: window.innerWidth,
-            height: window.innerHeight
-          },
-          platform: window.navigator.platform,
-          isWebview: /wv|webview/.test(window.navigator.userAgent.toLowerCase()),
-          storage: {
-            hasLocalStorage: (() => {
-              try { return !!window.localStorage } catch (e) { return false }
-            })(),
-            hasSessionStorage: (() => {
-              try { return !!window.sessionStorage } catch (e) { return false }
-            })()
-          },
-          theme: {
-            isDarkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
-            prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-          }
-        };
-        console.log('ClientLayout mount environment:', env);
-      }
+      console.log('ClientLayout environment:', {
+        userAgent,
+        isWebview: isWebviewEnv,
+        viewport: {
+          width: window.innerWidth,
+          height: window.innerHeight
+        },
+        storage: {
+          hasLocalStorage: (() => {
+            try { return !!window.localStorage } catch (e) { return false }
+          })(),
+          hasSessionStorage: (() => {
+            try { return !!window.sessionStorage } catch (e) { return false }
+          })()
+        }
+      })
+
       setMounted(true)
     } catch (error) {
       console.error('Error during ClientLayout mount:', error)
@@ -84,21 +82,38 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     )
   }
 
+  // Simplified layout for webview to avoid theme/storage related issues
+  if (isWebview) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background text-foreground">
+        <header className="fixed top-0 left-0 right-0 z-50">
+          <Navbar />
+        </header>
+        <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
+          <ErrorBoundary name="WebviewContent">
+            {children}
+          </ErrorBoundary>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
+
   return (
-    <ErrorBoundary>
+    <ErrorBoundary name="ClientLayout">
       <ThemeProvider>
         <div className="min-h-screen flex flex-col bg-background text-foreground">
           <header className="fixed top-0 left-0 right-0 z-50">
-            <ErrorBoundary>
+            <ErrorBoundary name="Navbar">
               <Navbar />
             </ErrorBoundary>
           </header>
           <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
-            <ErrorBoundary>
+            <ErrorBoundary name="MainContent">
               {children}
             </ErrorBoundary>
           </main>
-          <ErrorBoundary>
+          <ErrorBoundary name="Footer">
             <Footer />
           </ErrorBoundary>
         </div>

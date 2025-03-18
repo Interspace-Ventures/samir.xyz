@@ -60,7 +60,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.variable} font-sans antialiased bg-background`}>
-        <ErrorBoundary>
+        <ErrorBoundary name="RootLayout">
           <ClientLayout>{children}</ClientLayout>
         </ErrorBoundary>
       </body>
