@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
-export default function Footer() {
+const Footer = () => {
   const [year, setYear] = useState("")
 
   useEffect(() => {
@@ -11,12 +11,14 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer className="w-full border-t border-gray-200 navbar-bg dark:border-gray-800">
+    <footer className="w-full border-t border-gray-200 bg-background text-foreground">
       <div className="max-w-4xl mx-auto px-4 py-4">
-        <div className="text-sm text-gray-700 dark:text-gray-200 text-center">
-          © <Link href="/ventures" className="text-purple-600 dark:text-purple-400">TEST FOOTER CHANGE</Link> {year || "2025"}. Built with Replit AI at the speed of thought • v2.4.5
+        <div className="text-sm">
+          © <Link href="/ventures" className="text-purple-600 dark:text-purple-400 hover:opacity-80 transition-opacity">Interspace Ventures</Link> {year || "2025"}. Built with Replit AI at the speed of thought • v2.4.5
         </div>
       </div>
     </footer>
   )
 }
+
+export default Footer
