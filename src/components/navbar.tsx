@@ -2,8 +2,8 @@
 
 import { default as NextLink } from "next/link"
 import { usePathname } from "next/navigation"
-import { ThemeToggle } from "./theme-toggle"
-import { useState, useCallback, memo, useEffect } from "react"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { useState, useCallback, useEffect } from "react"
 
 const MenuIcon = () => (
   <svg
@@ -46,54 +46,60 @@ const navItems = [
   { href: "/", label: "ABOUT", isExternal: false },
   { href: "/portfolio", label: "PORTFOLIO", isExternal: false },
   { href: "/ventures", label: "VENTURES", isExternal: false }
-]
+] as const
 
-const NavLink = memo(({ href, label, isActive, isMobile = false }: {
+interface NavLinkProps {
   href: string;
   label: string;
   isActive: boolean;
   isMobile?: boolean;
-}) => (
-  <NextLink
-    href={href}
-    prefetch={false}
-    className={`
-      ${isMobile ? 'block py-4' : 'relative'} 
-      text-base font-medium tracking-wide transition-colors
-      hover:text-primary dark:hover:text-primary whitespace-nowrap
-      ${isActive ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
-      ${!isMobile ? `
-        after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full 
-        after:origin-left after:scale-x-0 after:bg-primary after:transition-transform
-        after:duration-300 after:ease-out
-        ${isActive ? 'after:scale-x-100' : ''}
-        hover:after:scale-x-100
-      ` : ''}
-    `}
-  >
-    {label}
-  </NextLink>
-));
+}
 
-NavLink.displayName = 'NavLink';
+function NavLink({ href, label, isActive, isMobile = false }: NavLinkProps) {
+  return (
+    <NextLink
+      href={href}
+      prefetch={false}
+      className={`
+        ${isMobile ? 'block py-4' : 'relative'} 
+        text-base font-medium tracking-wide transition-colors
+        hover:text-primary dark:hover:text-primary whitespace-nowrap
+        ${isActive ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
+        ${!isMobile ? `
+          after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full 
+          after:origin-left after:scale-x-0 after:bg-primary after:transition-transform
+          after:duration-300 after:ease-out
+          ${isActive ? 'after:scale-x-100' : ''}
+          hover:after:scale-x-100
+        ` : ''}
+      `}
+    >
+      {label}
+    </NextLink>
+  )
+}
 
-const Navbar = () => {
+export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    console.log('Navbar mounting...')
-    setMounted(true)
+    try {
+      setMounted(true)
+    } catch (error) {
+      console.error('Error mounting Navbar:', error)
+    }
   }, [])
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev)
   }, [])
 
+  // Return loading state while mounting
   if (!mounted) {
     return (
-      <nav className="sticky top-0 z-50 w-full h-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+      <nav className="sticky top-0 z-50 w-full h-20 bg-white dark:bg-gray-900">
         <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
           <div className="text-2xl font-bold text-foreground leading-none">
             Hey - I'm Samir
@@ -109,7 +115,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="sticky top-0 z-50 w-full h-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+    <nav className="sticky top-0 z-50 w-full h-20 bg-white dark:bg-gray-900">
       <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
         <NextLink
           href="/"
@@ -144,7 +150,7 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-20 left-0 right-0 z-50 navbar-bg py-4 px-6 space-y-2 border-b border-gray-200 dark:border-gray-800 md:hidden">
+        <div className="absolute top-20 left-0 right-0 z-50 navbar-bg py-4 px-6 space-y-2 md:hidden">
           {navItems.map((item) => (
             <NavLink
               key={item.href}
@@ -159,5 +165,3 @@ const Navbar = () => {
     </nav>
   )
 }
-
-export default Navbar

@@ -6,45 +6,33 @@ import type { ThemeProviderProps } from "next-themes/dist/types"
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const [mounted, setMounted] = React.useState(false)
-  const [error, setError] = React.useState<Error | null>(null)
 
   React.useEffect(() => {
-    console.log('ThemeProvider mounting...')
+    console.log('ThemeProvider initializing...')
     try {
-      // Only attempt to access window APIs after mount
       if (typeof window !== 'undefined') {
-        console.log('ThemeProvider environment check:', {
+        // Log environment information for debugging
+        console.log('Environment check:', {
           darkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
           reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
           userAgent: window.navigator.userAgent,
           colorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-          isWebview: /wv|webview/.test(window.navigator.userAgent.toLowerCase()),
           storageAvailable: (() => {
             try {
-              localStorage.setItem('theme-test', 'test');
-              localStorage.removeItem('theme-test');
-              return true;
+              localStorage.setItem('test', 'test')
+              localStorage.removeItem('test')
+              return true
             } catch (e) {
-              return false;
+              return false
             }
-          })(),
+          })()
         })
       }
       setMounted(true)
     } catch (error) {
-      console.error('ThemeProvider mount error:', error)
-      setError(error instanceof Error ? error : new Error(String(error)))
+      console.error('ThemeProvider initialization error:', error)
     }
   }, [])
-
-  // Return error state if mount failed
-  if (error) {
-    return (
-      <div className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/10 p-4 rounded-lg">
-        Failed to initialize theme provider: {error.message}
-      </div>
-    );
-  }
 
   // Return null on server and during initial mount to prevent hydration mismatch
   if (!mounted) {
@@ -55,7 +43,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     <NextThemesProvider 
       attribute="class" 
       defaultTheme="dark"
-      enableSystem
+      disableTransitionOnChange
       {...props}
     >
       {children}
