@@ -32,20 +32,33 @@ export class ErrorBoundary extends Component<Props, State> {
         errorMessage: error.message,
         errorStack: error.stack,
         errorInfo,
-        hasLocalStorage: (() => {
-          try {
-            return !!window.localStorage;
-          } catch (e) {
-            return false;
-          }
-        })(),
-        hasSessionStorage: (() => {
-          try {
-            return !!window.sessionStorage;
-          } catch (e) {
-            return false;
-          }
-        })()
+        windowDimensions: {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        },
+        browserFeatures: {
+          hasLocalStorage: (() => {
+            try {
+              return !!window.localStorage;
+            } catch (e) {
+              return false;
+            }
+          })(),
+          hasSessionStorage: (() => {
+            try {
+              return !!window.sessionStorage;
+            } catch (e) {
+              return false;
+            }
+          })(),
+          hasIndexedDB: (() => {
+            try {
+              return !!window.indexedDB;
+            } catch (e) {
+              return false;
+            }
+          })(),
+        }
       });
     }
   }
@@ -62,7 +75,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 : "Don't worry - we've been notified and will fix this issue soon."}
             </p>
             {process.env.NODE_ENV === 'development' && this.state.error.stack && (
-              <pre className="mt-2 text-xs text-left text-red-500 bg-red-50 dark:bg-red-900/10 p-4 rounded-lg overflow-auto">
+              <pre className="mt-2 max-h-[200px] text-xs text-left text-red-500 bg-red-50 dark:bg-red-900/10 p-4 rounded-lg overflow-auto">
                 {this.state.error.stack}
               </pre>
             )}
@@ -75,8 +88,27 @@ export class ErrorBoundary extends Component<Props, State> {
 
                 // Clear any potential corrupted state
                 if (typeof window !== 'undefined') {
-                  localStorage.clear();
-                  sessionStorage.clear();
+                  try {
+                    localStorage.clear();
+                    console.log('LocalStorage cleared');
+                  } catch (e) {
+                    console.error('Failed to clear localStorage:', e);
+                  }
+
+                  try {
+                    sessionStorage.clear();
+                    console.log('SessionStorage cleared');
+                  } catch (e) {
+                    console.error('Failed to clear sessionStorage:', e);
+                  }
+
+                  try {
+                    const req = indexedDB.deleteDatabase('next-pwa');
+                    req.onsuccess = () => console.log('IndexedDB cleared');
+                    req.onerror = () => console.error('Failed to clear IndexedDB');
+                  } catch (e) {
+                    console.error('Failed to access IndexedDB:', e);
+                  }
                 }
 
                 // Log successful cleanup
@@ -84,7 +116,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
                 window.location.reload();
               } catch (e) {
-                console.error('Failed to clear storage:', e);
+                console.error('Failed during cleanup:', e);
                 // Fallback to simple reload if cleanup fails
                 window.location.reload();
               }
