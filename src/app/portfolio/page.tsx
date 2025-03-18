@@ -4,24 +4,12 @@ import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import { ErrorBoundary } from '@/components/error-boundary'
 
-const StatsSection = dynamic(() => import('@/components/stats-section').catch(err => {
-  console.error('Failed to load StatsSection:', err);
-  return () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />;
-}), {
+const StatsSection = dynamic(() => import('@/components/stats-section'), {
   loading: () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />,
   ssr: false
 });
 
-const PortfolioCards = dynamic(() => import('@/components/portfolio-cards').catch(err => {
-  console.error('Failed to load PortfolioCards:', err);
-  return () => (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-      {[...Array(10)].map((_, i) => (
-        <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
-      ))}
-    </div>
-  );
-}), {
+const PortfolioCards = dynamic(() => import('@/components/portfolio-cards'), {
   loading: () => (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
       {[...Array(10)].map((_, i) => (
@@ -43,14 +31,14 @@ export default function Portfolio() {
           </p>
         </div>
 
-        <ErrorBoundary>
+        <ErrorBoundary name="StatsSection">
           <Suspense fallback={<div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />}>
             <StatsSection />
           </Suspense>
         </ErrorBoundary>
       </div>
 
-      <ErrorBoundary>
+      <ErrorBoundary name="PortfolioCards">
         <Suspense fallback={
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {[...Array(10)].map((_, i) => (

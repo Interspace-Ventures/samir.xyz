@@ -10,10 +10,19 @@ function CompanyCard({ company }: { company: Company }) {
   const [imageError, setImageError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
 
+  // Add error logging
+  useEffect(() => {
+    try {
+      console.log(`Rendering CompanyCard for ${company.name}`);
+    } catch (error) {
+      console.error(`Error in CompanyCard for ${company.name}:`, error);
+    }
+  }, [company.name]);
+
   return (
     <div className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
       <a
-        href={`https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
+        href={company.website || `https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
         rel="noopener noreferrer"
         className="block h-full p-6 relative"
@@ -38,8 +47,8 @@ function CompanyCard({ company }: { company: Company }) {
                 sizes="200px"
                 style={{ objectFit: 'contain' }}
                 priority
-                onError={() => {
-                  console.error(`Failed to load image for ${company.name}`);
+                onError={(e) => {
+                  console.error(`Failed to load image for ${company.name}:`, e);
                   setImageError(true);
                 }}
                 onLoad={() => setImageLoaded(true)}
@@ -74,14 +83,26 @@ function CompanyCard({ company }: { company: Company }) {
 export default function PortfolioCards() {
   const [mounted, setMounted] = useState(false)
   const [category, setCategory] = useState<typeof categories[number]>('All')
+  const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
     try {
+      console.log('PortfolioCards component mounting');
       setMounted(true)
     } catch (e) {
       console.error('Error during PortfolioCards initialization:', e)
+      setError(e instanceof Error ? e : new Error('Unknown error during initialization'))
     }
   }, [])
+
+  if (error) {
+    return (
+      <div className="text-red-500 p-4 rounded-lg border border-red-200 bg-red-50">
+        <h3 className="font-bold">Error loading portfolio</h3>
+        <p>{error.message}</p>
+      </div>
+    )
+  }
 
   if (!mounted) {
     return (
@@ -123,7 +144,7 @@ export default function PortfolioCards() {
         {companies
           .filter((company) => category === 'All' || company.category === category)
           .map((company) => (
-            <ErrorBoundary key={company.name}>
+            <ErrorBoundary key={company.name} name={`CompanyCard-${company.name}`}>
               <CompanyCard company={company} />
             </ErrorBoundary>
           ))}
