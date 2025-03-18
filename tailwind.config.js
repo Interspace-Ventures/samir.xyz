@@ -28,7 +28,7 @@ module.exports = {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
-        },
+        }
       },
       keyframes: {
         "fade-in": {
