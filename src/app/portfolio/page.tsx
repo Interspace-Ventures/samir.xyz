@@ -4,21 +4,28 @@ import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import { ErrorBoundary } from '@/components/error-boundary'
 
-const StatsSection = dynamic(() => import('@/components/stats-section'), {
-  loading: () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />,
-  ssr: false
-});
+// Import components with proper error handling
+const StatsSection = dynamic(
+  () => import('@/components/stats-section'),
+  {
+    loading: () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />,
+    ssr: false
+  }
+);
 
-const PortfolioCards = dynamic(() => import('@/components/portfolio-cards'), {
-  loading: () => (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-      {[...Array(10)].map((_, i) => (
-        <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
-      ))}
-    </div>
-  ),
-  ssr: false
-});
+const PortfolioCards = dynamic(
+  () => import('@/components/portfolio-cards'),
+  {
+    loading: () => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {Array.from({ length: 10 }, (_, i) => (
+          <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
+        ))}
+      </div>
+    ),
+    ssr: false
+  }
+);
 
 export default function Portfolio() {
   return (
@@ -40,8 +47,8 @@ export default function Portfolio() {
 
       <ErrorBoundary name="PortfolioCards">
         <Suspense fallback={
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            {[...Array(10)].map((_, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 10 }, (_, i) => (
               <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
             ))}
           </div>

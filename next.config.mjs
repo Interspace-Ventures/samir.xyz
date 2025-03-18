@@ -5,7 +5,7 @@ const nextConfig = {
   // Configure image optimization and domains
   images: {
     unoptimized: true,
-    domains: ['*'], //Preserving the original functionality
+    domains: ['*'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -28,25 +28,8 @@ const nextConfig = {
     ];
   },
   // Configure webpack for development
-  webpack: (config, { dev, isServer }) => {
-    // Enhanced error handling for webpack
-    config.optimization = {
-      ...config.optimization,
-      moduleIds: 'named',
-      chunkIds: 'named',
-    };
-
-    // Improve module resolution
-    config.resolve = {
-      ...config.resolve,
-      fallback: {
-        ...config.resolve?.fallback,
-        fs: false,
-        path: false,
-      },
-    };
-
-    // Configure watching options
+  webpack: (config) => {
+    // Only essential webpack configurations
     config.watchOptions = {
       poll: 1000,
       aggregateTimeout: 300,
