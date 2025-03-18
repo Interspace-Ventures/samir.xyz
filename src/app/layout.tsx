@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import ClientLayout from "@/components/client-layout";
+import { ErrorBoundary } from "@/components/error-boundary";
 
-// Move font configuration outside component to ensure consistent loading
+// Configure font outside component for better caching and hydration
 const inter = Inter({ 
   subsets: ["latin"],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  display: 'swap',
   variable: '--font-inter',
-  adjustFontFallback: true,
+  preload: true,
+  display: 'swap',
+  adjustFontFallback: false, // Disable font fallback adjustment to prevent hydration mismatches
+  weight: ['400', '500', '600', '700', '800', '900'], // Add back required weights
 });
 
 export const metadata: Metadata = {
@@ -37,14 +39,30 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Add runtime debugging info without accessing unsupported properties
+  if (typeof window !== 'undefined') {
+    console.log('RootLayout environment:', {
+      fontVariables: {
+        variable: inter.variable
+      },
+      viewport: {
+        width: window.innerWidth,
+        height: window.innerHeight
+      },
+      isWebview: /wv|webview/.test(window.navigator.userAgent.toLowerCase())
+    });
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} antialiased`}>
-        <ClientLayout>{children}</ClientLayout>
+      <body className={`${inter.variable} font-sans antialiased bg-background`}>
+        <ErrorBoundary>
+          <ClientLayout>{children}</ClientLayout>
+        </ErrorBoundary>
       </body>
     </html>
   );
