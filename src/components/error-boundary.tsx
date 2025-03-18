@@ -23,6 +23,15 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   static getDerivedStateFromError(error: Error) {
     console.error('ErrorBoundary caught error:', error);
+    // Clear any problematic cached data
+    try {
+      if (typeof window !== 'undefined') {
+        sessionStorage.clear();
+        localStorage.clear();
+      }
+    } catch (e) {
+      console.warn('Failed to clear storage:', e);
+    }
     return { hasError: true, error }
   }
 
@@ -30,6 +39,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     // Log the error to console with component name and stack trace
     console.error(`ErrorBoundary (${this.props.name || 'unnamed'}) caught error:`, {
       error: error.message,
+      component: this.props.name,
       stack: error.stack,
       componentStack: info.componentStack
     });
@@ -51,11 +61,12 @@ export class ErrorBoundary extends React.Component<Props, State> {
             onClick={() => {
               // Clear any cached state that might be causing the error
               try {
-                localStorage.clear();
+                if (typeof window !== 'undefined') {
+                  window.location.reload();
+                }
               } catch (e) {
-                console.warn('Failed to clear localStorage:', e);
+                console.warn('Failed to reload page:', e);
               }
-              window.location.reload();
             }}
             className="inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-red-700"
           >

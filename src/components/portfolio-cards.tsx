@@ -9,15 +9,18 @@ import { ErrorBoundary } from './error-boundary'
 function CompanyCard({ company }: { company: Company }) {
   const [imageError, setImageError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
-  // Add error logging
   useEffect(() => {
     try {
-      console.log(`Rendering CompanyCard for ${company.name}`);
+      setMounted(true)
+      console.log(`Mounting CompanyCard for ${company.name}`);
     } catch (error) {
-      console.error(`Error in CompanyCard for ${company.name}:`, error);
+      console.error(`Error mounting CompanyCard for ${company.name}:`, error);
     }
   }, [company.name]);
+
+  if (!mounted) return null;
 
   return (
     <div className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
@@ -95,20 +98,11 @@ export default function PortfolioCards() {
     }
   }, [])
 
-  if (error) {
-    return (
-      <div className="text-red-500 p-4 rounded-lg border border-red-200 bg-red-50">
-        <h3 className="font-bold">Error loading portfolio</h3>
-        <p>{error.message}</p>
-      </div>
-    )
-  }
-
   if (!mounted) {
     return (
       <div className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(9)].map((_, i) => (
+          {Array.from({ length: 9 }, (_, i) => (
             <div key={i} className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-white shadow-sm">
               <div className="h-full flex items-center justify-center">
                 <div className="animate-pulse bg-gray-200 dark:bg-gray-200 h-12 w-32 rounded" />
@@ -116,6 +110,15 @@ export default function PortfolioCards() {
             </div>
           ))}
         </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="text-red-500 p-4 rounded-lg border border-red-200 bg-red-50">
+        <h3 className="font-bold">Error loading portfolio</h3>
+        <p>{error.message}</p>
       </div>
     )
   }
