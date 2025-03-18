@@ -43,7 +43,9 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">
             <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-              <Navbar />
+              <ErrorBoundary name="Navbar">
+                <Navbar />
+              </ErrorBoundary>
             </header>
 
             <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
@@ -53,7 +55,9 @@ export default function RootLayout({
             </main>
 
             <footer className="mt-auto">
-              <Footer />
+              <ErrorBoundary name="Footer">
+                <Footer />
+              </ErrorBoundary>
             </footer>
           </div>
         </ThemeProvider>
