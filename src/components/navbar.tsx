@@ -2,21 +2,8 @@
 
 import { default as NextLink } from "next/link"
 import { usePathname } from "next/navigation"
-import dynamic from 'next/dynamic'
-import { useState, useEffect } from "react"
-
-// Dynamically import ThemeToggle with loading state
-const ThemeToggle = dynamic(
-  () => import('./theme-toggle').then(mod => mod.ThemeToggle),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-6 h-6 flex items-center justify-center">
-        <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-4 w-4 rounded-full" />
-      </div>
-    )
-  }
-)
+import { ThemeToggle } from "./theme-toggle"
+import { useState } from "react"
 
 const navItems = [
   { href: "/", label: "ABOUT", isExternal: false },
@@ -27,32 +14,6 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    try {
-      setMounted(true)
-    } catch (error) {
-      console.error('Error mounting Navbar:', error)
-    }
-  }, [])
-
-  if (!mounted) {
-    return (
-      <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-white dark:bg-gray-900">
-        <div className="max-w-4xl mx-auto px-6 h-full flex items-center">
-          <div className="text-2xl font-bold text-foreground leading-none">
-            Hey - I'm Samir
-          </div>
-          <div className="hidden md:flex items-center space-x-8">
-            {Array.from({ length: 3 }, (_, i) => (
-              <div key={i} className="w-20 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
-            ))}
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-white dark:bg-gray-900">

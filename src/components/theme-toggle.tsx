@@ -7,10 +7,12 @@ export function ThemeToggle() {
   const [mounted, setMounted] = React.useState(false)
   const { theme, setTheme } = useTheme()
 
+  // Only show the toggle after mounting to prevent hydration mismatch
   React.useEffect(() => {
     setMounted(true)
   }, [])
 
+  // Return a placeholder with the same dimensions during SSR
   if (!mounted) {
     return (
       <div className="w-6 h-6 flex items-center justify-center">
@@ -25,18 +27,14 @@ export function ThemeToggle() {
       className="relative w-6 h-6 flex items-center justify-center"
       aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
     >
+      {/* Sun icon */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
         aria-hidden="true"
-        className="h-[1.1rem] w-[1.1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
       >
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2" />
@@ -49,23 +47,17 @@ export function ThemeToggle() {
         <path d="m19.07 4.93-1.41 1.41" />
       </svg>
 
+      {/* Moon icon */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
         aria-hidden="true"
-        className="absolute h-[1.1rem] w-[1.1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
       >
         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
       </svg>
-
-      <span className="sr-only">Toggle theme</span>
     </button>
   )
 }
