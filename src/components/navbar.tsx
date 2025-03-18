@@ -93,14 +93,14 @@ export default function Navbar() {
 
   if (!mounted) {
     return (
-      <nav className="sticky top-0 z-50 w-full h-20 navbar-bg border-b border-border/40 shadow-sm">
+      <nav className="sticky top-0 z-50 w-full h-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
           <div className="text-2xl font-bold text-foreground leading-none">
             Hey - I'm Samir
           </div>
           <div className="hidden md:flex items-center space-x-4">
             {navItems.map((_, i) => (
-              <div key={i} className="w-20 h-4 bg-muted/10 rounded animate-pulse" />
+              <div key={i} className="w-20 h-4 bg-muted rounded animate-pulse" />
             ))}
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 w-full h-20 navbar-bg border-b border-border/40 shadow-sm">
+    <nav className="sticky top-0 z-50 w-full h-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
       <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
         <NextLink
           href="/"
@@ -144,7 +144,7 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-20 left-0 right-0 z-50 navbar-bg py-4 px-6 space-y-2 border-b border-border/40 shadow-sm md:hidden">
+        <div className="absolute top-20 left-0 right-0 z-50 navbar-bg py-4 px-6 space-y-2 border-b border-gray-200 dark:border-gray-800 md:hidden">
           {navItems.map((item) => (
             <NavLink
               key={item.href}

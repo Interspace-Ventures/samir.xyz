@@ -38,11 +38,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} font-sans antialiased bg-background`}>
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">
-            <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b">
+            <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
               <ErrorBoundary name="Navbar">
                 <Navbar />
               </ErrorBoundary>
