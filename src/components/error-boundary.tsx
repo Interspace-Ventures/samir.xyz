@@ -1,72 +1,45 @@
 "use client"
 
 import * as React from "react"
-import type { ReactNode } from "react"
 
 interface Props {
-  children: ReactNode;
-  name?: string;
+  children: React.ReactNode
+  name?: string
 }
 
 interface State {
-  error: Error | null;
-  errorInfo: React.ErrorInfo | null;
+  hasError: boolean
+  error: Error | null
 }
 
 export class ErrorBoundary extends React.Component<Props, State> {
-  public state: State = {
-    error: null,
-    errorInfo: null
-  }
-
-  public static getDerivedStateFromError(error: Error): State {
-    return { error, errorInfo: null }
-  }
-
-  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Enhanced error logging
-    const errorContext = {
-      componentName: this.props.name || 'Unknown',
-      error: {
-        name: error.name,
-        message: error.message,
-        stack: error.stack,
-      },
-      errorInfo,
-      environment: typeof window !== 'undefined' ? {
-        userAgent: window.navigator.userAgent,
-        isWebview: /wv|webview/.test(window.navigator.userAgent.toLowerCase()),
-        viewport: {
-          width: window.innerWidth,
-          height: window.innerHeight,
-        }
-      } : 'server-side',
-      timestamp: new Date().toISOString(),
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      hasError: false,
+      error: null
     }
-
-    console.error('ErrorBoundary caught error:', errorContext)
-    this.setState({ error, errorInfo })
   }
 
-  public render() {
-    if (this.state.error) {
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error(`ErrorBoundary (${this.props.name || 'unnamed'}) caught error:`, error.message)
+  }
+
+  render() {
+    if (this.state.hasError) {
       return (
-        <div className="flex min-h-[400px] flex-col items-center justify-center space-y-4 text-center">
+        <div className="flex min-h-[200px] flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-lg font-medium">Something went wrong!</h2>
             <p className="text-sm text-muted-foreground">
               {process.env.NODE_ENV === 'development' 
-                ? `Error in ${this.props.name || 'Unknown'}: ${this.state.error.message}` 
+                ? `Error in ${this.props.name || 'component'}: ${this.state.error?.message}` 
                 : "We've been notified and will fix this issue soon."}
             </p>
-            {process.env.NODE_ENV === 'development' && (
-              <pre className="mt-2 max-h-[200px] text-xs text-left text-red-500 bg-red-50 dark:bg-red-900/10 p-4 rounded-lg overflow-auto">
-                {this.state.error.stack}
-                {this.state.errorInfo && (
-                  '\n\nComponent Stack:\n' + this.state.errorInfo.componentStack
-                )}
-              </pre>
-            )}
           </div>
           <button
             onClick={() => window.location.reload()}
