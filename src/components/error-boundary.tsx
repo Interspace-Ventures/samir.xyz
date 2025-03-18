@@ -4,62 +4,74 @@ import { Component, ErrorInfo, ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
+  name?: string
 }
 
 interface State {
   error: Error | null
+  errorInfo: ErrorInfo | null
 }
 
 export class ErrorBoundary extends Component<Props, State> {
   public state: State = {
-    error: null
+    error: null,
+    errorInfo: null
   }
 
   public static getDerivedStateFromError(error: Error): State {
-    return { error }
+    return { error, errorInfo: null }
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo)
-
-    // Additional logging for webview debugging
-    if (typeof window !== 'undefined') {
-      const userAgent = window.navigator.userAgent.toLowerCase();
-      console.log('Error context:', {
-        isWebview: userAgent.includes('wv') || userAgent.includes('webview'),
-        url: window.location.href,
-        errorName: error.name,
-        errorMessage: error.message,
-        errorStack: error.stack,
-        errorInfo,
-        windowDimensions: {
+    // Enhanced error logging
+    const errorContext = {
+      componentName: this.props.name || 'Unknown',
+      error: {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+      },
+      errorInfo,
+      environment: typeof window !== 'undefined' ? {
+        userAgent: window.navigator.userAgent,
+        isWebview: /wv|webview/.test(window.navigator.userAgent.toLowerCase()),
+        viewport: {
           width: window.innerWidth,
           height: window.innerHeight,
         },
-        browserFeatures: {
-          hasLocalStorage: (() => {
-            try {
-              return !!window.localStorage;
-            } catch (e) {
-              return false;
-            }
-          })(),
-          hasSessionStorage: (() => {
-            try {
-              return !!window.sessionStorage;
-            } catch (e) {
-              return false;
-            }
-          })(),
-          hasIndexedDB: (() => {
-            try {
-              return !!window.indexedDB;
-            } catch (e) {
-              return false;
-            }
-          })(),
+        theme: {
+          prefersColorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+          prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        },
+        storage: {
+          hasLocalStorage: this.checkStorage('localStorage'),
+          hasSessionStorage: this.checkStorage('sessionStorage'),
+          hasIndexedDB: this.checkStorage('indexedDB'),
+        },
+        fontLoading: {
+          fonts: Array.from(document.fonts || []).map(font => ({
+            family: font.family,
+            status: font.status,
+          })),
         }
-      });
+      } : 'server-side',
+      timestamp: new Date().toISOString(),
+    }
+
+    console.error('ErrorBoundary caught error:', errorContext)
+    this.setState({ error, errorInfo })
+  }
+
+  private checkStorage(type: 'localStorage' | 'sessionStorage' | 'indexedDB'): boolean {
+    try {
+      if (type === 'indexedDB') return !!window.indexedDB
+      const storage = window[type]
+      const testKey = `test-${Math.random()}`
+      storage.setItem(testKey, testKey)
+      storage.removeItem(testKey)
+      return true
+    } catch (e) {
+      return false
     }
   }
 
@@ -71,55 +83,23 @@ export class ErrorBoundary extends Component<Props, State> {
             <h2 className="text-lg font-medium">Something went wrong!</h2>
             <p className="text-sm text-muted-foreground">
               {process.env.NODE_ENV === 'development' 
-                ? `Error: ${this.state.error.message}` 
-                : "Don't worry - we've been notified and will fix this issue soon."}
+                ? `Error in ${this.props.name || 'Unknown'}: ${this.state.error.message}` 
+                : "We've been notified and will fix this issue soon."}
             </p>
-            {process.env.NODE_ENV === 'development' && this.state.error.stack && (
+            {process.env.NODE_ENV === 'development' && (
               <pre className="mt-2 max-h-[200px] text-xs text-left text-red-500 bg-red-50 dark:bg-red-900/10 p-4 rounded-lg overflow-auto">
                 {this.state.error.stack}
+                {this.state.errorInfo && (
+                  '\n\nComponent Stack:\n' + this.state.errorInfo.componentStack
+                )}
               </pre>
             )}
           </div>
           <button
             onClick={() => {
-              try {
-                // Log cleanup attempt
-                console.log('Attempting error recovery cleanup...');
-
-                // Clear any potential corrupted state
-                if (typeof window !== 'undefined') {
-                  try {
-                    localStorage.clear();
-                    console.log('LocalStorage cleared');
-                  } catch (e) {
-                    console.error('Failed to clear localStorage:', e);
-                  }
-
-                  try {
-                    sessionStorage.clear();
-                    console.log('SessionStorage cleared');
-                  } catch (e) {
-                    console.error('Failed to clear sessionStorage:', e);
-                  }
-
-                  try {
-                    const req = indexedDB.deleteDatabase('next-pwa');
-                    req.onsuccess = () => console.log('IndexedDB cleared');
-                    req.onerror = () => console.error('Failed to clear IndexedDB');
-                  } catch (e) {
-                    console.error('Failed to access IndexedDB:', e);
-                  }
-                }
-
-                // Log successful cleanup
-                console.log('Storage cleanup completed');
-
-                window.location.reload();
-              } catch (e) {
-                console.error('Failed during cleanup:', e);
-                // Fallback to simple reload if cleanup fails
-                window.location.reload();
-              }
+              console.log('Attempting error recovery...')
+              this.cleanupStorage()
+              window.location.reload()
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
           >
@@ -130,5 +110,26 @@ export class ErrorBoundary extends Component<Props, State> {
     }
 
     return this.props.children
+  }
+
+  private cleanupStorage() {
+    if (typeof window === 'undefined') return
+
+    const cleanup = (operation: () => void, name: string) => {
+      try {
+        operation()
+        console.log(`Cleaned up ${name}`)
+      } catch (e) {
+        console.error(`Failed to clean up ${name}:`, e)
+      }
+    }
+
+    cleanup(() => localStorage.clear(), 'localStorage')
+    cleanup(() => sessionStorage.clear(), 'sessionStorage')
+    cleanup(() => {
+      const req = indexedDB.deleteDatabase('next-pwa')
+      req.onsuccess = () => console.log('Cleaned up IndexedDB')
+      req.onerror = () => console.error('Failed to clean up IndexedDB')
+    }, 'indexedDB')
   }
 }
