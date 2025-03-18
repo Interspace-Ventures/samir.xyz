@@ -29,11 +29,29 @@ const nextConfig = {
   },
   // Configure webpack for development
   webpack: (config, { dev, isServer }) => {
-    // Let Next.js handle the devtool configuration
+    // Enhanced error handling for webpack
+    config.optimization = {
+      ...config.optimization,
+      moduleIds: 'named',
+      chunkIds: 'named',
+    };
+
+    // Improve module resolution
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        ...config.resolve?.fallback,
+        fs: false,
+        path: false,
+      },
+    };
+
+    // Configure watching options
     config.watchOptions = {
       poll: 1000,
       aggregateTimeout: 300,
     };
+
     return config;
   },
   // Disable powered by header

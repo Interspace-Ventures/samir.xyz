@@ -5,4 +5,5 @@ export interface Company {
   category: 'Fintech' | 'Health' | 'Retail' | 'SaaS';
   markup?: boolean;
   acquired?: boolean;
+  website?: string;
 }
