@@ -77,7 +77,7 @@ const NavLink = memo(({ href, label, isActive, isMobile = false }: {
 
 NavLink.displayName = 'NavLink';
 
-export default function Navbar() {
+const Navbar = () => {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -159,3 +159,5 @@ export default function Navbar() {
     </nav>
   )
 }
+
+export default Navbar
