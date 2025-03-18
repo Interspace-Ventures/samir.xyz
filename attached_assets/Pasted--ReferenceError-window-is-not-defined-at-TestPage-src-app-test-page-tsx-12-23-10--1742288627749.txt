@@ -1,0 +1,78 @@
+⨯ ReferenceError: window is not defined
+    at TestPage (src/app/test/page.tsx:12:23)
+  10 |         <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-auto">
+  11 |           {JSON.stringify({
+> 12 |             userAgent: window.navigator.userAgent,
+     |                       ^
+  13 |             viewport: {
+  14 |               width: window.innerWidth,
+  15 |               height: window.innerHeight {
+  digest: '4061753906'
+}
+ HEAD /test 500 in 166ms
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: /home/runner/workspace/src/app/globals.css The `border-border` class does not exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive.
+
+> 1 | @tailwind base;
+    | ^
+  2 | @tailwind components;
+  3 | @tailwind utilities;
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: /home/runner/workspace/src/app/globals.css The `border-border` class does not exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive.
+
+> 1 | @tailwind base;
+    | ^
+  2 | @tailwind components;
+  3 | @tailwind utilities;
+ ○ Compiling /_error ...
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: /home/runner/workspace/src/app/globals.css The `border-border` class does not exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive.
+
+> 1 | @tailwind base;
+    | ^
+  2 | @tailwind components;
+  3 | @tailwind utilities;
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ HEAD /test 500 in 5493ms
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/home/runner/workspace/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!/home/runner/workspace/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!/home/runner/workspace/src/app/globals.css': No serializer registered for PostCSSSyntaxError
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> PostCSSSyntaxError
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: /home/runner/workspace/src/app/globals.css The `border-border` class does not exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive.
+
+> 1 | @tailwind base;
+    | ^
+  2 | @tailwind components;
+  3 | @tailwind utilities;
+ ✓ Compiled /_error in 341ms (96 modules)
+ ○ Compiling /test ...
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: /home/runner/workspace/src/app/globals.css The `border-border` class does not exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive.
+
+> 1 | @tailwind base;
+    | ^
+  2 | @tailwind components;
+  3 | @tailwind utilities;
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ HEAD /test 500 in 816ms
