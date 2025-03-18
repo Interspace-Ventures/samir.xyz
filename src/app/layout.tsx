@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
-import ClientLayout from "@/components/client-layout";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { ErrorBoundary } from "@/components/error-boundary";
 
-// Configure font outside component for better caching and hydration
 const inter = Inter({ 
   subsets: ["latin"],
   variable: '--font-inter',
-  preload: true,
   display: 'swap',
-  adjustFontFallback: false, // Disable font fallback adjustment to prevent hydration mismatches
-  weight: ['400', '500', '600', '700', '800', '900'], // Add back required weights
 });
 
 export const metadata: Metadata = {
@@ -39,13 +38,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={`${inter.variable} font-sans antialiased bg-background`}>
-        <ClientLayout>{children}</ClientLayout>
+    <html lang="en">
+      <body className={`${inter.variable} font-sans`}>
+        <ThemeProvider>
+          <div className="min-h-screen flex flex-col">
+            <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b">
+              <ErrorBoundary name="Navbar">
+                <Navbar />
+              </ErrorBoundary>
+            </header>
+            <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
+              <ErrorBoundary name="Content">
+                {children}
+              </ErrorBoundary>
+            </main>
+            <ErrorBoundary name="Footer">
+              <Footer />
+            </ErrorBoundary>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

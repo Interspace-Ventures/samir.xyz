@@ -2,18 +2,21 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
-
-type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0]
+import type { ThemeProviderProps } from "next-themes/dist/types"
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   const [mounted, setMounted] = React.useState(false)
   const [error, setError] = React.useState<Error | null>(null)
 
   React.useEffect(() => {
+    console.log('ThemeProvider mounting...')
     try {
-      // Log theme-related environment info
+      // Only attempt to access window APIs after mount
       if (typeof window !== 'undefined') {
-        console.log('ThemeProvider environment:', {
+        console.log('ThemeProvider environment check:', {
+          darkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
+          reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+          userAgent: window.navigator.userAgent,
           colorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
           isWebview: /wv|webview/.test(window.navigator.userAgent.toLowerCase()),
           storageAvailable: (() => {
@@ -25,11 +28,11 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
               return false;
             }
           })(),
-        });
+        })
       }
       setMounted(true)
     } catch (error) {
-      console.error('Error in ThemeProvider mounting:', error)
+      console.error('ThemeProvider mount error:', error)
       setError(error instanceof Error ? error : new Error(String(error)))
     }
   }, [])
@@ -53,7 +56,6 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       attribute="class" 
       defaultTheme="dark"
       enableSystem
-      disableTransitionOnChange
       {...props}
     >
       {children}
