@@ -1,0 +1,389 @@
+Could not kill process on port 5000. No process running on port.
+   ▲ Next.js 15.2.2
+   - Local:        http://localhost:5000
+   - Network:      http://0.0.0.0:5000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.6s
+ ○ Compiling / ...
+ ⨯ ./src/app/layout.tsx
+Error:   × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:14:1]
+ 11 │     });
+ 12 │     
+ 13 │     // Dynamically import components that depend on theme
+ 14 │ ╭─▶ const ThemeProvider = dynamic(
+ 15 │ │     () => import('@/components/theme-provider').then((mod) => mod.ThemeProvider),
+ 16 │ │     {
+ 17 │ │       ssr: false,
+ 18 │ │       loading: () => <div className="min-h-screen bg-white dark:bg-gray-900" />
+ 19 │ │     }
+ 20 │ ╰─▶ )
+ 21 │     
+ 22 │     const Navbar = dynamic(() => import('@/components/navbar'), {
+ 23 │       ssr: false,
+    ╰────
+  × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:22:1]
+ 19 │       }
+ 20 │     )
+ 21 │     
+ 22 │ ╭─▶ const Navbar = dynamic(() => import('@/components/navbar'), {
+ 23 │ │     ssr: false,
+ 24 │ │     loading: () => (
+ 25 │ │       <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+ 26 │ │         <div className="max-w-4xl mx-auto px-6 h-20 flex items-center">
+ 27 │ │           <div className="animate-pulse h-8 w-32 bg-gray-200 dark:bg-gray-700 rounded" />
+ 28 │ │         </div>
+ 29 │ │       </header>
+ 30 │ │     )
+ 31 │ ╰─▶ })
+ 32 │     
+ 33 │     const Footer = dynamic(() => import('@/components/footer'), {
+ 34 │       ssr: false,
+    ╰────
+  × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:33:1]
+ 30 │       )
+ 31 │     })
+ 32 │     
+ 33 │ ╭─▶ const Footer = dynamic(() => import('@/components/footer'), {
+ 34 │ │     ssr: false,
+ 35 │ │     loading: () => null
+ 36 │ ╰─▶ })
+ 37 │     
+ 38 │     export const metadata: Metadata = {
+ 39 │       title: "Hey - I'm Samir",
+    ╰────
+
+Import trace for requested module:
+./src/app/layout.tsx
+ ⨯ ./src/app/layout.tsx
+Error:   × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:14:1]
+ 11 │     });
+ 12 │     
+ 13 │     // Dynamically import components that depend on theme
+ 14 │ ╭─▶ const ThemeProvider = dynamic(
+ 15 │ │     () => import('@/components/theme-provider').then((mod) => mod.ThemeProvider),
+ 16 │ │     {
+ 17 │ │       ssr: false,
+ 18 │ │       loading: () => <div className="min-h-screen bg-white dark:bg-gray-900" />
+ 19 │ │     }
+ 20 │ ╰─▶ )
+ 21 │     
+ 22 │     const Navbar = dynamic(() => import('@/components/navbar'), {
+ 23 │       ssr: false,
+    ╰────
+  × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:22:1]
+ 19 │       }
+ 20 │     )
+ 21 │     
+ 22 │ ╭─▶ const Navbar = dynamic(() => import('@/components/navbar'), {
+ 23 │ │     ssr: false,
+ 24 │ │     loading: () => (
+ 25 │ │       <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+ 26 │ │         <div className="max-w-4xl mx-auto px-6 h-20 flex items-center">
+ 27 │ │           <div className="animate-pulse h-8 w-32 bg-gray-200 dark:bg-gray-700 rounded" />
+ 28 │ │         </div>
+ 29 │ │       </header>
+ 30 │ │     )
+ 31 │ ╰─▶ })
+ 32 │     
+ 33 │     const Footer = dynamic(() => import('@/components/footer'), {
+ 34 │       ssr: false,
+    ╰────
+  × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:33:1]
+ 30 │       )
+ 31 │     })
+ 32 │     
+ 33 │ ╭─▶ const Footer = dynamic(() => import('@/components/footer'), {
+ 34 │ │     ssr: false,
+ 35 │ │     loading: () => null
+ 36 │ ╰─▶ })
+ 37 │     
+ 38 │     export const metadata: Metadata = {
+ 39 │       title: "Hey - I'm Samir",
+    ╰────
+
+Import trace for requested module:
+./src/app/layout.tsx
+ ⨯ ./src/app/layout.tsx
+Error:   × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:14:1]
+ 11 │     });
+ 12 │     
+ 13 │     // Dynamically import components that depend on theme
+ 14 │ ╭─▶ const ThemeProvider = dynamic(
+ 15 │ │     () => import('@/components/theme-provider').then((mod) => mod.ThemeProvider),
+ 16 │ │     {
+ 17 │ │       ssr: false,
+ 18 │ │       loading: () => <div className="min-h-screen bg-white dark:bg-gray-900" />
+ 19 │ │     }
+ 20 │ ╰─▶ )
+ 21 │     
+ 22 │     const Navbar = dynamic(() => import('@/components/navbar'), {
+ 23 │       ssr: false,
+    ╰────
+  × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:22:1]
+ 19 │       }
+ 20 │     )
+ 21 │     
+ 22 │ ╭─▶ const Navbar = dynamic(() => import('@/components/navbar'), {
+ 23 │ │     ssr: false,
+ 24 │ │     loading: () => (
+ 25 │ │       <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+ 26 │ │         <div className="max-w-4xl mx-auto px-6 h-20 flex items-center">
+ 27 │ │           <div className="animate-pulse h-8 w-32 bg-gray-200 dark:bg-gray-700 rounded" />
+ 28 │ │         </div>
+ 29 │ │       </header>
+ 30 │ │     )
+ 31 │ ╰─▶ })
+ 32 │     
+ 33 │     const Footer = dynamic(() => import('@/components/footer'), {
+ 34 │       ssr: false,
+    ╰────
+  × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:33:1]
+ 30 │       )
+ 31 │     })
+ 32 │     
+ 33 │ ╭─▶ const Footer = dynamic(() => import('@/components/footer'), {
+ 34 │ │     ssr: false,
+ 35 │ │     loading: () => null
+ 36 │ ╰─▶ })
+ 37 │     
+ 38 │     export const metadata: Metadata = {
+ 39 │       title: "Hey - I'm Samir",
+    ╰────
+
+Import trace for requested module:
+./src/app/layout.tsx
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 15704ms
+ ⨯ ./src/app/layout.tsx
+Error:   × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:15:1]
+ 12 │     });
+ 13 │     
+ 14 │     // Dynamically import components that depend on theme
+ 15 │ ╭─▶ const Navbar = dynamic(
+ 16 │ │     () => import('@/components/navbar'),
+ 17 │ │     {
+ 18 │ │       ssr: false,
+ 19 │ │       loading: () => (
+ 20 │ │         <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-white dark:bg-gray-900">
+ 21 │ │           <div className="max-w-4xl mx-auto px-6 h-full flex items-center">
+ 22 │ │             <div className="animate-pulse h-8 w-32 bg-gray-200 dark:bg-gray-700 rounded" />
+ 23 │ │           </div>
+ 24 │ │         </div>
+ 25 │ │       )
+ 26 │ │     }
+ 27 │ ╰─▶ )
+ 28 │     
+ 29 │     const Footer = dynamic(
+ 30 │       () => import('@/components/footer'),
+    ╰────
+  × `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a client component.
+    ╭─[/home/runner/workspace/src/app/layout.tsx:29:1]
+ 26 │       }
+ 27 │     )
+ 28 │     
+ 29 │ ╭─▶ const Footer = dynamic(
+ 30 │ │     () => import('@/components/footer'),
+ 31 │ │     {
+ 32 │ │       ssr: false,
+ 33 │ │       loading: () => null
+ 34 │ │     }
+ 35 │ ╰─▶ )
+ 36 │     
+ 37 │     export const metadata: Metadata = {
+ 38 │       title: "Hey - I'm Samir",
+    ╰────
+
+Import trace for requested module:
+./src/app/layout.tsx
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 33ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 23ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 18ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 17ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 34ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 11ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 11ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 19ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 14ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 12ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 11ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 14ms
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at ShadowPortal (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/components/shadow-portal.tsx:5:32)
+    at DevOverlay (/home/runner/workspace/node_modules/next/src/client/components/react-dev-overlay/ui/dev-overlay.tsx:14:3)
+    at ReactDevOverlay (/home/runner/workspace/node_modules/next/src/server/dev/next-dev-server.ts:82:10)
+    at div
+    at Body (/home/runner/workspace/node_modules/next/src/server/render.tsx:1263:19)
+ GET /?initialPath=%2F&id=%3Ar20m0%3A 500 in 20ms
