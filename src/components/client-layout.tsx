@@ -27,21 +27,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       const isWebviewEnv = /wv|webview/.test(userAgent)
       setIsWebview(isWebviewEnv)
 
-      // Enhanced environment logging for debugging
       console.log('ClientLayout environment:', {
         userAgent,
         isWebview: isWebviewEnv,
         viewport: {
           width: window.innerWidth,
           height: window.innerHeight
-        },
-        storage: {
-          hasLocalStorage: (() => {
-            try { return !!window.localStorage } catch (e) { return false }
-          })(),
-          hasSessionStorage: (() => {
-            try { return !!window.sessionStorage } catch (e) { return false }
-          })()
         }
       })
 
@@ -85,17 +76,17 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   // Simplified layout for webview to avoid theme/storage related issues
   if (isWebview) {
     return (
-      <div className="min-h-screen flex flex-col bg-background text-foreground">
-        <header className="fixed top-0 left-0 right-0 z-50">
-          <Navbar />
-        </header>
-        <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
-          <ErrorBoundary name="WebviewContent">
+      <ErrorBoundary name="WebviewLayout">
+        <div className="min-h-screen flex flex-col bg-background text-foreground">
+          <header className="fixed top-0 left-0 right-0 z-50">
+            <Navbar />
+          </header>
+          <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
             {children}
-          </ErrorBoundary>
-        </main>
-        <Footer />
-      </div>
+          </main>
+          <Footer />
+        </div>
+      </ErrorBoundary>
     )
   }
 

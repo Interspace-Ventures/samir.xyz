@@ -1,18 +1,19 @@
 "use client"
 
-import { Component, ErrorInfo, ReactNode } from 'react'
+import * as React from "react"
+import type { ReactNode } from "react"
 
 interface Props {
-  children: ReactNode
-  name?: string
+  children: ReactNode;
+  name?: string;
 }
 
 interface State {
-  error: Error | null
-  errorInfo: ErrorInfo | null
+  error: Error | null;
+  errorInfo: React.ErrorInfo | null;
 }
 
-export class ErrorBoundary extends Component<Props, State> {
+export class ErrorBoundary extends React.Component<Props, State> {
   public state: State = {
     error: null,
     errorInfo: null
@@ -22,7 +23,7 @@ export class ErrorBoundary extends Component<Props, State> {
     return { error, errorInfo: null }
   }
 
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Enhanced error logging
     const errorContext = {
       componentName: this.props.name || 'Unknown',
@@ -38,21 +39,6 @@ export class ErrorBoundary extends Component<Props, State> {
         viewport: {
           width: window.innerWidth,
           height: window.innerHeight,
-        },
-        theme: {
-          prefersColorScheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-          prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-        },
-        storage: {
-          hasLocalStorage: this.checkStorage('localStorage'),
-          hasSessionStorage: this.checkStorage('sessionStorage'),
-          hasIndexedDB: this.checkStorage('indexedDB'),
-        },
-        fontLoading: {
-          fonts: Array.from(document.fonts || []).map(font => ({
-            family: font.family,
-            status: font.status,
-          })),
         }
       } : 'server-side',
       timestamp: new Date().toISOString(),
@@ -60,19 +46,6 @@ export class ErrorBoundary extends Component<Props, State> {
 
     console.error('ErrorBoundary caught error:', errorContext)
     this.setState({ error, errorInfo })
-  }
-
-  private checkStorage(type: 'localStorage' | 'sessionStorage' | 'indexedDB'): boolean {
-    try {
-      if (type === 'indexedDB') return !!window.indexedDB
-      const storage = window[type]
-      const testKey = `test-${Math.random()}`
-      storage.setItem(testKey, testKey)
-      storage.removeItem(testKey)
-      return true
-    } catch (e) {
-      return false
-    }
   }
 
   public render() {
@@ -96,11 +69,7 @@ export class ErrorBoundary extends Component<Props, State> {
             )}
           </div>
           <button
-            onClick={() => {
-              console.log('Attempting error recovery...')
-              this.cleanupStorage()
-              window.location.reload()
-            }}
+            onClick={() => window.location.reload()}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
           >
             Try again
@@ -110,26 +79,5 @@ export class ErrorBoundary extends Component<Props, State> {
     }
 
     return this.props.children
-  }
-
-  private cleanupStorage() {
-    if (typeof window === 'undefined') return
-
-    const cleanup = (operation: () => void, name: string) => {
-      try {
-        operation()
-        console.log(`Cleaned up ${name}`)
-      } catch (e) {
-        console.error(`Failed to clean up ${name}:`, e)
-      }
-    }
-
-    cleanup(() => localStorage.clear(), 'localStorage')
-    cleanup(() => sessionStorage.clear(), 'sessionStorage')
-    cleanup(() => {
-      const req = indexedDB.deleteDatabase('next-pwa')
-      req.onsuccess = () => console.log('Cleaned up IndexedDB')
-      req.onerror = () => console.error('Failed to clean up IndexedDB')
-    }, 'indexedDB')
   }
 }
