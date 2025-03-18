@@ -2,44 +2,20 @@
 
 import { default as NextLink } from "next/link"
 import { usePathname } from "next/navigation"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { useState, useCallback, useEffect } from "react"
+import dynamic from 'next/dynamic'
+import { useState, useEffect } from "react"
 
-const MenuIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <line x1="4" x2="20" y1="12" y2="12" />
-    <line x1="4" x2="20" y1="6" y2="6" />
-    <line x1="4" x2="20" y1="18" y2="18" />
-  </svg>
-)
-
-const XIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M18 6 6 18" />
-    <path d="m6 6 12 12" />
-  </svg>
+// Dynamically import ThemeToggle with loading state
+const ThemeToggle = dynamic(
+  () => import('./theme-toggle').then(mod => mod.ThemeToggle),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-6 h-6 flex items-center justify-center">
+        <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-4 w-4 rounded-full" />
+      </div>
+    )
+  }
 )
 
 const navItems = [
@@ -47,37 +23,6 @@ const navItems = [
   { href: "/portfolio", label: "PORTFOLIO", isExternal: false },
   { href: "/ventures", label: "VENTURES", isExternal: false }
 ] as const
-
-interface NavLinkProps {
-  href: string;
-  label: string;
-  isActive: boolean;
-  isMobile?: boolean;
-}
-
-function NavLink({ href, label, isActive, isMobile = false }: NavLinkProps) {
-  return (
-    <NextLink
-      href={href}
-      prefetch={false}
-      className={`
-        ${isMobile ? 'block py-4' : 'relative'} 
-        text-base font-medium tracking-wide transition-colors
-        hover:text-primary dark:hover:text-primary whitespace-nowrap
-        ${isActive ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
-        ${!isMobile ? `
-          after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full 
-          after:origin-left after:scale-x-0 after:bg-primary after:transition-transform
-          after:duration-300 after:ease-out
-          ${isActive ? 'after:scale-x-100' : ''}
-          hover:after:scale-x-100
-        ` : ''}
-      `}
-    >
-      {label}
-    </NextLink>
-  )
-}
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -92,31 +37,26 @@ export default function Navbar() {
     }
   }, [])
 
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen(prev => !prev)
-  }, [])
-
-  // Return loading state while mounting
   if (!mounted) {
     return (
-      <nav className="sticky top-0 z-50 w-full h-20 bg-white dark:bg-gray-900">
-        <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
+      <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto px-6 h-full flex items-center">
           <div className="text-2xl font-bold text-foreground leading-none">
             Hey - I'm Samir
           </div>
-          <div className="hidden md:flex items-center space-x-4">
-            {navItems.map((_, i) => (
-              <div key={i} className="w-20 h-4 bg-muted rounded animate-pulse" />
+          <div className="hidden md:flex items-center space-x-8">
+            {Array.from({ length: 3 }, (_, i) => (
+              <div key={i} className="w-20 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
             ))}
           </div>
         </div>
-      </nav>
+      </div>
     )
   }
 
   return (
-    <nav className="sticky top-0 z-50 w-full h-20 bg-white dark:bg-gray-900">
-      <div className="max-w-4xl w-full mx-auto px-6 flex items-center justify-between h-full">
+    <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-white dark:bg-gray-900">
+      <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
         <NextLink
           href="/"
           className="text-2xl font-bold text-foreground leading-none hover:opacity-80 transition-opacity"
@@ -127,12 +67,23 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
-            <NavLink
+            <NextLink
               key={item.href}
               href={item.href}
-              label={item.label}
-              isActive={pathname === item.href}
-            />
+              prefetch={false}
+              className={`
+                relative text-base font-medium tracking-wide transition-colors
+                hover:text-primary dark:hover:text-primary whitespace-nowrap
+                ${pathname === item.href ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
+                after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full 
+                after:origin-left after:scale-x-0 after:bg-primary after:transition-transform
+                after:duration-300 after:ease-out
+                ${pathname === item.href ? 'after:scale-x-100' : ''}
+                hover:after:scale-x-100
+              `}
+            >
+              {item.label}
+            </NextLink>
           ))}
           <ThemeToggle />
         </div>
@@ -140,28 +91,66 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-4">
           <ThemeToggle />
           <button
-            onClick={toggleMenu}
+            onClick={() => setIsMenuOpen(prev => !prev)}
             className="p-2 hover:bg-muted/10 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <XIcon /> : <MenuIcon />}
+            {isMenuOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="4" x2="20" y1="12" y2="12" />
+                <line x1="4" x2="20" y1="6" y2="6" />
+                <line x1="4" x2="20" y1="18" y2="18" />
+              </svg>
+            )}
           </button>
         </div>
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-20 left-0 right-0 z-50 navbar-bg py-4 px-6 space-y-2 md:hidden">
+        <div className="absolute top-20 left-0 right-0 z-50 bg-white dark:bg-gray-900 py-4 px-6 space-y-2 md:hidden">
           {navItems.map((item) => (
-            <NavLink
+            <NextLink
               key={item.href}
               href={item.href}
-              label={item.label}
-              isActive={pathname === item.href}
-              isMobile={true}
-            />
+              prefetch={false}
+              className={`
+                block py-4 text-base font-medium tracking-wide transition-colors
+                hover:text-primary dark:hover:text-primary whitespace-nowrap
+                ${pathname === item.href ? 'text-primary dark:text-primary' : 'text-muted-foreground'}
+              `}
+            >
+              {item.label}
+            </NextLink>
           ))}
         </div>
       )}
-    </nav>
+    </div>
   )
 }
