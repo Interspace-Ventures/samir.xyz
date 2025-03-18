@@ -3,11 +3,12 @@ import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import ClientLayout from "@/components/client-layout";
 
+// Move font configuration outside component to ensure consistent loading
 const inter = Inter({ 
   subsets: ["latin"],
   weight: ['400', '500', '600', '700', '800', '900'],
   display: 'swap',
-  fallback: ['system-ui', 'sans-serif'],
+  variable: '--font-inter',
   adjustFontFallback: true,
 });
 
@@ -37,12 +38,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
