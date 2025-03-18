@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import ClientLayout from "@/components/client-layout";
-import { ErrorBoundary } from "@/components/error-boundary";
 
 // Configure font outside component for better caching and hydration
 const inter = Inter({ 
@@ -39,20 +38,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Add runtime debugging info without accessing unsupported properties
-  if (typeof window !== 'undefined') {
-    console.log('RootLayout environment:', {
-      fontVariables: {
-        variable: inter.variable
-      },
-      viewport: {
-        width: window.innerWidth,
-        height: window.innerHeight
-      },
-      isWebview: /wv|webview/.test(window.navigator.userAgent.toLowerCase())
-    });
-  }
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -60,9 +45,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.variable} font-sans antialiased bg-background`}>
-        <ErrorBoundary name="RootLayout">
-          <ClientLayout>{children}</ClientLayout>
-        </ErrorBoundary>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
