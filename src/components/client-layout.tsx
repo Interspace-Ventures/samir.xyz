@@ -2,9 +2,6 @@
 
 import * as React from "react"
 import { ErrorBoundary } from './error-boundary'
-import dynamic from 'next/dynamic'
-
-// Import client components directly since we're in a client component
 import Navbar from './navbar'
 import Footer from './footer'
 
@@ -13,14 +10,14 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [mounted, setMounted] = React.useState(false)
-
+  // Handle initial client-side render
+  const [isClient, setIsClient] = React.useState(false)
   React.useEffect(() => {
-    setMounted(true)
+    setIsClient(true)
   }, [])
 
-  // Show nothing until mounted to prevent hydration mismatch
-  if (!mounted) {
+  // Return null on server to prevent hydration mismatch
+  if (!isClient) {
     return null
   }
 

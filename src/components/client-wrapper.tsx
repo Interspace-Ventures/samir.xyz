@@ -12,17 +12,22 @@ export default function ClientWrapper({
 }) {
   const [mounted, setMounted] = React.useState(false)
 
+  // Wait for component to mount before rendering anything
   React.useEffect(() => {
-    setMounted(true)
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      setMounted(true)
+    }, 10)
+    return () => clearTimeout(timer)
   }, [])
 
-  // Show a simple loading state until client-side code is hydrated
+  // Return a simple placeholder until fully mounted
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="min-h-screen bg-background">
         <div className="animate-pulse space-y-4 p-6">
-          <div className="h-8 w-1/3 bg-gray-200 dark:bg-gray-700 rounded" />
-          <div className="h-4 w-2/3 bg-gray-200 dark:bg-gray-700 rounded" />
+          <div className="h-8 w-1/3 bg-muted rounded" />
+          <div className="h-4 w-2/3 bg-muted rounded" />
         </div>
       </div>
     )
@@ -30,9 +35,11 @@ export default function ClientWrapper({
 
   return (
     <ThemeProvider>
-      <ClientLayout>
-        {children}
-      </ClientLayout>
+      <ErrorBoundary name="MainLayout">
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+      </ErrorBoundary>
     </ThemeProvider>
   )
 }
