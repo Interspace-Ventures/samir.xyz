@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useTheme } from "next-themes"
+import { HydrationProvider, Client } from "react-hydration-provider"
 
 interface Props {
   children: React.ReactNode
@@ -9,29 +10,19 @@ interface Props {
 }
 
 export function ClientThemeProvider({ children, suppressHydrationWarning = false }: Props) {
-  const [mounted, setMounted] = React.useState(false)
   const { theme } = useTheme()
 
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // On first render, don't show any background to match SSR
-  if (!mounted) {
-    return (
-      <div className="min-h-screen" suppressHydrationWarning={suppressHydrationWarning}>
-        {children}
-      </div>
-    )
-  }
-
   return (
-    <div 
-      className="min-h-screen bg-white dark:bg-gray-900" 
-      suppressHydrationWarning={suppressHydrationWarning}
-      data-theme={theme}
-    >
-      {children}
-    </div>
+    <HydrationProvider>
+      <Client>
+        <div 
+          className="min-h-screen bg-white dark:bg-gray-900" 
+          suppressHydrationWarning={suppressHydrationWarning}
+          data-theme={theme}
+        >
+          {children}
+        </div>
+      </Client>
+    </HydrationProvider>
   )
 }
