@@ -37,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased bg-background`}>
+      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         <ErrorBoundary name="MainLayout">
           <ClientWrapper>
             {children}
