@@ -47,14 +47,27 @@ export default function Ventures() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    console.log('Ventures component mounted');
     setMounted(true)
   }, [])
 
-  if (!mounted) return null
+  if (!mounted) {
+    return (
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="mb-12">
+          <div className="h-12 w-3/4 bg-gray-200 dark:bg-gray-700 rounded mb-4" />
+          <div className="h-6 w-2/3 bg-gray-100 dark:bg-gray-800 rounded" />
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="aspect-square bg-gray-100 dark:bg-gray-800 rounded-xl animate-pulse" />
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-8">
+    <div className="max-w-7xl mx-auto px-6 py-8">
       <div className="mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           Interspace Ventures
@@ -64,9 +77,9 @@ export default function Ventures() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <ErrorBoundary key={project.name}>
+          <ErrorBoundary key={project.name} name={`VenturesCard-${project.name}`}>
             <VenturesCard {...project} priority={true} />
           </ErrorBoundary>
         ))}

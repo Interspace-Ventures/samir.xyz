@@ -6,28 +6,48 @@ import { ErrorBoundary } from '@/components/error-boundary'
 
 // Import components with proper error handling
 const StatsSection = dynamic(
-  () => import('@/components/stats-section'),
+  () => {
+    console.log('Loading StatsSection component');
+    return import('@/components/stats-section').then(mod => {
+      console.log('StatsSection loaded:', mod);
+      return mod.default;
+    });
+  },
   {
-    loading: () => <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />,
+    loading: () => {
+      console.log('StatsSection showing loading state');
+      return <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50 animate-pulse" />;
+    },
     ssr: false
   }
 );
 
 const PortfolioCards = dynamic(
-  () => import('@/components/portfolio-cards'),
+  () => {
+    console.log('Loading PortfolioCards component');
+    return import('@/components/portfolio-cards').then(mod => {
+      console.log('PortfolioCards loaded:', mod);
+      return mod.default;
+    });
+  },
   {
-    loading: () => (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Array.from({ length: 10 }, (_, i) => (
-          <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
-        ))}
-      </div>
-    ),
+    loading: () => {
+      console.log('PortfolioCards showing loading state');
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 10 }, (_, i) => (
+            <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
+          ))}
+        </div>
+      );
+    },
     ssr: false
   }
 );
 
 export default function Portfolio() {
+  console.log('Rendering Portfolio page');
+
   return (
     <div className="transform-gpu">
       <div className="flex flex-col gap-8 mb-8">
@@ -39,7 +59,9 @@ export default function Portfolio() {
         </div>
 
         <ErrorBoundary name="StatsSection">
-          <Suspense fallback={<div className="w-full grid gap-3 rounded-xl p-3 bg-card/50" />}>
+          <Suspense fallback={
+            <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50 animate-pulse" />
+          }>
             <StatsSection />
           </Suspense>
         </ErrorBoundary>
