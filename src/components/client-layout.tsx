@@ -11,7 +11,7 @@ export default function ClientLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
+    <>
       <ErrorBoundary name="Navbar">
         <Navbar />
       </ErrorBoundary>
@@ -27,6 +27,6 @@ export default function ClientLayout({
           <Footer />
         </ErrorBoundary>
       </footer>
-    </div>
+    </>
   )
 }
