@@ -1,54 +1,55 @@
-"use client"
+"use client";
 
-import { VenturesCard } from '@/components/ventures-cards'
-import { useState, useEffect } from 'react'
-import { ErrorBoundary } from '@/components/error-boundary'
+import { VenturesCard } from "@/components/ventures-cards";
+import { useState, useEffect } from "react";
+import { ErrorBoundary } from "@/components/error-boundary";
 
 const projects = [
   {
     name: "2 Days Early",
-    description: "Current and former Chime operator community built by operators for operators",
+    description:
+      "Current and former Chime operator community built by operators for operators",
     imageUrl: "/images/ventures-brands/2de-interspace.png",
-    link: "https://2daysearly.com"
+    link: "https://2daysearly.com",
   },
   {
     name: "Solo",
     description: "The first design-forward climbing app",
-    imageUrl: "/images/ventures-brands/solo-logo-2025.png",
-    link: "https://gosolo.nyc"
+    imageUrl: "/public/images/ventures-brands/solo-logo-2025.png",
+    link: "https://gosolo.nyc",
   },
   {
     name: "Predictive:film",
     description: "AI-powered film predictions",
     imageUrl: "/images/ventures-brands/predictive-film-icon.png",
-    link: "https://predictive.film"
+    link: "https://predictive.film",
   },
   {
     name: "Interspace",
     description: "Over-engineered fintech and stratfin perspectives",
     imageUrl: "/images/ventures-brands/interspace.png",
-    link: "https://posts.interspace.ventures"
+    link: "https://posts.interspace.ventures",
   },
   {
     name: "Hey I'm Samir",
     description: "I drive business impact in fintech.",
     imageUrl: "/images/ventures-brands/hey%20-%20I'm%20Samir.png",
-    link: "https://samir.xyz"
+    link: "https://samir.xyz",
   },
   {
     name: "Perspectives",
     description: "Fintech & stratfin deep dives",
     imageUrl: "/images/ventures-brands/samir-favicon.png",
-    link: "https://perspectives.samir.xyz"
-  }
-]
+    link: "https://perspectives.samir.xyz",
+  },
+];
 
 export default function Ventures() {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
     return (
@@ -59,11 +60,14 @@ export default function Ventures() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="aspect-square rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 dark:from-purple-900/30 dark:to-purple-900/20 animate-pulse" />
+            <div
+              key={i}
+              className="aspect-square rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 dark:from-purple-900/30 dark:to-purple-900/20 animate-pulse"
+            />
           ))}
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -73,17 +77,21 @@ export default function Ventures() {
           Interspace Ventures
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground">
-          I create apps and concepts by coding at the speed of thought using Replit.
+          I create apps and concepts by coding at the speed of thought using
+          Replit.
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <ErrorBoundary key={project.name} name={`VenturesCard-${project.name}`}>
+          <ErrorBoundary
+            key={project.name}
+            name={`VenturesCard-${project.name}`}
+          >
             <VenturesCard {...project} priority={true} />
           </ErrorBoundary>
         ))}
       </div>
     </div>
-  )
+  );
 }
