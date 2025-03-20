@@ -27,9 +27,9 @@ const defaultStats: StatsGroup = {
   ]
 }
 
-export default function StatsSection() {
+const StatsSection = () => {
   const [mounted, setMounted] = useState(false)
-  const [stats, setStats] = useState<StatsGroup>(defaultStats)
+  const [stats] = useState<StatsGroup>(defaultStats)
 
   useEffect(() => {
     try {
@@ -48,16 +48,16 @@ export default function StatsSection() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={`top-${i}`} className="space-y-1">
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16" />
-              <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-12" />
+              <div className="h-4 bg-purple-100 dark:bg-purple-900/30 rounded w-16" />
+              <div className="h-6 bg-purple-50 dark:bg-purple-900/20 rounded w-12" />
             </div>
           ))}
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={`bottom-${i}`} className="space-y-1">
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16" />
-              <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded w-12" />
+              <div className="h-4 bg-purple-100 dark:bg-purple-900/30 rounded w-16" />
+              <div className="h-6 bg-purple-50 dark:bg-purple-900/20 rounded w-12" />
             </div>
           ))}
         </div>
@@ -87,3 +87,5 @@ export default function StatsSection() {
     </div>
   )
 }
+
+export default StatsSection;

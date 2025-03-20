@@ -16,7 +16,16 @@ const StatsSection = dynamic(
   {
     loading: () => {
       console.log('StatsSection showing loading state');
-      return <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50 animate-pulse" />;
+      return <div className="w-full grid gap-3 rounded-xl p-3 bg-purple-100 dark:bg-purple-900/30 backdrop-blur-sm animate-pulse">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="space-y-1">
+              <div className="h-4 bg-purple-100 dark:bg-purple-900/30 rounded w-16" />
+              <div className="h-6 bg-purple-50 dark:bg-purple-900/20 rounded w-12" />
+            </div>
+          ))}
+        </div>
+      </div>;
     },
     ssr: false
   }
@@ -36,7 +45,7 @@ const PortfolioCards = dynamic(
       return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: 10 }, (_, i) => (
-            <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
+            <div key={i} className="aspect-[3/2] bg-purple-100 dark:bg-purple-900/30 rounded-lg animate-pulse" />
           ))}
         </div>
       );
@@ -60,7 +69,16 @@ export default function Portfolio() {
 
         <ErrorBoundary name="StatsSection">
           <Suspense fallback={
-            <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50 animate-pulse" />
+            <div className="w-full grid gap-3 rounded-xl p-3 bg-purple-100 dark:bg-purple-900/30 animate-pulse">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="space-y-1">
+                    <div className="h-4 bg-purple-50 dark:bg-purple-900/20 rounded w-16" />
+                    <div className="h-6 bg-purple-50/50 dark:bg-purple-900/10 rounded w-12" />
+                  </div>
+                ))}
+              </div>
+            </div>
           }>
             <StatsSection />
           </Suspense>
@@ -71,7 +89,7 @@ export default function Portfolio() {
         <Suspense fallback={
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: 10 }, (_, i) => (
-              <div key={i} className="aspect-[3/2] bg-card/50 rounded-lg animate-pulse" />
+              <div key={i} className="aspect-[3/2] bg-purple-100 dark:bg-purple-900/30 rounded-lg animate-pulse" />
             ))}
           </div>
         }>
