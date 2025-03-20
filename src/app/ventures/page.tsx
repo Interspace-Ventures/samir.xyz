@@ -32,7 +32,7 @@ const projects = [
   {
     name: "Hey I'm Samir",
     description: "I drive business impact in fintech.",
-    imageUrl: "/images/ventures-brands/hey - I'm Samir.png",
+    imageUrl: "/images/ventures-brands/hey%20-%20I'm%20Samir.png",
     link: "https://samir.xyz"
   },
   {
