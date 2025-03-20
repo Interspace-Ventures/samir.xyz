@@ -10,13 +10,18 @@ interface Props {
 }
 
 export function ClientThemeProvider({ children, suppressHydrationWarning = false }: Props) {
+  const [mounted, setMounted] = React.useState(false)
   const { theme } = useTheme()
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <HydrationProvider>
       <Client>
         <div 
-          className="min-h-screen bg-white dark:bg-gray-900" 
+          className={`min-h-screen ${mounted ? 'bg-white dark:bg-gray-900' : ''}`}
           suppressHydrationWarning={suppressHydrationWarning}
           data-theme={theme}
         >
