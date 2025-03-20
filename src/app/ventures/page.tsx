@@ -32,13 +32,13 @@ const projects = [
   {
     name: "Hey I'm Samir",
     description: "I drive business impact in fintech.",
-    imageUrl: "/images/ventures-brands/hey-im-samir-2025.png",
+    imageUrl: "/images/ventures-brands/hey - I'm Samir.png",
     link: "https://samir.xyz"
   },
   {
     name: "Perspectives",
     description: "Fintech & stratfin deep dives",
-    imageUrl: "/images/ventures-brands/perspectives-favicon.png",
+    imageUrl: "/images/ventures-brands/samir-favicon.png",
     link: "https://perspectives.samir.xyz"
   }
 ]
@@ -57,9 +57,9 @@ export default function Ventures() {
           <div className="h-12 w-3/4 bg-purple-100 dark:bg-purple-900/30 rounded-lg mb-4 animate-pulse" />
           <div className="h-6 w-2/3 bg-purple-50 dark:bg-purple-900/20 rounded-lg animate-pulse" />
         </div>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="aspect-square rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 dark:from-purple-900/30 dark:to-purple-900/20 animate-pulse shadow-sm" />
+            <div key={i} className="aspect-square rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 dark:from-purple-900/30 dark:to-purple-900/20 animate-pulse" />
           ))}
         </div>
       </div>
@@ -77,7 +77,7 @@ export default function Ventures() {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <ErrorBoundary key={project.name} name={`VenturesCard-${project.name}`}>
             <VenturesCard {...project} priority={true} />
