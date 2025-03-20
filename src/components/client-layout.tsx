@@ -10,19 +10,8 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Handle initial client-side render
-  const [isClient, setIsClient] = React.useState(false)
-  React.useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  // Return null on server to prevent hydration mismatch
-  if (!isClient) {
-    return null
-  }
-
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       <ErrorBoundary name="Navbar">
         <Navbar />
       </ErrorBoundary>
