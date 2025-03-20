@@ -5,14 +5,12 @@ import { Suspense } from 'react'
 import { ErrorBoundary } from '@/components/error-boundary'
 import { Client } from "react-hydration-provider"
 
+// Simplified loading states
 const LoadingStats = () => (
-  <div className="w-full grid gap-3 rounded-xl p-3 bg-purple-100 dark:bg-purple-900/30 backdrop-blur-sm animate-pulse">
+  <div className="w-full grid gap-3 rounded-xl p-3 bg-purple-100 dark:bg-purple-900/30 backdrop-blur-sm">
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
       {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="space-y-1">
-          <div className="h-4 bg-purple-50 dark:bg-purple-900/20 rounded w-16" />
-          <div className="h-6 bg-purple-50/50 dark:bg-purple-900/10 rounded w-12" />
-        </div>
+        <div key={i} className="h-16 bg-purple-50 dark:bg-purple-900/20 rounded animate-pulse" />
       ))}
     </div>
   </div>
@@ -20,21 +18,34 @@ const LoadingStats = () => (
 
 const LoadingCards = () => (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {Array.from({ length: 10 }, (_, i) => (
+    {Array.from({ length: 6 }).map((_, i) => (
       <div key={i} className="aspect-[3/2] bg-purple-100 dark:bg-purple-900/30 rounded-lg animate-pulse" />
     ))}
   </div>
 );
 
-const StatsSection = dynamic(() => import('@/components/stats-section'), {
-  loading: () => <LoadingStats />,
-  ssr: false
-});
+// Dynamically import components with error handling
+const StatsSection = dynamic(
+  () => import('@/components/stats-section').catch(err => {
+    console.error('Failed to load StatsSection:', err);
+    return () => <div>Failed to load stats</div>;
+  }),
+  {
+    loading: () => <LoadingStats />,
+    ssr: false
+  }
+);
 
-const PortfolioCards = dynamic(() => import('@/components/portfolio-cards'), {
-  loading: () => <LoadingCards />,
-  ssr: false
-});
+const PortfolioCards = dynamic(
+  () => import('@/components/portfolio-cards').catch(err => {
+    console.error('Failed to load PortfolioCards:', err);
+    return () => <div>Failed to load portfolio</div>;
+  }),
+  {
+    loading: () => <LoadingCards />,
+    ssr: false
+  }
+);
 
 export default function Portfolio() {
   return (
