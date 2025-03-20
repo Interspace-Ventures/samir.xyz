@@ -3,7 +3,7 @@
 import { default as NextLink } from "next/link"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const navItems = [
   { href: "/", label: "ABOUT", isExternal: false },
@@ -11,9 +11,31 @@ const navItems = [
   { href: "/ventures", label: "VENTURES", isExternal: false }
 ] as const
 
+const NavbarSkeleton = () => (
+  <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-white dark:bg-gray-900">
+    <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
+      <div className="h-8 w-1/3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+      <div className="hidden md:flex items-center space-x-8">
+        {Array(3).fill(null).map((_, i) => (
+          <div key={i} className="h-4 w-20 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+        ))}
+      </div>
+    </div>
+  </div>
+)
+
 export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <NavbarSkeleton />
+  }
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-white dark:bg-gray-900">
