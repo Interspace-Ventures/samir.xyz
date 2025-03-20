@@ -14,16 +14,34 @@ export function ClientThemeProvider({ children, suppressHydrationWarning = false
   const { theme } = useTheme()
 
   React.useEffect(() => {
-    setMounted(true)
-  }, [])
+    try {
+      setMounted(true)
+      console.log('ClientThemeProvider mounted successfully', {
+        theme,
+        isWebview: typeof window !== 'undefined' && /wv|webview/.test(window.navigator.userAgent.toLowerCase())
+      });
+    } catch (error) {
+      console.error('Error in ClientThemeProvider mount:', error)
+    }
+  }, [theme])
+
+  // Initial render - match server exactly
+  if (!mounted) {
+    return (
+      <div className="min-h-screen">
+        {children}
+      </div>
+    )
+  }
 
   return (
     <HydrationProvider>
       <Client>
         <div 
-          className={`min-h-screen ${mounted ? 'bg-white dark:bg-gray-900' : ''}`}
-          suppressHydrationWarning={suppressHydrationWarning}
+          className="min-h-screen"
+          suppressHydrationWarning={true}
           data-theme={theme}
+          data-mounted="true"
         >
           {children}
         </div>

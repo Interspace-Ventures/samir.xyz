@@ -6,19 +6,20 @@ import Navbar from './navbar'
 import Footer from './footer'
 import { Client } from "react-hydration-provider"
 
+// Initial skeleton that matches server render exactly
 const LayoutSkeleton = () => (
-  <>
+  <div className="min-h-screen">
     <div className="h-20" /> {/* Navbar space */}
     <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
-      <div className="animate-pulse space-y-4">
-        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
+      <div className="space-y-4">
+        <div className="h-8 w-2/3" />
+        <div className="h-4 w-1/2" />
       </div>
     </main>
     <footer className="mt-auto">
-      <div className="h-16 bg-gray-100 dark:bg-gray-800" />
+      <div className="h-16" />
     </footer>
-  </>
+  </div>
 )
 
 export default function ClientLayout({
@@ -29,30 +30,37 @@ export default function ClientLayout({
   const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
-    setMounted(true)
+    try {
+      setMounted(true)
+    } catch (error) {
+      console.error('Error in ClientLayout mount:', error)
+    }
   }, [])
 
+  // Return skeleton on server render and initial client render
   if (!mounted) {
     return <LayoutSkeleton />
   }
 
   return (
     <Client>
-      <ErrorBoundary name="Navbar">
-        <Navbar />
-      </ErrorBoundary>
-
-      <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
-        <ErrorBoundary name="MainContent">
-          {children}
+      <div className="min-h-screen bg-white dark:bg-gray-900" data-mounted="true">
+        <ErrorBoundary name="Navbar">
+          <Navbar />
         </ErrorBoundary>
-      </main>
 
-      <footer className="mt-auto">
-        <ErrorBoundary name="Footer">
-          <Footer />
-        </ErrorBoundary>
-      </footer>
+        <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
+          <ErrorBoundary name="MainContent">
+            {children}
+          </ErrorBoundary>
+        </main>
+
+        <footer className="mt-auto">
+          <ErrorBoundary name="Footer">
+            <Footer />
+          </ErrorBoundary>
+        </footer>
+      </div>
     </Client>
   )
 }

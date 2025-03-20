@@ -32,17 +32,29 @@ mkdir -p .replit
 echo "Starting Next.js development server..."
 NODE_ENV=development npx next dev -p 5000 --hostname 0.0.0.0 & 
 
-# Wait for the port to be available (timeout after 30 seconds)
+# Wait for the port to be available (timeout after 60 seconds)
 echo "Waiting for port 5000 to be ready..."
-if npx wait-port -t 30000 localhost:5000; then
-  echo "Port 5000 is ready and accepting connections"
-  # Export the ready port for the workflow
-  echo "export PORT_READY=5000" > .replit/.env
-  echo "Successfully wrote port configuration to .replit/.env"
-else
-  echo "Timeout waiting for port 5000 to be ready"
-  exit 1
-fi
+TIMEOUT=60
+START_TIME=$(date +%s)
+
+while ! nc -z localhost 5000; do
+  CURRENT_TIME=$(date +%s)
+  ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
+
+  if [ $ELAPSED_TIME -gt $TIMEOUT ]; then
+    echo "Timeout waiting for port 5000"
+    exit 1
+  fi
+
+  echo "Waiting for Next.js server... (${ELAPSED_TIME}s)"
+  sleep 1
+done
+
+echo "Port 5000 is ready and accepting connections"
+
+# Export the ready port for the workflow
+echo "export PORT_READY=5000" > .replit/.env
+echo "Successfully wrote port configuration to .replit/.env"
 
 # Keep the script running
 wait
