@@ -18,7 +18,6 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '2mb',
     },
-    serverComponentsExternalPackages: [],
   },
   // Cache control headers for static assets
   async headers() {
