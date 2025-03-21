@@ -32,7 +32,7 @@ mkdir -p .replit
 echo "Starting Bun development server..."
 NEXT_RUNTIME="nodejs" \
 NODE_ENV=development \
-exec bun --bun run dev --port 5000 --hostname 0.0.0.0 & 
+exec bun --bun run server.js & 
 
 # Wait for the port to be available (timeout after 60 seconds)
 echo "Waiting for port 5000 to be ready..."
@@ -48,7 +48,7 @@ while ! nc -z localhost 5000; do
     exit 1
   fi
 
-  echo "Waiting for Next.js server... (${ELAPSED_TIME}s)"
+  echo "Waiting for server... (${ELAPSED_TIME}s)"
   sleep 1
 done
 
