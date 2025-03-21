@@ -1,5 +1,6 @@
 // Polyfill for TextEncoderStream when running in Bun
 if (typeof globalThis.TextEncoderStream === 'undefined') {
+  console.log("Polyfilling TextEncoderStream for Bun environment");
   class TextEncoderStreamPolyfill {
     private encoder: TextEncoder;
 

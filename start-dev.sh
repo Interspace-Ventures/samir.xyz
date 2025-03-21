@@ -6,24 +6,14 @@ check_port() {
   return $?
 }
 
-# Kill any process using port 5000 with retries
-MAX_RETRIES=5
-RETRY_COUNT=0
+# Clean up port using lsof
 echo "Cleaning up port 5000..."
-
-while check_port && [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-  echo "Attempt $((RETRY_COUNT + 1)) to free port 5000..."
-  npx kill-port 5000 || true
-  sleep 2
-  RETRY_COUNT=$((RETRY_COUNT + 1))
-done
-
 if check_port; then
-  echo "Failed to free port 5000 after $MAX_RETRIES attempts"
-  exit 1
+  PID=$(lsof -t -i:5000)
+  if [ ! -z "$PID" ]; then
+    kill $PID 2>/dev/null || kill -9 $PID 2>/dev/null
+  fi
 fi
-
-echo "Port 5000 is now free"
 
 # Create .replit directory if it doesn't exist
 mkdir -p .replit
