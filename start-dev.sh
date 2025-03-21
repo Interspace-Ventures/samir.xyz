@@ -28,9 +28,11 @@ echo "Port 5000 is now free"
 # Create .replit directory if it doesn't exist
 mkdir -p .replit
 
-# Start Next.js development server and wait for port to be ready
-echo "Starting Next.js development server..."
-NODE_ENV=development npx next dev -p 5000 --hostname 0.0.0.0 & 
+# Start Bun development server and wait for port to be ready
+echo "Starting Bun development server..."
+NEXT_RUNTIME="nodejs" \
+NODE_ENV=development \
+exec bun --bun run dev --port 5000 --hostname 0.0.0.0 & 
 
 # Wait for the port to be available (timeout after 60 seconds)
 echo "Waiting for port 5000 to be ready..."
