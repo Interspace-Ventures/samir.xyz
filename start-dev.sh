@@ -1,36 +1,28 @@
 #!/bin/bash
 
-# Function to check if port is in use
-check_port() {
-  nc -z localhost 5000 2>/dev/null
-  return $?
-}
+# Enable debug output
+set -x
 
-# Clean up port using lsof
-echo "Cleaning up port 5000..."
-if check_port; then
-  PID=$(lsof -t -i:5000)
-  if [ ! -z "$PID" ]; then
-    kill $PID 2>/dev/null || kill -9 $PID 2>/dev/null
-  fi
-fi
-
-# Handle .replit directory creation
-if [ -f ".replit" ]; then
-  echo "Converting .replit file to directory..."
-  mv .replit .replit.bak
-fi
+echo "Starting cleanup..."
+# Kill any existing processes on port 5000
+pkill -f "node|bun" || true
+echo "Waiting for processes to terminate..."
+sleep 2
 
 # Create .replit directory if it doesn't exist
-mkdir -p .replit
+mkdir -p .replit || echo "Failed to create .replit directory"
 
-# Start Bun development server and wait for port to be ready
 echo "Starting Bun development server..."
-NEXT_RUNTIME="nodejs" \
-NODE_ENV=development \
-exec bun --bun run server.js & 
+# Use Bun to run Next.js directly
+export NEXT_TELEMETRY_DISABLED=1
+export NODE_ENV=development
+export PORT=5000
 
-# Wait for the port to be available (timeout after 60 seconds)
+# Run bun without exec to see output
+bun --bun run next dev -p 5000 --hostname 0.0.0.0 &
+SERVER_PID=$!
+
+# Wait for the port to be available
 echo "Waiting for port 5000 to be ready..."
 TIMEOUT=60
 START_TIME=$(date +%s)
@@ -41,6 +33,7 @@ while ! nc -z localhost 5000; do
 
   if [ $ELAPSED_TIME -gt $TIMEOUT ]; then
     echo "Timeout waiting for port 5000"
+    kill $SERVER_PID 2>/dev/null || true
     exit 1
   fi
 
@@ -54,5 +47,6 @@ echo "Port 5000 is ready and accepting connections"
 echo "export PORT_READY=5000" > .replit/.env
 echo "Successfully wrote port configuration to .replit/.env"
 
-# Keep the script running
-wait
+# Keep the script running and forward signals to the server
+trap "kill $SERVER_PID 2>/dev/null" EXIT
+wait $SERVER_PID
