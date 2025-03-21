@@ -15,6 +15,12 @@ if check_port; then
   fi
 fi
 
+# Handle .replit directory creation
+if [ -f ".replit" ]; then
+  echo "Converting .replit file to directory..."
+  mv .replit .replit.bak
+fi
+
 # Create .replit directory if it doesn't exist
 mkdir -p .replit
 
