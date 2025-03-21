@@ -13,6 +13,13 @@ const nextConfig = {
       },
     ],
   },
+  // Disable edge runtime to avoid Bun compatibility issues
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+    serverComponentsExternalPackages: [],
+  },
   // Cache control headers for static assets
   async headers() {
     return [
@@ -27,12 +34,22 @@ const nextConfig = {
       },
     ];
   },
-  // Configure webpack for development
+  // Configure webpack for Bun compatibility
   webpack: (config) => {
     // Only essential webpack configurations
     config.watchOptions = {
       poll: 1000,
       aggregateTimeout: 300,
+    };
+
+    // Add Bun-specific optimizations
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        ...config.resolve?.fallback,
+        stream: false,
+        crypto: false,
+      },
     };
 
     return config;
