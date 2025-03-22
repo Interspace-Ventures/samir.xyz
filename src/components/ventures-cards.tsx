@@ -1,6 +1,5 @@
-import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface VenturesCardProps {
   name: string
@@ -10,13 +9,59 @@ interface VenturesCardProps {
   priority?: boolean
 }
 
-export function VenturesCard({ name, description, imageUrl, link, priority = false }: VenturesCardProps) {
-  const [imageError, setImageError] = useState(false) // Start with error false to attempt loading images
-  const [imageLoaded, setImageLoaded] = useState(false)
+// Helper function to check if a file path is an SVG
+const isSvgPath = (path: string): boolean => {
+  return path.toLowerCase().endsWith('.svg');
+};
 
-  // Debug: Log the component mounting and image URL
-  React.useEffect(() => {
+export function VenturesCard({ name, description, imageUrl, link, priority = false }: VenturesCardProps) {
+  const [imageError, setImageError] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const [svgContent, setSvgContent] = useState<string | null>(null)
+
+  // Load and handle the image or SVG
+  useEffect(() => {
     console.log(`VenturesCard mounted for ${name} with imageUrl: ${imageUrl}`)
+    
+    if (typeof window === 'undefined') return;
+    
+    // Mark as not loaded initially
+    setImageLoaded(false);
+    
+    if (isSvgPath(imageUrl)) {
+      // For SVG files, fetch the content and render inline for better control
+      fetch(imageUrl)
+        .then(response => {
+          if (response.ok) {
+            return response.text();
+          }
+          throw new Error(`Failed to load SVG: ${response.status}`);
+        })
+        .then(text => {
+          setSvgContent(text);
+          setImageLoaded(true);
+          setImageError(false);
+        })
+        .catch(error => {
+          console.error(`Failed to load SVG for ${name}:`, error);
+          setImageError(true);
+        });
+    } else {
+      // For non-SVG images, we'll rely on the img onLoad/onError handlers
+      // But let's also preload to verify it exists
+      const testImg = new Image();
+      testImg.src = imageUrl;
+      
+      testImg.onload = () => {
+        // Image exists, but we'll wait for the actual img tag to trigger setImageLoaded
+        console.log(`Image verified for ${name}: ${imageUrl}`);
+      };
+      
+      testImg.onerror = () => {
+        console.error(`Image verification failed for ${name}: ${imageUrl}`);
+        setImageError(true);
+      };
+    }
   }, [name, imageUrl])
 
   // Generate consistent gradient colors based on the name of the venture
@@ -89,20 +134,30 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
               </div>
             )}
 
-            {/* Image */}
+            {/* Image or SVG content */}
             <div className="absolute inset-0 p-6">
-              <Image
-                src={imageUrl}
-                alt={name}
-                fill
-                className={`object-contain transition-opacity duration-500 filter drop-shadow-md ${
-                  imageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                priority={priority}
-                onLoad={handleImageLoad}
-                onError={handleImageError}
-              />
+              <div className="relative w-full h-full">
+                {svgContent && isSvgPath(imageUrl) ? (
+                  // If we have SVG content, use it directly for better rendering
+                  <div 
+                    className={`w-full h-full transition-opacity duration-500 ${
+                      imageLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    dangerouslySetInnerHTML={{ __html: svgContent }}
+                  />
+                ) : (
+                  // Otherwise use regular image tag
+                  <img
+                    src={imageUrl}
+                    alt={name}
+                    className={`w-full h-full object-contain transition-opacity duration-500 filter drop-shadow-md ${
+                      imageLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onLoad={handleImageLoad}
+                    onError={handleImageError}
+                  />
+                )}
+              </div>
             </div>
           </>
         )}
