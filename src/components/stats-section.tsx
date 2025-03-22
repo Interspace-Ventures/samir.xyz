@@ -31,10 +31,10 @@ const StatsSection = () => {
   const [stats] = useState<StatsGroup>(defaultStats)
 
   return (
-    <div className="w-full grid gap-6 rounded-xl p-6 border border-gray-800 bg-black/20 transform-gpu">
+    <div className="w-full grid gap-6 rounded-xl p-6 border border-purple-800/40 bg-gradient-to-br from-purple-950/30 to-black/40 transform-gpu shadow-lg">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
         {stats.top.map((stat) => (
-          <div key={stat.label} className="space-y-2">
+          <div key={stat.label} className="px-4 py-3 bg-black/30 rounded-lg border border-purple-800/20 hover:border-purple-800/40 transition-colors space-y-2 shadow-sm">
             <dt className="text-sm text-gray-400 font-medium">{stat.label}</dt>
             <dd className="text-2xl font-semibold text-white">{stat.value}</dd>
           </div>
@@ -42,7 +42,7 @@ const StatsSection = () => {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
         {stats.bottom.map((stat) => (
-          <div key={stat.label} className="space-y-2">
+          <div key={stat.label} className="px-4 py-3 bg-black/30 rounded-lg border border-purple-800/20 hover:border-purple-800/40 transition-colors space-y-2 shadow-sm">
             <dt className="text-sm text-gray-400 font-medium">{stat.label}</dt>
             <dd className="text-2xl font-semibold text-white">{stat.value}</dd>
           </div>
