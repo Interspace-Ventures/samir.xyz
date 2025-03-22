@@ -1,7 +1,16 @@
 /** @type {import('next').NextConfig} */
-
-export default {
+const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   output: 'standalone',
+  // Workarounds for Replit environment
+  serverExternalPackages: [], // Updated from experimental.serverComponentsExternalPackages
+  webpack: (config, { isServer }) => {
+    // Handle polyfills for browser APIs
+    if (isServer) {
+      console.log('Applying server-side webpack configurations');
+    }
+    return config;
+  },
 };
+
+export default nextConfig;

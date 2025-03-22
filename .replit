@@ -1,5 +1,5 @@
-modules = ["nodejs-20", "bun"]
-run = "npm run dev"
+modules = ["bun"]
+run = "bun run dev"
 
 [nix]
 channel = "stable-24_05"
@@ -9,9 +9,8 @@ localPort = 5000
 externalPort = 80
 
 [deployment]
-run = ["sh", "-c", "bun run next dev -p 5000 --hostname 0.0.0.0
-"]
-build = ["sh", "-c", "npm run build"]
+run = ["sh", "-c", "bun run dev -p 5000 --hostname 0.0.0.0"]
+build = ["sh", "-c", "bun run build"]
 
 [workflows]
 runButton = "Project"
@@ -23,7 +22,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "bun run dev"
 
 [[workflows.workflow]]
 name = "Project"
@@ -46,4 +45,4 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx kill-port 5000 && NODE_ENV=development exec npx next dev -p 5000 --hostname 0.0.0.0"
+args = "./start.sh"
