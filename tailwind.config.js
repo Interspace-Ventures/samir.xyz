@@ -51,5 +51,25 @@ export default {
       }
     },
   },
-  plugins: [], // ESM doesn't support require, will need to be configured differently
+  plugins: [
+    // Using import() for ESM compatibility
+    await (async () => {
+      try {
+        const { default: typography } = await import('@tailwindcss/typography');
+        return typography();
+      } catch (e) {
+        console.warn('Failed to load @tailwindcss/typography plugin:', e.message);
+        return () => {};
+      }
+    })(),
+    await (async () => {
+      try {
+        const { default: animate } = await import('tailwindcss-animate');
+        return animate();
+      } catch (e) {
+        console.warn('Failed to load tailwindcss-animate plugin:', e.message);
+        return () => {};
+      }
+    })(),
+  ]
 }
