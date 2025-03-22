@@ -3,6 +3,7 @@
 import React from 'react'
 import { ErrorBoundary } from '../../components/error-boundary'
 import { companies, categories } from '../../components/data/portfolio'
+import Image from 'next/image'
 
 export default function Portfolio() {
   const [selectedCategory, setSelectedCategory] = React.useState<typeof categories[number]>('All')
@@ -16,7 +17,7 @@ export default function Portfolio() {
   // Simplified loading state
   if (!mounted) {
     return (
-      <div className="space-y-8">
+      <div className="max-w-4xl mx-auto px-6 space-y-8">
         <div className="space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold">Portfolio</h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
@@ -48,7 +49,7 @@ export default function Portfolio() {
 
   return (
     <ErrorBoundary name="PortfolioPage">
-      <div className="space-y-8">
+      <div className="max-w-4xl mx-auto px-6 space-y-8">
         <div className="space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold">Portfolio</h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
@@ -63,7 +64,7 @@ export default function Portfolio() {
               key={category}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 selectedCategory === category
-                  ? 'bg-purple-500 text-white'
+                  ? 'bg-purple-600 text-white'
                   : 'bg-gray-100 dark:bg-gray-800 hover:bg-purple-100 dark:hover:bg-purple-900/30'
               }`}
               onClick={() => setSelectedCategory(category)}
@@ -98,12 +99,19 @@ export default function Portfolio() {
         {/* Portfolio Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCompanies.map((company) => (
-            <div key={company.name} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+            <div key={company.name} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1">
               <div className="p-6">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center overflow-hidden relative">
                     {company.logo ? (
-                      <span className="text-xl">{company.logo}</span>
+                      <div className="w-full h-full relative">
+                        <Image 
+                          src={company.logo} 
+                          alt={company.name} 
+                          fill 
+                          style={{ objectFit: 'contain' }} 
+                        />
+                      </div>
                     ) : (
                       <span className="text-xl">{company.name.charAt(0)}</span>
                     )}
@@ -114,21 +122,28 @@ export default function Portfolio() {
                   </div>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300">{company.description}</p>
-                {company.website && (
-                  <a 
-                    href={company.website} 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-block text-purple-600 dark:text-purple-400 hover:underline"
-                  >
-                    Visit website →
-                  </a>
-                )}
-                {company.acquired && (
-                  <span className="inline-block mt-2 px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded">
-                    Acquired
-                  </span>
-                )}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {company.website && (
+                    <a 
+                      href={company.website} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-purple-600 dark:text-purple-400 hover:underline"
+                    >
+                      Visit website →
+                    </a>
+                  )}
+                  {company.markup && (
+                    <span className="inline-block px-2 py-1 text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded">
+                      Markup
+                    </span>
+                  )}
+                  {company.acquired && (
+                    <span className="inline-block px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded">
+                      Acquired
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))}
