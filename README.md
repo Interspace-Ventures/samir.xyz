@@ -1,118 +1,58 @@
-# Hey I'm Samir
+# Portfolio Website v3.0.0
 
-I'm building design-forward, high performance apps and concepts by coding at the speed of thought with Replit.
+A personal portfolio website showcasing professional projects through an AI-enhanced interactive design that dynamically highlights technical expertise and professional achievements.
 
-## Version Information
+## Technology Stack
 
-This project follows [Semantic Versioning](https://semver.org/):
-- Patch updates (x.x.1): Every single commit
-- Minor updates (x.1.x): Every chat/feature session
-- Major updates (1.x.x): Significant architectural changes
+- **Next.js 15.2.3**: Server-side rendering and client-side hydration
+- **React 19**: Dynamic user interface components
+- **Bun Runtime**: Fast JavaScript/TypeScript runtime (critical for this project)
+- **Tailwind CSS**: Responsive styling
+- **TypeScript**: Type-safe development
 
-Current Version: 2.4.5
-For detailed changes, see [CHANGELOG.md](docs/CHANGELOG.md).
+## Important Development Notes
 
-## Tech Stack
+### Critical Configuration Requirements
 
-- Next.js for server-side rendering
-- React.js for dynamic user interface
-- Tailwind CSS for responsive styling
-- TypeScript for type-safe development
-- Responsive mobile-first design
-- Inter font for consistent typography
-- Performance-optimized loading states
-- CSS-based animations for smooth transitions
+1. **Always use Bun runtime** - This project must use Bun instead of Node.js for proper hydration in the Replit environment.
 
-## Dependencies
+2. **Source Map Management** - Source maps must be disabled to prevent client-side hydration errors.
+   - This is handled in both `next.config.js` and environment variables in `start.sh`
 
-### Core Framework
-- `next` - The React framework for production web applications
-- `react` & `react-dom` - Core React libraries
-- `typescript` - Programming language adding static types to JavaScript
-- `@types/node`, `@types/react`, `@types/react-dom` - TypeScript type definitions
+3. **Hydration Safety** - The application uses `ClientWrapper` components to safely handle client-side hydration.
 
-### Styling & UI
-- `tailwindcss` - Utility-first CSS framework
-- `tailwindcss-animate` - Animation utilities for Tailwind CSS
-- `@tailwindcss/typography` - Typography plugin for consistent text styling
-- `postcss` - Tool for transforming CSS with JavaScript (required by Tailwind)
-- `autoprefixer` - PostCSS plugin to parse CSS and add vendor prefixes
+4. **Turbopack Configuration** - Special configuration in `next.config.js` ensures compatibility with Replit.
 
-### Form Handling & Validation
-- `@hookform/resolvers` - Validation resolvers for React Hook Form
-- `zod` - TypeScript-first schema validation
+### Avoiding Common Issues
 
-### Theming
-- `next-themes` - Feature-rich theme system for Next.js
+To prevent the hydration and infinite loading issues from recurring:
 
-## Project Structure
+1. **DO NOT** modify environment variables in `start.sh` that control the runtime (keep using Bun)
+2. **DO NOT** enable source maps or source map related features
+3. **DO NOT** change the `ClientWrapper` implementation which safely handles hydration
+4. **DO NOT** modify the webpack configuration that disables source maps
 
-The project follows a clean, organized structure:
+## Running the Application
 
-```
-├── public/
-│   └── images/
-│       ├── brand/           # Brand-related assets
-│       ├── portfolio-logos/ # Company logos
-│       ├── profile/         # Profile photos
-│       └── ventures-brands/ # Venture project logos and favicons
-├── src/
-│   ├── app/                # Next.js App Router pages
-│   │   ├── portfolio/      # Portfolio section
-│   │   ├── ventures/       # Ventures section
-│   │   ├── layout.tsx      # Root layout with metadata
-│   │   ├── page.tsx        # Home page
-│   │   └── globals.css     # Global styles and theme
-│   └── components/         # Reusable UI components
-│       ├── data/          # Static data and types
-│       ├── ui/            # Shared UI components
-│       ├── footer.tsx     # Site footer
-│       ├── navbar.tsx     # Navigation with theme toggle
-│       ├── company-card/  # Portfolio company cards
-│       ├── project-card/  # Venture project cards
-│       └── stats-section/ # Portfolio statistics
-├── docs/                   # Documentation
-│   └── CHANGELOG.md        # Version history
-└── [Configuration]         # Project configuration
-    ├── next.config.mjs     # Next.js config
-    ├── tailwind.config.js  # Tailwind config
-    └── tsconfig.json       # TypeScript config
-```
-
-## Development
-
-Run the development server:
+The application is configured to run automatically through the "Start application" workflow, which executes `./start.sh`.
 
 ```bash
-npm run dev
+# View application version
+cat version.json
+
+# Manual start (if needed)
+./start.sh
 ```
 
-This starts Next.js development server with hot module replacement on port 5000.
+## Version History
 
-### Important Development Notes
+See [CHANGELOG.md](./CHANGELOG.md) for detailed version history.
 
-1. The application runs through the "Start application" workflow which executes start-dev.sh
-2. Development server is configured to run on port 5000 with proper host binding (0.0.0.0)
-3. All assets are optimized during build time
-4. Uses CSS-based animations instead of Framer Motion for better performance
-5. Theme support with next-themes including system preference detection
+## Troubleshooting
 
-## Features
+If you encounter any issues:
 
-- Responsive design optimized for mobile, tablet, and desktop
-- Dark/light mode with system preference detection
-- CSS-based animated transitions
-- SEO-optimized metadata configuration
-- Performance-optimized image loading
-- Consistent typography with Inter font
-- Category filtering for portfolio companies
-- Interactive project cards with hover effects
-- Optimized asset loading with proper caching
-
-## Notes
-
-- Uses Next.js App Router exclusively for improved routing and layouts
-- All assets are optimized during build
-- Static site deployment ready
-- Organized asset structure in public/images
-- Proper favicon configuration for all devices
+1. Check the logs for source map or webpack related errors
+2. Ensure Bun is being used as the runtime
+3. Clear cache files with `rm -rf .next` and `rm -rf node_modules/.cache`
+4. Restart the application with the workflow
