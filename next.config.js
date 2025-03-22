@@ -20,6 +20,10 @@ const nextConfig = {
     unoptimized: true, // Disable image optimization for simplicity
   },
   
+  // Ensure proper handling of paths in Replit environment
+  assetPrefix: process.env.NODE_ENV === 'production' ? undefined : '',
+  basePath: '',
+  
   // Disable middleware which often uses edge runtime
   skipMiddlewareUrlNormalize: true,
   skipTrailingSlashRedirect: true,
@@ -33,6 +37,10 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
           },
         ],
       },
