@@ -19,4 +19,4 @@ export NODE_ENV=development
 export PORT=5000
 
 # Run bun directly without exec to see output
-bun --bun run next dev -p 5000 --hostname 0.0.0.0
+bun run next dev -p 5000 --hostname 0.0.0.0
