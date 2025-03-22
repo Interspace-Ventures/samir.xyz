@@ -1,1 +1,0 @@
-config/tools/tailwind.config.js

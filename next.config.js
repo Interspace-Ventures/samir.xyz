@@ -1,7 +1,26 @@
 /** @type {import('next').NextConfig} */
-import { getNextConfig } from './config/next/index.js';
+const nextConfig = {
+  reactStrictMode: false,
+  experimental: {
+    optimizeCss: true,
+  },
+  webpack: (config) => {
+    return config;
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
+  allowedDevOrigins: [
+    'localhost:*',
+    '*.replit.dev',
+    '*.repl.co',
+    '*.janeway.replit.dev'
+  ],
+};
 
-// Use optimized modular Next.js configuration - v3.1.0
-const nextConfig = getNextConfig();
-
-export default nextConfig;
+module.exports = nextConfig;
