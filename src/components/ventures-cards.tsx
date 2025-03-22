@@ -11,8 +11,35 @@ interface VenturesCardProps {
 }
 
 export function VenturesCard({ name, description, imageUrl, link, priority = false }: VenturesCardProps) {
-  const [imageError, setImageError] = useState(false)
+  const [imageError, setImageError] = useState(false) // Start with error false to attempt loading images
   const [imageLoaded, setImageLoaded] = useState(false)
+
+  // Generate consistent gradient colors based on the name of the venture
+  const getGradientColors = (name: string) => {
+    const hash = name.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
+    
+    // List of gradient pairs that work well with our dark theme
+    const gradients = [
+      ['from-purple-700', 'to-indigo-900'],
+      ['from-blue-700', 'to-purple-900'],
+      ['from-indigo-700', 'to-purple-900'],
+      ['from-violet-700', 'to-indigo-900'],
+      ['from-fuchsia-700', 'to-purple-900'],
+      ['from-purple-800', 'to-indigo-700']
+    ];
+    
+    return gradients[hash % gradients.length];
+  };
+  
+  const [fromColor, toColor] = getGradientColors(name);
+  
+  // Get initial letters for the placeholder
+  const initials = name
+    .split(' ')
+    .map(word => word[0])
+    .join('')
+    .substring(0, 2)
+    .toUpperCase();
 
   const handleImageError = () => {
     console.error(`Failed to load image for ${name}: ${imageUrl}`)
@@ -21,6 +48,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
 
   const handleImageLoad = () => {
     setImageLoaded(true)
+    setImageError(false)
   }
 
   return (
@@ -37,7 +65,16 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
       <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 group-hover:duration-300"></div>
       
       <div className="relative w-full h-full">
-        {!imageError ? (
+        {imageError ? (
+          // Gradient background with initials
+          <div className={`absolute inset-0 bg-gradient-to-br ${fromColor} ${toColor} p-6 flex flex-col items-center justify-center`}>
+            <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4">
+              <span className="text-2xl font-bold text-white">{initials}</span>
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-white text-center">{name}</h3>
+            <p className="text-sm text-gray-200 text-center">{description}</p>
+          </div>
+        ) : (
           <>
             {/* Loading state */}
             {!imageLoaded && (
@@ -62,12 +99,6 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
               />
             </div>
           </>
-        ) : (
-          // Fallback state when image fails to load
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-            <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">{name}</h3>
-            <p className="text-sm text-gray-300">{description}</p>
-          </div>
         )}
 
         {/* Hover overlay with improved gradient and animations */}

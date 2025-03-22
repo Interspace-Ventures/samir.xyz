@@ -9,19 +9,19 @@ const projects = [
     name: "2 Days Early",
     description:
       "Current and former Chime operator community built by operators for operators",
-    imageUrl: "/ventures-brands/2de-interspace.png",
+    imageUrl: "/ventures-brands/2de-interspace.svg",
     link: "https://2daysearly.com",
   },
   {
     name: "Solo",
     description: "The first design-forward climbing app",
-    imageUrl: "/ventures-brands/solo-logo-2025.png",
+    imageUrl: "/ventures-brands/solo-logo-2025.svg",
     link: "https://gosolo.nyc",
   },
   {
     name: "Predictive:film",
     description: "AI-powered film predictions",
-    imageUrl: "/ventures-brands/predictive-film-icon.png",
+    imageUrl: "/ventures-brands/predictive-film-icon.svg",
     link: "https://predictive.film",
   },
   {
