@@ -16,18 +16,23 @@ const nextConfig = {
     ],
   },
   
-  // Completely disable edge runtime and middleware
+  // Configure experimental features for Next.js 15
   experimental: {
-    runtime: 'nodejs',
-    disableEdgeRuntime: true,
-    serverComponents: true,
-    serverActions: false,
+    // Disable server actions for better compatibility
+    serverActions: {
+      enabled: false,
+    },
+    // Other experimental features
+    optimizePackageImports: ['lucide-react'],
   },
   
   // Disable middleware which often uses edge runtime
   skipMiddlewareUrlNormalize: true,
   skipTrailingSlashRedirect: true,
   
+  // Allow dev origins for testing
+  allowedDevOrigins: ["d2193f08-b592-45ce-b730-8dc2c7ef133c-00-1f1txs3yeigba.janeway.replit.dev"],
+
   // Set up security headers without middleware
   async headers() {
     return [

@@ -1,10 +1,15 @@
 {
-  "name": "Start application",
-  "tasks": [
+  "workflows": [
     {
-      "name": "Start Portfolio Website",
-      "command": "./start.sh",
-      "wait_for_port": 5000
+      "name": "Start application",
+      "tasks": [
+        {
+          "name": "Start Portfolio Website",
+          "command": "./start.sh",
+          "wait_for_port": 5000,
+          "timeout": 60000
+        }
+      ]
     }
   ]
 }
