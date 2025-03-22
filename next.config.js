@@ -3,9 +3,19 @@ const nextConfig = {
   reactStrictMode: false,
   distDir: '.next',
   
-  // Simplified configuration for troubleshooting
+  // Configurations for both Turbopack and Webpack
   experimental: {
     optimizeCss: true,
+    // Turbopack configuration
+    turbo: {
+      resolveAlias: {
+        // Add necessary aliases for Turbopack if needed
+      },
+      // Rules that match Webpack configuration
+      rules: {
+        // Ensure consistent behavior with Webpack
+      }
+    }
   },
   
   // Configure image optimization
@@ -66,6 +76,7 @@ const nextConfig = {
   poweredByHeader: false,
   
   // Enhanced webpack configuration for better client-side handling
+  // This will be used when NOT using Turbopack (e.g., in production builds)
   webpack: (config, { isServer }) => {
     // Disable source maps
     config.devtool = false;
