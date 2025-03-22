@@ -5,9 +5,10 @@
       "tasks": [
         {
           "name": "Start Portfolio Website",
-          "command": "./start.sh",
+          "command": "./start-direct.sh",
           "wait_for_port": 5000,
-          "timeout": 60000
+          "timeout": 60000,
+          "prevent_capture_with_port": false
         }
       ]
     }

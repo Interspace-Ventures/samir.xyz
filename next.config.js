@@ -4,28 +4,20 @@ const nextConfig = {
   output: 'standalone',
   distDir: '.next',
   
-  // Minimal experimental config with only supported features
+  // Enable only valid experimental features
   experimental: {
     optimizeCss: true,
   },
   
-  // External packages configuration (moved from experimental)
+  // External packages configuration
   serverExternalPackages: [],
   
   // Keep this enabled for routing
   useFileSystemPublicRoutes: true,
   
-  // Configure image optimization and domains
+  // Configure image optimization
   images: {
-    unoptimized: true,
-    formats: ['image/webp'],
-    domains: ['*'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
+    unoptimized: true, // Disable image optimization for simplicity
   },
   
   // Disable middleware which often uses edge runtime
@@ -47,7 +39,7 @@ const nextConfig = {
     ];
   },
   
-  // Configure webpack for Bun compatibility and to fully disable RSC
+  // Configure webpack to make the app work with Bun and disable RSC
   webpack: (config, { isServer }) => {
     // Exclude RSC and edge runtime related modules
     config.resolve = {
@@ -80,13 +72,13 @@ const nextConfig = {
       aggregateTimeout: 300,
     };
 
-    // Add rule to ignore RSC imports
+    // Explicitly ignore RSC modules
     config.module = config.module || {};
     config.module.rules = config.module.rules || [];
     
-    // Add a rule to handle RSC imports
+    // Ignore all RSC-related modules with null-loader
     config.module.rules.push({
-      test: /react-server-dom-webpack/,
+      test: /react-server-dom-webpack|server-components/,
       use: 'null-loader',
     });
 
