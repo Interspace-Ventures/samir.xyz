@@ -56,6 +56,14 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Default to dark theme */
+  :root {
+    color-scheme: dark;
   }
 }
 

@@ -31,20 +31,20 @@ const StatsSection = () => {
   const [stats] = useState<StatsGroup>(defaultStats)
 
   return (
-    <div className="w-full grid gap-3 rounded-xl p-3 bg-card/50 backdrop-blur-sm transform-gpu">
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div className="w-full grid gap-6 rounded-xl p-6 border border-gray-800 bg-black/20 transform-gpu">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
         {stats.top.map((stat) => (
-          <div key={stat.label} className="space-y-1">
-            <dt className="text-sm text-muted-foreground font-medium">{stat.label}</dt>
-            <dd className="text-lg font-semibold">{stat.value}</dd>
+          <div key={stat.label} className="space-y-2">
+            <dt className="text-sm text-gray-400 font-medium">{stat.label}</dt>
+            <dd className="text-2xl font-semibold text-white">{stat.value}</dd>
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
         {stats.bottom.map((stat) => (
-          <div key={stat.label} className="space-y-1">
-            <dt className="text-sm text-muted-foreground font-medium">{stat.label}</dt>
-            <dd className="text-lg font-semibold">{stat.value}</dd>
+          <div key={stat.label} className="space-y-2">
+            <dt className="text-sm text-gray-400 font-medium">{stat.label}</dt>
+            <dd className="text-2xl font-semibold text-white">{stat.value}</dd>
           </div>
         ))}
       </div>

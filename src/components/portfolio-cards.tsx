@@ -52,7 +52,7 @@ const CompanyLogo = ({ company }: { company: Company }) => {
 
 const CompanyCard = ({ company }: { company: Company }) => {
   return (
-    <div className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+    <div className="h-[160px] rounded-lg border border-gray-800 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1">
       <a
         href={company.website || `https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
@@ -60,7 +60,7 @@ const CompanyCard = ({ company }: { company: Company }) => {
         className="block h-full p-6 relative"
       >
         {(company.markup || company.acquired) && (
-          <div className={`absolute top-2 right-2 text-xs px-2 py-1 rounded text-white ${
+          <div className={`absolute top-3 right-3 text-xs px-2 py-1 rounded-md text-white ${
             company.acquired ? 'bg-gray-700' : 'bg-purple-600'
           }`}>
             {company.acquired ? 'Acquired' : 'Markup'}
@@ -69,12 +69,6 @@ const CompanyCard = ({ company }: { company: Company }) => {
 
         <div className="h-full flex items-center justify-center">
           <CompanyLogo company={company} />
-        </div>
-
-        <div className="absolute inset-0 opacity-0 hover:opacity-100 bg-purple-600/80 transition-opacity duration-300 flex items-center justify-center rounded-lg">
-          <p className="text-white text-sm text-center px-4">
-            {company.description}
-          </p>
         </div>
       </a>
     </div>
@@ -115,10 +109,10 @@ export default function PortfolioCards() {
           <button
             key={cat}
             onClick={() => setCategory(cat)}
-            className={`px-4 h-[36px] text-sm font-medium rounded transition-colors duration-200 ${
+            className={`px-4 h-[36px] text-sm font-medium rounded-md transition-colors duration-200 ${
               category === cat
                 ? 'bg-purple-600 text-white'
-                : 'bg-purple-100 hover:bg-purple-200 text-gray-700 dark:bg-purple-900/30 dark:hover:bg-purple-900/40 dark:text-gray-200'
+                : 'border border-gray-700 hover:border-purple-600 text-gray-300'
             }`}
           >
             {cat}
@@ -137,9 +131,9 @@ export default function PortfolioCards() {
         ) : (
           // Show simple placeholders during server-side render and initial hydration
           companies.slice(0, 6).map((company, index) => (
-            <div key={index} className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-white shadow-sm">
+            <div key={index} className="h-[160px] rounded-lg border border-gray-800 bg-white shadow-sm">
               <div className="h-full flex items-center justify-center">
-                <div className="bg-purple-100 dark:bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
+                <div className="bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
               </div>
             </div>
           ))
