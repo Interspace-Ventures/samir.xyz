@@ -1,9 +1,9 @@
-import "@/lib/polyfills";  // Import polyfills from new consolidated location
+import "@/lib/polyfills.ts";  // Import TypeScript polyfills from new consolidated location
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import { ErrorBoundary } from "@/components/error-boundary";
-import ClientWrapper from "@/components/client-wrapper";
+import BasicLayout from "@/components/basic-layout"; // Use simpler layout
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -12,8 +12,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Hey - I'm Samir",
-  description: "Hey I'm Samir. I drive business impact at fintechs.",
+  title: "Portfolio Site",
+  description: "Personal portfolio website showcasing professional achievements",
   icons: {
     icon: [
       {
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   },
 };
 
+// Using a simpler layout to avoid RSC/webpack issues
 export default function RootLayout({
   children,
 }: {
@@ -38,11 +39,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         <ErrorBoundary name="MainLayout">
-          <ClientWrapper>
+          <BasicLayout>
             {children}
-          </ClientWrapper>
+          </BasicLayout>
         </ErrorBoundary>
       </body>
     </html>

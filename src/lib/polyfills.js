@@ -5,7 +5,7 @@
  */
 
 // Define our polyfill classes
-class TextEncoderStreamPolyfill {
+export class TextEncoderStreamPolyfill {
   constructor() {
     this.encoder = new TextEncoder();
   }
@@ -18,7 +18,7 @@ class TextEncoderStreamPolyfill {
   flush() {}
 }
 
-class TextDecoderStreamPolyfill {
+export class TextDecoderStreamPolyfill {
   constructor(label) {
     this.decoder = new TextDecoder(label);
   }
@@ -35,14 +35,35 @@ class TextDecoderStreamPolyfill {
   }
 }
 
-// Add our polyfills to the global scope
-globalThis.TextEncoderStream = TextEncoderStreamPolyfill;
-globalThis.TextDecoderStream = TextDecoderStreamPolyfill;
+// Apply polyfills to global scope
+function applyPolyfills() {
+  // Check if we're in a browser or Node.js environment
+  const isServer = typeof window === 'undefined';
 
-console.log("Added TextEncoderStream and TextDecoderStream polyfills to global scope");
+  // Add our polyfills to the global scope if they don't exist
+  if (typeof globalThis.TextEncoderStream === 'undefined') {
+    globalThis.TextEncoderStream = TextEncoderStreamPolyfill;
+    console.log("Added TextEncoderStream polyfill to global scope");
+  }
+  
+  if (typeof globalThis.TextDecoderStream === 'undefined') {
+    globalThis.TextDecoderStream = TextDecoderStreamPolyfill;
+    console.log("Added TextDecoderStream polyfill to global scope");
+  }
 
-// Add extra protection to ensure Edge Runtime primitives won't break us
-process.env.NEXT_RUNTIME = "nodejs";
+  // Add extra protection to ensure Edge Runtime primitives won't break us
+  if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
+    process.env.NEXT_RUNTIME = "nodejs";
+  }
+  
+  return {
+    TextEncoderStream: globalThis.TextEncoderStream,
+    TextDecoderStream: globalThis.TextDecoderStream
+  };
+}
+
+// Apply polyfills immediately
+const polyfills = applyPolyfills();
 
 // Patch node modules if needed
 export async function patchNodeModules() {

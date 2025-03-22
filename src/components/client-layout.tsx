@@ -5,6 +5,7 @@ import { ErrorBoundary } from './error-boundary'
 import Navbar from './navbar'
 import Footer from './footer'
 import { Client } from "react-hydration-provider"
+import { DebugStatus } from './debug-status'
 
 // Initial skeleton that matches server render exactly
 const LayoutSkeleton = () => (
@@ -32,6 +33,10 @@ export default function ClientLayout({
   React.useEffect(() => {
     try {
       setMounted(true)
+      console.log('ClientLayout mounted successfully', {
+        timestamp: new Date().toISOString(),
+        reactVersion: React.version
+      })
     } catch (error) {
       console.error('Error in ClientLayout mount:', error)
     }
@@ -60,6 +65,11 @@ export default function ClientLayout({
             <Footer />
           </ErrorBoundary>
         </footer>
+        
+        {/* Debug overlay */}
+        <ErrorBoundary name="DebugStatus">
+          <DebugStatus />
+        </ErrorBoundary>
       </div>
     </Client>
   )

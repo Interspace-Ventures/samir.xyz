@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import React from 'react';
 
 interface Props {
   children: React.ReactNode
@@ -14,71 +14,46 @@ interface State {
 
 export class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
-    super(props)
-    this.state = {
-      hasError: false,
-      error: null
-    }
+    super(props);
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error) {
-    console.error('ErrorBoundary caught error:', error);
-    // Clear any problematic cached data
-    try {
-      if (typeof window !== 'undefined') {
-        // Clear storage to help with recovery
-        sessionStorage.clear();
-        localStorage.clear();
-      }
-    } catch (e) {
-      console.warn('Failed to clear storage:', e);
-    }
-    return { hasError: true, error }
+    // Update state so the next render will show the fallback UI
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    // Log the error to console with component name and stack trace
-    console.error(`ErrorBoundary (${this.props.name || 'unnamed'}) caught error:`, {
-      error: error.message,
-      component: this.props.name,
-      stack: error.stack,
-      componentStack: info.componentStack,
-      isWebview: typeof window !== 'undefined' && /wv|webview/.test(window.navigator.userAgent.toLowerCase()),
-      environment: process.env.NODE_ENV
-    });
+    // Log the error to console
+    console.error(`Error boundary (${this.props.name || 'unnamed'}) caught an error:`, error, info.componentStack);
   }
 
   render() {
     if (this.state.hasError) {
+      // Render fallback UI
       return (
-        <div className="flex min-h-[200px] flex-col items-center justify-center space-y-4 text-center p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20">
-          <div className="space-y-2">
-            <h2 className="text-lg font-medium text-red-700 dark:text-red-300">Something went wrong!</h2>
-            <p className="text-sm text-red-600 dark:text-red-400">
-              {process.env.NODE_ENV === 'development' 
-                ? `Error in ${this.props.name || 'component'}: ${this.state.error?.message}` 
-                : "We've been notified and will fix this issue soon."}
+        <div className="p-4 bg-red-50 dark:bg-red-900 rounded-lg border border-red-200 dark:border-red-800">
+          <h2 className="text-xl font-bold text-red-700 dark:text-red-300 mb-2">Something went wrong</h2>
+          <p className="mb-2 text-red-600 dark:text-red-400">
+            {this.state.error?.message || 'An unexpected error occurred'}
+          </p>
+          {this.props.name && (
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Component: {this.props.name}
             </p>
+          )}
+          <div className="mt-4">
+            <button
+              onClick={() => window.location.reload()}
+              className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+              Refresh page
+            </button>
           </div>
-          <button
-            onClick={() => {
-              // Clear any cached state that might be causing the error
-              try {
-                if (typeof window !== 'undefined') {
-                  window.location.reload();
-                }
-              } catch (e) {
-                console.warn('Failed to reload page:', e);
-              }
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-700"
-          >
-            Try again
-          </button>
         </div>
-      )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }
