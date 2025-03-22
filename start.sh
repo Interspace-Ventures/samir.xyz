@@ -11,7 +11,6 @@ export PORT=5000
 export HOSTNAME=0.0.0.0
 export NEXT_PUBLIC_REPLIT_RUNNING=true
 
-# Start Next.js development server
+# Start Next.js dev server directly with minimal config
 echo "Starting Next.js development server on port 5000..."
-# Use exec to replace the shell process with the Next.js process
 exec bun run next dev -p 5000 --hostname 0.0.0.0
