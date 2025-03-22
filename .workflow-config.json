@@ -8,7 +8,7 @@
           "command": "./start.sh",
           "wait_for_port": 5000,
           "url_path": "/",
-          "timeout": 120000,
+          "timeout": 180000,
           "prevent_capture_with_port": false,
           "enable_port_browser": true
         }
