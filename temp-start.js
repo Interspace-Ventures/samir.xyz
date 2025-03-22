@@ -1,19 +1,3 @@
-#!/bin/bash
-
-# Simple startup script
-echo "Starting Next.js application..."
-
-# Set environment variables
-export NEXT_TELEMETRY_DISABLED=1
-export NODE_ENV=development
-export NEXT_RUNTIME="nodejs"
-export PORT=5000
-
-# Apply Next.js patch for Bun compatibility
-echo "Applying Next.js patches for Bun compatibility..."
-
-# Create combined temporary patched script
-cat > temp-start.js << 'EOF'
 // First, patch the modules
 import './node_modules-patch.js';
 
@@ -41,8 +25,3 @@ process.on('SIGTERM', () => nextProcess.kill('SIGTERM'));
 nextProcess.on('exit', (code) => {
   process.exit(code);
 });
-EOF
-
-# Start Next.js using our temp launcher
-echo "Starting Next.js development server on port 5000..."
-exec bun temp-start.js

@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
   distDir: '.next',
+  
   // Configure image optimization and domains
   images: {
     unoptimized: true,
@@ -14,16 +15,20 @@ const nextConfig = {
       },
     ],
   },
-  // Disable edge runtime to avoid Bun compatibility issues
+  
+  // Completely disable edge runtime and middleware
   experimental: {
-    serverActions: {
-      bodySizeLimit: '2mb',
-    },
-    // Completely disable edge runtime
     runtime: 'nodejs',
     disableEdgeRuntime: true,
+    serverComponents: true,
+    serverActions: false,
   },
-  // Cache control headers for static assets
+  
+  // Disable middleware which often uses edge runtime
+  skipMiddlewareUrlNormalize: true,
+  skipTrailingSlashRedirect: true,
+  
+  // Set up security headers without middleware
   async headers() {
     return [
       {
@@ -37,15 +42,18 @@ const nextConfig = {
       },
     ];
   },
+  
   // Configure webpack for Bun compatibility
   webpack: (config) => {
-    // Add Bun-specific optimizations
+    // Exclude edge runtime and related polyfills
     config.resolve = {
       ...config.resolve,
       fallback: {
         ...config.resolve?.fallback,
         stream: false,
         crypto: false,
+        '@edge-runtime/primitives': false,
+        'edge-runtime': false,
       },
     };
 
@@ -57,6 +65,7 @@ const nextConfig = {
 
     return config;
   },
+  
   // Disable powered by header
   poweredByHeader: false,
 };
