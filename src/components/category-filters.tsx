@@ -14,10 +14,10 @@ export default function CategoryFilters({ selected, onChange }: Props) {
         <button
           key={cat}
           onClick={() => onChange(cat)}
-          className={`px-4 h-[36px] rounded text-sm font-medium ${
+          className={`px-5 h-[38px] text-sm font-medium rounded-md transition-all duration-300 ${
             selected === cat
-              ? 'bg-purple-600 text-white'
-              : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200'
+              ? 'bg-gradient-to-r from-purple-600 to-purple-800 text-white shadow-md shadow-purple-900/20'
+              : 'border border-gray-800 hover:border-purple-500/50 text-gray-300 hover:bg-purple-900/10'
           }`}
         >
           {cat}
