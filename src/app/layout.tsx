@@ -1,4 +1,4 @@
-import "@/polyfills";  // Import polyfills first
+import "@/lib/polyfills";  // Import polyfills from new consolidated location
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
