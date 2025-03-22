@@ -44,10 +44,5 @@ fi
 echo "Starting Next.js development server on port 5000 using optimized Bun runtime..."
 echo "==============================================================="
 
-# Apply custom startup options via Node.js wrapper for better performance
-if [ -f "custom-start.js" ]; then
-  exec bun run custom-start.js
-else
-  # Fallback to standard startup
-  exec bun run next dev -p 5000 --hostname 0.0.0.0 --turbo
-fi
+# Simple, direct Next.js startup
+exec bun run next dev -p 5000 --hostname 0.0.0.0 --turbo
