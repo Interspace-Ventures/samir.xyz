@@ -10,7 +10,8 @@
           "url_path": "/",
           "timeout": 180000,
           "prevent_capture_with_port": false,
-          "enable_port_browser": true
+          "enable_port_browser": true,
+          "port": 5000
         }
       ]
     }

@@ -27,19 +27,19 @@ const projects = [
   {
     name: "Interspace",
     description: "Over-engineered fintech and stratfin perspectives",
-    imageUrl: "/ventures-brands/interspace.png",
+    imageUrl: "/ventures-brands/interspace.svg",
     link: "https://posts.interspace.ventures",
   },
   {
     name: "Hey I'm Samir",
     description: "I drive business impact in fintech.",
-    imageUrl: "/ventures-brands/hey-im-samir.png",
+    imageUrl: "/ventures-brands/hey-im-samir.svg",
     link: "https://samir.xyz",
   },
   {
     name: "Perspectives",
     description: "Fintech & stratfin deep dives",
-    imageUrl: "/ventures-brands/samir-favicon.png",
+    imageUrl: "/ventures-brands/samir-favicon.svg",
     link: "https://perspectives.samir.xyz",
   },
 ];
