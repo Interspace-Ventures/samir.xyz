@@ -8,7 +8,8 @@
           "command": "./start.sh",
           "wait_for_port": 5000,
           "timeout": 120000,
-          "prevent_capture_with_port": false
+          "prevent_capture_with_port": false,
+          "enable_port_browser": true
         }
       ]
     }

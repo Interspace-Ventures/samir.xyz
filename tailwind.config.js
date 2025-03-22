@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: ["class"],
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
@@ -51,5 +51,5 @@ module.exports = {
       }
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [], // ESM doesn't support require, will need to be configured differently
 }
