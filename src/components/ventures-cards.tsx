@@ -27,7 +27,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
     <Link 
       href={link}
       target="_blank"
-      className="block group relative aspect-square overflow-hidden rounded-xl hover:shadow-lg transition-all duration-300 border border-gray-800 bg-gradient-to-br from-purple-950/50 to-black"
+      className="block group relative aspect-square overflow-hidden rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-700 hover:border-purple-800/50 bg-gradient-to-br from-purple-950/50 to-black"
     >
       <div className="relative w-full h-full">
         {!imageError ? (
@@ -64,7 +64,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
         )}
 
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute inset-0 bg-gradient-to-t from-purple-950/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="absolute bottom-0 left-0 right-0 p-6">
             <h3 className="text-white text-lg font-semibold mb-2">{name}</h3>
             <p className="text-gray-300 text-sm line-clamp-2">{description}</p>

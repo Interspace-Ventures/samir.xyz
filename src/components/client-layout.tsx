@@ -9,15 +9,16 @@ import { DebugStatus } from './debug-status'
 
 // Initial skeleton that matches server render exactly
 const LayoutSkeleton = () => (
-  <div className="min-h-screen bg-gray-900">
-    <div className="h-20" /> {/* Navbar space */}
+  <div className="min-h-screen bg-black">
+    <div className="h-20 bg-gradient-to-r from-gray-900 to-black border-b border-gray-800/30" /> {/* Navbar space */}
     <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
-      <div className="space-y-4">
-        <div className="h-8 w-2/3 bg-gray-800/50 rounded animate-pulse" />
-        <div className="h-4 w-1/2 bg-gray-800/30 rounded animate-pulse" />
+      <div className="space-y-6">
+        <div className="h-10 w-2/3 bg-gray-800/30 rounded-lg animate-pulse" />
+        <div className="h-5 w-1/2 bg-gray-800/20 rounded-lg animate-pulse" />
+        <div className="h-64 w-full bg-gradient-to-br from-gray-900/50 to-purple-900/10 rounded-xl animate-pulse" />
       </div>
     </main>
-    <footer className="mt-auto">
+    <footer className="mt-auto border-t border-gray-800/30 bg-gradient-to-t from-black to-gray-900/50">
       <div className="h-16" />
     </footer>
   </div>
@@ -49,7 +50,7 @@ export default function ClientLayout({
 
   return (
     <Client>
-      <div className="min-h-screen bg-gray-900" data-mounted="true">
+      <div className="min-h-screen bg-black" data-mounted="true">
         <ErrorBoundary name="Navbar">
           <Navbar />
         </ErrorBoundary>

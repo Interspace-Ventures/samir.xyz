@@ -12,12 +12,12 @@ const navItems = [
 ] as const
 
 const NavbarSkeleton = () => (
-  <div className="fixed top-0 left-0 right-0 z-50 h-20 border-b border-gray-800 bg-black/60 backdrop-blur-md">
+  <div className="fixed top-0 left-0 right-0 z-50 h-20 border-b border-gray-700/50 bg-gradient-to-b from-black to-gray-900/90 backdrop-blur-md">
     <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
-      <div className="h-8 w-1/3 bg-gray-800 rounded animate-pulse" />
+      <div className="h-8 w-1/3 bg-gray-800/50 rounded animate-pulse" />
       <div className="hidden md:flex items-center space-x-8">
         {Array(3).fill(null).map((_, i) => (
-          <div key={i} className="h-4 w-20 bg-gray-800 rounded animate-pulse" />
+          <div key={i} className="h-4 w-20 bg-gray-800/50 rounded animate-pulse" />
         ))}
       </div>
     </div>
@@ -38,7 +38,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-20 border-b border-gray-800 bg-black/60 backdrop-blur-md">
+    <div className="fixed top-0 left-0 right-0 z-50 h-20 border-b border-gray-700/50 bg-gradient-to-b from-black to-gray-900/90 backdrop-blur-md">
       <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
         <NextLink
           href="/"
@@ -59,7 +59,7 @@ export default function Navbar() {
                 hover:text-purple-400 whitespace-nowrap
                 ${pathname === item.href ? 'text-purple-400' : 'text-gray-300'}
                 after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full 
-                after:origin-left after:scale-x-0 after:bg-purple-400 after:transition-transform
+                after:origin-left after:scale-x-0 after:bg-purple-500 after:transition-transform
                 after:duration-300 after:ease-out
                 ${pathname === item.href ? 'after:scale-x-100' : ''}
                 hover:after:scale-x-100
@@ -75,7 +75,7 @@ export default function Navbar() {
           <ThemeToggle />
           <button
             onClick={() => setIsMenuOpen(prev => !prev)}
-            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-purple-900/30 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -90,6 +90,7 @@ export default function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
+                className="text-purple-400"
               >
                 <path d="M18 6 6 18" />
                 <path d="m6 6 12 12" />
@@ -106,6 +107,7 @@ export default function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
+                className="text-gray-300 hover:text-purple-400"
               >
                 <line x1="4" x2="20" y1="12" y2="12" />
                 <line x1="4" x2="20" y1="6" y2="6" />
@@ -117,7 +119,7 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-20 left-0 right-0 z-50 bg-black/90 border-b border-gray-800 py-4 px-6 space-y-2 md:hidden">
+        <div className="absolute top-20 left-0 right-0 z-50 bg-gradient-to-b from-black/95 to-gray-900/95 backdrop-blur-md border-b border-gray-700/50 py-4 px-6 space-y-2 md:hidden shadow-lg">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
@@ -127,6 +129,7 @@ export default function Navbar() {
                 block py-4 text-base font-medium tracking-wide transition-colors
                 hover:text-purple-400 whitespace-nowrap
                 ${pathname === item.href ? 'text-purple-400' : 'text-gray-300'}
+                ${pathname === item.href ? 'border-l-2 border-purple-500 pl-4' : ''}
               `}
             >
               {item.label}
