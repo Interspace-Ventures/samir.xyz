@@ -1,8 +1,4 @@
 import Image from 'next/image';
-import ClientWrapper from '../components/client-wrapper';
-import PortfolioCards from '../components/portfolio-cards';
-import StatsSection from '../components/stats-section';
-import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -46,28 +42,6 @@ export default function HomePage() {
             </p>
           </div>
         </div>
-      </section>
-      
-      {/* Stats Section */}
-      <section className="py-10">
-        <h2 className="text-2xl font-bold mb-6 text-white">Investment Track Record</h2>
-        <StatsSection />
-      </section>
-      
-      {/* Portfolio Section */}
-      <section className="py-10">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-white">Featured Investments</h2>
-          <Link 
-            href="/portfolio" 
-            className="text-purple-400 hover:text-purple-300 hover:underline transition-colors"
-          >
-            View all →
-          </Link>
-        </div>
-        <ClientWrapper>
-          <PortfolioCards />
-        </ClientWrapper>
       </section>
     </div>
   );
