@@ -1,12 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false, // Avoid double renders
   output: 'standalone',
   distDir: '.next',
+  
+  // Minimal experimental config with only supported features
+  experimental: {
+    optimizeCss: true,
+  },
+  
+  // External packages configuration (moved from experimental)
+  serverExternalPackages: [],
+  
+  // Keep this enabled for routing
+  useFileSystemPublicRoutes: true,
   
   // Configure image optimization and domains
   images: {
     unoptimized: true,
+    formats: ['image/webp'],
     domains: ['*'],
     remotePatterns: [
       {
@@ -16,23 +28,10 @@ const nextConfig = {
     ],
   },
   
-  // Configure experimental features for Next.js 15
-  experimental: {
-    // Disable server actions for better compatibility
-    serverActions: {
-      enabled: false,
-    },
-    // Other experimental features
-    optimizePackageImports: ['lucide-react'],
-  },
-  
   // Disable middleware which often uses edge runtime
   skipMiddlewareUrlNormalize: true,
   skipTrailingSlashRedirect: true,
   
-  // Allow dev origins for testing
-  allowedDevOrigins: ["d2193f08-b592-45ce-b730-8dc2c7ef133c-00-1f1txs3yeigba.janeway.replit.dev"],
-
   // Set up security headers without middleware
   async headers() {
     return [
@@ -48,9 +47,9 @@ const nextConfig = {
     ];
   },
   
-  // Configure webpack for Bun compatibility
-  webpack: (config) => {
-    // Exclude edge runtime and related polyfills
+  // Configure webpack for Bun compatibility and to fully disable RSC
+  webpack: (config, { isServer }) => {
+    // Exclude RSC and edge runtime related modules
     config.resolve = {
       ...config.resolve,
       fallback: {
@@ -59,7 +58,20 @@ const nextConfig = {
         crypto: false,
         '@edge-runtime/primitives': false,
         'edge-runtime': false,
+        'react-server-dom-webpack': false,
+        'next/dist/compiled/react-server-dom-webpack/client': false,
+        'next/dist/compiled/react-server-dom-webpack/server.node': false,
+        'next/dist/compiled/react-server-dom-webpack/client.browser': false,
+        'next/dist/compiled/react-server-dom-webpack/client.edge': false,
+        'next/dist/compiled/react-server-dom-webpack': false,
       },
+    };
+
+    // Add alias for React to ensure consistent version
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'react': 'react',
+      'react-dom': 'react-dom',
     };
 
     // Better watch options for development
@@ -67,6 +79,16 @@ const nextConfig = {
       poll: 1000,
       aggregateTimeout: 300,
     };
+
+    // Add rule to ignore RSC imports
+    config.module = config.module || {};
+    config.module.rules = config.module.rules || [];
+    
+    // Add a rule to handle RSC imports
+    config.module.rules.push({
+      test: /react-server-dom-webpack/,
+      use: 'null-loader',
+    });
 
     return config;
   },

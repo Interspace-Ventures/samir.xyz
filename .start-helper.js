@@ -1,16 +1,3 @@
-#!/bin/bash
-
-# Clean startup script for Next.js with polyfills
-echo "Starting Next.js application..."
-
-# Set environment variables
-export NEXT_TELEMETRY_DISABLED=1
-export NODE_ENV=development
-export NEXT_RUNTIME="nodejs"
-export PORT=5000
-
-# Create a simple dedicated startup script
-cat > .start-helper.js << 'EOF'
 // Next.js startup script with polyfills
 import { spawn } from 'child_process';
 
@@ -79,8 +66,3 @@ process.on('SIGTERM', () => nextProcess.kill('SIGTERM'));
 nextProcess.on('exit', (code) => {
   process.exit(code);
 });
-EOF
-
-# Start Next.js using our helper script
-echo "Starting Next.js development server on port 5000..."
-exec bun .start-helper.js

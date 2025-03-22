@@ -1,84 +1,72 @@
-import Image from "next/image"
-import Link from "next/link"
-
-export default function Page() {
+export default function HomePage() {
   return (
-    <div className="transform-gpu">
-      <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
-        <div className="flex-1 space-y-6 sm:space-y-8">
-          <div className="flex items-center gap-4 sm:gap-8">
-            <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
-              <Image
-                src="/images/profile/hero-main.png"
-                alt="Samir's profile"
-                fill
-                className="object-cover rounded-lg"
-                priority
-                sizes="(max-width: 768px) 96px, 128px"
-              />
-            </div>
-            <div className="space-y-2 sm:space-y-4">
-              <h1 
-                className="text-3xl sm:text-4xl md:text-5xl font-bold"
-              >
-                Hey - I'm Samir.
-              </h1>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">
-                I drive business impact at fintechs.
-              </h2>
-            </div>
-          </div>
+    <div className="max-w-4xl mx-auto py-8">
+      <section className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">Hey - I'm Samir.</h1>
+        <h2 className="text-xl font-bold text-purple-600 dark:text-purple-400 mb-4">
+          I drive business impact at fintechs.
+        </h2>
+        
+        <div className="space-y-4 text-gray-700 dark:text-gray-200">
+          <p>
+            Today, I am leading Strategic Finance for the Financial Partnerships team at 
+            <a href="https://cash.app" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline"> Cash App </a> 
+            where we're expanding financial access to help users do more with their money.
+          </p>
 
-          <div className="space-y-4 sm:space-y-6 text-gray-700 dark:text-gray-200">
-            <p className="text-sm sm:text-base md:text-lg">
-              Today, I am leading Strategic Finance for the Financial Partnerships team at{" "}
-              <Link href="https://cash.app" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                Cash App
-              </Link>{" "}
-              where we're expanding financial access to help users do more with their money.
-            </p>
-
-            <p className="text-sm sm:text-base md:text-lg">
-              Prior to that, I drove financial partnerships at{" "}
-              <Link href="https://unit.co" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                Unit
-              </Link>
-              , which embeds financial features into products. Before that, I built and led the Strategic Finance function at{" "}
-              <Link href="https://chime.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                Chime
-              </Link>
-              . Earlier, I was the first finance hire at{" "}
-              <Link href="https://sift.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                Sift
-              </Link>
-              . I got my start in investment banking in the Financial Institutions Group at{" "}
-              <Link href="https://jpmorgan.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                JP Morgan
-              </Link>
-              {" "}covering market structure and asset management.
-            </p>
-            <p className="text-sm sm:text-base md:text-lg">
-              Outside of work, I write over-engineered fintech threads on{" "}
-              <Link href="https://x.com/heyinterspace" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                Twitter
-              </Link>
-              , share perspectives on{" "}
-              <Link href="https://perspectives.samir.xyz" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                Substack
-              </Link>{" "}
-              and write fintech & stratfin posts at{" "}
-              <Link href="https://posts.interspace.ventures" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
-                Interspace
-              </Link>
-              . I also create over-engineered apps and ideas at{" "}
-              <Link href="/ventures" className="text-purple-600 dark:text-purple-400 hover:underline">
-                Interspace Ventures
-              </Link>
-              .
-            </p>
+          <p>
+            Prior to that, I drove financial partnerships at 
+            <a href="https://unit.co" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline"> Unit</a>, 
+            which embeds financial features into products. Before that, I built and led the Strategic Finance function at 
+            <a href="https://chime.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline"> Chime</a>. 
+            Earlier, I was the first finance hire at 
+            <a href="https://sift.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline"> Sift</a>. 
+          </p>
+        </div>
+      </section>
+      
+      <section className="mb-8">
+        <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+          <h2 className="text-xl font-bold mb-4">Explore More</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-white dark:bg-gray-700 p-4 rounded shadow-sm">
+              <h3 className="font-bold mb-2">Portfolio</h3>
+              <p className="text-sm">View showcase of professional projects</p>
+              <a href="/portfolio" className="mt-4 inline-block text-purple-600 dark:text-purple-400 hover:underline">
+                Browse Portfolio →
+              </a>
+            </div>
+            <div className="bg-white dark:bg-gray-700 p-4 rounded shadow-sm">
+              <h3 className="font-bold mb-2">Ventures</h3>
+              <p className="text-sm">Explore business ventures and investments</p>
+              <a href="/ventures" className="mt-4 inline-block text-purple-600 dark:text-purple-400 hover:underline">
+                See Ventures →
+              </a>
+            </div>
+            <div className="bg-white dark:bg-gray-700 p-4 rounded shadow-sm">
+              <h3 className="font-bold mb-2">Debug</h3>
+              <p className="text-sm">View technical diagnostics about the site</p>
+              <a href="/debug" className="mt-4 inline-block text-purple-600 dark:text-purple-400 hover:underline">
+                Debug Page →
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+      
+      <section>
+        <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg">
+          <h2 className="text-xl font-bold mb-2">Connect</h2>
+          <p className="mb-4">
+            I write fintech threads on 
+            <a href="https://x.com/heyinterspace" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline"> Twitter</a>, 
+            share perspectives on 
+            <a href="https://perspectives.samir.xyz" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline"> Substack</a>, 
+            and create over-engineered apps and ideas at 
+            <a href="/ventures" className="text-purple-600 dark:text-purple-400 hover:underline"> Interspace Ventures</a>.
+          </p>
+        </div>
+      </section>
     </div>
-  )
+  );
 }
