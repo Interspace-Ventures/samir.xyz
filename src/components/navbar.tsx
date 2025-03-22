@@ -12,12 +12,12 @@ const navItems = [
 ] as const
 
 const NavbarSkeleton = () => (
-  <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-background border-b border-muted">
+  <div className="fixed top-0 left-0 right-0 z-50 h-20 border-b border-gray-800 bg-black/60 backdrop-blur-md">
     <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
-      <div className="h-8 w-1/3 bg-muted rounded animate-pulse" />
+      <div className="h-8 w-1/3 bg-gray-800 rounded animate-pulse" />
       <div className="hidden md:flex items-center space-x-8">
         {Array(3).fill(null).map((_, i) => (
-          <div key={i} className="h-4 w-20 bg-muted rounded animate-pulse" />
+          <div key={i} className="h-4 w-20 bg-gray-800 rounded animate-pulse" />
         ))}
       </div>
     </div>
@@ -38,11 +38,11 @@ export default function Navbar() {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-20 bg-background border-b border-muted">
+    <div className="fixed top-0 left-0 right-0 z-50 h-20 border-b border-gray-800 bg-black/60 backdrop-blur-md">
       <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
         <NextLink
           href="/"
-          className="text-2xl font-bold text-foreground leading-none hover:opacity-80 transition-opacity"
+          className="text-2xl font-bold text-white leading-none hover:opacity-80 transition-opacity"
           prefetch={false}
         >
           Hey - I'm Samir
@@ -56,10 +56,10 @@ export default function Navbar() {
               prefetch={false}
               className={`
                 relative text-base font-medium tracking-wide transition-colors
-                hover:text-primary whitespace-nowrap
-                ${pathname === item.href ? 'text-primary' : 'text-muted-foreground'}
+                hover:text-purple-400 whitespace-nowrap
+                ${pathname === item.href ? 'text-purple-400' : 'text-gray-300'}
                 after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full 
-                after:origin-left after:scale-x-0 after:bg-primary after:transition-transform
+                after:origin-left after:scale-x-0 after:bg-purple-400 after:transition-transform
                 after:duration-300 after:ease-out
                 ${pathname === item.href ? 'after:scale-x-100' : ''}
                 hover:after:scale-x-100
@@ -75,7 +75,7 @@ export default function Navbar() {
           <ThemeToggle />
           <button
             onClick={() => setIsMenuOpen(prev => !prev)}
-            className="p-2 hover:bg-muted/10 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -117,7 +117,7 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-20 left-0 right-0 z-50 bg-background border-b border-muted py-4 px-6 space-y-2 md:hidden">
+        <div className="absolute top-20 left-0 right-0 z-50 bg-black/90 border-b border-gray-800 py-4 px-6 space-y-2 md:hidden">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
@@ -125,8 +125,8 @@ export default function Navbar() {
               prefetch={false}
               className={`
                 block py-4 text-base font-medium tracking-wide transition-colors
-                hover:text-primary whitespace-nowrap
-                ${pathname === item.href ? 'text-primary' : 'text-muted-foreground'}
+                hover:text-purple-400 whitespace-nowrap
+                ${pathname === item.href ? 'text-purple-400' : 'text-gray-300'}
               `}
             >
               {item.label}
