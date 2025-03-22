@@ -3,17 +3,21 @@ const nextConfig = {
   reactStrictMode: false,
   distDir: '.next',
   
-  // Configurations for both Turbopack and Webpack
+  // Configurations for Turbopack
   experimental: {
     optimizeCss: true,
+    // Fully disable source maps to prevent hydration errors
+    sourceMaps: false,
+    // Remove the Webpack build indicator to avoid client-side noise
+    webpackBuildWorker: false,
+    
     // Turbopack configuration
     turbo: {
-      resolveAlias: {
-        // Add necessary aliases for Turbopack if needed
-      },
-      // Rules that match Webpack configuration
+      // Disable source maps in Turbopack
+      sourceMaps: false,
+      // Simplified configuration to avoid hydration conflicts
       rules: {
-        // Ensure consistent behavior with Webpack
+        // Empty rules to avoid webpack-specific conflicts
       }
     }
   },
@@ -34,11 +38,11 @@ const nextConfig = {
     ],
   },
   
-  // Improved origins configuration to fix cross-origin issues in Replit
+  // Fix cross-origin issues in Replit
   crossOrigin: 'anonymous',
   assetPrefix: process.env.NODE_ENV === 'production' ? undefined : '',
   
-  // Allow all origins for development with proper formatting
+  // Allow all origins for development
   allowedDevOrigins: [
     'localhost:*',
     '*.replit.dev',
@@ -46,7 +50,7 @@ const nextConfig = {
     '*.janeway.replit.dev'
   ],
   
-  // Basic headers
+  // CORS headers for development
   async headers() {
     return [
       {
@@ -69,19 +73,28 @@ const nextConfig = {
     ];
   },
   
-  // Disable source maps to prevent warnings
+  // Additional optimizations
   productionBrowserSourceMaps: false,
-  
-  // Disable powered by header
   poweredByHeader: false,
+  swcMinify: true, // Use SWC for minification
   
-  // Enhanced webpack configuration for better client-side handling
-  // This will be used when NOT using Turbopack (e.g., in production builds)
+  // Simplified webpack configuration to avoid conflicts with Turbopack
   webpack: (config, { isServer }) => {
-    // Disable source maps
+    // Completely disable source maps
     config.devtool = false;
     
-    // Explicitly handle webpack 5 features
+    // Disable all source map related loaders
+    config.module.rules.forEach(rule => {
+      if (rule.use && Array.isArray(rule.use)) {
+        rule.use.forEach(loader => {
+          if (loader.options && loader.options.sourceMap) {
+            loader.options.sourceMap = false;
+          }
+        });
+      }
+    });
+    
+    // Fallbacks for client-side bundling
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
