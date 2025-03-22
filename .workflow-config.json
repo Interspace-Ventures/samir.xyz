@@ -2,8 +2,8 @@
   "name": "Start application",
   "tasks": [
     {
-      "name": "Start Simple Server",
-      "command": "bun run simple-server.js",
+      "name": "Start Portfolio Website",
+      "command": "./start.sh",
       "wait_for_port": 5000
     }
   ]
