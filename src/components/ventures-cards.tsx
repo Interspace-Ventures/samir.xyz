@@ -14,6 +14,11 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
   const [imageError, setImageError] = useState(false) // Start with error false to attempt loading images
   const [imageLoaded, setImageLoaded] = useState(false)
 
+  // Debug: Log the component mounting and image URL
+  React.useEffect(() => {
+    console.log(`VenturesCard mounted for ${name} with imageUrl: ${imageUrl}`)
+  }, [name, imageUrl])
+
   // Generate consistent gradient colors based on the name of the venture
   const getGradientColors = (name: string) => {
     const hash = name.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
@@ -47,6 +52,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
   }
 
   const handleImageLoad = () => {
+    console.log(`Image loaded successfully for ${name}: ${imageUrl}`)
     setImageLoaded(true)
     setImageError(false)
   }
