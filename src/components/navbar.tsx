@@ -38,7 +38,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-20 border-b border-gray-700/50 bg-gradient-to-b from-black to-gray-900/90 backdrop-blur-md">
+    <div className="fixed top-0 left-0 right-0 z-50 h-24 md:h-28 border-b border-gray-700/50 bg-gradient-to-b from-black to-gray-900/90 backdrop-blur-md shadow-lg shadow-black/30">
       <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
         <NextLink
           href="/"
