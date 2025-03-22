@@ -3,5 +3,5 @@
 # Wrapper script for the actual start script
 # This preserves backward compatibility while allowing us to refactor
 
-# Execute the new start script
-exec ./start-new.sh
+# Execute the direct start script with no polyfills
+exec ./start-direct.sh

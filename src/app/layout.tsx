@@ -1,9 +1,6 @@
-import "@/lib/polyfills.ts";  // Import TypeScript polyfills from new consolidated location
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
-import { ErrorBoundary } from "@/components/error-boundary";
-import BasicLayout from "@/components/basic-layout"; // Use simpler layout
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -31,7 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Using a simpler layout to avoid RSC/webpack issues
+// Using a simpler layout without polyfills or client components to avoid hydration issues
 export default function RootLayout({
   children,
 }: {
@@ -44,11 +41,31 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
-        <ErrorBoundary name="MainLayout">
-          <BasicLayout>
+        <div className="min-h-screen bg-white dark:bg-gray-900">
+          <header className="p-4 bg-gray-100 dark:bg-gray-800">
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-2xl font-bold">Portfolio Site</h1>
+              <nav className="mt-2">
+                <ul className="flex space-x-4">
+                  <li><a href="/" className="text-blue-600 dark:text-blue-400 hover:underline">Home</a></li>
+                  <li><a href="/portfolio" className="text-blue-600 dark:text-blue-400 hover:underline">Portfolio</a></li>
+                  <li><a href="/ventures" className="text-blue-600 dark:text-blue-400 hover:underline">Ventures</a></li>
+                  <li><a href="/debug" className="text-blue-600 dark:text-blue-400 hover:underline">Debug</a></li>
+                </ul>
+              </nav>
+            </div>
+          </header>
+
+          <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8">
             {children}
-          </BasicLayout>
-        </ErrorBoundary>
+          </main>
+
+          <footer className="mt-auto p-4 bg-gray-100 dark:bg-gray-800 text-center">
+            <div className="max-w-4xl mx-auto">
+              <p className="text-sm text-gray-600 dark:text-gray-400">© {new Date().getFullYear()} Portfolio Site</p>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
