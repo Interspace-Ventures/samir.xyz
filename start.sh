@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# v3.2.0 - Performance-optimized startup script with modular configuration
-echo "Starting Next.js application v3.2.0..."
+# v3.2.2 - Performance-optimized startup script with modular configuration
+echo "Starting Next.js application v3.2.2..."
 
 # Set critical environment variables
 export NEXT_TELEMETRY_DISABLED=1

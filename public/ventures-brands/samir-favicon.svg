@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient background -->
+  <rect width="200" height="200" rx="20" fill="url(#gradient)" />
+  
+  <!-- Text elements -->
+  <text x="100" y="110" font-family="Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="white">S</text>
+  
+  <!-- Decorative elements - perspective icon shape -->
+  <path d="M130 60L160 80L130 100L100 80L130 60Z" fill="rgba(255, 255, 255, 0.2)" />
+  <path d="M100 80L130 100L130 140L100 120L100 80Z" fill="rgba(255, 255, 255, 0.15)" />
+  <path d="M130 100L160 80L160 120L130 140L130 100Z" fill="rgba(255, 255, 255, 0.1)" />
+  
+  <!-- Define the gradient -->
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4C2A9B" />
+      <stop offset="100%" stop-color="#1A0B36" />
+    </linearGradient>
+  </defs>
+</svg>

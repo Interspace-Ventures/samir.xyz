@@ -1,14 +1,14 @@
 {
-  "version": "3.2.0",
+  "version": "3.2.2",
   "name": "Portfolio Website",
   "description": "Personal portfolio website showcasing professional projects through an AI-enhanced interactive design",
   "lastUpdated": "2025-03-22",
   "changes": [
-    "Advanced modular configuration structure for better organization",
-    "Simplified server startup for improved reliability",
-    "Moved documentation to dedicated docs directory with symlinks",
-    "Restructured files for clean root directory organization",
-    "Improved startup time to 1.1s (down from 2.2s)",
-    "Reduced page load time to ~90ms (down from 2.5s)"
+    "Increased navbar height and improved spacing",
+    "Applied Inter font throughout the site for consistent typography",
+    "Added shadow to navbar for better visual hierarchy",
+    "Restructured home page to focus solely on About content",
+    "Added onClick handler to mobile menu items for improved UX",
+    "Updated padding on main content area to prevent navbar overlap"
   ]
 }
