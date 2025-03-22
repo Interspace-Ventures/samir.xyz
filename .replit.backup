@@ -1,0 +1,27 @@
+modules = ["nodejs-20"]
+run = "./start.sh"
+
+[nix]
+channel = "stable-24_05"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+run = ["sh", "-c", "./start.sh"]
+build = ["sh", "-c", "node node_modules/.bin/next build"]
+
+[workflows]
+runButton = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./start.sh"
