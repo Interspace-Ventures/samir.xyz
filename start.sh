@@ -44,5 +44,6 @@ fi
 echo "Starting Next.js development server on port 5000 using optimized Bun runtime..."
 echo "==============================================================="
 
-# Simple, direct Next.js startup
+# Simple, direct Next.js startup with explicit host binding
+echo "Using address: http://0.0.0.0:5000"
 exec bun run next dev -p 5000 --hostname 0.0.0.0 --turbo

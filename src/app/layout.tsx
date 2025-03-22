@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { ErrorBoundary } from "../components/error-boundary";
+import { ThemeProvider } from "../components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Samir's Portfolio",
@@ -16,16 +17,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className="min-h-screen bg-background flex flex-col">
-        <ErrorBoundary name="Navbar">
-          <Navbar />
-        </ErrorBoundary>
-        <div className="flex-grow pt-20">
-          {children}
-        </div>
-        <ErrorBoundary name="Footer">
-          <Footer />
-        </ErrorBoundary>
+      <body suppressHydrationWarning className="min-h-screen bg-background text-foreground flex flex-col">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ErrorBoundary name="Navbar">
+            <Navbar />
+          </ErrorBoundary>
+          <div className="flex-grow pt-20">
+            {children}
+          </div>
+          <ErrorBoundary name="Footer">
+            <Footer />
+          </ErrorBoundary>
+        </ThemeProvider>
       </body>
     </html>
   );
