@@ -1,8 +1,8 @@
 "use client"
 
 import React from 'react'
-import { ErrorBoundary } from '@/components/error-boundary'
-import { companies, categories } from '@/components/data/portfolio'
+import { ErrorBoundary } from '../../components/error-boundary'
+import { companies, categories } from '../../components/data/portfolio'
 
 export default function Portfolio() {
   const [selectedCategory, setSelectedCategory] = React.useState<typeof categories[number]>('All')
