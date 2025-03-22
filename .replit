@@ -1,4 +1,4 @@
-modules = ["bun"]
+modules = ["bun", "nodejs-20"]
 run = "bun run dev"
 
 [nix]

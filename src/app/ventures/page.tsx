@@ -1,8 +1,7 @@
 "use client";
 
-import { VenturesCard } from "@/components/ventures-cards";
+import React from "react";
 import { ErrorBoundary } from "@/components/error-boundary";
-import { Client } from "react-hydration-provider";
 
 const projects = [
   {
@@ -44,15 +43,70 @@ const projects = [
   },
 ];
 
-export default function Ventures() {
+// Simple venture card component
+function SimpleVentureCard({ name, description, imageUrl, link }: {
+  name: string;
+  description: string;
+  imageUrl: string;
+  link: string;
+}) {
   return (
-    <Client>
+    <a 
+      href={link} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="block bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1"
+    >
+      <div className="p-6">
+        <div className="flex items-center space-x-4 mb-4">
+          <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+            <span className="text-xl">{name.charAt(0)}</span>
+          </div>
+          <h3 className="font-bold">{name}</h3>
+        </div>
+        <p className="text-gray-700 dark:text-gray-300">{description}</p>
+      </div>
+    </a>
+  );
+}
+
+export default function Ventures() {
+  const [mounted, setMounted] = React.useState(false);
+  
+  React.useEffect(() => {
+    setMounted(true);
+    console.log('Ventures page mounted');
+  }, []);
+
+  if (!mounted) {
+    return (
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Interspace Ventures
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground">
+          <p className="text-lg md:text-xl">
+            Loading venture projects...
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="h-48 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <ErrorBoundary name="VenturesPage">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Interspace Ventures
+          </h1>
+          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-200">
             I create apps and concepts by coding at the speed of thought using
             Replit.
           </p>
@@ -64,11 +118,11 @@ export default function Ventures() {
               key={project.name}
               name={`VenturesCard-${project.name}`}
             >
-              <VenturesCard {...project} priority={true} />
+              <SimpleVentureCard {...project} />
             </ErrorBoundary>
           ))}
         </div>
       </div>
-    </Client>
+    </ErrorBoundary>
   );
 }
