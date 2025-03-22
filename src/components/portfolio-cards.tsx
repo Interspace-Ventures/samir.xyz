@@ -1,17 +1,24 @@
 "use client"
 
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { companies, categories } from './data/portfolio'
 import type { Company } from './types'
 import { ErrorBoundary } from './error-boundary'
 
+// Simplified company logo component with better client-side handling
 const CompanyLogo = ({ company }: { company: Company }) => {
   const [loaded, setLoaded] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // Only run on the client after hydration
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <div className="relative h-[80px] w-[200px]">
-      {/* Server-side rendered static content - always the same on first render */}
+      {/* Server-side and initial client render placeholder */}
       <div className="absolute inset-0 flex items-center justify-center">
         {company.logo ? (
           <div className="bg-purple-100 dark:bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
@@ -22,8 +29,8 @@ const CompanyLogo = ({ company }: { company: Company }) => {
         )}
       </div>
 
-      {/* Client-side only image loading */}
-      {company.logo && (
+      {/* Client-side only image loading - only processed after mounting */}
+      {mounted && company.logo && (
         <div 
           className="absolute inset-0" 
           style={{ opacity: loaded ? 1 : 0 }}
@@ -87,6 +94,19 @@ const CompanyName = ({ name }: { name: string }) => (
 
 export default function PortfolioCards() {
   const [category, setCategory] = useState<typeof categories[number]>('All')
+  const [mounted, setMounted] = useState(false)
+  
+  // Add client-side hydration safety
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  
+  // Simplified filter function to reduce complexity during hydration
+  const filteredCompanies = React.useMemo(() => {
+    return companies.filter((company) => 
+      category === 'All' || company.category === category
+    )
+  }, [category])
 
   return (
     <div className="w-full">
@@ -107,13 +127,23 @@ export default function PortfolioCards() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {companies
-          .filter((company) => category === 'All' || company.category === category)
-          .map((company) => (
+        {mounted ? (
+          // Only render complex components after client-side hydration
+          filteredCompanies.map((company) => (
             <ErrorBoundary key={company.name} name={`CompanyCard-${company.name}`}>
               <CompanyCard company={company} />
             </ErrorBoundary>
-          ))}
+          ))
+        ) : (
+          // Show simple placeholders during server-side render and initial hydration
+          companies.slice(0, 6).map((company, index) => (
+            <div key={index} className="h-[160px] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-white shadow-sm">
+              <div className="h-full flex items-center justify-center">
+                <div className="bg-purple-100 dark:bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   )
