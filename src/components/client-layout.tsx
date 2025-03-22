@@ -9,12 +9,12 @@ import { DebugStatus } from './debug-status'
 
 // Initial skeleton that matches server render exactly
 const LayoutSkeleton = () => (
-  <div className="min-h-screen">
+  <div className="min-h-screen bg-gray-900">
     <div className="h-20" /> {/* Navbar space */}
     <main className="flex-grow max-w-4xl mx-auto px-6 w-full py-8 mt-20">
       <div className="space-y-4">
-        <div className="h-8 w-2/3" />
-        <div className="h-4 w-1/2" />
+        <div className="h-8 w-2/3 bg-gray-800/50 rounded animate-pulse" />
+        <div className="h-4 w-1/2 bg-gray-800/30 rounded animate-pulse" />
       </div>
     </main>
     <footer className="mt-auto">
@@ -49,7 +49,7 @@ export default function ClientLayout({
 
   return (
     <Client>
-      <div className="min-h-screen bg-white dark:bg-gray-900" data-mounted="true">
+      <div className="min-h-screen bg-gray-900" data-mounted="true">
         <ErrorBoundary name="Navbar">
           <Navbar />
         </ErrorBoundary>

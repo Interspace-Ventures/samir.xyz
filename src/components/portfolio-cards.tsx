@@ -21,9 +21,9 @@ const CompanyLogo = ({ company }: { company: Company }) => {
       {/* Server-side and initial client render placeholder */}
       <div className="absolute inset-0 flex items-center justify-center">
         {company.logo ? (
-          <div className="bg-purple-100 dark:bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
+          <div className="bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
         ) : (
-          <span className="text-gray-600 dark:text-gray-600 text-lg font-medium">
+          <span className="text-gray-300 text-lg font-medium">
             {company.name}
           </span>
         )}
@@ -52,7 +52,7 @@ const CompanyLogo = ({ company }: { company: Company }) => {
 
 const CompanyCard = ({ company }: { company: Company }) => {
   return (
-    <div className="h-[160px] rounded-lg border border-gray-800 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1">
+    <div className="h-[160px] rounded-lg border border-gray-700 bg-gradient-to-br from-gray-800 to-gray-900 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-purple-800/50">
       <a
         href={company.website || `https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
@@ -61,7 +61,7 @@ const CompanyCard = ({ company }: { company: Company }) => {
       >
         {(company.markup || company.acquired) && (
           <div className={`absolute top-3 right-3 text-xs px-2 py-1 rounded-md text-white ${
-            company.acquired ? 'bg-gray-700' : 'bg-purple-600'
+            company.acquired ? 'bg-green-600/80 border border-green-500/50' : 'bg-purple-600/80 border border-purple-500/50'
           }`}>
             {company.acquired ? 'Acquired' : 'Markup'}
           </div>
@@ -76,11 +76,11 @@ const CompanyCard = ({ company }: { company: Company }) => {
 }
 
 const Placeholder = () => (
-  <div className="bg-purple-100 dark:bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
+  <div className="bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
 );
 
 const CompanyName = ({ name }: { name: string }) => (
-  <span className="text-gray-600 dark:text-gray-600 text-lg font-medium">
+  <span className="text-gray-300 text-lg font-medium">
     {name}
   </span>
 );
@@ -131,7 +131,7 @@ export default function PortfolioCards() {
         ) : (
           // Show simple placeholders during server-side render and initial hydration
           companies.slice(0, 6).map((company, index) => (
-            <div key={index} className="h-[160px] rounded-lg border border-gray-800 bg-white shadow-sm">
+            <div key={index} className="h-[160px] rounded-lg border border-gray-700 bg-gradient-to-br from-gray-800 to-gray-900 shadow-md">
               <div className="h-full flex items-center justify-center">
                 <div className="bg-purple-900/30 h-12 w-32 rounded animate-pulse" />
               </div>
