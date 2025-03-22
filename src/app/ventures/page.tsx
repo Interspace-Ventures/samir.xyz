@@ -9,37 +9,37 @@ const projects = [
     name: "2 Days Early",
     description:
       "Current and former Chime operator community built by operators for operators",
-    imageUrl: "/ventures-brands/2de-interspace.svg",
+    imageUrl: "/ventures-brands/2de-interspace.png",
     link: "https://2daysearly.com",
   },
   {
     name: "Solo",
     description: "The first design-forward climbing app",
-    imageUrl: "/ventures-brands/solo-logo-2025.svg",
+    imageUrl: "/ventures-brands/solo-logo-2025.png",
     link: "https://gosolo.nyc",
   },
   {
     name: "Predictive:film",
     description: "AI-powered film predictions",
-    imageUrl: "/ventures-brands/predictive-film-icon.svg",
+    imageUrl: "/ventures-brands/predictive-film-icon.png",
     link: "https://predictive.film",
   },
   {
     name: "Interspace",
     description: "Over-engineered fintech and stratfin perspectives",
-    imageUrl: "/ventures-brands/interspace.svg",
+    imageUrl: "/ventures-brands/interspace.png",
     link: "https://posts.interspace.ventures",
   },
   {
     name: "Hey I'm Samir",
     description: "I drive business impact in fintech.",
-    imageUrl: "/ventures-brands/hey-im-samir.svg",
+    imageUrl: "/ventures-brands/hey-im-samir.png",
     link: "https://samir.xyz",
   },
   {
     name: "Perspectives",
     description: "Fintech & stratfin deep dives",
-    imageUrl: "/ventures-brands/samir-favicon.svg",
+    imageUrl: "/ventures-brands/samir-favicon.png",
     link: "https://perspectives.samir.xyz",
   },
 ];
