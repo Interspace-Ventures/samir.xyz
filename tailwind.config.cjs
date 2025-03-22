@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#6d28d9', // purple-700
+        primary: '#6d28d9',
+        purple: {
           50: '#faf5ff',
           100: '#f3e8ff',
           200: '#e9d5ff',
@@ -20,9 +20,7 @@ module.exports = {
           800: '#6b21a8',
           900: '#581c87',
           950: '#3b0764',
-        },
-        background: '#ffffff',
-        foreground: '#0f1419',
+        }
       },
       keyframes: {
         "fade-in": {
@@ -40,7 +38,5 @@ module.exports = {
       }
     },
   },
-  plugins: [
-    require('tailwindcss-animate'),
-  ]
+  plugins: []
 }
