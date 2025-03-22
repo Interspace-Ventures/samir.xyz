@@ -3,19 +3,13 @@ const nextConfig = {
   reactStrictMode: false,
   distDir: '.next',
   
-  // Configurations for Turbopack
+  // Configurations for Turbopack - v3.0.0
+  // Critical fix for client-side hydration issues in Replit environment
   experimental: {
     optimizeCss: true,
-    // Fully disable source maps to prevent hydration errors
-    sourceMaps: false,
-    // Remove the Webpack build indicator to avoid client-side noise
-    webpackBuildWorker: false,
-    
-    // Turbopack configuration
+    // Carefully configured Turbopack settings to prevent hydration errors
     turbo: {
-      // Disable source maps in Turbopack
-      sourceMaps: false,
-      // Simplified configuration to avoid hydration conflicts
+      // Minimal configuration to ensure compatibility with Bun runtime
       rules: {
         // Empty rules to avoid webpack-specific conflicts
       }
@@ -73,10 +67,9 @@ const nextConfig = {
     ];
   },
   
-  // Additional optimizations
+  // Additional optimizations - v3.0.0
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
-  swcMinify: true, // Use SWC for minification
   
   // Simplified webpack configuration to avoid conflicts with Turbopack
   webpack: (config, { isServer }) => {
