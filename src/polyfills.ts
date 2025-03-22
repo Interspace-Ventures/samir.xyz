@@ -1,4 +1,7 @@
 // Polyfill for TextEncoderStream and TextDecoderStream when running in Bun
+// Define and immediately apply polyfills for Stream API components
+
+// TextEncoderStream polyfill
 if (typeof globalThis.TextEncoderStream === 'undefined') {
   console.log("Polyfilling TextEncoderStream for Bun environment");
   class TextEncoderStreamPolyfill {
@@ -19,8 +22,14 @@ if (typeof globalThis.TextEncoderStream === 'undefined') {
 
   // @ts-ignore - Polyfill global
   globalThis.TextEncoderStream = TextEncoderStreamPolyfill;
+  // Also add it to the window if available (client-side)
+  if (typeof window !== 'undefined') {
+    // @ts-ignore - Polyfill window
+    window.TextEncoderStream = TextEncoderStreamPolyfill;
+  }
 }
 
+// TextDecoderStream polyfill
 if (typeof globalThis.TextDecoderStream === 'undefined') {
   console.log("Polyfilling TextDecoderStream for Bun environment");
   class TextDecoderStreamPolyfill {
@@ -46,13 +55,43 @@ if (typeof globalThis.TextDecoderStream === 'undefined') {
 
   // @ts-ignore - Polyfill global
   globalThis.TextDecoderStream = TextDecoderStreamPolyfill;
+  // Also add it to the window if available (client-side)
+  if (typeof window !== 'undefined') {
+    // @ts-ignore - Polyfill window
+    window.TextDecoderStream = TextDecoderStreamPolyfill;
+  }
 }
 
-// Ensure TextEncoder is available
-if (typeof globalThis.TextEncoder === 'undefined') {
-  const util = require('util');
-  // @ts-ignore - Polyfill global
-  globalThis.TextEncoder = util.TextEncoder;
+// Direct global assignment for Next.js
+// This ensures the polyfill is available to Next.js internals
+if (typeof globalThis !== 'undefined') {
+  if (!globalThis.TextEncoderStream) {
+    // @ts-ignore - Force define the global
+    globalThis.TextEncoderStream = globalThis.TextEncoderStream || class {
+      constructor() {
+        console.log('Using bare TextEncoderStream polyfill');
+      }
+      start() {}
+      transform() {}
+      flush() {}
+    };
+  }
+  
+  if (!globalThis.TextDecoderStream) {
+    // @ts-ignore - Force define the global
+    globalThis.TextDecoderStream = globalThis.TextDecoderStream || class {
+      constructor() {
+        console.log('Using bare TextDecoderStream polyfill');
+      }
+      start() {}
+      transform() {}
+      flush() {}
+    };
+  }
 }
 
-export {};
+// No CommonJS require in ESM
+// Use ESM export
+export {
+  // Export explicitly to ensure the file is not tree-shaken away
+};
