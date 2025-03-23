@@ -1,26 +1,34 @@
 /** @type {import('next').NextConfig} */
 
-// Version: 8.3.0 - Absolute Minimum Configuration for React 19
+// Version: 9.0.0 - React 19 Compatibility Focus
 const nextConfig = {
-  // Most simplified minimal config
+  // Basic settings
   reactStrictMode: false,
   
-  // Disable source maps - crucial for React 19 with Bun
+  // Crucial for Replit environment
+  allowedDevOrigins: ['*', 'localhost:*', '*.replit.dev', '*.repl.co', '*.replit.app'],
+  
+  // Disable source maps completely to avoid any React 19 sourcemap issues
   webpack: (config) => {
     config.devtool = false;
+    
+    // Using null-loader for any problematic modules
+    config.module.rules.push({
+      test: /\.(svg|jpg|jpeg|png|gif|webp|ico)$/,
+      use: 'null-loader'
+    });
+    
     return config;
   },
   
-  // Disable any cross-origin protection for development
-  crossOrigin: 'anonymous',
-  
-  // Add '*' to allowedOrigins to permit any origin
-  experimental: {
-    allowedReactFormActions: ['*'],
+  // Disable image optimization to simplify stack
+  images: {
+    disableStaticImages: true,
+    unoptimized: true
   },
   
-  // Turn off some security headers for development
-  poweredByHeader: false,
+  // Disable production browser source maps
+  productionBrowserSourceMaps: false,
 };
 
 module.exports = nextConfig;
