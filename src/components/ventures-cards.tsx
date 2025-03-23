@@ -147,8 +147,8 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
                 />
               </div>
             </div>
-            <div className="absolute left-0 right-0 bottom-0 p-6">
-              <h3 className="text-white text-base font-medium mb-1">{name}</h3>
+            <div className="absolute left-0 right-0 bottom-0 p-5">
+              <h3 className="text-white text-lg font-medium mb-1">{name}</h3>
               <p className="text-white/80 text-sm line-clamp-2 leading-relaxed">{description}</p>
             </div>
           </>
