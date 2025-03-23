@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import * as React from "react";
 import { ErrorBoundary } from "../../components/error-boundary";
 import { VenturesCard } from "../../components/ventures-cards";
 
@@ -46,8 +46,16 @@ const projects = [
 export default function Ventures() {
   const [mounted, setMounted] = React.useState(false);
   
+  // Use React.StrictMode-compatible effect pattern
   React.useEffect(() => {
-    setMounted(true);
+    // Use requestAnimationFrame for safer client-side initialization in React 19
+    const timer = requestAnimationFrame(() => {
+      setMounted(true);
+      console.log("Ventures page mounted");
+    });
+    
+    // Clean up the timer on unmount
+    return () => cancelAnimationFrame(timer);
   }, []);
 
   if (!mounted) {
