@@ -1,8 +1,7 @@
 "use client"
 
-import * as React from "react"
+import React, { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
-import { HydrationProvider, Client } from "react-hydration-provider"
 
 interface Props {
   children: React.ReactNode
@@ -10,20 +9,13 @@ interface Props {
 }
 
 export function ClientThemeProvider({ children, suppressHydrationWarning = false }: Props) {
-  const [mounted, setMounted] = React.useState(false)
+  const [mounted, setMounted] = useState(false)
   const { theme } = useTheme()
 
-  React.useEffect(() => {
-    try {
-      setMounted(true)
-      console.log('ClientThemeProvider mounted successfully', {
-        theme,
-        isWebview: typeof window !== 'undefined' && /wv|webview/.test(window.navigator.userAgent.toLowerCase())
-      });
-    } catch (error) {
-      console.error('Error in ClientThemeProvider mount:', error)
-    }
-  }, [theme])
+  // Simple effect for React 19 compatibility
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Initial render - match server exactly
   if (!mounted) {
@@ -34,18 +26,14 @@ export function ClientThemeProvider({ children, suppressHydrationWarning = false
     )
   }
 
+  // Simplified rendering for React 19 compatibility
   return (
-    <HydrationProvider>
-      <Client>
-        <div 
-          className="min-h-screen"
-          suppressHydrationWarning={true}
-          data-theme={theme}
-          data-mounted="true"
-        >
-          {children}
-        </div>
-      </Client>
-    </HydrationProvider>
+    <div 
+      className="min-h-screen"
+      suppressHydrationWarning={suppressHydrationWarning}
+      data-theme={theme}
+    >
+      {children}
+    </div>
   )
 }
