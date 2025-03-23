@@ -198,7 +198,7 @@ const nextConfig = {
     formats: ['image/webp']
   },
   
-  // Direct access to attached_assets through static and public URL mapping
+  // Direct access to assets through static and public URL mapping with organized structure
   async rewrites() {
     return [
       // Map root /attached_assets path to actual files
@@ -206,7 +206,22 @@ const nextConfig = {
         source: '/attached_assets/:path*',
         destination: '/attached_assets/:path*',
       },
-      // Also make attached_assets available at the root
+      // Support organized folder structure for images
+      {
+        source: '/images/:path*',
+        destination: '/public/images/:path*',
+      },
+      // Support organized folder structure for logos
+      {
+        source: '/logos/:path*',
+        destination: '/public/logos/:path*',
+      },
+      // Support organized folder structure for icons
+      {
+        source: '/icons/:path*',
+        destination: '/public/icons/:path*',
+      },
+      // Also make attached_assets available at the root for backward compatibility
       {
         source: '/:asset*',
         destination: '/attached_assets/:asset*',
