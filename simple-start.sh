@@ -1,20 +1,16 @@
 #!/bin/bash
 
-echo "Starting with simplified static site..."
+echo "Starting simplified server..."
 
-# Create output directory
-mkdir -p public
-mkdir -p attached_assets
+# Make our server file executable
+chmod +x simple-server.js
 
-echo "Ensuring public folder has access to attached_assets content..."
-# Create symlink to attached_assets if it doesn't exist
-if [ ! -L "public/attached_assets" ]; then
-  ln -sf ../attached_assets public/attached_assets
+# Run the static site generator if needed
+if [ ! -d "out" ] || [ ! -f "out/index.html" ]; then
+  echo "Generating static site..."
+  ./generate-simple-site.sh
 fi
 
-# Generate the simple static site
-./generate-simple-site.sh
-
-echo "Starting simple HTTP server to serve the static files on port 5000..."
-cd out
-exec npx http-server -p 5000 --cors -a 0.0.0.0
+# Directly execute the server script
+echo "Starting server on port 5000..."
+exec ./simple-server.js
