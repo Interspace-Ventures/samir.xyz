@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
     optimizeCss: true,
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     // Improve SVG handling with both next/image support and React component import
     config.module.rules.push({
       test: /\.svg$/,
@@ -39,6 +41,13 @@ const nextConfig = {
         }
       ],
     });
+    
+    // Add null loader for incompatible modules to improve compatibility with React 19
+    config.module.rules.push({
+      test: /node_modules[\\\/]react[\\\/]jsx-dev-runtime/,
+      use: ['null-loader'],
+    });
+    
     return config;
   },
   images: {
@@ -51,6 +60,19 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  // Serve attached_assets through static directory mapping
+  async rewrites() {
+    return [
+      {
+        source: '/attached_assets/:path*',
+        destination: '/attached_assets/:path*',
+      }
+    ];
+  },
+  // Add attached_assets directory to the static folders
+  serverRuntimeConfig: {
+    attachedAssetsDirectory: path.join(process.cwd(), 'attached_assets'),
   },
   allowedDevOrigins: [
     'localhost:*',
