@@ -1,7 +1,7 @@
-// Version 8.0.0 - Server-Side Only Ventures Page
+// Version 10.0.0 - Static HTML Only Ventures Page - No Client JavaScript
 
 export default function Ventures() {
-  // Sample static venture data
+  // Pre-defined static venture data
   const ventures = [
     {
       name: "2 Days Early",
@@ -50,8 +50,11 @@ export default function Ventures() {
       }}>
         {ventures.map((venture, index) => (
           <div key={index} className="card" style={{
+            padding: "1.5rem", 
+            border: "1px solid #eaeaea", 
             borderRadius: "0.75rem",
-            padding: "1.5rem"
+            backgroundColor: "#fff",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
           }}>
             <h3 style={{ margin: "0 0 0.75rem 0", color: "#6366f1" }}>{venture.name}</h3>
             <p style={{ marginBottom: "1rem", fontSize: "0.9rem" }}>{venture.description}</p>

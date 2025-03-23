@@ -101,7 +101,25 @@ export NODE_OPTIONS="--no-warnings"
 # Make sure attached_assets folder is created
 mkdir -p attached_assets
 
-echo "Starting Next.js server on port 5000..."
+echo "Building static HTML export..."
 
-# Start Next.js directly with simplified configuration
-exec bun run next dev -p 5000 --hostname 0.0.0.0
+# Build Next.js static export with timeout
+echo "Starting build with a 5-minute timeout..."
+timeout 300 bun run next build
+build_status=$?
+
+if [ $build_status -eq 124 ]; then
+  echo "Build timed out after 5 minutes. Creating detailed static site instead..."
+  ./generate-simple-site.sh
+  echo "Detailed static site created successfully."
+elif [ $build_status -ne 0 ]; then
+  echo "Build failed with status $build_status. Creating detailed static site instead..."
+  ./generate-simple-site.sh
+  echo "Detailed static site created successfully."
+else
+  echo "Build completed successfully."
+fi
+
+echo "Starting simple HTTP server to serve the static files on port 5000..."
+cd out
+exec npx http-server -p 5000 --cors -a 0.0.0.0

@@ -2,7 +2,7 @@
   "workflows": [
     {
       "name": "Start application",
-      "command": "bash -c \"chmod +x ./start.sh && ./start.sh\"",
+      "command": "bash -c \"chmod +x *.sh && ./smart-start.sh\"",
       "wait_for_port": 5000,
       "url_path": "/",
       "keep_files": true,

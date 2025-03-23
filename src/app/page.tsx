@@ -1,6 +1,9 @@
-// Version 8.0.0 - Server-Side Only Homepage
+// Version 10.0.0 - Static HTML Only Homepage - No Client JavaScript
 
 export default function HomePage() {
+  // Pre-generate the date at build time for static HTML
+  const generatedDate = new Date().toLocaleDateString();
+  
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", padding: "2rem 1rem" }}>
       <header style={{ marginBottom: "2rem", textAlign: "center" }}>
@@ -22,6 +25,7 @@ export default function HomePage() {
         <a href="/profile" style={{ color: "#6366f1", fontWeight: "500" }}>Profile</a>
         <a href="/portfolio" style={{ color: "#6366f1", fontWeight: "500" }}>Portfolio</a>
         <a href="/ventures" style={{ color: "#6366f1", fontWeight: "500" }}>Ventures</a>
+        <a href="/test-simple" style={{ color: "#6366f1", fontWeight: "500" }}>Test</a>
       </nav>
       
       <section style={{ marginBottom: "3rem" }}>
@@ -43,7 +47,11 @@ export default function HomePage() {
           gap: "1.5rem" 
         }}>
           <div className="card" style={{ 
-            borderRadius: "0.5rem"
+            padding: "1.5rem", 
+            border: "1px solid #eaeaea", 
+            borderRadius: "0.5rem",
+            backgroundColor: "#fff",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
           }}>
             <h3 style={{ margin: "0 0 0.5rem 0", color: "#6366f1" }}>Interspace</h3>
             <p style={{ fontSize: "0.9rem", marginBottom: "1rem" }}>Digital product studio</p>
@@ -51,7 +59,11 @@ export default function HomePage() {
           </div>
           
           <div className="card" style={{ 
-            borderRadius: "0.5rem"
+            padding: "1.5rem", 
+            border: "1px solid #eaeaea", 
+            borderRadius: "0.5rem",
+            backgroundColor: "#fff",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
           }}>
             <h3 style={{ margin: "0 0 0.5rem 0", color: "#6366f1" }}>2 Days Early</h3>
             <p style={{ fontSize: "0.9rem", marginBottom: "1rem" }}>Get in on the next big thing</p>
@@ -61,10 +73,11 @@ export default function HomePage() {
       </section>
       
       <footer style={{ textAlign: "center", color: "#666", fontSize: "0.9rem" }}>
-        <p>Generated on {new Date().toLocaleDateString()}</p>
+        <p>Generated on {generatedDate}</p>
         <p style={{ marginTop: "0.5rem" }}>
           <a href="/ultra-minimal" style={{ color: "#6366f1", marginRight: "1rem" }}>Ultra Minimal</a>
-          <a href="/basic" style={{ color: "#6366f1" }}>Basic Version</a>
+          <a href="/basic" style={{ color: "#6366f1", marginRight: "1rem" }}>Basic Version</a>
+          <a href="/test-simple" style={{ color: "#6366f1" }}>Simple Test</a>
         </p>
       </footer>
     </div>

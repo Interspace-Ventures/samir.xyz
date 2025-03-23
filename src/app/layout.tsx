@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-// Version 8.3.0 - Server-Side Only Layout with Fixed Viewport
+// Version 10.0.0 - Static HTML Only Layout - No Client JavaScript
 
 export const viewport: Viewport = {
   width: "device-width",
