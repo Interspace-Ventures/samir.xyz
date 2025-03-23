@@ -36,16 +36,26 @@ export function ThemeToggle() {
       className="relative w-6 h-6 flex items-center justify-center"
       aria-label="Toggle dark theme intensity"
     >
-      {/* Stars icon for dark mode toggling */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        className={`h-[1.2rem] w-[1.2rem] transition-opacity ${darkIntensity === 1 ? 'text-purple-400' : 'text-gray-400'}`}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-5 w-5 text-gray-300"
         aria-hidden="true"
       >
-        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        <circle cx="12" cy="12" r="5" />
+        <line x1="12" y1="1" x2="12" y2="3" />
+        <line x1="12" y1="21" x2="12" y2="23" />
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+        <line x1="1" y1="12" x2="3" y2="12" />
+        <line x1="21" y1="12" x2="23" y2="12" />
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
       </svg>
     </button>
   )
