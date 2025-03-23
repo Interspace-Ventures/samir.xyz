@@ -127,7 +127,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
               <div className="w-4/5 h-4/5 flex items-center justify-center">
                 {name === 'Solo' ? (
                   <img
-                    src="/Solo Wordmark - Gradient 2025.png"
+                    src="/attached_assets/Solo Wordmark - Gradient 2025.png"
                     alt={name}
                     className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
                       imageLoaded ? 'opacity-100' : 'opacity-0'
