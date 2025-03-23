@@ -115,67 +115,82 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
         {/* Gradient background */}
         <div className={`absolute inset-0 bg-gradient-to-br ${fromColor} ${toColor}`}></div>
         
+        {/* Loading state */}
+        {!imageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-lg bg-white/20 animate-pulse" />
+          </div>
+        )}
+
+        {/* Content based on card type */}
         {imageError ? (
-          // Gradient background with brand symbol
+          // Fallback: Gradient background with initials
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="w-3/5 h-3/5 flex items-center justify-center">
               <span className="text-6xl font-bold text-white opacity-80">{initials}</span>
             </div>
           </div>
-        ) : (
+        ) : name === 'Solo' ? (
+          // Solo card with logo and text overlay (like in example)
           <>
-            {/* Loading state */}
-            {!imageLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-12 h-12 rounded-lg bg-white/20 animate-pulse" />
-              </div>
-            )}
-
-            {/* Image or SVG content */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-3/5 h-3/5 flex items-center justify-center">
-                {svgContent && isSvgPath(imageUrl) ? (
-                  // If we have SVG content, use it directly for better rendering
-                  <div 
-                    className={`w-full h-full transition-opacity duration-500 ${
-                      imageLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    dangerouslySetInnerHTML={{ __html: svgContent }}
-                  />
-                ) : (
-                  // Otherwise use regular image tag
-                  <img
-                    src={imageUrl}
-                    alt={name}
-                    className={`w-full h-full object-contain transition-opacity duration-500 filter drop-shadow-lg ${
-                      imageLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    onLoad={handleImageLoad}
-                    onError={handleImageError}
-                  />
-                )}
+                <img
+                  src={imageUrl}
+                  alt={name}
+                  className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
               </div>
             </div>
+            <div className="absolute left-0 right-0 bottom-0 p-3">
+              <h3 className="text-white text-sm font-medium">{name}</h3>
+              <p className="text-white/80 text-xs line-clamp-2">{description}</p>
+            </div>
           </>
-        )}
-
-        {/* Only show text for Solo card mimicking the example */}
-        {name === 'Solo' ? (
-          <div className="absolute left-0 right-0 bottom-0 p-3">
-            <h3 className="text-white text-sm font-medium">{name}</h3>
-            <p className="text-white/80 text-xs line-clamp-2">{description}</p>
-          </div>
-        ) : name === 'Hey I\'m Samir' || name === 'Perspectives' ? (
+        ) : name === '2 Days Early' || name === 'Predictive:film' || name === 'Interspace' ? (
+          // Logo-only cards (centered logos)
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-4/5 h-4/5">
+            <div className="w-3/5 h-3/5 flex items-center justify-center">
+              {svgContent && isSvgPath(imageUrl) ? (
+                <div 
+                  className={`w-full h-full transition-opacity duration-500 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  dangerouslySetInnerHTML={{ __html: svgContent }}
+                />
+              ) : (
+                <img
+                  src={imageUrl}
+                  alt={name}
+                  className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
+              )}
+            </div>
+          </div>
+        ) : (
+          // Text-only cards (Hey I'm Samir, Perspectives)
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-4/5 h-4/5 flex items-center justify-center">
               <img
                 src={imageUrl}
                 alt={name}
-                className="w-full h-full object-contain filter drop-shadow-lg"
+                className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                onLoad={handleImageLoad}
+                onError={handleImageError}
               />
             </div>
           </div>
-        ) : null}
+        )}
       </div>
     </Link>
   )
