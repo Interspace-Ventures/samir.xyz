@@ -63,13 +63,20 @@ export default function Ventures() {
         </div>
         
         <div className="grid grid-cols-3 gap-5 sm:gap-6 max-w-3xl mx-auto">
-          {Array.from({ length: 6 }).map((_, i) => (
+          {/* First 4 cards (full squares) */}
+          {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="aspect-square w-full">
-              <div className={`h-full w-full rounded-2xl animate-pulse bg-gradient-to-br ${
-                i % 2 === 0 ? 'from-blue-600 to-purple-500' : 'from-indigo-600 to-violet-500'
-              }`} />
+              <div className={`h-full w-full rounded-2xl animate-pulse bg-gradient-to-br from-blue-600 to-purple-500`} />
             </div>
           ))}
+          {/* Last two cards (smaller) */}
+          <div className="flex flex-col gap-5 sm:gap-6">
+            {Array.from({ length: 2 }).map((_, i) => (
+              <div key={i} className="h-24 w-full">
+                <div className={`h-full w-full rounded-2xl animate-pulse bg-gradient-to-br from-blue-600 to-purple-500`} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -89,7 +96,7 @@ export default function Ventures() {
         </div>
 
         <div className="grid grid-cols-3 gap-5 sm:gap-6 max-w-3xl mx-auto">
-          {projects.map((project, index) => (
+          {projects.slice(0, 4).map((project, index) => (
             <ErrorBoundary
               key={project.name}
               name={`VenturesCard-${project.name}`}
@@ -99,6 +106,19 @@ export default function Ventures() {
               </div>
             </ErrorBoundary>
           ))}
+          {/* Last two cards (smaller) */}
+          <div className="flex flex-col gap-5 sm:gap-6">
+            {projects.slice(4, 6).map((project, index) => (
+              <ErrorBoundary
+                key={project.name}
+                name={`VenturesCard-${project.name}`}
+              >
+                <div className="h-24 w-full mb-2">
+                  <VenturesCard {...project} priority={false} />
+                </div>
+              </ErrorBoundary>
+            ))}
+          </div>
         </div>
       </div>
     </ErrorBoundary>
