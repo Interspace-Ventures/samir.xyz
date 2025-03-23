@@ -30,11 +30,8 @@ export default function Portfolio() {
         gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" 
       }}>
         {companies.map((company, index) => (
-          <div key={index} style={{
-            border: "1px solid #ddd",
-            borderRadius: "0.5rem",
-            padding: "1.5rem",
-            backgroundColor: "#fff"
+          <div key={index} className="card" style={{
+            borderRadius: "0.5rem"
           }}>
             <h3 style={{ marginTop: 0, color: "#2563eb" }}>{company.name}</h3>
             <p style={{ marginBottom: "0.5rem" }}>{company.description}</p>

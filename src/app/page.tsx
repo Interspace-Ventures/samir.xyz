@@ -42,22 +42,16 @@ export default function HomePage() {
           gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", 
           gap: "1.5rem" 
         }}>
-          <div style={{ 
-            padding: "1.5rem", 
-            border: "1px solid #ddd", 
-            borderRadius: "0.5rem",
-            backgroundColor: "#fff" 
+          <div className="card" style={{ 
+            borderRadius: "0.5rem"
           }}>
             <h3 style={{ margin: "0 0 0.5rem 0", color: "#6366f1" }}>Interspace</h3>
             <p style={{ fontSize: "0.9rem", marginBottom: "1rem" }}>Digital product studio</p>
             <a href="/ventures" style={{ color: "#6366f1", fontSize: "0.9rem" }}>Learn more →</a>
           </div>
           
-          <div style={{ 
-            padding: "1.5rem", 
-            border: "1px solid #ddd", 
-            borderRadius: "0.5rem",
-            backgroundColor: "#fff" 
+          <div className="card" style={{ 
+            borderRadius: "0.5rem"
           }}>
             <h3 style={{ margin: "0 0 0.5rem 0", color: "#6366f1" }}>2 Days Early</h3>
             <p style={{ fontSize: "0.9rem", marginBottom: "1rem" }}>Get in on the next big thing</p>
