@@ -1,12 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-// Version 8.0.0 - Server-Side Only Layout
+// Version 8.3.0 - Server-Side Only Layout with Fixed Viewport
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Samir's Portfolio",
   description: "Personal portfolio website showcasing fintech expertise and ventures",
-  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({

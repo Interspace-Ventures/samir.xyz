@@ -49,12 +49,9 @@ export default function Ventures() {
         marginBottom: "2rem"
       }}>
         {ventures.map((venture, index) => (
-          <div key={index} style={{
-            border: "1px solid #ddd",
+          <div key={index} className="card" style={{
             borderRadius: "0.75rem",
-            padding: "1.5rem",
-            backgroundColor: "#fff",
-            transition: "transform 0.2s ease"
+            padding: "1.5rem"
           }}>
             <h3 style={{ margin: "0 0 0.75rem 0", color: "#6366f1" }}>{venture.name}</h3>
             <p style={{ marginBottom: "1rem", fontSize: "0.9rem" }}>{venture.description}</p>

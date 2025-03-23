@@ -1,33 +1,26 @@
 /** @type {import('next').NextConfig} */
 
-// Version: 8.1.0 - Corrected React 19 Compatibility Config
+// Version: 8.3.0 - Absolute Minimum Configuration for React 19
 const nextConfig = {
-  // Core settings
+  // Most simplified minimal config
   reactStrictMode: false,
   
-  // Development environment settings
-  compress: true,
-  poweredByHeader: false,
-  allowedDevOrigins: ['*'],
-  
-  // Note: removed invalid experimental options
-  
-  // Webpack config focusing on React compatibility
-  webpack: (config, { isServer }) => {
-    // Disable source maps to avoid compatibility issues
+  // Disable source maps - crucial for React 19 with Bun
+  webpack: (config) => {
     config.devtool = false;
-    
-    // Handle React 19 JSX Runtime
-    if (!isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'react/jsx-runtime': require.resolve('react/jsx-runtime'),
-        'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime'),
-      };
-    }
-    
     return config;
-  }
+  },
+  
+  // Disable any cross-origin protection for development
+  crossOrigin: 'anonymous',
+  
+  // Add '*' to allowedOrigins to permit any origin
+  experimental: {
+    allowedReactFormActions: ['*'],
+  },
+  
+  // Turn off some security headers for development
+  poweredByHeader: false,
 };
 
 module.exports = nextConfig;
