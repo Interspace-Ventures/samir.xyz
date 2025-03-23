@@ -62,7 +62,7 @@ export default function Ventures() {
           </p>
         </div>
         
-        <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-3 gap-5 sm:gap-6 max-w-3xl mx-auto">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="aspect-square w-full">
               <div className={`h-full w-full rounded-xl animate-pulse bg-gradient-to-br ${
@@ -78,17 +78,17 @@ export default function Ventures() {
   return (
     <ErrorBoundary name="VenturesPage">
       <div className="max-w-4xl mx-auto px-4 py-12 sm:py-16">
-        <div className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="mb-10 max-w-2xl">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">
             Interspace Ventures
           </h1>
-          <p className="text-lg text-gray-400">
+          <p className="text-lg text-gray-400 leading-relaxed">
             I create apps and concepts by coding at the speed of thought using
             Replit.
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-3 gap-5 sm:gap-6 max-w-3xl mx-auto">
           {projects.map((project, index) => (
             <ErrorBoundary
               key={project.name}
