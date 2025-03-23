@@ -68,14 +68,14 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
   const getGradientColors = (name: string) => {
     const hash = name.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
     
-    // List of gradient pairs that work well with our dark theme
+    // List of gradient pairs that match the blue-to-purple style from the example
     const gradients = [
-      ['from-purple-700', 'to-indigo-900'],
-      ['from-blue-700', 'to-purple-900'],
-      ['from-indigo-700', 'to-purple-900'],
-      ['from-violet-700', 'to-indigo-900'],
-      ['from-fuchsia-700', 'to-purple-900'],
-      ['from-purple-800', 'to-indigo-700']
+      ['from-blue-600', 'to-purple-500'],
+      ['from-indigo-600', 'to-fuchsia-500'],
+      ['from-violet-600', 'to-purple-500'],
+      ['from-blue-700', 'to-violet-500'],
+      ['from-indigo-700', 'to-purple-400'],
+      ['from-blue-600', 'to-indigo-500']
     ];
     
     return gradients[hash % gradients.length];
@@ -106,38 +106,34 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
     <Link 
       href={link}
       target="_blank"
-      className="block group relative aspect-square overflow-hidden rounded-lg
-        hover:shadow-md hover:shadow-purple-900/20 hover:-translate-y-1 
+      className="block group relative aspect-square overflow-hidden rounded-xl
+        hover:shadow-lg hover:shadow-purple-900/20 hover:-translate-y-1 
         transition-all duration-300 
-        border border-gray-800 hover:border-purple-700/40 
-        bg-gradient-to-br from-black to-gray-900
         w-full h-full"
-    >
-      {/* Glow effect */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 blur transition-opacity duration-500 group-hover:duration-300"></div>
-      
+    >      
       <div className="relative w-full h-full">
+        {/* Gradient background */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${fromColor} ${toColor}`}></div>
+        
         {imageError ? (
-          // Gradient background with initials
-          <div className={`absolute inset-0 bg-gradient-to-br ${fromColor} ${toColor} p-3 flex flex-col items-center justify-center`}>
-            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-1">
-              <span className="text-lg font-bold text-white">{initials}</span>
+          // Gradient background with brand symbol
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="w-3/5 h-3/5 flex items-center justify-center">
+              <span className="text-6xl font-bold text-white opacity-80">{initials}</span>
             </div>
-            <h3 className="text-sm font-semibold text-white text-center">{name}</h3>
-            <p className="text-xs text-gray-200 text-center line-clamp-2 mt-1">{description}</p>
           </div>
         ) : (
           <>
             {/* Loading state */}
             {!imageLoaded && (
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-12 h-12 rounded-lg bg-purple-900/20 animate-pulse backdrop-blur-sm" />
+                <div className="w-12 h-12 rounded-lg bg-white/20 animate-pulse" />
               </div>
             )}
 
             {/* Image or SVG content */}
-            <div className="absolute inset-0 p-3">
-              <div className="relative w-full h-full flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-3/5 h-3/5 flex items-center justify-center">
                 {svgContent && isSvgPath(imageUrl) ? (
                   // If we have SVG content, use it directly for better rendering
                   <div 
@@ -151,7 +147,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
                   <img
                     src={imageUrl}
                     alt={name}
-                    className={`w-full h-full object-contain transition-opacity duration-500 filter drop-shadow-md ${
+                    className={`w-full h-full object-contain transition-opacity duration-500 filter drop-shadow-lg ${
                       imageLoaded ? 'opacity-100' : 'opacity-0'
                     }`}
                     onLoad={handleImageLoad}
@@ -163,16 +159,23 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
           </>
         )}
 
-        {/* Hover overlay with improved gradient and animations */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <div className="absolute bottom-0 left-0 right-0 p-3 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-            <h3 className="text-white text-sm font-semibold group-hover:text-purple-200 transition-colors">
-              {name}
-              <span className="inline-block ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">→</span>
-            </h3>
-            <p className="text-white text-xs line-clamp-2 transition-colors">{description}</p>
+        {/* Only show text for Solo card mimicking the example */}
+        {name === 'Solo' ? (
+          <div className="absolute left-0 right-0 bottom-0 p-3">
+            <h3 className="text-white text-sm font-medium">{name}</h3>
+            <p className="text-white/80 text-xs line-clamp-2">{description}</p>
           </div>
-        </div>
+        ) : name === 'Hey I\'m Samir' || name === 'Perspectives' ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-4/5 h-4/5">
+              <img
+                src={imageUrl}
+                alt={name}
+                className="w-full h-full object-contain filter drop-shadow-lg"
+              />
+            </div>
+          </div>
+        ) : null}
       </div>
     </Link>
   )
