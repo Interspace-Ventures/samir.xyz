@@ -15,7 +15,7 @@ const NavbarSkeleton = () => (
   <div className="fixed top-0 left-0 right-0 z-50 h-16 w-full bg-[#111111] border-b border-gray-800">
     <div className="w-full px-6 h-full flex items-center justify-between">
       <div className="h-8 w-1/3 bg-gray-800/50 rounded animate-pulse" />
-      <div className="hidden sm:flex items-center space-x-8">
+      <div className="hidden xs:flex items-center space-x-8">
         {Array(3).fill(null).map((_, i) => (
           <div key={i} className="h-4 w-20 bg-gray-800/50 rounded animate-pulse" />
         ))}
@@ -48,7 +48,7 @@ export default function Navbar() {
           Hey - I'm Samir
         </NextLink>
 
-        <div className="hidden sm:flex items-center space-x-10">
+        <div className="hidden xs:flex items-center space-x-10">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
@@ -68,7 +68,7 @@ export default function Navbar() {
           <ThemeToggle />
         </div>
 
-        <div className="sm:hidden flex items-center">
+        <div className="xs:hidden flex items-center">
           <button
             onClick={() => setIsMenuOpen(prev => !prev)}
             className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
@@ -115,7 +115,7 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 z-50 bg-[#111111] border-b border-gray-800 py-4 px-6 space-y-4 sm:hidden">
+        <div className="absolute top-16 left-0 right-0 z-50 bg-[#111111] border-b border-gray-800 py-4 px-6 space-y-4 xs:hidden">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
