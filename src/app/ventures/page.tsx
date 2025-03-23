@@ -7,40 +7,39 @@ import { VenturesCard } from "../../components/ventures-cards";
 const projects = [
   {
     name: "2 Days Early",
-    description:
-      "Current and former Chime operator community built by operators for operators",
-    imageUrl: "/ventures-brands/2de-interspace.png",
+    description: "Get in on the next big thing",
+    imageUrl: "/2DE Interspace.png",
     link: "https://2daysearly.com",
   },
   {
     name: "Solo",
     description: "The first design-forward climbing app",
-    imageUrl: "/ventures-brands/solo-logo-2025.png",
-    link: "https://gosolo.nyc",
+    imageUrl: "/Solo Wordmark 2025.png",
+    link: "https://soloclimbing.com",
   },
   {
     name: "Predictive:film",
-    description: "AI-powered film predictions",
-    imageUrl: "/ventures-brands/predictive-film-icon.png",
+    description: "AI-powered script analysis",
+    imageUrl: "/Predictive.film icon 2025.png",
     link: "https://predictive.film",
   },
   {
     name: "Interspace",
-    description: "Over-engineered fintech and stratfin perspectives",
-    imageUrl: "/ventures-brands/interspace.png",
-    link: "https://posts.interspace.ventures",
+    description: "Digital product studio",
+    imageUrl: "/Interspace Square - 2025.png",
+    link: "https://interspace.sh",
   },
   {
     name: "Hey I'm Samir",
-    description: "I drive business impact in fintech.",
-    imageUrl: "/ventures-brands/hey-im-samir.png",
-    link: "https://samir.xyz",
+    description: "",
+    imageUrl: "/Hey I'm Samir 2025.png",
+    link: "https://heyimsamir.com",
   },
   {
     name: "Perspectives",
-    description: "Fintech & stratfin deep dives",
-    imageUrl: "/ventures-brands/samir-favicon.png",
-    link: "https://perspectives.samir.xyz",
+    description: "",
+    imageUrl: "/Perspectives Favicon.png",
+    link: "https://perspectives.fyi",
   },
 ];
 
@@ -66,7 +65,9 @@ export default function Ventures() {
         <div className="grid grid-cols-3 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="w-full max-w-[170px] mx-auto">
-              <div className="aspect-square bg-black/20 border border-gray-800 rounded-xl animate-pulse" />
+              <div className={`aspect-square rounded-xl animate-pulse bg-gradient-to-br ${
+                i % 2 === 0 ? 'from-blue-600 to-purple-500' : 'from-indigo-600 to-violet-500'
+              }`} />
             </div>
           ))}
         </div>

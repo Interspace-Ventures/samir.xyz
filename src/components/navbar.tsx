@@ -12,7 +12,7 @@ const navItems = [
 ] as const
 
 const NavbarSkeleton = () => (
-  <header className="fixed top-0 left-0 right-0 z-50 h-16 w-full bg-[#111111] border-b border-gray-800">
+  <header className="sticky top-0 left-0 right-0 z-50 h-16 w-full bg-[#111111] border-b border-gray-800">
     <div className="w-full px-6 h-full flex items-center justify-between">
       <div className="h-8 w-1/3 bg-gray-800/50 rounded animate-pulse" />
       <div className="hidden md:flex items-center space-x-8">
@@ -28,9 +28,19 @@ export default function Navbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   if (!mounted) {
@@ -38,7 +48,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-16 w-full bg-[#111111] border-b border-gray-800">
+    <header className={`sticky top-0 left-0 right-0 z-50 h-16 w-full transition-all duration-300 ${scrolled ? 'bg-[#111111]/95 backdrop-blur-sm shadow-md' : 'bg-[#111111]'} border-b border-gray-800`}>
       <div className="w-full px-6 h-full flex items-center justify-between">
         <NextLink
           href="/"

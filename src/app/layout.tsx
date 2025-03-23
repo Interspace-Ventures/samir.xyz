@@ -23,7 +23,7 @@ export default function RootLayout({
           <ErrorBoundary name="Navbar">
             <Navbar />
           </ErrorBoundary>
-          <div className="flex-grow pt-24">
+          <div className="flex-grow pt-6">
             {children}
           </div>
           <ErrorBoundary name="Footer">
