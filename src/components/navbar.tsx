@@ -12,16 +12,16 @@ const navItems = [
 ] as const
 
 const NavbarSkeleton = () => (
-  <div className="fixed top-0 left-0 right-0 z-50 h-16 w-full bg-[#111111] border-b border-gray-800">
+  <header className="fixed top-0 left-0 right-0 z-50 h-16 w-full bg-[#111111] border-b border-gray-800">
     <div className="w-full px-6 h-full flex items-center justify-between">
       <div className="h-8 w-1/3 bg-gray-800/50 rounded animate-pulse" />
-      <div className="hidden xs:flex items-center space-x-8">
+      <div className="hidden md:flex items-center space-x-8">
         {Array(3).fill(null).map((_, i) => (
           <div key={i} className="h-4 w-20 bg-gray-800/50 rounded animate-pulse" />
         ))}
       </div>
     </div>
-  </div>
+  </header>
 )
 
 export default function Navbar() {
@@ -136,6 +136,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-    </div>
+    </header>
   )
 }
