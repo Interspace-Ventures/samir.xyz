@@ -48,7 +48,7 @@ export default function Navbar() {
           Hey - I'm Samir
         </NextLink>
 
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden xs:flex items-center space-x-8">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
@@ -67,7 +67,7 @@ export default function Navbar() {
           <ThemeToggle />
         </div>
 
-        <div className="md:hidden flex items-center">
+        <div className="xs:hidden flex items-center">
           <button
             onClick={() => setIsMenuOpen(prev => !prev)}
             className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
@@ -114,7 +114,7 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 z-50 bg-[#111111] border-b border-gray-800 py-4 px-6 space-y-4 md:hidden">
+        <div className="absolute top-16 left-0 right-0 z-50 bg-[#111111] border-b border-gray-800 py-4 px-6 space-y-4 xs:hidden">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
