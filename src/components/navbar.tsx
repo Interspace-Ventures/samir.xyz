@@ -12,8 +12,8 @@ const navItems = [
 ] as const
 
 const NavbarSkeleton = () => (
-  <div className="fixed top-0 left-0 right-0 z-50 h-24 md:h-28 border-b border-gray-700/50 bg-gradient-to-b from-black to-gray-900/90 backdrop-blur-md shadow-lg shadow-black/30">
-    <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
+  <div className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#111111] border-b border-gray-800">
+    <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
       <div className="h-8 w-1/3 bg-gray-800/50 rounded animate-pulse" />
       <div className="hidden md:flex items-center space-x-8">
         {Array(3).fill(null).map((_, i) => (
@@ -38,31 +38,28 @@ export default function Navbar() {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-24 md:h-28 border-b border-gray-700/50 bg-gradient-to-b from-black to-gray-900/90 backdrop-blur-md shadow-lg shadow-black/30">
-      <div className="max-w-4xl mx-auto px-6 h-full flex items-center justify-between">
+    <div className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#111111] border-b border-gray-800">
+      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
         <NextLink
           href="/"
-          className="text-2xl font-bold text-white leading-none hover:opacity-80 transition-opacity"
+          className="text-xl font-bold text-white leading-none hover:opacity-80 transition-opacity"
           prefetch={false}
         >
           Hey - I'm Samir
         </NextLink>
 
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-10">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
               href={item.href}
               prefetch={false}
               className={`
-                relative text-base font-medium tracking-wide transition-colors
-                hover:text-purple-400 whitespace-nowrap
-                ${pathname === item.href ? 'text-purple-400' : 'text-gray-300'}
-                after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full 
-                after:origin-left after:scale-x-0 after:bg-purple-500 after:transition-transform
-                after:duration-300 after:ease-out
-                ${pathname === item.href ? 'after:scale-x-100' : ''}
-                hover:after:scale-x-100
+                relative text-sm font-medium tracking-wide transition-colors
+                whitespace-nowrap uppercase
+                ${pathname === item.href ? 'text-white' : 'text-gray-300'}
+                ${pathname === item.href ? 'border-b-2 border-white pb-1' : ''}
+                hover:text-white
               `}
             >
               {item.label}
@@ -75,14 +72,14 @@ export default function Navbar() {
           <ThemeToggle />
           <button
             onClick={() => setIsMenuOpen(prev => !prev)}
-            className="p-2 hover:bg-purple-900/30 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -90,7 +87,7 @@ export default function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                className="text-purple-400"
+                className="text-white"
               >
                 <path d="M18 6 6 18" />
                 <path d="m6 6 12 12" />
@@ -98,8 +95,8 @@ export default function Navbar() {
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -107,7 +104,7 @@ export default function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                className="text-gray-300 hover:text-purple-400"
+                className="text-gray-300 hover:text-white"
               >
                 <line x1="4" x2="20" y1="12" y2="12" />
                 <line x1="4" x2="20" y1="6" y2="6" />
@@ -119,17 +116,17 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-24 left-0 right-0 z-50 bg-gradient-to-b from-black/95 to-gray-900/95 backdrop-blur-md border-b border-gray-700/50 py-4 px-6 space-y-2 md:hidden shadow-lg">
+        <div className="absolute top-16 left-0 right-0 z-50 bg-[#111111] border-b border-gray-800 py-4 px-6 space-y-2 md:hidden">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
               href={item.href}
               prefetch={false}
               className={`
-                block py-4 text-base font-medium tracking-wide transition-colors
-                hover:text-purple-400 whitespace-nowrap
-                ${pathname === item.href ? 'text-purple-400' : 'text-gray-300'}
-                ${pathname === item.href ? 'border-l-2 border-purple-500 pl-4' : ''}
+                block py-3 text-sm font-medium tracking-wide transition-colors uppercase
+                hover:text-white whitespace-nowrap
+                ${pathname === item.href ? 'text-white' : 'text-gray-300'}
+                ${pathname === item.href ? 'border-l-2 border-white pl-3' : ''}
               `}
               onClick={() => setIsMenuOpen(false)}
             >
