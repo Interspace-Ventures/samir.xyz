@@ -44,7 +44,7 @@ export function ThemeToggle() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5 text-gray-300"
+        className="h-5 w-5 text-white"
         aria-hidden="true"
       >
         <circle cx="12" cy="12" r="5" />
