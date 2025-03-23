@@ -1,38 +1,11 @@
 "use client"
 
-import * as React from "react"
-import { useTheme } from "next-themes"
+import React from "react"
 
+// Super simplified version to avoid React 19 hydration issues
 export function ThemeToggle() {
-  const [mounted, setMounted] = React.useState(false)
-  const [darkIntensity, setDarkIntensity] = React.useState(1)
-  const { setTheme } = useTheme()
-
-  // Only show the toggle after mounting to prevent hydration mismatch
-  React.useEffect(() => {
-    setMounted(true)
-    // Always set to dark theme as we're using only dark mode
-    setTheme("dark")
-  }, [setTheme])
-
-  // Return a placeholder with the same dimensions during SSR
-  if (!mounted) {
-    return (
-      <div className="w-6 h-6 flex items-center justify-center">
-        <div className="animate-pulse bg-gray-700 h-4 w-4 rounded-full" />
-      </div>
-    )
-  }
-
-  // Function to toggle between different dark theme intensities
-  const toggleDarkIntensity = () => {
-    setDarkIntensity(darkIntensity === 1 ? 2 : 1)
-    // In a real implementation, we'd also update CSS variables to reflect darker/lighter dark mode
-  }
-
   return (
     <button
-      onClick={toggleDarkIntensity}
       className="relative w-6 h-6 flex items-center justify-center"
       aria-label="Toggle dark theme intensity"
     >
