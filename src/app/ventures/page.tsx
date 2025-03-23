@@ -14,7 +14,7 @@ const projects = [
   {
     name: "Solo",
     description: "The first design-forward climbing app",
-    imageUrl: "/Solo Wordmark 2025.png",
+    imageUrl: "/Solo Wordmark - Gradient 2025.png",
     link: "https://soloclimbing.com",
   },
   {
@@ -62,7 +62,7 @@ export default function Ventures() {
           </p>
         </div>
         
-        <div className="grid grid-cols-3 gap-5 sm:gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
           {/* First 4 cards (full squares) */}
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="aspect-square w-full">
@@ -70,9 +70,9 @@ export default function Ventures() {
             </div>
           ))}
           {/* Last two cards (smaller) */}
-          <div className="flex flex-col gap-5 sm:gap-6">
+          <div className="flex flex-col gap-6">
             {Array.from({ length: 2 }).map((_, i) => (
-              <div key={i} className="h-24 w-full">
+              <div key={i} className="aspect-square w-full sm:aspect-auto sm:h-[calc(50%-0.75rem)]">
                 <div className={`h-full w-full rounded-2xl animate-pulse bg-gradient-to-br from-blue-600 to-purple-500`} />
               </div>
             ))}
@@ -95,7 +95,8 @@ export default function Ventures() {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-5 sm:gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+          {/* First four cards */}
           {projects.slice(0, 4).map((project, index) => (
             <ErrorBoundary
               key={project.name}
@@ -106,14 +107,15 @@ export default function Ventures() {
               </div>
             </ErrorBoundary>
           ))}
-          {/* Last two cards (smaller) */}
-          <div className="flex flex-col gap-5 sm:gap-6">
+          
+          {/* Small cards section (last column) */}
+          <div className="flex flex-col gap-6">
             {projects.slice(4, 6).map((project, index) => (
               <ErrorBoundary
                 key={project.name}
                 name={`VenturesCard-${project.name}`}
               >
-                <div className="h-24 w-full mb-2">
+                <div className="aspect-square w-full sm:aspect-auto sm:h-[calc(50%-0.75rem)]">
                   <VenturesCard {...project} priority={false} />
                 </div>
               </ErrorBoundary>
