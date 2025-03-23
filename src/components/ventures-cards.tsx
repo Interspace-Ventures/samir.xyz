@@ -106,37 +106,38 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
     <Link 
       href={link}
       target="_blank"
-      className="block group relative aspect-square overflow-hidden rounded-xl 
+      className="block group relative aspect-square overflow-hidden rounded-lg
         hover:shadow-md hover:shadow-purple-900/20 hover:-translate-y-1 
         transition-all duration-300 
         border border-gray-800 hover:border-purple-700/40 
-        bg-gradient-to-br from-black to-gray-900"
+        bg-gradient-to-br from-black to-gray-900
+        w-full h-full"
     >
       {/* Glow effect */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500 group-hover:duration-300"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 blur transition-opacity duration-500 group-hover:duration-300"></div>
       
       <div className="relative w-full h-full">
         {imageError ? (
           // Gradient background with initials
-          <div className={`absolute inset-0 bg-gradient-to-br ${fromColor} ${toColor} p-4 flex flex-col items-center justify-center`}>
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-2">
-              <span className="text-xl font-bold text-white">{initials}</span>
+          <div className={`absolute inset-0 bg-gradient-to-br ${fromColor} ${toColor} p-3 flex flex-col items-center justify-center`}>
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-1">
+              <span className="text-lg font-bold text-white">{initials}</span>
             </div>
-            <h3 className="text-base font-semibold mb-1 text-white text-center">{name}</h3>
-            <p className="text-xs text-gray-200 text-center line-clamp-2">{description}</p>
+            <h3 className="text-sm font-semibold text-white text-center">{name}</h3>
+            <p className="text-xs text-gray-200 text-center line-clamp-2 mt-1">{description}</p>
           </div>
         ) : (
           <>
             {/* Loading state */}
             {!imageLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center p-4">
-                <div className="w-16 h-16 rounded-lg bg-purple-900/20 animate-pulse backdrop-blur-sm" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-lg bg-purple-900/20 animate-pulse backdrop-blur-sm" />
               </div>
             )}
 
             {/* Image or SVG content */}
-            <div className="absolute inset-0 p-4">
-              <div className="relative w-full h-full">
+            <div className="absolute inset-0 p-3">
+              <div className="relative w-full h-full flex items-center justify-center">
                 {svgContent && isSvgPath(imageUrl) ? (
                   // If we have SVG content, use it directly for better rendering
                   <div 
@@ -163,13 +164,13 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
         )}
 
         {/* Hover overlay with improved gradient and animations */}
-        <div className="absolute inset-0 bg-gradient-to-t from-purple-950/95 via-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm group-hover:backdrop-blur-none">
-          <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-            <h3 className="text-white text-base font-semibold mb-1 group-hover:text-purple-200 transition-colors">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <div className="absolute bottom-0 left-0 right-0 p-3 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+            <h3 className="text-white text-sm font-semibold group-hover:text-purple-200 transition-colors">
               {name}
               <span className="inline-block ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">→</span>
             </h3>
-            <p className="text-gray-300 text-xs line-clamp-2 group-hover:text-white/90 transition-colors">{description}</p>
+            <p className="text-white text-xs line-clamp-2 transition-colors">{description}</p>
           </div>
         </div>
       </div>

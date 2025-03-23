@@ -63,9 +63,11 @@ export default function Ventures() {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-3 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="aspect-square bg-black/20 border border-gray-800 rounded-xl animate-pulse" />
+            <div key={i} className="w-full max-w-[170px] mx-auto">
+              <div className="aspect-square bg-black/20 border border-gray-800 rounded-xl animate-pulse" />
+            </div>
           ))}
         </div>
       </div>
@@ -85,13 +87,15 @@ export default function Ventures() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <ErrorBoundary
               key={project.name}
               name={`VenturesCard-${project.name}`}
             >
-              <VenturesCard {...project} priority={index < 3} />
+              <div className="w-full max-w-[170px] mx-auto">
+                <VenturesCard {...project} priority={index < 3} />
+              </div>
             </ErrorBoundary>
           ))}
         </div>
