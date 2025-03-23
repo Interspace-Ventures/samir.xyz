@@ -1,6 +1,6 @@
-# Portfolio Website v3.0.0
+# Hey - I'm Samir
 
-A personal portfolio website showcasing professional projects through an AI-enhanced interactive design that dynamically highlights technical expertise and professional achievements.
+I drive business impact at fintechs.
 
 ## Technology Stack
 
