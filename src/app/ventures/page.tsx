@@ -53,8 +53,8 @@ export default function Ventures() {
 
   if (!mounted) {
     return (
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="mb-12">
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Interspace Ventures
           </h1>
@@ -63,7 +63,7 @@ export default function Ventures() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="aspect-square bg-black/20 border border-gray-800 rounded-xl animate-pulse" />
           ))}
@@ -74,8 +74,8 @@ export default function Ventures() {
 
   return (
     <ErrorBoundary name="VenturesPage">
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="mb-12">
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Interspace Ventures
           </h1>
@@ -85,7 +85,7 @@ export default function Ventures() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {projects.map((project, index) => (
             <ErrorBoundary
               key={project.name}
