@@ -2,21 +2,11 @@
   "workflows": [
     {
       "name": "Start application",
-      "tasks": [
-        {
-          "name": "Start Portfolio Website",
-          "command": "./run-app.sh",
-          "wait_for_port": true,
-          "url_path": "/",
-          "timeout": 180000,
-          "prevent_capture_with_port": false,
-          "enable_port_browser": true,
-          "port": 5000,
-          "capture_output": true,
-          "preserve_output": true,
-          "delay_ms": 1000
-        }
-      ]
+      "command": "bash -c \"chmod +x ./start.sh && ./start.sh\"",
+      "wait_for_port": 5000,
+      "url_path": "/",
+      "keep_files": true,
+      "restart_on": "all_files"
     }
   ]
 }
