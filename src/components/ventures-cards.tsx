@@ -64,21 +64,22 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
     }
   }, [name, imageUrl])
 
-  // Generate consistent gradient colors based on the name of the venture
+  // Assign consistent gradient colors based on the card position
   const getGradientColors = (name: string) => {
-    const hash = name.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
-    
-    // List of gradient pairs that match the blue-to-purple style from the example
-    const gradients = [
-      ['from-blue-600', 'to-purple-500'],
-      ['from-indigo-600', 'to-fuchsia-500'],
-      ['from-violet-600', 'to-purple-500'],
-      ['from-blue-700', 'to-violet-500'],
-      ['from-indigo-700', 'to-purple-400'],
-      ['from-blue-600', 'to-indigo-500']
-    ];
-    
-    return gradients[hash % gradients.length];
+    // Map specific gradients to match the example image exactly
+    if (name === '2 Days Early') {
+      return ['from-blue-600', 'to-purple-500'];
+    } else if (name === 'Solo') {
+      return ['from-blue-600', 'to-purple-500'];
+    } else if (name === 'Predictive:film') {
+      return ['from-blue-600', 'to-purple-500'];
+    } else if (name === 'Interspace') {
+      return ['from-blue-600', 'to-purple-500'];
+    } else if (name === 'Hey I\'m Samir') {
+      return ['from-blue-600', 'to-purple-500'];
+    } else {
+      return ['from-blue-600', 'to-purple-500'];
+    }
   };
   
   const [fromColor, toColor] = getGradientColors(name);
@@ -107,8 +108,8 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
       href={link}
       target="_blank"
       className="block group relative aspect-square overflow-hidden rounded-xl
-        hover:shadow-lg hover:shadow-purple-900/20 hover:-translate-y-1 
-        transition-all duration-300 
+        hover:shadow-lg hover:shadow-purple-800/30 hover:translate-y-[-3px] 
+        transition-all duration-200 ease-in-out
         w-full h-full"
     >      
       <div className="relative w-full h-full">
@@ -146,9 +147,9 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
                 />
               </div>
             </div>
-            <div className="absolute left-0 right-0 bottom-0 p-3">
-              <h3 className="text-white text-sm font-medium">{name}</h3>
-              <p className="text-white/80 text-xs line-clamp-2">{description}</p>
+            <div className="absolute left-0 right-0 bottom-0 p-4">
+              <h3 className="text-white text-sm font-medium mb-0.5">{name}</h3>
+              <p className="text-white/80 text-xs line-clamp-2 leading-relaxed">{description}</p>
             </div>
           </>
         ) : name === '2 Days Early' || name === 'Predictive:film' || name === 'Interspace' ? (
