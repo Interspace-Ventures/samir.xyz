@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Fragment, memo } from 'react'
 
-// Performance-optimized client component wrapper (v3.1.0)
+// Performance-optimized client component wrapper (v3.2.0) - Enhanced for React 19
 export const ClientWrapper = memo(function ClientWrapper({
   children,
   placeholder,
@@ -14,33 +14,42 @@ export const ClientWrapper = memo(function ClientWrapper({
 }) {
   const [mounted, setMounted] = useState(false)
   
-  // Use a layout effect for faster mounting in priority components
-  const EffectHook = priority ? useEffect : useEffect
-  
-  // Only render children on the client-side with priority option
-  EffectHook(() => {
-    // Use requestIdleCallback for non-priority components to improve performance
-    if (priority) {
-      setMounted(true)
-    } else {
-      // Use requestAnimationFrame as a fallback for browsers without requestIdleCallback
-      const id = requestAnimationFrame(() => {
+  // React 19 compatibility - always use useEffect
+  useEffect(() => {
+    try {
+      // Delay slightly to prevent hydration issues
+      const timer = setTimeout(() => {
         setMounted(true)
-      })
-      return () => cancelAnimationFrame(id)
+      }, priority ? 0 : 10)
+      
+      return () => clearTimeout(timer)
+    } catch (e) {
+      // Fallback for any React 19 compatibility issues
+      console.error('ClientWrapper mounting error:', e)
+      setMounted(true)
     }
   }, [priority])
   
   // Return custom placeholder if provided, otherwise default
   if (!mounted) {
-    return placeholder || (
-      <div className="min-h-[250px] flex items-center justify-center">
-        <div className="animate-pulse">Loading...</div>
+    return (
+      <div 
+        className="min-h-[250px] flex items-center justify-center" 
+        suppressHydrationWarning={true}
+      >
+        {placeholder || (
+          <div className="animate-pulse">Loading...</div>
+        )}
       </div>
     )
   }
   
-  return <Fragment>{children}</Fragment>
+  // Wrap children with suppressHydrationWarning for React 19 compatibility
+  return (
+    <div suppressHydrationWarning={true}>
+      {children}
+    </div>
+  )
 })
 
 export default ClientWrapper;
