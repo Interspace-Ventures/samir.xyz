@@ -1,4 +1,4 @@
-# Portfolio Website v3.0.0
+# Portfolio Website v3.3.0
 
 A personal portfolio website showcasing professional projects through an AI-enhanced interactive design that dynamically highlights technical expertise and professional achievements.
 
@@ -9,6 +9,35 @@ A personal portfolio website showcasing professional projects through an AI-enha
 - **Bun Runtime**: Fast JavaScript/TypeScript runtime (critical for this project)
 - **Tailwind CSS**: Responsive styling
 - **TypeScript**: Type-safe development
+
+## AI COLLABORATION GUIDELINES
+
+### Communication Guidelines
+
+1. **Use Simple Language** - Always communicate in non-technical terms. Avoid code jargon when explaining changes or recommendations.
+
+2. **Focus on Visual Feedback** - When implementing UI changes, describe the visual impact in clear terms and offer to show a preview using the appropriate tool.
+
+3. **Respond in User's Language** - If the user communicates in a language other than English, respond in the same language.
+
+4. **Single Question Principle** - Ask only one question at a time to avoid overwhelming the user.
+
+5. **Show Progress** - Regularly summarize what has been accomplished and what's next using simple checkmarks (✓) for completed items and arrows (→) for in-progress work.
+
+### Task Execution Guidelines
+
+1. **Error Handling** - When encountering errors, analyze logs and provide a simple explanation of the issue before suggesting solutions.
+
+2. **Test All Changes** - Always verify that changes work properly across different viewport sizes and in both light and dark modes.
+
+3. **Step-by-Step Approach** - Break down complex tasks into smaller steps and confirm completion of each step before moving to the next.
+
+4. **Prefer Workflow Tools** - Use the workflow system for running the application rather than executing commands directly in the terminal.
+
+5. **Maintain Version Tracking** - Update version numbers in:
+   - `version.json`
+   - Footer component (`src/components/footer.tsx`)
+   - CHANGELOG.md
 
 ## IMPORTANT DEVELOPMENT GUIDELINES
 

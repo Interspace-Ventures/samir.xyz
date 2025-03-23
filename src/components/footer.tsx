@@ -14,7 +14,7 @@ const Footer = () => {
     <footer className="w-full border-t border-gray-700/50 bg-gradient-to-t from-black to-gray-900/90 text-gray-300">
       <div className="max-w-4xl mx-auto px-6 py-6">
         <div className="text-sm">
-          © <Link href="/ventures" className="text-purple-400 hover:text-purple-300 transition-colors">Interspace Ventures</Link> {year || "2025"}. Built with Replit AI at the speed of thought • v3.2.0
+          © <Link href="/ventures" className="text-purple-400 hover:text-purple-300 transition-colors">Interspace Ventures</Link> {year || "2025"}. Built with Replit AI at the speed of thought • v3.3.0
         </div>
       </div>
     </footer>
