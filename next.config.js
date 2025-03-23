@@ -1,12 +1,29 @@
 /** @type {import('next').NextConfig} */
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
   reactStrictMode: false,
+  // Disable React strict mode to avoid double renders in development which can cause issues with React 19
+  
   experimental: {
     optimizeCss: true,
+    // Keeping only recommended experimental features
   },
+  
   webpack: (config, { isServer }) => {
+    // Ensure React 19 compatibility
+    if (!isServer) {
+      // Fix hydration errors by ensuring React is properly resolved
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'react/jsx-runtime': path.resolve('node_modules/react/jsx-runtime.js'),
+        'react/jsx-dev-runtime': path.resolve('node_modules/react/jsx-dev-runtime.js'),
+      };
+    }
+    
     // Improve SVG handling with both next/image support and React component import
     config.module.rules.push({
       test: /\.svg$/,
@@ -42,14 +59,17 @@ const nextConfig = {
       ],
     });
     
-    // Add null loader for incompatible modules to improve compatibility with React 19
+    // Enhanced React 19 compatibility for certain packages
     config.module.rules.push({
-      test: /node_modules[\\\/]react[\\\/]jsx-dev-runtime/,
-      use: ['null-loader'],
+      test: /node_modules[\\/](react-server-dom-webpack|react-dom)[\\/].+\.js$/,
+      use: {
+        loader: 'null-loader',
+      },
     });
     
     return config;
   },
+  
   images: {
     remotePatterns: [
       {
@@ -61,6 +81,7 @@ const nextConfig = {
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  
   // Serve attached_assets through static directory mapping
   async rewrites() {
     return [
@@ -70,10 +91,12 @@ const nextConfig = {
       }
     ];
   },
+  
   // Add attached_assets directory to the static folders
   serverRuntimeConfig: {
     attachedAssetsDirectory: path.join(process.cwd(), 'attached_assets'),
   },
+  
   allowedDevOrigins: [
     'localhost:*',
     '*.replit.dev',
@@ -82,4 +105,4 @@ const nextConfig = {
   ],
 };
 
-module.exports = nextConfig;
+export default nextConfig;
