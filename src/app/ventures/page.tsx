@@ -53,11 +53,11 @@ export default function Ventures() {
   if (!mounted) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-12 sm:py-16">
-        <div className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="mb-10 max-w-2xl">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">
             Interspace Ventures
           </h1>
-          <p className="text-lg text-gray-400">
+          <p className="text-lg text-gray-400 leading-relaxed">
             Loading venture projects...
           </p>
         </div>
@@ -65,7 +65,7 @@ export default function Ventures() {
         <div className="grid grid-cols-3 gap-5 sm:gap-6 max-w-3xl mx-auto">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="aspect-square w-full">
-              <div className={`h-full w-full rounded-xl animate-pulse bg-gradient-to-br ${
+              <div className={`h-full w-full rounded-2xl animate-pulse bg-gradient-to-br ${
                 i % 2 === 0 ? 'from-blue-600 to-purple-500' : 'from-indigo-600 to-violet-500'
               }`} />
             </div>
