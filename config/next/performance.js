@@ -56,7 +56,7 @@ export const getPerformanceConfig = () => ({
     optimizeCss: true,
     
     // Optimize fonts
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: [],
     
     // Minimal Turbopack configuration
     turbo: {
