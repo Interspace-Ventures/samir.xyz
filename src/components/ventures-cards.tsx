@@ -107,7 +107,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
     <Link 
       href={link}
       target="_blank"
-      className="block group relative aspect-square overflow-hidden rounded-2xl
+      className="block group relative overflow-hidden rounded-2xl
         hover:shadow-lg hover:shadow-purple-800/30 hover:translate-y-[-3px] 
         transition-all duration-200 ease-in-out
         w-full h-full"
@@ -132,10 +132,61 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
             </div>
           </div>
         ) : name === 'Solo' ? (
-          // Solo card with logo and text overlay (like in example)
+          // Solo card with logo and text overlay
           <>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-2/3 h-2/3 flex items-center justify-center">
+              <div className="w-4/5 h-4/5 flex items-center justify-center">
+                <img
+                  src="/Solo Wordmark - Gradient 2025.png"
+                  alt={name}
+                  className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
+                    imageLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
+              </div>
+            </div>
+            <div className="absolute left-0 right-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <h3 className="text-white text-lg font-medium mb-1">{name}</h3>
+              <p className="text-white/80 text-sm line-clamp-2 leading-relaxed">{description}</p>
+            </div>
+          </>
+        ) : name === '2 Days Early' || name === 'Predictive:film' || name === 'Interspace' ? (
+          // Logo-only cards (centered logos)
+          <>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-3/4 h-3/4 flex items-center justify-center">
+                {svgContent && isSvgPath(imageUrl) ? (
+                  <div 
+                    className={`w-full h-full transition-opacity duration-500 ${
+                      imageLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    dangerouslySetInnerHTML={{ __html: svgContent }}
+                  />
+                ) : (
+                  <img
+                    src={imageUrl}
+                    alt={name}
+                    className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
+                      imageLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onLoad={handleImageLoad}
+                    onError={handleImageError}
+                  />
+                )}
+              </div>
+            </div>
+            <div className="absolute left-0 right-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <h3 className="text-white text-lg font-medium mb-1">{name}</h3>
+              <p className="text-white/80 text-sm line-clamp-2 leading-relaxed">{description}</p>
+            </div>
+          </>
+        ) : (
+          // Text-only cards (Hey I'm Samir, Perspectives)
+          <>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-3/4 h-3/4 flex items-center justify-center">
                 <img
                   src={imageUrl}
                   alt={name}
@@ -147,51 +198,13 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
                 />
               </div>
             </div>
-            <div className="absolute left-0 right-0 bottom-0 p-5">
+            <div className="absolute left-0 right-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <h3 className="text-white text-lg font-medium mb-1">{name}</h3>
-              <p className="text-white/80 text-sm line-clamp-2 leading-relaxed">{description}</p>
-            </div>
-          </>
-        ) : name === '2 Days Early' || name === 'Predictive:film' || name === 'Interspace' ? (
-          // Logo-only cards (centered logos)
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-2/3 h-2/3 flex items-center justify-center">
-              {svgContent && isSvgPath(imageUrl) ? (
-                <div 
-                  className={`w-full h-full transition-opacity duration-500 ${
-                    imageLoaded ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  dangerouslySetInnerHTML={{ __html: svgContent }}
-                />
-              ) : (
-                <img
-                  src={imageUrl}
-                  alt={name}
-                  className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
-                    imageLoaded ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  onLoad={handleImageLoad}
-                  onError={handleImageError}
-                />
+              {description && (
+                <p className="text-white/80 text-sm line-clamp-2 leading-relaxed">{description}</p>
               )}
             </div>
-          </div>
-        ) : (
-          // Text-only cards (Hey I'm Samir, Perspectives) - Simple logo display
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-4/5 h-4/5 flex items-center justify-center">
-              <img
-                src={imageUrl}
-                alt={name}
-                className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
-                  imageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-                style={{ maxWidth: '70%', maxHeight: '70%' }} // Limit size for better fit
-                onLoad={handleImageLoad}
-                onError={handleImageError}
-              />
-            </div>
-          </div>
+          </>
         )}
       </div>
     </Link>
