@@ -14,14 +14,31 @@ const nextConfig = {
   },
   
   webpack: (config, { isServer }) => {
-    // Ensure React 19 compatibility
+    // Enhanced React 19 compatibility
     if (!isServer) {
-      // Fix hydration errors by ensuring React is properly resolved
+      // Fix jsx runtime errors by ensuring proper React resolution
       config.resolve.alias = {
         ...config.resolve.alias,
-        'react/jsx-runtime': path.resolve('node_modules/react/jsx-runtime.js'),
-        'react/jsx-dev-runtime': path.resolve('node_modules/react/jsx-dev-runtime.js'),
+        'react': path.resolve('node_modules/react'),
+        'react-dom': path.resolve('node_modules/react-dom'),
+        'react/jsx-runtime': path.resolve('node_modules/react/jsx-runtime'),
+        'react/jsx-dev-runtime': path.resolve('node_modules/react/jsx-dev-runtime'),
       };
+      
+      // Prevent multiple React instances
+      config.resolve.dedupe = ['react', 'react-dom'];
+      
+      // Add React 19 shim for better compatibility
+      config.module.rules.unshift({
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
+        include: [
+          path.resolve('node_modules/next/dist/compiled/react'),
+          path.resolve('node_modules/next/dist/compiled/react-dom'),
+        ],
+        use: {
+          loader: 'null-loader',
+        },
+      });
     }
     
     // Improve SVG handling with both next/image support and React component import
@@ -59,11 +76,19 @@ const nextConfig = {
       ],
     });
     
-    // Enhanced React 19 compatibility for certain packages
+    // Fix React 19 specific issues with server components
     config.module.rules.push({
       test: /node_modules[\\/](react-server-dom-webpack|react-dom)[\\/].+\.js$/,
       use: {
         loader: 'null-loader',
+      },
+    });
+    
+    // Fix for the specific "Cannot read properties of undefined (reading 'ReactCurrentDispatcher')" error
+    config.module.rules.push({
+      test: /node_modules\/next\/dist\/compiled\/react\/cjs\/react-jsx-dev-runtime\.development\.js$/,
+      use: {
+        loader: 'null-loader', // Skip this problematic file and use the ESM version instead
       },
     });
     
