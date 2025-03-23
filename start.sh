@@ -16,24 +16,82 @@ echo "Current directory: $(pwd)"
 # We've modified next.config.js to handle loading from attached_assets directly
 
 # Make sure public directory and structure exists
-mkdir -p public/logos public/images public/icons public/logs
+mkdir -p public/logos/ventures public/logos/portfolio public/logos/profile public/images/hero public/icons public/logs
 
 # Make sure public has the same content as attached_assets
 echo "Ensuring public folder has access to attached_assets content..."
 mkdir -p attached_assets
 
-# Copy assets maintaining folder structure instead of simple symlinks
-cp -a attached_assets/* public/logos/ 2>/dev/null || true
+# Clear existing links in the logos directory
+rm -f public/logos/*.png 2>/dev/null || true
 
-# Move specific files to appropriate folders
-mv public/logos/*.txt public/logs/ 2>/dev/null || true
-mv public/logos/*.jpg public/images/ 2>/dev/null || true
-mv public/logos/*.webp public/images/ 2>/dev/null || true
-mv public/logos/*.svg public/images/ 2>/dev/null || true
+# Create symbolic links from attached_assets to the appropriate public directories
+# Ventures logos
+ln -sf /home/runner/workspace/attached_assets/"2DE Interspace.png" public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"Solo Wordmark - Gradient 2025.png" public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"Predictive.film icon 2025.png" public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"Interspace Square - 2025.png" public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"Hey I'm Samir 2025.png" public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"Perspectives Favicon.png" public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/interspace.png public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/interspace-square.png public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/predictive-film-icon.png public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/perspectives.png public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/solo-logo-2025.png public/logos/ventures/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"Solo Wordmark 2025.png" public/logos/ventures/ 2>/dev/null || true
+
+# Portfolio logos
+ln -sf /home/runner/workspace/attached_assets/Afar.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/AON3D.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Aura.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Backpack.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/GEM.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Goodmylk.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Harper.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Hedgehog.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Juneshine.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Kartera.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Keep.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/margin.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Maridea.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Playbook.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/RPM.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Rely.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Restream.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Sanzo.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Soot.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Sugar.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Sundae.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Superplastic.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Swan.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Techmate.png public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"The Coffee.png" public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"The Food Company.png" public/logos/portfolio/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/Waldo.png public/logos/portfolio/ 2>/dev/null || true
+
+# Profile images
+ln -sf /home/runner/workspace/attached_assets/samir.png public/logos/profile/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/samir-favicon.png public/logos/profile/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"Hey I'm Samir 2025.png" public/logos/profile/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/hey-im-samir.png public/logos/profile/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/"hey - I'm Samir.png" public/logos/profile/ 2>/dev/null || true
+
+# Hero images
+ln -sf /home/runner/workspace/attached_assets/hero-banner.png public/images/hero/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/hero-main.png public/images/hero/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/screenshot-2025-03-01.png public/images/hero/ 2>/dev/null || true
+
+# Move other images and files to appropriate folders
+cp -a attached_assets/*.txt public/logs/ 2>/dev/null || true
+cp -a attached_assets/*.jpg public/images/ 2>/dev/null || true
+cp -a attached_assets/*.webp public/images/ 2>/dev/null || true
+cp -a attached_assets/*.svg public/images/ 2>/dev/null || true
 
 # Keep these in root for compatibility
-cp public/logos/favicon.png public/ 2>/dev/null || true
-cp public/logos/generated-icon.png public/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/favicon.png public/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/generated-icon.png public/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/favicon.png public/logos/ 2>/dev/null || true
+ln -sf /home/runner/workspace/attached_assets/generated-icon.png public/logos/ 2>/dev/null || true
 
 # Set enhanced environment variables for React 19 compatibility
 export NEXT_TELEMETRY_DISABLED=1

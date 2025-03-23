@@ -26,7 +26,7 @@ export default function Ventures() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 flex items-center justify-center">
                   <img
-                    src="/attached_assets/2DE Interspace.png"
+                    src="/logos/ventures/2DE Interspace.png"
                     alt="2 Days Early"
                     className="w-full h-full object-contain filter drop-shadow-lg"
                   />
@@ -49,7 +49,7 @@ export default function Ventures() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 flex items-center justify-center">
                   <img
-                    src="/attached_assets/Solo Wordmark - Gradient 2025.png"
+                    src="/logos/ventures/Solo Wordmark - Gradient 2025.png"
                     alt="Solo"
                     className="w-full h-full object-contain filter drop-shadow-lg"
                   />
@@ -72,7 +72,7 @@ export default function Ventures() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 flex items-center justify-center">
                   <img
-                    src="/attached_assets/Predictive.film icon 2025.png"
+                    src="/logos/ventures/Predictive.film icon 2025.png"
                     alt="Predictive:film"
                     className="w-full h-full object-contain filter drop-shadow-lg"
                   />
@@ -95,7 +95,7 @@ export default function Ventures() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 flex items-center justify-center">
                   <img
-                    src="/attached_assets/Interspace Square - 2025.png"
+                    src="/logos/ventures/Interspace Square - 2025.png"
                     alt="Interspace"
                     className="w-full h-full object-contain filter drop-shadow-lg"
                   />
@@ -120,7 +120,7 @@ export default function Ventures() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-4/5 h-4/5 flex items-center justify-center">
                     <img
-                      src="/attached_assets/Hey I'm Samir 2025.png"
+                      src="/logos/ventures/Hey I'm Samir 2025.png"
                       alt="Hey I'm Samir"
                       className="w-full h-full object-contain filter drop-shadow-lg"
                     />
@@ -142,7 +142,7 @@ export default function Ventures() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-4/5 h-4/5 flex items-center justify-center">
                     <img
-                      src="/attached_assets/Perspectives Favicon.png"
+                      src="/logos/ventures/Perspectives Favicon.png"
                       alt="Perspectives"
                       className="w-full h-full object-contain filter drop-shadow-lg"
                     />
