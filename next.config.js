@@ -4,21 +4,13 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Version: 3.4.4 - Ultra-enhanced React 19 Compatibility Mode
+// Version: 3.4.5 - React 19 Compatibility Fixed Version
 const nextConfig = {
   // Disable strict mode to prevent double-rendering issues with React 19
   reactStrictMode: false,
   
   // Output as a standalone build
   output: 'standalone',
-  
-  // Configure server-side components at the top level as per Next.js 15 standards
-  serverComponentsExternalPackages: [
-    'react', 
-    'react-dom', 
-    'next/navigation', 
-    'next/router'
-  ],
   
   // Use classic React runtime to avoid React 19 compatibility issues
   compiler: {
@@ -46,14 +38,9 @@ const nextConfig = {
     optimizePackageImports: ['react', 'react-dom', 'next-themes'],
     // Disable features known to cause issues with React 19
     appDocumentPreloading: false,
-    trustHostHeader: true,
-    // Override the React runtime version to ensure compatibility
-    reactRoot: true,
+    // Removed trustHostHeader and reactRoot as they're unrecognized
     forceSwcTransforms: true
   },
-  
-  // Force module/nomodule to avoid hydration issues
-  swcMinify: false,
   
   webpack: (config, { isServer, dev }) => {
     // Enhanced fix for React 19 - ensure consistent React instance and correct JSX runtime
@@ -67,14 +54,21 @@ const nextConfig = {
       'scheduler': path.resolve(__dirname, 'node_modules/scheduler'),
     };
     
+    // Set up path alias for attached_assets to make them available in the app
+    config.resolve.alias['@attached_assets'] = path.resolve(__dirname, 'attached_assets');
+    
     // Force React modules to be properly deduplicated - prevent duplicate React instances
-    config.resolve.dedupe = [
+    if (config.resolve.dedupe === undefined) {
+      config.resolve.dedupe = [];
+    }
+    
+    config.resolve.dedupe.push(
       'react', 
       'react-dom', 
       'scheduler', 
       'next-themes', 
       'react-hydration-provider'
-    ];
+    );
     
     // Set webpack target to modern browsers to simplify bundle
     if (!isServer) {
@@ -204,17 +198,25 @@ const nextConfig = {
     formats: ['image/webp']
   },
   
-  // Serve attached_assets through static directory mapping
+  // Direct access to attached_assets through static and public URL mapping
   async rewrites() {
     return [
+      // Map root /attached_assets path to actual files
       {
         source: '/attached_assets/:path*',
         destination: '/attached_assets/:path*',
       },
-      // Enable local assets in public directory
+      // Also make attached_assets available at the root
       {
-        source: '/public/:path*',
-        destination: '/:path*',
+        source: '/:asset*',
+        destination: '/attached_assets/:asset*',
+        has: [
+          {
+            type: 'header',
+            key: 'accept',
+            value: '(image|audio|video|application).*',
+          },
+        ],
       }
     ];
   },
