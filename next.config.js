@@ -1,14 +1,31 @@
 /** @type {import('next').NextConfig} */
 
-// Version: 7.0.0 - Absolute Minimum Config
+// Version: 8.1.0 - Corrected React 19 Compatibility Config
 const nextConfig = {
-  // Core settings - absolute minimum
+  // Core settings
   reactStrictMode: false,
   
-  // Only include critical webpack config
-  webpack: (config) => {
-    // Disable source maps completely 
+  // Development environment settings
+  compress: true,
+  poweredByHeader: false,
+  allowedDevOrigins: ['*'],
+  
+  // Note: removed invalid experimental options
+  
+  // Webpack config focusing on React compatibility
+  webpack: (config, { isServer }) => {
+    // Disable source maps to avoid compatibility issues
     config.devtool = false;
+    
+    // Handle React 19 JSX Runtime
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'react/jsx-runtime': require.resolve('react/jsx-runtime'),
+        'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime'),
+      };
+    }
+    
     return config;
   }
 };
