@@ -12,8 +12,8 @@ const navItems = [
 ] as const
 
 const NavbarSkeleton = () => (
-  <div className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#111111] border-b border-gray-800">
-    <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+  <div className="fixed top-0 left-0 right-0 z-50 h-16 w-full bg-[#111111] border-b border-gray-800">
+    <div className="w-full px-6 h-full flex items-center justify-between">
       <div className="h-8 w-1/3 bg-gray-800/50 rounded animate-pulse" />
       <div className="hidden md:flex items-center space-x-8">
         {Array(3).fill(null).map((_, i) => (
@@ -38,8 +38,8 @@ export default function Navbar() {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#111111] border-b border-gray-800">
-      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+    <div className="fixed top-0 left-0 right-0 z-50 h-16 w-full bg-[#111111] border-b border-gray-800">
+      <div className="w-full px-6 h-full flex items-center justify-between">
         <NextLink
           href="/"
           className="text-xl font-bold text-white leading-none hover:opacity-80 transition-opacity"
@@ -68,8 +68,7 @@ export default function Navbar() {
           <ThemeToggle />
         </div>
 
-        <div className="md:hidden flex items-center gap-4">
-          <ThemeToggle />
+        <div className="md:hidden flex items-center">
           <button
             onClick={() => setIsMenuOpen(prev => !prev)}
             className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
@@ -116,14 +115,14 @@ export default function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 z-50 bg-[#111111] border-b border-gray-800 py-4 px-6 space-y-2 md:hidden">
+        <div className="absolute top-16 left-0 right-0 z-50 bg-[#111111] border-b border-gray-800 py-4 px-6 space-y-4 md:hidden">
           {navItems.map((item) => (
             <NextLink
               key={item.href}
               href={item.href}
               prefetch={false}
               className={`
-                block py-3 text-sm font-medium tracking-wide transition-colors uppercase
+                block py-2 text-sm font-medium tracking-wide transition-colors uppercase
                 hover:text-white whitespace-nowrap
                 ${pathname === item.href ? 'text-white' : 'text-gray-300'}
                 ${pathname === item.href ? 'border-l-2 border-white pl-3' : ''}
@@ -133,6 +132,9 @@ export default function Navbar() {
               {item.label}
             </NextLink>
           ))}
+          <div className="py-2">
+            <ThemeToggle />
+          </div>
         </div>
       )}
     </div>
