@@ -1,7 +1,7 @@
-// Version 8.0.0 - Server-Side Only Portfolio Page (No Client Components)
+// Version 10.0.0 - Static HTML Only Portfolio Page - No Client JavaScript
 
 export default function Portfolio() {
-  // Sample static data
+  // Pre-defined static data
   const companies = [
     { name: "Backpack", description: "Financial services platform", category: "Fintech" },
     { name: "Caliber X", description: "Health tech innovation", category: "Health" },
@@ -31,7 +31,11 @@ export default function Portfolio() {
       }}>
         {companies.map((company, index) => (
           <div key={index} className="card" style={{
-            borderRadius: "0.5rem"
+            padding: "1.5rem", 
+            border: "1px solid #eaeaea", 
+            borderRadius: "0.5rem",
+            backgroundColor: "#fff",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
           }}>
             <h3 style={{ marginTop: 0, color: "#2563eb" }}>{company.name}</h3>
             <p style={{ marginBottom: "0.5rem" }}>{company.description}</p>

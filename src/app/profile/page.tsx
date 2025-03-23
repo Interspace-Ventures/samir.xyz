@@ -1,4 +1,4 @@
-// Version 8.0.0 - Server-Side Only Profile Page
+// Version 10.0.0 - Static HTML Only Profile Page - No Client JavaScript
 
 export default function Profile() {
   return (

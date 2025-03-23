@@ -1,4 +1,4 @@
-// Version 6.0.0 - Pure Static HTML Test Page
+// Version 10.0.0 - Pure Static HTML Test Page - No Client JavaScript
 
 export default function BasicPage() {
   // Generate server-side timestamp
