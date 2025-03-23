@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { inter } from "../config/fonts";
-import dynamic from 'next/dynamic';
-
-// Safely import components with React 19 compatibility
-const ThemeProvider = dynamic(() => import('../components/theme-provider').then(mod => ({ 
-  default: mod.ThemeProvider 
-})), { ssr: true });
-
-const RootLayout = dynamic(() => import('../components/root-layout'), { ssr: true });
+import { ThemeProvider } from "../components/theme-provider";
+import RootLayout from "../components/root-layout";
 
 export const metadata: Metadata = {
   title: "Samir's Portfolio",

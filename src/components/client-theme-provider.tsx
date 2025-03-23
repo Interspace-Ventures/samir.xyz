@@ -8,38 +8,18 @@ interface Props {
   suppressHydrationWarning?: boolean
 }
 
+// Simplified version to avoid React 19 hydration issues
 export function ClientThemeProvider({ children, suppressHydrationWarning = false }: Props) {
   const [mounted, setMounted] = useState(false)
   
-  // Enhanced compatibility for React 19
   useEffect(() => {
-    // Delay mounting slightly to ensure proper hydration order
-    const timer = setTimeout(() => {
-      setMounted(true)
-    }, 10)
-    
-    return () => clearTimeout(timer)
+    setMounted(true)
   }, [])
 
-  // Initial render - match server exactly
-  // Prevents hydration mismatch by rendering minimal content until client-side mounted
-  if (!mounted) {
-    return (
-      <div className="min-h-screen" suppressHydrationWarning={true}>
-        {children}
-      </div>
-    )
-  }
-
-  // Safely access theme only after mounting
-  const { theme } = useTheme()
-
-  // Simplified rendering for React 19 compatibility
   return (
     <div 
-      className="min-h-screen"
-      suppressHydrationWarning={suppressHydrationWarning || true}
-      data-theme={theme}
+      className="min-h-screen" 
+      suppressHydrationWarning={true}
     >
       {children}
     </div>
