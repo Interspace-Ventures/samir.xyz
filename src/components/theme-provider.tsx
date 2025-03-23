@@ -9,14 +9,12 @@ type ThemeProviderProps = {
 }
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  // Simplified version with fewer props to avoid hydration issues
   return (
     <NextThemesProvider 
       attribute="class"
       defaultTheme="dark"
-      enableSystem={false}
-      forcedTheme="dark" // Force dark theme always
-      disableTransitionOnChange
-      {...props}
+      forcedTheme="dark"
     >
       {children}
     </NextThemesProvider>

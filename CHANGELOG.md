@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.3] - 2025-03-23
+
+### Fixed
+- Added symbolic link for attached_assets to ensure images load properly
+- Enhanced public directory structure for better asset accessibility
+- Improved application startup reliability
+
+## [3.4.2] - 2025-03-23
+
+### Fixed
+- Corrected serverExternalPackages configuration key location for Next.js 15
+- Moved from deprecated serverComponentsExternalPackages to serverExternalPackages at the top level
+- Updated version number in configuration comments for better tracking
+
+## [3.4.1] - 2025-03-23
+
+### Fixed
+- Corrected Next.js configuration to follow latest Next.js 15 standards
+- Fixed server component configuration warning by updating the configuration format
+- Improved startup script permissions and reliability
+- Enhanced cache clearing in start.sh for better React 19 compatibility
+
+## [3.4.0] - 2025-03-23
+
+### Fixed
+- Resolved React 19 ReactCurrentDispatcher errors affecting client-side rendering
+- Fixed infinite loading issues by simplifying client components structure
+- Eliminated incompatibilities between Next.js 15 and React 19
+- Enhanced webpack configuration to properly handle React 19 JSX runtime
+
+### Changed
+- Streamlined theme provider components to prevent hydration issues
+- Simplified layout structure for more reliable rendering across browsers
+- Removed unused dependencies to reduce potential conflicts
+- Added cache clearing to start.sh script for cleaner application starts
+- Created a more direct rendering path by eliminating unnecessary component nesting
+
 ## [3.3.0] - 2025-03-23
 
 ### Changed

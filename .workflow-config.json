@@ -5,15 +5,16 @@
       "tasks": [
         {
           "name": "Start Portfolio Website",
-          "command": "./start.sh",
-          "wait_for_port": 5000,
+          "command": "./run-app.sh",
+          "wait_for_port": true,
           "url_path": "/",
           "timeout": 180000,
           "prevent_capture_with_port": false,
           "enable_port_browser": true,
           "port": 5000,
           "capture_output": true,
-          "preserve_output": true
+          "preserve_output": true,
+          "delay_ms": 1000
         }
       ]
     }
