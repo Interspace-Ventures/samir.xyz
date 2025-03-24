@@ -65,14 +65,29 @@ export default function PortfolioCards() {
   )
 }
 
-// Optimized company card component with better image handling
+// Optimized company card component with better image handling and special cases for problematic logos
 const CompanyCard = ({ company }: { company: Company }) => {
   const [fallback, setFallback] = useState(false)
   const [mounted, setMounted] = useState(false)
   
+  // List of companies with known problematic logos (text overlap issues)
+  const problemLogos = [
+    'The Food Company',
+    'Swansea City AFC',
+    'The Coffee'
+  ]
+  
+  // Special case handling for known problematic logos
+  const hasProblemLogo = problemLogos.includes(company.name)
+  
   useEffect(() => {
     setMounted(true)
-  }, [])
+    
+    // Force text fallback for known problematic logos
+    if (hasProblemLogo) {
+      setFallback(true)
+    }
+  }, [hasProblemLogo])
 
   return (
     <div className="h-[160px] rounded-xl border border-gray-800 bg-gradient-to-br from-black to-gray-900 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-purple-900/20 hover:border-purple-700/30 group">
