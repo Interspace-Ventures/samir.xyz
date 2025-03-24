@@ -1,47 +1,37 @@
-// Version 10.0.0 - Static HTML Only Profile Page - No Client JavaScript
-
 export default function Profile() {
   return (
-    <div>
-      <h1>Hey - I'm Samir</h1>
-      <h2 style={{ color: "#8b5cf6", marginBottom: "1.5rem" }}>I drive business impact at fintechs</h2>
+    <div className="py-8">
+      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+        About <span className="text-purple-500">Samir</span>
+      </h1>
       
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <p>
-          Today, I am leading Strategic Finance for the Financial Partnerships team at 
-          <a href="https://cash.app" target="_blank" rel="noopener noreferrer" style={{ color: "#8b5cf6", margin: "0 0.25rem" }}>
-            Cash App
-          </a> 
+      <div className="max-w-3xl mx-auto card mb-10">
+        <h2 className="text-xl font-semibold mb-4 text-purple-400">I drive business impact at fintechs</h2>
+        
+        <p className="text-gray-300 mb-4 leading-relaxed">
+          Today, I am leading Strategic Finance for the Financial Partnerships team at Cash App
           where we're expanding financial access to help users do more with their money.
         </p>
-
-        <p>
-          Prior to that, I drove financial partnerships at
-          <a href="https://unit.co" target="_blank" rel="noopener noreferrer" style={{ color: "#8b5cf6", margin: "0 0.25rem" }}>
-            Unit
-          </a>
-          and built and led the Strategic Finance function at
-          <a href="https://chime.com" target="_blank" rel="noopener noreferrer" style={{ color: "#8b5cf6", margin: "0 0.25rem" }}>
-            Chime
-          </a>.
+        
+        <p className="text-gray-300 mb-4 leading-relaxed">
+          Prior to that, I drove financial partnerships at Unit, which embeds financial features into products.
+          Before that, I built and led the Strategic Finance function at Chime. Earlier, I was the first finance
+          hire at Sift. I got my start in investment banking in the Financial Institutions Group at JP Morgan
+          covering market structure and asset management.
         </p>
-
-        <p>
-          Outside of work, I write about fintech on
-          <a href="https://x.com/heyinterspace" target="_blank" rel="noopener noreferrer" style={{ color: "#8b5cf6", margin: "0 0.25rem" }}>
-            Twitter
-          </a>
-          and create apps and ideas at
-          <a href="/ventures" style={{ color: "#8b5cf6", margin: "0 0.25rem" }}>
-            Interspace Ventures
-          </a>.
+        
+        <p className="text-gray-300 leading-relaxed">
+          Outside of work, I write over-engineered fintech threads on Twitter, share perspectives on Substack
+          and write fintech & stratfin posts at Interspace. I also create over-engineered apps and ideas at
+          Interspace Ventures.
         </p>
       </div>
       
-      <p style={{ marginTop: "2rem" }}>
-        <a href="/">Back to Home</a> | 
-        <a href="/portfolio" style={{ marginLeft: "0.5rem" }}>View Portfolio</a>
-      </p>
+      <div className="text-center">
+        <a href="/" className="btn-primary">
+          Back to Home
+        </a>
+      </div>
     </div>
   );
 }

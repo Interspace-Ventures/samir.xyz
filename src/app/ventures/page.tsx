@@ -1,84 +1,93 @@
-// Version 10.0.0 - Static HTML Only Ventures Page - No Client JavaScript
+// Version 12.0.1 - Enhanced Ventures Page with purple accents and dark theme
 
 export default function Ventures() {
   // Pre-defined static venture data
   const ventures = [
     {
       name: "2 Days Early",
-      description: "Get in on the next big thing",
-      url: "https://2daysearly.com"
+      description: "Get in on the next big thing before everyone else. Early access to innovative products and services.",
+      url: "https://2daysearly.com",
+      status: "Active"
     },
     {
       name: "Solo",
-      description: "The first design-forward climbing app",
-      url: "https://soloclimbing.com"
+      description: "The first design-forward climbing app for tracking, sharing, and discovering climbing routes.",
+      url: "https://soloclimbing.com",
+      status: "Active"
     },
     {
       name: "Predictive:film",
-      description: "AI-powered script analysis",
-      url: "https://predictive.film"
+      description: "AI-powered script analysis for screenwriters and production studios to evaluate market potential.",
+      url: "https://predictive.film",
+      status: "Beta"
     },
     {
       name: "Interspace",
-      description: "Digital product studio",
-      url: "https://interspace.sh"
+      description: "Digital product studio focused on creating innovative solutions for emerging technologies.",
+      url: "https://interspace.sh",
+      status: "Active"
     },
     {
       name: "Hey I'm Samir",
-      description: "Personal website",
-      url: "https://heyimsamir.com"
+      description: "Personal website showcasing my professional expertise and portfolio of ventures.",
+      url: "https://heyimsamir.com",
+      status: "Active"
     },
     {
       name: "Perspectives",
-      description: "Insights on tech and finance",
-      url: "https://perspectives.fyi"
+      description: "Insights on tech and finance through in-depth analysis and expert interviews.",
+      url: "https://perspectives.fyi",
+      status: "Coming Soon"
     }
   ];
   
   return (
-    <div>
-      <h1 style={{ marginBottom: "0.5rem" }}>Interspace Ventures</h1>
-      <p style={{ marginBottom: "2rem", color: "#666" }}>
-        I create apps and concepts by coding at the speed of thought using Replit.
-      </p>
+    <div className="py-8">
+      <div className="max-w-4xl mx-auto text-center mb-12">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6">
+          Interspace <span className="text-purple-500">Ventures</span>
+        </h1>
+        <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+          Creating innovative digital products and concepts at the intersection of technology and creativity.
+        </p>
+      </div>
       
-      <div style={{ 
-        display: "grid", 
-        gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", 
-        gap: "1.5rem",
-        marginBottom: "2rem"
-      }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {ventures.map((venture, index) => (
-          <div key={index} className="card" style={{
-            padding: "1.5rem", 
-            border: "1px solid #eaeaea", 
-            borderRadius: "0.75rem",
-            backgroundColor: "#fff",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
-          }}>
-            <h3 style={{ margin: "0 0 0.75rem 0", color: "#6366f1" }}>{venture.name}</h3>
-            <p style={{ marginBottom: "1rem", fontSize: "0.9rem" }}>{venture.description}</p>
+          <div key={index} className="card group hover:border-purple-600 transition-colors">
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-xl font-bold text-purple-400">{venture.name}</h3>
+              <span className={`text-xs px-2 py-1 rounded-full ${
+                venture.status === 'Active' 
+                  ? 'bg-purple-900/40 text-purple-300' 
+                  : venture.status === 'Beta'
+                    ? 'bg-blue-900/40 text-blue-300'
+                    : 'bg-gray-800 text-gray-400'
+              }`}>
+                {venture.status}
+              </span>
+            </div>
+            <p className="text-gray-300 mb-4">{venture.description}</p>
             <a 
               href={venture.url} 
               target="_blank" 
               rel="noopener noreferrer"
-              style={{ 
-                color: "#6366f1", 
-                textDecoration: "none",
-                fontWeight: "500",
-                fontSize: "0.9rem" 
-              }}
+              className="inline-flex items-center text-purple-400 hover:text-purple-300 group-hover:underline"
             >
-              Visit website →
+              <span>Visit website</span>
+              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
             </a>
           </div>
         ))}
       </div>
       
-      <p>
-        <a href="/" style={{ marginRight: "1rem" }}>Back to Home</a>
-        <a href="/portfolio">View Portfolio</a>
-      </p>
+      <div className="text-center">
+        <a href="/" className="btn-primary">
+          Back to Home
+        </a>
+      </div>
     </div>
   );
 }

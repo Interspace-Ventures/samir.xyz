@@ -1,18 +1,11 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
+import { inter } from "../config/fonts";
 import "./globals.css";
-import Script from "next/script";
-
-// Version 10.1.0 - Enhanced layout with compatibility fixes for Replit Webview
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-};
+import Navbar from "../components/navbar";
 
 export const metadata: Metadata = {
-  title: "Samir's Portfolio",
-  description: "Personal portfolio website showcasing fintech expertise and ventures",
+  title: "Hey - I'm Samir",
+  description: "I drive business impact at fintechs",
 };
 
 export default function RootLayout({
@@ -21,50 +14,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* Special compatibility script for Replit Webview */}
-        <Script src="/webview-compat.js" strategy="beforeInteractive" />
-        {/* Force reload if there are issues with React initialization */}
-        <Script id="compatibility-fix" strategy="afterInteractive">
-          {`
-            // Check if we need to refresh due to incomplete React initialization
-            if (typeof window !== 'undefined') {
-              console.log('Checking for React compatibility');
-              
-              // Detect if React is properly initialized
-              if (!window.React && !window.__NEXT_HYDRATED && location.search.indexOf('retry=true') === -1) {
-                console.log('React not properly initialized, will reload in 2 seconds...');
-                
-                // Set a timeout to reload the page with a retry parameter
-                setTimeout(() => {
-                  const separator = location.search ? '&' : '?';
-                  window.location.href = location.href + separator + 'retry=true';
-                }, 2000);
-              } else {
-                console.log('React initialized properly');
-              }
-            }
-          `}
-        </Script>
-      </head>
-      <body style={{ 
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-        lineHeight: "1.5",
-        color: "#333",
-        backgroundColor: "#f5f7fa",
-        margin: 0,
-        padding: 0
-      }} suppressHydrationWarning>
-        <div style={{ 
-          maxWidth: "1200px", 
-          margin: "0 auto", 
-          padding: "2rem 1rem"
-        }}>
+    <html lang="en" className={inter.className}>
+      <body>
+        <Navbar />
+        <main className="max-w-6xl mx-auto py-8 px-4 min-h-[calc(100vh-160px)]">
           {children}
-        </div>
+        </main>
+        <footer className="bg-gray-900 border-t border-gray-800 p-6 text-center text-gray-400">
+          <div className="max-w-6xl mx-auto">
+            <p>© {new Date().getFullYear()} Samir • Built with Next.js</p>
+            <div className="flex justify-center gap-4 mt-3">
+              <a href="https://twitter.com/heyinterspace" className="text-gray-400 hover:text-purple-400 transition-colors">Twitter</a>
+              <a href="https://linkedin.com" className="text-gray-400 hover:text-purple-400 transition-colors">LinkedIn</a>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
