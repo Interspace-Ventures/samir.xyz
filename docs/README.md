@@ -52,7 +52,7 @@ When working with this codebase, please adhere to these best practices:
 
 5. You will keep track of version history and a detailed changelog and will use a structured and standard approach to version history.
 
-## Running the Application
+## Build Instructions
 
 The application is configured to run automatically through the "Start application" workflow, which executes `./start.sh`.
 
