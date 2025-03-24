@@ -2,25 +2,55 @@
 
 I drive business impact at fintechs.
 
+## Outline
+
+- [Stack](#stack) - Technologies used in this project
+  - [Core Framework & Runtime](#core-framework--runtime) - Key platform technologies
+  - [Frontend Libraries](#frontend-libraries) - React ecosystem components
+  - [Styling & UI](#styling--ui) - Visual presentation tools
+  - [CSS Processing](#css-processing) - Style transformation tools
+  - [Development & Deployment](#development--deployment) - Infrastructure tools
+- [Repository Overview](#repository-overview) - Directory structure and naming conventions
+  - [Core Directories](#core-directories) - Main application directories
+  - [Supporting Directories](#supporting-directories) - Additional resource directories
+  - [Naming Conventions](#naming-conventions) - File and directory naming patterns
+- [Artificial Intelligence Model Instructions](#artificial-intelligence-model-instructions) - Guidelines for AI
+  - [Model Context](#model-context) - Technical context for AI models
+  - [Five Laws of Artificial Intelligence](#five-laws-of-artificial-intelligence) - Rules for AI collaboration
+- [Build Instructions](#build-instructions) - How to run the application
+- [Version History](#version-history) - Tracking changes and updates
+  - [Versioning Philosophy](#versioning-philosophy) - How versions are structured
+  - [Latest Version](#latest-version-410-2025-03-24) - Current release details
+- [License](#license) - Open source licensing information
+
 ## Stack
 
+### Core Framework & Runtime
+- **Bun Runtime**: Fast JavaScript/TypeScript runtime (critical for this project)
 - **Next.js (v15.2.3)**: Framework for server-side rendering and client-side hydration
+- **TypeScript (v5.8.2)**: Typed superset of JavaScript for safe development
+
+### Frontend Libraries
 - **React (v19.0.0)**: Library for building dynamic user interface components
 - **React DOM (v19.0.0)**: DOM-specific methods for React
-- **Bun Runtime**: Fast JavaScript/TypeScript runtime (critical for this project)
-- **Tailwind CSS (v4.0.15)**: Utility-first CSS framework for responsive styling
-- **TypeScript (v5.8.2)**: Typed superset of JavaScript for safe development
-- **next-themes (v0.4.6)**: Theme management for Next.js
 - **@tanstack/react-query (v5.69.0)**: Data fetching and state management
-- **@svgr/webpack (v8.1.0)**: Transform SVGs into React components
+- **react-hydration-provider (v2.1.0)**: Hydration safety utilities for React
+- **next-themes (v0.4.6)**: Theme management for Next.js
+
+### Styling & UI
+- **Tailwind CSS (v4.0.15)**: Utility-first CSS framework for responsive styling
 - **@tailwindcss/typography (v0.5.16)**: Typography plugin for Tailwind CSS
-- **@tailwindcss/postcss (v4.0.15)**: PostCSS plugin for Tailwind
-- **autoprefixer (v10.4.21)**: PostCSS plugin to parse CSS and add vendor prefixes
-- **postcss (v8.5.3)**: Tool for transforming CSS with JavaScript
 - **tailwind-merge (v3.0.2)**: Utility for merging Tailwind CSS classes
 - **tailwindcss-animate (v1.0.7)**: Animation utilities for Tailwind CSS
-- **react-hydration-provider (v2.1.0)**: Hydration safety utilities for React
+- **@svgr/webpack (v8.1.0)**: Transform SVGs into React components
+
+### CSS Processing
+- **postcss (v8.5.3)**: Tool for transforming CSS with JavaScript
+- **@tailwindcss/postcss (v4.0.15)**: PostCSS plugin for Tailwind
+- **autoprefixer (v10.4.21)**: PostCSS plugin to parse CSS and add vendor prefixes
 - **critters (v0.0.23)**: Critical CSS inlining tool
+
+### Development & Deployment
 - **http-server (v14.1.1)**: Simple HTTP server for static content
 - **vercel (v41.4.1)**: Deployment platform integration
 
@@ -124,15 +154,14 @@ The project follows [Semantic Versioning](https://semver.org/) with the followin
 - **Minor Versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch Versions (0.0.X)**: Individual commits within a single chat session
 
-### Latest Version: 4.0.0 (2025-03-23)
+### Latest Version: 4.1.0 (2025-03-24)
 
 Key updates in the latest version:
-- Documentation restructuring for improved AI collaboration
-- Consolidated documentation to the docs directory
-- Enhanced Stack section with detailed package information
-- Added Repository Overview with folder structure and naming conventions
-- Added AI Model Instructions with context and five laws
-- Updated build instructions and version history information
+- Enhanced documentation with improved navigation structure
+- Added Outline section with descriptive links to all major sections
+- Reorganized Stack section into logical technology categories
+- Refined Repository Overview with detailed folder structure explanations
+- Added Naming Conventions section for consistent development patterns
 
 For detailed changes across all versions, see the [CHANGELOG.md](./CHANGELOG.md).
 

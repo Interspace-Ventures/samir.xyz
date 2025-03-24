@@ -12,9 +12,34 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [4.1.0] - 2025-03-24
+
+### Added
+- Enhanced documentation with new Outline section for easier navigation
+- Comprehensive Repository Overview with detailed folder structure explanations
+- Naming Conventions subsection with patterns for files, components, and directories
+- Reorganized Stack section into logical categories for better readability:
+  - Core Framework & Runtime
+  - Frontend Libraries
+  - Styling & UI
+  - CSS Processing
+  - Development & Deployment
+
+### Changed
+- Updated version tracking in version.json to reflect documentation improvements
+- Improved README.md structure with anchor links to all major sections
+- Restructured technology stack presentation with categorized groupings
+
+### Documentation
+- Streamlined documentation organization for better readability
+- Added descriptive text to navigation links for better context
+- Updated Latest Version section to show only current version details
+- Enhanced Stack section with clearer categorization of technologies
+
 ## [4.0.0] - 2025-03-23
 
 ### Added
+- New "Outline" section with navigation links to all major sections
 - New "Artificial Intelligence Model Instructions" section in README
 - Comprehensive "Five Laws of Artificial Intelligence" for model guidance
 - Enhanced "Stack" section with detailed package version information
