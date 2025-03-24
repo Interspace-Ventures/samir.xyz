@@ -18,10 +18,12 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   
-  // Allow proper hydration of client components
+  // Allow proper hydration of client components and cross-origin requests
   experimental: {
     // Suppress specific Next.js errors that might occur during development
     scrollRestoration: true,
+    // Allow cross-origin requests in development
+    allowedDevOrigins: ['*.replit.dev']
   }
 };
 
