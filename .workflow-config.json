@@ -3,14 +3,17 @@
     {
       "name": "Start application",
       "command": "bash -c \"chmod +x *.sh && ./start.sh\"",
-      "wait_for_port": 5000,
+      "wait_for_port": true,
+      "port": 5000,
       "url_path": "/",
       "keep_files": true,
       "restart_on": "all_files",
       "http_port": 5000,
       "http_host": "0.0.0.0",
       "stop_command": "pkill -f \"next\"",
-      "wait_for_port_timeout": 60000
+      "wait_for_port_timeout": 180000,
+      "success_message": "Ready in",
+      "should_watch_workflow_files": true
     }
   ]
 }
