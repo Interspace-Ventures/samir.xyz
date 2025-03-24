@@ -1,50 +1,57 @@
-// Version 12.0.1 - Enhanced Ventures Page with purple accents and dark theme
+// Version 12.0.2 - Enhanced Ventures Page with logo images and VenturesCard component
+import { VenturesCard } from "../../components/ventures-cards";
 
 export default function Ventures() {
-  // Pre-defined static venture data
+  // Pre-defined static venture data with logo images
   const ventures = [
     {
       name: "2 Days Early",
       description: "Get in on the next big thing before everyone else. Early access to innovative products and services.",
-      url: "https://2daysearly.com",
-      status: "Active"
+      imageUrl: "/logos/ventures/2de-interspace.png",
+      link: "https://2daysearly.com",
+      priority: true
     },
     {
       name: "Solo",
       description: "The first design-forward climbing app for tracking, sharing, and discovering climbing routes.",
-      url: "https://soloclimbing.com",
-      status: "Active"
+      imageUrl: "/logos/ventures/Solo Wordmark - Gradient 2025.png",
+      link: "https://soloclimbing.com",
+      priority: true
     },
     {
       name: "Predictive:film",
       description: "AI-powered script analysis for screenwriters and production studios to evaluate market potential.",
-      url: "https://predictive.film",
-      status: "Beta"
+      imageUrl: "/logos/ventures/predictive-film-icon.png",
+      link: "https://predictive.film",
+      priority: false
     },
     {
       name: "Interspace",
       description: "Digital product studio focused on creating innovative solutions for emerging technologies.",
-      url: "https://interspace.sh",
-      status: "Active"
+      imageUrl: "/logos/ventures/interspace-square.png",
+      link: "https://interspace.sh",
+      priority: true
     },
     {
       name: "Hey I'm Samir",
       description: "Personal website showcasing my professional expertise and portfolio of ventures.",
-      url: "https://heyimsamir.com",
-      status: "Active"
+      imageUrl: "/logos/ventures/hey-im-samir.png",
+      link: "https://heyimsamir.com",
+      priority: true
     },
     {
       name: "Perspectives",
       description: "Insights on tech and finance through in-depth analysis and expert interviews.",
-      url: "https://perspectives.fyi",
-      status: "Coming Soon"
+      imageUrl: "/logos/ventures/perspectives.png",
+      link: "https://perspectives.fyi",
+      priority: false
     }
   ];
   
   return (
-    <div className="py-8">
+    <div className="py-8 max-w-7xl mx-auto px-4 sm:px-6">
       <div className="max-w-4xl mx-auto text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold mb-6">
+        <h1 className="text-3xl md:text-5xl font-bold mb-6">
           Interspace <span className="text-purple-500">Ventures</span>
         </h1>
         <p className="text-gray-300 text-lg max-w-3xl mx-auto">
@@ -52,40 +59,23 @@ export default function Ventures() {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         {ventures.map((venture, index) => (
-          <div key={index} className="card group hover:border-purple-600 transition-colors">
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="text-xl font-bold text-purple-400">{venture.name}</h3>
-              <span className={`text-xs px-2 py-1 rounded-full ${
-                venture.status === 'Active' 
-                  ? 'bg-purple-900/40 text-purple-300' 
-                  : venture.status === 'Beta'
-                    ? 'bg-blue-900/40 text-blue-300'
-                    : 'bg-gray-800 text-gray-400'
-              }`}>
-                {venture.status}
-              </span>
-            </div>
-            <p className="text-gray-300 mb-4">{venture.description}</p>
-            <a 
-              href={venture.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-purple-400 hover:text-purple-300 group-hover:underline"
-            >
-              <span>Visit website</span>
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+          <div key={index} className="aspect-square">
+            <VenturesCard
+              name={venture.name}
+              description={venture.description}
+              imageUrl={venture.imageUrl}
+              link={venture.link}
+              priority={venture.priority}
+            />
           </div>
         ))}
       </div>
       
-      <div className="text-center">
-        <a href="/" className="btn-primary">
-          Back to Home
+      <div className="text-center mt-16">
+        <a href="/profile" className="btn-primary">
+          Back to Profile
         </a>
       </div>
     </div>
