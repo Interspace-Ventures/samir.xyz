@@ -66,5 +66,29 @@ cat version.json
 
 ## Version History
 
-See [CHANGELOG.md](./CHANGELOG.md) for detailed version history.
+This project follows a structured versioning system with detailed change tracking in the [CHANGELOG.md](./CHANGELOG.md).
+
+### Versioning Philosophy
+
+The project follows [Semantic Versioning](https://semver.org/) with the following custom guidelines:
+
+- **Major Versions (X.0.0)**: Dictated by user requirement changes or significant architectural shifts
+- **Minor Versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
+- **Patch Versions (0.0.X)**: Individual commits within a single chat session
+
+### Latest Version: 4.0.0 (2025-03-23)
+
+Key updates in the latest version:
+- Documentation restructuring for improved AI collaboration
+- Consolidated documentation to the docs directory
+- Enhanced Stack section with detailed package information
+- Added AI Model Instructions with context and five laws
+- Updated build instructions and version history information
+
+For detailed changes across all versions, see the [CHANGELOG.md](./CHANGELOG.md).
+
+## License
+
+This project is provided as open source software and can be freely modified and distributed. 
+Developed with the assistance of Replit's AI tools and hosted on the Replit platform.
 

@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Versioning Methodology
+
+This project uses a custom implementation of Semantic Versioning:
+- **Major versions (X.0.0)**: Dictated by user requirement changes or significant architectural shifts
+- **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
+- **Patch versions (0.0.X)**: Individual commits within a single chat session
+
+## [4.0.0] - 2025-03-23
+
+### Added
+- New "Artificial Intelligence Model Instructions" section in README
+- Comprehensive "Five Laws of Artificial Intelligence" for model guidance
+- Enhanced "Stack" section with detailed package version information
+- Expanded versioning philosophy explanation
+
+### Changed
+- Renamed "Technology Stack" to "Stack" with more comprehensive details
+- Renamed "Running the Application" to "Build Instructions"
+- Consolidated all documentation to the docs directory
+- Removed redundant README.md and CHANGELOG.md from root directory
+
+### Documentation
+- Added detailed explanations for each technology in the stack
+- Created new License section
+- Enhanced Version History section with versioning philosophy
+- Improved overall documentation structure and clarity
+
 ## [3.4.3] - 2025-03-23
 
 ### Fixed
