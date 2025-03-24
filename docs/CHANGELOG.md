@@ -18,6 +18,8 @@ This project uses a custom implementation of Semantic Versioning:
 - New "Artificial Intelligence Model Instructions" section in README
 - Comprehensive "Five Laws of Artificial Intelligence" for model guidance
 - Enhanced "Stack" section with detailed package version information
+- Added "Repository Overview" section with folder hierarchy explanation
+- Added "Naming Conventions" subsection to Repository Overview
 - Expanded versioning philosophy explanation
 
 ### Changed
@@ -28,6 +30,7 @@ This project uses a custom implementation of Semantic Versioning:
 
 ### Documentation
 - Added detailed explanations for each technology in the stack
+- Created comprehensive project folder structure documentation
 - Created new License section
 - Enhanced Version History section with versioning philosophy
 - Improved overall documentation structure and clarity

@@ -24,6 +24,54 @@ I drive business impact at fintechs.
 - **http-server (v14.1.1)**: Simple HTTP server for static content
 - **vercel (v41.4.1)**: Deployment platform integration
 
+## Repository Overview
+
+The project follows a structured organization with the following key directories:
+
+### Core Directories
+
+- **`/src`**: Main application source code
+  - `/app`: Next.js application routes and pages
+  - `/components`: Reusable React components
+  - `/config`: Application configuration files
+  - `/lib`: Utility functions and shared libraries
+  - `/styles`: Global styles and Tailwind configuration
+
+- **`/public`**: Static assets served directly
+  - `/icons`: Icon assets for the UI
+  - `/images`: Image assets for content
+  - `/logos`: Logo files for companies and brands
+  - `/logs`: Application logs for debugging
+
+- **`/config`**: Configuration files
+  - `/next`: Next.js specific configuration
+  - `/tools`: Build tools configuration
+  - `/typescript`: TypeScript configuration
+
+- **`/out`**: Static HTML export from Next.js build
+  - Contains the pre-rendered HTML, CSS, and assets
+
+- **`/docs`**: Project documentation
+  - `README.md`: This documentation file
+  - `CHANGELOG.md`: Version history
+
+### Supporting Directories
+
+- **`/attached_assets`**: Original asset files before processing
+- **`/node_modules`**: Third-party dependencies (generated)
+- **`/.next`**: Next.js build cache (generated)
+
+### Naming Conventions
+
+The project follows consistent naming conventions for better readability and maintenance:
+
+- **Files and Directories**: Uses `kebab-case` for script files and config files (e.g., `bun-simple-server.js`, `generate-simple-site.sh`)
+- **React Components**: Uses `PascalCase` for component names and their files (e.g., `ClientWrapper.tsx`, `PortfolioCards.tsx`)
+- **React Pages**: Follows Next.js naming convention with lowercase `page.tsx` in directories representing routes
+- **CSS and Style Files**: Uses `kebab-case` (e.g., `globals.css`)
+- **Configuration Files**: Uses standard naming with appropriate extensions (e.g., `next.config.js`, `tailwind.config.cjs`)
+- **Utility Scripts**: Uses `kebab-case` with descriptive prefixes (e.g., `simple-start.sh`, `smart-start.sh`)
+
 ## Artificial Intelligence Model Instructions
 
 ### Model Context
@@ -82,6 +130,7 @@ Key updates in the latest version:
 - Documentation restructuring for improved AI collaboration
 - Consolidated documentation to the docs directory
 - Enhanced Stack section with detailed package information
+- Added Repository Overview with folder structure and naming conventions
 - Added AI Model Instructions with context and five laws
 - Updated build instructions and version history information
 
