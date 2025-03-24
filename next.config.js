@@ -70,11 +70,18 @@ const nextConfig = {
     
     // Specify allowed origin patterns exactly as they appear in the warning message
     allowedDevOrigins: [
-      // Include the exact domain from the warning message
+      // Include the exact domain from the warning message with various patterns
       'd2193f08-b592-45ce-b730-8dc2c7ef133c-00-1f1txs3yeigba.janeway.replit.dev',
-      // Add common Replit patterns
-      '.janeway.replit.dev',
-      '.replit.dev',
+      // Add direct wildcard pattern for this specific domain (the one in the error message)
+      'd2193f08*.janeway.replit.dev',
+      'd2193f08-b592-45ce-b730-8dc2c7ef133c*.janeway.replit.dev',
+      // Add all possible variations of the specific domain
+      '*-1f1txs3yeigba.janeway.replit.dev',
+      '*-00-1f1txs3yeigba.janeway.replit.dev',
+      '*-00-*.janeway.replit.dev',
+      // Add common Replit patterns with broader matching
+      '*.janeway.replit.dev',
+      '*.replit.dev',
       '.repl.co',
       '.replit.app',
       'replit.com',
@@ -83,6 +90,7 @@ const nextConfig = {
       '127.0.0.1',
       // Add wildcard - this covers all domains for testing purposes
       '*',
+      '**',
       // Special wildcard format to ensure all domains work
       '**.replit.dev',
     ],
