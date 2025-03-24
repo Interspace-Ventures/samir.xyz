@@ -28,8 +28,8 @@ export default function Profile() {
       </div>
       
       <div className="text-center">
-        <a href="/" className="btn-primary">
-          Back to Home
+        <a href="/portfolio" className="btn-primary">
+          View Portfolio
         </a>
       </div>
     </div>
