@@ -1,35 +1,47 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 
-// Simple client component wrapper - Fixed for React 19 compatibility
+/**
+ * Enhanced ClientWrapper component with improved hydration handling
+ * - Uses suppressHydrationWarning for React 19 compatibility
+ * - Properly handles server/client rendering differences
+ * - Provides fallback UI during hydration
+ */
 export function ClientWrapper({
   children,
-  placeholder
+  placeholder,
+  fallback
 }: {
   children: React.ReactNode
   placeholder?: React.ReactNode
+  fallback?: React.ReactNode
 }) {
   const [mounted, setMounted] = useState(false)
   
-  // Basic mounting effect
+  // Safely handle mounting state
   useEffect(() => {
-    setMounted(true)
+    try {
+      // Use requestAnimationFrame to ensure we're in the browser environment
+      const raf = requestAnimationFrame(() => {
+        setMounted(true)
+      })
+      
+      return () => cancelAnimationFrame(raf)
+    } catch (e) {
+      // Fallback for environments where requestAnimationFrame isn't available
+      setMounted(true)
+      console.error('ClientWrapper mounting error:', e)
+    }
   }, [])
   
-  // Return custom placeholder if provided, otherwise default
-  if (!mounted) {
-    return (
-      <div suppressHydrationWarning={true}>
-        {placeholder || <div>Loading...</div>}
-      </div>
-    )
-  }
-  
+  // Use Suspense to handle any async loading issues
   return (
-    <div suppressHydrationWarning={true}>
-      {children}
-    </div>
+    <Suspense fallback={fallback || <div suppressHydrationWarning>Loading component...</div>}>
+      <div suppressHydrationWarning={true}>
+        {mounted ? children : (placeholder || <div>Loading client content...</div>)}
+      </div>
+    </Suspense>
   )
 }
 
