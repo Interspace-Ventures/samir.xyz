@@ -6,7 +6,11 @@
       "wait_for_port": 5000,
       "url_path": "/",
       "keep_files": true,
-      "restart_on": "all_files"
+      "restart_on": "all_files",
+      "http_port": 5000,
+      "http_host": "0.0.0.0",
+      "stop_command": "pkill -f \"next\"",
+      "wait_for_port_timeout": 60000
     }
   ]
 }
