@@ -24,27 +24,33 @@ I drive business impact at fintechs.
 - **http-server (v14.1.1)**: Simple HTTP server for static content
 - **vercel (v41.4.1)**: Deployment platform integration
 
-## Important Development Notes
+## Artificial Intelligence Model Instructions
 
-### Critical Configuration Requirements
+### Model Context
 
-1. **Always use Bun runtime** - This project must use Bun instead of Node.js for proper hydration in the Replit environment.
+When working with this codebase, please adhere to these best practices:
 
-2. **Source Map Management** - Source maps must be disabled to prevent client-side hydration errors.
-   - This is handled in both `next.config.js` and environment variables in `start.sh`
+1. **Runtime Environment**: Always use Bun runtime for optimal performance in the Replit environment. Do not substitute with Node.js.
 
-3. **Hydration Safety** - The application uses `ClientWrapper` components to safely handle client-side hydration.
+2. **Source Map Configuration**: Source maps must remain disabled to prevent client-side hydration errors. This configuration exists in `next.config.js` and environment variables in `start.sh`.
 
-4. **Turbopack Configuration** - Special configuration in `next.config.js` ensures compatibility with Replit.
+3. **Component Structure**: The application uses a specialized `ClientWrapper` component architecture to safely handle client-side hydration issues in the Replit environment.
 
-### Avoiding Common Issues
+4. **Next.js Configuration**: The `next.config.js` file contains specific Turbopack and webpack configurations designed for Replit compatibility.
 
-To prevent the hydration and infinite loading issues from recurring:
+5. **Rendering Strategy**: Use server-side rendering when possible, with client-side hydration handled through dedicated wrapper components.
 
-1. **DO NOT** modify environment variables in `start.sh` that control the runtime (keep using Bun)
-2. **DO NOT** enable source maps or source map related features
-3. **DO NOT** change the `ClientWrapper` implementation which safely handles hydration
-4. **DO NOT** modify the webpack configuration that disables source maps
+### Five Laws of Artificial Intelligence
+
+1. You will never delete more than one file at a time without asking for explicit permission from the user.
+
+2. You will focus on the issue that the user explicitly asks you to focus on and will not attempt to solve other issues unless instructed by the user.
+
+3. You will provide a concrete approach and plan for each user interaction thread. You will solve issues iteratively and check in with the user for guidance and to explain what you are doing on a periodic basis.
+
+4. You will provide multiple approaches to solving issues where necessary and solicit the user's feedback. You will provide your recommendation for best approach.
+
+5. You will keep track of version history and a detailed changelog and will use a structured and standard approach to version history.
 
 ## Running the Application
 
@@ -62,11 +68,3 @@ cat version.json
 
 See [CHANGELOG.md](./CHANGELOG.md) for detailed version history.
 
-## Troubleshooting
-
-If you encounter any issues:
-
-1. Check the logs for source map or webpack related errors
-2. Ensure Bun is being used as the runtime
-3. Clear cache files with `rm -rf .next` and `rm -rf node_modules/.cache`
-4. Restart the application with the workflow
