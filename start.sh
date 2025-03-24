@@ -3,7 +3,7 @@
 echo "Starting Next.js development server..."
 
 # Make scripts executable
-chmod +x *.sh simple-server.js
+chmod +x *.sh
 
 # Kill any existing Next.js processes
 pkill -f "next" || true
