@@ -1,28 +1,29 @@
 {
-  "version": "4.1.0",
+  "version": "4.2.0",
   "name": "Portfolio Website",
   "description": "Personal portfolio website showcasing professional projects through an AI-enhanced interactive design",
   "lastUpdated": "2025-03-24",
   "changes": [
-    "Enhanced documentation structure with comprehensive Outline section",
-    "Added detailed Repository Overview with folder hierarchy explanation",
-    "Created Naming Conventions guide for file and component structures",
-    "Reorganized Stack section into logical technology categories",
-    "Updated Latest Version section to show only current version details",
-    "Improved README structure with clearer navigation to all sections",
-    "Added Artificial Intelligence Model Instructions with context and laws",
-    "Expanded versioning philosophy with clearer guidelines"
+    "Fixed critical rendering issues in Replit Webview environment",
+    "Enhanced cross-origin resource configuration in next.config.js",
+    "Added webview-compat.js for better Replit Webview compatibility",
+    "Optimized client-side JavaScript to prevent hydration errors",
+    "Implemented static HTML approach for main pages to improve reliability",
+    "Updated environment variable configuration for cross-origin support",
+    "Modified start script for consistent server initialization",
+    "Improved error handling in client wrapper components"
   ],
   "previousVersion": {
-    "version": "4.0.0",
+    "version": "4.1.0",
     "changes": [
-      "Documentation restructuring for improved AI collaboration",
-      "Consolidated documentation to the docs directory",
-      "Enhanced Stack section with detailed package information",
-      "Added Repository Overview with folder structure information",
-      "Added AI Model Instructions with context and five laws",
-      "Updated build instructions and version history information",
-      "Removed redundant README.md and CHANGELOG.md from root directory"
+      "Enhanced documentation structure with comprehensive Outline section",
+      "Added detailed Repository Overview with folder hierarchy explanation",
+      "Created Naming Conventions guide for file and component structures",
+      "Reorganized Stack section into logical technology categories",
+      "Updated Latest Version section to show only current version details",
+      "Improved README structure with clearer navigation to all sections",
+      "Added Artificial Intelligence Model Instructions with context and laws",
+      "Expanded versioning philosophy with clearer guidelines"
     ]
   },
   "aiInstructions": {
