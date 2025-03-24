@@ -1,16 +1,27 @@
 /** @type {import('next').NextConfig} */
 
-// Version: 10.1.0 - Bare Minimum Config for Static Generation
+// Version: 10.2.0 - Config for hybrid static/dynamic rendering
 const nextConfig = {
-  // Disable all advanced features to avoid any React 19 compatibility issues
-  output: 'export',
-
-  // No JavaScript, use static HTML mode only for now
-  reactStrictMode: false,
+  // Enable React strict mode for better error catching
+  reactStrictMode: true,
   
-  // Simplified images config - treat all as static files
+  // Configure image domains and optimization
   images: {
-    unoptimized: true
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  
+  // Allow proper hydration of client components
+  experimental: {
+    // Suppress specific Next.js errors that might occur during development
+    scrollRestoration: true,
   }
 };
 
