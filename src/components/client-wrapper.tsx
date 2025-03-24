@@ -72,15 +72,8 @@ export function ClientWrapper({
   // If there was an error, show it
   if (error) {
     return (
-      <div style={{ 
-        padding: '1rem',
-        margin: '1rem 0', 
-        border: '1px solid #f56565',
-        borderRadius: '0.375rem',
-        backgroundColor: '#fff5f5',
-        color: '#c53030'
-      }}>
-        <h4 style={{ margin: '0 0 0.5rem 0' }}>Component Error</h4>
+      <div className="p-4 my-4 border border-red-500 rounded-lg bg-red-900/20 text-red-300">
+        <h4 className="font-medium mb-2">Component Error</h4>
         <p>{error.message}</p>
       </div>
     )
@@ -90,23 +83,14 @@ export function ClientWrapper({
   return (
     <Suspense fallback={
       fallback || 
-      <div suppressHydrationWarning style={{
-        padding: '1rem', 
-        backgroundColor: '#f3f4f6',
-        borderRadius: '0.375rem',
-        color: '#4b5563'
-      }}>
+      <div suppressHydrationWarning className="p-4 rounded-lg bg-gray-800/50 text-gray-300">
         Loading component...
       </div>
     }>
       <div suppressHydrationWarning={true}>
         {mounted ? children : (
           placeholder || 
-          <div style={{
-            padding: '0.5rem',
-            backgroundColor: '#f9fafb',
-            borderRadius: '0.25rem'
-          }}>
+          <div className="p-2 rounded bg-gray-800/30 text-gray-400">
             Loading client content...
           </div>
         )}

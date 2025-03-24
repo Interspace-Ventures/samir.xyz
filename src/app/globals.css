@@ -1,57 +1,149 @@
-/* Version 8.0.0 - Basic CSS Only (No Tailwind) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Note: Many styles are applied directly inline in components for simplicity */
+/* V12.0.2 - Enhanced styling with purple accent and dark theme */
+
+:root {
+  /* Base colors */
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 12, 17, 27;
+  
+  /* Purple accent colors */
+  --accent-purple-400: 192, 132, 252;
+  --accent-purple-500: 168, 85, 247;
+  --accent-purple-600: 147, 51, 234;
+  --accent-purple-700: 126, 34, 206;
+}
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f7fa;
-  color: #333;
-  line-height: 1.6;
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  color: white;
+  min-height: 100vh;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #111827;
+@layer base {
+  a {
+    transition-duration: 200ms;
+    transition-property: color, background-color, border-color;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: white;
+  }
 }
 
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-  color: #1f2937;
+@layer components {
+  .btn-primary {
+    padding: 0.5rem 1rem;
+    background-color: #9333ea; /* purple-600 */
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition-property: all;
+    transition-duration: 200ms;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #7e22ce; /* purple-700 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  .btn-secondary {
+    padding: 0.5rem 1rem;
+    background-color: #1f2937; /* gray-800 */
+    border-radius: 0.5rem;
+    border: 1px solid #374151; /* gray-700 */
+    transition-property: all;
+    transition-duration: 200ms;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #374151; /* gray-700 */
+    border-color: #4b5563; /* gray-600 */
+  }
+  
+  .card {
+    background-color: #1f2937; /* gray-800 */
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #374151; /* gray-700 */
+    transition-property: all;
+    transition-duration: 200ms;
+  }
+  
+  .card:hover {
+    border-color: #9333ea; /* purple-600 */
+    box-shadow: 0 0 15px rgba(147, 51, 234, 0.1);
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+  
+  .accent-text {
+    color: #c084fc; /* purple-400 */
+  }
+  
+  /* Custom link styles */
+  .link-underline {
+    position: relative;
+    color: #c084fc; /* purple-400 */
+  }
+  
+  .link-underline:hover {
+    color: #d8b4fe; /* purple-300 */
+  }
+  
+  .link-underline:after {
+    content: '';
+    background-color: #c084fc; /* purple-400 */
+    height: 2px;
+    width: 0;
+    left: 0;
+    bottom: -4px;
+    position: absolute;
+    transition-duration: 300ms;
+  }
+  
+  .link-underline:hover:after {
+    width: 100%;
+  }
 }
 
-h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: #1f2937;
-}
-
-p {
-  margin-bottom: 1rem;
-}
-
-a {
-  color: #6366f1;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Basic card styling */
-.card {
-  background-color: white;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  border: 1px solid #e5e7eb;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+@layer utilities {
+  .text-gradient {
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #c084fc, #9333ea); /* purple-400 to purple-600 */
+  }
+  
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #111827; /* dark gray bg */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #374151; /* gray-700 */
+    border-radius: 0.375rem;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #4b5563; /* gray-600 */
+  }
 }
