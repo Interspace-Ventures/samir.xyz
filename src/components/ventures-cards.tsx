@@ -31,6 +31,23 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
     setImageLoaded(false);
     setImageError(false);
     
+    // If imageUrl is empty, force error state to use fallback
+    if (!imageUrl || imageUrl.trim() === '') {
+      setImageError(true);
+      return;
+    }
+    
+    // Special handling for known problematic image names
+    // Force error state for problematic images or paths with spaces
+    if (imageUrl.includes(' ') || 
+        imageUrl.includes('Solo Wordmark') || 
+        imageUrl.includes('Hey I\'m Samir') ||
+        imageUrl.includes('Predictive.film')) {
+      console.log('Detected problematic image path:', imageUrl);
+      setImageError(true);
+      return;
+    }
+    
     if (isSvgPath(imageUrl)) {
       // Handle SVG files by loading their content
       fetch(imageUrl)
@@ -44,7 +61,8 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
           setSvgContent(text);
           setImageLoaded(true);
         })
-        .catch(() => {
+        .catch((err) => {
+          console.error('SVG loading error:', err);
           setImageError(true);
         });
     } else {
@@ -58,6 +76,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
           setImageError(false);
         };
         tempImg.onerror = () => {
+          console.error('Image loading error:', imageUrl);
           setImageError(true);
         };
         tempImg.src = imageUrl;
@@ -146,7 +165,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
                     }`}
                     dangerouslySetInnerHTML={{ __html: svgContent }}
                   />
-                ) : (
+                ) : imageUrl ? (
                   <img
                     src={imageUrl}
                     alt={name}
@@ -155,7 +174,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
                     onLoad={handleImageLoad}
                     onError={handleImageError}
                   />
-                )}
+                ) : null}
               </div>
             </div>
             

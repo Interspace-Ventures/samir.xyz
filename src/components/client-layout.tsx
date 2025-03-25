@@ -5,7 +5,6 @@ import { ErrorBoundary } from './error-boundary'
 import Navbar from './navbar'
 import Footer from './footer'
 import { Client } from "react-hydration-provider"
-import { DebugStatus } from './debug-status'
 
 // Initial skeleton that matches server render exactly
 const LayoutSkeleton = () => (
@@ -66,11 +65,6 @@ export default function ClientLayout({
             <Footer />
           </ErrorBoundary>
         </footer>
-        
-        {/* Debug overlay */}
-        <ErrorBoundary name="DebugStatus">
-          <DebugStatus />
-        </ErrorBoundary>
       </div>
     </Client>
   )
