@@ -1,8 +1,9 @@
-// Version 12.0.5 - Enhanced Navbar with active page highlighting
+// Version 13.0.0 - Updated Navbar to match the provided design
 
 "use client"
 
 import { usePathname } from 'next/navigation'
+import { ThemeToggle } from './theme-toggle'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -13,46 +14,47 @@ export default function Navbar() {
   }
   
   return (
-    <header className="bg-gray-900 border-b border-gray-800 py-4 sticky top-0 z-10">
-      <div className="container mx-auto px-4 flex items-center justify-between">
+    <header className="bg-[#171717] border-b border-gray-800 py-4 sticky top-0 z-10">
+      <div className="px-6 flex items-center justify-between w-full">
         <a 
           href="/" 
-          className="text-xl font-bold text-white hover:text-purple-400 transition-colors"
+          className="text-xl font-bold text-white hover:text-gray-300 transition-colors"
         >
-          Hey - I'm <span className="text-purple-500">Samir</span>
+          Hey - I'm Samir
         </a>
 
-        <nav className="flex items-center space-x-6">
+        <nav className="flex items-center space-x-10">
           <a 
             href="/profile" 
-            className={`font-medium transition-colors ${
+            className={`font-medium uppercase transition-colors ${
               isActive('/profile') 
-                ? 'text-purple-400 relative after:absolute after:bottom-[-6px] after:left-0 after:w-full after:h-[2px] after:bg-purple-500' 
-                : 'text-gray-300 hover:text-purple-400'
+                ? 'text-white font-medium relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[2px] after:bg-white' 
+                : 'text-gray-400 hover:text-white'
             }`}
           >
-            ABOUT
+            About
           </a>
           <a 
             href="/portfolio" 
-            className={`font-medium transition-colors ${
+            className={`font-medium uppercase transition-colors ${
               isActive('/portfolio') 
-                ? 'text-purple-400 relative after:absolute after:bottom-[-6px] after:left-0 after:w-full after:h-[2px] after:bg-purple-500' 
-                : 'text-gray-300 hover:text-purple-400'
+                ? 'text-white font-medium relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[2px] after:bg-white' 
+                : 'text-gray-400 hover:text-white'
             }`}
           >
-            PORTFOLIO
+            Portfolio
           </a>
           <a 
             href="/ventures" 
-            className={`font-medium transition-colors ${
+            className={`font-medium uppercase transition-colors ${
               isActive('/ventures')
-                ? 'text-purple-400 relative after:absolute after:bottom-[-6px] after:left-0 after:w-full after:h-[2px] after:bg-purple-500' 
-                : 'text-gray-300 hover:text-purple-400'
+                ? 'text-white font-medium relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[2px] after:bg-white' 
+                : 'text-gray-400 hover:text-white'
             }`}
           >
-            VENTURES
+            Ventures
           </a>
+          <ThemeToggle />
         </nav>
       </div>
     </header>
