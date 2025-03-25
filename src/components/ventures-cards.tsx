@@ -119,9 +119,12 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
       target="_blank"
       className="block group relative overflow-hidden rounded-2xl
         hover:shadow-lg hover:shadow-purple-800/30 hover:translate-y-[-3px] 
-        transition-all duration-200 ease-in-out
-        w-full h-full"
-      style={{ height: '100%', display: 'block' }}
+        transition-all duration-200 ease-in-out"
+      style={{ 
+        display: 'block', 
+        height: '100%',
+        position: 'relative'
+      }}
     >      
       <div className="relative w-full h-full">
         {/* Gradient background */}
