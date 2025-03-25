@@ -53,21 +53,21 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
     }
   }, [name, imageUrl])
 
-  // Assign consistent gradient colors based on the card position
+  // Assign consistent gradient colors with purple accents
   const getGradientColors = (name: string) => {
-    // Map specific gradients to match the example image exactly
+    // Map specific gradients for each venture
     if (name === '2 Days Early') {
-      return ['from-blue-600', 'to-purple-500'];
+      return ['from-purple-600', 'to-blue-700'];
     } else if (name === 'Solo') {
-      return ['from-blue-600', 'to-purple-500'];
+      return ['from-purple-500', 'to-indigo-600'];
     } else if (name === 'Predictive:film') {
-      return ['from-blue-600', 'to-purple-500'];
+      return ['from-purple-700', 'to-purple-900'];
     } else if (name === 'Interspace') {
-      return ['from-blue-600', 'to-purple-500'];
+      return ['from-indigo-600', 'to-purple-700'];
     } else if (name === 'Hey I\'m Samir') {
-      return ['from-blue-600', 'to-purple-500'];
+      return ['from-purple-600', 'to-fuchsia-700'];
     } else {
-      return ['from-blue-600', 'to-purple-500'];
+      return ['from-violet-600', 'to-purple-800'];
     }
   };
   
@@ -99,7 +99,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
       className="block group relative overflow-hidden rounded-2xl
         hover:shadow-lg hover:shadow-purple-800/30 hover:translate-y-[-3px] 
         transition-all duration-200 ease-in-out
-        w-full h-full"
+        w-full h-full aspect-[4/3]"
     >      
       <div className="relative w-full h-full">
         {/* Gradient background */}
@@ -119,23 +119,17 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
             <div className="w-3/5 h-3/5 flex items-center justify-center">
               <span className="text-6xl font-bold text-white opacity-80">{initials}</span>
             </div>
+            {/* Show name even in error state */}
+            <div className="absolute left-0 right-0 bottom-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+              <h3 className="text-white text-lg font-medium mb-1">{name}</h3>
+            </div>
           </div>
         ) : (
           // All cards have the same structure, but different content
           <>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-4/5 h-4/5 flex items-center justify-center">
-                {name === 'Solo' ? (
-                  <img
-                    src="/logos/ventures/Solo Wordmark - Gradient 2025.png"
-                    alt={name}
-                    className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
-                      imageLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    onLoad={handleImageLoad}
-                    onError={handleImageError}
-                  />
-                ) : svgContent && isSvgPath(imageUrl) ? (
+                {svgContent && isSvgPath(imageUrl) ? (
                   <div 
                     className={`w-full h-full transition-opacity duration-500 ${
                       imageLoaded ? 'opacity-100' : 'opacity-0'
@@ -146,9 +140,8 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
                   <img
                     src={imageUrl}
                     alt={name}
-                    className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 ${
-                      imageLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
+                    className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 
+                      max-h-24 max-w-[80%] mx-auto my-auto ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                     onLoad={handleImageLoad}
                     onError={handleImageError}
                   />
@@ -156,11 +149,14 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
               </div>
             </div>
             
-            {/* Hover overlay with name and description */}
-            <div className="absolute left-0 right-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-t from-black/60 to-transparent">
+            {/* Always visible name overlay with hover description */}
+            <div className="absolute left-0 right-0 bottom-0 p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
               <h3 className="text-white text-lg font-medium mb-1">{name}</h3>
               {description && (
-                <p className="text-white/80 text-sm line-clamp-2 leading-relaxed">{description}</p>
+                <p className="text-white/80 text-sm line-clamp-2 leading-relaxed 
+                              opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  {description}
+                </p>
               )}
             </div>
           </>

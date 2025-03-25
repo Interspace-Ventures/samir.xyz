@@ -68,23 +68,8 @@ const nextConfig = {
     // Enable scroll restoration
     scrollRestoration: true,
     
-    // Specify allowed origin patterns exactly as they appear in the warning message
-    allowedDevOrigins: [
-      // Include the exact domain from the most recent warning message
-      'd2193f08-b592-45ce-b730-8dc2c7ef133c-00-1f1txs3yeigba.janeway.replit.dev',
-      // Add all possible Replit domain patterns to ensure compatibility
-      '*.janeway.replit.dev',
-      '*.replit.dev',
-      '*.repl.co',
-      '*.replit.app',
-      'replit.com',
-      // Add local development patterns
-      'localhost',
-      '127.0.0.1',
-      // Add wildcards to cover all possible domains
-      '*',
-      '**',
-    ],
+    // Special config for Replit Webview compatibility
+    allowedDevOrigins: ['*'],
     
     // Opt into more stable React features
     serverActions: {
