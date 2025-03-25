@@ -147,3 +147,11 @@ body {
     background-color: #4b5563; /* gray-600 */
   }
 }
+
+/* Media query for mobile devices */
+@media (max-width: 767px) {
+  /* Force the ventures grid to display as a single column on mobile */
+  .grid.grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+}
