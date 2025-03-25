@@ -30,9 +30,10 @@ export NODE_OPTIONS="--max-http-header-size=16384 --no-warnings --max-old-space-
 mkdir -p .next
 chmod -R 777 .next || true
 
-# Remove cache files that might cause stale builds
-echo "Clearing Next.js cache for clean start..."
-rm -rf .next/cache || true
+# Completely clean Next.js build and cache for fresh start
+echo "Performing full Next.js cleanup for fresh start..."
+rm -rf .next || true
+rm -rf node_modules/.cache || true
 
 # Special fix for Replit Webview compatibility issues with cross-origin requests
 echo "window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;" >> public/webview-compat.js
