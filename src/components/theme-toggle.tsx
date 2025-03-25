@@ -2,11 +2,11 @@
 
 import React from "react"
 
-// Updated to match the design in the provided image
+// Fixed to exactly match the design in the provided image
 export function ThemeToggle() {
   return (
     <button
-      className="relative w-6 h-6 flex items-center justify-center"
+      className="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
       aria-label="Toggle theme"
     >
       <svg
@@ -17,7 +17,7 @@ export function ThemeToggle() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5 text-gray-400 hover:text-white transition-colors"
+        className="h-5 w-5"
         aria-hidden="true"
       >
         <circle cx="12" cy="12" r="5" />
