@@ -2,12 +2,12 @@
 
 import React from "react"
 
-// Super simplified version to avoid React 19 hydration issues
+// Updated to match the design in the provided image
 export function ThemeToggle() {
   return (
     <button
       className="relative w-6 h-6 flex items-center justify-center"
-      aria-label="Toggle dark theme intensity"
+      aria-label="Toggle theme"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -17,18 +17,11 @@ export function ThemeToggle() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5 text-white"
+        className="h-5 w-5 text-gray-400 hover:text-white transition-colors"
         aria-hidden="true"
       >
         <circle cx="12" cy="12" r="5" />
-        <line x1="12" y1="1" x2="12" y2="3" />
-        <line x1="12" y1="21" x2="12" y2="23" />
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-        <line x1="1" y1="12" x2="3" y2="12" />
-        <line x1="21" y1="12" x2="23" y2="12" />
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
       </svg>
     </button>
   )
