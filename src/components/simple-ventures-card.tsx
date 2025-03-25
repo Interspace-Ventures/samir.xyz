@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 
-interface VenturesCardProps {
+interface SimpleVenturesCardProps {
   name: string;
   description: string;
-  imageUrl: string;
+  imagePath: string;
   link: string;
-  priority?: boolean;
 }
 
-export function VenturesCard({ name, description, imageUrl, link, priority = false }: VenturesCardProps) {
+export function SimpleVenturesCard({ name, description, imagePath, link }: SimpleVenturesCardProps) {
   const [imageError, setImageError] = useState(false);
   
   // Extract initials for fallback
@@ -34,7 +33,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
           {!imageError ? (
             <div className="mb-4 h-24 w-full flex items-center justify-center overflow-hidden rounded-md bg-gray-900/50">
               <img
-                src={imageUrl}
+                src={imagePath}
                 alt={name}
                 className="max-h-20 w-auto object-contain"
                 onError={() => setImageError(true)}
