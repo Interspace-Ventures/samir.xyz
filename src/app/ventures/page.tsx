@@ -61,20 +61,18 @@ export default function Ventures() {
           </p>
         </div>
         
-        {/* Simple flex-based grid layout - much more reliable */}
+        {/* Ultra-simple grid layout with fixed dimensions */}
         <div className="mb-16">
-          <div className="flex flex-wrap -mx-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {ventures.map((venture, index) => (
-              <div key={index} className="w-full sm:w-1/2 lg:w-1/3 p-4" style={{ marginBottom: '16px' }}>
-                <div className="h-64 md:h-72" style={{ height: '300px' }}>
-                  <VenturesCard
-                    name={venture.name}
-                    description={venture.description}
-                    imageUrl={venture.imageUrl}
-                    link={venture.link}
-                    priority={venture.priority}
-                  />
-                </div>
+              <div key={index} className="w-full" style={{ height: '320px' }}>
+                <VenturesCard
+                  name={venture.name}
+                  description={venture.description}
+                  imageUrl={venture.imageUrl}
+                  link={venture.link}
+                  priority={venture.priority}
+                />
               </div>
             ))}
           </div>

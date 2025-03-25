@@ -123,7 +123,8 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
       style={{ 
         display: 'block', 
         height: '100%',
-        position: 'relative'
+        position: 'relative',
+        maxHeight: '320px'
       }}
     >      
       <div className="relative w-full h-full">
@@ -165,8 +166,9 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
                   <img
                     src={imageUrl}
                     alt={name}
-                    className={`w-full h-full object-contain filter drop-shadow-lg transition-opacity duration-500 
-                      max-h-24 max-w-[80%] mx-auto my-auto ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    className={`object-contain filter drop-shadow-lg transition-opacity duration-500 
+                      max-h-40 max-w-[70%] mx-auto ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    style={{ objectFit: 'contain', width: 'auto', height: 'auto' }}
                     onLoad={handleImageLoad}
                     onError={handleImageError}
                   />
