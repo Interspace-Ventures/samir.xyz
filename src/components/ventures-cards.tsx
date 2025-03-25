@@ -22,18 +22,19 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
   const [imageLoaded, setImageLoaded] = useState(false)
   const [svgContent, setSvgContent] = useState<string | null>(null)
 
-  // Load and handle the image or SVG - simple effect for React 19 compatibility
+  // Pre-load the image at mount time
   useEffect(() => {
     console.log(`VenturesCard mounted for ${name} with imageUrl: ${imageUrl}`)
     
     // Safety check for server-side rendering
     if (typeof window === 'undefined') return;
     
-    // Mark as not loaded initially
+    // Reset states for a clean start
     setImageLoaded(false);
+    setImageError(false);
     
     if (isSvgPath(imageUrl)) {
-      // For SVG files, fetch the content and render inline for better control
+      // Handle SVG files by loading their content
       fetch(imageUrl)
         .then(response => {
           if (response.ok) {
@@ -44,12 +45,27 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
         .then(text => {
           setSvgContent(text);
           setImageLoaded(true);
-          setImageError(false);
         })
         .catch(error => {
           console.error(`Failed to load SVG for ${name}:`, error);
           setImageError(true);
         });
+    } else {
+      // For regular images, we'll use a simpler approach with state management
+      // Ensure we're only running in browser context
+      if (typeof window !== 'undefined') {
+        // Create a temporary HTML image element to test loading
+        const tempImg = document.createElement('img');
+        tempImg.onload = () => {
+          setImageLoaded(true);
+          setImageError(false);
+        };
+        tempImg.onerror = () => {
+          console.error(`Failed to pre-load image for ${name}: ${imageUrl}`);
+          setImageError(true);
+        };
+        tempImg.src = imageUrl;
+      }
     }
   }, [name, imageUrl])
 
