@@ -148,10 +148,7 @@ body {
   }
 }
 
-/* Media query for mobile devices */
+/* Custom media queries - applied as needed */
 @media (max-width: 767px) {
-  /* Force the ventures grid to display as a single column on mobile */
-  .grid.grid-cols-3 {
-    grid-template-columns: 1fr !important;
-  }
+  /* Mobile-specific styles */
 }

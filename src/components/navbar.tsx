@@ -44,9 +44,9 @@ export default function Navbar() {
             PORTFOLIO
           </a>
           <a 
-            href="/ventures/page-fixed" 
+            href="/ventures" 
             className={`font-medium transition-colors ${
-              isActive('/ventures/page-fixed') || isActive('/ventures')
+              isActive('/ventures')
                 ? 'text-purple-400 relative after:absolute after:bottom-[-6px] after:left-0 after:w-full after:h-[2px] after:bg-purple-500' 
                 : 'text-gray-300 hover:text-purple-400'
             }`}
