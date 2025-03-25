@@ -8,42 +8,42 @@ export default function Ventures() {
     {
       name: "2 Days Early",
       description: "Get in on the next big thing before everyone else. Early access to innovative products and services.",
-      imageUrl: "/attached_assets/2DE Interspace.png",
+      imageUrl: "/attached_assets/2de-interspace.png",
       link: "https://2daysearly.com",
       priority: true
     },
     {
       name: "Solo",
       description: "The first design-forward climbing app for tracking, sharing, and discovering climbing routes.",
-      imageUrl: "/attached_assets/Solo Wordmark - Gradient 2025.png",
+      imageUrl: "/attached_assets/solo-logo-2025.png",
       link: "https://soloclimbing.com",
       priority: true
     },
     {
       name: "Predictive:film",
       description: "AI-powered script analysis for screenwriters and production studios to evaluate market potential.",
-      imageUrl: "/attached_assets/Predictive.film icon 2025.png",
+      imageUrl: "/attached_assets/predictive-film-icon.png",
       link: "https://predictive.film",
       priority: false
     },
     {
       name: "Interspace",
       description: "Digital product studio focused on creating innovative solutions for emerging technologies.",
-      imageUrl: "/attached_assets/Interspace Square - 2025.png",
+      imageUrl: "/attached_assets/interspace-square.png",
       link: "https://interspace.sh",
       priority: true
     },
     {
       name: "Hey I'm Samir",
       description: "Personal website showcasing my professional expertise and portfolio of ventures.",
-      imageUrl: "/attached_assets/Hey I'm Samir 2025.png",
+      imageUrl: "/attached_assets/hey-im-samir.png",
       link: "https://heyimsamir.com",
       priority: true
     },
     {
       name: "Perspectives",
       description: "Insights on tech and finance through in-depth analysis and expert interviews.",
-      imageUrl: "/attached_assets/Perspectives Favicon.png",
+      imageUrl: "/attached_assets/perspectives.png",
       link: "https://perspectives.fyi",
       priority: false
     }
@@ -61,15 +61,12 @@ export default function Ventures() {
           </p>
         </div>
         
-        {/* Proper Tailwind grid implementation */}
+        {/* Fixed Tailwind grid implementation */}
         <div className="mb-16">
           {/* Grid container with explicit column definition and gap settings */}
-          <div 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 gap-y-10" 
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 gap-y-10">
             {ventures.map((venture, index) => (
-              <div key={index} className="h-60 min-h-60">
+              <div key={index} className="h-64 w-full">
                 <VenturesCard
                   name={venture.name}
                   description={venture.description}
