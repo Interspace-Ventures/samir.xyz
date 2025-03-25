@@ -24,8 +24,6 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
 
   // Pre-load the image at mount time
   useEffect(() => {
-    console.log(`VenturesCard mounted for ${name} with imageUrl: ${imageUrl}`)
-    
     // Safety check for server-side rendering
     if (typeof window === 'undefined') return;
     
@@ -46,8 +44,7 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
           setSvgContent(text);
           setImageLoaded(true);
         })
-        .catch(error => {
-          console.error(`Failed to load SVG for ${name}:`, error);
+        .catch(() => {
           setImageError(true);
         });
     } else {
@@ -61,7 +58,6 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
           setImageError(false);
         };
         tempImg.onerror = () => {
-          console.error(`Failed to pre-load image for ${name}: ${imageUrl}`);
           setImageError(true);
         };
         tempImg.src = imageUrl;
@@ -98,12 +94,10 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
     .toUpperCase();
 
   const handleImageError = () => {
-    console.error(`Failed to load image for ${name}: ${imageUrl}`)
     setImageError(true)
   }
 
   const handleImageLoad = () => {
-    console.log(`Image loaded successfully for ${name}: ${imageUrl}`)
     setImageLoaded(true)
     setImageError(false)
   }
