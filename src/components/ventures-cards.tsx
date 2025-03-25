@@ -37,16 +37,8 @@ export function VenturesCard({ name, description, imageUrl, link, priority = fal
       return;
     }
     
-    // Special handling for known problematic image names
-    // Force error state for problematic images or paths with spaces
-    if (imageUrl.includes(' ') || 
-        imageUrl.includes('Solo Wordmark') || 
-        imageUrl.includes('Hey I\'m Samir') ||
-        imageUrl.includes('Predictive.film')) {
-      console.log('Detected problematic image path:', imageUrl);
-      setImageError(true);
-      return;
-    }
+    // We're now going to try loading all images, and rely on proper error handling
+    // instead of pre-emptively forcing errors for specific paths
     
     if (isSvgPath(imageUrl)) {
       // Handle SVG files by loading their content
