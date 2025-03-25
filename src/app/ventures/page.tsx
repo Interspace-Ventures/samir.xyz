@@ -27,7 +27,7 @@ export default function Ventures() {
       id: "solo",
       name: "Solo",
       description: "The first design-forward climbing app",
-      imagePath: "/attached_assets/solo-logo-2025.png",
+      imagePath: "/attached_assets/Solo Wordmark - Gradient 2025.png",
       letter: "S",
       link: "https://soloclimbing.com"
     },
@@ -49,7 +49,7 @@ export default function Ventures() {
     },
     {
       id: "samir",
-      name: "Hey I'm Samir",
+      name: "Hey - I'm Samir",
       description: "I drive business impact in fintech.",
       imagePath: "/attached_assets/hey-im-samir.png",
       letter: "S",
@@ -73,28 +73,19 @@ export default function Ventures() {
             Interspace Ventures
           </h1>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-            Creating innovative digital products and concepts at the intersection of technology and creativity.
+            I create apps and concepts by coding at the speed of thought using Replit.
           </p>
         </div>
         
-        {/* Gradient Card Implementation based on the 2DE card example */}
+        {/* Gradient Card Implementation with hover effects and reduced size */}
         <style jsx global>{`
           .ventures-grid {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 2rem;
-          }
-          
-          @media (min-width: 640px) {
-            .ventures-grid {
-              grid-template-columns: repeat(2, 1fr);
-            }
-          }
-          
-          @media (min-width: 1024px) {
-            .ventures-grid {
-              grid-template-columns: repeat(3, 1fr);
-            }
+            max-width: 1200px;
+            margin: 0 auto;
           }
           
           .ventures-card {
@@ -105,6 +96,10 @@ export default function Ventures() {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            /* Reduce size by 50% */
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
           }
           
           .ventures-card:hover {
@@ -125,54 +120,97 @@ export default function Ventures() {
           .card-content {
             position: relative;
             z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             height: 100%;
             width: 100%;
-            padding: 1.5rem;
-            text-align: center;
           }
           
           .card-letter {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.8);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+          
+          .card-image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+          }
+          
+          .card-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          
+          /* Special styling for the SOLO card to better display the gradient wordmark */
+          .ventures-card[data-id="solo"] .card-bg {
+            background: none; /* Remove the default gradient background */
+          }
+          
+          .ventures-card[data-id="solo"] .card-image-container img {
+            object-fit: contain;
+            padding: 0;
+          }
+          
+          /* Hide title and description by default */
+          .card-info {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 0.75rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), transparent);
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            text-align: left;
+            z-index: 10;
+            box-sizing: border-box;
+            overflow: hidden;
+          }
+          
+          /* Show title and description on hover */
+          .ventures-card:hover .card-info {
+            opacity: 1;
+            transform: translateY(0);
           }
           
           .card-title {
-            font-size: 2.5rem;
+            font-size: 1rem;
             font-weight: 800;
             color: white;
-            margin-bottom: 1rem;
+            margin-bottom: 0.25rem;
             line-height: 1.2;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           
           .card-description {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.875rem;
+            font-size: 0.7rem;
             max-width: 100%;
-          }
-          
-          .white-square {
-            background-color: white;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            max-width: 80px;
-            height: 80px;
-          }
-          
-          .white-square img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            text-align: left;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
           }
         `}</style>
         
@@ -185,11 +223,11 @@ export default function Ventures() {
               rel="noopener noreferrer"
               className="block"
             >
-              <div className="ventures-card">
+              <div className="ventures-card" data-id={venture.id}>
                 <div className="card-bg"></div>
                 <div className="card-content">
                   {!imageErrors[venture.id] ? (
-                    <div className="white-square">
+                    <div className="card-image-container">
                       <img 
                         src={venture.imagePath} 
                         alt={venture.name} 
@@ -199,22 +237,17 @@ export default function Ventures() {
                   ) : (
                     <div className="card-letter">{venture.letter}</div>
                   )}
-                  <div className="card-title">{venture.name.split(' ')[0]}</div>
-                  <p className="card-description">{venture.description}</p>
+                  <div className="card-info">
+                    <div className="card-title">{venture.name}</div>
+                    <p className="card-description">{venture.description}</p>
+                  </div>
                 </div>
               </div>
             </a>
           ))}
         </div>
         
-        <div className="text-center mt-16">
-          <a 
-            href="/profile" 
-            className="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium"
-          >
-            Back to Profile
-          </a>
-        </div>
+        {/* Back to Profile button removed as requested */}
       </div>
     </RootLayout>
   );
