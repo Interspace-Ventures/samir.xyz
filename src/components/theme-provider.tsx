@@ -5,16 +5,25 @@ import { ThemeProvider as NextThemesProvider } from "next-themes"
 
 type ThemeProviderProps = {
   children: React.ReactNode
+  attribute?: "class" | "data-theme" | "data-mode"
+  defaultTheme?: string
+  enableSystem?: boolean
   [prop: string]: any
 }
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  // Simplified version with fewer props to avoid hydration issues
+export function ThemeProvider({ 
+  children, 
+  attribute = "class",
+  defaultTheme = "dark",
+  enableSystem = true,
+  ...props 
+}: ThemeProviderProps) {
   return (
     <NextThemesProvider 
-      attribute="class"
-      defaultTheme="dark"
-      forcedTheme="dark"
+      attribute={attribute as "class"}
+      defaultTheme={defaultTheme}
+      enableSystem={enableSystem}
+      {...props}
     >
       {children}
     </NextThemesProvider>

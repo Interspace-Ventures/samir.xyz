@@ -7,7 +7,10 @@
       "view_port": 5000,
       "view_port_protocol": "http",
       "timeout": 120000,
-      "wait_for_port_timeout": 60000
+      "wait_for_port_timeout": 60000,
+      "setup_commands": [
+        "echo 'Preparing Next.js environment...'"
+      ]
     }
   ]
 }

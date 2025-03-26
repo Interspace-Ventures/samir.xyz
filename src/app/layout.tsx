@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { inter } from "../config/fonts";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
@@ -11,6 +11,15 @@ export const metadata: Metadata = {
   description: "I drive business impact at fintechs",
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -18,12 +27,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
-      <body className="min-h-screen bg-black text-gray-100">
-        <ThemeProvider>
+      <body className="antialiased">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="flex flex-col min-h-screen">
             <SimpleNavbar />
-            <main className="flex-grow px-4 sm:px-6 py-8">
-              {children}
+            <main className="flex-grow px-4 sm:px-6 py-10 mt-2"> {/* Increased top padding to prevent navbar overlap */}
+              <div className="max-w-screen-xl mx-auto w-full">
+                {children}
+              </div>
             </main>
             <ErrorBoundary name="Footer">
               <Footer />
