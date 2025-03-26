@@ -7,7 +7,14 @@ import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { ThemeToggle } from "./theme-toggle";
 import "./minimal-navbar.css";
-import { IMAGE_BASE_PATH } from "../../config/paths";
+
+interface ThemeColors {
+  bg: string;
+  text: string;
+  border: string;
+  muted: string;
+  accent: string;
+}
 
 export default function MinimalNavbar() {
   const pathname = usePathname();
@@ -23,7 +30,7 @@ export default function MinimalNavbar() {
   const isDark = mounted && theme === "dark";
   
   // Set colors based on theme
-  const colors = {
+  const colors: ThemeColors = {
     bg: isDark ? "#0f172a" : "white",
     text: isDark ? "#f1f5f9" : "#333333",
     border: isDark ? "#1e293b" : "#e2e8f0",
@@ -159,22 +166,19 @@ export default function MinimalNavbar() {
             position: "relative",
             border: `2px solid ${colors.border}`
           }}>
-            <Image 
-              src="/attached_assets/samir-profile-photo.webp"
-              alt="Samir's Profile" 
-              fill
-              style={{ objectFit: "cover" }}
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.parentElement.style.backgroundColor = colors.accent;
-                e.target.parentElement.innerHTML = "S";
-                e.target.parentElement.style.display = "flex";
-                e.target.parentElement.style.justifyContent = "center";
-                e.target.parentElement.style.alignItems = "center";
-                e.target.parentElement.style.color = "white";
-                e.target.parentElement.style.fontWeight = "bold";
-              }}
-            />
+            <div style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: colors.accent,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "16px"
+            }}>
+              S
+            </div>
           </div>
         </div>
         
@@ -196,22 +200,19 @@ export default function MinimalNavbar() {
             position: "relative",
             border: `2px solid ${colors.border}`
           }}>
-            <Image 
-              src="/attached_assets/samir-profile-photo.webp"
-              alt="Samir's Profile" 
-              fill
-              style={{ objectFit: "cover" }}
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.parentElement.style.backgroundColor = colors.accent;
-                e.target.parentElement.innerHTML = "S";
-                e.target.parentElement.style.display = "flex";
-                e.target.parentElement.style.justifyContent = "center";
-                e.target.parentElement.style.alignItems = "center";
-                e.target.parentElement.style.color = "white";
-                e.target.parentElement.style.fontWeight = "bold";
-              }}
-            />
+            <div style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: colors.accent,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "16px"
+            }}>
+              S
+            </div>
           </div>
           
           {/* Menu button */}
