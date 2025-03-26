@@ -44,31 +44,34 @@ export default function SimpleNavbar() {
             </a>
           </div>
           
-          {/* Mobile menu - with enhanced spacing and visual separators */}
+          {/* Completely revised mobile menu with more distinct separation */}
           <div className="md:hidden flex items-center">
-            <div className="flex">
+            <nav className="flex items-center">
               <a 
                 href="/profile" 
-                className={`text-xs uppercase tracking-wider font-medium px-2 border-r border-gray-700 ${isActive('/profile') ? 'text-white' : 'text-gray-400 hover:text-white transition-colors duration-200'}`}
+                className="text-xs uppercase tracking-wider font-medium px-2 mx-1 bg-gray-800/50 rounded"
+                style={{ color: isActive('/profile') ? 'white' : '#9ca3af' }}
                 aria-label="About"
               >
                 About
               </a>
               <a 
                 href="/portfolio" 
-                className={`text-xs uppercase tracking-wider font-medium px-2 border-r border-gray-700 ${isActive('/portfolio') ? 'text-white' : 'text-gray-400 hover:text-white transition-colors duration-200'}`}
+                className="text-xs uppercase tracking-wider font-medium px-2 mx-1 bg-gray-800/50 rounded"
+                style={{ color: isActive('/portfolio') ? 'white' : '#9ca3af' }}
                 aria-label="Portfolio"
               >
                 Portfolio
               </a>
               <a 
                 href="/ventures" 
-                className={`text-xs uppercase tracking-wider font-medium px-2 ${isActive('/ventures') ? 'text-white' : 'text-gray-400 hover:text-white transition-colors duration-200'}`}
+                className="text-xs uppercase tracking-wider font-medium px-2 mx-1 bg-gray-800/50 rounded"
+                style={{ color: isActive('/ventures') ? 'white' : '#9ca3af' }}
                 aria-label="Ventures"
               >
                 Ventures
               </a>
-            </div>
+            </nav>
           </div>
           
           <div className="ml-4">

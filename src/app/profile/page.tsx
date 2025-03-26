@@ -6,7 +6,7 @@ export default function Profile() {
       <div className="flex items-center mb-8 gap-4">
         <div className="w-16 h-16 relative">
           <Image 
-            src="/attached_assets/samir-profile-photo.webp"
+            src="/images/samir-profile-photo.webp"
             alt="Samir's profile"
             width={64}
             height={64}
