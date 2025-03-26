@@ -1,58 +1,59 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
-import { useTheme } from "next-themes"
+import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 
 export function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   
-  // Avoid hydration mismatch by only rendering once mounted on the client
+  // Prevent hydration issues
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  const toggleTheme = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark")
-  }
-
-  // Enhanced button styles with proper light/dark mode support
-  const buttonClasses = 
-    "w-8 h-8 flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none " +
-    "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white " +
-    "bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
-
+    setMounted(true);
+  }, []);
+  
   if (!mounted) {
     return (
       <button 
-        className={buttonClasses}
-        aria-label="Toggle theme"
-        disabled
+        aria-label="Toggle theme" 
+        className="w-9 h-9 flex items-center justify-center rounded-md transition-colors"
+        style={{
+          backgroundColor: "transparent",
+          border: "none",
+          cursor: "pointer",
+          padding: "8px",
+          borderRadius: "4px"
+        }}
       >
-        <span className="sr-only">Loading theme toggle</span>
-        <div className="w-5 h-5 opacity-50" />
-      </button>
-    )
-  }
-
-  return (
-    <button
-      onClick={toggleTheme}
-      className={buttonClasses}
-      aria-label="Toggle theme"
-      title={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-    >
-      {resolvedTheme === "dark" ? (
-        <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>
-          light_mode
-        </span>
-      ) : (
-        <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>
+        <span className="material-symbols-outlined" style={{ opacity: 0 }}>
           dark_mode
         </span>
-      )}
+      </button>
+    );
+  }
+  
+  const isDark = theme === "dark";
+  
+  return (
+    <button
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label="Toggle theme"
+      style={{
+        backgroundColor: "transparent",
+        border: "none",
+        cursor: "pointer",
+        padding: "8px",
+        borderRadius: "4px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: isDark ? "#f1f5f9" : "#4b5563",
+        transition: "color 0.3s"
+      }}
+    >
+      <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>
+        {isDark ? "light_mode" : "dark_mode"}
+      </span>
     </button>
-  )
+  );
 }
-
-export default ThemeToggle

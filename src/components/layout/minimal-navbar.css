@@ -1,20 +1,11 @@
-/* Responsive styles for minimal navbar */
+/* 
+ * Minimal Navbar CSS
+ * This file contains only responsive styles for the navbar
+ * All other styling is done inline to avoid conflicts
+ */
 
-/* Hide desktop navigation on mobile */
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none !important;
-  }
-  
-  .mobile-nav {
-    display: flex !important;
-    align-items: center;
-    gap: 12px;
-  }
-}
-
-/* Show desktop navigation on larger screens */
-@media (min-width: 769px) {
+/* Desktop and larger screens */
+@media (min-width: 768px) {
   .desktop-nav {
     display: flex !important;
   }
@@ -24,18 +15,13 @@
   }
 }
 
-/* Animation for mobile menu */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+/* Mobile screens */
+@media (max-width: 767px) {
+  .desktop-nav {
+    display: none !important;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .mobile-nav {
+    display: flex !important;
   }
-}
-
-.mobile-menu {
-  animation: fadeIn 0.2s ease-out;
 }
