@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { inter } from "../config/fonts";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
-import SimpleNavbar from "../components/layout/simple-navbar";
+import MinimalNavbar from "../components/layout/minimal-navbar";
 import Footer from "../components/layout/footer";
 import { ErrorBoundary } from "../components/error-boundary";
 
@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="flex flex-col min-h-screen">
-            <SimpleNavbar />
+            <MinimalNavbar />
             <main className="flex-grow px-4 sm:px-6 py-10 mt-2"> {/* Increased top padding to prevent navbar overlap */}
               <div className="max-w-screen-xl mx-auto w-full">
                 {children}

@@ -1,0 +1,25 @@
+/* Responsive styles for minimal navbar */
+
+/* Hide desktop navigation on mobile */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  .mobile-nav {
+    display: flex !important;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+/* Show desktop navigation on larger screens */
+@media (min-width: 769px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+  
+  .mobile-nav {
+    display: none !important;
+  }
+}
