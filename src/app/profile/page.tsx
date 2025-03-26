@@ -1,9 +1,9 @@
-import RootLayout from "../../components/root-layout";
+import RootLayout from "../../components/layout/root-layout";
 
 export default function Profile() {
   return (
     <RootLayout>
-      <div className="py-8">
+      <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
           About <span className="text-purple-500">Samir</span>
         </h1>

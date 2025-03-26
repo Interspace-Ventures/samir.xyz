@@ -1,15 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import { IMAGE_BASE_PATH } from "../../config/paths";
 
-interface SimpleVenturesCardProps {
+interface VenturesCardProps {
   name: string;
   description: string;
   imagePath: string;
   link: string;
+  priority?: boolean;
 }
 
-export function SimpleVenturesCard({ name, description, imagePath, link }: SimpleVenturesCardProps) {
+/**
+ * Consolidated VenturesCard component
+ * - Uses Next.js Image component for optimized image loading
+ * - Provides smooth fallback to initials when image fails to load
+ * - Consistent styling with the rest of the application
+ * - Supports priority loading for important images
+ */
+export function VenturesCard({ name, description, imagePath, link, priority = false }: VenturesCardProps) {
   const [imageError, setImageError] = useState(false);
   
   // Extract initials for fallback
@@ -20,6 +30,11 @@ export function SimpleVenturesCard({ name, description, imagePath, link }: Simpl
     .toUpperCase()
     .substring(0, 2);
   
+  // Ensure image path starts with the correct base path
+  const fullImagePath = imagePath.startsWith('/') || imagePath.startsWith(IMAGE_BASE_PATH) 
+    ? imagePath 
+    : `${IMAGE_BASE_PATH}${imagePath}`;
+  
   return (
     <a 
       href={link}
@@ -27,17 +42,23 @@ export function SimpleVenturesCard({ name, description, imagePath, link }: Simpl
       rel="noopener noreferrer"
       className="block h-full w-full"
     >
-      <div className="bg-gray-800/50 rounded-xl p-6 flex flex-col h-full transition-all hover:bg-gray-800/80 hover:shadow-lg hover:shadow-purple-800/20 border border-gray-700/50">
+      <div className="bg-gray-800/50 rounded-xl p-6 flex flex-col h-full transition-all 
+                     hover:bg-gray-800/80 hover:shadow-lg hover:shadow-purple-800/20 
+                     border border-gray-700/50">
         <div className="flex-grow">
-          {/* Ultra-simplified image handling with standard img tag */}
+          {/* Image with fallback */}
           {!imageError ? (
             <div className="mb-4 h-24 w-full flex items-center justify-center overflow-hidden rounded-md bg-gray-900/50">
-              <img
-                src={imagePath}
-                alt={name}
-                className="max-h-20 w-auto object-contain"
-                onError={() => setImageError(true)}
-              />
+              <div className="relative h-20 w-full">
+                <Image
+                  src={fullImagePath}
+                  alt={name}
+                  fill={true}
+                  style={{ objectFit: 'contain' }}
+                  onError={() => setImageError(true)}
+                  priority={priority}
+                />
+              </div>
             </div>
           ) : (
             <div className="mb-4 h-24 w-full flex items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-purple-800 to-purple-900">

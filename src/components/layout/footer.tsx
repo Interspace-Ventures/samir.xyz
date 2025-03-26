@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import getVersionInfo from "../utils/version"
+import getVersionInfo from "../../utils/version"
 
 const Footer = () => {
   const [year, setYear] = useState("")
