@@ -1,14 +1,12 @@
 "use client"
 
 import React from "react"
-import Footer from "./footer"
-import { ErrorBoundary } from "../error-boundary"
 
 /**
  * Simplified ContentLayout component
- * - Only handles content and footer
+ * - Only handles content, no navbar or footer (those are in the main RootLayout)
  * - Renamed from RootLayout to ContentLayout to avoid conflicts with Next.js app/layout.tsx
- * - Should be used inside pages that need specific layout but not navigation
+ * - Should be used inside pages that need specific layout for content area only
  */
 export default function ContentLayout({
   children,

@@ -21,8 +21,9 @@ export default function SimpleNavbar() {
           Hey - I&apos;m Samir
         </a>
 
-        <nav className="flex items-center">
-          <div className="hidden md:flex items-center space-x-8 mr-6">
+        <nav className="flex items-center space-x-4">
+          {/* Desktop menu */}
+          <div className="hidden md:flex items-center space-x-8">
             <a 
               href="/profile" 
               className={`text-sm uppercase tracking-wider font-medium ${isActive('/profile') ? 'text-white' : 'text-gray-400 hover:text-white transition-colors duration-200'}`}
@@ -43,29 +44,36 @@ export default function SimpleNavbar() {
             </a>
           </div>
           
-          {/* Mobile menu - simplified for now */}
-          <div className="md:hidden flex items-center space-x-4">
-            <a 
-              href="/profile" 
-              className="text-sm uppercase tracking-wider font-medium text-gray-400 hover:text-white transition-colors duration-200"
-            >
-              About
-            </a>
-            <a 
-              href="/portfolio" 
-              className="text-sm uppercase tracking-wider font-medium text-gray-400 hover:text-white transition-colors duration-200"
-            >
-              Portfolio
-            </a>
-            <a 
-              href="/ventures" 
-              className="text-sm uppercase tracking-wider font-medium text-gray-400 hover:text-white transition-colors duration-200"
-            >
-              Ventures
-            </a>
+          {/* Mobile menu - with enhanced spacing and visual separators */}
+          <div className="md:hidden flex items-center">
+            <div className="flex">
+              <a 
+                href="/profile" 
+                className={`text-xs uppercase tracking-wider font-medium px-2 border-r border-gray-700 ${isActive('/profile') ? 'text-white' : 'text-gray-400 hover:text-white transition-colors duration-200'}`}
+                aria-label="About"
+              >
+                About
+              </a>
+              <a 
+                href="/portfolio" 
+                className={`text-xs uppercase tracking-wider font-medium px-2 border-r border-gray-700 ${isActive('/portfolio') ? 'text-white' : 'text-gray-400 hover:text-white transition-colors duration-200'}`}
+                aria-label="Portfolio"
+              >
+                Portfolio
+              </a>
+              <a 
+                href="/ventures" 
+                className={`text-xs uppercase tracking-wider font-medium px-2 ${isActive('/ventures') ? 'text-white' : 'text-gray-400 hover:text-white transition-colors duration-200'}`}
+                aria-label="Ventures"
+              >
+                Ventures
+              </a>
+            </div>
           </div>
           
-          <ThemeToggle />
+          <div className="ml-4">
+            <ThemeToggle />
+          </div>
         </nav>
       </div>
     </header>
