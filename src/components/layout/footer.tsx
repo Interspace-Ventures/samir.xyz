@@ -18,30 +18,71 @@ const Footer = () => {
 
   // Detect if we're in dark mode for proper styling
   const isDark = mounted && resolvedTheme === 'dark'
+  
+  // Colors based on dark/light mode
+  const colors = {
+    bg: isDark ? "#111827" : "#f3f4f6",
+    text: isDark ? "#9ca3af" : "#6b7280",
+    textHighlight: isDark ? "#ffffff" : "#111827",
+    accent: isDark ? "#a78bfa" : "#8b5cf6", // Purple for brand
+    accentHover: isDark ? "#c4b5fd" : "#7c3aed",
+    muted: isDark ? "#6b7280" : "#9ca3af",
+    border: isDark ? "#374151" : "#e5e7eb",
+  };
 
   return (
-    <footer className={`w-full mt-10 transition-colors duration-200
-      ${isDark 
-        ? 'border-t border-gray-800/30 text-gray-400 bg-gray-900/50' 
-        : 'border-t border-gray-200 text-gray-600 bg-gray-50'}`}>
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-sm">
+    <footer style={{
+      width: "100%",
+      marginTop: "40px",
+      backgroundColor: colors.bg,
+      borderTop: `1px solid ${colors.border}`,
+      color: colors.text,
+      transition: "background-color 0.3s, color 0.3s, border-color 0.3s",
+    }}>
+      <div style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "24px 16px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+      }}>
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "16px",
+        }} className="footer-content">
+          <div style={{ fontSize: "14px" }}>
             © <Link 
                 href="/ventures" 
-                className={`font-medium transition-colors duration-200
-                  ${isDark 
-                    ? 'text-purple-400 hover:text-purple-300' 
-                    : 'text-purple-600 hover:text-purple-700'}`}
+                style={{ 
+                  color: colors.accent,
+                  fontWeight: 500,
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = colors.accentHover}
+                onMouseOut={(e) => e.currentTarget.style.color = colors.accent}
               >
                 Interspace Ventures
               </Link> {year || "2025"}
           </div>
-          <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+          <div style={{ fontSize: "12px", color: colors.muted }}>
             Built with Replit AI at the speed of thought • v{version}
           </div>
         </div>
       </div>
+      
+      <style jsx global>{`
+        @media (min-width: 768px) {
+          .footer-content {
+            flex-direction: row !important;
+            align-items: center !important;
+          }
+        }
+      `}</style>
     </footer>
   )
 }
