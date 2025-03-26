@@ -1,21 +1,18 @@
 "use client"
 
 import React from "react"
-import Navbar from "./navbar"
 import Footer from "./footer"
 import { ErrorBoundary } from "./error-boundary"
 
+// Updated to work with the new app layout approach
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col min-h-screen bg-black text-gray-100">
-      <ErrorBoundary name="Navbar">
-        <Navbar />
-      </ErrorBoundary>
-      <div className="flex-grow pt-6">
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow">
         {children}
       </div>
       <ErrorBoundary name="Footer">

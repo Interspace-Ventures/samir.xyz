@@ -2,7 +2,7 @@
 
 import React from "react"
 
-// Fixed to exactly match the design in the provided image
+// Simplified approach - just a static icon to match the design exactly
 export function ThemeToggle() {
   return (
     <button
