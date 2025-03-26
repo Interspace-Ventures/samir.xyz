@@ -1,4 +1,3 @@
-import RootLayout from "../../components/layout/root-layout";
 import { VenturesGrid } from "../../components/ventures/ventures-grid";
 
 /**
@@ -52,21 +51,19 @@ export default function Ventures() {
   ];
   
   return (
-    <RootLayout>
-      <div className="max-w-6xl mx-auto">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h1 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
-            Interspace Ventures
-          </h1>
-          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-            I create apps and concepts by coding at the speed of thought using Replit.
-          </p>
-        </div>
-        
-        <div className="mb-16">
-          <VenturesGrid ventures={ventures} />
-        </div>
+    <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto text-center mb-12">
+        <h1 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
+          Interspace Ventures
+        </h1>
+        <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+          I create apps and concepts by coding at the speed of thought using Replit.
+        </p>
       </div>
-    </RootLayout>
+      
+      <div className="mb-16">
+        <VenturesGrid ventures={ventures} />
+      </div>
+    </div>
   );
 }
