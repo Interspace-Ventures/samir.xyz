@@ -1,43 +1,42 @@
 import RootLayout from "../../components/layout/root-layout";
+import Image from "next/image";
 
 export default function Profile() {
   return (
     <RootLayout>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-          About <span className="text-purple-500">Samir</span>
-        </h1>
+        <div className="flex flex-col items-center mb-8">
+          <div className="relative w-40 h-40 overflow-hidden rounded-full mb-6 border-2 border-purple-500/30">
+            <Image 
+              src="/images/samir-profile-photo.webp"
+              alt="Samir's profile"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-center">
+            Hey - I&apos;m <span className="text-purple-500">Samir</span>
+          </h1>
+        </div>
         
-        <div className="max-w-3xl mx-auto card mb-10">
-          <h2 className="text-xl font-semibold mb-4 text-purple-400">I drive business impact at fintechs</h2>
+        <div className="max-w-3xl mx-auto mb-10">
+          <h2 className="text-xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
+            I drive business impact at fintechs
+          </h2>
           
           <p className="text-gray-300 mb-4 leading-relaxed">
-            Today, I am leading Strategic Finance for the Financial Partnerships team at Cash App
-            where we're expanding financial access to help users do more with their money.
+            Today, I am leading Strategic Finance for the Financial Partnerships team at <a href="https://cash.app" className="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">Cash App</a> where we're expanding financial access to help users do more with their money.
           </p>
           
           <p className="text-gray-300 mb-4 leading-relaxed">
-            Prior to that, I drove financial partnerships at Unit, which embeds financial features into products.
-            Before that, I built and led the Strategic Finance function at Chime. Earlier, I was the first finance
-            hire at Sift. I got my start in investment banking in the Financial Institutions Group at JP Morgan
-            covering market structure and asset management.
+            Prior to that, I drove financial partnerships at <a href="https://unit.co" className="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">Unit</a>, which embeds financial features into products.
+            Before that, I built and led the Strategic Finance function at <a href="https://chime.com" className="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">Chime</a>. Earlier, I was the first finance hire at <a href="https://sift.com" className="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">Sift</a>. I got my start in investment banking in the Financial Institutions Group at <a href="https://jpmorgan.com" className="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">JP Morgan</a> covering market structure and asset management.
           </p>
           
           <p className="text-gray-300 leading-relaxed">
-            Outside of work, I write over-engineered fintech threads on Twitter, share perspectives on Substack
-            and write fintech & stratfin posts at Interspace. I also create over-engineered apps and ideas at
-            Interspace Ventures.
+            Outside of work, I write over-engineered fintech threads on <a href="https://twitter.com" className="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">Twitter</a>, share perspectives on <a href="https://substack.com" className="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">Substack</a> and write fintech & stratfin posts at <a href="https://interspace.sh" className="text-purple-400 hover:text-purple-300 underline" target="_blank" rel="noopener noreferrer">Interspace</a>. I also create over-engineered apps and ideas at <a href="/ventures" className="text-purple-400 hover:text-purple-300 underline">Interspace Ventures</a>.
           </p>
-        </div>
-        
-        <div className="text-center">
-          <a 
-            href="/portfolio" 
-            className="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-purple-800 text-white font-medium 
-                      hover:from-purple-500 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-purple-800/30"
-          >
-            View Portfolio
-          </a>
         </div>
       </div>
     </RootLayout>
