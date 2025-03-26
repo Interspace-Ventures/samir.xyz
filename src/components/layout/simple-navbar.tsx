@@ -6,17 +6,25 @@ import { ThemeToggle } from './theme-toggle'
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 
-// Ultra simple navbar with fixed-width grid layout to ensure proper spacing
+// Navigation links data for easier maintenance
+const navLinks = [
+  { href: "/profile", label: "About" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/ventures", label: "Ventures" }
+]
+
 export default function SimpleNavbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   
+  // Handle hydration issue
   useEffect(() => {
     setMounted(true)
   }, [])
   
+  // Close mobile menu on resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && isMenuOpen) {
@@ -30,74 +38,57 @@ export default function SimpleNavbar() {
   
   const isDark = mounted && resolvedTheme === 'dark'
   
+  // Determine if a link is active
+  const isActive = (href: string) => pathname === href || pathname === `${href}/`
+
   return (
-    <header 
-      className={`w-full sticky top-0 z-50 py-4 ${isDark ? 'bg-gray-900 border-b border-gray-800' : 'bg-white border-b border-gray-200'}`}
-    >
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Hidden on mobile */}
-        <div className="hidden md:grid md:grid-cols-12 md:gap-4 items-center">
-          {/* Logo - 4 columns */}
-          <div className="col-span-4">
-            <Link href="/" className={`font-bold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              <span className="whitespace-nowrap">Hey - I&apos;m Samir</span>
+    <header className="w-full sticky top-0 z-50 py-4 border-b bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+      <nav className="max-w-6xl mx-auto px-4">
+        {/* Desktop navbar */}
+        <div className="hidden md:flex md:justify-between md:items-center">
+          {/* Logo */}
+          <div className="flex-shrink-0 mr-8">
+            <Link href="/" className="font-bold text-lg text-gray-900 dark:text-white whitespace-nowrap">
+              Hey - I&apos;m Samir
             </Link>
           </div>
           
-          {/* Nav Links - 7 columns */}
-          <div className="col-span-7 flex justify-start space-x-12">
-            <div>
-              <Link 
-                href="/profile" 
-                className={`font-medium ${pathname === '/profile' || pathname === '/profile/' 
-                  ? `text-purple-600 ${isDark ? 'dark:text-purple-400' : ''}` 
-                  : `${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}`}
-              >
-                About
-              </Link>
+          {/* Desktop navigation links */}
+          <div className="flex items-center justify-between flex-1">
+            <div className="flex space-x-8">
+              {navLinks.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`inline-block px-1 py-2 font-medium transition-colors ${
+                    isActive(href)
+                      ? 'text-purple-600 dark:text-purple-400'
+                      : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
             </div>
             
             <div>
-              <Link 
-                href="/portfolio" 
-                className={`font-medium ${pathname === '/portfolio' || pathname === '/portfolio/' 
-                  ? `text-purple-600 ${isDark ? 'dark:text-purple-400' : ''}` 
-                  : `${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}`}
-              >
-                Portfolio
-              </Link>
+              <ThemeToggle />
             </div>
-            
-            <div>
-              <Link 
-                href="/ventures" 
-                className={`font-medium ${pathname === '/ventures' || pathname === '/ventures/' 
-                  ? `text-purple-600 ${isDark ? 'dark:text-purple-400' : ''}` 
-                  : `${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}`}
-              >
-                Ventures
-              </Link>
-            </div>
-          </div>
-          
-          {/* Theme toggle - 1 column */}
-          <div className="col-span-1 flex justify-end">
-            <ThemeToggle />
           </div>
         </div>
 
-        {/* Mobile view */}
+        {/* Mobile navbar */}
         <div className="flex justify-between items-center md:hidden">
-          <Link href="/" className={`font-bold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            <span className="whitespace-nowrap">Hey - I&apos;m Samir</span>
+          <Link href="/" className="font-bold text-lg text-gray-900 dark:text-white whitespace-nowrap">
+            Hey - I&apos;m Samir
           </Link>
           
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
             <ThemeToggle />
             
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 rounded-md ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+              className="p-2 text-gray-500 dark:text-gray-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
               aria-expanded={isMenuOpen}
             >
               <span className="sr-only">Open menu</span>
@@ -111,46 +102,25 @@ export default function SimpleNavbar() {
             </button>
           </div>
         </div>
-      </div>
+      </nav>
       
       {/* Mobile menu dropdown */}
       {isMenuOpen && (
-        <div className={`px-4 pt-2 pb-4 space-y-2 md:hidden ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
-          <Link
-            href="/profile"
-            className={`block py-2 px-4 rounded-md ${
-              pathname === '/profile' || pathname === '/profile/' 
-                ? `${isDark ? 'bg-gray-700 text-purple-400' : 'bg-gray-100 text-purple-600'}`
-                : `${isDark ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            About
-          </Link>
-          
-          <Link
-            href="/portfolio"
-            className={`block py-2 px-4 rounded-md ${
-              pathname === '/portfolio' || pathname === '/portfolio/' 
-                ? `${isDark ? 'bg-gray-700 text-purple-400' : 'bg-gray-100 text-purple-600'}`
-                : `${isDark ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Portfolio
-          </Link>
-          
-          <Link
-            href="/ventures"
-            className={`block py-2 px-4 rounded-md ${
-              pathname === '/ventures' || pathname === '/ventures/' 
-                ? `${isDark ? 'bg-gray-700 text-purple-400' : 'bg-gray-100 text-purple-600'}`
-                : `${isDark ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Ventures
-          </Link>
+        <div className="px-4 pt-2 pb-4 space-y-1 bg-gray-50 dark:bg-gray-800 md:hidden">
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`block py-2 px-4 rounded-md ${
+                isActive(href)
+                  ? 'bg-gray-100 text-purple-600 dark:bg-gray-700 dark:text-purple-400'
+                  : 'text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
       )}
     </header>
