@@ -2,26 +2,84 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function UltraSimpleNavbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  
+  // Check for system dark mode preference and localStorage theme setting
+  useEffect(() => {
+    // Check if document is available (client-side only)
+    if (typeof window !== 'undefined') {
+      // Check localStorage for theme setting
+      const savedTheme = localStorage.getItem('theme');
+      
+      if (savedTheme) {
+        setIsDarkMode(savedTheme === 'dark');
+      } else {
+        // Check system preference if no saved theme
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setIsDarkMode(prefersDark);
+      }
+      
+      // Set up listener for theme changes
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (
+            mutation.type === 'attributes' &&
+            mutation.attributeName === 'class'
+          ) {
+            const htmlElement = document.documentElement;
+            setIsDarkMode(htmlElement.classList.contains('dark'));
+          }
+        });
+      });
+      
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+      
+      return () => observer.disconnect();
+    }
+  }, []);
+  
+  // Colors based on dark/light mode
+  const colors = {
+    bg: isDarkMode ? "#111827" : "#f3f4f6",
+    text: isDarkMode ? "#ffffff" : "#111827",
+    muted: isDarkMode ? "#9ca3af" : "#6b7280",
+    border: isDarkMode ? "#374151" : "#e5e7eb",
+    menuBg: isDarkMode ? "#1f2937" : "#ffffff",
+    shadow: isDarkMode ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.1)",
+  };
   
   return (
     <nav style={{
-      backgroundColor: "#111827",
-      color: "white",
-      padding: "16px"
+      backgroundColor: colors.bg,
+      color: colors.text,
+      padding: "16px",
+      borderBottom: `1px solid ${colors.border}`,
+      transition: "background-color 0.3s, color 0.3s, border-color 0.3s",
     }}>
       <div style={{
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "0 16px"
       }}>
         {/* Left side - Logo/Name */}
         <div>
-          <Link href="/" style={{ color: "white", textDecoration: "none" }}>
+          <Link href="/" style={{ 
+            color: colors.text, 
+            textDecoration: "none",
+            fontWeight: 600,
+            fontSize: "18px",
+          }}>
             Hey - I&apos;m Samir
           </Link>
         </div>
@@ -29,34 +87,76 @@ export default function UltraSimpleNavbar() {
         {/* Right side - Navigation links (desktop) */}
         <div style={{ 
           display: "flex", 
-          gap: "20px"
+          gap: "32px" // Increased gap for better spacing between links
         }} className="desktop-nav">
           <Link 
             href="/profile/" 
             style={{ 
-              color: pathname.startsWith("/profile") ? "#ffffff" : "#9ca3af",
-              textDecoration: "none" 
+              color: pathname.startsWith("/profile") ? colors.text : colors.muted,
+              textDecoration: "none",
+              fontWeight: pathname.startsWith("/profile") ? 600 : 400,
+              position: "relative",
+              paddingBottom: "2px",
             }}
           >
             About
+            {pathname.startsWith("/profile") && (
+              <span style={{
+                position: "absolute",
+                bottom: "-4px",
+                left: "0",
+                width: "100%",
+                height: "2px",
+                backgroundColor: colors.text,
+                transition: "all 0.2s ease"
+              }}></span>
+            )}
           </Link>
           <Link 
             href="/portfolio/" 
             style={{ 
-              color: pathname.startsWith("/portfolio") ? "#ffffff" : "#9ca3af",
-              textDecoration: "none" 
+              color: pathname.startsWith("/portfolio") ? colors.text : colors.muted,
+              textDecoration: "none",
+              fontWeight: pathname.startsWith("/portfolio") ? 600 : 400,
+              position: "relative",
+              paddingBottom: "2px",
             }}
           >
             Portfolio
+            {pathname.startsWith("/portfolio") && (
+              <span style={{
+                position: "absolute",
+                bottom: "-4px",
+                left: "0",
+                width: "100%",
+                height: "2px",
+                backgroundColor: colors.text,
+                transition: "all 0.2s ease"
+              }}></span>
+            )}
           </Link>
           <Link 
             href="/ventures/" 
             style={{ 
-              color: pathname.startsWith("/ventures") ? "#ffffff" : "#9ca3af",
-              textDecoration: "none" 
+              color: pathname.startsWith("/ventures") ? colors.text : colors.muted,
+              textDecoration: "none",
+              fontWeight: pathname.startsWith("/ventures") ? 600 : 400,
+              position: "relative",
+              paddingBottom: "2px",
             }}
           >
             Ventures
+            {pathname.startsWith("/ventures") && (
+              <span style={{
+                position: "absolute",
+                bottom: "-4px",
+                left: "0",
+                width: "100%",
+                height: "2px",
+                backgroundColor: colors.text,
+                transition: "all 0.2s ease"
+              }}></span>
+            )}
           </Link>
         </div>
         
@@ -66,59 +166,112 @@ export default function UltraSimpleNavbar() {
           style={{
             background: "transparent",
             border: "none",
-            color: "white",
+            color: colors.text,
             padding: "8px",
             cursor: "pointer",
-            display: "none"
+            display: "none",
+            alignItems: "center",
           }}
           className="mobile-menu-button"
-          aria-label="Open main menu"
+          aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
         >
-          Open main menu
-          <div style={{ marginTop: "4px" }}>
-            <div style={{ height: "2px", width: "20px", backgroundColor: "white", marginBottom: "4px" }}></div>
-            <div style={{ height: "2px", width: "20px", backgroundColor: "white", marginBottom: "4px" }}></div>
-            <div style={{ height: "2px", width: "20px", backgroundColor: "white" }}></div>
+          <span style={{ position: "absolute", width: "1px", height: "1px", padding: "0", margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", borderWidth: "0" }}>
+            {isMenuOpen ? "Close main menu" : "Open main menu"}
+          </span>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+            <div style={{ 
+              height: "2px", 
+              width: "20px", 
+              backgroundColor: colors.text, 
+              marginBottom: "4px",
+              transition: "transform 0.3s, opacity 0.3s",
+              transform: isMenuOpen ? "translateY(6px) rotate(45deg)" : "none"
+            }}></div>
+            <div style={{ 
+              height: "2px", 
+              width: "20px", 
+              backgroundColor: colors.text, 
+              marginBottom: "4px",
+              transition: "opacity 0.3s",
+              opacity: isMenuOpen ? 0 : 1
+            }}></div>
+            <div style={{ 
+              height: "2px", 
+              width: "20px", 
+              backgroundColor: colors.text,
+              transition: "transform 0.3s",
+              transform: isMenuOpen ? "translateY(-6px) rotate(-45deg)" : "none"
+            }}></div>
           </div>
         </button>
       </div>
       
       {/* Mobile menu dropdown */}
-      {isMenuOpen && (
-        <div style={{
+      <div
+        style={{
           position: "absolute",
-          backgroundColor: "#374151",
+          backgroundColor: colors.menuBg,
           width: "100%",
           left: 0,
+          top: isMenuOpen ? "56px" : "-100%", // This makes it animate in/out
           padding: "16px",
-          boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-          zIndex: 50
+          boxShadow: isMenuOpen ? `0 4px 6px -1px ${colors.shadow}` : "none",
+          zIndex: 50,
+          transition: "top 0.3s ease-in-out",
+          borderBottom: isMenuOpen ? `1px solid ${colors.border}` : "none",
+          opacity: isMenuOpen ? 1 : 0,
+        }}
+        className="mobile-menu"
+      >
+        <div style={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          gap: "16px",
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "8px 16px"
         }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <Link 
-              href="/profile/" 
-              style={{ color: "white", textDecoration: "none" }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </Link>
-            <Link 
-              href="/portfolio/" 
-              style={{ color: "white", textDecoration: "none" }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Portfolio
-            </Link>
-            <Link 
-              href="/ventures/" 
-              style={{ color: "white", textDecoration: "none" }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Ventures
-            </Link>
-          </div>
+          <Link 
+            href="/profile/" 
+            style={{ 
+              color: pathname.startsWith("/profile") ? colors.text : colors.muted,
+              textDecoration: "none",
+              fontWeight: pathname.startsWith("/profile") ? 600 : 400,
+              borderLeft: pathname.startsWith("/profile") ? `2px solid ${colors.text}` : "none",
+              paddingLeft: pathname.startsWith("/profile") ? "8px" : "0",
+            }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            About
+          </Link>
+          <Link 
+            href="/portfolio/" 
+            style={{ 
+              color: pathname.startsWith("/portfolio") ? colors.text : colors.muted,
+              textDecoration: "none",
+              fontWeight: pathname.startsWith("/portfolio") ? 600 : 400,
+              borderLeft: pathname.startsWith("/portfolio") ? `2px solid ${colors.text}` : "none",
+              paddingLeft: pathname.startsWith("/portfolio") ? "8px" : "0",
+            }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Portfolio
+          </Link>
+          <Link 
+            href="/ventures/" 
+            style={{ 
+              color: pathname.startsWith("/ventures") ? colors.text : colors.muted,
+              textDecoration: "none",
+              fontWeight: pathname.startsWith("/ventures") ? 600 : 400,
+              borderLeft: pathname.startsWith("/ventures") ? `2px solid ${colors.text}` : "none",
+              paddingLeft: pathname.startsWith("/ventures") ? "8px" : "0",
+            }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Ventures
+          </Link>
         </div>
-      )}
+      </div>
       
       <style jsx global>{`
         @media (max-width: 768px) {
@@ -127,8 +280,6 @@ export default function UltraSimpleNavbar() {
           }
           .mobile-menu-button {
             display: flex !important;
-            flex-direction: column;
-            align-items: flex-end;
           }
         }
         
@@ -137,6 +288,9 @@ export default function UltraSimpleNavbar() {
             display: flex !important;
           }
           .mobile-menu-button {
+            display: none !important;
+          }
+          .mobile-menu {
             display: none !important;
           }
         }
