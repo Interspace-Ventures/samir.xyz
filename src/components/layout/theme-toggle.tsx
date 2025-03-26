@@ -6,7 +6,7 @@ import React from "react"
 export function ThemeToggle() {
   return (
     <button
-      className="w-5 h-5 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+      className="w-7 h-7 flex items-center justify-center text-gray-400 hover:text-white transition-colors duration-200 rounded-full hover:bg-gray-800/50"
       aria-label="Toggle theme"
     >
       <svg
@@ -17,7 +17,7 @@ export function ThemeToggle() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5"
+        className="h-[18px] w-[18px]"
         aria-hidden="true"
       >
         <circle cx="12" cy="12" r="5" />

@@ -18,10 +18,12 @@ export default function RootLayout({
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className="min-h-screen bg-black text-gray-100">
         <ThemeProvider>
-          <SimpleNavbar />
-          <main className="flex-grow pt-6">
-            {children}
-          </main>
+          <div className="flex flex-col min-h-screen">
+            <SimpleNavbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+          </div>
         </ThemeProvider>
       </body>
     </html>
