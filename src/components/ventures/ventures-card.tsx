@@ -30,9 +30,11 @@ export function VenturesCard({ name, description, imagePath, link, priority = fa
     .toUpperCase()
     .substring(0, 2);
   
-  // Ensure image path starts with the correct base path
-  const fullImagePath = imagePath.startsWith('/') || imagePath.startsWith(IMAGE_BASE_PATH) 
-    ? imagePath 
+  // Ensure image path is correctly formatted for Next.js Image component
+  // If path already contains 'attached_assets', use it directly
+  // Otherwise, prepend the IMAGE_BASE_PATH
+  const fullImagePath = imagePath.includes('attached_assets')
+    ? (imagePath.startsWith('/') ? imagePath : `/${imagePath}`)
     : `${IMAGE_BASE_PATH}${imagePath}`;
   
   return (

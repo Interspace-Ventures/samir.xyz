@@ -12,41 +12,41 @@ export default function Ventures() {
     {
       name: "2 Days Early",
       description: "Current and former Chime operator community built by operators for operators",
-      imagePath: "/attached_assets/2de-interspace.png",
+      imagePath: "attached_assets/2de-interspace.png",
       link: "https://2daysearly.com",
       priority: true
     },
     {
       name: "Solo",
       description: "The first design-forward climbing app",
-      imagePath: "/attached_assets/Solo Wordmark - Gradient 2025.png",
+      imagePath: "attached_assets/Solo Wordmark - Gradient 2025.png",
       link: "https://soloclimbing.com",
       priority: true
     },
     {
       name: "Predictive:film",
       description: "AI-powered film predictions",
-      imagePath: "/attached_assets/predictive-film-icon.png",
+      imagePath: "attached_assets/Predictive.film icon 2025.png",
       link: "https://predictive.film"
     },
     {
       name: "Interspace",
       description: "Over-engineered fintech and stratfin perspectives",
-      imagePath: "/attached_assets/interspace.png",
+      imagePath: "attached_assets/interspace.png",
       link: "https://interspace.sh",
       priority: true
     },
     {
       name: "Hey - I'm Samir",
       description: "I drive business impact in fintech.",
-      imagePath: "/attached_assets/hey-im-samir.png",
+      imagePath: "attached_assets/hey-im-samir.png",
       link: "https://heyimsamir.com",
       priority: true
     },
     {
       name: "Perspectives",
       description: "Fintech & stratfin deep dives",
-      imagePath: "/attached_assets/perspectives.png",
+      imagePath: "attached_assets/perspectives.png",
       link: "https://perspectives.fyi"
     }
   ];
