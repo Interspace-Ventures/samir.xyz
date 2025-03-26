@@ -4,16 +4,21 @@ import React, { useState, useEffect } from 'react'
 import { companies, categories } from '../data/portfolio'
 import type { Company } from '../types'
 import { ErrorBoundary } from '../error-boundary'
+import { useTheme } from 'next-themes'
 
 // Better approach to portfolio cards that prevents overlapping text and improves image handling
 export default function PortfolioCards() {
   const [category, setCategory] = useState<typeof categories[number]>('All')
   const [mounted, setMounted] = useState(false)
+  const { resolvedTheme } = useTheme()
   
   // Add client-side hydration safety
   useEffect(() => {
     setMounted(true)
   }, [])
+  
+  // Detect if we're in dark mode for proper styling
+  const isDark = mounted && resolvedTheme === 'dark'
   
   // Filtered companies based on selected category
   const filteredCompanies = React.useMemo(() => {
@@ -33,7 +38,9 @@ export default function PortfolioCards() {
             className={`px-5 h-[38px] text-sm font-medium rounded-md transition-all duration-300 ${
               category === cat
                 ? 'bg-gradient-to-r from-purple-600 to-purple-800 text-white shadow-md shadow-purple-900/20'
-                : 'border border-gray-800 hover:border-purple-500/50 text-gray-300 hover:bg-purple-900/10'
+                : isDark 
+                  ? 'border border-gray-800 hover:border-purple-500/50 text-gray-300 hover:bg-purple-900/10' 
+                  : 'border border-gray-300 hover:border-purple-400/50 text-gray-700 hover:bg-purple-100/30'
             }`}
           >
             {cat}
@@ -47,15 +54,19 @@ export default function PortfolioCards() {
           // Render full cards after client-side hydration
           filteredCompanies.map((company) => (
             <ErrorBoundary key={company.name} name={`CompanyCard-${company.name}`}>
-              <CompanyCard company={company} />
+              <CompanyCard company={company} isDark={isDark} />
             </ErrorBoundary>
           ))
         ) : (
           // Show simple placeholders during server-side render
           companies.slice(0, 6).map((company, index) => (
-            <div key={index} className="h-[160px] rounded-xl border border-gray-800 bg-gradient-to-br from-black to-gray-900 shadow-md">
+            <div key={index} className={`h-[160px] rounded-xl border shadow-md
+                                        ${isDark 
+                                          ? 'border-gray-800 bg-gradient-to-br from-black to-gray-900' 
+                                          : 'border-gray-200 bg-gradient-to-br from-white to-gray-50'}`}>
               <div className="h-full flex items-center justify-center">
-                <div className="bg-purple-900/20 h-12 w-32 rounded-md animate-pulse backdrop-blur-sm" />
+                <div className={`h-12 w-32 rounded-md animate-pulse backdrop-blur-sm
+                               ${isDark ? 'bg-purple-900/20' : 'bg-purple-100/50'}`} />
               </div>
             </div>
           ))
@@ -66,7 +77,7 @@ export default function PortfolioCards() {
 }
 
 // Optimized company card component with better image handling and special cases for problematic logos
-const CompanyCard = ({ company }: { company: Company }) => {
+const CompanyCard = ({ company, isDark }: { company: Company, isDark: boolean }) => {
   const [fallback, setFallback] = useState(false)
   const [mounted, setMounted] = useState(false)
   
@@ -90,7 +101,11 @@ const CompanyCard = ({ company }: { company: Company }) => {
   }, [hasProblemLogo])
 
   return (
-    <div className="h-[160px] rounded-xl border border-gray-800 bg-gradient-to-br from-black to-gray-900 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-purple-900/20 hover:border-purple-700/30 group">
+    <div className={`h-[160px] rounded-xl border shadow-md transition-all duration-300 
+                    hover:-translate-y-1 group
+                    ${isDark 
+                      ? 'border-gray-800 bg-gradient-to-br from-black to-gray-900 hover:shadow-purple-900/20 hover:border-purple-700/30' 
+                      : 'border-gray-200 bg-gradient-to-br from-white to-gray-50 hover:shadow-purple-300/30 hover:border-purple-300/50'}`}>
       <a
         href={company.website || `https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
@@ -111,17 +126,22 @@ const CompanyCard = ({ company }: { company: Company }) => {
 
         {/* Subtle purple glow effect on hover */}
         <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-blue-500/5 rounded-xl"></div>
+          <div className={`absolute inset-0 rounded-xl
+                         ${isDark 
+                           ? 'bg-gradient-to-r from-purple-500/5 to-blue-500/5' 
+                           : 'bg-gradient-to-r from-purple-300/10 to-blue-300/10'}`}></div>
         </div>
 
         <div className="h-full flex flex-col items-center justify-center relative z-10">
           {/* Main content area with fallback */}
           {fallback || !company.logo ? (
             <div className="text-center">
-              <h3 className="text-gray-200 text-lg font-medium bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+              <h3 className="text-lg font-medium bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
                 {company.name}
               </h3>
-              <p className="text-gray-400 text-sm mt-2">{company.category}</p>
+              <p className={`text-sm mt-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                {company.category}
+              </p>
             </div>
           ) : (
             <div className="relative w-full max-w-[180px] h-[80px] mx-auto">

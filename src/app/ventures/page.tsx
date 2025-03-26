@@ -1,11 +1,27 @@
+"use client"
+
 import { VenturesGrid } from "../../components/ventures/ventures-grid";
+import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
 
 /**
  * Main Ventures page
  * - Uses consolidated components for improved maintainability 
  * - Clean implementation with Tailwind CSS
+ * - Added dark/light mode support
  */
 export default function Ventures() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  
+  // Handle client side mounting for theme detection
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Detect if we're in dark mode for proper styling
+  const isDark = mounted && resolvedTheme === 'dark';
+  
   // All venture data in one consistent format
   const ventures = [
     {
@@ -56,7 +72,7 @@ export default function Ventures() {
         <h1 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
           Interspace Ventures
         </h1>
-        <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+        <p className={`text-lg max-w-3xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
           I create apps and concepts by coding at the speed of thought using Replit.
         </p>
       </div>
