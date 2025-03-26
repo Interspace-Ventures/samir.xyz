@@ -21,3 +21,4 @@ if (typeof window !== 'undefined') {
 window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;
 window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;
 window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;
+window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;
