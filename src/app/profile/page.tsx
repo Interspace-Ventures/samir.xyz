@@ -6,12 +6,13 @@ export default function Profile() {
     <RootLayout>
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center mb-8">
-          <div className="relative w-24 h-24 overflow-hidden rounded-full mb-6 border-2 border-purple-500/30">
+          <div className="w-16 h-16 mb-6 relative">
             <Image 
               src="/images/samir-profile-photo.webp"
               alt="Samir's profile"
-              fill
-              className="object-cover"
+              width={64}
+              height={64}
+              className="rounded-full border-2 border-purple-500/30 object-cover"
               priority
             />
           </div>
