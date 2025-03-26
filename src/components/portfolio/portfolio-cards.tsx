@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
-import { companies, categories } from './data/portfolio'
-import type { Company } from './types'
-import { ErrorBoundary } from './error-boundary'
+import { companies, categories } from '../data/portfolio'
+import type { Company } from '../types'
+import { ErrorBoundary } from '../error-boundary'
 
 // Better approach to portfolio cards that prevents overlapping text and improves image handling
 export default function PortfolioCards() {

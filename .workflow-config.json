@@ -3,8 +3,7 @@
     {
       "name": "Start application",
       "command": "./start.sh",
-      "wait_for_port": true,
-      "port": 5000,
+      "wait_for_port": 5000,
       "view_port": 5000,
       "view_port_protocol": "http",
       "timeout": 120000,

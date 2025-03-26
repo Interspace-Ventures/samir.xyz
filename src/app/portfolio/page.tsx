@@ -1,12 +1,12 @@
-// Version 12.0.1 - Enhanced Portfolio Page with purple accents and dark theme
-import StatsSection from '../../components/stats-section';
-import PortfolioCards from '../../components/portfolio-cards';
-import RootLayout from '../../components/root-layout';
+// Version 13.0.1 - Enhanced Portfolio Page with consolidated layout
+import StatsSection from '../../components/portfolio/stats-section';
+import PortfolioCards from '../../components/portfolio/portfolio-cards';
+import RootLayout from '../../components/layout/root-layout';
 
 export default function Portfolio() {
   return (
     <RootLayout>
-      <div className="py-8 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto">
         <div className="mb-12 text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
             Portfolio

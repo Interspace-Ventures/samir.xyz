@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { inter } from "../config/fonts";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
-import SimpleNavbar from "../components/simple-navbar";
+import SimpleNavbar from "../components/layout/simple-navbar";
 
 export const metadata: Metadata = {
   title: "Hey - I'm Samir",
