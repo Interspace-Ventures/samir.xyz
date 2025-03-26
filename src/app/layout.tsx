@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { inter } from "../config/fonts";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
-import MinimalNavbar from "../components/layout/minimal-navbar";
+import MinimalNavbar from "../components/layout/minimal-navbar-new";
 import Footer from "../components/layout/footer";
 import { ErrorBoundary } from "../components/error-boundary";
 
