@@ -6,18 +6,17 @@ import { ThemeToggle } from './theme-toggle'
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 
+// Ultra simple navbar with fixed-width grid layout to ensure proper spacing
 export default function SimpleNavbar() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   
-  // Handle client side mounting for theme detection
   useEffect(() => {
     setMounted(true)
   }, [])
   
-  // Close the menu when window is resized
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768 && isMenuOpen) {
@@ -29,94 +28,84 @@ export default function SimpleNavbar() {
     return () => window.removeEventListener('resize', handleResize)
   }, [isMenuOpen])
   
-  // Function to determine if a path is active
-  const isActive = (path: string) => {
-    return pathname === path || pathname === path + '/'
-  }
-  
-  // Detect if we're in dark mode for proper styling
   const isDark = mounted && resolvedTheme === 'dark'
   
-  // Navigation links definition to avoid repetition
-  const navLinks = [
-    { href: '/profile', label: 'About' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/ventures', label: 'Ventures' }
-  ]
-  
   return (
-    <header className={`w-full h-16 sticky top-0 z-50 transition-colors duration-200 
-      ${isDark 
-        ? 'bg-gray-900 border-b border-gray-800/50 shadow-md' 
-        : 'bg-white border-b border-gray-200 shadow-sm'}`}>
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 h-full">
-        <div className="flex justify-between items-center h-full">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link 
-              href="/" 
-              className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}
-            >
-              Hey - I&apos;m Samir
+    <header 
+      className={`w-full sticky top-0 z-50 py-4 ${isDark ? 'bg-gray-900 border-b border-gray-800' : 'bg-white border-b border-gray-200'}`}
+    >
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Hidden on mobile */}
+        <div className="hidden md:grid md:grid-cols-12 md:gap-4 items-center">
+          {/* Logo - 4 columns */}
+          <div className="col-span-4">
+            <Link href="/" className={`font-bold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <span className="whitespace-nowrap">Hey - I&apos;m Samir</span>
             </Link>
           </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:items-center md:space-x-6">
-            {navLinks.map(link => (
+          
+          {/* Nav Links - 7 columns */}
+          <div className="col-span-7 flex justify-start space-x-12">
+            <div>
               <Link 
-                key={link.href}
-                href={link.href}
-                className={`
-                  inline-block text-sm font-medium px-2 py-1 border-b-2 transition-colors
-                  ${isActive(link.href) 
-                    ? `border-purple-500 ${isDark ? 'text-white' : 'text-gray-900'}` 
-                    : `border-transparent ${isDark ? 'text-gray-300' : 'text-gray-600'} 
-                      hover:${isDark ? 'text-white' : 'text-gray-900'} hover:border-purple-400`
-                  }
-                `}
+                href="/profile" 
+                className={`font-medium ${pathname === '/profile' || pathname === '/profile/' 
+                  ? `text-purple-600 ${isDark ? 'dark:text-purple-400' : ''}` 
+                  : `${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}`}
               >
-                {link.label}
+                About
               </Link>
-            ))}
-          </nav>
+            </div>
+            
+            <div>
+              <Link 
+                href="/portfolio" 
+                className={`font-medium ${pathname === '/portfolio' || pathname === '/portfolio/' 
+                  ? `text-purple-600 ${isDark ? 'dark:text-purple-400' : ''}` 
+                  : `${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}`}
+              >
+                Portfolio
+              </Link>
+            </div>
+            
+            <div>
+              <Link 
+                href="/ventures" 
+                className={`font-medium ${pathname === '/ventures' || pathname === '/ventures/' 
+                  ? `text-purple-600 ${isDark ? 'dark:text-purple-400' : ''}` 
+                  : `${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}`}
+              >
+                Ventures
+              </Link>
+            </div>
+          </div>
+          
+          {/* Theme toggle - 1 column */}
+          <div className="col-span-1 flex justify-end">
+            <ThemeToggle />
+          </div>
+        </div>
 
-          <div className="flex items-center">
-            {/* Theme toggle */}
+        {/* Mobile view */}
+        <div className="flex justify-between items-center md:hidden">
+          <Link href="/" className={`font-bold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <span className="whitespace-nowrap">Hey - I&apos;m Samir</span>
+          </Link>
+          
+          <div className="flex items-center space-x-2">
             <ThemeToggle />
             
-            {/* Mobile menu button - with more spacing */}
             <button 
-              type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden ml-4 p-2 rounded-md focus:outline-none
-                ${isDark 
-                  ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
+              className={`p-2 rounded-md ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
               aria-expanded={isMenuOpen}
             >
-              <span className="sr-only">Open main menu</span>
-              <svg 
-                className="h-6 w-6" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor" 
-                aria-hidden="true"
-              >
+              <span className="sr-only">Open menu</span>
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isMenuOpen ? (
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M6 18L18 6M6 6l12 12" 
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M4 6h16M4 12h16M4 18h16" 
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 )}
               </svg>
             </button>
@@ -124,31 +113,44 @@ export default function SimpleNavbar() {
         </div>
       </div>
       
-      {/* Mobile menu - simpler implementation */}
+      {/* Mobile menu dropdown */}
       {isMenuOpen && (
-        <div className={`md:hidden ${isDark ? 'bg-gray-900' : 'bg-white'} border-b ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
-          <nav className="px-4 pt-2 pb-3 space-y-1">
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`
-                  block px-3 py-2 rounded-md text-base font-medium
-                  ${isActive(link.href)
-                    ? isDark 
-                      ? 'bg-gray-800 text-white' 
-                      : 'bg-gray-100 text-gray-900'
-                    : isDark 
-                      ? 'text-gray-300 hover:bg-gray-800 hover:text-white' 
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                  }
-                `}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+        <div className={`px-4 pt-2 pb-4 space-y-2 md:hidden ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
+          <Link
+            href="/profile"
+            className={`block py-2 px-4 rounded-md ${
+              pathname === '/profile' || pathname === '/profile/' 
+                ? `${isDark ? 'bg-gray-700 text-purple-400' : 'bg-gray-100 text-purple-600'}`
+                : `${isDark ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`
+            }`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            About
+          </Link>
+          
+          <Link
+            href="/portfolio"
+            className={`block py-2 px-4 rounded-md ${
+              pathname === '/portfolio' || pathname === '/portfolio/' 
+                ? `${isDark ? 'bg-gray-700 text-purple-400' : 'bg-gray-100 text-purple-600'}`
+                : `${isDark ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`
+            }`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Portfolio
+          </Link>
+          
+          <Link
+            href="/ventures"
+            className={`block py-2 px-4 rounded-md ${
+              pathname === '/ventures' || pathname === '/ventures/' 
+                ? `${isDark ? 'bg-gray-700 text-purple-400' : 'bg-gray-100 text-purple-600'}`
+                : `${isDark ? 'text-white hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`
+            }`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Ventures
+          </Link>
         </div>
       )}
     </header>
