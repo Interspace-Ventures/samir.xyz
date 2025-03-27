@@ -19,25 +19,29 @@ const Footer = () => {
   // Detect if we're in dark mode for proper styling
   const isDark = mounted && resolvedTheme === 'dark'
   
-  // Colors based on dark/light mode with enhanced purple theme
+  // Colors based on dark/light mode with deepest enhanced purple theme
   const colors = {
-    bg: isDark ? "#2c0b5a" : "#f3f4f6", // Deep purple background for dark mode
-    text: isDark ? "#b69df8" : "#6b7280", // Lighter purple text for dark mode
+    bg: isDark ? "#1b063a" : "#f3f4f6", // Deepest purple background for dark mode
+    text: isDark ? "#a78df8" : "#6b7280", // Adjusted purple text for dark mode
     textHighlight: isDark ? "#ffffff" : "#111827",
-    accent: isDark ? "#c084fc" : "#8b5cf6", // Brighter purple for branding
-    accentHover: isDark ? "#d8b4fe" : "#7c3aed", // Even brighter on hover
-    muted: isDark ? "#9361f4" : "#9ca3af", // More vibrant muted text
-    border: isDark ? "#5f25bf" : "#e5e7eb", // More visible purple border
-    glow: isDark ? "0 0 15px rgba(139, 92, 246, 0.3)" : "none", // Purple glow for dark mode
+    accent: isDark ? "#7e22ce" : "#8b5cf6", // Deepest purple accent for branding
+    accentHover: isDark ? "#9333ea" : "#7c3aed", // Slightly brighter on hover but still deep
+    muted: isDark ? "#6d28d9" : "#9ca3af", // Deepest vibrant muted text
+    border: isDark ? "#4c1d95" : "#e5e7eb", // Deep purple border
+    glow: isDark ? "0 0 15px rgba(109, 40, 217, 0.5)" : "none", // Enhanced purple glow for dark mode
   };
 
   return (
     <footer style={{
       width: "100%",
       marginTop: "40px",
-      backgroundColor: colors.bg,
+      background: isDark ? 
+        `linear-gradient(to bottom, ${colors.bg}, rgba(22, 5, 48, 1))` : 
+        colors.bg,
       borderTop: `1px solid ${colors.border}`,
-      boxShadow: isDark ? colors.glow : "none", // Add subtle purple glow in dark mode
+      boxShadow: isDark ? 
+        `0 -5px 15px -2px rgba(76, 29, 149, 0.25), ${colors.glow}` : 
+        "none", // Enhanced purple glow in dark mode
       color: colors.text,
       transition: "background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s",
       position: "relative",
@@ -67,15 +71,15 @@ const Footer = () => {
                   transition: "all 0.2s ease",
                   position: "relative",
                   padding: "0 2px",
-                  textShadow: isDark ? "0 0 5px rgba(192, 132, 252, 0.5)" : "none",
+                  textShadow: isDark ? "0 0 5px rgba(147, 51, 234, 0.5)" : "none",
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.color = colors.accentHover;
-                  if (isDark) e.currentTarget.style.textShadow = "0 0 8px rgba(192, 132, 252, 0.8)";
+                  if (isDark) e.currentTarget.style.textShadow = "0 0 8px rgba(147, 51, 234, 0.8)";
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.color = colors.accent;
-                  if (isDark) e.currentTarget.style.textShadow = "0 0 5px rgba(192, 132, 252, 0.5)";
+                  if (isDark) e.currentTarget.style.textShadow = "0 0 5px rgba(147, 51, 234, 0.5)";
                 }}
               >
                 Interspace Ventures

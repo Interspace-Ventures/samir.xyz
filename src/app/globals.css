@@ -19,20 +19,20 @@
   --accent-purple-800: 91, 33, 182;
   --accent-purple-900: 76, 29, 149;
   
-  /* Enhanced dark theme purple colors */
-  --dark-purple-primary: 44, 11, 90;    /* deeper main background */
-  --dark-purple-secondary: 63, 20, 130; /* more vibrant secondary */
-  --dark-purple-accent: 139, 92, 246;   /* brighter accent elements */
-  --dark-purple-glow: 167, 139, 250;    /* glow color */
+  /* Deepest enhanced dark theme purple colors */
+  --dark-purple-primary: 27, 6, 58;     /* deepest main background */
+  --dark-purple-secondary: 45, 10, 95;  /* deepest vibrant secondary */
+  --dark-purple-accent: 109, 40, 217;   /* deepest accent elements (purple-800) */
+  --dark-purple-glow: 126, 34, 206;     /* deepest glow color (purple-700) */
 }
 
 .dark {
-  /* Dark mode colors - Enhanced Purple Theme */
+  /* Dark mode colors - Enhanced Deepest Purple Theme */
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 44, 11, 90; /* Deeper, more vibrant dark purple */
-  --background-end-rgb: 35, 8, 66; /* Even deeper purple for gradient depth */
+  --background-start-rgb: 27, 6, 58; /* Deepest, more vibrant dark purple */
+  --background-end-rgb: 19, 4, 40; /* Deepest purple for gradient depth */
   /* Add a subtle purple glow effect to the entire UI */
-  --dark-glow: 0 0 20px rgba(139, 92, 246, 0.15);
+  --dark-glow: 0 0 20px rgba(109, 40, 217, 0.2);
 }
 
 body {
@@ -47,12 +47,12 @@ body {
   transition-duration: 300ms;
 }
 
-/* Apply subtle glow effect to the dark theme */
+/* Apply enhanced glow effect to the dark theme with deeper purple */
 .dark body {
-  box-shadow: inset 0 0 100px rgba(139, 92, 246, 0.2);
+  box-shadow: inset 0 0 100px rgba(109, 40, 217, 0.25);
 }
 
-/* Add shimmer effect to links, buttons, and interactive elements */
+/* Add shimmer effect to links, buttons, and interactive elements with deeper purple */
 .dark a, .dark button, .dark .interactive {
   position: relative;
   overflow: hidden;
@@ -67,9 +67,9 @@ body {
   height: 200%;
   background: linear-gradient(
     60deg,
-    rgba(139, 92, 246, 0) 0%,
-    rgba(139, 92, 246, 0.03) 50%,
-    rgba(139, 92, 246, 0) 100%
+    rgba(109, 40, 217, 0) 0%,
+    rgba(109, 40, 217, 0.04) 50%,
+    rgba(109, 40, 217, 0) 100%
   );
   transform: rotate(30deg);
   animation: shimmer 4s infinite linear;
@@ -346,30 +346,30 @@ body {
 
 /* Dark Purple Theme Special Effects */
 
-/* Glowing purple border effect */
+/* Glowing deeper purple border effect */
 .dark .purple-border-glow {
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(109, 40, 217, 0.35);
+  box-shadow: 0 0 15px rgba(109, 40, 217, 0.25);
   transition: all 0.3s ease;
 }
 
 .dark .purple-border-glow:hover, 
 .dark .purple-border-glow:focus {
-  border-color: rgba(192, 132, 252, 0.8);
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  border-color: rgba(147, 51, 234, 0.8);
+  box-shadow: 0 0 20px rgba(109, 40, 217, 0.45);
 }
 
-/* Purple neon text effect */
+/* Deepest purple neon text effect */
 .dark .purple-neon {
-  color: #d8b4fe;
+  color: #c084fc;
   text-shadow: 
-    0 0 5px rgba(192, 132, 252, 0.5),
-    0 0 10px rgba(192, 132, 252, 0.3),
-    0 0 15px rgba(139, 92, 246, 0.3),
-    0 0 20px rgba(139, 92, 246, 0.2);
+    0 0 5px rgba(126, 34, 206, 0.7),
+    0 0 10px rgba(126, 34, 206, 0.5),
+    0 0 15px rgba(109, 40, 217, 0.4),
+    0 0 20px rgba(109, 40, 217, 0.3);
 }
 
-/* Purple spotlight effect for important sections */
+/* Deepest purple spotlight effect for important sections */
 .dark .purple-spotlight {
   position: relative;
   z-index: 1;
@@ -385,7 +385,7 @@ body {
   z-index: -1;
   background: radial-gradient(
     circle at center,
-    rgba(139, 92, 246, 0.15),
+    rgba(91, 33, 182, 0.25),
     transparent 70%
   );
   border-radius: inherit;
