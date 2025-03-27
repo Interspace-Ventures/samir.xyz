@@ -23,9 +23,13 @@ interface VenturesGridProps {
  */
 export function VenturesGrid({ ventures }: VenturesGridProps) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {ventures.map((venture, index) => (
-        <div key={index} className="h-full">
+        <div 
+          key={index} 
+          className="h-full transform transition-all duration-300 hover:translate-y-[-4px]"
+          style={{ fontFamily: 'Inter, sans-serif' }} // Ensure consistent font
+        >
           <VenturesCard
             name={venture.name}
             description={venture.description}

@@ -49,7 +49,7 @@ export function ThemeToggle() {
         justifyContent: "center",
         color: isDark ? "#f1f5f9" : "#4b5563",
         transition: "all 0.3s ease",
-        textShadow: isDark ? "0 0 8px rgba(109, 40, 217, 0.6)" : "none"
+        textShadow: isDark ? "0 0 10px rgba(76, 29, 149, 0.8), 0 0 15px rgba(59, 7, 100, 0.4)" : "none"
       }}
     >
       <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>

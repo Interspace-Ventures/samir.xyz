@@ -68,6 +68,7 @@ export default function UltraSimpleNavbar() {
       boxShadow: isDarkMode ? colors.glow : "none", // Add subtle purple glow in dark mode
       transition: "background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s",
       position: "relative",
+      zIndex: 50, // Ensure navbar is above other content
     }}>
       <div style={{
         display: "flex",
@@ -84,6 +85,7 @@ export default function UltraSimpleNavbar() {
             textDecoration: "none",
             fontWeight: 600,
             fontSize: "18px",
+            fontFamily: "Inter, sans-serif", // Ensure Inter font
           }}>
             Hey - I&apos;m Samir
           </Link>
@@ -92,7 +94,8 @@ export default function UltraSimpleNavbar() {
         {/* Right side - Navigation links (desktop) */}
         <div style={{ 
           display: "flex", 
-          gap: "32px" // Increased gap for better spacing between links
+          gap: "32px", // Increased gap for better spacing between links
+          fontFamily: "Inter, sans-serif", // Ensure Inter font
         }} className="desktop-nav">
           <Link 
             href="/profile/" 
@@ -171,7 +174,7 @@ export default function UltraSimpleNavbar() {
           </Link>
         </div>
         
-        {/* Mobile menu button */}
+        {/* Mobile menu button - Fixed display issues */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           style={{
@@ -180,8 +183,9 @@ export default function UltraSimpleNavbar() {
             color: colors.text,
             padding: "8px",
             cursor: "pointer",
-            display: "none",
+            display: "flex", // Changed from none to flex to always show
             alignItems: "center",
+            fontFamily: "Inter, sans-serif", // Ensure Inter font
           }}
           className="mobile-menu-button"
           aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
@@ -217,20 +221,22 @@ export default function UltraSimpleNavbar() {
         </button>
       </div>
       
-      {/* Mobile menu dropdown */}
+      {/* Mobile menu dropdown - Fixed visibility issues */}
       <div
         style={{
           position: "absolute",
           backgroundColor: colors.menuBg,
           width: "100%",
           left: 0,
-          top: isMenuOpen ? "56px" : "-100%", // This makes it animate in/out
+          top: isMenuOpen ? "56px" : "-300px", // Changed from -100% to a fixed value
           padding: "16px",
           boxShadow: isMenuOpen ? `0 4px 6px -1px ${colors.shadow}` : "none",
-          zIndex: 50,
+          zIndex: 100, // Increased z-index
           transition: "top 0.3s ease-in-out",
           borderBottom: isMenuOpen ? `1px solid ${colors.border}` : "none",
           opacity: isMenuOpen ? 1 : 0,
+          visibility: isMenuOpen ? "visible" : "hidden", // Added visibility control
+          fontFamily: "Inter, sans-serif", // Ensure Inter font
         }}
         className="mobile-menu"
       >
@@ -292,9 +298,7 @@ export default function UltraSimpleNavbar() {
           .desktop-nav {
             display: none !important;
           }
-          .mobile-menu-button {
-            display: flex !important;
-          }
+          /* Removed display:flex here - it's set in the inline style */
         }
         
         @media (min-width: 769px) {

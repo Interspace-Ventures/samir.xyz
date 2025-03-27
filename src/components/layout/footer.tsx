@@ -19,16 +19,16 @@ const Footer = () => {
   // Detect if we're in dark mode for proper styling
   const isDark = mounted && resolvedTheme === 'dark'
   
-  // Colors based on dark/light mode with deepest enhanced purple theme
+  // Colors based on dark/light mode with ultra-deep enhanced purple theme
   const colors = {
-    bg: isDark ? "#1b063a" : "#f3f4f6", // Deepest purple background for dark mode
+    bg: isDark ? "#12022e" : "#f3f4f6", // Ultra-deep purple background for dark mode
     text: isDark ? "#a78df8" : "#6b7280", // Adjusted purple text for dark mode
     textHighlight: isDark ? "#ffffff" : "#111827",
-    accent: isDark ? "#7e22ce" : "#8b5cf6", // Deepest purple accent for branding
-    accentHover: isDark ? "#9333ea" : "#7c3aed", // Slightly brighter on hover but still deep
-    muted: isDark ? "#6d28d9" : "#9ca3af", // Deepest vibrant muted text
-    border: isDark ? "#4c1d95" : "#e5e7eb", // Deep purple border
-    glow: isDark ? "0 0 15px rgba(109, 40, 217, 0.5)" : "none", // Enhanced purple glow for dark mode
+    accent: isDark ? "#5b21b6" : "#8b5cf6", // Ultra-deep purple accent for branding
+    accentHover: isDark ? "#6d28d9" : "#7c3aed", // Slightly brighter on hover but still ultra-deep
+    muted: isDark ? "#4c1d95" : "#9ca3af", // Ultra-deep vibrant muted text
+    border: isDark ? "#3b0764" : "#e5e7eb", // Ultra-deep purple border
+    glow: isDark ? "0 0 15px rgba(91, 33, 182, 0.7)" : "none", // Enhanced ultra-deep purple glow
   };
 
   return (
@@ -36,12 +36,12 @@ const Footer = () => {
       width: "100%",
       marginTop: "40px",
       background: isDark ? 
-        `linear-gradient(to bottom, ${colors.bg}, rgba(22, 5, 48, 1))` : 
+        `linear-gradient(125deg, ${colors.bg}, rgba(14, 2, 34, 0.98), rgba(10, 1, 26, 1), rgba(16, 3, 38, 0.97), rgba(12, 2, 30, 0.99))` : 
         colors.bg,
       borderTop: `1px solid ${colors.border}`,
       boxShadow: isDark ? 
-        `0 -5px 15px -2px rgba(76, 29, 149, 0.25), ${colors.glow}` : 
-        "none", // Enhanced purple glow in dark mode
+        `0 -5px 15px -2px rgba(59, 7, 100, 0.35), 0 -2px 10px rgba(91, 33, 182, 0.25), ${colors.glow}` : 
+        "none", // Ultra-deep enhanced purple glow in dark mode
       color: colors.text,
       transition: "background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s",
       position: "relative",
@@ -71,15 +71,15 @@ const Footer = () => {
                   transition: "all 0.2s ease",
                   position: "relative",
                   padding: "0 2px",
-                  textShadow: isDark ? "0 0 5px rgba(147, 51, 234, 0.5)" : "none",
+                  textShadow: isDark ? "0 0 5px rgba(91, 33, 182, 0.7), 0 0 15px rgba(139, 92, 246, 0.4)" : "none",
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.color = colors.accentHover;
-                  if (isDark) e.currentTarget.style.textShadow = "0 0 8px rgba(147, 51, 234, 0.8)";
+                  if (isDark) e.currentTarget.style.textShadow = "0 0 8px rgba(91, 33, 182, 0.9), 0 0 20px rgba(139, 92, 246, 0.6)";
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.color = colors.accent;
-                  if (isDark) e.currentTarget.style.textShadow = "0 0 5px rgba(147, 51, 234, 0.5)";
+                  if (isDark) e.currentTarget.style.textShadow = "0 0 5px rgba(91, 33, 182, 0.7), 0 0 15px rgba(139, 92, 246, 0.4)";
                 }}
               >
                 Interspace Ventures
