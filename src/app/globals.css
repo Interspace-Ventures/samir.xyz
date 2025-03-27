@@ -11,17 +11,25 @@
   --background-end-rgb: 243, 244, 246;
   
   /* Purple accent colors */
+  --accent-purple-300: 216, 180, 254; /* light purple */
   --accent-purple-400: 192, 132, 252;
   --accent-purple-500: 168, 85, 247;
   --accent-purple-600: 147, 51, 234;
   --accent-purple-700: 126, 34, 206;
+  --accent-purple-800: 91, 33, 182;
+  --accent-purple-900: 76, 29, 149;
+  
+  /* Dark theme purple colors */
+  --dark-purple-primary: 44, 16, 74;    /* main background */
+  --dark-purple-secondary: 59, 20, 100; /* slightly lighter for elements */
+  --dark-purple-accent: 108, 43, 217;   /* accent elements */
 }
 
 .dark {
-  /* Dark mode colors */
+  /* Dark mode colors - Custom Purple Theme */
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 17, 24, 39;
-  --background-end-rgb: 3, 7, 18;
+  --background-start-rgb: 44, 16, 74; /* Dark purple */
+  --background-end-rgb: 30, 11, 51; /* Even darker purple */
 }
 
 body {
@@ -64,9 +72,9 @@ body {
 }
 
 .dark .btn-secondary {
-  background-color: #1f2937; /* gray-800 */
+  background-color: rgb(var(--dark-purple-secondary)); /* Dark purple from our CSS vars */
   color: white;
-  border-color: #374151; /* gray-700 */
+  border-color: rgb(var(--dark-purple-accent), 0.5); /* Purple accent with opacity */
 }
 
 .btn-secondary:hover {
@@ -75,8 +83,8 @@ body {
 }
 
 .dark .btn-secondary:hover {
-  background-color: #374151; /* gray-700 */
-  border-color: #4b5563; /* gray-600 */
+  background-color: rgb(var(--dark-purple-accent), 0.8); /* Slightly brighter when hovered */
+  border-color: rgb(var(--accent-purple-500)); /* Brighter border on hover */
 }
 
 /* Card component */
@@ -90,8 +98,8 @@ body {
 }
 
 .dark .card {
-  background-color: #1f2937; /* gray-800 */
-  border-color: #374151; /* gray-700 */
+  background-color: rgb(var(--dark-purple-secondary)); /* Using our CSS variable */
+  border-color: rgb(var(--dark-purple-accent), 0.3); /* Using our CSS variable with opacity */
 }
 
 .card:hover {
@@ -100,8 +108,9 @@ body {
 }
 
 .dark .card:hover {
-  border-color: #a855f7; /* purple-500 */
-  box-shadow: 0 0 15px rgba(147, 51, 234, 0.1);
+  border-color: rgb(var(--accent-purple-500));
+  box-shadow: 0 0 15px rgba(var(--dark-purple-accent), 0.3);
+  background-color: rgb(var(--dark-purple-secondary), 0.9); /* Subtle background change on hover */
 }
 
 .section-title {
