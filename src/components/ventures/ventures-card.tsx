@@ -62,24 +62,30 @@ export function VenturesCard({ name, description, imagePath, link, priority = fa
                        ? 'bg-gray-800/50 hover:bg-gray-800/80 hover:shadow-purple-800/20 border-gray-700/50' 
                        : 'bg-white hover:bg-gray-50 hover:shadow-purple-500/10 border-gray-200'}`}>
         <div className="flex-grow">
-          {/* Image with fallback */}
+          {/* Image with fallback - Enhanced styling */}
           {!imageError ? (
             <div className={`mb-4 h-24 w-full flex items-center justify-center overflow-hidden rounded-md
-                          ${isDark ? 'bg-gray-900/50' : 'bg-gray-100'}`}>
-              <div className="relative h-20 w-full">
+                          ${isDark ? 'bg-gray-900/30 border border-purple-900/30' : 'bg-gray-100/80'}`}>
+              <div className="relative h-20 w-full px-3">
                 <Image
                   src={fullImagePath}
                   alt={name}
                   fill={true}
-                  style={{ objectFit: 'contain' }}
+                  style={{ 
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                    fontFamily: 'Inter, sans-serif', // Ensure alt text uses Inter
+                  }}
                   onError={() => setImageError(true)}
                   priority={priority}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className={`transition-all duration-300 ${isDark ? 'filter-none' : ''}`}
                 />
               </div>
             </div>
           ) : (
-            <div className="mb-4 h-24 w-full flex items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-purple-800 to-purple-900">
-              <div className="text-3xl font-bold text-white">
+            <div className="mb-4 h-24 w-full flex items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-purple-800 to-purple-900 border border-purple-700/30">
+              <div className="text-3xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
                 {initials}
               </div>
             </div>

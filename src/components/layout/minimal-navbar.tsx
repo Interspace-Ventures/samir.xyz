@@ -29,13 +29,13 @@ export default function MinimalNavbar() {
   
   const isDark = mounted && theme === "dark";
   
-  // Set colors based on theme with deepest enhanced purple dark mode
+  // Set colors based on theme with ultra-deep enhanced purple dark mode
   const colors: ThemeColors = {
-    bg: isDark ? "#250755" : "white", // Deepest purple background for dark mode
+    bg: isDark ? "#14033a" : "white", // Ultra-deep purple background for dark mode
     text: isDark ? "#f5f3ff" : "#333333", // Bright text for better contrast on dark purple
-    border: isDark ? "#4c1d95" : "#e2e8f0", // Deeper purple border for dark mode
+    border: isDark ? "#3b0764" : "#e2e8f0", // Ultra-deep purple border for dark mode
     muted: isDark ? "#c4b5fd" : "#4b5563", // Keeping the muted text visible
-    accent: isDark ? "#7e22ce" : "#8b5cf6", // Deepest purple accent for dark mode
+    accent: isDark ? "#5b21b6" : "#8b5cf6", // Ultra-deep purple accent for dark mode
   };
   
   return (
@@ -44,7 +44,7 @@ export default function MinimalNavbar() {
       padding: "16px",
       borderBottom: `1px solid ${isDark ? colors.accent : colors.border}`,
       background: isDark ? 
-        `linear-gradient(to bottom, rgba(45, 8, 90, 0.98), ${colors.bg})` : 
+        `linear-gradient(135deg, rgba(35, 6, 78, 0.98), ${colors.bg}, rgba(22, 3, 58, 0.99), rgba(28, 5, 70, 0.97))` : 
         colors.bg,
       boxShadow: isDark ? 
         "0 4px 20px -8px rgba(70, 20, 130, 0.75), 0 0 12px rgba(123, 58, 237, 0.2)" : 
@@ -280,7 +280,7 @@ export default function MinimalNavbar() {
           left: 0,
           right: 0,
           background: isDark ? 
-            `linear-gradient(to bottom, ${colors.bg}, rgba(30, 5, 65, 1))` : 
+            `linear-gradient(140deg, rgba(26, 4, 66, 0.97), ${colors.bg}, rgba(22, 3, 58, 0.98), rgba(28, 5, 70, 0.99), rgba(18, 2, 50, 1))` : 
             colors.bg,
           padding: "20px",
           borderTop: `1px solid ${isDark ? colors.accent : colors.border}`,

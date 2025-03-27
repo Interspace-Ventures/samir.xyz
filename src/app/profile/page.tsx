@@ -18,28 +18,58 @@ export default function Profile() {
   const isDark = mounted && resolvedTheme === 'dark';
   
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="flex items-center mb-8 gap-4">
-        <div className="w-16 h-16 relative">
-          <Image 
-            src={`${IMAGE_BASE_PATH}samir-profile-photo.webp`}
+    <div className="max-w-4xl mx-auto px-4">
+      <div style={{ position: 'relative', height: '130px', marginTop: '24px', marginBottom: '32px' }}>
+        {/* Left image with absolute positioning */}
+        <div style={{
+          position: 'absolute',
+          left: '0',
+          top: '0',
+          width: '80px',
+          height: '80px',
+          zIndex: 10
+        }}>
+          <img 
+            src="/attached_assets/samir-profile-photo.webp"
             alt="Samir's profile"
-            width={64}
-            height={64}
-            className="rounded-full border-2 border-purple-500/30 object-cover"
-            priority
+            style={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '8px',
+              border: '2px solid rgba(139, 92, 246, 0.4)',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+              objectFit: 'cover'
+            }}
           />
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold">
-          Hey - I&apos;m <span className="text-purple-500">Samir</span>
-        </h1>
+        
+        {/* Right text section with left padding */}
+        <div style={{
+          position: 'absolute',
+          left: '100px',
+          top: '0'
+        }}>
+          <h1 style={{
+            fontSize: '28px',
+            fontWeight: 'bold',
+            marginBottom: '8px'
+          }}>
+            Hey - I&apos;m <span style={{color: '#8b5cf6'}}>Samir</span>
+          </h1>
+          <h2 style={{
+            fontSize: '18px',
+            fontWeight: '600',
+            background: 'linear-gradient(to right, #a78bfa, #8b5cf6)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            I drive business impact at fintechs
+          </h2>
+        </div>
       </div>
       
-      <div className="max-w-3xl mx-auto mb-10">
-        <h2 className="text-xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
-          I drive business impact at fintechs
-        </h2>
-        
+      {/* Content container with responsive margins */}
+      <div className="max-w-3xl mx-auto mb-10 sm:mb-12 px-0 sm:px-2">
         <p className={`${isDark ? 'text-gray-300' : 'text-gray-700'} mb-4 leading-relaxed`}>
           Today, I am leading Strategic Finance for the Financial Partnerships team at <a 
             href="https://cash.app" 

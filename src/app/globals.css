@@ -4,6 +4,11 @@
 
 /* V15.0.0 - Simplified global styles with improved dark/light mode consistency */
 
+/* Force Inter font family across all elements */
+html, body, button, input, select, textarea {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 :root {
   /* Light mode colors */
   --foreground-rgb: 17, 24, 39;
@@ -19,20 +24,20 @@
   --accent-purple-800: 91, 33, 182;
   --accent-purple-900: 76, 29, 149;
   
-  /* Deepest enhanced dark theme purple colors */
-  --dark-purple-primary: 27, 6, 58;     /* deepest main background */
-  --dark-purple-secondary: 45, 10, 95;  /* deepest vibrant secondary */
-  --dark-purple-accent: 109, 40, 217;   /* deepest accent elements (purple-800) */
-  --dark-purple-glow: 126, 34, 206;     /* deepest glow color (purple-700) */
+  /* Ultra-deep enhanced dark theme purple colors */
+  --dark-purple-primary: 18, 3, 42;     /* ultra-deep main background */
+  --dark-purple-secondary: 32, 6, 72;   /* ultra-deep vibrant secondary */
+  --dark-purple-accent: 76, 29, 149;    /* ultra-deep accent elements (purple-900) */
+  --dark-purple-glow: 91, 33, 182;      /* ultra-deep glow color (purple-800) */
 }
 
 .dark {
-  /* Dark mode colors - Enhanced Deepest Purple Theme */
+  /* Dark mode colors - Ultra-deep Enhanced Purple Theme */
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 27, 6, 58; /* Deepest, more vibrant dark purple */
-  --background-end-rgb: 19, 4, 40; /* Deepest purple for gradient depth */
-  /* Add a subtle purple glow effect to the entire UI */
-  --dark-glow: 0 0 20px rgba(109, 40, 217, 0.2);
+  --background-start-rgb: 18, 3, 42; /* Ultra-deep, more vibrant dark purple */
+  --background-end-rgb: 12, 2, 28; /* Ultra-deep purple for gradient depth */
+  /* Add a subtle ultra-deep purple glow effect to the entire UI */
+  --dark-glow: 0 0 20px rgba(76, 29, 149, 0.35);
 }
 
 body {
@@ -47,9 +52,9 @@ body {
   transition-duration: 300ms;
 }
 
-/* Apply enhanced glow effect to the dark theme with deeper purple */
+/* Apply ultra-deep enhanced glow effect to the dark theme */
 .dark body {
-  box-shadow: inset 0 0 100px rgba(109, 40, 217, 0.25);
+  box-shadow: inset 0 0 100px rgba(76, 29, 149, 0.35), inset 0 0 200px rgba(59, 7, 100, 0.15);
 }
 
 /* Add shimmer effect to links, buttons, and interactive elements with deeper purple */
@@ -67,9 +72,9 @@ body {
   height: 200%;
   background: linear-gradient(
     60deg,
-    rgba(109, 40, 217, 0) 0%,
-    rgba(109, 40, 217, 0.04) 50%,
-    rgba(109, 40, 217, 0) 100%
+    rgba(76, 29, 149, 0) 0%,
+    rgba(76, 29, 149, 0.06) 50%,
+    rgba(76, 29, 149, 0) 100%
   );
   transform: rotate(30deg);
   animation: shimmer 4s infinite linear;
@@ -346,30 +351,31 @@ body {
 
 /* Dark Purple Theme Special Effects */
 
-/* Glowing deeper purple border effect */
+/* Ultra-deep glowing purple border effect */
 .dark .purple-border-glow {
-  border: 1px solid rgba(109, 40, 217, 0.35);
-  box-shadow: 0 0 15px rgba(109, 40, 217, 0.25);
+  border: 1px solid rgba(76, 29, 149, 0.45);
+  box-shadow: 0 0 15px rgba(76, 29, 149, 0.35);
   transition: all 0.3s ease;
 }
 
 .dark .purple-border-glow:hover, 
 .dark .purple-border-glow:focus {
-  border-color: rgba(147, 51, 234, 0.8);
-  box-shadow: 0 0 20px rgba(109, 40, 217, 0.45);
+  border-color: rgba(91, 33, 182, 0.9);
+  box-shadow: 0 0 20px rgba(76, 29, 149, 0.55), 0 0 30px rgba(59, 7, 100, 0.25);
 }
 
-/* Deepest purple neon text effect */
+/* Ultra-deep purple neon text effect */
 .dark .purple-neon {
   color: #c084fc;
   text-shadow: 
-    0 0 5px rgba(126, 34, 206, 0.7),
-    0 0 10px rgba(126, 34, 206, 0.5),
-    0 0 15px rgba(109, 40, 217, 0.4),
-    0 0 20px rgba(109, 40, 217, 0.3);
+    0 0 5px rgba(76, 29, 149, 0.8),
+    0 0 10px rgba(91, 33, 182, 0.7),
+    0 0 15px rgba(91, 33, 182, 0.5),
+    0 0 20px rgba(76, 29, 149, 0.4),
+    0 0 30px rgba(59, 7, 100, 0.3);
 }
 
-/* Deepest purple spotlight effect for important sections */
+/* Ultra-deep purple spotlight effect for important sections */
 .dark .purple-spotlight {
   position: relative;
   z-index: 1;
@@ -385,8 +391,9 @@ body {
   z-index: -1;
   background: radial-gradient(
     circle at center,
-    rgba(91, 33, 182, 0.25),
-    transparent 70%
+    rgba(76, 29, 149, 0.35),
+    rgba(59, 7, 100, 0.2) 40%,
+    transparent 75%
   );
   border-radius: inherit;
 }
