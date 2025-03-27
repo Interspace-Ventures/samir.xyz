@@ -29,22 +29,27 @@ export default function MinimalNavbar() {
   
   const isDark = mounted && theme === "dark";
   
-  // Set colors based on theme
+  // Set colors based on theme with enhanced purple dark mode
   const colors: ThemeColors = {
-    bg: isDark ? "#2c104a" : "white", // Dark purple background for dark mode
-    text: isDark ? "#f1f5f9" : "#333333",
-    border: isDark ? "#4c1d95" : "#e2e8f0", // Purple border for dark mode
-    muted: isDark ? "#a78bda" : "#4b5563", // Lighter purple for muted text in dark mode
-    accent: isDark ? "#a855f7" : "#9333ea", // Different purple accent for dark/light
+    bg: isDark ? "#3b0c82" : "white", // More vibrant dark purple background for dark mode
+    text: isDark ? "#f5f3ff" : "#333333", // Brighter text for better contrast on purple
+    border: isDark ? "#6d28d9" : "#e2e8f0", // Brighter purple border for dark mode
+    muted: isDark ? "#c4b5fd" : "#4b5563", // More visible muted text color in dark mode
+    accent: isDark ? "#a855f7" : "#9333ea", // Vibrant purple accent for dark mode
   };
   
   return (
     <div style={{
       position: "relative",
       padding: "16px",
-      borderBottom: `1px solid ${colors.border}`,
-      backgroundColor: colors.bg,
-      transition: "background-color 0.3s, color 0.3s, border-color 0.3s"
+      borderBottom: `1px solid ${isDark ? colors.accent : colors.border}`,
+      background: isDark ? 
+        `linear-gradient(to bottom, rgba(67, 15, 125, 0.95), ${colors.bg})` : 
+        colors.bg,
+      boxShadow: isDark ? 
+        "0 4px 20px -8px rgba(89, 30, 158, 0.6), 0 0 10px rgba(139, 92, 246, 0.1)" : 
+        "none",
+      transition: "all 0.3s ease"
     }}>
       <div style={{
         display: "flex",
@@ -59,14 +64,27 @@ export default function MinimalNavbar() {
           <a 
             href="/" 
             style={{
-              fontWeight: "bold",
+              fontWeight: isDark ? "700" : "bold",
               fontSize: "20px",
-              color: colors.text,
+              color: isDark ? colors.text : colors.text,
               textDecoration: "none",
-              transition: "color 0.3s"
+              textShadow: isDark ? "0 0 10px rgba(192, 132, 252, 0.5)" : "none",
+              transition: "all 0.3s ease",
+              position: "relative",
+              letterSpacing: isDark ? "0.3px" : "normal"
             }}
           >
-            Hey - I&apos;m Samir
+            <span 
+              style={{ 
+                backgroundImage: isDark ? "linear-gradient(90deg, #f5f3ff, #d8b4fe)" : "none",
+                WebkitBackgroundClip: isDark ? "text" : "none",
+                backgroundClip: isDark ? "text" : "none",
+                color: isDark ? "transparent" : colors.text,
+                fontWeight: isDark ? "800" : "bold"
+              }}
+            >
+              Hey - I&apos;m Samir
+            </span>
           </a>
         </div>
         
@@ -82,10 +100,11 @@ export default function MinimalNavbar() {
               style={{
                 color: pathname.startsWith("/profile") ? colors.accent : colors.muted,
                 textDecoration: "none",
-                fontWeight: "500",
+                fontWeight: isDark ? "600" : "500",
                 padding: "0 8px",
                 position: "relative",
-                transition: "color 0.3s"
+                transition: "all 0.3s ease",
+                textShadow: isDark && pathname.startsWith("/profile") ? "0 0 8px rgba(192, 132, 252, 0.6)" : "none",
               }}
             >
               About
@@ -95,10 +114,11 @@ export default function MinimalNavbar() {
                   bottom: "-8px",
                   left: "50%",
                   transform: "translateX(-50%)",
-                  width: "20px",
+                  width: "24px",
                   height: "3px",
                   backgroundColor: colors.accent,
-                  borderRadius: "2px"
+                  borderRadius: "3px",
+                  boxShadow: isDark ? "0 0 8px rgba(192, 132, 252, 0.8)" : "none",
                 }}></span>
               )}
             </Link>
@@ -107,10 +127,11 @@ export default function MinimalNavbar() {
               style={{
                 color: pathname.startsWith("/portfolio") ? colors.accent : colors.muted,
                 textDecoration: "none",
-                fontWeight: "500",
+                fontWeight: isDark ? "600" : "500",
                 padding: "0 8px",
                 position: "relative",
-                transition: "color 0.3s"
+                transition: "all 0.3s ease",
+                textShadow: isDark && pathname.startsWith("/portfolio") ? "0 0 8px rgba(192, 132, 252, 0.6)" : "none",
               }}
             >
               Portfolio
@@ -120,10 +141,11 @@ export default function MinimalNavbar() {
                   bottom: "-8px",
                   left: "50%",
                   transform: "translateX(-50%)",
-                  width: "20px",
+                  width: "24px",
                   height: "3px",
                   backgroundColor: colors.accent,
-                  borderRadius: "2px"
+                  borderRadius: "3px",
+                  boxShadow: isDark ? "0 0 8px rgba(192, 132, 252, 0.8)" : "none",
                 }}></span>
               )}
             </Link>
@@ -132,10 +154,11 @@ export default function MinimalNavbar() {
               style={{
                 color: pathname.startsWith("/ventures") ? colors.accent : colors.muted,
                 textDecoration: "none",
-                fontWeight: "500",
+                fontWeight: isDark ? "600" : "500",
                 padding: "0 8px",
                 position: "relative",
-                transition: "color 0.3s"
+                transition: "all 0.3s ease",
+                textShadow: isDark && pathname.startsWith("/ventures") ? "0 0 8px rgba(192, 132, 252, 0.6)" : "none",
               }}
             >
               Ventures
@@ -145,10 +168,11 @@ export default function MinimalNavbar() {
                   bottom: "-8px",
                   left: "50%",
                   transform: "translateX(-50%)",
-                  width: "20px",
+                  width: "24px",
                   height: "3px",
                   backgroundColor: colors.accent,
-                  borderRadius: "2px"
+                  borderRadius: "3px",
+                  boxShadow: isDark ? "0 0 8px rgba(192, 132, 252, 0.8)" : "none",
                 }}></span>
               )}
             </Link>
@@ -157,25 +181,30 @@ export default function MinimalNavbar() {
           {/* Theme toggle button */}
           <ThemeToggle />
           
-          {/* Profile Picture */}
+          {/* Profile Picture with purple glow in dark mode */}
           <div style={{ 
             width: "36px", 
             height: "36px", 
             borderRadius: "50%", 
             overflow: "hidden",
             position: "relative",
-            border: `2px solid ${colors.border}`
+            border: `2px solid ${colors.accent}`,
+            boxShadow: isDark ? `0 0 10px rgba(192, 132, 252, 0.7)` : "none",
+            transition: "all 0.3s ease"
           }}>
             <div style={{
               width: '100%',
               height: '100%',
-              backgroundColor: colors.accent,
+              background: isDark ? 
+                `linear-gradient(135deg, ${colors.accent}, #7c3aed)` : 
+                colors.accent,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               color: "white",
               fontWeight: "bold",
-              fontSize: "16px"
+              fontSize: "16px",
+              textShadow: isDark ? "0 0 3px rgba(255, 255, 255, 0.5)" : "none"
             }}>
               S
             </div>
@@ -191,25 +220,30 @@ export default function MinimalNavbar() {
           {/* Theme toggle in mobile view */}
           <ThemeToggle />
           
-          {/* Profile Picture in mobile view */}
+          {/* Profile Picture in mobile view - with matching glow effect */}
           <div style={{ 
             width: "32px", 
             height: "32px", 
             borderRadius: "50%", 
             overflow: "hidden",
             position: "relative",
-            border: `2px solid ${colors.border}`
+            border: `2px solid ${colors.accent}`,
+            boxShadow: isDark ? `0 0 10px rgba(192, 132, 252, 0.7)` : "none",
+            transition: "all 0.3s ease"
           }}>
             <div style={{
               width: '100%',
               height: '100%',
-              backgroundColor: colors.accent,
+              background: isDark ? 
+                `linear-gradient(135deg, ${colors.accent}, #7c3aed)` : 
+                colors.accent,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               color: "white",
               fontWeight: "bold",
-              fontSize: "16px"
+              fontSize: "16px",
+              textShadow: isDark ? "0 0 3px rgba(255, 255, 255, 0.5)" : "none"
             }}>
               S
             </div>
@@ -245,12 +279,17 @@ export default function MinimalNavbar() {
           top: "100%",
           left: 0,
           right: 0,
-          backgroundColor: colors.bg,
+          background: isDark ? 
+            `linear-gradient(to bottom, ${colors.bg}, rgba(55, 12, 110, 0.98))` : 
+            colors.bg,
           padding: "20px",
-          borderTop: `1px solid ${colors.border}`,
-          boxShadow: isDark ? "0 4px 8px -1px rgba(76, 29, 149, 0.6)" : "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+          borderTop: `1px solid ${isDark ? colors.accent : colors.border}`,
+          boxShadow: isDark ? 
+            "0 4px 15px -1px rgba(89, 30, 158, 0.8), 0 0 10px rgba(139, 92, 246, 0.3)" : 
+            "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
           zIndex: 50,
-          transition: "background-color 0.3s, border-color 0.3s"
+          transition: "all 0.3s ease",
+          backdropFilter: isDark ? "blur(5px)" : "none"
         }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
             <Link 
@@ -258,10 +297,13 @@ export default function MinimalNavbar() {
               style={{
                 color: pathname.startsWith("/profile") ? colors.accent : colors.muted,
                 textDecoration: "none",
-                fontWeight: "500",
+                fontWeight: isDark ? "600" : "500",
                 padding: "8px 0",
                 fontSize: "18px",
-                transition: "color 0.3s"
+                transition: "all 0.3s ease",
+                textShadow: isDark && pathname.startsWith("/profile") ? "0 0 8px rgba(192, 132, 252, 0.6)" : "none",
+                borderLeft: isDark && pathname.startsWith("/profile") ? `3px solid ${colors.accent}` : "none",
+                paddingLeft: isDark && pathname.startsWith("/profile") ? "10px" : "0",
               }}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -272,10 +314,13 @@ export default function MinimalNavbar() {
               style={{
                 color: pathname.startsWith("/portfolio") ? colors.accent : colors.muted,
                 textDecoration: "none",
-                fontWeight: "500",
+                fontWeight: isDark ? "600" : "500",
                 padding: "8px 0",
                 fontSize: "18px",
-                transition: "color 0.3s"
+                transition: "all 0.3s ease",
+                textShadow: isDark && pathname.startsWith("/portfolio") ? "0 0 8px rgba(192, 132, 252, 0.6)" : "none",
+                borderLeft: isDark && pathname.startsWith("/portfolio") ? `3px solid ${colors.accent}` : "none",
+                paddingLeft: isDark && pathname.startsWith("/portfolio") ? "10px" : "0",
               }}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -286,10 +331,13 @@ export default function MinimalNavbar() {
               style={{
                 color: pathname.startsWith("/ventures") ? colors.accent : colors.muted,
                 textDecoration: "none",
-                fontWeight: "500",
+                fontWeight: isDark ? "600" : "500",
                 padding: "8px 0",
                 fontSize: "18px",
-                transition: "color 0.3s"
+                transition: "all 0.3s ease",
+                textShadow: isDark && pathname.startsWith("/ventures") ? "0 0 8px rgba(192, 132, 252, 0.6)" : "none",
+                borderLeft: isDark && pathname.startsWith("/ventures") ? `3px solid ${colors.accent}` : "none",
+                paddingLeft: isDark && pathname.startsWith("/ventures") ? "10px" : "0",
               }}
               onClick={() => setIsMenuOpen(false)}
             >

@@ -19,17 +19,20 @@
   --accent-purple-800: 91, 33, 182;
   --accent-purple-900: 76, 29, 149;
   
-  /* Dark theme purple colors */
-  --dark-purple-primary: 44, 16, 74;    /* main background */
-  --dark-purple-secondary: 59, 20, 100; /* slightly lighter for elements */
-  --dark-purple-accent: 108, 43, 217;   /* accent elements */
+  /* Enhanced dark theme purple colors */
+  --dark-purple-primary: 44, 11, 90;    /* deeper main background */
+  --dark-purple-secondary: 63, 20, 130; /* more vibrant secondary */
+  --dark-purple-accent: 139, 92, 246;   /* brighter accent elements */
+  --dark-purple-glow: 167, 139, 250;    /* glow color */
 }
 
 .dark {
-  /* Dark mode colors - Custom Purple Theme */
+  /* Dark mode colors - Enhanced Purple Theme */
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 44, 16, 74; /* Dark purple */
-  --background-end-rgb: 30, 11, 51; /* Even darker purple */
+  --background-start-rgb: 44, 11, 90; /* Deeper, more vibrant dark purple */
+  --background-end-rgb: 35, 8, 66; /* Even deeper purple for gradient depth */
+  /* Add a subtle purple glow effect to the entire UI */
+  --dark-glow: 0 0 20px rgba(139, 92, 246, 0.15);
 }
 
 body {
@@ -40,8 +43,52 @@ body {
     rgb(var(--background-end-rgb))
   );
   min-height: 100vh;
-  transition-property: color, background-color;
+  transition-property: color, background-color, box-shadow;
   transition-duration: 300ms;
+}
+
+/* Apply subtle glow effect to the dark theme */
+.dark body {
+  box-shadow: inset 0 0 100px rgba(139, 92, 246, 0.2);
+}
+
+/* Add shimmer effect to links, buttons, and interactive elements */
+.dark a, .dark button, .dark .interactive {
+  position: relative;
+  overflow: hidden;
+}
+
+.dark a:after, .dark button:after, .dark .interactive:after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(139, 92, 246, 0) 0%,
+    rgba(139, 92, 246, 0.03) 50%,
+    rgba(139, 92, 246, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: shimmer 4s infinite linear;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dark a:hover:after, .dark button:hover:after, .dark .interactive:hover:after {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  to {
+    transform: translateX(100%) rotate(30deg);
+  }
 }
 
 /* Button components */
@@ -98,19 +145,31 @@ body {
 }
 
 .dark .card {
-  background-color: rgb(var(--dark-purple-secondary)); /* Using our CSS variable */
-  border-color: rgb(var(--dark-purple-accent), 0.3); /* Using our CSS variable with opacity */
+  background: linear-gradient(135deg, 
+    rgba(var(--dark-purple-secondary), 0.9),
+    rgba(var(--dark-purple-primary), 0.85)
+  ); /* Gradient background for more depth */
+  border: 1px solid rgba(var(--dark-purple-accent), 0.4); /* Slightly more visible border */
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3), 
+              inset 0 0 10px rgba(var(--dark-purple-glow), 0.05); /* Inner glow effect */
 }
 
 .card:hover {
   border-color: #c084fc; /* purple-400 */
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .dark .card:hover {
-  border-color: rgb(var(--accent-purple-500));
-  box-shadow: 0 0 15px rgba(var(--dark-purple-accent), 0.3);
-  background-color: rgb(var(--dark-purple-secondary), 0.9); /* Subtle background change on hover */
+  border-color: rgba(var(--dark-purple-glow), 0.7);
+  box-shadow: 0 8px 25px -2px rgba(0, 0, 0, 0.4), 
+              0 0 15px rgba(var(--dark-purple-accent), 0.5), 
+              inset 0 0 12px rgba(var(--dark-purple-glow), 0.1); /* Enhanced glow on hover */
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, 
+    rgba(var(--dark-purple-secondary), 0.95),
+    rgba(var(--dark-purple-primary), 0.9)
+  ); /* Slightly brighter on hover */
 }
 
 .section-title {
@@ -122,6 +181,8 @@ body {
 
 .dark .section-title {
   color: white;
+  text-shadow: 0 0 10px rgba(var(--dark-purple-glow), 0.5);
+  letter-spacing: 0.01em;
 }
 
 .accent-text {
@@ -130,6 +191,36 @@ body {
 
 .dark .accent-text {
   color: #c084fc; /* purple-400 */
+  text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
+  font-weight: 500;
+}
+
+/* Add pulsing highlight to important elements */
+.dark .highlight-pulse {
+  position: relative;
+}
+
+.dark .highlight-pulse::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 8px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.3) 0%,
+    rgba(139, 92, 246, 0) 70%
+  );
+  z-index: -1;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; transform: scale(0.95); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+  100% { opacity: 0.5; transform: scale(0.95); }
 }
 
 /* Custom link styles */
@@ -140,6 +231,8 @@ body {
 
 .dark .link-underline {
   color: #c084fc; /* purple-400 */
+  text-shadow: 0 0 5px rgba(192, 132, 252, 0.3);
+  position: relative;
 }
 
 .link-underline:hover {
@@ -148,6 +241,7 @@ body {
 
 .dark .link-underline:hover {
   color: #d8b4fe; /* purple-300 */
+  text-shadow: 0 0 8px rgba(216, 180, 254, 0.6);
 }
 
 .link-underline:after {
@@ -159,21 +253,80 @@ body {
   bottom: -4px;
   position: absolute;
   transition-duration: 300ms;
+  border-radius: 2px;
 }
 
 .dark .link-underline:after {
-  background-color: #c084fc; /* purple-400 */
+  background: linear-gradient(90deg, #8b5cf6, #c084fc);
+  box-shadow: 0 0 6px rgba(192, 132, 252, 0.7);
+  height: 2.5px;
 }
 
 .link-underline:hover:after {
   width: 100%;
 }
 
-/* Text gradient utility */
+/* Enhance focus states for accessibility */
+.dark *:focus {
+  outline: 2px solid rgba(192, 132, 252, 0.5);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+}
+
+/* Text gradient utilities with enhanced purple theme */
 .text-gradient {
   background-clip: text;
+  -webkit-background-clip: text;
   color: transparent;
   background-image: linear-gradient(to right, #c084fc, #9333ea); /* purple-400 to purple-600 */
+}
+
+.dark .text-gradient {
+  background-image: linear-gradient(to right, #d8b4fe, #a855f7); /* Brighter purples for dark mode */
+  text-shadow: 0 2px 10px rgba(192, 132, 252, 0.3);
+  position: relative;
+}
+
+/* Diagonal purple gradient */
+.dark .text-gradient-diagonal {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, #d8b4fe, #8b5cf6);
+  text-shadow: 0 2px 10px rgba(192, 132, 252, 0.3);
+}
+
+/* Purple shine effect for special elements */
+.dark .purple-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .purple-shine::after {
+  content: '';
+  position: absolute;
+  top: -110%;
+  left: -210%;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  transform: rotate(30deg);
+  background: linear-gradient(
+    to right, 
+    rgba(255, 255, 255, 0) 0%,
+    rgba(139, 92, 246, 0.1) 77%,
+    rgba(139, 92, 246, 0.3) 92%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.dark .purple-shine:hover::after {
+  opacity: 1;
+  top: -30%;
+  left: -30%;
+  transition-property: left, top, opacity;
+  transition-duration: 0.7s, 0.7s, 0.15s;
+  transition-timing-function: ease;
 }
 
 /* Responsive adjustments */
@@ -189,4 +342,51 @@ body {
   h2 {
     font-size: 1.25rem;
   }
+}
+
+/* Dark Purple Theme Special Effects */
+
+/* Glowing purple border effect */
+.dark .purple-border-glow {
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+  transition: all 0.3s ease;
+}
+
+.dark .purple-border-glow:hover, 
+.dark .purple-border-glow:focus {
+  border-color: rgba(192, 132, 252, 0.8);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+/* Purple neon text effect */
+.dark .purple-neon {
+  color: #d8b4fe;
+  text-shadow: 
+    0 0 5px rgba(192, 132, 252, 0.5),
+    0 0 10px rgba(192, 132, 252, 0.3),
+    0 0 15px rgba(139, 92, 246, 0.3),
+    0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+/* Purple spotlight effect for important sections */
+.dark .purple-spotlight {
+  position: relative;
+  z-index: 1;
+}
+
+.dark .purple-spotlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 92, 246, 0.15),
+    transparent 70%
+  );
+  border-radius: inherit;
 }
