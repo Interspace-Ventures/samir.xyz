@@ -48,12 +48,14 @@ export default function UltraSimpleNavbar() {
   
   // Colors based on dark/light mode
   const colors = {
-    bg: isDarkMode ? "#111827" : "#f3f4f6",
+    // For dark mode, we use the new purple theme
+    bg: isDarkMode ? "#2c104a" : "#f3f4f6", // Dark purple background
     text: isDarkMode ? "#ffffff" : "#111827",
-    muted: isDarkMode ? "#9ca3af" : "#6b7280",
-    border: isDarkMode ? "#374151" : "#e5e7eb",
-    menuBg: isDarkMode ? "#1f2937" : "#ffffff",
-    shadow: isDarkMode ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.1)",
+    muted: isDarkMode ? "#a78bda" : "#6b7280", // Lighter purple for muted text
+    border: isDarkMode ? "#4c1d95" : "#e5e7eb", // Purple border
+    menuBg: isDarkMode ? "#3b1464" : "#ffffff", // Slightly lighter purple for menus
+    shadow: isDarkMode ? "rgba(76, 29, 149, 0.5)" : "rgba(0, 0, 0, 0.1)", // Purple shadow
+    accent: isDarkMode ? "#a855f7" : "#9333ea", // Accent color for highlights
   };
   
   return (
@@ -107,8 +109,9 @@ export default function UltraSimpleNavbar() {
                 left: "0",
                 width: "100%",
                 height: "2px",
-                backgroundColor: colors.text,
-                transition: "all 0.2s ease"
+                backgroundColor: colors.accent,
+                transition: "all 0.2s ease",
+                borderRadius: "1px"
               }}></span>
             )}
           </Link>
@@ -130,8 +133,9 @@ export default function UltraSimpleNavbar() {
                 left: "0",
                 width: "100%",
                 height: "2px",
-                backgroundColor: colors.text,
-                transition: "all 0.2s ease"
+                backgroundColor: colors.accent,
+                transition: "all 0.2s ease",
+                borderRadius: "1px"
               }}></span>
             )}
           </Link>
@@ -153,8 +157,9 @@ export default function UltraSimpleNavbar() {
                 left: "0",
                 width: "100%",
                 height: "2px",
-                backgroundColor: colors.text,
-                transition: "all 0.2s ease"
+                backgroundColor: colors.accent,
+                transition: "all 0.2s ease",
+                borderRadius: "1px"
               }}></span>
             )}
           </Link>
@@ -237,7 +242,7 @@ export default function UltraSimpleNavbar() {
               color: pathname.startsWith("/profile") ? colors.text : colors.muted,
               textDecoration: "none",
               fontWeight: pathname.startsWith("/profile") ? 600 : 400,
-              borderLeft: pathname.startsWith("/profile") ? `2px solid ${colors.text}` : "none",
+              borderLeft: pathname.startsWith("/profile") ? `2px solid ${colors.accent}` : "none",
               paddingLeft: pathname.startsWith("/profile") ? "8px" : "0",
             }}
             onClick={() => setIsMenuOpen(false)}
@@ -250,7 +255,7 @@ export default function UltraSimpleNavbar() {
               color: pathname.startsWith("/portfolio") ? colors.text : colors.muted,
               textDecoration: "none",
               fontWeight: pathname.startsWith("/portfolio") ? 600 : 400,
-              borderLeft: pathname.startsWith("/portfolio") ? `2px solid ${colors.text}` : "none",
+              borderLeft: pathname.startsWith("/portfolio") ? `2px solid ${colors.accent}` : "none",
               paddingLeft: pathname.startsWith("/portfolio") ? "8px" : "0",
             }}
             onClick={() => setIsMenuOpen(false)}
@@ -263,7 +268,7 @@ export default function UltraSimpleNavbar() {
               color: pathname.startsWith("/ventures") ? colors.text : colors.muted,
               textDecoration: "none",
               fontWeight: pathname.startsWith("/ventures") ? 600 : 400,
-              borderLeft: pathname.startsWith("/ventures") ? `2px solid ${colors.text}` : "none",
+              borderLeft: pathname.startsWith("/ventures") ? `2px solid ${colors.accent}` : "none",
               paddingLeft: pathname.startsWith("/ventures") ? "8px" : "0",
             }}
             onClick={() => setIsMenuOpen(false)}

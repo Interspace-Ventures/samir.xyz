@@ -31,11 +31,11 @@ export default function MinimalNavbar() {
   
   // Set colors based on theme
   const colors: ThemeColors = {
-    bg: isDark ? "#0f172a" : "white",
+    bg: isDark ? "#2c104a" : "white", // Dark purple background for dark mode
     text: isDark ? "#f1f5f9" : "#333333",
-    border: isDark ? "#1e293b" : "#e2e8f0",
-    muted: isDark ? "#94a3b8" : "#4b5563",
-    accent: "#9333ea", // Purple accent color for both themes
+    border: isDark ? "#4c1d95" : "#e2e8f0", // Purple border for dark mode
+    muted: isDark ? "#a78bda" : "#4b5563", // Lighter purple for muted text in dark mode
+    accent: isDark ? "#a855f7" : "#9333ea", // Different purple accent for dark/light
   };
   
   return (
@@ -248,7 +248,7 @@ export default function MinimalNavbar() {
           backgroundColor: colors.bg,
           padding: "20px",
           borderTop: `1px solid ${colors.border}`,
-          boxShadow: isDark ? "0 4px 6px -1px rgba(0, 0, 0, 0.4)" : "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+          boxShadow: isDark ? "0 4px 8px -1px rgba(76, 29, 149, 0.6)" : "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
           zIndex: 50,
           transition: "background-color 0.3s, border-color 0.3s"
         }}>
