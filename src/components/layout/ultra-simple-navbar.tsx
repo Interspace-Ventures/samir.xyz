@@ -48,14 +48,15 @@ export default function UltraSimpleNavbar() {
   
   // Colors based on dark/light mode
   const colors = {
-    // For dark mode, we use the new purple theme
-    bg: isDarkMode ? "#2c104a" : "#f3f4f6", // Dark purple background
+    // For dark mode, we use the enhanced purple theme with more vibrant colors
+    bg: isDarkMode ? "#2c0b5a" : "#f3f4f6", // Deeper, more vibrant dark purple background
     text: isDarkMode ? "#ffffff" : "#111827",
-    muted: isDarkMode ? "#a78bda" : "#6b7280", // Lighter purple for muted text
-    border: isDarkMode ? "#4c1d95" : "#e5e7eb", // Purple border
-    menuBg: isDarkMode ? "#3b1464" : "#ffffff", // Slightly lighter purple for menus
-    shadow: isDarkMode ? "rgba(76, 29, 149, 0.5)" : "rgba(0, 0, 0, 0.1)", // Purple shadow
-    accent: isDarkMode ? "#a855f7" : "#9333ea", // Accent color for highlights
+    muted: isDarkMode ? "#b69df8" : "#6b7280", // Brighter purple for muted text
+    border: isDarkMode ? "#5f25bf" : "#e5e7eb", // More visible purple border
+    menuBg: isDarkMode ? "#3b0d82" : "#ffffff", // More vibrant purple for menus
+    shadow: isDarkMode ? "rgba(108, 43, 217, 0.6)" : "rgba(0, 0, 0, 0.1)", // Brighter purple shadow
+    accent: isDarkMode ? "#c084fc" : "#9333ea", // Brighter accent color for highlights
+    glow: isDarkMode ? "0 0 15px rgba(139, 92, 246, 0.3)" : "none", // Purple glow for dark mode
   };
   
   return (
@@ -64,7 +65,9 @@ export default function UltraSimpleNavbar() {
       color: colors.text,
       padding: "16px",
       borderBottom: `1px solid ${colors.border}`,
-      transition: "background-color 0.3s, color 0.3s, border-color 0.3s",
+      boxShadow: isDarkMode ? colors.glow : "none", // Add subtle purple glow in dark mode
+      transition: "background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s",
+      position: "relative",
     }}>
       <div style={{
         display: "flex",
@@ -108,10 +111,11 @@ export default function UltraSimpleNavbar() {
                 bottom: "-4px",
                 left: "0",
                 width: "100%",
-                height: "2px",
-                backgroundColor: colors.accent,
+                height: "3px",
+                background: "linear-gradient(90deg, #8b5cf6, #c084fc)",
+                boxShadow: isDarkMode ? "0 0 8px rgba(192, 132, 252, 0.7)" : "none", // Glow effect
                 transition: "all 0.2s ease",
-                borderRadius: "1px"
+                borderRadius: "2px"
               }}></span>
             )}
           </Link>
@@ -132,10 +136,11 @@ export default function UltraSimpleNavbar() {
                 bottom: "-4px",
                 left: "0",
                 width: "100%",
-                height: "2px",
-                backgroundColor: colors.accent,
+                height: "3px",
+                background: "linear-gradient(90deg, #8b5cf6, #c084fc)",
+                boxShadow: isDarkMode ? "0 0 8px rgba(192, 132, 252, 0.7)" : "none", // Glow effect
                 transition: "all 0.2s ease",
-                borderRadius: "1px"
+                borderRadius: "2px"
               }}></span>
             )}
           </Link>
@@ -156,10 +161,11 @@ export default function UltraSimpleNavbar() {
                 bottom: "-4px",
                 left: "0",
                 width: "100%",
-                height: "2px",
-                backgroundColor: colors.accent,
+                height: "3px",
+                background: "linear-gradient(90deg, #8b5cf6, #c084fc)",
+                boxShadow: isDarkMode ? "0 0 8px rgba(192, 132, 252, 0.7)" : "none", // Glow effect
                 transition: "all 0.2s ease",
-                borderRadius: "1px"
+                borderRadius: "2px"
               }}></span>
             )}
           </Link>
@@ -242,7 +248,8 @@ export default function UltraSimpleNavbar() {
               color: pathname.startsWith("/profile") ? colors.text : colors.muted,
               textDecoration: "none",
               fontWeight: pathname.startsWith("/profile") ? 600 : 400,
-              borderLeft: pathname.startsWith("/profile") ? `2px solid ${colors.accent}` : "none",
+              borderLeft: pathname.startsWith("/profile") ? `3px solid` : "none",
+              backgroundImage: pathname.startsWith("/profile") ? `linear-gradient(0deg, #8b5cf6, #c084fc)` : "none",
               paddingLeft: pathname.startsWith("/profile") ? "8px" : "0",
             }}
             onClick={() => setIsMenuOpen(false)}
@@ -255,7 +262,8 @@ export default function UltraSimpleNavbar() {
               color: pathname.startsWith("/portfolio") ? colors.text : colors.muted,
               textDecoration: "none",
               fontWeight: pathname.startsWith("/portfolio") ? 600 : 400,
-              borderLeft: pathname.startsWith("/portfolio") ? `2px solid ${colors.accent}` : "none",
+              borderLeft: pathname.startsWith("/portfolio") ? `3px solid` : "none",
+              backgroundImage: pathname.startsWith("/portfolio") ? `linear-gradient(0deg, #8b5cf6, #c084fc)` : "none",
               paddingLeft: pathname.startsWith("/portfolio") ? "8px" : "0",
             }}
             onClick={() => setIsMenuOpen(false)}
@@ -268,7 +276,8 @@ export default function UltraSimpleNavbar() {
               color: pathname.startsWith("/ventures") ? colors.text : colors.muted,
               textDecoration: "none",
               fontWeight: pathname.startsWith("/ventures") ? 600 : 400,
-              borderLeft: pathname.startsWith("/ventures") ? `2px solid ${colors.accent}` : "none",
+              borderLeft: pathname.startsWith("/ventures") ? `3px solid` : "none",
+              backgroundImage: pathname.startsWith("/ventures") ? `linear-gradient(0deg, #8b5cf6, #c084fc)` : "none",
               paddingLeft: pathname.startsWith("/ventures") ? "8px" : "0",
             }}
             onClick={() => setIsMenuOpen(false)}
