@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "Starting Next.js development server with enhanced compatibility..."
+echo "Starting Next.js development server with enhanced compatibility... VERSION 3.0"
+echo "UPDATED PORTFOLIO CARDS - Clean white background cards with no border and pure purple badges"
 
 # Make scripts executable
 chmod +x *.sh

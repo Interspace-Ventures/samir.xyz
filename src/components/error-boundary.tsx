@@ -5,6 +5,7 @@ import React from 'react';
 interface Props {
   children: React.ReactNode
   name?: string
+  fallback?: React.ReactNode
 }
 
 interface State {
@@ -30,7 +31,12 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      // Render fallback UI
+      // Use custom fallback if provided, otherwise default error UI
+      if (this.props.fallback) {
+        return this.props.fallback;
+      }
+      
+      // Render default fallback UI
       return (
         <div className="p-4 bg-red-50 dark:bg-red-900 rounded-lg border border-red-200 dark:border-red-800">
           <h2 className="text-xl font-bold text-red-700 dark:text-red-300 mb-2">Something went wrong</h2>
