@@ -50,18 +50,35 @@ export default function PortfolioPage() {
             </p>
           </div>
           
-          {/* Stats Section - 2x4 grid layout with black background */}
-          <div className="w-full mb-12 bg-black p-6 rounded-lg">
-            <div className="grid grid-cols-4 grid-rows-2 gap-6">
-              <StatItem label="# Investments" value="32" />
-              <StatItem label="# Markups" value="13" />
-              <StatItem label="# Acquisitions" value="2" />
-              <StatItem label="# Busts" value="4" />
-              <StatItem label="TVPI" value="1.44x" />
-              <StatItem label="Gross Multiple" value="1.22x" />
-              <StatItem label="Net Multiple" value="1.12x" />
-              <StatItem label="IRR" value="10%" />
-            </div>
+          {/* Stats Section - Manually coded as a table for maximum layout control */}
+          <div className="w-full mb-12 bg-black p-6 sm:p-8 rounded-lg shadow-lg border border-gray-800">
+            {/* Hardcoded table layout for consistent display across all viewports */}
+            <table className="w-full border-separate border-spacing-2">
+              <tbody>
+                {/* Row 1 - First 4 stats */}
+                <tr>
+                  <td width="25%"><StatItem label="# Investments" value="32" /></td>
+                  <td width="25%"><StatItem label="# Markups" value="13" /></td>
+                  <td width="25%"><StatItem label="# Acquisitions" value="2" /></td>
+                  <td width="25%"><StatItem label="# Busts" value="4" /></td>
+                </tr>
+                
+                {/* Visual separator row */}
+                <tr>
+                  <td colSpan={4} className="py-2">
+                    <div className="border-t border-gray-800 opacity-50"></div>
+                  </td>
+                </tr>
+                
+                {/* Row 2 - Second 4 stats */}
+                <tr>
+                  <td width="25%"><StatItem label="TVPI" value="1.44x" /></td>
+                  <td width="25%"><StatItem label="Gross Multiple" value="1.22x" /></td>
+                  <td width="25%"><StatItem label="Net Multiple" value="1.12x" /></td>
+                  <td width="25%"><StatItem label="IRR" value="10%" /></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           
           {/* Category Filters with improved spacing and white text on purple */}
@@ -125,12 +142,12 @@ export default function PortfolioPage() {
   );
 }
 
-// Simple stat item component
+// Enhanced stat item component specifically sized for the table layout
 function StatItem({ label, value }: { label: string, value: string }) {
   return (
-    <div className="flex flex-col space-y-2">
-      <div className="text-gray-400 text-sm font-medium">{label}</div>
-      <div className="text-white text-3xl font-semibold">{value}</div>
+    <div className="flex flex-col p-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 text-center">
+      <div className="text-gray-400 text-xs font-medium tracking-wide uppercase mb-1">{label}</div>
+      <div className="text-white text-lg sm:text-xl md:text-2xl font-bold">{value}</div>
     </div>
   );
 }
