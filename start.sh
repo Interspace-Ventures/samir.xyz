@@ -5,6 +5,8 @@ echo "UPDATED PORTFOLIO CARDS - Clean white background cards with no border and 
 
 # Make scripts executable
 chmod +x *.sh
+mkdir -p tools/scripts
+chmod +x tools/scripts/*.sh || true
 
 # Kill any existing Next.js processes
 echo "Cleaning up any existing Next.js processes..."

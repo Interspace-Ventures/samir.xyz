@@ -10,7 +10,8 @@
       "wait_for_port_timeout": 60000,
       "setup_commands": [
         "echo 'Preparing Next.js environment...'"
-      ]
+      ],
+      "port_test_url": "/portfolio/"
     }
   ]
 }

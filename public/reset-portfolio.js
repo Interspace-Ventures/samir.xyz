@@ -1,12 +1,12 @@
 /**
- * Version v3.0 - Enhanced Portfolio Grid Reset Script with Purple Styling Preservation
+ * Version v4.0 - Enhanced Portfolio Grid Reset Script with Gray Hover and Image Fixes
  * 
  * This improved script respects custom styling while helping fix rendering issues with the portfolio grid.
- * It uses a gentle approach that preserves animations, purple accents, and hover effects.
+ * It uses a gentle approach that preserves animations, consistent padding, and gray hover effects.
  */
 
 (function() {
-  console.log('Portfolio reset script v3.0 with purple theming preservation loaded');
+  console.log('Portfolio reset script v4.0 with gray hover theming loaded');
   
   // Version timestamp to ensure we're running the latest script (cache busting)
   const VERSION = Date.now();
@@ -14,7 +14,7 @@
   
   // Wait for DOM to be fully loaded
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded - preparing portfolio grid with purple theming');
+    console.log('DOM loaded - preparing portfolio grid with gray theming');
     setTimeout(resetPortfolioGridGently, 200);
     setTimeout(enhanceLogoDisplayPreservingStyles, 250);
     
@@ -24,7 +24,7 @@
 
   // Also run on window load to ensure images are loaded
   window.addEventListener('load', function() {
-    console.log('Window loaded - ensuring portfolio grid with purple theming is applied');
+    console.log('Window loaded - ensuring portfolio grid with gray theming is applied');
     resetPortfolioGridGently();
     enhanceLogoDisplayPreservingStyles();
     preserveAnimationsAndHoverEffects();
@@ -79,15 +79,15 @@
         card.style.opacity = '1';
       }
       
-      // No other style changes to preserve purple styling
+      // No other style changes to preserve gray styling
     });
     
-    console.log('Portfolio grid has been gently reset while preserving custom purple styling');
+    console.log('Portfolio grid has been gently reset while preserving custom gray styling');
   }
 
   function enhanceLogoDisplayPreservingStyles() {
     // Find all company logo images that need enhancement
-    const companyLogos = document.querySelectorAll('.portfolio-grid img:not(.styled-v3)');
+    const companyLogos = document.querySelectorAll('.portfolio-grid img:not(.styled-v4)');
     
     if (companyLogos.length === 0) {
       // If all logos are already enhanced, we can skip
@@ -98,12 +98,15 @@
     
     companyLogos.forEach(img => {
       // Mark this image as styled with our new version marker
-      img.classList.add('styled-v3');
+      img.classList.add('styled-v4');
       
       // Only set these minimal styles without overriding existing styles
       if (!img.hasAttribute('style') || !img.style.maxHeight) {
-        img.style.maxHeight = img.style.maxHeight || '40px';
+        img.style.maxHeight = img.style.maxHeight || '50px';
         img.style.objectFit = img.style.objectFit || 'contain';
+        img.style.maxWidth = '90%';
+        img.style.display = 'block';
+        img.style.margin = '0 auto';
       }
       
       // Add error handling directly to images
@@ -150,7 +153,7 @@
       }
     });
     
-    console.log('Logo display has been enhanced while preserving custom purple styling');
+    console.log('Logo display has been enhanced while preserving custom gray styling');
   }
   
   function preserveAnimationsAndHoverEffects() {
@@ -167,12 +170,27 @@
       // Mark this card as processed
       card.classList.add('hover-preserved');
       
+      // Ensure consistent padding
+      const cardLink = card.querySelector('a');
+      if (cardLink && !cardLink.hasAttribute('data-padding-fixed')) {
+        cardLink.style.padding = '16px';
+        cardLink.setAttribute('data-padding-fixed', 'true');
+      }
+      
       // Find hover overlay elements
       const overlay = card.querySelector('div[class*="absolute inset-0"]');
       
       if (overlay) {
         // Make sure the overlay has our custom class for CSS targeting
         overlay.classList.add('custom-overlay');
+        
+        // Update to gray gradient if it's still purple
+        if (overlay.classList.contains('bg-gradient-to-t') && 
+            (overlay.classList.contains('from-purple-900/95') || 
+             overlay.classList.contains('to-purple-800/90'))) {
+          overlay.classList.remove('from-purple-900/95', 'to-purple-800/90');
+          overlay.classList.add('from-gray-900/95', 'to-gray-800/90');
+        }
       }
       
       // Ensure card has animation class but doesn't override existing ones
@@ -213,5 +231,5 @@
   });
   
   // Log completion of script initialization
-  console.log('Portfolio grid enhancement script v3.0 fully initialized');
+  console.log('Portfolio grid enhancement script v4.0 fully initialized');
 })();

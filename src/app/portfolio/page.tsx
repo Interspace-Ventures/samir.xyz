@@ -136,37 +136,24 @@ export default function PortfolioPage() {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
               gridAutoRows: '130px',
-              gap: '1rem',
-              width: '100%',
+              gap: '1.5rem', /* Increased from 1rem for more spacing between cards */
+              width: '92%', /* Reduced from 100% to add margin on left/right edges */
               maxWidth: '1400px',
-              margin: '0 auto'
+              margin: '0 auto',
+              padding: '0.5rem'
             }}
           >
-            {companies.map(company => {
-              const isVisible = selectedCategory === 'All' || company.category === selectedCategory;
-              return (
-                <div 
-                  key={company.name}
-                  className={`transition-opacity duration-200 ${isVisible ? 'opacity-100' : 'opacity-40 pointer-events-none'}`}
-                >
+            {filteredCompanies.map(company => (
+                <div key={company.name} className="transition-opacity duration-200">
                   <CompanyCard 
                     company={company}
                     isDark={isDark}
                   />
                 </div>
-              );
-            })}
+            ))}
           </div>
           
-          <div className="text-center mt-12">
-            <a 
-              href="/profile" 
-              className="inline-block px-6 py-3 rounded-lg bg-purple-600 text-white font-medium 
-                       hover:bg-purple-500 transition-all duration-200"
-            >
-              Back to Profile
-            </a>
-          </div>
+          {/* No Back to Profile button here as requested */}
         </div>
       </div>
     </>
@@ -197,7 +184,7 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
 
   return (
     <div 
-      className="h-[130px] rounded-xl bg-white shadow-md overflow-hidden border border-gray-100 relative transition-all duration-300 transform hover:animate-card-hover hover:shadow-lg hover:shadow-purple-500/20"
+      className="h-[130px] rounded-xl bg-white shadow-md overflow-hidden border border-gray-100 relative transition-all duration-300 transform hover:-translate-y-1 hover:animate-card-hover hover:shadow-lg hover:shadow-gray-400/30"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -205,11 +192,11 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
         href={company.website || `https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
         rel="noopener noreferrer"
-        className="block h-full p-3 relative hover:bg-gray-50 transition-colors duration-200"
+        className="block h-full px-4 py-4 relative hover:bg-gray-50 transition-colors duration-200"
       >
-        {/* Status badge - positioned in top right as overlay */}
+        {/* Status badge - enhanced with shadow and improved visibility */}
         {(company.markup || company.acquired) && (
-          <div className="absolute top-2 right-2 z-20 text-xs px-2 py-0.5 rounded text-white bg-purple-700 font-bold animate-fade-in">
+          <div className="absolute top-2 right-2 z-20 text-xs px-2.5 py-0.5 rounded-md text-white bg-purple-700 font-semibold shadow-md shadow-purple-900/30 animate-fade-in">
             {company.acquired ? 'Acquired' : 'Markup'}
           </div>
         )}
@@ -224,8 +211,8 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
                 <p className="text-sm mt-1 text-gray-500">{company.category}</p>
               </div>
             ) : (
-              // Image display with enforced white background and better sizing
-              <div className="h-[45px] w-full max-w-[120px] relative mx-auto bg-white p-1 rounded">
+              // Enhanced image display with improved white background and better sizing
+              <div className="h-[60px] w-full max-w-[140px] relative mx-auto bg-white p-2 rounded-md shadow-sm">
                 <ErrorBoundary name={`CompanyImage-${company.name}`} fallback={
                   <div className="text-center">
                     <h3 className="text-lg font-medium text-gray-900">{company.name}</h3>
@@ -235,10 +222,15 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
                   <img
                     src={company.logo}
                     alt={company.name}
-                    className="w-full h-full object-contain object-center max-h-[40px] transition-transform duration-300"
+                    className="w-full h-full object-contain object-center max-h-[50px] transition-transform duration-300"
                     onError={() => setImageError(true)}
                     loading="lazy"
-                    style={{ maxWidth: '100%', display: 'block' }}
+                    style={{ 
+                      maxWidth: '90%', 
+                      display: 'block',
+                      margin: '0 auto',
+                      filter: 'drop-shadow(0px 1px 1px rgba(0,0,0,0.05))'
+                    }}
                   />
                 </ErrorBoundary>
               </div>
@@ -246,25 +238,35 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
           </div>
         </div>
         
-        {/* Hover overlay with company info and slide-in animation */}
+        {/* Enhanced hover overlay with improved gradient and animations - changed to gray */}
         <div 
-          className={`absolute inset-0 bg-gradient-to-t from-purple-900/90 to-purple-800/80 p-4 flex flex-col justify-end text-white transition-all duration-300 ${
+          className={`absolute inset-0 bg-gradient-to-t from-gray-900/95 to-gray-800/90 p-4 flex flex-col justify-end text-white transition-all duration-300 ${
             isHovered ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ 
-            backdropFilter: isHovered ? 'blur(2px)' : 'none',
-            transform: `translateY(${isHovered ? '0' : '8px'})`,
+            backdropFilter: isHovered ? 'blur(3px)' : 'none',
+            transform: `translateY(${isHovered ? '0' : '10px'})`,
             opacity: isHovered ? 1 : 0,
+            boxShadow: isHovered ? 'inset 0 0 15px rgba(107, 114, 128, 0.3)' : 'none',
           }}
         >
           <div 
             className="transform transition-all duration-300 animate-fade-in" 
             style={{ 
-              transitionDelay: isHovered ? '50ms' : '0ms'
+              transitionDelay: isHovered ? '50ms' : '0ms',
+              transform: isHovered ? 'translateY(0)' : 'translateY(5px)',
+              opacity: isHovered ? 1 : 0
             }}
           >
-            <h3 className="text-base font-semibold mb-1 text-white">{company.name}</h3>
-            <p className="text-xs text-purple-100 line-clamp-2">{company.description}</p>
+            <h3 className="text-base font-semibold mb-1.5 text-white">{company.name}</h3>
+            <p className="text-xs leading-relaxed text-gray-100 line-clamp-2" 
+               style={{ 
+                 textShadow: '0 1px 2px rgba(0,0,0,0.2)',
+                 opacity: isHovered ? 0.95 : 0
+               }}
+            >
+              {company.description}
+            </p>
           </div>
         </div>
       </a>

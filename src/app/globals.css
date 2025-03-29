@@ -247,7 +247,7 @@ body {
 
 .portfolio-grid .custom-overlay,
 .portfolio-grid div[class*="absolute inset-0"] {
-  background: linear-gradient(to top, rgba(88, 28, 135, 0.9), rgba(107, 33, 168, 0.8)) !important;
+  background: linear-gradient(to top, rgba(31, 41, 55, 0.95), rgba(55, 65, 81, 0.9)) !important;
   opacity: 0;
   transition: all 0.3s ease !important;
   transform: translateY(8px);
@@ -259,17 +259,26 @@ body {
   transform: translateY(0) !important;
 }
 
+/* Increased size of logos within the cards */
 .portfolio-grid img {
-  max-height: 40px !important;
+  max-height: 50px !important; /* Increased from 40px */
+  max-width: 80% !important; /* Control width to maintain proportions */
   object-fit: contain !important;
   transition: transform 0.3s ease !important;
+  margin: 0 auto !important; /* Center the logo horizontally */
+  display: block !important; /* Ensure it's a block element for margin auto to work */
 }
 
+/* Logo container styling */
 .portfolio-grid .bg-white,
 .portfolio-grid div.h-\[45px\] {
   background: white !important;
   border-radius: 4px !important;
-  padding: 2px !important;
+  padding: 6px !important; /* Increased from 2px */
+  height: 60px !important; /* Increased from 45px */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .portfolio-grid .animate-fade-in {
