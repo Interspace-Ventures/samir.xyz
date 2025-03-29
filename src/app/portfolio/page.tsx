@@ -15,16 +15,47 @@ export default function PortfolioPage() {
   useEffect(() => {
     setMounted(true);
     
-    // Force a redraw of the grid after component mounts
-    const timer = setTimeout(() => {
+    // Aggressive approach to ensure our styling takes precedence
+    const applyCustomStyles = () => {
+      console.log('Applying custom portfolio styles');
+      
+      // Force a redraw of the grid first
       const gridElement = document.querySelector('.portfolio-grid');
       if (gridElement) {
-        // Apply a style change to force a reflow
+        // Apply essential grid styles
         gridElement.classList.add('grid-loaded');
+        
+        // Apply styles to company cards with purple hover
+        const cards = document.querySelectorAll('.portfolio-grid > div > div');
+        cards.forEach(card => {
+          // Ensure only image container gets white background
+          const imgContainer = card.querySelector('div > div > div.bg-white');
+          if (imgContainer) {
+            imgContainer.classList.add('custom-bg');
+          }
+          
+          // Add hover classes
+          card.classList.add('custom-card');
+          
+          // Find and ensure hover overlay has correct styles
+          const overlay = card.querySelector('div[class*="absolute inset-0"]');
+          if (overlay) {
+            overlay.classList.add('custom-overlay');
+          }
+        });
       }
-    }, 100);
+    };
     
-    return () => clearTimeout(timer);
+    // Apply styles multiple times to ensure they stick
+    const timer1 = setTimeout(applyCustomStyles, 100);
+    const timer2 = setTimeout(applyCustomStyles, 500);
+    const timer3 = setTimeout(applyCustomStyles, 1500);
+    
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
   }, []);
   
   const isDark = mounted && resolvedTheme === 'dark';
@@ -36,31 +67,31 @@ export default function PortfolioPage() {
   
   return (
     <>
-      {/* Add reset script to ensure grid renders properly */}
-      <Script src="/reset-portfolio.js" strategy="afterInteractive" />
+      {/* Add reset script to ensure grid renders properly with version parameter to force reload */}
+      <Script src={`/reset-portfolio.js?v=${new Date().getTime()}`} strategy="afterInteractive" />
       
       <div className="bg-gray-900 min-h-screen p-4 pt-8">
         <div className="max-w-6xl mx-auto">
           <div className="mb-10 text-center">
             <h1 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              My Investment Portfolio
+              Portfolio
             </h1>
             <p className="text-lg max-w-3xl mx-auto text-gray-300">
               I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
             </p>
           </div>
           
-          {/* Stats Section - Manually coded as a table for maximum layout control */}
+          {/* Stats Section - Improved table styling */}
           <div className="w-full mb-12 bg-black p-6 sm:p-8 rounded-lg shadow-lg border border-gray-800">
-            {/* Hardcoded table layout for consistent display across all viewports */}
-            <table className="w-full border-separate border-spacing-2">
-              <tbody>
+            {/* Enhanced table layout with better styling */}
+            <table className="w-full border-separate border-spacing-2 rounded-lg overflow-hidden">
+              <tbody className="divide-y divide-gray-800">
                 {/* Row 1 - First 4 stats */}
-                <tr>
-                  <td width="25%"><StatItem label="# Investments" value="32" /></td>
-                  <td width="25%"><StatItem label="# Markups" value="13" /></td>
-                  <td width="25%"><StatItem label="# Acquisitions" value="2" /></td>
-                  <td width="25%"><StatItem label="# Busts" value="4" /></td>
+                <tr className="bg-black bg-opacity-50 hover:bg-opacity-70 transition-colors">
+                  <td width="25%" className="p-2 border border-gray-800 rounded-lg"><StatItem label="# Investments" value="32" /></td>
+                  <td width="25%" className="p-2 border border-gray-800 rounded-lg"><StatItem label="# Markups" value="13" /></td>
+                  <td width="25%" className="p-2 border border-gray-800 rounded-lg"><StatItem label="# Acquisitions" value="2" /></td>
+                  <td width="25%" className="p-2 border border-gray-800 rounded-lg"><StatItem label="# Busts" value="4" /></td>
                 </tr>
                 
                 {/* Visual separator row */}
@@ -71,26 +102,26 @@ export default function PortfolioPage() {
                 </tr>
                 
                 {/* Row 2 - Second 4 stats */}
-                <tr>
-                  <td width="25%"><StatItem label="TVPI" value="1.44x" /></td>
-                  <td width="25%"><StatItem label="Gross Multiple" value="1.22x" /></td>
-                  <td width="25%"><StatItem label="Net Multiple" value="1.12x" /></td>
-                  <td width="25%"><StatItem label="IRR" value="10%" /></td>
+                <tr className="bg-black bg-opacity-50 hover:bg-opacity-70 transition-colors">
+                  <td width="25%" className="p-2 border border-gray-800 rounded-lg"><StatItem label="TVPI" value="1.44x" /></td>
+                  <td width="25%" className="p-2 border border-gray-800 rounded-lg"><StatItem label="Gross Multiple" value="1.22x" /></td>
+                  <td width="25%" className="p-2 border border-gray-800 rounded-lg"><StatItem label="Net Multiple" value="1.12x" /></td>
+                  <td width="25%" className="p-2 border border-gray-800 rounded-lg"><StatItem label="IRR" value="10%" /></td>
                 </tr>
               </tbody>
             </table>
           </div>
           
-          {/* Category Filters with improved spacing and white text on purple */}
+          {/* Category Filters with enhanced purple highlighting when selected */}
           <div className="flex flex-wrap gap-6 mb-8">
             {categories.map(category => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2.5 text-sm font-medium rounded-md transition-colors ${
+                className={`px-6 py-2.5 text-sm font-medium rounded-md transition-all duration-300 ${
                   selectedCategory === category
-                    ? 'bg-purple-600 text-white'
-                    : 'border border-gray-700 text-gray-300 hover:border-gray-500'
+                    ? 'bg-purple-700 text-white shadow-md shadow-purple-900/30 border border-purple-500 transform scale-105'
+                    : 'border border-gray-700 text-gray-300 hover:border-purple-400 hover:text-purple-200'
                 }`}
               >
                 {category}
@@ -152,9 +183,10 @@ function StatItem({ label, value }: { label: string, value: string }) {
   );
 }
 
-// Company card component with white background in both modes
+// Enhanced Company card component with white background, hover effects, and animations
 function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
   const [imageError, setImageError] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   
   // Check if this is a company with known problematic logos
   const problemLogos = ['The Food Company', 'Swansea City AFC', 'The Coffee', 'Predictive.film', 'Interspace', 'Solo', 'Aon3D', 'Hey I\'m Samir'];
@@ -164,20 +196,25 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
   const shouldShowFallback = imageError || hasProblemLogo || !company.logo;
 
   return (
-    <div className="h-[130px] rounded-xl bg-white shadow-md overflow-hidden border border-gray-100">
+    <div 
+      className="h-[130px] rounded-xl bg-white shadow-md overflow-hidden border border-gray-100 relative transition-all duration-300 transform hover:animate-card-hover hover:shadow-lg hover:shadow-purple-500/20"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <a
         href={company.website || `https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
         rel="noopener noreferrer"
         className="block h-full p-3 relative hover:bg-gray-50 transition-colors duration-200"
       >
-        {/* Status badge - pure purple with white text */}
+        {/* Status badge - positioned in top right as overlay */}
         {(company.markup || company.acquired) && (
-          <div className="absolute top-2 right-2 z-10 text-xs px-2 py-0.5 rounded text-white bg-purple-700 font-bold">
+          <div className="absolute top-2 right-2 z-20 text-xs px-2 py-0.5 rounded text-white bg-purple-700 font-bold animate-fade-in">
             {company.acquired ? 'Acquired' : 'Markup'}
           </div>
         )}
 
+        {/* Card content */}
         <div className="h-full flex flex-col items-center justify-center">
           <div className="w-full h-full flex items-center justify-center">
             {shouldShowFallback ? (
@@ -187,7 +224,7 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
                 <p className="text-sm mt-1 text-gray-500">{company.category}</p>
               </div>
             ) : (
-              // Image display with direct path reference and controlled sizing
+              // Image display with enforced white background and better sizing
               <div className="h-[45px] w-full max-w-[120px] relative mx-auto bg-white p-1 rounded">
                 <ErrorBoundary name={`CompanyImage-${company.name}`} fallback={
                   <div className="text-center">
@@ -198,7 +235,7 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
                   <img
                     src={company.logo}
                     alt={company.name}
-                    className="w-full h-full object-contain object-center max-h-[40px]"
+                    className="w-full h-full object-contain object-center max-h-[40px] transition-transform duration-300"
                     onError={() => setImageError(true)}
                     loading="lazy"
                     style={{ maxWidth: '100%', display: 'block' }}
@@ -206,6 +243,28 @@ function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
                 </ErrorBoundary>
               </div>
             )}
+          </div>
+        </div>
+        
+        {/* Hover overlay with company info and slide-in animation */}
+        <div 
+          className={`absolute inset-0 bg-gradient-to-t from-purple-900/90 to-purple-800/80 p-4 flex flex-col justify-end text-white transition-all duration-300 ${
+            isHovered ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ 
+            backdropFilter: isHovered ? 'blur(2px)' : 'none',
+            transform: `translateY(${isHovered ? '0' : '8px'})`,
+            opacity: isHovered ? 1 : 0,
+          }}
+        >
+          <div 
+            className="transform transition-all duration-300 animate-fade-in" 
+            style={{ 
+              transitionDelay: isHovered ? '50ms' : '0ms'
+            }}
+          >
+            <h3 className="text-base font-semibold mb-1 text-white">{company.name}</h3>
+            <p className="text-xs text-purple-100 line-clamp-2">{company.description}</p>
           </div>
         </div>
       </a>

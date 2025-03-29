@@ -228,6 +228,58 @@ body {
   100% { opacity: 0.5; transform: scale(0.95); }
 }
 
+/* Custom Portfolio Styles - Added with high specificity to prevent reset script from overriding */
+.portfolio-grid .custom-card,
+.portfolio-grid > div > div {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+}
+
+.portfolio-grid .custom-card:hover,
+.portfolio-grid > div > div:hover {
+  box-shadow: 0 4px 8px rgba(147, 51, 234, 0.3) !important;
+  transform: translateY(-2px) !important;
+  border-color: rgba(147, 51, 234, 0.4) !important;
+}
+
+.portfolio-grid .custom-overlay,
+.portfolio-grid div[class*="absolute inset-0"] {
+  background: linear-gradient(to top, rgba(88, 28, 135, 0.9), rgba(107, 33, 168, 0.8)) !important;
+  opacity: 0;
+  transition: all 0.3s ease !important;
+  transform: translateY(8px);
+}
+
+.portfolio-grid div[class*="absolute inset-0"]:hover,
+.portfolio-grid .custom-overlay:hover {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.portfolio-grid img {
+  max-height: 40px !important;
+  object-fit: contain !important;
+  transition: transform 0.3s ease !important;
+}
+
+.portfolio-grid .bg-white,
+.portfolio-grid div.h-\[45px\] {
+  background: white !important;
+  border-radius: 4px !important;
+  padding: 2px !important;
+}
+
+.portfolio-grid .animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out !important;
+}
+
+.portfolio-grid .hover\:animate-card-hover:hover {
+  animation: cardHover 0.3s ease-in-out !important;
+}
+
 /* Custom link styles */
 .link-underline {
   position: relative;
