@@ -154,14 +154,14 @@ The project follows [Semantic Versioning](https://semver.org/) with the followin
 - **Minor Versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch Versions (0.0.X)**: Individual commits within a single chat session
 
-### Latest Version: 4.1.0 (2025-03-24)
+### Latest Version: 4.5.0 (2025-03-29)
 
 Key updates in the latest version:
-- Enhanced documentation with improved navigation structure
-- Added Outline section with descriptive links to all major sections
-- Reorganized Stack section into logical technology categories
-- Refined Repository Overview with detailed folder structure explanations
-- Added Naming Conventions section for consistent development patterns
+- Improved navbar responsiveness to show menu at all but the narrowest viewports
+- Updated mobile navigation to respond to content width rather than device type
+- Created adaptive menu spacing that adjusts to available viewport width
+- Ensured menu visibility on medium and larger screens for better usability
+- Maintained consistent purple accent styling across all viewport sizes
 
 For detailed changes across all versions, see the [CHANGELOG.md](./CHANGELOG.md).
 

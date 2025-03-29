@@ -94,7 +94,7 @@ export default function UltraSimpleNavbar() {
         {/* Right side - Navigation links (desktop) */}
         <div style={{ 
           display: "flex", 
-          gap: "32px", // Increased gap for better spacing between links
+          gap: "min(32px, 8vw)", // Responsive gap that gets smaller as viewport narrows
           fontFamily: "Inter, sans-serif", // Ensure Inter font
         }} className="desktop-nav">
           <Link 
@@ -174,7 +174,7 @@ export default function UltraSimpleNavbar() {
           </Link>
         </div>
         
-        {/* Mobile menu button - Fixed display issues */}
+        {/* Mobile menu button - Hidden by default on larger screens */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           style={{
@@ -183,7 +183,7 @@ export default function UltraSimpleNavbar() {
             color: colors.text,
             padding: "8px",
             cursor: "pointer",
-            display: "flex", // Changed from none to flex to always show
+            display: "none", // Hidden by default, controlled by media query
             alignItems: "center",
             fontFamily: "Inter, sans-serif", // Ensure Inter font
           }}
@@ -294,14 +294,18 @@ export default function UltraSimpleNavbar() {
       </div>
       
       <style jsx global>{`
-        @media (max-width: 768px) {
+        /* Only hide desktop menu and show mobile menu at very small screens where menu items would crowd */
+        @media (max-width: 420px) {
           .desktop-nav {
             display: none !important;
           }
-          /* Removed display:flex here - it's set in the inline style */
+          .mobile-menu-button {
+            display: flex !important;
+          }
         }
         
-        @media (min-width: 769px) {
+        /* Show desktop menu for all other sizes */
+        @media (min-width: 421px) {
           .desktop-nav {
             display: flex !important;
           }

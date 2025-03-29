@@ -8,9 +8,9 @@ if [ -d "out" ] && [ -f "out/index.html" ]; then
   cd out
   exec npx http-server -p 5000 --cors -a 0.0.0.0
 else
-  echo "No prebuilt site found, generating simple static site..."
-  # Generate the simple static site
-  ./generate-simple-site.sh
+  echo "No prebuilt site found, running build-next-site.sh..."
+  # Build the Next.js site
+  ./tools/scripts/build-next-site.sh
   
   echo "Starting simple HTTP server to serve the static files on port 5000..."
   cd out

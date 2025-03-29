@@ -2,8 +2,11 @@ import { Company } from '../types';
 
 // Helper function to safely convert image paths with spaces
 const safePath = (imageName: string) => {
-  // Use attached_assets directory where the images are actually stored
-  return `/attached_assets/${imageName}.png`;
+  // Ensure the image name has no spaces and uses the correct path
+  const sanitizedName = imageName.replace(/\s+/g, '');
+  
+  // First try the attached_assets directory in public
+  return `/attached_assets/${sanitizedName}.png`;
 };
 
 export const companies: Company[] = [

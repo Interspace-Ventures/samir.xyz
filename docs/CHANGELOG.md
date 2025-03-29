@@ -12,6 +12,82 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [4.7.0] - 2025-03-29
+
+### Fixed
+- Fixed logo display issues within cards for consistent visual presentation
+- Standardized card padding (16px) on all sides for uniform appearance
+- Fixed filter categories functionality to properly show/hide relevant companies
+- Improved image path handling in portfolio.ts to resolve logo loading issues
+
+### Changed
+- Changed hover-over gradient from purple to gray for more professional look
+- Removed 'Back to Profile' button from portfolio page bottom
+- Enhanced client-side reset script (v4.0) to ensure consistent styling across all cards
+- Improved fallback handling for problematic logos with better error recovery
+
+## [4.6.0] - 2025-03-29
+
+### Changed
+- Enhanced portfolio card display with improved visual elements and interactions:
+  - Increased logo size from 40px to 50px max-height for better visibility
+  - Enlarged logo container from 45px to 60px height with proper centering
+  - Added subtle drop shadow to logos for improved visual separation
+  - Increased spacing between cards from 1rem to 1.5rem for better layout flow
+  - Refined the grid layout with 92% width and 0.5rem padding for consistent spacing
+  - Enhanced markup/acquired badges with rounded corners and subtle shadow effects
+
+### Enhancement
+- Improved hover animations for better user interaction:
+  - Added subtle card lift effect (-translate-y-1) on hover
+  - Enhanced purple gradient overlay with higher opacity and inner shadow
+  - Implemented staggered animation for text elements on hover
+  - Added text shadow to description text for better readability
+  - Improved transition timing and easing functions for smoother animations
+  
+## [4.5.0] - 2025-03-29
+
+### Changed
+- Improved navbar responsiveness to show menu at all but the narrowest viewports
+- Updated mobile breakpoint to 420px to ensure menu visibility at most screen sizes
+- Implemented responsive gap spacing for menu items using min() function
+- Fixed mobile menu button to properly hide on larger viewports
+
+### Enhancement
+- Enhanced menu visibility based on content width rather than device type
+- Created smoother transition between desktop and mobile navigation modes
+- Ensured consistent styling across viewport size changes 
+- Preserved purple accent styling in both navigation modes
+
+### Fixed
+- Resolved Turbopack HMR error related to version.json import
+- Improved version fetching to use client-side fetch instead of direct import
+- Enhanced footer component with more reliable version display
+- Added version.json to public directory for proper client-side access
+
+## [4.2.0] - 2025-03-29
+
+### Added
+- Created dedicated directories for improved project organization:
+  - `/tools/scripts/` - For helper scripts and automation tools
+  - `/docs/snapshots/` - For HTML snapshots and reference files
+  - `/docs/references/` - For content reference and template files
+
+### Changed
+- Relocated script files to appropriate directories:
+  - Moved build-next-site.sh to tools/scripts/
+  - Moved smart-start.sh to tools/scripts/
+  - Moved screenshot.html to docs/snapshots/
+  - Moved other tools and reference files to their dedicated directories
+- Updated script references to work with the new file locations
+- Enhanced start.sh to handle scripts in new locations
+- Improved project organization for better maintainability
+
+### Documentation
+- Cleaned up root directory by moving non-essential files to appropriate folders
+- Ensured all scripts maintain proper references after relocation
+- Maintained backward compatibility with workflow configuration
+
 ## [4.1.0] - 2025-03-24
 
 ### Added
