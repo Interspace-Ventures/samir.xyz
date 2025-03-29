@@ -38,6 +38,21 @@ module.exports = {
           950: '#030712',
         }
       },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'card-hover': 'cardHover 0.3s ease-in-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        cardHover: {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.02)' },
+          '100%': { transform: 'scale(1.01)' },
+        },
+      },
     },
   },
   plugins: []
