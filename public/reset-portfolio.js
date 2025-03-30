@@ -1,31 +1,290 @@
 /**
- * Version v4.8.0 - Enhanced Portfolio Grid Reset Script with Force Refresh Functionality
+ * Version v7.2.0 - Complete Page Layout Reset Script - Perfect Reference Match with Refined UI
  * 
- * This improved script respects custom styling while helping fix rendering issues with the portfolio grid.
- * It uses a powerful approach that forces proper styles through multiple methods while preserving animations.
+ * This specialized script creates an exact match to the reference image including page layout.
+ * Features: black background, clean stats layout, purple/gray category buttons, white cards.
  * Updated: 2025-03-30
+ * 
+ * - Creates exact 2-per-row grid layout with improved spacing between cards (1.5rem)
+ * - Applies proper page styling with black background and left-aligned heading
+ * - Formats stats as a consistent 2-row, 4-column grid across all viewport sizes
+ * - Creates purple highlight for selected category buttons without rounded corners
+ * - Sets precise badge positioning with improved padding in purple/#7e22ce
+ * - Ensures logos are properly sized and centered in white cards with consistent dimensions
+ * - Safely handles DOM manipulations to prevent removal errors
+ * - Adds proper spacing between stats section and filters section
  */
 
 (function() {
-  console.log('Portfolio reset script v4.8.0 with advanced force refresh loaded');
+  console.log('Portfolio reset script v7.2.0 with refined UI styling and responsive design loaded');
   
   // Version timestamp to ensure we're running the latest script (cache busting)
-  const VERSION = 'v4.8.0-' + Date.now();
+  const VERSION = 'v7.2.0-' + Date.now();
   console.log('Script version timestamp:', VERSION);
+  
+  // Safe DOM manipulation helper with additional checks
+  function safeRemoveElement(element) {
+    try {
+      // First verify the element exists and is connected to DOM
+      if (!element || !element.isConnected) {
+        console.log('Element is null, undefined, or not in DOM');
+        return false;
+      }
+      
+      // Then verify it has a parent
+      if (!element.parentNode) {
+        console.log('Element has no parent node');
+        return false;
+      }
+      
+      // Finally verify the parent contains this element
+      if (!element.parentNode.contains(element)) {
+        console.log('Parent does not contain this element');
+        return false;
+      }
+      
+      // Now it's safe to remove
+      element.parentNode.removeChild(element);
+      return true;
+    } catch (e) {
+      console.log('Safe remove failed:', e);
+      // As a fallback, just hide the element if we can't remove it
+      try {
+        if (element) {
+          element.style.display = 'none';
+          console.log('Element hidden as fallback');
+        }
+      } catch (innerError) {
+        console.error('Even hiding failed:', innerError);
+      }
+    }
+    return false;
+  }
   
   // Force clear CSS caches by adding a dynamic stylesheet
   function forceClearStyleCache() {
-    const style = document.createElement('style');
-    style.textContent = `
-      /* Force-refresh cache buster: ${VERSION} */
-      .portfolio-grid { display: grid !important; }
-      .portfolio-motto { display: inline-block !important; }
-      .portfolio-grid > div > div > a { display: block !important; }
-      .portfolio-grid div[class*="absolute inset-0"] { position: absolute !important; }
-      .portfolio-grid .absolute.top-2.right-2 { position: absolute !important; }
-    `;
-    document.head.appendChild(style);
-    console.log('Dynamic style with cache busting injected');
+    // First, try to remove any existing dynamic styles
+    const oldStyles = document.querySelectorAll('style[data-portfolio-reset]');
+    oldStyles.forEach(oldStyle => {
+      safeRemoveElement(oldStyle);
+    });
+    
+    // Create and add new style
+    try {
+      const style = document.createElement('style');
+      style.setAttribute('data-portfolio-reset', VERSION);
+      style.textContent = `
+        /* Force-refresh cache buster: ${VERSION} */
+        /* EXACT REFERENCE MATCHING DESIGN - v7.2.0 */
+        
+        /* Page background */
+        body {
+          background-color: #000000 !important;
+        }
+        
+        /* Overall page container styling */
+        .bg-black, div[class*="bg-gray-900"] {
+          background-color: #000000 !important;
+        }
+        
+        /* Left-aligned heading */
+        h1.text-4xl {
+          text-align: left !important;
+          margin-bottom: 1rem !important;
+        }
+        
+        /* Enhanced stats section - ALWAYS 2 rows of 4 columns */
+        .stats-row-1, .stats-row-2 {
+          margin-bottom: 0.75rem !important;
+          display: grid !important;
+          grid-template-columns: repeat(4, 1fr) !important; /* Always 4 columns */
+          width: 100% !important;
+          max-width: 800px !important;
+          gap: 0.5rem !important;
+        }
+        
+        /* Force grid layout for all viewport sizes */
+        @media (max-width: 768px) {
+          .stats-row-1, .stats-row-2 {
+            grid-template-columns: repeat(4, 1fr) !important;
+            font-size: 90% !important; /* Scale down text size on smaller screens */
+          }
+        }
+        
+        /* Stats item styling */
+        .stats-item {
+          background: none !important;
+          border: none !important;
+          box-shadow: none !important;
+          padding: 0 !important;
+          min-width: 0 !important; /* Allow text truncation */
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+        }
+        
+        /* Stats labels */
+        .stats-item div:first-child {
+          color: #9ca3af !important; /* gray-400 */
+          font-size: 0.875rem !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+        }
+        
+        /* Stats values */
+        .stats-item div:last-child {
+          color: #ffffff !important;
+          font-size: 1.25rem !important;
+          font-weight: 700 !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+        }
+        
+        /* Add spacing between stats and filters */
+        .stats-row-2 {
+          margin-bottom: 2.5rem !important;
+        }
+        
+        /* For very small screens, handle gracefully */
+        @media (max-width: 480px) {
+          .stats-row-1, .stats-row-2 {
+            font-size: 75% !important; /* Scale down more */
+          }
+          
+          .stats-item div:last-child {
+            font-size: 1rem !important;
+          }
+        }
+        
+        /* Category buttons - selected button in purple, otherwise gray (exact match to reference) */
+        button[class*="text-sm"] {
+          min-width: 70px !important;
+          padding: 0.375rem 1rem !important; /* py-1.5 px-4 */
+          font-size: 0.875rem !important; /* text-sm */
+          border-radius: 0 !important; /* no rounded corners */
+          font-weight: 500 !important;
+          margin-right: 0.5rem !important;
+          margin-bottom: 0.5rem !important;
+          outline: none !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+        
+        /* Selected category button is purple */
+        button[class*="bg-purple-700"] {
+          background-color: #7e22ce !important; /* purple-700 */
+          color: #ffffff !important;
+        }
+        
+        /* Non-selected category buttons are gray */
+        button[class*="text-sm"]:not([class*="bg-purple-700"]) {
+          background-color: #1f2937 !important; /* gray-800 */
+          color: #ffffff !important;
+          transition: background-color 0.2s !important;
+        }
+        
+        /* Hover effect on non-selected buttons */
+        button[class*="text-sm"]:not([class*="bg-purple-700"]):hover {
+          background-color: #374151 !important; /* gray-700 */
+        }
+        
+        /* Grid layout - exactly 2 cards per row */
+        .portfolio-grid { 
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr) !important; /* Exactly 2 columns */
+          grid-auto-rows: 150px !important;
+          gap: 1.5rem !important; /* Increased spacing between cards */
+          width: 90% !important; /* Controlled width */
+          max-width: 800px !important; /* Limited max width */
+          margin: 0 auto !important;
+          padding: 0 !important;
+        }
+        
+        /* Pure white cards with minimal styling - exactly like reference */
+        .portfolio-grid > div > div {
+          height: 150px !important;
+          border-radius: 0.75rem !important;
+          background-color: white !important;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+          overflow: hidden !important;
+          border: none !important;
+          transition: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+        
+        /* Card content centered - exactly like reference */
+        .portfolio-grid > div > div > a {
+          display: flex !important;
+          height: 100% !important;
+          width: 100% !important;
+          align-items: center !important;
+          justify-content: center !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          position: relative !important;
+        }
+        
+        /* Purple badge styling - exact match to reference image */
+        .badge-markup, [data-status="Markup"] { 
+          position: absolute !important;
+          top: 8px !important; /* top-2 */
+          right: 8px !important; /* right-2 */
+          z-index: 20 !important;
+          background-color: #7e22ce !important; /* purple-700 */
+          color: white !important;
+          font-size: 0.7rem !important;
+          font-weight: 500 !important;
+          border-radius: 0.25rem !important;
+          padding: 0.15rem 0.5rem !important;
+          line-height: 1.4 !important;
+          box-shadow: none !important;
+        }
+        
+        /* Gray badge for Acquired - exact match to reference styling */
+        .badge-acquired, [data-status="Acquired"] { 
+          position: absolute !important;
+          top: 8px !important; /* top-2 */
+          right: 8px !important; /* right-2 */
+          z-index: 20 !important;
+          background-color: #6b7280 !important; /* gray-500 */
+          color: white !important;
+          font-size: 0.7rem !important;
+          font-weight: 500 !important;
+          border-radius: 0.25rem !important;
+          padding: 0.15rem 0.5rem !important;
+          line-height: 1.4 !important;
+          box-shadow: none !important;
+        }
+        
+        /* Image styling - exactly like reference */
+        .portfolio-grid img {
+          max-height: 70px !important;
+          max-width: 120px !important;
+          object-fit: contain !important;
+          display: block !important;
+          margin: 0 auto !important;
+          filter: none !important;
+          transition: none !important;
+        }
+        
+        /* Remove any hover effects */
+        .portfolio-grid > div > div:hover {
+          transform: none !important;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+        }
+        
+        /* Hide all hover overlays */
+        .portfolio-grid div[class*="absolute inset-0"] {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+      console.log('Dynamic style with cache busting injected - version: ' + VERSION);
+    } catch (e) {
+      console.error('Error applying styles:', e);
+    }
   }
   
   // Run immediately
@@ -36,9 +295,10 @@
     console.log('DOM loaded - preparing portfolio grid with gray theming');
     setTimeout(resetPortfolioGridGently, 200);
     setTimeout(enhanceLogoDisplayPreservingStyles, 250);
+    setTimeout(enforceStatsLayout, 300); // Apply stats layout first
     
     // Make sure all hover effects and animations are preserved
-    setTimeout(preserveAnimationsAndHoverEffects, 300);
+    setTimeout(preserveAnimationsAndHoverEffects, 350);
   });
 
   // Also run on window load to ensure images are loaded
@@ -46,15 +306,23 @@
     console.log('Window loaded - ensuring portfolio grid with gray theming is applied');
     resetPortfolioGridGently();
     enhanceLogoDisplayPreservingStyles();
+    enforceStatsLayout(); // Apply stats layout immediately
     preserveAnimationsAndHoverEffects();
     
     // Run twice more with delays to ensure everything is properly applied
     setTimeout(() => {
       resetPortfolioGridGently();
       enhanceLogoDisplayPreservingStyles();
+      enforceStatsLayout(); // Apply stats layout again
       preserveAnimationsAndHoverEffects();
       console.log('Portfolio grid final styling check complete');
     }, 1000);
+  });
+  
+  // Add specific event for fixing stats section on viewport resize
+  window.addEventListener('resize', function() {
+    // Prioritize stats layout first on resize
+    setTimeout(enforceStatsLayout, 50);
   });
 
   function resetPortfolioGridGently() {
@@ -80,8 +348,8 @@
       
       // Only set these grid styles if they aren't already set by React
       if (!portfolioGrid.style.gridTemplateColumns) {
-        portfolioGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(220px, 1fr))';
-        portfolioGrid.style.gridAutoRows = '130px';
+        portfolioGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(260px, 1fr))';
+        portfolioGrid.style.gridAutoRows = '150px'; // Match our card height
         portfolioGrid.style.gap = '1.25rem'; // Consistent spacing for both row and column gaps
         portfolioGrid.style.width = '94%';
         portfolioGrid.style.maxWidth = '1400px';
@@ -120,12 +388,17 @@
       img.classList.add('styled-v4');
       
       // Only set these minimal styles without overriding existing styles
-      if (!img.hasAttribute('style') || !img.style.maxHeight) {
-        img.style.maxHeight = img.style.maxHeight || '50px';
-        img.style.objectFit = img.style.objectFit || 'contain';
-        img.style.maxWidth = '90%';
-        img.style.display = 'block';
-        img.style.margin = '0 auto';
+      try {
+        if (!img.hasAttribute('style') || !img.style.maxHeight) {
+          img.style.maxHeight = img.style.maxHeight || '70px'; // Increased from 50px to 70px
+          img.style.objectFit = img.style.objectFit || 'contain';
+          img.style.maxWidth = '90%';
+          img.style.display = 'block';
+          img.style.margin = '0 auto';
+          img.style.filter = 'drop-shadow(0px 1px 1px rgba(0,0,0,0.05))';
+        }
+      } catch (e) {
+        console.error('Error setting image styles:', e);
       }
       
       // Add error handling directly to images
@@ -150,22 +423,22 @@
             }
           }
           
-          // Provide text fallback only if image truly failed
+          // Just hide the image on error instead of trying to replace it
+          // This avoids DOM manipulation errors with React's virtual DOM
           if (!img.complete || img.naturalWidth === 0) {
-            const companyName = img.getAttribute('alt');
-            
-            if (companyName && !img.parentElement.querySelector('.text-fallback')) {
-              // Create fallback text element
-              const fallback = document.createElement('div');
-              fallback.className = 'text-center text-fallback';
-              fallback.innerHTML = `
-                <h3 style="font-size: 1rem; font-weight: 500; color: #111827;">${companyName}</h3>
-              `;
+            try {
+              // Simply hide the image and show nothing
+              img.style.display = 'none';
               
-              // Replace image with fallback
-              if (img.parentElement) {
-                img.parentElement.replaceChild(fallback, img);
-              }
+              // Add empty alt text to improve accessibility
+              img.alt = '';
+              
+              // Add a data attribute to mark this image as handled
+              img.setAttribute('data-error-handled-safely', 'true');
+              
+              console.log('Image hidden safely without DOM manipulation');
+            } catch (e) {
+              console.error('Error hiding failed image:', e);
             }
           }
         };
@@ -222,35 +495,57 @@
         // Improve hover content styling if needed
         const hoverContent = overlay.querySelector('div');
         if (hoverContent) {
-          // Add button-like styling to company name
-          const companyName = hoverContent.querySelector('h3');
-          if (companyName && !companyName.closest('.px-2.py-1.bg-gray-700\\/70')) {
-            // Wrap company name in a styled container if not already
-            const nameWrapper = document.createElement('div');
-            nameWrapper.className = 'px-2 py-1 bg-gray-700/70 rounded mb-2 inline-block';
-            companyName.parentNode.insertBefore(nameWrapper, companyName);
-            nameWrapper.appendChild(companyName);
+          // Add button-like styling to company name with safer DOM manipulation
+          try {
+            const companyName = hoverContent.querySelector('h3');
+            if (companyName && !companyName.closest('.px-2.py-1.bg-gray-700\\/70')) {
+              // Wrap company name in a styled container if not already
+              const nameWrapper = document.createElement('div');
+              nameWrapper.className = 'px-2 py-1 bg-gray-700/70 rounded mb-2 inline-block';
+              
+              // Safer DOM manipulation with reference validity check
+              if (companyName.parentNode && nameWrapper) {
+                const parentNode = companyName.parentNode;
+                if (parentNode.contains(companyName)) {
+                  parentNode.insertBefore(nameWrapper, companyName);
+                  nameWrapper.appendChild(companyName);
+                }
+              }
+            }
+          } catch (e) {
+            console.error('Error styling company name:', e);
           }
           
-          // Add visit button if needed
-          if (!hoverContent.querySelector('.mt-1.text-xs')) {
-            const description = hoverContent.querySelector('p');
-            if (description) {
-              description.classList.add('mb-2');
-              
-              // Create visit button after description
-              const visitButtonContainer = document.createElement('div');
-              visitButtonContainer.className = 'mt-1 text-xs';
-              
-              const visitButton = document.createElement('span');
-              visitButton.className = 'bg-gray-600/70 hover:bg-gray-500/80 px-3 py-1 rounded-full transition-colors';
-              
-              const companyName = card.querySelector('h3')?.textContent || 'Website';
-              visitButton.textContent = `Visit ${companyName} →`;
-              
-              visitButtonContainer.appendChild(visitButton);
-              hoverContent.appendChild(visitButtonContainer);
+          // Add visit button if needed with safe DOM manipulation
+          try {
+            if (!hoverContent.querySelector('.mt-1.text-xs')) {
+              const description = hoverContent.querySelector('p');
+              if (description) {
+                description.classList.add('mb-2');
+                
+                // Create visit button after description
+                const visitButtonContainer = document.createElement('div');
+                visitButtonContainer.className = 'mt-1 text-xs';
+                
+                const visitButton = document.createElement('span');
+                visitButton.className = 'bg-gray-600/70 hover:bg-gray-500/80 px-3 py-1 rounded-full transition-colors';
+                
+                const companyName = card.querySelector('h3')?.textContent || 'Website';
+                visitButton.textContent = `Visit ${companyName} →`;
+                
+                // Safe append with checks
+                if (visitButtonContainer && visitButton) {
+                  visitButtonContainer.appendChild(visitButton);
+                  
+                  // Only append to parent if it exists and is connected to the DOM
+                  if (hoverContent && hoverContent.isConnected) {
+                    hoverContent.appendChild(visitButtonContainer);
+                  }
+                }
+              }
             }
+          } catch (e) {
+            console.error('Error adding visit button:', e);
           }
         }
       }
@@ -292,6 +587,103 @@
     setTimeout(preserveAnimationsAndHoverEffects, 150);
   });
   
-  // Log completion of script initialization
-  console.log('Portfolio grid enhancement script v4.0 fully initialized');
+  // Function to ensure stats section is using our new layout
+  function enforceStatsLayout() {
+    try {
+      // Find any old-style stats sections
+      const oldStatsGrids = document.querySelectorAll('div.grid-cols-2, div.grid-cols-4');
+      
+      if (oldStatsGrids.length > 0) {
+        console.log(`Converting ${oldStatsGrids.length} old stats sections to new format`);
+        
+        // Convert each old grid to new format
+        oldStatsGrids.forEach((oldGrid, index) => {
+          // Add class based on position (first or second row)
+          oldGrid.classList.add(index === 0 ? 'stats-row-1' : 'stats-row-2');
+          
+          // Force grid layout
+          oldGrid.style.display = 'grid';
+          oldGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+          oldGrid.style.gap = '0.5rem';
+          oldGrid.style.width = '100%';
+          oldGrid.style.maxWidth = '800px';
+          
+          // Add stats-item class to children
+          const statItems = oldGrid.querySelectorAll('div');
+          statItems.forEach(item => {
+            item.classList.add('stats-item');
+          });
+        });
+      }
+      
+      // Also target our new stats sections and ensure they're properly styled
+      const statsRows = document.querySelectorAll('.stats-row-1, .stats-row-2');
+      if (statsRows.length > 0) {
+        console.log(`Found ${statsRows.length} stats rows to ensure proper layout`);
+        
+        statsRows.forEach(row => {
+          // Ensure proper grid layout
+          row.style.display = 'grid';
+          row.style.gridTemplateColumns = 'repeat(4, 1fr)';
+          row.style.gap = '0.5rem';
+          
+          // Add proper classes to children if needed
+          const statItems = row.querySelectorAll('div');
+          statItems.forEach(item => {
+            if (!item.classList.contains('stats-item')) {
+              item.classList.add('stats-item');
+            }
+          });
+        });
+      }
+      
+      console.log('Stats section layout enforcement complete');
+    } catch (e) {
+      console.error('Error enforcing stats layout:', e);
+    }
+  }
+
+  // Final safety check after all operations complete
+  setTimeout(() => {
+    try {
+      // Verify our dynamic styles
+      const styleVerification = document.querySelector('style[data-portfolio-reset]');
+      if (!styleVerification) {
+        console.warn('Dynamic style may have been removed - reapplying');
+        forceClearStyleCache();
+      }
+      
+      // Ensure stats section is using our new layout
+      enforceStatsLayout();
+      
+      // One last pass for badge formatting - with better positioning
+      const badges = document.querySelectorAll('.portfolio-grid .absolute');
+      badges.forEach(badge => {
+        // Update position to match our new styling
+        badge.classList.remove('top-2', 'right-2');
+        badge.classList.add('top-1', 'right-1');
+        
+        // Reduce padding
+        badge.style.padding = '0 0.3rem';
+        badge.style.fontSize = '0.65rem';
+        badge.style.lineHeight = '1.2';
+        badge.style.borderRadius = '0.15rem';
+        
+        // Add specific badge classes
+        if (badge.textContent?.includes('Markup')) {
+          badge.classList.add('badge-markup');
+          badge.style.backgroundColor = '#7e22ce';
+        }
+        if (badge.textContent?.includes('Acquired')) {
+          badge.classList.add('badge-acquired');
+          badge.style.backgroundColor = '#6b7280';
+        }
+      });
+      
+      // Log completion of script initialization with version info
+      console.log(`Portfolio grid enhancement script v7.1.0 fully initialized (${VERSION})`);
+    } catch (e) {
+      console.error('Error during final checks:', e);
+    }
+  }, 2000);
 })();

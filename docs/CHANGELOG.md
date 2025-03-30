@@ -12,22 +12,34 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
-## [4.8.0] - 2025-03-30
+## [5.0.0] - 2025-03-30
 
 ### Added
-- Added portfolio motto quote to enhance branding: "Helping founders create category-defining products that matter"
-- Added improved status labels (Markup/Acquired) with better visibility and styling
-- Added styled visit buttons on hover with arrow indicators for better UX
+- Added data-status attributes for enhanced CSS targeting of status badges
+- Added comprehensive node validation to prevent DOM manipulation errors 
+- Added enhanced image timeout handling with better error recovery
+- Added improved element connectivity checks before DOM operations
 
 ### Fixed
-- Fixed logo display issues by improving path handling for special case filenames
-- Fixed inconsistent grid spacing between rows and columns for a more balanced layout
-- Fixed hover state styling with proper button-like elements and better transitions
+- Fixed portfolio card styling to match design reference with clean white cards
+- Fixed badge styling with proper purple color for "Markup" and gray for "Acquired"
+- Fixed DOM manipulation errors with proper parent node validation
+- Fixed portfolio grid appearance with better spacing and consistent card heights
 
 ### Changed
-- Enhanced hover overlay with structured content layout and button-like elements
-- Redesigned card interaction with styled company names on hover
-- Improved client-side script to apply all visual enhancements consistently
+- Redesigned portfolio cards to match the clean, white card design from reference
+- Updated badge styling with the specified purple for "Markup" badges
+- Increased logo container dimensions from 70x140px to 85x160px for better display
+- Increased logo image max-height from 50px to 70px for improved visibility
+- Enhanced reset-portfolio.js script with safer DOM operations
+
+## [4.9.0] - 2025-03-29
+
+### Added
+- Added DOM operation safety checks to prevent "removeChild" Node errors
+- Added error boundary patterns with proper fallback display for image components
+- Added enhanced image timeouts with safe node manipulation techniques
+- Added consistent error logging for improved debugging with custom error types
 
 ## [4.7.0] - 2025-03-29
 

@@ -35,87 +35,75 @@
   margin-top: 3rem !important; /* More spacing between filters and grid */
 }
 
-/* Portfolio card styling - v5.0 - Larger cards with animations */
+/* Portfolio card styling - v5.0 - Exact match to reference image */
 .portfolio-grid > div > div {
-  height: 150px !important; /* Increased from 130px */
+  height: 150px !important;
   border-radius: 0.75rem !important;
   background-color: white !important;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
   overflow: hidden !important;
-  border: 1px solid rgba(229, 231, 235, 1) !important;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; /* Improved animation curve */
+  border: none !important;
+  transition: none !important; /* No transitions as per reference */
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* Company card link container */
+/* Company card link container - ultra-simplified to match reference */
 .portfolio-grid > div > div > a {
-  display: block !important;
+  display: flex !important;
   height: 100% !important;
-  padding: 1rem !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
   position: relative !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-/* Status badge (Markup/Acquired) - v5.0 - Different colors for each status */
-.portfolio-grid .absolute.top-2.right-2 {
+/* Status badge (Markup) - exactly matching reference image */
+.badge-markup, 
+.portfolio-grid [data-status="Markup"] {
   position: absolute !important;
   top: 0.5rem !important;
   right: 0.5rem !important;
   z-index: 20 !important;
-  font-size: 0.7rem !important;
-  line-height: 1rem !important;
-  padding: 0.2rem 0.6rem !important;
-  border-radius: 4px !important;
+  background-color: #7e22ce !important; /* Purple-700 */
   color: white !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
-  transition: all 0.2s ease !important;
-}
-
-/* Purple badge for Markup */
-.portfolio-grid .absolute.top-2.right-2:contains('Markup') {
-  background-color: #8b5cf6 !important; /* Purple for Markup */
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  border-radius: 0.25rem !important;
+  padding: 0.15rem 0.5rem !important;
+  box-shadow: none !important; /* No shadow in reference image */
+  letter-spacing: 0 !important;
 }
 
 /* Gray badge for Acquired */
-.portfolio-grid .absolute.top-2.right-2:contains('Acquired') {
-  background-color: #6b7280 !important; /* Gray for Acquired */
+.badge-acquired,
+.portfolio-grid [data-status="Acquired"] {
+  position: absolute !important;
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  z-index: 20 !important;
+  background-color: #6b7280 !important; /* Gray-500 */
+  color: white !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  border-radius: 0.25rem !important;
+  padding: 0.15rem 0.5rem !important;
+  box-shadow: none !important; /* No shadow in reference image */
+  letter-spacing: 0 !important;
 }
 
-/* Logo container styling - v5.0 - Larger logos with better positioning */
-.portfolio-grid .bg-white {
-  height: 85px !important; /* Increased from 70px */
-  width: 100% !important;
-  max-width: 160px !important; /* Increased from 140px */
-  position: relative !important;
-  margin: 0 auto !important;
-  background-color: white !important;
-  padding: 0.75rem !important; /* Increased from 0.5rem */
-  border-radius: 6px !important; /* Increased from 0.375rem */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important; /* Enhanced shadow */
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-/* Logo container hover effect */
-.portfolio-grid .bg-white:hover {
-  transform: scale(1.04) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08) !important;
-}
-
-/* Logo image styling - v5.0 - Larger logos with better appearance */
+/* Logo image styling - exactly matching reference */
 .portfolio-grid img {
-  width: 100% !important;
-  height: 100% !important;
+  max-height: 70px !important;
+  max-width: 120px !important;
   object-fit: contain !important;
   object-position: center !important;
-  max-height: 70px !important; /* Increased from 60px */
-  max-width: 90% !important;
   display: block !important;
+  filter: none !important; /* No shadow in reference */
+  transition: none !important; /* No transitions in reference */
   margin: 0 auto !important;
-  filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.08)) !important; /* Enhanced shadow */
-  transition: transform 0.3s ease !important;
 }
 
 /* Hover overlay styling - v5.0 - Improved hover effect */
@@ -445,24 +433,30 @@ body {
 
 /* Increased size of logos within the cards */
 .portfolio-grid img {
-  max-height: 50px !important; /* Increased from 40px */
-  max-width: 80% !important; /* Control width to maintain proportions */
+  max-height: 70px !important; /* Increased from 50px to match above */
+  max-width: 90% !important; /* Control width to maintain proportions */
   object-fit: contain !important;
   transition: transform 0.3s ease !important;
   margin: 0 auto !important; /* Center the logo horizontally */
   display: block !important; /* Ensure it's a block element for margin auto to work */
+  filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.08)) !important; /* Enhanced shadow */
 }
 
 /* Logo container styling */
 .portfolio-grid .bg-white,
 .portfolio-grid div.h-\[45px\] {
   background: white !important;
-  border-radius: 4px !important;
-  padding: 6px !important; /* Increased from 2px */
-  height: 60px !important; /* Increased from 45px */
+  border-radius: 6px !important; /* Match container radius from main styling */
+  padding: 8px !important; /* Increased from 6px */
+  height: 85px !important; /* Match height from main styling (increased from 60px) */
+  width: 100% !important;
+  max-width: 160px !important; /* Match width from main styling */
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important; /* Match shadow from main styling */
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  margin: 0 auto !important;
 }
 
 .portfolio-grid .animate-fade-in {
