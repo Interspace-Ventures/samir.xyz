@@ -1,16 +1,17 @@
 {
-  "version": "4.8.0",
+  "version": "7.0.0",
   "name": "Portfolio Website",
   "description": "Personal portfolio website showcasing professional projects through an AI-enhanced interactive design",
   "lastUpdated": "2025-03-30",
   "changes": [
-    "Fixed logo display issues with improved path handling for special case filenames",
-    "Added portfolio motto quote for better branding presentation",
-    "Standardized grid spacing for consistent visual layout between rows and columns",
-    "Enhanced hover effects with proper styled links and button-like elements",
-    "Improved status badges (Markup/Acquired) with better visibility and proper styling",
-    "Redesigned card interaction with styled company names on hover",
-    "Enhanced client-side script to consistently apply all visual improvements"
+    "Complete page layout redesign to match reference image with black background",
+    "Simplified stats section with clean text layout (no table or borders)",
+    "Added purple 'All' button with gray category buttons",
+    "Maintained exact 2-per-row grid layout with reduced spacing",
+    "Preserved precise badge positioning with minimal padding",
+    "Kept pure white card design with centered logos at 70px height",
+    "Updated reset-portfolio.js script to v6.0.2 with comprehensive page styling",
+    "Optimized DOM manipulation for consistent and reliable styling"
   ],
   "previousVersion": {
     "version": "4.5.0",
