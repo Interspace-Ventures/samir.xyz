@@ -2,10 +2,26 @@ import { Company } from '../types';
 
 // Helper function to safely convert image paths with spaces
 const safePath = (imageName: string) => {
-  // Ensure the image name has no spaces and uses the correct path
-  const sanitizedName = imageName.replace(/\s+/g, '');
+  // For special cases with specific naming patterns
+  const specialNames: Record<string, string> = {
+    'Swansea City AFC': 'SwanseaCityAFC',
+    'The Coffee': 'TheCoffee',
+    'The Food Company': 'TheFoodCompany',
+    'Hey I\'m Samir': 'hey-im-samir', // Use hyphenated version
+    'Interspace': 'interspace', // Handle lowercase
+    'margin': 'margin', // Already correct
+    'Solo': 'solo-logo-2025', // Special case
+    'Predictive.film': 'predictive-film-icon', // Special case
+    '2 Days Early': '2DE-Interspace', // Special case
+  };
+
+  // Check if it's a special case
+  if (imageName in specialNames) {
+    return `/attached_assets/${specialNames[imageName]}.png`;
+  }
   
-  // First try the attached_assets directory in public
+  // Regular case - just replace spaces and use the name
+  const sanitizedName = imageName.replace(/\s+/g, '');
   return `/attached_assets/${sanitizedName}.png`;
 };
 

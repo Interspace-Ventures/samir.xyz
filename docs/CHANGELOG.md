@@ -12,6 +12,23 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [4.8.0] - 2025-03-30
+
+### Added
+- Added portfolio motto quote to enhance branding: "Helping founders create category-defining products that matter"
+- Added improved status labels (Markup/Acquired) with better visibility and styling
+- Added styled visit buttons on hover with arrow indicators for better UX
+
+### Fixed
+- Fixed logo display issues by improving path handling for special case filenames
+- Fixed inconsistent grid spacing between rows and columns for a more balanced layout
+- Fixed hover state styling with proper button-like elements and better transitions
+
+### Changed
+- Enhanced hover overlay with structured content layout and button-like elements
+- Redesigned card interaction with styled company names on hover
+- Improved client-side script to apply all visual enhancements consistently
+
 ## [4.7.0] - 2025-03-29
 
 ### Fixed

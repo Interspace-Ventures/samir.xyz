@@ -1,16 +1,35 @@
 /**
- * Version v4.0 - Enhanced Portfolio Grid Reset Script with Gray Hover and Image Fixes
+ * Version v4.8.0 - Enhanced Portfolio Grid Reset Script with Force Refresh Functionality
  * 
  * This improved script respects custom styling while helping fix rendering issues with the portfolio grid.
- * It uses a gentle approach that preserves animations, consistent padding, and gray hover effects.
+ * It uses a powerful approach that forces proper styles through multiple methods while preserving animations.
+ * Updated: 2025-03-30
  */
 
 (function() {
-  console.log('Portfolio reset script v4.0 with gray hover theming loaded');
+  console.log('Portfolio reset script v4.8.0 with advanced force refresh loaded');
   
   // Version timestamp to ensure we're running the latest script (cache busting)
-  const VERSION = Date.now();
+  const VERSION = 'v4.8.0-' + Date.now();
   console.log('Script version timestamp:', VERSION);
+  
+  // Force clear CSS caches by adding a dynamic stylesheet
+  function forceClearStyleCache() {
+    const style = document.createElement('style');
+    style.textContent = `
+      /* Force-refresh cache buster: ${VERSION} */
+      .portfolio-grid { display: grid !important; }
+      .portfolio-motto { display: inline-block !important; }
+      .portfolio-grid > div > div > a { display: block !important; }
+      .portfolio-grid div[class*="absolute inset-0"] { position: absolute !important; }
+      .portfolio-grid .absolute.top-2.right-2 { position: absolute !important; }
+    `;
+    document.head.appendChild(style);
+    console.log('Dynamic style with cache busting injected');
+  }
+  
+  // Run immediately
+  forceClearStyleCache();
   
   // Wait for DOM to be fully loaded
   document.addEventListener('DOMContentLoaded', function() {
@@ -63,8 +82,8 @@
       if (!portfolioGrid.style.gridTemplateColumns) {
         portfolioGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(220px, 1fr))';
         portfolioGrid.style.gridAutoRows = '130px';
-        portfolioGrid.style.gap = '1rem';
-        portfolioGrid.style.width = '100%';
+        portfolioGrid.style.gap = '1.25rem'; // Consistent spacing for both row and column gaps
+        portfolioGrid.style.width = '94%';
         portfolioGrid.style.maxWidth = '1400px';
         portfolioGrid.style.margin = '0 auto';
       }
@@ -177,6 +196,14 @@
         cardLink.setAttribute('data-padding-fixed', 'true');
       }
       
+      // Find and style status badges
+      const badge = card.querySelector('.absolute.top-2.right-2');
+      if (badge) {
+        badge.classList.add('z-20', 'text-xs', 'px-2.5', 'py-0.5', 'rounded-md', 'text-white', 'bg-gray-800', 'font-semibold', 'shadow-md', 'shadow-gray-900/30', 'animate-fade-in');
+        // Remove any purple styling
+        badge.classList.remove('bg-purple-700', 'shadow-purple-900/30');
+      }
+      
       // Find hover overlay elements
       const overlay = card.querySelector('div[class*="absolute inset-0"]');
       
@@ -190,6 +217,41 @@
              overlay.classList.contains('to-purple-800/90'))) {
           overlay.classList.remove('from-purple-900/95', 'to-purple-800/90');
           overlay.classList.add('from-gray-900/95', 'to-gray-800/90');
+        }
+        
+        // Improve hover content styling if needed
+        const hoverContent = overlay.querySelector('div');
+        if (hoverContent) {
+          // Add button-like styling to company name
+          const companyName = hoverContent.querySelector('h3');
+          if (companyName && !companyName.closest('.px-2.py-1.bg-gray-700\\/70')) {
+            // Wrap company name in a styled container if not already
+            const nameWrapper = document.createElement('div');
+            nameWrapper.className = 'px-2 py-1 bg-gray-700/70 rounded mb-2 inline-block';
+            companyName.parentNode.insertBefore(nameWrapper, companyName);
+            nameWrapper.appendChild(companyName);
+          }
+          
+          // Add visit button if needed
+          if (!hoverContent.querySelector('.mt-1.text-xs')) {
+            const description = hoverContent.querySelector('p');
+            if (description) {
+              description.classList.add('mb-2');
+              
+              // Create visit button after description
+              const visitButtonContainer = document.createElement('div');
+              visitButtonContainer.className = 'mt-1 text-xs';
+              
+              const visitButton = document.createElement('span');
+              visitButton.className = 'bg-gray-600/70 hover:bg-gray-500/80 px-3 py-1 rounded-full transition-colors';
+              
+              const companyName = card.querySelector('h3')?.textContent || 'Website';
+              visitButton.textContent = `Visit ${companyName} →`;
+              
+              visitButtonContainer.appendChild(visitButton);
+              hoverContent.appendChild(visitButtonContainer);
+            }
+          }
         }
       }
       
