@@ -1,16 +1,37 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class', // Enable class-based dark mode for more control
+  darkMode: "class",
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       screens: {
         'xs': '480px',  // Added custom 'xs' breakpoint for responsive design
       },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      },
       colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
         purple: {
           50: '#faf5ff',
           100: '#f3e8ff',
@@ -38,22 +59,30 @@ module.exports = {
           950: '#030712',
         }
       },
-      animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'card-hover': 'cardHover 0.3s ease-in-out',
-      },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
-        cardHover: {
-          '0%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.02)' },
-          '100%': { transform: 'scale(1.01)' },
+        "slide-in-from-bottom": {
+          "0%": { transform: "translateY(20px)" },
+          "100%": { transform: "translateY(0)" },
         },
+        "card-hover": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-8px)" }
+        }
       },
+      animation: {
+        "fade-in": "fade-in 0.3s ease-in-out",
+        "slide-in-from-bottom": "slide-in-from-bottom 0.3s ease-out",
+        "card-hover": "card-hover 0.2s ease-out forwards"
+      }
     },
   },
-  plugins: []
+  plugins: [
+    // Adding tailwind plugins
+    require('@tailwindcss/typography'),
+    require('tailwindcss-animate'),
+  ]
 }
