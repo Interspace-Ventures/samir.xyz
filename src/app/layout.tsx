@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 import UltraSimpleNavbar from "../components/layout/ultra-simple-navbar";
 import Footer from "../components/layout/footer";
-import { ErrorBoundary } from "../components/error-boundary";
 
 export const metadata: Metadata = {
   title: "Hey - I'm Samir",
@@ -39,9 +38,7 @@ export default function RootLayout({
                 {children}
               </div>
             </main>
-            <ErrorBoundary name="Footer">
-              <Footer />
-            </ErrorBoundary>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>

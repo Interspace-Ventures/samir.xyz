@@ -36,7 +36,7 @@ const nextConfig = {
   },
   
   // Allow cross-origin requests from Replit webview
-  allowedDevOrigins: ['*'],
+  allowedDevOrigins: ['*', 'janeway.replit.dev', '*.janeway.replit.dev'],
   
   // Support for Replit environment
   crossOrigin: 'anonymous',

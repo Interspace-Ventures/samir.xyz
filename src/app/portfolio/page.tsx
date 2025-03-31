@@ -3,7 +3,6 @@
 import { useState, memo } from 'react';
 import { companies, categories } from '../../components/data/portfolio';
 import { useTheme } from 'next-themes';
-import { ErrorBoundary } from '../../components/error-boundary';
 import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { Card } from '../../components/ui/card';
@@ -149,15 +148,13 @@ const CompanyCard = memo(function CompanyCard({ company, isDark }: { company: an
             <div className="text-gray-400 text-sm">No image</div>
           ) : (
             <div className="flex items-center justify-center h-full w-full">
-              <ErrorBoundary name={`CompanyImage-${company.name}`} fallback={<div className="text-gray-400 text-sm">Image error</div>}>
-                <img
-                  src={company.logo}
-                  alt={company.name}
-                  className="max-h-[100px] max-w-[140px] object-contain"
-                  onError={() => setImageError(true)}
-                  loading="lazy"
-                />
-              </ErrorBoundary>
+              <img
+                src={company.logo}
+                alt={company.name}
+                className="max-h-[100px] max-w-[140px] object-contain"
+                onError={() => setImageError(true)}
+                loading="lazy"
+              />
             </div>
           )}
         </div>

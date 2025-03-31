@@ -6,10 +6,17 @@ echo "Starting Next.js development server... VERSION 4.1"
 chmod +x *.sh
 mkdir -p tools/scripts
 chmod +x tools/scripts/organize-assets.sh 2>/dev/null || true
+chmod +x tools/scripts/cleanup-test-dirs.sh 2>/dev/null || true
 
 # Run asset organization script to ensure consistent file structure
 echo "Organizing assets for consistency..."
 ./tools/scripts/organize-assets.sh
+
+# Check for test directories and clean them up if found
+if ls -d src/app/{basic,basic-diagnostic,basic-test,debug,debug-portfolio,grid-test,simple-ventures,test,test-simple,ultra-minimal} 2>/dev/null >/dev/null; then
+  echo "Found test directories, cleaning up..."
+  ./tools/scripts/cleanup-test-dirs.sh
+fi
 
 # Only clean up processes if they're causing issues
 if pgrep -f "next" >/dev/null; then
