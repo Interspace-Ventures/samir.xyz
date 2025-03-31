@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Starting Next.js development server... VERSION 4.4"
+echo "Starting Next.js development server... VERSION 4.6"
 
 # Make scripts executable if needed
 chmod +x *.sh
@@ -9,6 +9,8 @@ chmod +x tools/scripts/organize-assets.sh 2>/dev/null || true
 chmod +x tools/scripts/cleanup-test-dirs.sh 2>/dev/null || true
 chmod +x tools/scripts/final-cleanup.sh 2>/dev/null || true
 chmod +x tools/scripts/cleanup-root-dir.sh 2>/dev/null || true
+chmod +x tools/scripts/consolidate-readmes.sh 2>/dev/null || true
+chmod +x tools/scripts/final-documentation-cleanup.sh 2>/dev/null || true
 
 # Create public directories structure
 mkdir -p public/attached_assets
@@ -30,7 +32,7 @@ if [ -d "attached_assets" ] && [ -d "public/attached_assets" ]; then
   
   if [ "$remaining_files" -eq 0 ] && [ "$public_files" -gt 0 ]; then
     # Only attempt final cleanup if assets are properly migrated
-    if ! grep -q '"assetCleanup":true' version-config.json 2>/dev/null; then
+    if ! grep -q '"assetCleanup":true' config/version/version-config.json 2>/dev/null; then
       echo "Asset migration complete. Running final cleanup..."
       ./tools/scripts/final-cleanup.sh
     else
@@ -50,6 +52,26 @@ fi
 if [ ! -f "tools/archive/root-cleanup-date.txt" ] && [ -f "tools/scripts/cleanup-root-dir.sh" ]; then
   echo "Cleaning up root directory structure..."
   ./tools/scripts/cleanup-root-dir.sh
+fi
+
+# Consolidate README files if not already done
+if [ -f "tools/scripts/consolidate-readmes.sh" ]; then
+  if ! grep -q '"readmeConsolidation":true' config/version/version-config.json 2>/dev/null; then
+    echo "Consolidating README files to docs directory..."
+    ./tools/scripts/consolidate-readmes.sh
+  else
+    echo "README consolidation already completed."
+  fi
+fi
+
+# Run final documentation cleanup if not already done
+if [ -f "tools/scripts/final-documentation-cleanup.sh" ]; then
+  if ! grep -q '"documentationCleanup":true' config/version/version-config.json 2>/dev/null; then
+    echo "Performing final documentation cleanup..."
+    ./tools/scripts/final-documentation-cleanup.sh
+  else
+    echo "Documentation cleanup already completed."
+  fi
 fi
 
 # Only clean up processes if they're causing issues
