@@ -189,16 +189,37 @@
           background-color: #374151 !important; /* gray-700 */
         }
         
-        /* Grid layout - exactly 2 cards per row */
+        /* Grid layout - responsive with 2 cards per row on desktop */
         .portfolio-grid { 
           display: grid !important;
-          grid-template-columns: repeat(2, 1fr) !important; /* Exactly 2 columns */
+          grid-template-columns: repeat(2, 1fr) !important; /* 2 columns by default */
           grid-auto-rows: 150px !important;
-          gap: 1.5rem !important; /* Increased spacing between cards */
-          width: 90% !important; /* Controlled width */
+          gap: 0.375rem !important; /* Extremely narrow spacing */
+          row-gap: 0.375rem !important; /* Very narrow vertical spacing */
+          column-gap: 0.5rem !important; /* Narrow horizontal spacing */
+          width: 95% !important; /* Wider to fill more space */
           max-width: 800px !important; /* Limited max width */
           margin: 0 auto !important;
           padding: 0 !important;
+        }
+        
+        /* Responsive grid adjustments */
+        @media (max-width: 768px) {
+          .portfolio-grid {
+            grid-template-columns: repeat(2, 1fr) !important; /* 2 columns on tablet */
+            width: 95% !important; /* Slightly wider on tablet */
+            gap: 0.375rem !important; /* Extremely narrow gap on tablet */
+            row-gap: 0.375rem !important; /* Very narrow vertical spacing */
+            column-gap: 0.5rem !important; /* Narrow horizontal spacing */
+          }
+        }
+        
+        @media (max-width: 640px) {
+          .portfolio-grid {
+            grid-template-columns: 1fr !important; /* Single column on mobile */
+            width: 95% !important; /* Slightly wider on small screens */
+            gap: 0.375rem !important; /* Extremely narrow gap on mobile */
+          }
         }
         
         /* Pure white cards with minimal styling - exactly like reference */
@@ -260,8 +281,8 @@
         
         /* Image styling - exactly like reference */
         .portfolio-grid img {
-          max-height: 70px !important;
-          max-width: 120px !important;
+          max-height: 100px !important; /* Much larger logo height */
+          max-width: 140px !important; /* Wider logo width */
           object-fit: contain !important;
           display: block !important;
           margin: 0 auto !important;
@@ -287,18 +308,23 @@
     }
   }
   
-  // Run immediately
+  // Run immediately - this is critical to prevent the flicker effect
   forceClearStyleCache();
   
   // Wait for DOM to be fully loaded
   document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - preparing portfolio grid with gray theming');
-    setTimeout(resetPortfolioGridGently, 200);
-    setTimeout(enhanceLogoDisplayPreservingStyles, 250);
-    setTimeout(enforceStatsLayout, 300); // Apply stats layout first
+    // Run immediately without delays to prevent flicker
+    resetPortfolioGridGently();
+    enhanceLogoDisplayPreservingStyles();
+    enforceStatsLayout();
+    preserveAnimationsAndHoverEffects();
     
-    // Make sure all hover effects and animations are preserved
-    setTimeout(preserveAnimationsAndHoverEffects, 350);
+    // Also run with a slight delay as backup
+    setTimeout(resetPortfolioGridGently, 50);
+    setTimeout(enhanceLogoDisplayPreservingStyles, 100);
+    setTimeout(enforceStatsLayout, 150);
+    setTimeout(preserveAnimationsAndHoverEffects, 200);
   });
 
   // Also run on window load to ensure images are loaded
@@ -319,10 +345,14 @@
     }, 1000);
   });
   
-  // Add specific event for fixing stats section on viewport resize
+  // Add comprehensive resize handler for both stats and portfolio grid
   window.addEventListener('resize', function() {
     // Prioritize stats layout first on resize
     setTimeout(enforceStatsLayout, 50);
+    // Then adjust the portfolio grid for the new viewport
+    setTimeout(resetPortfolioGridGently, 100);
+    // Finally, ensure images and badges are properly sized
+    setTimeout(enhanceLogoDisplayPreservingStyles, 150);
   });
 
   function resetPortfolioGridGently() {
@@ -333,8 +363,9 @@
       return;
     }
 
-    // Force a gentle layout recalculation that doesn't override custom styles
-    if (!portfolioGrid.classList.contains('gentle-reset-applied')) {
+    // Always apply responsive layout on every call, not just the first time
+    // This ensures the layout stays responsive when the window is resized
+    {
       console.log('Applying gentle grid reset');
       
       // Use a temporary class instead of directly manipulating display style
@@ -346,15 +377,46 @@
       portfolioGrid.classList.add('gentle-reset-applied');
       portfolioGrid.classList.add('grid-reset');
       
-      // Only set these grid styles if they aren't already set by React
-      if (!portfolioGrid.style.gridTemplateColumns) {
-        portfolioGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(260px, 1fr))';
-        portfolioGrid.style.gridAutoRows = '150px'; // Match our card height
-        portfolioGrid.style.gap = '1.25rem'; // Consistent spacing for both row and column gaps
-        portfolioGrid.style.width = '94%';
-        portfolioGrid.style.maxWidth = '1400px';
+      // Always force responsive behavior regardless of previous styles
+      portfolioGrid.classList.remove('grid-cols-2', 'grid-cols-1', 'grid-cols-3');
+      
+      // Set responsive grid styles with extremely tight spacing
+      const viewport = window.innerWidth;
+      
+      // Force extremely tight spacing on all screens no matter what!
+      portfolioGrid.setAttribute('data-forced-tight-spacing', 'true');
+      portfolioGrid.style.gridGap = '0.375rem'; // Force tight spacing
+      portfolioGrid.style.gap = '0.375rem'; // Force tight spacing
+      portfolioGrid.style.rowGap = '0.375rem'; // Force tight spacing
+      portfolioGrid.style.columnGap = '0.375rem'; // Force tight spacing
+      
+      if (viewport <= 640) {
+        // Mobile view - single column
+        portfolioGrid.style.gridTemplateColumns = '1fr';
+        portfolioGrid.style.gridAutoRows = '150px';
+        portfolioGrid.style.width = '95%';
+        portfolioGrid.style.maxWidth = '500px';
+        portfolioGrid.style.margin = '0 auto';
+      } else if (viewport <= 768) {
+        // Tablet view - 2 columns with extremely tight gap
+        portfolioGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        portfolioGrid.style.gridAutoRows = '150px';
+        portfolioGrid.style.width = '95%';
+        portfolioGrid.style.maxWidth = '700px';
+        portfolioGrid.style.margin = '0 auto';
+      } else {
+        // Desktop view - 2 columns with extremely tight gap
+        portfolioGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        portfolioGrid.style.gridAutoRows = '150px';
+        portfolioGrid.style.width = '95%';
+        portfolioGrid.style.maxWidth = '800px';
         portfolioGrid.style.margin = '0 auto';
       }
+      
+      // Additional force to ensure spacing is applied
+      portfolioGrid.querySelectorAll('div').forEach(div => {
+        div.style.margin = '0'; // Remove any margins that might interfere
+      });
     }
     
     // Preserve visibility of cards without changing other custom styles
@@ -387,15 +449,29 @@
       // Mark this image as styled with our new version marker
       img.classList.add('styled-v4');
       
-      // Only set these minimal styles without overriding existing styles
+      // Apply forceful logo sizing - the important part!
       try {
-        if (!img.hasAttribute('style') || !img.style.maxHeight) {
-          img.style.maxHeight = img.style.maxHeight || '70px'; // Increased from 50px to 70px
-          img.style.objectFit = img.style.objectFit || 'contain';
-          img.style.maxWidth = '90%';
-          img.style.display = 'block';
-          img.style.margin = '0 auto';
-          img.style.filter = 'drop-shadow(0px 1px 1px rgba(0,0,0,0.05))';
+        // Always apply these styles to ensure consistency
+        img.setAttribute('data-sized-by-portfolio-script', 'true');
+        img.style.maxHeight = '100px'; // Much larger height
+        img.style.height = 'auto'; // Let height adjust to width
+        img.style.maxWidth = '140px'; // Wider width  
+        img.style.width = 'auto'; // Let width adjust to height
+        img.style.objectFit = 'contain';
+        img.style.display = 'block';
+        img.style.margin = '0 auto';
+        img.style.padding = '0px';
+        img.style.filter = 'none';
+        
+        // Ensure image is properly centered in the card
+        const parentLink = img.closest('a');
+        if (parentLink) {
+          parentLink.style.display = 'flex';
+          parentLink.style.alignItems = 'center';
+          parentLink.style.justifyContent = 'center';
+          parentLink.style.height = '100%';
+          parentLink.style.width = '100%';
+          parentLink.style.padding = '0';
         }
       } catch (e) {
         console.error('Error setting image styles:', e);
@@ -462,10 +538,15 @@
       // Mark this card as processed
       card.classList.add('hover-preserved');
       
-      // Ensure consistent padding
+      // Ensure consistent padding - remove padding to let images fill more space
       const cardLink = card.querySelector('a');
       if (cardLink && !cardLink.hasAttribute('data-padding-fixed')) {
-        cardLink.style.padding = '16px';
+        cardLink.style.padding = '0'; // Remove padding completely to give more space
+        cardLink.style.display = 'flex';
+        cardLink.style.alignItems = 'center';
+        cardLink.style.justifyContent = 'center';
+        cardLink.style.height = '100%';
+        cardLink.style.width = '100%';
         cardLink.setAttribute('data-padding-fixed', 'true');
       }
       
@@ -581,11 +662,7 @@
     console.log('Hover effects and animations preserved for all cards');
   }
 
-  // Add a resize handler to maintain grid layout on window resize
-  window.addEventListener('resize', function() {
-    setTimeout(resetPortfolioGridGently, 100);
-    setTimeout(preserveAnimationsAndHoverEffects, 150);
-  });
+  // We already have a comprehensive resize handler above
   
   // Function to ensure stats section is using our new layout
   function enforceStatsLayout() {
