@@ -3,6 +3,7 @@
 import { VenturesGrid } from "../../components/ventures/ventures-grid";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { ASSET_PATHS } from "../../config/paths";
 
 /**
  * Main Ventures page
@@ -22,46 +23,46 @@ export default function Ventures() {
   // Detect if we're in dark mode for proper styling
   const isDark = mounted && resolvedTheme === 'dark';
   
-  // All venture data in one consistent format
+  // All venture data with consistent image paths using centralized path config
   const ventures = [
     {
       name: "2 Days Early",
       description: "Current and former Chime operator community built by operators for operators",
-      imagePath: "attached_assets/2de-interspace.png",
+      imagePath: `${ASSET_PATHS.VENTURES}2de-interspace.png`, // Using centralized path config
       link: "https://2daysearly.com",
       priority: true
     },
     {
       name: "Solo",
       description: "The first design-forward climbing app",
-      imagePath: "attached_assets/Solo Wordmark - Gradient 2025.png",
+      imagePath: `${ASSET_PATHS.VENTURES}solo-wordmark---gradient-2025.png`, // Using centralized path config
       link: "https://soloclimbing.com",
       priority: true
     },
     {
       name: "Predictive:film",
       description: "AI-powered film predictions",
-      imagePath: "attached_assets/Predictive.film icon 2025.png",
+      imagePath: `${ASSET_PATHS.VENTURES}predictive.film-icon-2025.png`, // Using centralized path config
       link: "https://predictive.film"
     },
     {
       name: "Interspace",
       description: "Over-engineered fintech and stratfin perspectives",
-      imagePath: "attached_assets/interspace.png",
+      imagePath: `${ASSET_PATHS.VENTURES}interspace.png`, // Using centralized path config
       link: "https://interspace.sh",
       priority: true
     },
     {
       name: "Hey - I'm Samir",
       description: "I drive business impact in fintech.",
-      imagePath: "attached_assets/hey-im-samir.png",
+      imagePath: `${ASSET_PATHS.VENTURES}hey-im-samir.png`, // Using centralized path config
       link: "https://heyimsamir.com",
       priority: true
     },
     {
       name: "Perspectives",
       description: "Fintech & stratfin deep dives",
-      imagePath: "attached_assets/perspectives.png",
+      imagePath: `${ASSET_PATHS.VENTURES}perspectives.png`, // Using centralized path config
       link: "https://perspectives.fyi"
     }
   ];

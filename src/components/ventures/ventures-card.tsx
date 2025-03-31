@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { IMAGE_BASE_PATH } from "../../config/paths";
+import { IMAGE_BASE_PATH, ASSET_PATHS } from "../../config/paths";
 
 interface VenturesCardProps {
   name: string;
@@ -42,12 +42,38 @@ export function VenturesCard({ name, description, imagePath, link, priority = fa
     .toUpperCase()
     .substring(0, 2);
   
-  // Ensure image path is correctly formatted for Next.js Image component
-  // If path already contains 'attached_assets', use it directly
-  // Otherwise, prepend the IMAGE_BASE_PATH
-  const fullImagePath = imagePath.includes('attached_assets')
-    ? (imagePath.startsWith('/') ? imagePath : `/${imagePath}`)
-    : `${IMAGE_BASE_PATH}${imagePath}`;
+  // Enhanced image path handling with fallback options
+  // This handles various image path formats and provides fallback options
+  const computeImagePath = () => {
+    // If path already starts with '/', use as is
+    if (imagePath.startsWith('/')) {
+      return imagePath;
+    }
+    
+    // For paths with filenames, ensure we use the standard location
+    if (imagePath.includes('/')) {
+      // Try to find the right path based on context clues in the path
+      if (imagePath.includes('attached_assets/')) {
+        return `${ASSET_PATHS.ATTACHED}${imagePath.split('attached_assets/')[1]}`;
+      }
+      
+      // Default to just adding a leading slash
+      return `/${imagePath}`;
+    }
+    
+    // For simple filenames, use the ventures logos path
+    // This assumes it's just a filename like "interspace.png"
+    return `${ASSET_PATHS.VENTURES}${imagePath.toLowerCase().replace(/\s+/g, '-')}`;
+  };
+  
+  const fullImagePath = computeImagePath();
+    
+  // For debugging image path issues
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      console.debug(`[VenturesCard] Loading image for ${name}: ${fullImagePath}`);
+    }
+  }, [name, fullImagePath]);
   
   return (
     <a 
@@ -76,7 +102,20 @@ export function VenturesCard({ name, description, imagePath, link, priority = fa
                     objectPosition: 'center',
                     fontFamily: 'Inter, sans-serif', // Ensure alt text uses Inter
                   }}
-                  onError={() => setImageError(true)}
+                  onError={(e) => {
+                    console.warn(`[VenturesCard] Image error for ${name}: ${fullImagePath}`);
+                    
+                    // Log a detailed error message for debugging
+                    console.error(`[VenturesCard] Image failed to load for ${name}`, {
+                      originalPath: fullImagePath,
+                      possibleFallbackPath: fullImagePath.includes('/') 
+                        ? `${ASSET_PATHS.VENTURES}${fullImagePath.split('/').pop()?.toLowerCase().replace(/\s+/g, '-')}` 
+                        : `${ASSET_PATHS.VENTURES}${imagePath.toLowerCase().replace(/\s+/g, '-')}`
+                    });
+                    
+                    // Set to error state to show initials
+                    setImageError(true);
+                  }}
                   priority={priority}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className={`transition-all duration-300 ${isDark ? 'filter-none' : ''}`}

@@ -5,22 +5,21 @@ import { useTheme } from "next-themes"
 
 interface Props {
   children: React.ReactNode
-  suppressHydrationWarning?: boolean
 }
 
-// Simplified version to avoid React 19 hydration issues
-export function ClientThemeProvider({ children, suppressHydrationWarning = false }: Props) {
+/**
+ * Clean theme provider component for handling color scheme preferences
+ */
+export function ClientThemeProvider({ children }: Props) {
   const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
   
   useEffect(() => {
     setMounted(true)
   }, [])
 
   return (
-    <div 
-      className="min-h-screen" 
-      suppressHydrationWarning={true}
-    >
+    <div className="min-h-screen transition-colors duration-300">
       {children}
     </div>
   )
