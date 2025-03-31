@@ -5,12 +5,11 @@
  */
 const nextConfig = {
   // Core configuration
-  reactStrictMode: false,
+  reactStrictMode: true, // Enable React strict mode for better development experience
   trailingSlash: true,
-
+  
   // Images configuration
   images: {
-    domains: ['*'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -25,27 +24,21 @@ const nextConfig = {
     dangerouslyAllowSVG: true
   },
   
-  // Static files handling 
-  // We don't need rewrites anymore as files are directly in public folder
-  
   // Development settings
   experimental: {
     scrollRestoration: true,
   },
   
-  // Ignore the development origin warnings for simplicity
+  // Memory management for development
   onDemandEntries: {
-    // Keep pages in memory for longer during development
     maxInactiveAge: 25 * 1000,
-    // Number of pages to keep in memory
     pagesBufferLength: 5,
   },
   
   // Allow cross-origin requests from Replit webview
-  allowedDevOrigins: ['d2193f08-b592-45ce-b730-8dc2c7ef133c-00-1f1txs3yeigba.janeway.replit.dev', '*'],
+  allowedDevOrigins: ['*'],
   
-  // Alternative approach for Replit compatibility
-  // Define some additional CORS settings directly in the config
+  // Support for Replit environment
   crossOrigin: 'anonymous',
 
   // Security headers
@@ -57,15 +50,19 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Access-Control-Allow-Methods', value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT' },
           { key: 'Access-Control-Allow-Headers', value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version' },
-          { key: 'Cache-Control', value: 'no-store, must-revalidate' },
-          { key: 'Pragma', value: 'no-cache' },
-          { key: 'Expires', value: '0' },
+        ],
+      },
+      {
+        // Cache optimization for static assets
+        source: '/(.*)\\.(jpg|jpeg|png|svg|webp|js|css|woff|woff2)$',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
     ];
   },
   
-  // Disable source maps for better performance
+  // Disable source maps for production
   productionBrowserSourceMaps: false,
 };
 

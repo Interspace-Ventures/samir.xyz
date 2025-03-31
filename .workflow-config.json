@@ -11,7 +11,7 @@
       "setup_commands": [
         "echo 'Preparing Next.js environment...'"
       ],
-      "port_test_url": "/portfolio/",
+      "port_test_url": "/ventures",
       "wait_for_port_test_timeout": 90000
     }
   ]
