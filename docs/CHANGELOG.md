@@ -12,6 +12,47 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [7.2.0] - 2025-03-31
+
+### Asset Management
+- Improved asset organization with consolidated public/attached_assets directory
+- Created final-cleanup.sh script to completely remove root attached_assets after migration
+- Updated organize-assets.sh to preserve error logs in public/logs/errors
+- Added backward compatibility with symlinks for smoother transition
+- Created dedicated public/screenshots directory for screenshot assets
+- Added version tracking for asset cleanup status in version.json
+
+### Build Process
+- Updated start.sh (v4.3) to perform more selective cleanup rather than full cache wipes
+- Enhanced script permissions handling for more reliable execution
+- Added proper directory structure creation to ensure consistent runtime environment
+- Improved workflow configuration for better startup performance
+
+### Project Structure
+- Improved project directory organization with more logical structure
+- Moved portfolio.html to docs/snapshots for better organization
+- Moved screenshot.jpg to public/screenshots directory
+- Created dedicated public/logs/errors directory for capturing error information
+- Enhanced version.json with new features tracking section
+
+## [7.1.0] - 2025-03-31
+
+### Documentation
+- Consolidated all documentation into a single comprehensive document in the docs folder
+- Created consolidated-README.md with complete project documentation including:
+  - Technology stack details
+  - Project structure and architecture
+  - Configuration guidelines
+  - Development tools and scripts
+  - Development best practices
+  - Building and running instructions
+- Updated main README.md with simplified overview and links to consolidated docs
+- Updated docs/index.md to reference the consolidated documentation
+- Modified config/README.md and tools/README.md to point to main documentation
+- Reorganized documentation structure for improved maintainability
+- Enhanced documentation with more detailed section organization
+- Preserved previous READMEs with legacy reference notes
+
 ## [5.0.0] - 2025-03-30
 
 ### Added

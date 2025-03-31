@@ -1,23 +1,15 @@
-import type { Metadata, Viewport } from "next";
 import { inter } from "../config/fonts";
 import "./globals.css";
-import { ThemeProvider } from "../components/theme-provider";
-import UltraSimpleNavbar from "../components/layout/ultra-simple-navbar";
-import Footer from "../components/layout/footer";
+import { metadata, viewport } from "./metadata";
+import ClientLayout from "../components/layout/client-layout";
 
-export const metadata: Metadata = {
-  title: "Hey - I'm Samir",
-  description: "I drive business impact at fintechs",
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#2c104a' }, // Updated to dark purple
-  ],
-  width: 'device-width',
-  initialScale: 1,
-};
+/**
+ * Root layout that supports both server-side metadata and client interactivity
+ * 
+ * This component stays as a server component to support next/metadata exports
+ * but delegates interactive rendering to the ClientLayout component
+ */
+export { metadata, viewport };
 
 export default function RootLayout({
   children,
@@ -30,17 +22,9 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode,menu,light_mode" />
       </head>
       <body className="antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className="flex flex-col min-h-screen">
-            <UltraSimpleNavbar />
-            <main className="flex-grow px-4 sm:px-6 py-10 mt-2"> {/* Increased top padding to prevent navbar overlap */}
-              <div className="max-w-screen-xl mx-auto w-full">
-                {children}
-              </div>
-            </main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

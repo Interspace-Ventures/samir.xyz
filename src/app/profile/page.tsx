@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
-import { IMAGE_BASE_PATH } from "../../config/paths";
+import { IMAGE_BASE_PATH, ASSET_PATHS } from "../../config/paths";
 
 export default function Profile() {
   const { resolvedTheme } = useTheme();
@@ -30,7 +30,7 @@ export default function Profile() {
           zIndex: 10
         }}>
           <img 
-            src="/attached_assets/samir-profile-photo.webp"
+            src={`${IMAGE_BASE_PATH}${ASSET_PATHS.ATTACHED}samir-profile-photo.webp`}
             alt="Samir's profile"
             style={{
               width: '80px',
