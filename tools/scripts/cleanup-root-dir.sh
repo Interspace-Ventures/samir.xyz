@@ -1,76 +1,42 @@
 #!/bin/bash
 
-# Root Directory Cleanup Script
-# This script consolidates and organizes configuration files,
-# removes redundant files, and cleans up the root directory.
+# This script cleans up the root directory by moving files to appropriate directories
+echo "Cleaning up root directory..."
 
-echo "Starting root directory cleanup..."
-
-# Create config directories if they don't exist
-mkdir -p config/next
-mkdir -p config/postcss
-mkdir -p config/tailwind
+# Create necessary directories
+mkdir -p config/version
 mkdir -p tools/archive
 
-# 1. Move configuration files to their proper locations
-echo "Moving configuration files to organized locations..."
-
-# Next.js configuration
-if [ -f "next-config.js" ]; then
-  cp next-config.js config/next/next.config.js
-  echo "Moved next-config.js to config/next/next.config.js"
+# 1. Move version-config.json to config/version directory if it exists in root
+if [ -f "version-config.json" ] && [ ! -L "version-config.json" ]; then
+  echo "Moving version-config.json to config/version directory..."
+  cp version-config.json config/version/version-config.json
+  # Create a symlink to maintain compatibility
+  ln -sf config/version/version-config.json version-config.json
+  echo "Created symlink from version-config.json to config/version/version-config.json"
+else
+  echo "version-config.json is already properly setup or doesn't exist."
 fi
 
-# Tailwind configuration
-if [ -f "tailwind-config.cjs" ]; then
-  cp tailwind-config.cjs config/tailwind/tailwind.config.cjs
-  echo "Moved tailwind-config.cjs to config/tailwind/tailwind.config.cjs"
+# 2. Clean up attached_assets directory if it only contains .gitkeep
+if [ -d "attached_assets" ]; then
+  file_count=$(find attached_assets -type f -not -name ".gitkeep" | wc -l)
+  if [ "$file_count" -eq 0 ]; then
+    echo "No actual files in attached_assets directory, only keeping .gitkeep for compatibility."
+    # Add a note explaining this is a placeholder
+    echo "This directory is maintained for backward compatibility only. All assets are now in public/attached_assets." > attached_assets/README.txt
+  fi
 fi
 
-# PostCSS configuration
-if [ -f "postcss-config.cjs" ]; then
-  cp postcss-config.cjs config/postcss/postcss.config.cjs
-  echo "Moved postcss-config.cjs to config/postcss/postcss.config.cjs"
+# 3. Run the README cleanup script
+if [ -f "tools/scripts/cleanup-readme.sh" ]; then
+  echo "Running README cleanup script..."
+  chmod +x tools/scripts/cleanup-readme.sh
+  ./tools/scripts/cleanup-readme.sh
+else
+  echo "README cleanup script not found."
 fi
 
-# 2. Update symlinks
-echo "Updating symlinks for configuration files..."
-
-# Ensure next.config.js points to the right location
-if [ -L "next.config.js" ]; then
-  rm next.config.js
-fi
-ln -s config/next/next.config.js next.config.js
-echo "Updated next.config.js symlink"
-
-# 3. Move/archive backup directory
-if [ -d "backup" ]; then
-  echo "Moving backup directory to tools/archive..."
-  mv backup tools/archive/
-fi
-
-# 4. Clean up attached_assets in root (using existing script)
-if [ -d "attached_assets" ] && [ -f "tools/scripts/final-cleanup.sh" ]; then
-  echo "Cleaning up attached_assets using final-cleanup.sh..."
-  bash tools/scripts/final-cleanup.sh --force
-fi
-
-# 5. Remove out directory (build artifacts)
-if [ -d "out" ]; then
-  echo "Removing out directory (build artifacts)..."
-  rm -rf out
-  mkdir -p out
-  touch out/.gitkeep
-fi
-
-# 6. Create a simple file to track when this cleanup was done
-echo "$(date)" > tools/archive/root-cleanup-date.txt
-
-# 7. Create config pointers instead of modifying package.json
-# Instead of directly modifying package.json, create symlinks in the root directory
-echo "Creating config pointers for build tools..."
-ln -sf config/postcss/postcss.config.cjs postcss.config.cjs 2>/dev/null || true
-ln -sf config/tailwind/tailwind.config.cjs tailwind.config.cjs 2>/dev/null || true
-
-echo "Root directory cleanup complete!"
-echo "Note: You may need to update any hard-coded references to the moved configuration files."
+# Create a marker file to indicate this script has run
+date > tools/archive/root-cleanup-date.txt
+echo "Root directory cleanup completed."

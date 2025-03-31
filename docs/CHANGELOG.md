@@ -12,6 +12,18 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [7.3.0] - 2025-03-31
+
+### Documentation
+- Enhanced documentation consolidation with centralized management in /docs folder
+- Created final-documentation-cleanup.sh script for comprehensive documentation handling
+- Added symlinks for all README files to point to the consolidated docs
+- Excluded system libraries from documentation processing
+- Updated consolidated-README.md with documentation consolidation details
+- Added documentation cleanup tracking in version-config.json
+- Added documentation cleanup to start.sh to automate the process during startup
+- Updated root README.md to be concise and point to the consolidated documentation
+
 ## [7.2.0] - 2025-03-31
 
 ### Asset Management

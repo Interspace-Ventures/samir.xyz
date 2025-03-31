@@ -58,7 +58,12 @@ touch attached_assets/.gitkeep
 echo "Final cleanup complete. All assets are now in public/attached_assets only."
 
 # Update version-config.json to indicate the cleanup has been completed
-if [ -f "version-config.json" ]; then
+if [ -f "config/version/version-config.json" ]; then
+  tmp=$(mktemp)
+  jq '.features.assetCleanup = true' config/version/version-config.json > "$tmp" && mv "$tmp" config/version/version-config.json
+  echo "Updated version-config.json to indicate asset cleanup is complete."
+elif [ -f "version-config.json" ]; then
+  # For backward compatibility
   tmp=$(mktemp)
   jq '.features.assetCleanup = true' version-config.json > "$tmp" && mv "$tmp" version-config.json
   echo "Updated version-config.json to indicate asset cleanup is complete."
