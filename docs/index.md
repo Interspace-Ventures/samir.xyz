@@ -2,38 +2,35 @@
 
 This directory contains documentation for the Portfolio Website project.
 
-## Contents
+## 📚 Consolidated Documentation
 
-- [README](./README.md) - Project overview and setup instructions
-- [CHANGELOG](./CHANGELOG.md) - Version history and detailed changes
+All project documentation has been consolidated into a single comprehensive document:
 
-## Project Structure
+- [Consolidated README](./consolidated-README.md) - Complete project documentation
 
-The project follows a modular structure with configuration files organized into dedicated directories:
+## Additional Documentation Files
 
-- `/config` - Contains modular configuration files:
-  - `/config/next` - Next.js configuration modules
-  - `/config/tools` - Configuration for tools like Tailwind and PostCSS
-  - `/config/typescript` - TypeScript configuration
-- `/docs` - Project documentation (you are here)
-- `/public` - Static assets
-- `/src` - Application source code
+- [CHANGELOG](./CHANGELOG.md) - Detailed version history and changes
 
-## Architecture
+## Documentation Structure
 
-The application is built with:
-- Next.js for server-side rendering
-- React.js for dynamic user interface
-- Tailwind CSS for responsive styling
-- TypeScript for type-safe development
+The consolidated documentation includes:
 
-## Development Workflow
+- Technology stack details
+- Project structure and architecture
+- Configuration guidelines
+- Development tools and scripts
+- Development best practices
+- Building and running instructions
+- Project cleanup notes
+- Version history
 
-1. The application starts through the Replit workflow defined in `.workflow-config.json`
-2. The workflow executes `start.sh` which:
-   - Sets environment variables
-   - Starts Next.js in development mode
+## Navigation
 
-## Version History
+From this documentation, you can:
 
-See the [CHANGELOG](./CHANGELOG.md) for detailed version history.
+1. Get a complete overview of the project in the [Consolidated README](./consolidated-README.md)
+2. View the version history in the [CHANGELOG](./CHANGELOG.md)
+3. Return to the project root via the [main README](../README.md)
+
+The consolidated documentation is the primary reference for all aspects of the project.
