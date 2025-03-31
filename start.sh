@@ -39,7 +39,7 @@ rm -rf .next || true
 rm -rf node_modules/.cache || true
 
 # Special fix for Replit Webview compatibility issues with cross-origin requests
-echo "window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;" >> public/webview-compat.js
+echo "window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;" > public/webview-compat.js
 
 # Wait briefly to make sure environment is ready
 echo "Preparing development environment..."
