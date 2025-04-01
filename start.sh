@@ -93,8 +93,133 @@ export NODE_OPTIONS="--max-http-header-size=16384 --max-old-space-size=4096"
 # Only create .next directory if it doesn't exist
 mkdir -p .next 2>/dev/null || true
 
-# Update webview compatibility
-echo "window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;" > public/webview-compat.js
+# Update webview compatibility (only if file doesn't exist)
+if [ ! -f public/webview-compat.js ]; then
+  echo "Creating WebView compatibility script..."
+  # Create a backup of our script (previously pasted here)
+  echo "// Set WebView compatibility flag for the application
+window.__NEXT_WEBVIEW_COMPATIBILITY__ = true;
+
+// Immediately apply visibility enforcement for WebView
+(function() {
+  console.log('WebView compatibility script: initializing');
+  
+  // Make content visible immediately (don't wait for hydration)
+  document.documentElement.setAttribute('data-webview-ready', 'true');
+  
+  // Apply immediate visibility to the body when it becomes available
+  function enforceVisibility() {
+    if (document.body) {
+      // Apply multiple important inline styles for maximum visibility
+      document.body.setAttribute('style', 
+        'visibility: visible !important; ' +
+        'opacity: 1 !important; ' + 
+        'display: block !important; ' +
+        'animation: none !important; ' +
+        'transition: none !important;'
+      );
+      
+      // Apply to all major containers
+      var containers = document.querySelectorAll(
+        'body > *, ' + 
+        '#__next, ' + 
+        '#__next > *, ' + 
+        'main, ' + 
+        '[class*=\"container\"], ' + 
+        '[class*=\"content\"], ' + 
+        '.flex-grow'
+      );
+      
+      for (var i = 0; i < containers.length; i++) {
+        containers[i].setAttribute('style', 
+          'visibility: visible !important; ' +
+          'opacity: 1 !important; ' + 
+          'display: block !important;'
+        );
+      }
+      
+      console.log('WebView compatibility script: enforced visibility');
+    } else {
+      // If body isn't available yet, try again very soon
+      setTimeout(enforceVisibility, 10);
+    }
+  }
+  
+  // Patch any theme-related functions to ensure they don't hide content
+  // This prevents theme flashing protection from hiding content
+  function patchThemeMethods() {
+    if (window.next && window.next.themes) {
+      // Backup the original methods
+      var original = window.next.themes;
+      
+      // Override with versions that don't hide content
+      window.next.themes = {
+        ...original,
+        // Ensure the setTheme method doesn't hide content temporarily
+        setTheme: function(theme) {
+          // Call original but ensure visibility immediately after
+          var result = original.setTheme(theme);
+          enforceVisibility();
+          return result;
+        }
+      };
+      
+      console.log('WebView compatibility: patched next-themes');
+    }
+  }
+  
+  // Start enforcement immediately
+  enforceVisibility();
+  
+  // Also apply when DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    enforceVisibility();
+    patchThemeMethods();
+    console.log('WebView compatibility: DOMContentLoaded handler fired');
+  });
+  
+  // And when window is fully loaded
+  window.addEventListener('load', function() {
+    enforceVisibility();
+    patchThemeMethods();
+    console.log('WebView compatibility: load handler fired');
+  });
+  
+  // Create a MutationObserver to watch for any changes that might hide content
+  if (typeof MutationObserver !== 'undefined') {
+    setTimeout(function() {
+      var observer = new MutationObserver(function(mutations) {
+        // Force visibility after any DOM changes that might affect visibility
+        enforceVisibility();
+      });
+      
+      // Start observing once the body is available
+      if (document.body) {
+        observer.observe(document.body, { 
+          attributes: true, 
+          childList: true, 
+          subtree: true 
+        });
+        console.log('WebView compatibility: MutationObserver started');
+      }
+    }, 100); // Short delay to ensure body is available
+  }
+  
+  // Set periodic enforcement as a fallback
+  var forcedInterval = setInterval(function() {
+    enforceVisibility();
+  }, 500); // Check every 500ms as an ultimate fallback
+  
+  // Clear interval after 5 seconds (should be fully loaded by then)
+  setTimeout(function() {
+    clearInterval(forcedInterval);
+    console.log('WebView compatibility: stopped periodic enforcement');
+  }, 5000);
+})();" > public/webview-compat.js
+  echo "Created WebView compatibility script with comprehensive visibility enforcement"
+else
+  echo "WebView compatibility script already exists, preserving custom implementation"
+fi
 
 # Create symlink from next.config.js to the proper config location
 echo "Creating symlink for Next.js configuration..."
