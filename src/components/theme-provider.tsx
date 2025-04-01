@@ -12,10 +12,10 @@ type ThemeProviderProps = {
 }
 
 /**
- * Enhanced ThemeProvider with error handling and logging
+ * Enhanced ThemeProvider with error handling and immediate content display
  * 
  * This component provides theme support with improved error recovery
- * and client-side rendering compatibility.
+ * and guaranteed content visibility even during client-side mounting.
  */
 export function ThemeProvider({ 
   children, 
@@ -26,38 +26,52 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [mounted, setMounted] = useState(false);
   
-  // Make sure we only render once the client is mounted
-  // to avoid hydration issues with server/client theme
+  // Set mounted state once the client is hydrated
+  // This happens after the initial render
   useEffect(() => {
-    setMounted(true);
+    // Check if we're in a webview environment (compatibility script sets this)
+    const isWebview = typeof window !== 'undefined' && window.__NEXT_WEBVIEW_COMPATIBILITY__ === true;
     
-    // Log theme provider initialized correctly
-    console.log("ThemeProvider initialized successfully");
+    // Set timeout of 0 to ensure this happens after initial render cycle
+    // For webview, use a shorter timeout to improve visual experience
+    const timer = setTimeout(() => {
+      setMounted(true);
+      console.log("ThemeProvider fully mounted");
+      
+      // For webview environments, ensure body is visible
+      if (isWebview && typeof document !== 'undefined') {
+        document.body.style.visibility = 'visible';
+        document.body.style.opacity = '1';
+      }
+    }, isWebview ? 0 : 0);
     
-    // Clean up on component unmount
-    return () => {
-      // Any cleanup if needed
-    };
+    // Immediate visibility for webviews to prevent blank screens
+    if (isWebview && typeof document !== 'undefined') {
+      // Force immediate visibility in webviews
+      document.body.style.visibility = 'visible';
+    }
+    
+    return () => clearTimeout(timer);
   }, []);
 
-  // If we're server-side or mounting, render without theme initially
-  if (!mounted) {
-    return (
-      <div className="theme-provider-loading">
-        {children}
-      </div>
-    );
-  }
-
-  // Wrap in error boundary-like try/catch for client components
+  // Detect system preference for dark mode to use as initial value
+  // before the client-side mounting is complete
+  const prefersDarkMode = typeof window !== 'undefined' && 
+    window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+  
+  // Always render content immediately, just adjust the theme settings
+  // based on whether we're mounted or not
   try {
     return (
       <NextThemesProvider 
         attribute={attribute as "class"}
-        defaultTheme={defaultTheme}
-        enableSystem={enableSystem}
+        defaultTheme={prefersDarkMode ? "dark" : defaultTheme}
+        // Only enable system theme detection after mounting to prevent flicker
+        enableSystem={mounted ? enableSystem : false}
+        forcedTheme={!mounted ? (prefersDarkMode ? "dark" : defaultTheme) : undefined}
         {...props}
       >
+        {/* No need for conditional rendering or loading wrapper */}
         {children}
       </NextThemesProvider>
     );
@@ -65,7 +79,7 @@ export function ThemeProvider({
     // Log the error but still render content without theme
     console.error("ThemeProvider error:", error);
     
-    // Write to error log in public/logs/errors
+    // Write to error log for tracking
     if (typeof window !== 'undefined') {
       const errorLog = {
         timestamp: new Date().toISOString(),
@@ -78,7 +92,7 @@ export function ThemeProvider({
       console.error("THEME_PROVIDER_ERROR", JSON.stringify(errorLog, null, 2));
     }
     
-    // Render children without theme provider on error
+    // Always render children, even on error
     return <div className="theme-provider-error">{children}</div>;
   }
 }

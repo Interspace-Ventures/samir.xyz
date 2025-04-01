@@ -107,6 +107,22 @@ else
   ln -sf next-config.js next.config.js
 fi
 
+# Test server script
+chmod +x tools/scripts/test-server.sh 2>/dev/null || true
+
 # Start the Next.js development server
 echo "Starting Next.js dev server on port 5000 (http://0.0.0.0:5000)..."
+# Fork a background process to run tests after server startup
+(
+  # Wait for server to be up
+  echo "Waiting for Next.js server to be ready..."
+  for i in {1..30}; do
+    if curl -s http://localhost:5000/ > /dev/null; then
+      echo "Server is ready. Running server tests..."
+      ./tools/scripts/test-server.sh
+      break
+    fi
+    sleep 1
+  done
+) &
 exec bun run next dev -p 5000 --hostname 0.0.0.0 --turbo
