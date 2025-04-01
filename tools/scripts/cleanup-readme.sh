@@ -20,7 +20,7 @@ Visit [http://localhost:5000](http://localhost:5000)
 
 ## Documentation
 
-Complete documentation is available in the [consolidated documentation](./docs/consolidated-README.md).
+Comprehensive documentation is available in this README file. See individual directories for specific component documentation.
 
 ## Tech Stack
 

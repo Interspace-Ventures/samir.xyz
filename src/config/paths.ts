@@ -12,9 +12,12 @@ export const IMAGE_BASE_PATH = '/';
 export const ASSET_PATHS = {
   // Venture logos in a dedicated folder with consistent naming
   // These are automatically copied from attached_assets by organize-assets.sh
-  VENTURES: '/logos/ventures/',
+  VENTURES: 'logos/ventures/',
   
   // Main attached assets folder (for general purpose images)
   // This is now the primary source for all assets in the application
-  ATTACHED: '/attached_assets/'
+  ATTACHED: 'attached_assets/',
+  
+  // Alternate paths for images (for better path resolution)
+  IMAGES: 'images/'
 };

@@ -1,1 +1,77 @@
-config/version/version-config.json
+{
+  "version": "7.9.0",
+  "name": "Portfolio Website",
+  "description": "Personal portfolio website showcasing professional projects through an AI-enhanced interactive design",
+  "lastUpdated": "2025-04-01",
+  "changes": [
+    "Added webview compatibility support for Replit environment with specialized scripts",
+    "Enhanced CSS with forced visibility rules to prevent loading state in webview",
+    "Improved ThemeProvider with webview-specific detection and rendering optimizations",
+    "Added client-side visibility enforcement via ClientLayout component",
+    "Created globals.d.ts with TypeScript declarations for webview compatibility",
+    "Added CSS fallbacks to ensure content is always visible regardless of theme state",
+    "Fixed discrepancy between browser and webview rendering behaviors"
+  ],
+  "features": {
+    "documentationCleanup": true,
+    "readmeConsolidation": true,
+    "assetCleanup": true,
+    "responsiveDesign": true,
+    "darkMode": true,
+    "documentationConsolidated": true,
+    "serverHealthCheck": true,
+    "webviewCompatibility": true
+  },
+  "previousVersion": {
+    "version": "7.8.0",
+    "changes": [
+      "Completely eliminated 'stuck loading' issue by redesigning ThemeProvider to always render children",
+      "Improved theme detection with system preference fallback for optimal initial rendering",
+      "Enhanced profile page with better theme state handling and optimized timeout strategy",
+      "Added proper cleanup for setTimeout to prevent memory leaks in theme components",
+      "Implemented forcedTheme strategy for consistent appearance during initial render",
+      "Removed conditional rendering that was causing layout shifts during page load",
+      "Updated version-config.json and CHANGELOG.md to reflect the latest improvements"
+    ]
+  },
+  "olderVersions": [
+    {
+      "version": "7.7.0",
+      "changes": [
+        "Fixed 'stuck loading' issue by improving theme provider handling of initial render state",
+        "Enhanced ThemeProvider to use NextThemesProvider even during the loading phase",
+        "Improved profile page to detect system dark mode preference before mounting",
+        "Enhanced client-side mounting strategies for immediate content display",
+        "Improved user experience by eliminating the waiting time for theme initialization",
+        "Fixed issues with content not appearing until client-side mounting was complete",
+        "Updated version-config.json and CHANGELOG.md to reflect the latest changes"
+      ]
+    },
+    {
+      "version": "7.6.0",
+      "changes": [
+        "Updated organize-assets.sh to ensure profile images are properly copied to public/images",
+        "Enhanced start.sh to automatically test server functionality after startup",
+        "Added intelligent server readiness check with retry mechanism",
+        "Created dedicated public/images directory for profile photos",
+        "Improved asset management to ensure consistent image paths",
+        "Added validation for all major routes (/profile/, /ventures/, /portfolio/)",
+        "Enhanced version tracking with updated version-config.json and public/version.json"
+      ]
+    }
+  ],
+  "aiInstructions": {
+    "communicationStyle": "simple, non-technical language for user interactions",
+    "taskPriorities": [
+      "Fix visual issues before addressing functionality concerns",
+      "Prioritize mobile responsiveness for all updates",
+      "Always test changes in both light and dark mode",
+      "Maintain consistent design language across all components"
+    ],
+    "documentationStandards": [
+      "Update CHANGELOG.md with all significant changes",
+      "Maintain version numbers in version.json and footer component",
+      "Provide clear before/after descriptions for visual changes"
+    ]
+  }
+}

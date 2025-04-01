@@ -9,6 +9,7 @@ echo "Organizing image assets..."
 # Create necessary directories
 mkdir -p public/attached_assets
 mkdir -p public/logos/ventures
+mkdir -p public/images
 
 # Migrate assets from root attached_assets to public/attached_assets
 # This is a one-time consolidation to eliminate duplicate asset folders
@@ -85,6 +86,26 @@ for logo in "${VENTURE_LOGOS[@]}"; do
     cp "public/attached_assets/$logo" "public/logos/ventures/$normalized"
   else
     echo "  Warning: Could not find $logo in public/attached_assets"
+  fi
+done
+
+# Ensure profile images are in the images directory
+echo "Ensuring profile images are in public/images..."
+
+# Key profile images to ensure are available
+declare -a PROFILE_IMAGES=(
+  "samir-profile-photo.webp"
+  "samir.png"
+  "hey-im-samir.png"
+)
+
+for image in "${PROFILE_IMAGES[@]}"; do
+  # Check in public/attached_assets (since we've now consolidated all assets here)
+  if [ -f "public/attached_assets/$image" ]; then
+    echo "  Copying from public/attached_assets/$image to public/images/$image"
+    cp "public/attached_assets/$image" "public/images/$image"
+  else
+    echo "  Warning: Could not find $image in public/attached_assets"
   fi
 done
 

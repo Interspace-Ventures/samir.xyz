@@ -10,12 +10,24 @@ export default function Profile() {
   const [mounted, setMounted] = useState(false);
   
   // Handle client side mounting for theme detection
+  // Using a small timeout to ensure it happens after initial render
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => {
+      setMounted(true);
+      console.log("Profile component mounted");
+    }, 0);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   // Detect if we're in dark mode for proper styling
-  const isDark = mounted && resolvedTheme === 'dark';
+  // Immediately use system preference until theme detection is complete
+  const systemPrefersDark = typeof window !== 'undefined' && 
+    window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+  
+  // Use resolvedTheme once mounted, otherwise use system preference (default to dark if detection unavailable)
+  const isDark = mounted ? (resolvedTheme === 'dark') : 
+    (systemPrefersDark ?? true);
   
   return (
     <div className="max-w-4xl mx-auto px-4">
@@ -30,7 +42,7 @@ export default function Profile() {
           zIndex: 10
         }}>
           <img 
-            src={`${IMAGE_BASE_PATH}${ASSET_PATHS.ATTACHED}samir-profile-photo.webp`}
+            src={`${IMAGE_BASE_PATH}${ASSET_PATHS.IMAGES}samir-profile-photo.webp`}
             alt="Samir's profile"
             style={{
               width: '80px',

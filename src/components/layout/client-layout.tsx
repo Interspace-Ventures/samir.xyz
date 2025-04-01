@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "../theme-provider";
 import UltraSimpleNavbar from "./ultra-simple-navbar";
 import Footer from "./footer";
@@ -41,6 +41,26 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Add effect to ensure webview compatibility
+  useEffect(() => {
+    // Check if we're in webview environment
+    const isWebview = typeof window !== 'undefined' && window.__NEXT_WEBVIEW_COMPATIBILITY__ === true;
+    
+    if (isWebview) {
+      // For webview environments, ensure content is visible after a delay
+      const timer = setTimeout(() => {
+        // Ensure the page is fully visible
+        if (document.body) {
+          document.body.style.visibility = 'visible';
+          document.body.style.opacity = '1';
+          console.log('Webview compatibility: forced visibility');
+        }
+      }, 500); // Half-second fallback to ensure visibility
+      
+      return () => clearTimeout(timer);
+    }
+  }, []);
+  
   const handleError = (error: Error) => {
     // Log errors to the console in development
     if (process.env.NODE_ENV === 'development') {

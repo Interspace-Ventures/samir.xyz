@@ -213,11 +213,19 @@ body {
   min-height: 100vh;
   transition-property: color, background-color, box-shadow;
   transition-duration: 300ms;
+  
+  /* Force visibility for all environments, especially Replit webview */
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Apply ultra-deep enhanced glow effect to the dark theme */
 .dark body {
   box-shadow: inset 0 0 100px rgba(76, 29, 149, 0.35), inset 0 0 200px rgba(59, 7, 100, 0.15);
+  
+  /* Force visibility for all environments in dark mode */
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Add shimmer effect to links, buttons, and interactive elements with deeper purple */
@@ -635,4 +643,16 @@ body {
     transparent 75%
   );
   border-radius: inherit;
+}
+
+/* Webview compatibility - Force override any theme-provider-loading classes */
+.theme-provider-loading {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+/* Force content visibility for all elements in the Replit webview */
+[data-webview-ready] * {
+  visibility: visible !important;
+  opacity: 1 !important;
 }

@@ -1,1 +1,1 @@
-../docs/consolidated-README.md
+../README.md

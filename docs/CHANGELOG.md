@@ -12,6 +12,102 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [7.9.0] - 2025-04-01
+
+### Added
+- Added specialized webview compatibility support for Replit environment
+- Created public/webview-compat.js with initialization and compatibility features
+- Added TypeScript declarations for webview compatibility in globals.d.ts
+- Created CSS fallbacks to ensure content is always visible regardless of theme state
+
+### Fixed
+- Fixed discrepancy between browser and webview rendering behaviors
+- Eliminated any remaining "stuck loading" states in webview environments
+- Improved visibility enforcement through multiple rendering pathways
+- Enhanced error recovery in environments with limited client-side capabilities
+
+### Changed
+- Improved ThemeProvider with webview-specific detection and optimizations
+- Enhanced CSS with forced visibility rules and !important overrides
+- Modified ClientLayout to support specialized webview compatibility
+- Updated version tracking with new webviewCompatibility feature in config
+
+## [7.8.0] - 2025-04-01
+
+### Fixed
+- Completely eliminated any possibility of "stuck loading" issues by redesigning theme handling
+- Implemented proper timeout cleanup to prevent memory leaks in theme components
+- Fixed layout shift issues by removing conditional rendering of theme wrapper components
+- Improved error recovery with more robust fallback rendering strategy
+
+### Changed
+- Redesigned ThemeProvider to always render children regardless of mounting state
+- Enhanced system preference detection for better initial theme appearance
+- Optimized theme state handling with improved timeout strategy in profile page
+- Implemented forcedTheme approach for more consistent initial rendering
+
+## [7.7.0] - 2025-04-01
+
+### Fixed
+- Fixed "stuck loading" issue by improving theme provider handling of initial render state
+- Enhanced client-side mounting strategies for immediate content display with default theme
+- Improved how theme detection works before client-side mounting is complete
+- Fixed profile page to better handle pre-mounted theme state with system preferences
+
+### Changed
+- Modified ThemeProvider to use NextThemesProvider even during the loading phase
+- Updated profile page to detect system dark mode preference before mounting
+- Enhanced error recovery in theme provider for more reliable rendering
+- Improved user experience by eliminating the "stuck loading" state entirely
+
+## [7.6.0] - 2025-04-01
+
+### Fixed
+- Fixed loading issues on profile page by ensuring all profile images are copied to public/images directory
+- Enhanced asset management to guarantee consistent image paths across all pages
+- Improved server testing with retries to ensure proper validation
+
+### Added
+- Updated organize-assets.sh to specifically handle profile images in dedicated directory
+- Enhanced start.sh with intelligent server readiness check and retry mechanism
+- Added automatic server test execution after server startup
+- Created thorough validation for all main routes (/profile/, /ventures/, /portfolio/)
+
+### Changed
+- Modified asset organization process to include public/images directory creation
+- Updated paths configuration to properly reference images in multiple locations
+- Enhanced version tracking with updated version-config.json and public/version.json
+
+## [7.5.0] - 2025-04-01
+
+### Fixed
+- Fixed image path resolution issues to ensure images are properly loaded from correct directories
+- Updated ASSET_PATHS configuration to use proper paths for image assets
+- Created test-server.sh script to verify server functionality across all routes
+- Enhanced error handling for missing assets with improved debugging information
+
+### Changed
+- Modified profile page to use proper image paths from IMAGES directory
+- Updated start.sh to automatically run test-server.sh for server health verification
+- Enhanced version tracking with serverHealthCheck feature
+
+### Added
+- Added test-server.sh script for route accessibility testing
+- Improved server response verification with detailed HTTP status checking
+- Added automatic server health check during startup process
+
+## [7.4.0] - 2025-03-31
+
+### Documentation
+- Changed documentation approach to use the root README.md as the single source of truth
+- Updated all documentation scripts to point to the root README.md instead of docs/consolidated-README.md
+- Created symlink from docs/consolidated-README.md to root README.md for backward compatibility
+- Updated all other README.md files to be symlinks to the root README.md
+- Modified consolidate-readmes.sh and final-documentation-cleanup.sh to support the new approach
+- Enhanced scripts to handle additional markdown files and directories consistently
+- Improved documentation organization for better discoverability
+- Made documentation more accessible by placing the comprehensive guide in the root directory
+
 ## [7.3.0] - 2025-03-31
 
 ### Documentation
