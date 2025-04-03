@@ -234,8 +234,9 @@ body {
   transition-duration: 300ms;
   
   /* Ensure content is always visible */
-  visibility: visible;
-  opacity: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }
 
 /* Apply ultra-deep enhanced glow effect to the dark theme */
@@ -243,8 +244,29 @@ body {
   box-shadow: inset 0 0 100px rgba(76, 29, 149, 0.35), inset 0 0 200px rgba(59, 7, 100, 0.15);
   
   /* Ensure content is always visible */
-  visibility: visible;
-  opacity: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* WebView-specific styles */
+.webview body {
+  /* Enhance visibility in WebView environments */
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  /* Fix for WebView rendering issues */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
+/* Force hardware acceleration for smoother rendering in WebViews */
+.webview * {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Add shimmer effect to links, buttons, and interactive elements with deeper purple */

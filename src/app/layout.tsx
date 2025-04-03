@@ -23,60 +23,77 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Ultra-aggressive WebView compatibility script */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          // Critical WebView compatibility - execute before anything else
+          (function() {
+            // Immediately force visibility of the page
+            document.documentElement.style.visibility = 'visible';
+            document.documentElement.style.opacity = '1';
+            
+            // Add critical styles for WebView environments
+            var criticalStyles = document.createElement('style');
+            criticalStyles.textContent = 
+              'html, body { visibility: visible !important; opacity: 1 !important; display: block !important; }' +
+              'html.hide-content * { visibility: hidden !important; }' +
+              'html.hide-content body, html.hide-content head { visibility: visible !important; }' +
+              '@media screen { html, body { visibility: visible !important; opacity: 1 !important; } }';
+            
+            // Insert as first child of head for highest priority
+            if (document.head.firstChild) {
+              document.head.insertBefore(criticalStyles, document.head.firstChild);
+            } else {
+              document.head.appendChild(criticalStyles);
+            }
+            
+            // Remove any hide-content class after a small delay
+            setTimeout(function() {
+              document.documentElement.classList.remove('hide-content');
+            }, 50);
+          })();
+        ` }} />
+        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode,menu,light_mode" />
         
-        {/* Enhanced WebView compatibility - preload scripts */}
-        <link rel="preload" href="/webview-compat.js" as="script" />
-        
-        {/* Simple, immediate script to apply theme and ensure WebView compatibility */}
+        {/* Enhanced theme and WebView compatibility script */}
         <script dangerouslySetInnerHTML={{ __html: `
-          // Simple theme script that works in any environment including WebViews
+          // Enhanced theme and WebView compatibility (v2)
           (function() {
-            // Apply dark theme immediately if system prefers it
-            function applyTheme() {
-              try {
-                // Check if system prefers dark mode
-                const prefersDark = window.matchMedia && 
-                  window.matchMedia('(prefers-color-scheme: dark)').matches;
-                
-                // Apply theme class directly to html element
-                if (prefersDark) {
-                  document.documentElement.classList.add('dark');
-                }
-                
-                // Set flag to indicate this script ran
-                window.__themeInitialized = true;
-
-                console.log("Theme initialized, dark mode:", prefersDark);
-              } catch(e) {
-                // Fallback to default (no dark mode)
-                console.error("Error initializing theme:", e);
+            try {
+              // Apply theme class directly to html element
+              if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
               }
-            }
-            
-            // Run immediately
-            applyTheme();
-            
-            // Check if we're in a WebView for extra compatibility
-            function isWebView() {
-              try {
-                const ua = navigator.userAgent || '';
-                return /(WebView|wv)/.test(ua) || 
-                      /Android.*(wv|.NET)/.test(ua) ||
-                      /iPhone|iPad.*AppleWebKit(?!.*Safari)/.test(ua) ||
-                      /FB_IAB|FBAN|FBAV|Line|Instagram|NAVER|KAKAOTALK|Electron|Capacitor|Cordova/.test(ua);
-              } catch(e) {
-                return false;
+              
+              // Additional WebView compatibility
+              var isWebView = 
+                (navigator.userAgent.includes('wv') || 
+                navigator.userAgent.includes('WebView') ||
+                window.navigator.standalone === true || 
+                window.matchMedia('(display-mode: standalone)').matches);
+              
+              if (isWebView) {
+                // Add WebView-specific class for targeting CSS
+                document.documentElement.classList.add('webview');
+                
+                // Force page visibility in WebViews
+                document.documentElement.style.visibility = 'visible';
+                document.documentElement.style.opacity = '1';
+                document.body.style.visibility = 'visible';
+                document.body.style.opacity = '1';
+                
+                // Force repaint in WebView
+                setTimeout(function() {
+                  window.scrollTo(0, 1);
+                  setTimeout(function() {
+                    window.scrollTo(0, 0);
+                  }, 10);
+                }, 50);
               }
-            }
-            
-            // For WebViews, apply additional compatibility
-            if (isWebView() || window.location.search.includes('webview=true')) {
-              // Load compat script for problematic WebViews
-              var compat = document.createElement('script');
-              compat.src = '/webview-compat.js';
-              compat.async = false;
-              document.head.appendChild(compat);
+            } catch(e) {
+              // If something fails, make sure content is still visible
+              document.documentElement.style.visibility = 'visible';
+              document.documentElement.style.opacity = '1';
             }
           })();
         ` }} />
