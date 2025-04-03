@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isWebViewEnvironment } from '../../utils/webview-compat';
+import { isWebViewEnvironment, applyWebViewOptimizations } from '../../utils/webview-compat';
+import LoadingFallback from '../../components/compat/loading-fallback';
 
 /**
  * Direct Access page
@@ -13,32 +14,69 @@ import { isWebViewEnvironment } from '../../utils/webview-compat';
 export default function DirectAccessPage() {
   const router = useRouter();
   const [status, setStatus] = useState('Initializing...');
+  const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    // Check if we're in a WebView
-    const isWebView = isWebViewEnvironment();
-    
-    // Set status message
-    setStatus(isWebView 
-      ? 'WebView detected - Redirecting to profile page...' 
-      : 'Standard browser detected - Redirecting to home page...');
-    
-    // Small delay to allow the WebView to properly initialize
-    const timer = setTimeout(() => {
-      // For WebViews, go directly to the profile page (final destination)
-      // For regular browsers, go back to the home page
-      const targetPath = isWebView ? '/profile/' : '/';
+    try {
+      // Check if we're in a WebView
+      const isWebView = isWebViewEnvironment();
       
-      // Log the redirect
-      console.log(`DirectAccess page redirecting to: ${targetPath}`);
+      // Apply optimizations if we're in a WebView
+      if (isWebView) {
+        applyWebViewOptimizations();
+      }
       
-      // Use the router for navigation
-      router.push(targetPath);
-    }, 100);
-    
-    return () => clearTimeout(timer);
+      // Set status message
+      setStatus(isWebView 
+        ? 'WebView detected - Redirecting to profile page...' 
+        : 'Standard browser detected - Redirecting to home page...');
+      
+      // Small delay to allow the WebView to properly initialize
+      const timer = setTimeout(() => {
+        // For WebViews, go directly to the profile page (final destination)
+        // For regular browsers, go back to the home page
+        const targetPath = isWebView ? '/profile/' : '/';
+        
+        // Log the redirect
+        console.log(`DirectAccess page redirecting to: ${targetPath}`);
+        
+        // After a small delay, allow rendering the full UI
+        setIsLoading(false);
+        
+        // Use the router for navigation
+        router.push(targetPath);
+      }, 100);
+      
+      // Fail-safe: If redirect doesn't happen within 2 seconds, force it with window.location
+      const failSafeTimer = setTimeout(() => {
+        console.log('Direct access redirect fail-safe triggered');
+        const fallbackPath = isWebView ? '/profile/' : '/';
+        window.location.href = fallbackPath;
+      }, 2000);
+      
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(failSafeTimer);
+      };
+    } catch (error) {
+      console.error('Error in direct access page:', error);
+      setIsLoading(false);
+      
+      // Force redirect even if there's an error
+      if (typeof window !== 'undefined') {
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 500);
+      }
+    }
   }, [router]);
   
+  // While loading, show the optimized loading indicator
+  if (isLoading) {
+    return <LoadingFallback message={status} />;
+  }
+  
+  // Once loaded, show the styled redirect page
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center">
       <div className="animate-pulse mb-4">

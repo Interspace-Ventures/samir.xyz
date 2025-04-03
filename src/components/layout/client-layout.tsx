@@ -42,6 +42,7 @@ function ErrorFallback() {
  * Client component wrapper for the app layout
  * Contains all interactive elements that need to be client components
  * Uses a simple, direct approach to theme handling for better compatibility
+ * Always renders children to avoid hydration mismatches
  */
 export default function ClientLayout({
   children,
@@ -60,23 +61,27 @@ export default function ClientLayout({
   
   // Clean theme detection
   useEffect(() => {
-    // Theme detection is now handled by the WebView compatibility module
-    // This keeps the client layout component clean and focused
-    
-    // Listen for changes in system preference
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      if (e.matches) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
+    try {
+      // Theme detection is now handled by the WebView compatibility module
+      // This keeps the client layout component clean and focused
+      
+      // Listen for changes in system preference
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = (e: MediaQueryListEvent) => {
+        if (e.matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      };
+      
+      // Add listener for theme changes
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
       }
-    };
-    
-    // Add listener for theme changes
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
+    } catch (error) {
+      console.error('Error setting up theme detection:', error);
     }
   }, []);
   
@@ -88,12 +93,10 @@ export default function ClientLayout({
   
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
-      {/* Show loading fallback until mounted */}
-      {!mounted && <LoadingFallback />}
-      
+      {/* Always render the layout to avoid hydration mismatches */}
       <div className="flex flex-col min-h-screen">
         <UltraSimpleNavbar />
-        <main className="flex-grow px-4 sm:px-6 py-10 mt-2"> {/* Increased top padding to prevent navbar overlap */}
+        <main className="flex-grow px-4 sm:px-6 py-10 mt-2">
           <div className="max-w-screen-xl mx-auto w-full">
             <ErrorBoundary>
               {children}
@@ -102,6 +105,28 @@ export default function ClientLayout({
         </main>
         <Footer />
       </div>
+      
+      {/* Show loading overlay until mounted, but only on client */}
+      {!mounted && (
+        <div id="loading-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 9998,
+          display: 'none'
+        }}>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                document.getElementById('loading-overlay').style.display = 'block';
+              `
+            }}
+          />
+          <LoadingFallback />
+        </div>
+      )}
     </ErrorBoundary>
   );
 }

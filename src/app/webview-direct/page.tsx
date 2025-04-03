@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
+import { applyWebViewOptimizations } from '../../utils/webview-compat';
+import LoadingFallback from '../../components/compat/loading-fallback';
 
 /**
  * WebView Direct Access Page
@@ -11,42 +13,44 @@ import { useEffect } from 'react';
  */
 export default function WebViewDirectPage() {
   useEffect(() => {
-    // Log the access
-    console.log('WebView direct access page loaded - redirecting to profile');
-    
-    // Use a small timeout to ensure the page has initialized
-    setTimeout(() => {
-      // Use direct window.location navigation for maximum compatibility
-      window.location.href = '/profile/';
-    }, 50);
+    try {
+      // Log the access
+      console.log('WebView direct access page loaded - redirecting to profile');
+      
+      // Apply WebView optimizations immediately
+      applyWebViewOptimizations();
+      
+      // Mark the document as WebView for any CSS optimizations
+      if (typeof document !== 'undefined') {
+        document.documentElement.classList.add('webview');
+      }
+      
+      // Use a small timeout to ensure the page has initialized
+      // with a fail-safe mechanism
+      const redirectTimer = setTimeout(() => {
+        // Use direct window.location navigation for maximum compatibility
+        window.location.href = '/profile/';
+      }, 100);
+      
+      // Fail-safe: If redirect doesn't happen within 2 seconds, force it
+      const failSafeTimer = setTimeout(() => {
+        console.log('WebView redirect fail-safe triggered');
+        window.location.replace('/profile/');
+      }, 2000);
+      
+      return () => {
+        clearTimeout(redirectTimer);
+        clearTimeout(failSafeTimer);
+      };
+    } catch (error) {
+      console.error('Error in WebView direct page:', error);
+      // Force redirect even if there's an error
+      if (typeof window !== 'undefined') {
+        window.location.href = '/profile/';
+      }
+    }
   }, []);
   
-  // Simple loading display
-  return (
-    <div style={{ 
-      display: 'flex', 
-      height: '100vh', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      flexDirection: 'column',
-      fontFamily: 'system-ui, sans-serif',
-    }}>
-      <div style={{ marginBottom: '16px' }}>
-        <div style={{ 
-          width: '40px', 
-          height: '40px', 
-          borderRadius: '50%', 
-          border: '3px solid #e5e7eb',
-          borderTopColor: '#9333ea',
-          animation: 'spin 1s linear infinite',
-        }} />
-      </div>
-      <style jsx global>{`
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
-      <p style={{ color: '#4b5563' }}>Accessing profile...</p>
-    </div>
-  );
+  // Use our optimized loading fallback component
+  return <LoadingFallback message="Accessing profile..." />;
 }

@@ -13,38 +13,48 @@ interface WebViewProviderProps {
  * 
  * Provides WebView detection and optimization for child components
  * Applies WebView-specific optimizations when in a WebView environment
+ * Always renders children to avoid hydration mismatches
  */
 export default function WebViewProvider({ children }: WebViewProviderProps) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
   const [isWebView, setIsWebView] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   
   useEffect(() => {
     // Detect if we're in a WebView
-    const webViewDetected = isWebViewEnvironment();
-    setIsWebView(webViewDetected);
-    
-    if (webViewDetected) {
-      console.log('WebView detected - applying optimizations');
-      // Apply WebView-specific optimizations
-      applyWebViewOptimizations();
+    try {
+      const webViewDetected = isWebViewEnvironment();
+      setIsWebView(webViewDetected);
+      
+      // Only show loading for WebViews after a brief delay
+      // This prevents flashing of loading screen for regular browsers
+      if (webViewDetected) {
+        console.log('WebView detected - applying optimizations');
+        // Apply WebView-specific optimizations
+        applyWebViewOptimizations();
+        
+        // Only show loading for WebView after a small delay
+        // to prevent unnecessary flashing in regular browsers
+        const loadingTimer = setTimeout(() => {
+          setShowLoading(true);
+        }, 50);
+        
+        return () => clearTimeout(loadingTimer);
+      }
+    } catch (error) {
+      console.error('Error in WebView detection:', error);
+    } finally {
+      // Always mark as initialized after detection attempt
+      setIsInitialized(true);
     }
-    
-    // Mark as loaded after a short delay
-    // This helps ensure WebView has fully initialized
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, webViewDetected ? 200 : 0);
-    
-    return () => clearTimeout(timer);
   }, []);
-
-  // For WebViews, show a loading state until we're ready
-  if (isWebView && isLoading) {
-    return <LoadingFallback message="Loading your page..." />;
-  }
   
   return (
     <>
+      {/* Always render children first to ensure content is available during hydration */}
+      {children}
+      
+      {/* Add WebView indicator when detected */}
       {isWebView && (
         <div 
           id="webview-indicator" 
@@ -52,7 +62,13 @@ export default function WebViewProvider({ children }: WebViewProviderProps) {
           style={{ display: 'none' }}
         />
       )}
-      {children}
+      
+      {/* Show loading overlay for WebViews only after initialization and brief delay */}
+      {isWebView && showLoading && !isInitialized && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+          <LoadingFallback message="Loading your page..." />
+        </div>
+      )}
     </>
   );
 }
