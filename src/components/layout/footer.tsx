@@ -53,58 +53,36 @@ const Footer = () => {
   };
 
   return (
-    <footer style={{
-      width: "100%",
-      marginTop: "40px",
-      background: isDark ? '#000000' : colors.bg,
-      borderTop: `1px solid ${colors.border}`,
-      boxShadow: isDark ? 
-        `0 -5px 15px -2px rgba(59, 7, 100, 0.35), 0 -2px 10px rgba(91, 33, 182, 0.25), ${colors.glow}` : 
-        "none", // Ultra-deep enhanced purple glow in dark mode
-      color: colors.text,
-      transition: "background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s",
-      position: "relative",
-    }}>
-      <div style={{
-        maxWidth: "1200px",
-        margin: "0 auto",
-        padding: "24px 16px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-      }}>
-        <div style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: "16px",
-        }} className="footer-content">
-          <div style={{ fontSize: "14px" }}>
+    <footer className={`w-full mt-10 transition-colors duration-300 border-t ${
+      isDark 
+        ? 'bg-[#12022e] border-purple-950/50 shadow-[0_-5px_15px_-2px_rgba(59,7,100,0.35),0_-2px_10px_rgba(91,33,182,0.25),0_0_15px_rgba(91,33,182,0.7)] text-purple-300' 
+        : 'bg-gray-50 border-gray-200 text-gray-600'
+    }`}>
+      <div className="max-w-[1200px] mx-auto py-6 px-4 flex flex-col gap-4">
+        <div className="footer-content flex flex-col justify-between items-center gap-4">
+          <div className="text-sm">
             © <Link 
                 href="/ventures" 
-                style={{ 
-                  color: colors.accent,
-                  fontWeight: 500,
-                  textDecoration: "none",
-                  transition: "all 0.2s ease",
-                  position: "relative",
-                  padding: "0 2px",
+                className={`font-medium relative px-0.5 transition-all duration-200 ${
+                  isDark 
+                    ? 'text-purple-600 hover:text-purple-500 shadow-purple-800/30 hover:shadow-purple-800/50' 
+                    : 'text-purple-600 hover:text-purple-700'
+                }`}
+                style={{
                   textShadow: isDark ? "0 0 5px rgba(91, 33, 182, 0.7), 0 0 15px rgba(139, 92, 246, 0.4)" : "none",
+                  textDecoration: "none"
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.color = colors.accentHover;
                   if (isDark) e.currentTarget.style.textShadow = "0 0 8px rgba(91, 33, 182, 0.9), 0 0 20px rgba(139, 92, 246, 0.6)";
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.color = colors.accent;
                   if (isDark) e.currentTarget.style.textShadow = "0 0 5px rgba(91, 33, 182, 0.7), 0 0 15px rgba(139, 92, 246, 0.4)";
                 }}
               >
                 Interspace Ventures
               </Link> {year || "2025"}
           </div>
-          <div style={{ fontSize: "12px", color: colors.muted }}>
+          <div className={`text-xs ${isDark ? 'text-purple-800' : 'text-gray-500'}`}>
             Built with Replit AI at the speed of thought • v{versionInfo.version}
           </div>
         </div>
