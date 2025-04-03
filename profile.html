@@ -64,98 +64,41 @@
       visibility: visible !important;
       opacity: 1 !important;
     }
-    
-    #webview-message {
-      display: none;
-      margin-top: 1.5rem;
-      padding: 1rem;
-      background: rgba(126, 34, 206, 0.2);
-      border-radius: 0.5rem;
-    }
   </style>
   
-  <!-- WebView detection and compatibility -->
+  <!-- Simple redirect script -->
   <script>
-    // Detect WebView environments
-    function isWebView() {
+    // Simple direct redirect
+    function simpleRedirect() {
+      // Check if we're in a WebView using UA detection
       const ua = navigator.userAgent || '';
-      return /(WebView|wv)/.test(ua) || 
-             /Android.*(wv|.NET)/.test(ua) ||
-             /iPhone|iPad.*AppleWebKit(?!.*Safari)/.test(ua) ||
-             /FB_IAB|FBAN|FBAV|Line|Instagram|NAVER|KAKAOTALK|Electron|Capacitor|Cordova/.test(ua);
-    }
-    
-    // Redirect to the appropriate destination based on environment
-    function smartRedirect() {
-      // Check if we're in a WebView environment
-      if (isWebView()) {
-        console.log('WebView detected, using fallback redirect approach');
-        document.getElementById('webview-message').style.display = 'block';
-        
-        // Try to use the simplified WebView fallback version
-        try {
-          fetch('/webview-fallback.html', { method: 'HEAD' })
-            .then(response => {
-              if (response.ok) {
-                // Fallback page exists, redirect to it
-                window.location.href = '/webview-fallback.html';
-              } else {
-                // Fallback doesn't exist, use normal profile with compatibility script
-                redirectWithCompatibility();
-              }
-            })
-            .catch(() => {
-              // Error checking fallback, use normal profile with compatibility
-              redirectWithCompatibility();
-            });
-        } catch (e) {
-          // Fetch API not available, use direct redirect
-          redirectWithCompatibility();
-        }
+      const isWebViewEnv = /(WebView|wv)/.test(ua) || 
+                          /Android.*(wv|.NET)/.test(ua) ||
+                          /iPhone|iPad.*AppleWebKit(?!.*Safari)/.test(ua) ||
+                          /FB_IAB|FBAN|FBAV|Line|Instagram|NAVER|KAKAOTALK|Electron|Capacitor|Cordova/.test(ua);
+      
+      // Just add a parameter to indicate if it's a WebView
+      if (isWebViewEnv) {
+        console.log('WebView detected, adding flag parameter');
+        window.location.href = "/profile/?webview=true";
       } else {
-        // Normal browser, standard redirect
-        console.log('Standard browser detected, using normal redirect');
-        setTimeout(function() {
-          window.location.href = "/profile/";
-        }, 1000);
+        // Normal browser - standard redirect
+        console.log('Standard browser detected');
+        window.location.href = "/profile/";
       }
     }
     
-    // Redirect with compatibility script for WebViews
-    function redirectWithCompatibility() {
-      // Add a parameter to indicate this is a WebView redirect
-      window.location.href = "/profile/?webview=true";
-    }
+    // Run immediately 
+    setTimeout(simpleRedirect, 500);
   </script>
 </head>
 <body>
   <h1>Redirecting to Profile Page</h1>
-  <p>You are being redirected to the profile page. If you are not redirected automatically, please click one of the buttons below.</p>
+  <p>You are being redirected to the profile page. If you are not redirected automatically, please click the button below.</p>
   <div class="loading"></div>
-  
-  <div id="webview-message">
-    <p><strong>WebView environment detected!</strong></p>
-    <p>We're preparing a compatible version for you...</p>
-  </div>
   
   <div style="margin-top: 2rem;">
     <a href="/profile/" class="btn">Go to Profile</a>
-    <a href="/webview-fallback.html" class="btn">WebView Version</a>
   </div>
-  
-  <script>
-    // Initialize smart redirection
-    document.addEventListener('DOMContentLoaded', function() {
-      smartRedirect();
-    });
-    
-    // Fallback - if for some reason the DOMContentLoaded event doesn't fire
-    setTimeout(function() {
-      if (window.location.pathname === '/profile.html' || 
-          window.location.pathname === '/') {
-        smartRedirect();
-      }
-    }, 1000);
-  </script>
 </body>
 </html>

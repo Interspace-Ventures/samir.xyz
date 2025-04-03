@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { ThemeProvider } from "../theme-provider";
+import React, { useEffect } from "react";
 import UltraSimpleNavbar from "./ultra-simple-navbar";
 import Footer from "./footer";
 import ErrorBoundary from "../error-boundary";
@@ -35,6 +34,7 @@ function ErrorFallback() {
 /**
  * Client component wrapper for the app layout
  * Contains all interactive elements that need to be client components
+ * Uses a simple, direct approach to theme handling for better compatibility
  */
 export default function ClientLayout({
   children,
@@ -42,30 +42,57 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   
+  // Handle errors in ErrorBoundary
   const handleError = (error: Error) => {
     // Log errors to the console in development
     if (process.env.NODE_ENV === 'development') {
       console.error('Layout Error:', error);
     }
-    
-    // Could add external error logging service here
   };
+  
+  // Simple theme detection and application
+  useEffect(() => {
+    // Check if user prefers dark mode
+    const prefersDarkMode = window.matchMedia && 
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+    // Apply dark mode directly to document
+    if (prefersDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
+    // Listen for changes in system preference
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+    
+    // Add listener for theme changes
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+  }, []);
   
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        <div className="flex flex-col min-h-screen">
-          <UltraSimpleNavbar />
-          <main className="flex-grow px-4 sm:px-6 py-10 mt-2"> {/* Increased top padding to prevent navbar overlap */}
-            <div className="max-w-screen-xl mx-auto w-full">
-              <ErrorBoundary>
-                {children}
-              </ErrorBoundary>
-            </div>
-          </main>
-          <Footer />
-        </div>
-      </ThemeProvider>
+      <div className="flex flex-col min-h-screen">
+        <UltraSimpleNavbar />
+        <main className="flex-grow px-4 sm:px-6 py-10 mt-2"> {/* Increased top padding to prevent navbar overlap */}
+          <div className="max-w-screen-xl mx-auto w-full">
+            <ErrorBoundary>
+              {children}
+            </ErrorBoundary>
+          </div>
+        </main>
+        <Footer />
+      </div>
     </ErrorBoundary>
   );
 }
