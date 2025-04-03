@@ -27,13 +27,38 @@ export default function RootLayout({
         
         {/* Enhanced WebView compatibility - preload scripts */}
         <link rel="preload" href="/webview-compat.js" as="script" />
-        <link rel="preload" href="/webview-detector.js" as="script" />
         
-        {/* Inline WebView detection to load compatibility scripts immediately */}
+        {/* Simple, immediate script to apply theme and ensure WebView compatibility */}
         <script dangerouslySetInnerHTML={{ __html: `
-          // Immediate WebView detection and script loading
+          // Simple theme script that works in any environment including WebViews
           (function() {
-            function detectWebView() {
+            // Apply dark theme immediately if system prefers it
+            function applyTheme() {
+              try {
+                // Check if system prefers dark mode
+                const prefersDark = window.matchMedia && 
+                  window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                // Apply theme class directly to html element
+                if (prefersDark) {
+                  document.documentElement.classList.add('dark');
+                }
+                
+                // Set flag to indicate this script ran
+                window.__themeInitialized = true;
+
+                console.log("Theme initialized, dark mode:", prefersDark);
+              } catch(e) {
+                // Fallback to default (no dark mode)
+                console.error("Error initializing theme:", e);
+              }
+            }
+            
+            // Run immediately
+            applyTheme();
+            
+            // Check if we're in a WebView for extra compatibility
+            function isWebView() {
               try {
                 const ua = navigator.userAgent || '';
                 return /(WebView|wv)/.test(ua) || 
@@ -45,21 +70,13 @@ export default function RootLayout({
               }
             }
             
-            // If URL parameter indicates WebView or we detect it
-            if (window.location.search.includes('webview=true') || detectWebView()) {
-              // Check if we should redirect to fallback
-              if (window.location.pathname !== '/webview-fallback.html') {
-                // Load compatibility scripts immediately with high priority
-                var compat = document.createElement('script');
-                compat.src = '/webview-compat.js';
-                compat.async = false;
-                document.head.appendChild(compat);
-                
-                var detector = document.createElement('script');
-                detector.src = '/webview-detector.js';
-                detector.async = false;
-                document.head.appendChild(detector);
-              }
+            // For WebViews, apply additional compatibility
+            if (isWebView() || window.location.search.includes('webview=true')) {
+              // Load compat script for problematic WebViews
+              var compat = document.createElement('script');
+              compat.src = '/webview-compat.js';
+              compat.async = false;
+              document.head.appendChild(compat);
             }
           })();
         ` }} />
