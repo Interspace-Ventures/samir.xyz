@@ -9,7 +9,7 @@ import { IMAGE_BASE_PATH, ASSET_PATHS } from "../../config/paths";
 export default function Profile() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-[32px]">
-      <div className="relative h-[110px] mt-6 mb-8 font-inter">
+      <div className="relative h-[100px] mt-6 mb-8 font-inter">
         {/* Left image with absolute positioning */}
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 z-10">
           <img 
@@ -20,7 +20,7 @@ export default function Profile() {
         </div>
         
         {/* Right text section with left padding, vertically centered */}
-        <div className="absolute left-[80px] top-1/2 -translate-y-1/2">
+        <div className="absolute left-[72px] top-1/2 -translate-y-1/2">
           <h1 className="text-2xl font-bold mb-2 font-inter">
             Hey - I&apos;m Samir
           </h1>
