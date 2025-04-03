@@ -43,7 +43,7 @@ const Footer = () => {
   // Colors based on dark/light mode with ultra-deep enhanced purple theme
   const colors = {
     bg: isDark ? "#12022e" : "#f3f4f6", // Deep purple background for dark mode (#12022e)
-    text: isDark ? "#a78df8" : "#6b7280", // Adjusted purple text for dark mode
+    text: isDark ? "#d8b4fe" : "#6b7280", // Purple-300 for dark mode text (matches link-underline)
     textHighlight: isDark ? "#ffffff" : "#111827",
     accent: isDark ? "#5b21b6" : "#8b5cf6", // Ultra-deep purple accent for branding
     accentHover: isDark ? "#6d28d9" : "#7c3aed", // Slightly brighter on hover but still ultra-deep
@@ -58,31 +58,17 @@ const Footer = () => {
         ? 'bg-[#12022e] border-purple-950/50 shadow-[0_-5px_15px_-2px_rgba(59,7,100,0.35),0_-2px_10px_rgba(91,33,182,0.25),0_0_15px_rgba(91,33,182,0.7)] text-purple-300' 
         : 'bg-gray-50 border-gray-200 text-gray-600'
     }`}>
-      <div className="max-w-[1200px] mx-auto py-6 px-4 flex flex-col gap-4">
+      <div className="max-w-[1200px] mx-auto py-6 px-4 sm:px-[32px] flex flex-col gap-4">
         <div className="footer-content flex flex-col justify-between items-center gap-4">
-          <div className="text-sm">
+          <div className="text-sm font-inter">
             © <Link 
                 href="/ventures" 
-                className={`font-medium relative px-0.5 transition-all duration-200 ${
-                  isDark 
-                    ? 'text-purple-300 hover:text-purple-200 shadow-purple-800/30 hover:shadow-purple-800/50' 
-                    : 'text-purple-600 hover:text-purple-700'
-                }`}
-                style={{
-                  textShadow: isDark ? "0 0 5px rgba(139, 92, 246, 0.8), 0 0 15px rgba(167, 139, 250, 0.6)" : "none",
-                  textDecoration: "none"
-                }}
-                onMouseOver={(e) => {
-                  if (isDark) e.currentTarget.style.textShadow = "0 0 8px rgba(139, 92, 246, 0.9), 0 0 20px rgba(167, 139, 250, 0.8)";
-                }}
-                onMouseOut={(e) => {
-                  if (isDark) e.currentTarget.style.textShadow = "0 0 5px rgba(139, 92, 246, 0.8), 0 0 15px rgba(167, 139, 250, 0.6)";
-                }}
+                className="link-underline font-medium"
               >
                 Interspace Ventures
               </Link> {year || "2025"}
           </div>
-          <div className={`text-xs ${isDark ? 'text-purple-400/80' : 'text-gray-500'}`}>
+          <div className={`text-xs font-inter ${isDark ? 'text-purple-300/80' : 'text-gray-500'}`}>
             Built with Replit AI at the speed of thought • v{versionInfo.version}
           </div>
         </div>

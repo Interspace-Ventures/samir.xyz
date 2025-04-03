@@ -531,9 +531,10 @@ body {
 }
 
 .dark .link-underline {
-  color: #c084fc; /* purple-400 */
-  text-shadow: 0 0 5px rgba(192, 132, 252, 0.3);
+  color: #d8b4fe; /* purple-300 */
+  text-shadow: 0 0 5px rgba(216, 180, 254, 0.3);
   position: relative;
+  font-family: 'Inter', sans-serif;
 }
 
 .link-underline:hover {
@@ -541,8 +542,8 @@ body {
 }
 
 .dark .link-underline:hover {
-  color: #d8b4fe; /* purple-300 */
-  text-shadow: 0 0 8px rgba(216, 180, 254, 0.6);
+  color: #e9d5ff; /* purple-200 */
+  text-shadow: 0 0 8px rgba(233, 213, 255, 0.6);
 }
 
 .link-underline:after {
@@ -558,8 +559,8 @@ body {
 }
 
 .dark .link-underline:after {
-  background: linear-gradient(90deg, #8b5cf6, #c084fc);
-  box-shadow: 0 0 6px rgba(192, 132, 252, 0.7);
+  background: linear-gradient(90deg, #c084fc, #e9d5ff);
+  box-shadow: 0 0 6px rgba(216, 180, 254, 0.7);
   height: 2.5px;
 }
 
@@ -695,3 +696,12 @@ body {
 }
 
 /* End of styles */
+/* Gradient text classes for light/dark mode */
+.bg-gradient-light {
+  background: linear-gradient(to right, #a78bfa, #8b5cf6);
+}
+
+.dark .bg-gradient-dark {
+  background: linear-gradient(to right, #d8b4fe, #e9d5ff);
+  box-shadow: 0 0 10px rgba(216, 180, 254, 0.2);
+}
