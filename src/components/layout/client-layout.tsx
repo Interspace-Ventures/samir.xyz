@@ -30,7 +30,8 @@ function ErrorFallback() {
             window.location.reload();
           }
         }}
-        className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md"
+        className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-700 text-white py-2 px-6 rounded-md font-inter"
+        style={{ fontFamily: 'Inter, sans-serif' }}
       >
         Refresh page
       </button>
@@ -94,10 +95,10 @@ export default function ClientLayout({
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
       {/* Always render the layout to avoid hydration mismatches */}
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen font-inter" style={{ fontFamily: 'Inter, sans-serif' }}>
         <UltraSimpleNavbar />
-        <main className="flex-grow px-4 sm:px-6 py-10 mt-2">
-          <div className="max-w-screen-xl mx-auto w-full">
+        <main className="flex-grow py-10 mt-2">
+          <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-[32px]">
             <ErrorBoundary>
               {children}
             </ErrorBoundary>
