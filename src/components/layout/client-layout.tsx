@@ -50,49 +50,10 @@ export default function ClientLayout({
     }
   };
   
-  // Enhanced theme detection and WebView compatibility
+  // Clean theme detection
   useEffect(() => {
-    // Check if user prefers dark mode
-    const prefersDarkMode = window.matchMedia && 
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-    // Apply dark mode directly to document
-    if (prefersDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    
-    // WebView detection with safer approach
-    // Using a function to avoid TypeScript errors with Safari-specific properties
-    const isWebView = () => {
-      try {
-        return (
-          navigator.userAgent.includes('wv') || 
-          navigator.userAgent.includes('WebView') ||
-          // @ts-ignore - Safari-specific property for home screen apps
-          (typeof window.navigator.standalone !== 'undefined' && window.navigator.standalone === true) || 
-          window.matchMedia('(display-mode: standalone)').matches
-        );
-      } catch (e) {
-        return false;
-      }
-    };
-      
-    // Apply WebView-specific class if needed
-    if (isWebView()) {
-      document.documentElement.classList.add('webview');
-      
-      // Set body styles directly for WebViews
-      document.body.style.visibility = 'visible';
-      document.body.style.opacity = '1';
-      document.body.style.display = 'block';
-      
-      // Force layout recalculation in WebViews
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-      }, 100);
-    }
+    // Theme detection is now handled by the WebView compatibility module
+    // This keeps the client layout component clean and focused
     
     // Listen for changes in system preference
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
