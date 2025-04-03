@@ -42,7 +42,7 @@ const Footer = () => {
   
   // Colors based on dark/light mode with ultra-deep enhanced purple theme
   const colors = {
-    bg: isDark ? "#12022e" : "#f3f4f6", // Ultra-deep purple background for dark mode
+    bg: isDark ? "#000000" : "#f3f4f6", // Black background for dark mode to match site
     text: isDark ? "#a78df8" : "#6b7280", // Adjusted purple text for dark mode
     textHighlight: isDark ? "#ffffff" : "#111827",
     accent: isDark ? "#5b21b6" : "#8b5cf6", // Ultra-deep purple accent for branding
@@ -56,9 +56,7 @@ const Footer = () => {
     <footer style={{
       width: "100%",
       marginTop: "40px",
-      background: isDark ? 
-        `linear-gradient(125deg, ${colors.bg}, rgba(14, 2, 34, 0.98), rgba(10, 1, 26, 1), rgba(16, 3, 38, 0.97), rgba(12, 2, 30, 0.99))` : 
-        colors.bg,
+      background: isDark ? '#000000' : colors.bg,
       borderTop: `1px solid ${colors.border}`,
       boxShadow: isDark ? 
         `0 -5px 15px -2px rgba(59, 7, 100, 0.35), 0 -2px 10px rgba(91, 33, 182, 0.25), ${colors.glow}` : 
