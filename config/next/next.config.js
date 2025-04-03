@@ -35,7 +35,7 @@ const nextConfig = {
     pagesBufferLength: 5,
   },
   
-  // Allow cross-origin requests from Replit webview
+  // Allow cross-origin requests for development
   allowedDevOrigins: ['*', 'janeway.replit.dev', '*.janeway.replit.dev'],
   
   // Support for Replit environment
