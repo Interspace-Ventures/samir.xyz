@@ -42,7 +42,7 @@ const Footer = () => {
   
   // Colors based on dark/light mode with ultra-deep enhanced purple theme
   const colors = {
-    bg: isDark ? "#000000" : "#f3f4f6", // Black background for dark mode to match site
+    bg: isDark ? "#12022e" : "#f3f4f6", // Deep purple background for dark mode (#12022e)
     text: isDark ? "#a78df8" : "#6b7280", // Adjusted purple text for dark mode
     textHighlight: isDark ? "#ffffff" : "#111827",
     accent: isDark ? "#5b21b6" : "#8b5cf6", // Ultra-deep purple accent for branding
