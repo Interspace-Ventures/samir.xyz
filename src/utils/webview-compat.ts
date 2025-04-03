@@ -9,6 +9,22 @@
 const DEBUG_WEBVIEW = false; // Set to true for verbose debugging
 
 /**
+ * Safely executes a browser operation with error handling
+ * 
+ * @param {Function} operation The operation to perform
+ * @param {boolean} defaultValue The default value to return if the operation fails
+ * @returns {any} The result of the operation or the default value
+ */
+function safelyExecute<T>(operation: () => T, defaultValue: T): T {
+  try {
+    return operation();
+  } catch (error) {
+    console.error("WebView compat error:", error);
+    return defaultValue;
+  }
+}
+
+/**
  * Checks if the current environment is a WebView
  * Uses multiple detection methods for better accuracy
  * 
@@ -20,72 +36,76 @@ export function isWebViewEnvironment(): boolean {
     return false;
   }
   
-  const userAgent = window.navigator.userAgent.toLowerCase();
-  
-  // If DEBUG_WEBVIEW is true, we'll log the details
-  if (DEBUG_WEBVIEW) {
-    console.log('WebView Detection - User Agent:', userAgent);
-    console.log('WebView Detection - navigator:', Object.keys(window.navigator).join(', '));
-  }
-  
-  // Common WebView identifiers in user agent
-  const webViewSignatures = [
-    // Android WebView
-    'wv', // Most reliable identifier for Android WebView
-    'android.+webview',
-    'android.+wv',
-    'crosswalk',
+  return safelyExecute(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
     
-    // iOS WebView signatures 
-    'crios', // Chrome iOS
-    'fxios', // Firefox iOS  
-    'mozilla/5.0 (iphone',  // General iOS + not Safari
+    // If DEBUG_WEBVIEW is true, we'll log the details
+    if (DEBUG_WEBVIEW) {
+      console.log('WebView Detection - User Agent:', userAgent);
+      console.log('WebView Detection - navigator:', Object.keys(window.navigator).join(', '));
+    }
     
-    // General WebView keywords
-    'electron',
-    'cordova',
-    'capacitor',
-    'mobileapp',
-    'nativeapp',
-  ];
-  
-  // Check for WebView signatures in user agent
-  const hasWebViewUserAgent = webViewSignatures.some(signature => 
-    userAgent.includes(signature)
-  );
-  
-  // Advanced detection for iOS UIWebView & WKWebView
-  const hasIOSWebViewBrowser = /(iPhone|iPod|iPad)(?!.*Safari)/.test(userAgent);
-  
-  // Check for common WebView properties
-  const hasWebViewProperties = !!(
-    (window as any).webkit?.messageHandlers || 
-    (window as any).Android || 
-    (window as any).MSApp || 
-    (window as any).ReactNativeWebView
-  );
-  
-  // Check for missing browser-specific features often not in WebViews
-  const missingBrowserFeatures = typeof (window as any).orientation !== 'undefined' && 
-                                !(window as any).chrome;
-  
-  // Final result using multiple detection methods
-  const result = hasWebViewUserAgent || 
-                hasIOSWebViewBrowser || 
-                hasWebViewProperties || 
-                missingBrowserFeatures;
-  
-  if (DEBUG_WEBVIEW) {
-    console.log('WebView Detection Results:', {
-      hasWebViewUserAgent,
-      hasIOSWebViewBrowser,
-      hasWebViewProperties,
-      missingBrowserFeatures,
-      finalResult: result
-    });
-  }
-  
-  return result;
+    // Common WebView identifiers in user agent
+    const webViewSignatures = [
+      // Android WebView
+      'wv', // Most reliable identifier for Android WebView
+      'android.+webview',
+      'android.+wv',
+      'crosswalk',
+      
+      // iOS WebView signatures 
+      'crios', // Chrome iOS
+      'fxios', // Firefox iOS  
+      'mozilla/5.0 (iphone',  // General iOS + not Safari
+      
+      // General WebView keywords
+      'electron',
+      'cordova',
+      'capacitor',
+      'mobileapp',
+      'nativeapp',
+    ];
+    
+    // Check for WebView signatures in user agent
+    const hasWebViewUserAgent = webViewSignatures.some(signature => 
+      userAgent.includes(signature)
+    );
+    
+    // Advanced detection for iOS UIWebView & WKWebView
+    const hasIOSWebViewBrowser = /(iPhone|iPod|iPad)(?!.*Safari)/.test(userAgent);
+    
+    // Check for common WebView properties (safely)
+    const hasWebViewProperties = !!(
+      safelyExecute(() => (window as any).webkit?.messageHandlers, false) || 
+      safelyExecute(() => (window as any).Android, false) || 
+      safelyExecute(() => (window as any).MSApp, false) || 
+      safelyExecute(() => (window as any).ReactNativeWebView, false)
+    );
+    
+    // Check for missing browser-specific features often not in WebViews
+    const missingBrowserFeatures = safelyExecute(() => {
+      return typeof (window as any).orientation !== 'undefined' && 
+             !(window as any).chrome;
+    }, false);
+    
+    // Final result using multiple detection methods
+    const result = hasWebViewUserAgent || 
+                  hasIOSWebViewBrowser || 
+                  hasWebViewProperties || 
+                  missingBrowserFeatures;
+    
+    if (DEBUG_WEBVIEW) {
+      console.log('WebView Detection Results:', {
+        hasWebViewUserAgent,
+        hasIOSWebViewBrowser,
+        hasWebViewProperties,
+        missingBrowserFeatures,
+        finalResult: result
+      });
+    }
+    
+    return result;
+  }, false);
 }
 
 /**
@@ -98,49 +118,56 @@ export function applyWebViewOptimizations(): void {
     return;
   }
   
-  // Add a class to the HTML element to target WebView-specific CSS
-  if (isWebViewEnvironment()) {
-    document.documentElement.classList.add('webview');
-    
-    // Add WebView-specific styles dynamically
-    const styleElement = document.createElement('style');
-    styleElement.id = 'webview-optimizations';
-    styleElement.textContent = `
-      /* WebView-specific optimizations */
-      .webview body {
-        /* Hardware acceleration boost */
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-        -webkit-overflow-scrolling: touch;
+  safelyExecute(() => {
+    // Add a class to the HTML element to target WebView-specific CSS
+    if (isWebViewEnvironment()) {
+      document.documentElement.classList.add('webview');
+      
+      // Check if we've already applied optimizations
+      if (document.getElementById('webview-optimizations')) {
+        return;
+      }
+      
+      // Add WebView-specific styles dynamically
+      const styleElement = document.createElement('style');
+      styleElement.id = 'webview-optimizations';
+      styleElement.textContent = `
+        /* WebView-specific optimizations */
+        .webview body {
+          /* Hardware acceleration boost */
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+          -webkit-overflow-scrolling: touch;
+          
+          /* Force visibility */
+          opacity: 1 !important;
+          visibility: visible !important;
+          display: block !important;
+        }
         
-        /* Force visibility */
-        opacity: 1 !important;
-        visibility: visible !important;
-        display: block !important;
-      }
+        /* Additional visibility helpers for problematic elements */
+        .webview .main-content,
+        .webview main,
+        .webview .profile-container {
+          opacity: 1 !important;
+          visibility: visible !important;
+          display: block !important;
+        }
+        
+        /* Performance optimizations */
+        .webview * {
+          -webkit-tap-highlight-color: transparent;
+        }
+      `;
       
-      /* Additional visibility helpers for problematic elements */
-      .webview .main-content,
-      .webview main,
-      .webview .profile-container {
-        opacity: 1 !important;
-        visibility: visible !important;
-        display: block !important;
-      }
+      // Add the style to the head
+      document.head.appendChild(styleElement);
       
-      /* Performance optimizations */
-      .webview * {
-        -webkit-tap-highlight-color: transparent;
+      if (DEBUG_WEBVIEW) {
+        console.log('WebView optimizations applied');
       }
-    `;
-    
-    // Add the style to the head
-    document.head.appendChild(styleElement);
-    
-    if (DEBUG_WEBVIEW) {
-      console.log('WebView optimizations applied');
     }
-  }
+  }, undefined);
 }
 
 /**
@@ -155,11 +182,36 @@ export function redirectWebView(targetPath: string): void {
     return;
   }
   
-  console.log(`Redirecting WebView to: ${targetPath}`);
-  
-  // Use direct location change for WebViews
-  // setTimeout helps ensure the WebView is ready
-  setTimeout(() => {
-    window.location.href = targetPath;
-  }, 50);
+  safelyExecute(() => {
+    console.log(`Redirecting WebView to: ${targetPath}`);
+    
+    // Use direct location change for WebViews
+    // setTimeout helps ensure the WebView is ready
+    setTimeout(() => {
+      window.location.href = targetPath;
+    }, 50);
+  }, undefined);
+}
+
+/**
+ * Check if the application is fully loaded and ready
+ * Used to detect potential issues with the loading state
+ * 
+ * @returns {boolean} True if the application is ready, false otherwise
+ */
+export function isAppReady(): boolean {
+  return safelyExecute(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return false;
+    }
+    
+    // Check if body has been populated with content
+    const hasMainContent = !!document.querySelector('main');
+    
+    // Check if app container exists and has children
+    const appRoot = document.getElementById('__next') || document.getElementById('root');
+    const hasAppContent = !!appRoot && appRoot.children.length > 0;
+    
+    return hasMainContent && hasAppContent;
+  }, false);
 }
