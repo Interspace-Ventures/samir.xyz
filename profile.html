@@ -1,1 +1,161 @@
-/profile/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to Profile</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: #0c021c;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    h1 {
+      color: #d8b4fe;
+      margin-bottom: 1rem;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+      line-height: 1.6;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #7e22ce;
+      animation: spin 1s ease-in-out infinite;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .btn {
+      display: inline-block;
+      background: #7e22ce;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      margin: 1rem;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    #webview-message {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(126, 34, 206, 0.2);
+      border-radius: 0.5rem;
+    }
+  </style>
+  
+  <!-- WebView detection and compatibility -->
+  <script>
+    // Detect WebView environments
+    function isWebView() {
+      const ua = navigator.userAgent || '';
+      return /(WebView|wv)/.test(ua) || 
+             /Android.*(wv|.NET)/.test(ua) ||
+             /iPhone|iPad.*AppleWebKit(?!.*Safari)/.test(ua) ||
+             /FB_IAB|FBAN|FBAV|Line|Instagram|NAVER|KAKAOTALK|Electron|Capacitor|Cordova/.test(ua);
+    }
+    
+    // Redirect to the appropriate destination based on environment
+    function smartRedirect() {
+      // Check if we're in a WebView environment
+      if (isWebView()) {
+        console.log('WebView detected, using fallback redirect approach');
+        document.getElementById('webview-message').style.display = 'block';
+        
+        // Try to use the simplified WebView fallback version
+        try {
+          fetch('/webview-fallback.html', { method: 'HEAD' })
+            .then(response => {
+              if (response.ok) {
+                // Fallback page exists, redirect to it
+                window.location.href = '/webview-fallback.html';
+              } else {
+                // Fallback doesn't exist, use normal profile with compatibility script
+                redirectWithCompatibility();
+              }
+            })
+            .catch(() => {
+              // Error checking fallback, use normal profile with compatibility
+              redirectWithCompatibility();
+            });
+        } catch (e) {
+          // Fetch API not available, use direct redirect
+          redirectWithCompatibility();
+        }
+      } else {
+        // Normal browser, standard redirect
+        console.log('Standard browser detected, using normal redirect');
+        setTimeout(function() {
+          window.location.href = "/profile/";
+        }, 1000);
+      }
+    }
+    
+    // Redirect with compatibility script for WebViews
+    function redirectWithCompatibility() {
+      // Add a parameter to indicate this is a WebView redirect
+      window.location.href = "/profile/?webview=true";
+    }
+  </script>
+</head>
+<body>
+  <h1>Redirecting to Profile Page</h1>
+  <p>You are being redirected to the profile page. If you are not redirected automatically, please click one of the buttons below.</p>
+  <div class="loading"></div>
+  
+  <div id="webview-message">
+    <p><strong>WebView environment detected!</strong></p>
+    <p>We're preparing a compatible version for you...</p>
+  </div>
+  
+  <div style="margin-top: 2rem;">
+    <a href="/profile/" class="btn">Go to Profile</a>
+    <a href="/webview-fallback.html" class="btn">WebView Version</a>
+  </div>
+  
+  <script>
+    // Initialize smart redirection
+    document.addEventListener('DOMContentLoaded', function() {
+      smartRedirect();
+    });
+    
+    // Fallback - if for some reason the DOMContentLoaded event doesn't fire
+    setTimeout(function() {
+      if (window.location.pathname === '/profile.html' || 
+          window.location.pathname === '/') {
+        smartRedirect();
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

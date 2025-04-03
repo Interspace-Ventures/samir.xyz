@@ -4,42 +4,19 @@
 
 /* V15.0.0 - Simplified global styles with improved dark/light mode consistency */
 
-/* WebView Compatibility - forcing critical elements to be visible - V1.0 */
-html[data-webview-ready="true"] body,
-html[data-webview-ready="true"] #__next,
-html[data-webview-ready="true"] main,
-html[data-webview-ready="true"] .flex-grow,
-html[data-webview-ready="true"] [class*="container"],
-html[data-webview-ready="true"] [class*="content"] {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  animation: none !important;
-  transition: none !important;
-}
-
-/* Base compatibility styles applied regardless of data attribute */
+/* Base styles */
 body {
-  visibility: visible !important;
-  opacity: 1 !important;
-  min-height: 100vh !important;
+  min-height: 100vh;
 }
 
-/* Ensure immediate visibility even before JavaScript loads */
+/* App root container */
 #__next {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  min-height: 100vh !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Prevent any potential flashing or visibility transitions */
-* {
-  animation-delay: 0s !important;
-  animation-duration: 0s !important;
-  transition-delay: 0s !important;
-}
+
 
 /* Fix for theme flashing by ensuring immediate transitions */
 .theme-init-fix {
@@ -256,18 +233,18 @@ body {
   transition-property: color, background-color, box-shadow;
   transition-duration: 300ms;
   
-  /* Force visibility for all environments, especially Replit webview */
-  visibility: visible !important;
-  opacity: 1 !important;
+  /* Ensure content is always visible */
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Apply ultra-deep enhanced glow effect to the dark theme */
 .dark body {
   box-shadow: inset 0 0 100px rgba(76, 29, 149, 0.35), inset 0 0 200px rgba(59, 7, 100, 0.15);
   
-  /* Force visibility for all environments in dark mode */
-  visibility: visible !important;
-  opacity: 1 !important;
+  /* Ensure content is always visible */
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Add shimmer effect to links, buttons, and interactive elements with deeper purple */
@@ -687,115 +664,4 @@ body {
   border-radius: inherit;
 }
 
-/* Webview compatibility enhancements */
-
-/* ======= ULTRA AGGRESSIVE WEBVIEW COMPATIBILITY ======= */
-/* V2.0 - Enhanced WebView immediate visibility rules with !important */
-
-/* Force visibility for WebView-detection attributes */
-html.webview-compatible,
-html[data-webview-compatible],
-html[data-webview-ready],
-html[data-webview-ready="true"] {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  animation: none !important;
-  transition: none !important;
-}
-
-/* Target the most critical elements with highly specific selectors */
-html[data-webview-ready="true"] body,
-html[data-webview-ready="true"] #__next,
-html[data-webview-ready="true"] main,
-html[data-webview-ready="true"] .flex-grow,
-html[data-webview-ready="true"] [class*="container"],
-html[data-webview-ready="true"] [class*="content"],
-html[data-webview-ready="true"] [class*="layout"],
-html.webview-compatible body,
-html.webview-compatible #__next,
-html.webview-compatible main,
-html[data-webview-compatible] body,
-html[data-webview-compatible] #__next,
-html[data-webview-compatible] main {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
-}
-
-/* Completely disable all animations and transitions in WebView mode */
-html[data-webview-ready="true"] *,
-html.webview-compatible *,
-html[data-webview-compatible] * {
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
-}
-
-/* Remove any loading overlays or spinners in WebView */
-html[data-webview-ready="true"] [class*="loading"],
-html[data-webview-ready="true"] [class*="spinner"],
-html[data-webview-ready="true"] [class*="skeleton"],
-html.webview-compatible [class*="loading"],
-html.webview-compatible [class*="spinner"],
-html.webview-compatible [class*="skeleton"] {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
-/* Prevent theme flashing protection mechanisms */
-.theme-provider-loading {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
-/* Force content visibility for all elements in the Replit webview */
-html[data-webview-ready] *,
-html.webview-compatible *,
-html[data-webview-compatible] *,
-body[style*="visibility: visible"] * {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: revert !important;
-}
-
-/* Global selector to ensure body has immediate visibility */
-body, 
-body.antialiased,
-html body,
-html:not(.hydrated) body,
-#__next body {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  animation: none !important;
-  transition: none !important;
-}
-
-/* Ultra-high specificity selectors for main content areas */
-body main, 
-body .flex-grow,
-body [class*="container"],
-body [class*="content"],
-body [class*="layout"],
-body [class*="page"],
-#__next main,
-#__next .flex-grow,
-#__next [class*="container"],
-#__next [class*="content"] {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
-  animation: none !important;
-  transition: none !important;
-}
-
-/* Prevent any opacity/visibility animations */
-* {
-  transition-property: none !important;
-}
+/* End of styles */

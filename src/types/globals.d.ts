@@ -1,26 +1,15 @@
 /**
- * Global type declarations for the application
+ * Global type definitions for window properties
+ * 
+ * This file contains type definitions for properties added to the global window object
  */
 
-// Extend the Window interface to include webview compatibility flag
 interface Window {
-  /**
-   * Flag to indicate webview compatibility mode is active
-   */
-  __NEXT_WEBVIEW_COMPATIBILITY__?: boolean;
+  // Global properties can be defined here as needed
   
   /**
-   * Flag to indicate hydration is complete (for webview environments)
+   * Flag to indicate a WebView compatibility script is active
+   * This is set by the webview-compat.js script
    */
-  __NEXT_HYDRATION_COMPLETE__?: boolean;
-  
-  /**
-   * Flag to indicate content is ready for display
-   */
-  __CONTENT_READY__?: boolean;
-  
-  /**
-   * Next.js data object (from _next/data/)
-   */
-  __NEXT_DATA__?: any;
+  __webviewCompatActive?: boolean;
 }
