@@ -12,6 +12,25 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [7.10.0] - 2025-04-03
+
+### Added
+- Created dedicated WebView compatibility utilities with enhanced environment detection
+- Added powerful WebView-specific CSS optimizations with hardware acceleration
+- Implemented special direct-access routes for WebView navigation (/direct-access, /webview-direct)
+- Developed a comprehensive component system for WebView integration
+- Created client-side WebView provider with automatic optimizations
+
+### Fixed
+- Resolved WebView "Loading your page" stuck state issue with multiple fallback strategies
+- Fixed redirect chain handling for WebView environments with direct access pages
+- Enhanced visibility of content in WebView with targeted CSS improvements
+
+### Technical
+- Created src/utils/webview-compat.ts for centralized WebView handling
+- Added robust client-wrapper component architecture for WebView compatibility
+- Enhanced logging throughout WebView compatibility layer for better debugging
+
 ## [7.9.0] - 2025-04-01
 
 ### Added

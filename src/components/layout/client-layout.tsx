@@ -1,9 +1,16 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import UltraSimpleNavbar from "./ultra-simple-navbar";
 import Footer from "./footer";
 import ErrorBoundary from "../error-boundary";
+import dynamic from "next/dynamic";
+
+// Import the loading fallback component with ssr: false to ensure it only runs on client
+const LoadingFallback = dynamic(
+  () => import("../compat/loading-fallback"),
+  { ssr: false }
+);
 
 /**
  * Custom fallback UI for the ErrorBoundary component
@@ -41,6 +48,7 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [mounted, setMounted] = useState(false);
   
   // Handle errors in ErrorBoundary
   const handleError = (error: Error) => {
@@ -72,8 +80,17 @@ export default function ClientLayout({
     }
   }, []);
   
+  // Track component mount state
+  useEffect(() => {
+    setMounted(true);
+    console.log('ClientLayout mounted and visible');
+  }, []);
+  
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
+      {/* Show loading fallback until mounted */}
+      {!mounted && <LoadingFallback />}
+      
       <div className="flex flex-col min-h-screen">
         <UltraSimpleNavbar />
         <main className="flex-grow px-4 sm:px-6 py-10 mt-2"> {/* Increased top padding to prevent navbar overlap */}

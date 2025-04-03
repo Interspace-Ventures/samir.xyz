@@ -44,10 +44,11 @@ export default function RootLayout({
         className="antialiased"
       >
         {/* WebView compatibility provider - cleanly handles WebView-specific optimizations */}
-        <ClientCompatWrapper />
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <ClientCompatWrapper>
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </ClientCompatWrapper>
       </body>
     </html>
   );

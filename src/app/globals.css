@@ -257,12 +257,24 @@ body {
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
   overscroll-behavior-y: none;
+  
+  /* Ensure content is visible - force display properties */
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }
 
 /* Hardware acceleration for smoother rendering in WebViews */
 .webview * {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+/* Fix for WebView loading state */
+.webview main {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }
 
 /* Add shimmer effect to links, buttons, and interactive elements with deeper purple */
