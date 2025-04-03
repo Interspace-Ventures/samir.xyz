@@ -12,10 +12,10 @@ type ThemeProviderProps = {
 }
 
 /**
- * Enhanced ThemeProvider with error handling and immediate content display
+ * Ultra-simplified ThemeProvider with WebView compatibility
  * 
- * This component provides theme support with improved error recovery
- * and guaranteed content visibility even during client-side mounting.
+ * This component prioritizes content visibility over theme consistency,
+ * making it more compatible with WebView environments.
  */
 export function ThemeProvider({ 
   children, 
@@ -26,57 +26,75 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   // Track if component is mounted for theme consistency
   const [mounted, setMounted] = useState(false);
+  // Track if we're in a WebView for special handling
+  const [isWebView, setIsWebView] = useState(false);
   
-  // Set mounted state once the client is hydrated
+  // Detect if we're in a WebView environment on mount
   useEffect(() => {
-    // For regular browsers, set mounted after initial render
-    const timer = setTimeout(() => {
-      setMounted(true);
-      console.log("ThemeProvider fully mounted");
-    }, 0);
+    const detectWebView = () => {
+      try {
+        // Check for WebView in user agent
+        const ua = navigator.userAgent || '';
+        const isWebViewEnv = /(WebView|wv)/.test(ua) || 
+          /Android.*(wv|.NET)/.test(ua) ||
+          /iPhone|iPad.*AppleWebKit(?!.*Safari)/.test(ua) ||
+          /FB_IAB|FBAN|FBAV|Line|Instagram|NAVER|KAKAOTALK|Electron|Capacitor|Cordova/.test(ua);
+          
+        // Also check URL parameters
+        const hasWebViewParam = window.location.search.includes('webview=true');
+        
+        return isWebViewEnv || hasWebViewParam;
+      } catch (e) {
+        return false;
+      }
+    };
     
-    return () => clearTimeout(timer);
+    // Set WebView state
+    setIsWebView(detectWebView());
+    
+    // Set mounted immediately to ensure content visibility
+    setMounted(true);
+    console.log("ThemeProvider initialized, WebView:", detectWebView());
+    
   }, []);
 
-  // Detect system preference for dark mode to use as initial value
-  // before the client-side mounting is complete
+  // Detect system preference for dark mode for immediate use
   const prefersDarkMode = typeof window !== 'undefined' && 
     window.matchMedia?.('(prefers-color-scheme: dark)').matches;
   
-  // Always render content immediately, just adjust the theme settings
-  // based on whether we're mounted or not
+  // For WebView environments, use a much simpler approach that doesn't rely on theme context
+  if (isWebView) {
+    // Apply dark theme class directly to html element
+    if (typeof document !== 'undefined') {
+      if (prefersDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+    
+    // Just render children without theme provider to avoid hydration issues
+    return <>{children}</>;
+  }
+  
+  // For regular browsers, use the normal theme provider with safety guards
   try {
     return (
       <NextThemesProvider 
         attribute={attribute as "class"}
         defaultTheme={prefersDarkMode ? "dark" : defaultTheme}
-        // Only enable system theme detection after mounting to prevent flicker
-        enableSystem={mounted ? enableSystem : false}
-        forcedTheme={!mounted ? (prefersDarkMode ? "dark" : defaultTheme) : undefined}
+        enableSystem={enableSystem}
         {...props}
       >
         {children}
       </NextThemesProvider>
     );
   } catch (error) {
-    // Log the error but still render content without theme
+    // Log the error but still render content
     console.error("ThemeProvider error:", error);
     
-    // Write to error log for tracking
-    if (typeof window !== 'undefined') {
-      const errorLog = {
-        timestamp: new Date().toISOString(),
-        error: error instanceof Error ? error.message : String(error),
-        stack: error instanceof Error ? error.stack : undefined,
-        component: "ThemeProvider"
-      };
-      
-      // Log to console in a structured way
-      console.error("THEME_PROVIDER_ERROR", JSON.stringify(errorLog, null, 2));
-    }
-    
     // Always render children, even on error
-    return <div className="theme-provider-error">{children}</div>;
+    return <>{children}</>;
   }
 }
 
