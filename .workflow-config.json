@@ -3,19 +3,15 @@
     {
       "name": "Start application",
       "command": "./start.sh",
-      "wait_for_port": 5000,
+      "wait_for_port": true,
+      "port": 5000,
       "view_port": 5000,
       "view_port_protocol": "http",
-      "timeout": 180000,
-      "wait_for_port_timeout": 180000,
-      "setup_commands": [
-        "echo 'Preparing Next.js environment...'"
-      ],
-      "port_test_url": "/",
-      "wait_for_port_test_timeout": 120000,
+      "timeout": 60000,
+      "wait_for_port_timeout": 60000,
+      "port_test_url": "/profile/",
       "ready_patterns": [
-        "Ready in",
-        "Compiled"
+        "Starting Next.js on port 5000"
       ]
     }
   ]
