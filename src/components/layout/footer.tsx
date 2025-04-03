@@ -65,24 +65,24 @@ const Footer = () => {
                 href="/ventures" 
                 className={`font-medium relative px-0.5 transition-all duration-200 ${
                   isDark 
-                    ? 'text-purple-600 hover:text-purple-500 shadow-purple-800/30 hover:shadow-purple-800/50' 
+                    ? 'text-purple-300 hover:text-purple-200 shadow-purple-800/30 hover:shadow-purple-800/50' 
                     : 'text-purple-600 hover:text-purple-700'
                 }`}
                 style={{
-                  textShadow: isDark ? "0 0 5px rgba(91, 33, 182, 0.7), 0 0 15px rgba(139, 92, 246, 0.4)" : "none",
+                  textShadow: isDark ? "0 0 5px rgba(139, 92, 246, 0.8), 0 0 15px rgba(167, 139, 250, 0.6)" : "none",
                   textDecoration: "none"
                 }}
                 onMouseOver={(e) => {
-                  if (isDark) e.currentTarget.style.textShadow = "0 0 8px rgba(91, 33, 182, 0.9), 0 0 20px rgba(139, 92, 246, 0.6)";
+                  if (isDark) e.currentTarget.style.textShadow = "0 0 8px rgba(139, 92, 246, 0.9), 0 0 20px rgba(167, 139, 250, 0.8)";
                 }}
                 onMouseOut={(e) => {
-                  if (isDark) e.currentTarget.style.textShadow = "0 0 5px rgba(91, 33, 182, 0.7), 0 0 15px rgba(139, 92, 246, 0.4)";
+                  if (isDark) e.currentTarget.style.textShadow = "0 0 5px rgba(139, 92, 246, 0.8), 0 0 15px rgba(167, 139, 250, 0.6)";
                 }}
               >
                 Interspace Ventures
               </Link> {year || "2025"}
           </div>
-          <div className={`text-xs ${isDark ? 'text-purple-800' : 'text-gray-500'}`}>
+          <div className={`text-xs ${isDark ? 'text-purple-400/80' : 'text-gray-500'}`}>
             Built with Replit AI at the speed of thought • v{versionInfo.version}
           </div>
         </div>
