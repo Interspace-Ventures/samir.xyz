@@ -77,8 +77,8 @@ const Footer = () => {
       <style jsx global>{`
         @media (min-width: 768px) {
           .footer-content {
-            flex-direction: row !important;
-            align-items: center !important;
+            flex-direction: row;
+            align-items: center;
           }
         }
       `}</style>

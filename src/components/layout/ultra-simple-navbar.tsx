@@ -125,7 +125,7 @@ export default function UltraSimpleNavbar() {
           z-50 transition-all duration-300 ease-in-out
         `}
       >
-        <div className="nav-container py-2" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className="nav-container py-2 flex flex-col gap-4">
           <Link 
             href="/profile/" 
             className={`mobile-nav-link ${pathname.startsWith("/profile") ? 'active' : ''}`}
@@ -154,23 +154,23 @@ export default function UltraSimpleNavbar() {
         /* Only hide desktop menu and show mobile menu at very small screens where menu items would crowd */
         @media (max-width: 420px) {
           .desktop-nav {
-            display: none !important;
+            display: none;
           }
           .mobile-menu-button {
-            display: flex !important;
+            display: flex;
           }
         }
         
         /* Show desktop menu for all other sizes */
         @media (min-width: 421px) {
           .desktop-nav {
-            display: flex !important;
+            display: flex;
           }
           .mobile-menu-button {
-            display: none !important;
+            display: none;
           }
           .mobile-menu {
-            display: none !important;
+            display: none;
           }
         }
       `}</style>
