@@ -19,80 +19,84 @@ export default function PortfolioPage() {
   const isDark = resolvedTheme === 'dark';
   
   return (
-    <div className="bg-black min-h-screen p-4 pt-8">
+    <div className="bg-[#080808] min-h-screen p-4 pt-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8 text-left">
-          <h1 className="text-4xl font-bold mb-4 text-white">
+        <div className="mb-10 text-left">
+          <h1 className="text-4xl font-bold mb-4 text-white font-inter">
             Portfolio
           </h1>
-          <p className="text-lg max-w-3xl text-gray-300 mb-6">
+          <p className="text-lg max-w-3xl text-gray-300 mb-6 font-inter leading-relaxed">
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
         </div>
         
-        {/* Stats Section - First Row (Properly formatted 4-column layout with pure Tailwind) */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-2 w-full max-w-[800px]">
-          <div className="bg-transparent">
-            <div className="text-gray-400 text-sm whitespace-nowrap overflow-hidden text-ellipsis"># Investments</div>
-            <div className="text-white text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">32</div>
+        {/* Stats Section - perfectly matching the design in the image */}
+        <div className="w-full max-w-[800px] mb-10 bg-[#0C0C0C] rounded-md overflow-hidden p-6 font-inter">
+          {/* First row - Count metrics */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-8">
+            <div className="bg-transparent">
+              <div className="text-gray-400 text-sm font-medium mb-1"># Investments</div>
+              <div className="text-white text-2xl font-bold">32</div>
+            </div>
+            <div className="bg-transparent">
+              <div className="text-gray-400 text-sm font-medium mb-1"># Markups</div>
+              <div className="text-white text-2xl font-bold">13</div>
+            </div>
+            <div className="bg-transparent">
+              <div className="text-gray-400 text-sm font-medium mb-1"># Acquisitions</div>
+              <div className="text-white text-2xl font-bold">2</div>
+            </div>
+            <div className="bg-transparent">
+              <div className="text-gray-400 text-sm font-medium mb-1"># Busts</div>
+              <div className="text-white text-2xl font-bold">4</div>
+            </div>
           </div>
-          <div className="bg-transparent">
-            <div className="text-gray-400 text-sm whitespace-nowrap overflow-hidden text-ellipsis"># Markups</div>
-            <div className="text-white text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">13</div>
-          </div>
-          <div className="bg-transparent">
-            <div className="text-gray-400 text-sm whitespace-nowrap overflow-hidden text-ellipsis"># Acquisitions</div>
-            <div className="text-white text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">2</div>
-          </div>
-          <div className="bg-transparent">
-            <div className="text-gray-400 text-sm whitespace-nowrap overflow-hidden text-ellipsis"># Busts</div>
-            <div className="text-white text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">4</div>
+          
+          {/* Second row - Performance metrics - exact match to design */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+            <div className="bg-transparent">
+              <div className="text-gray-400 text-sm font-medium mb-1">TVPI</div>
+              <div className="text-white text-2xl font-bold">1.44x</div>
+            </div>
+            <div className="bg-transparent">
+              <div className="text-gray-400 text-sm font-medium mb-1">Gross Multiple</div>
+              <div className="text-white text-2xl font-bold">1.22x</div>
+            </div>
+            <div className="bg-transparent">
+              <div className="text-gray-400 text-sm font-medium mb-1">Net Multiple</div>
+              <div className="text-white text-2xl font-bold">1.12x</div>
+            </div>
+            <div className="bg-transparent">
+              <div className="text-gray-400 text-sm font-medium mb-1">IRR</div>
+              <div className="text-white text-2xl font-bold">10%</div>
+            </div>
           </div>
         </div>
         
-        {/* Stats Section - Second Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 w-full max-w-[800px]">
-          <div className="bg-transparent">
-            <div className="text-gray-400 text-sm whitespace-nowrap overflow-hidden text-ellipsis">TVPI</div>
-            <div className="text-white text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">1.44x</div>
-          </div>
-          <div className="bg-transparent">
-            <div className="text-gray-400 text-sm whitespace-nowrap overflow-hidden text-ellipsis">Gross Multiple</div>
-            <div className="text-white text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">1.22x</div>
-          </div>
-          <div className="bg-transparent">
-            <div className="text-gray-400 text-sm whitespace-nowrap overflow-hidden text-ellipsis">Net Multiple</div>
-            <div className="text-white text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">1.12x</div>
-          </div>
-          <div className="bg-transparent">
-            <div className="text-gray-400 text-sm whitespace-nowrap overflow-hidden text-ellipsis">IRR</div>
-            <div className="text-white text-xl font-bold whitespace-nowrap overflow-hidden text-ellipsis">10%</div>
-          </div>
-        </div>
-        
-        {/* Add spacing after stats section */}
-        <div className="h-10"></div>
-        
-        {/* Category Filters using shadcn/ui Button components */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        {/* Category Filters using shadcn/ui Button components with improved styling */}
+        <div className="flex flex-wrap gap-3 mb-8">
           {categories.map(category => (
             <Button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              variant={selectedCategory === category ? 'default' : 'secondary'}
-              className="min-w-[70px]"
+              variant={selectedCategory === category ? 'default' : 'outline'}
+              className={`min-w-[70px] font-medium ${
+                selectedCategory === category 
+                  ? 'bg-purple-700 hover:bg-purple-800 text-white' 
+                  : 'text-gray-300 border-gray-700 hover:bg-gray-800 hover:text-white'
+              }`}
             >
               {category}
             </Button>
           ))}
         </div>
         
-        {/* White background container for portfolio cards - using only Tailwind classes */}
-        <div id="white-container" className="bg-white p-6 rounded-xl w-[95%] max-w-[800px] mx-auto mb-12">
-          {/* Portfolio grid with enhanced Tailwind styling and shadcn components - added portfolio-grid class */}
-          <div className="portfolio-grid grid grid-cols-1 sm:grid-cols-2 gap-[0.375rem]">
+        {/* Portfolio cards container with dark theme matching the metrics section */}
+        <div id="portfolio-container" className="bg-[#0C0C0C] p-6 rounded-md w-full max-w-[800px] mb-12">
+          {/* Portfolio grid with enhanced styling */}
+          <div className="portfolio-grid grid grid-cols-1 sm:grid-cols-2 gap-4">
             {filteredCompanies.map(company => (
-              <div key={company.name} className="transition-opacity duration-100">
+              <div key={company.name} className="transition-opacity duration-200">
                 <CompanyCard 
                   company={company}
                   isDark={isDark}
@@ -106,7 +110,7 @@ export default function PortfolioPage() {
   );
 }
 
-// Pure Tailwind company card component with shadcn components
+// Updated company card component that matches the dark theme
 const CompanyCard = memo(function CompanyCard({ company, isDark }: { company: any, isDark: boolean }) {
   const [imageError, setImageError] = useState(false);
   
@@ -116,18 +120,18 @@ const CompanyCard = memo(function CompanyCard({ company, isDark }: { company: an
     company.logo.trim() === '';
   
   return (
-    <Card className="h-[150px]">
+    <div className="bg-[#151515] h-[150px] rounded-md border border-gray-800 overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:border-purple-800">
       <a
         href={company.website || `https://${company.name.toLowerCase().replace(/\s+/g, '')}.com`}
         target="_blank"
         rel="noopener noreferrer"
         className="block h-full relative"
       >
-        {/* Status badges using shadcn Badge component */}
+        {/* Status badges with updated styling */}
         {company.markup && (
           <Badge 
             variant="default"
-            className="absolute top-2 right-2 z-10"
+            className="absolute top-2 right-2 z-10 bg-purple-600 hover:bg-purple-700"
           >
             Markup
           </Badge>
@@ -136,22 +140,22 @@ const CompanyCard = memo(function CompanyCard({ company, isDark }: { company: an
         {company.acquired && (
           <Badge 
             variant="secondary"
-            className="absolute top-2 right-2 z-10"
+            className="absolute top-2 right-2 z-10 bg-blue-600 hover:bg-blue-700 text-white"
           >
             Acquired
           </Badge>
         )}
 
-        {/* Card content with Tailwind-only classes */}
-        <div className="h-full flex items-center justify-center p-4">
+        {/* Card content with updated styling for dark theme */}
+        <div className="h-full flex items-center justify-center p-4 bg-gradient-to-b from-[#181818] to-[#111111]">
           {shouldShowFallback ? (
-            <div className="text-gray-400 text-sm">No image</div>
+            <div className="text-gray-400 text-sm font-inter">No image</div>
           ) : (
             <div className="flex items-center justify-center h-full w-full">
               <img
                 src={company.logo}
                 alt={company.name}
-                className="max-h-[100px] max-w-[140px] object-contain"
+                className="max-h-[100px] max-w-[140px] object-contain filter brightness-110"
                 onError={() => setImageError(true)}
                 loading="lazy"
               />
@@ -159,6 +163,6 @@ const CompanyCard = memo(function CompanyCard({ company, isDark }: { company: an
           )}
         </div>
       </a>
-    </Card>
+    </div>
   );
 });

@@ -46,123 +46,51 @@ export default function UltraSimpleNavbar() {
     }
   }, []);
   
-  // Colors based on dark/light mode
-  const colors = {
-    // For dark mode, we use the ultra-deep enhanced purple theme
-    bg: isDarkMode ? "#12022e" : "#f3f4f6", // Ultra-deep purple background for dark mode (#12022e)
-    text: isDarkMode ? "#ffffff" : "#111827",
-    muted: isDarkMode ? "#d8b4fe" : "#6b7280", // Purple-300 for muted text (matches link color)
-    border: isDarkMode ? "#3b0764" : "#e5e7eb", // Ultra-deep purple border
-    menuBg: isDarkMode ? "#20035c" : "#ffffff", // Ultra-deep purple for menus
-    shadow: isDarkMode ? "rgba(59, 7, 100, 0.6)" : "rgba(0, 0, 0, 0.1)", // Darker purple shadow
-    accent: isDarkMode ? "#d8b4fe" : "#9333ea", // Purple-300 for accent color (matches link-underline)
-    glow: isDarkMode ? "0 0 15px rgba(91, 33, 182, 0.7)" : "none", // Enhanced purple glow
-  };
-  
   return (
-    <nav style={{
-      backgroundColor: colors.bg,
-      color: colors.text,
-      padding: "16px 0", // Removed horizontal padding
-      borderBottom: `1px solid ${colors.border}`,
-      boxShadow: isDarkMode ? colors.glow : "none", // Add subtle purple glow in dark mode
-      transition: "background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s",
-      position: "relative",
-      zIndex: 50, // Ensure navbar is above other content
-    }}>
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-[32px] flex justify-between items-center">
+    <nav className={`
+      relative py-4 
+      bg-gray-100 dark:bg-[#12022e] 
+      text-gray-900 dark:text-white 
+      border-b border-gray-200 dark:border-purple-950
+      transition-colors duration-300 
+      ${isDarkMode ? 'dark:shadow-[0_0_15px_rgba(91,33,182,0.7)]' : ''}
+      z-50
+    `}>
+      <div className="nav-container">
         {/* Left side - Logo/Name */}
         <div>
-          <Link href="/" style={{ 
-            color: colors.text, 
-            textDecoration: "none",
-            fontWeight: 600,
-            fontSize: "18px",
-            fontFamily: "Inter, sans-serif", // Ensure Inter font
-          }}>
+          <Link href="/" className="text-lg font-semibold no-underline text-gray-900 dark:text-white">
             Hey - I&apos;m Samir
           </Link>
         </div>
         
         {/* Right side - Navigation links (desktop) */}
-        <div style={{ 
-          display: "flex", 
-          gap: "min(32px, 8vw)", // Responsive gap that gets smaller as viewport narrows
-          fontFamily: "Inter, sans-serif", // Ensure Inter font
-        }} className="desktop-nav">
+        <div className="desktop-nav flex gap-8">
           <Link 
             href="/profile/" 
-            style={{ 
-              color: pathname.startsWith("/profile") ? colors.text : colors.muted,
-              textDecoration: "none",
-              fontWeight: pathname.startsWith("/profile") ? 600 : 400,
-              position: "relative",
-              paddingBottom: "2px",
-            }}
+            className={`nav-link ${pathname.startsWith("/profile") ? 'active' : ''}`}
           >
             About
             {pathname.startsWith("/profile") && (
-              <span style={{
-                position: "absolute",
-                bottom: "-4px",
-                left: "0",
-                width: "100%",
-                height: "3px",
-                background: isDarkMode ? "linear-gradient(90deg, #d8b4fe, #e9d5ff)" : "linear-gradient(90deg, #8b5cf6, #c084fc)",
-                boxShadow: isDarkMode ? "0 0 8px rgba(216, 180, 254, 0.7)" : "none", // Glow effect
-                transition: "all 0.2s ease",
-                borderRadius: "2px"
-              }}></span>
+              <span className="nav-link-indicator"></span>
             )}
           </Link>
           <Link 
             href="/portfolio/" 
-            style={{ 
-              color: pathname.startsWith("/portfolio") ? colors.text : colors.muted,
-              textDecoration: "none",
-              fontWeight: pathname.startsWith("/portfolio") ? 600 : 400,
-              position: "relative",
-              paddingBottom: "2px",
-            }}
+            className={`nav-link ${pathname.startsWith("/portfolio") ? 'active' : ''}`}
           >
             Portfolio
             {pathname.startsWith("/portfolio") && (
-              <span style={{
-                position: "absolute",
-                bottom: "-4px",
-                left: "0",
-                width: "100%",
-                height: "3px",
-                background: isDarkMode ? "linear-gradient(90deg, #d8b4fe, #e9d5ff)" : "linear-gradient(90deg, #8b5cf6, #c084fc)",
-                boxShadow: isDarkMode ? "0 0 8px rgba(216, 180, 254, 0.7)" : "none", // Glow effect
-                transition: "all 0.2s ease",
-                borderRadius: "2px"
-              }}></span>
+              <span className="nav-link-indicator"></span>
             )}
           </Link>
           <Link 
             href="/ventures/" 
-            style={{ 
-              color: pathname.startsWith("/ventures") ? colors.text : colors.muted,
-              textDecoration: "none",
-              fontWeight: pathname.startsWith("/ventures") ? 600 : 400,
-              position: "relative",
-              paddingBottom: "2px",
-            }}
+            className={`nav-link ${pathname.startsWith("/ventures") ? 'active' : ''}`}
           >
             Ventures
             {pathname.startsWith("/ventures") && (
-              <span style={{
-                position: "absolute",
-                bottom: "-4px",
-                left: "0",
-                width: "100%",
-                height: "3px",
-                background: isDarkMode ? "linear-gradient(90deg, #d8b4fe, #e9d5ff)" : "linear-gradient(90deg, #8b5cf6, #c084fc)",
-                boxShadow: isDarkMode ? "0 0 8px rgba(216, 180, 254, 0.7)" : "none", // Glow effect
-                transition: "all 0.2s ease",
-                borderRadius: "2px"
-              }}></span>
+              <span className="nav-link-indicator"></span>
             )}
           </Link>
         </div>
@@ -170,108 +98,51 @@ export default function UltraSimpleNavbar() {
         {/* Mobile menu button - Hidden by default on larger screens */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          style={{
-            background: "transparent",
-            border: "none",
-            color: colors.text,
-            padding: "8px",
-            cursor: "pointer",
-            display: "none", // Hidden by default, controlled by media query
-            alignItems: "center",
-            fontFamily: "Inter, sans-serif", // Ensure Inter font
-          }}
-          className="mobile-menu-button"
+          className="mobile-menu-button bg-transparent border-none cursor-pointer p-2 hidden items-center"
           aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
         >
-          <span style={{ position: "absolute", width: "1px", height: "1px", padding: "0", margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", borderWidth: "0" }}>
+          <span className="sr-only">
             {isMenuOpen ? "Close main menu" : "Open main menu"}
           </span>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-            <div style={{ 
-              height: "2px", 
-              width: "20px", 
-              backgroundColor: colors.text, 
-              marginBottom: "4px",
-              transition: "transform 0.3s, opacity 0.3s",
-              transform: isMenuOpen ? "translateY(6px) rotate(45deg)" : "none"
-            }}></div>
-            <div style={{ 
-              height: "2px", 
-              width: "20px", 
-              backgroundColor: colors.text, 
-              marginBottom: "4px",
-              transition: "opacity 0.3s",
-              opacity: isMenuOpen ? 0 : 1
-            }}></div>
-            <div style={{ 
-              height: "2px", 
-              width: "20px", 
-              backgroundColor: colors.text,
-              transition: "transform 0.3s",
-              transform: isMenuOpen ? "translateY(-6px) rotate(-45deg)" : "none"
-            }}></div>
+          <div className="flex flex-col items-end">
+            <div className={`hamburger-line top ${isMenuOpen ? 'open' : ''}`}></div>
+            <div className={`hamburger-line middle ${isMenuOpen ? 'open' : ''}`}></div>
+            <div className={`hamburger-line bottom ${isMenuOpen ? 'open' : ''}`}></div>
           </div>
         </button>
       </div>
       
-      {/* Mobile menu dropdown - Fixed visibility issues */}
+      {/* Mobile menu dropdown */}
       <div
-        style={{
-          position: "absolute",
-          backgroundColor: colors.menuBg,
-          width: "100%",
-          left: 0,
-          top: isMenuOpen ? "56px" : "-300px", // Changed from -100% to a fixed value
-          padding: "16px 0", // Removed horizontal padding
-          boxShadow: isMenuOpen ? `0 4px 6px -1px ${colors.shadow}` : "none",
-          zIndex: 100, // Increased z-index
-          transition: "top 0.3s ease-in-out",
-          borderBottom: isMenuOpen ? `1px solid ${colors.border}` : "none",
-          opacity: isMenuOpen ? 1 : 0,
-          visibility: isMenuOpen ? "visible" : "hidden", // Added visibility control
-          fontFamily: "Inter, sans-serif", // Ensure Inter font
-        }}
-        className="mobile-menu"
+        className={`
+          mobile-menu absolute w-full left-0 
+          bg-white dark:bg-purple-950
+          px-0 py-4
+          ${isMenuOpen 
+            ? 'top-14 opacity-100 visible shadow-md dark:shadow-purple-900/60 border-b border-gray-200 dark:border-purple-900' 
+            : '-top-80 opacity-0 invisible'
+          }
+          z-50 transition-all duration-300 ease-in-out
+        `}
       >
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-[32px] py-2 flex flex-col gap-4">
+        <div className="nav-container py-2" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <Link 
             href="/profile/" 
-            style={{ 
-              color: pathname.startsWith("/profile") ? colors.text : colors.muted,
-              textDecoration: "none",
-              fontWeight: pathname.startsWith("/profile") ? 600 : 400,
-              borderLeft: pathname.startsWith("/profile") ? `3px solid` : "none",
-              backgroundImage: pathname.startsWith("/profile") ? (isDarkMode ? `linear-gradient(0deg, #d8b4fe, #e9d5ff)` : `linear-gradient(0deg, #8b5cf6, #c084fc)`) : "none",
-              paddingLeft: pathname.startsWith("/profile") ? "8px" : "0",
-            }}
+            className={`mobile-nav-link ${pathname.startsWith("/profile") ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
             About
           </Link>
           <Link 
             href="/portfolio/" 
-            style={{ 
-              color: pathname.startsWith("/portfolio") ? colors.text : colors.muted,
-              textDecoration: "none",
-              fontWeight: pathname.startsWith("/portfolio") ? 600 : 400,
-              borderLeft: pathname.startsWith("/portfolio") ? `3px solid` : "none",
-              backgroundImage: pathname.startsWith("/portfolio") ? (isDarkMode ? `linear-gradient(0deg, #d8b4fe, #e9d5ff)` : `linear-gradient(0deg, #8b5cf6, #c084fc)`) : "none",
-              paddingLeft: pathname.startsWith("/portfolio") ? "8px" : "0",
-            }}
+            className={`mobile-nav-link ${pathname.startsWith("/portfolio") ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
             Portfolio
           </Link>
           <Link 
             href="/ventures/" 
-            style={{ 
-              color: pathname.startsWith("/ventures") ? colors.text : colors.muted,
-              textDecoration: "none",
-              fontWeight: pathname.startsWith("/ventures") ? 600 : 400,
-              borderLeft: pathname.startsWith("/ventures") ? `3px solid` : "none",
-              backgroundImage: pathname.startsWith("/ventures") ? (isDarkMode ? `linear-gradient(0deg, #d8b4fe, #e9d5ff)` : `linear-gradient(0deg, #8b5cf6, #c084fc)`) : "none",
-              paddingLeft: pathname.startsWith("/ventures") ? "8px" : "0",
-            }}
+            className={`mobile-nav-link ${pathname.startsWith("/ventures") ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
             Ventures

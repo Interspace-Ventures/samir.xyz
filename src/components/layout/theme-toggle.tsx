@@ -16,16 +16,9 @@ export function ThemeToggle() {
     return (
       <button 
         aria-label="Toggle theme" 
-        className="w-9 h-9 flex items-center justify-center rounded-md transition-colors"
-        style={{
-          backgroundColor: "transparent",
-          border: "none",
-          cursor: "pointer",
-          padding: "8px",
-          borderRadius: "4px"
-        }}
+        className="w-9 h-9 flex items-center justify-center rounded-md bg-transparent border-none cursor-pointer p-2 opacity-0"
       >
-        <span className="material-symbols-outlined" style={{ opacity: 0 }}>
+        <span className="material-symbols-outlined">
           dark_mode
         </span>
       </button>
@@ -38,21 +31,14 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label="Toggle theme"
-      style={{
-        backgroundColor: "transparent",
-        border: "none",
-        cursor: "pointer",
-        padding: "8px",
-        borderRadius: "4px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: isDark ? "#f1f5f9" : "#4b5563",
-        transition: "all 0.3s ease",
-        textShadow: isDark ? "0 0 10px rgba(76, 29, 149, 0.8), 0 0 15px rgba(59, 7, 100, 0.4)" : "none"
-      }}
+      className={`
+        w-9 h-9 flex items-center justify-center rounded-md 
+        bg-transparent border-none cursor-pointer p-2
+        transition-all duration-300 ease-in-out
+        ${isDark ? 'text-slate-100 dark-theme-glow' : 'text-gray-600'}
+      `}
     >
-      <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>
+      <span className="material-symbols-outlined text-xl">
         {isDark ? "light_mode" : "dark_mode"}
       </span>
     </button>
