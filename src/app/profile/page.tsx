@@ -9,18 +9,9 @@ import { IMAGE_BASE_PATH, ASSET_PATHS } from "../../config/paths";
 export default function Profile() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-[32px]">
-      <div className="relative h-[100px] mt-6 mb-8 font-inter">
-        {/* Left image with absolute positioning */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 z-10">
-          <img 
-            src={`${IMAGE_BASE_PATH}${ASSET_PATHS.IMAGES}samir-profile-photo.webp`}
-            alt="Samir's profile"
-            className="w-16 h-16 rounded-none shadow-md object-cover"
-          />
-        </div>
-        
-        {/* Right text section with left padding, vertically centered */}
-        <div className="absolute left-[72px] top-1/2 -translate-y-1/2">
+      <div className="mt-6 mb-8 font-inter">
+        {/* Header text section without profile image */}
+        <div>
           <h1 className="text-2xl font-bold mb-2 font-inter">
             Hey - I&apos;m Samir
           </h1>
