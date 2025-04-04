@@ -96,7 +96,7 @@ export default function ClientLayout({
       {/* Always render the layout to avoid hydration mismatches */}
       <div className="flex flex-col min-h-screen font-inter font-sans">
         <UltraSimpleNavbar />
-        <main className="flex-grow py-10 mt-2">
+        <main className="flex-grow py-8 mt-0">
           <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-[32px]">
             <ErrorBoundary>
               {children}

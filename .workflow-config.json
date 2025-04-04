@@ -9,7 +9,6 @@
       "view_port_protocol": "http",
       "timeout": 60000,
       "wait_for_port_timeout": 60000,
-      "port_test_url": "/profile/",
       "ready_patterns": [
         "Ready in",
         "Compiled"

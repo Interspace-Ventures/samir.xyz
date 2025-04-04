@@ -12,6 +12,101 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [8.3.0] - 2025-04-04
+
+### Navbar Brand Wordmark Fix
+
+- **Enhanced Navbar Brand Wordmark Styling**
+  - Fixed persistent issue with "Hey - I'm Samir" text not appearing in white in dark mode
+  - Implemented multiple styling approaches for maximum browser compatibility
+  - Created direct DOM styling in useEffect hook for guaranteed wordmark styling
+  - Added !important flags for this specific use case to override any conflicting styles
+  - Implemented proper hover effects for the brand wordmark consistent with our design system
+
+### Advanced CSS Handling
+
+- **Improved CSS Specificity Strategies**
+  - Created specialized classes (`brand-wordmark`, `brand-wordmark-text`) for targeted styling
+  - Employed higher specificity selectors with multiple class combinations
+  - Implemented JavaScript-enhanced styling to ensure consistency across all browsers
+  - Added defensive CSS to handle edge cases in various rendering environments
+
+## [8.2.0] - 2025-04-04
+
+### Footer Consistency & Styling Improvements
+
+- **Enhanced Footer Styling**
+  - Standardized purple theme colors in footer to match site-wide color scheme
+  - Improved footer link styling to be consistent with other page links
+  - Enhanced dark mode footer with proper ultra-deep purple background (#12022e)
+  - Added subtle purple glow effect to footer in dark mode for visual consistency
+
+### Link Styling Standards
+
+- **Standardized Link Styling**
+  - Implemented consistent link styles across all components (navbar, footer, content)
+  - Created hover effects with proper contrast using purple-300 to purple-200 transition
+  - Removed all hardcoded color values in favor of theme-based color system
+  - Fixed link contrast issues to ensure proper accessibility
+
+## [8.1.0] - 2025-04-04
+
+### Layout & Styling Improvements
+
+- **Improved Portfolio Page Layout**
+  - Changed KPI layout to display 2 rows of 4 KPIs instead of 4 rows of 2 KPIs for better space utilization
+  - Increased max-width of portfolio containers from 800px to 1100px for better widescreen presentation
+  - Created responsive portfolio grid (1-column mobile, 2-columns standard, 3-columns widescreen)
+  - Improved card presentation with consistent spacing and dimensions
+
+- **Navbar & Navigation Improvements**
+  - Fixed navbar wordmark color to white for better contrast in dark mode
+  - Adjusted spacing between navbar and content with optimal padding (py-8 mt-0)
+  - Improved overall page rhythm with consistent spacing patterns
+
+## [8.0.0] - 2025-04-04
+
+### Code Quality Improvements
+
+- **Removed all `!important` flags** - Eliminated all `!important` CSS flags which were causing specificity issues and making the stylesheet harder to maintain. Proper CSS hierarchy and specificity should always be used instead of forcing styles with `!important`.
+
+- **Replaced inline styles with Tailwind classes** - Converted all inline style attributes to Tailwind utility classes for better consistency and maintainability. Inline styles should be avoided as they make the code harder to maintain and override.
+
+- **Standardized globals.css structure** - Reorganized global CSS file to follow best practices:
+  - Used `@layer components` for component-specific styles
+  - Defined CSS variables in `:root` for consistent theming
+  - Implemented dark mode styles using proper class selectors
+
+- **Improved component organization** - Component-specific styles now live with their respective components while truly global styles remain in globals.css.
+
+### Documentation
+
+- **Enhanced Code Quality Guidelines** - Added comprehensive Code Quality Best Practices section to README.md
+- **Added Law of AI #6** - Updated the Five Laws of AI with a 6th law focused on code quality and avoiding shortcuts
+- **Expanded Project Cleanup Notes** - Added CSS and Styling Improvements section to document our recent changes
+
+### Coding Best Practices
+
+This project strictly adheres to the following coding principles:
+
+1. **No coding shortcuts that compromise quality** - Never use bad coding practices to solve a problem quickly. Quality is never sacrificed for speed.
+
+2. **No `!important` flags** - CSS should be structured with proper specificity hierarchies, not forced overrides.
+
+3. **No inline styles** - Styles should be managed through the design system (Tailwind) or component-specific stylesheets.
+
+4. **Proper separation of concerns** - Keep component logic, styling, and markup appropriately separated.
+
+5. **Consistent theming** - Use the established theming system rather than hardcoding colors or creating one-off solutions.
+
+6. **Mobile-first responsive design** - Always ensure components work across all screen sizes.
+
+7. **Accessibility standards** - Maintain proper accessibility practices throughout the codebase.
+
+8. **Performance optimization** - Follow best practices for optimizing rendering and reducing unnecessary re-renders.
+
+These principles ensure the codebase remains maintainable, scalable, and of high quality for current and future developers.
+
 ## [7.10.0] - 2025-04-03
 
 ### Added

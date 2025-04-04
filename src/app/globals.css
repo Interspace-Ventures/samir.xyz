@@ -7,6 +7,30 @@
     text-shadow: 0 0 10px rgba(76, 29, 149, 0.8), 0 0 15px rgba(59, 7, 100, 0.4);
   }
   
+  /* Brand wordmark styles - with high specificity to override any conflicting styles */
+  .brand-wordmark {
+    position: relative;
+    z-index: 5;
+    color: #111827; /* dark gray for light mode */
+  }
+  
+  /* Dark mode styles with higher specificity */
+  html.dark .brand-wordmark {
+    color: white;
+  }
+  
+  .brand-wordmark:hover {
+    color: #7c3aed; /* purple-600 for light mode */
+  }
+  
+  html.dark .brand-wordmark:hover {
+    color: #e9d5ff; /* purple-200 for dark mode */
+  }
+  
+  .brand-wordmark-text {
+    color: inherit;
+  }
+  
   /* Navbar styles */
   .nav-container {
     max-width: 80rem;
@@ -25,10 +49,19 @@
     font-weight: 400;
     color: #6b7280;
     text-decoration: none;
+    transition: color 0.3s ease;
   }
   
   .dark .nav-link {
-    color: #d8b4fe;
+    color: #d8b4fe; /* Purple-300 */
+  }
+  
+  .nav-link:hover {
+    color: #8b5cf6; /* Purple-500 */
+  }
+  
+  .dark .nav-link:hover {
+    color: #e9d5ff; /* Purple-200 */
   }
   
   .nav-link.active {
@@ -65,10 +98,19 @@
     font-weight: 400;
     color: #6b7280;
     text-decoration: none;
+    transition: color 0.3s ease;
   }
   
   .dark .mobile-nav-link {
-    color: #d8b4fe;
+    color: #d8b4fe; /* Purple-300 */
+  }
+  
+  .mobile-nav-link:hover {
+    color: #8b5cf6; /* Purple-500 */
+  }
+  
+  .dark .mobile-nav-link:hover {
+    color: #e9d5ff; /* Purple-200 */
   }
   
   .mobile-nav-link.active {
