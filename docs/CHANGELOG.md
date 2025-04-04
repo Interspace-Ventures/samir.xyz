@@ -12,6 +12,25 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [8.4.0] - 2025-04-04
+
+### Consistent Layout & Padding 
+
+- **Standardized Page Layout**
+  - Fixed inconsistency between navbar and page content padding
+  - Updated all content containers to use px-8 padding to match navbar styling
+  - Removed responsive padding variants (px-4 sm:px-[32px]) for a more consistent look
+  - Maintained maximum width constraint (max-w-[1200px]) for proper content sizing
+  - Enhanced visual consistency across all pages with uniform horizontal spacing
+
+### File Cleanup
+
+- **Removed Legacy HTML Files**
+  - Deleted obsolete index.html from public folder that was causing redirection conflicts
+  - Standardized on Next.js app routing for all page handling
+  - Cleaned up project structure for better maintainability
+  - Improved overall project organization
+
 ## [8.3.0] - 2025-04-04
 
 ### Navbar Brand Wordmark Fix
@@ -22,6 +41,7 @@ This project uses a custom implementation of Semantic Versioning:
   - Created direct DOM styling in useEffect hook for guaranteed wordmark styling
   - Added !important flags for this specific use case to override any conflicting styles
   - Implemented proper hover effects for the brand wordmark consistent with our design system
+  - Added theme observer to detect and handle theme changes with specific timeout strategy
 
 ### Advanced CSS Handling
 
@@ -30,6 +50,7 @@ This project uses a custom implementation of Semantic Versioning:
   - Employed higher specificity selectors with multiple class combinations
   - Implemented JavaScript-enhanced styling to ensure consistency across all browsers
   - Added defensive CSS to handle edge cases in various rendering environments
+  - Used clean querySelector approach instead of querySelectorAll for better precision
 
 ## [8.2.0] - 2025-04-04
 

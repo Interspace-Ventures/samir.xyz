@@ -97,7 +97,7 @@ export default function ClientLayout({
       <div className="flex flex-col min-h-screen font-inter font-sans">
         <UltraSimpleNavbar />
         <main className="flex-grow py-8 mt-0">
-          <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-[32px]">
+          <div className="max-w-[1200px] mx-auto w-full px-8">
             <ErrorBoundary>
               {children}
             </ErrorBoundary>

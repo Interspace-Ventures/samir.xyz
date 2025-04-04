@@ -1,16 +1,15 @@
 {
-  "version": "8.0.0",
+  "version": "8.4.0",
   "name": "Portfolio Website",
   "description": "Personal portfolio website showcasing professional projects through an AI-enhanced interactive design",
   "lastUpdated": "2025-04-04",
   "changes": [
-    "Removed all `!important` flags from CSS for improved maintainability",
-    "Replaced inline styles with Tailwind utility classes throughout the codebase",
-    "Standardized globals.css structure with proper layer organization",
-    "Improved component organization with component-specific styles",
-    "Enhanced Code Quality Guidelines with comprehensive best practices",
-    "Added sixth 'Law of AI' focused on maintaining code quality",
-    "Established eight core coding principles for maintainable, high-quality code"
+    "Fixed navbar brand wordmark styling with enhanced JavaScript DOM handling",
+    "Standardized page padding to match navbar (px-8) for consistent appearance",
+    "Implemented navbar theme observation to ensure consistent styling across themes",
+    "Removed obsolete HTML files (index.html in public folder)",
+    "Enhanced layout consistency with uniform horizontal padding across all pages",
+    "Improved responsiveness with proper padding on mobile and desktop screens"
   ],
   "previousVersion": {
     "version": "7.10.0",
