@@ -130,174 +130,9 @@ body {
   min-height: 100vh;
 }
 
-
-
 /* Fix for theme flashing by ensuring immediate transitions */
 .theme-init-fix {
-  transition: background-color 0ms ease !important;
-}
-
-/*
-* PORTFOLIO PAGE SPECIFIC STYLES - v4.8.0
-* These styles are added directly to globals.css with !important to ensure they apply
-* High specificity selectors are used to override any conflicting styles
-* Last updated: 2025-03-30
-*/
-
-/* Portfolio motto styling */
-.portfolio-motto {
-  display: inline-block !important;
-  background-color: rgba(31, 41, 55, 0.7) !important;
-  padding: 0.5rem 1rem !important;
-  border-radius: 0.375rem !important;
-  border: 1px solid rgba(75, 85, 99, 0.7) !important;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3) !important;
-  margin-top: 0.75rem !important;
-}
-
-/* Portfolio grid styling - v5.0 - Larger cards with improved spacing */
-.portfolio-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important; /* Increased from 220px */
-  grid-auto-rows: 150px !important; /* Increased from 130px */
-  gap: 1.75rem !important; /* Increased from 1.25rem for more spacing */
-  width: 94% !important;
-  max-width: 1400px !important;
-  margin: 0 auto !important;
-  padding: 0.5rem !important;
-  margin-top: 3rem !important; /* More spacing between filters and grid */
-}
-
-/* Portfolio card styling - v5.0 - Exact match to reference image */
-.portfolio-grid > div > div {
-  height: 150px !important;
-  border-radius: 0.75rem !important;
-  background-color: white !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-  overflow: hidden !important;
-  border: none !important;
-  transition: none !important; /* No transitions as per reference */
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Company card link container - ultra-simplified to match reference */
-.portfolio-grid > div > div > a {
-  display: flex !important;
-  height: 100% !important;
-  width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  position: relative !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Status badge (Markup) - exactly matching reference image */
-.badge-markup, 
-.portfolio-grid [data-status="Markup"] {
-  position: absolute !important;
-  top: 0.5rem !important;
-  right: 0.5rem !important;
-  z-index: 20 !important;
-  background-color: #7e22ce !important; /* Purple-700 */
-  color: white !important;
-  font-size: 0.75rem !important;
-  font-weight: 500 !important;
-  border-radius: 0.25rem !important;
-  padding: 0.15rem 0.5rem !important;
-  box-shadow: none !important; /* No shadow in reference image */
-  letter-spacing: 0 !important;
-}
-
-/* Gray badge for Acquired */
-.badge-acquired,
-.portfolio-grid [data-status="Acquired"] {
-  position: absolute !important;
-  top: 0.5rem !important;
-  right: 0.5rem !important;
-  z-index: 20 !important;
-  background-color: #6b7280 !important; /* Gray-500 */
-  color: white !important;
-  font-size: 0.75rem !important;
-  font-weight: 500 !important;
-  border-radius: 0.25rem !important;
-  padding: 0.15rem 0.5rem !important;
-  box-shadow: none !important; /* No shadow in reference image */
-  letter-spacing: 0 !important;
-}
-
-/* Logo image styling - exactly matching reference */
-.portfolio-grid img {
-  max-height: 70px !important;
-  max-width: 120px !important;
-  object-fit: contain !important;
-  object-position: center !important;
-  display: block !important;
-  filter: none !important; /* No shadow in reference */
-  transition: none !important; /* No transitions in reference */
-  margin: 0 auto !important;
-}
-
-/* Hover overlay styling - v5.0 - Improved hover effect */
-.portfolio-grid div[class*="absolute inset-0"] {
-  position: absolute !important;
-  inset: 0 !important;
-  background: linear-gradient(to top, 
-    rgba(31, 41, 55, 0.97), 
-    rgba(55, 65, 81, 0.92)
-  ) !important;
-  padding: 1.25rem !important; /* Increased padding */
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-end !important;
-  color: white !important;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; /* Improved animation curve */
-  backdrop-filter: blur(4px) !important; /* Increased blur */
-  opacity: 0 !important; /* Start as invisible */
-  transform: translateY(10px) !important; /* Start slightly shifted down */
-}
-
-/* Add visible state on hover */
-.portfolio-grid > div > div:hover div[class*="absolute inset-0"] {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* Company name in hover state */
-.portfolio-grid div[class*="absolute inset-0"] h3 {
-  margin-bottom: 0.375rem !important;
-  font-weight: 600 !important;
-  color: white !important;
-}
-
-/* Company name container in hover state */
-.portfolio-grid div[class*="absolute inset-0"] div:first-child {
-  background-color: rgba(55, 65, 81, 0.7) !important;
-  padding: 0.25rem 0.5rem !important;
-  border-radius: 0.25rem !important;
-  margin-bottom: 0.5rem !important;
-  display: inline-block !important;
-}
-
-/* Description in hover state */
-.portfolio-grid div[class*="absolute inset-0"] p {
-  font-size: 0.75rem !important;
-  line-height: 1.25rem !important;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
-  margin-bottom: 0.5rem !important;
-}
-
-/* Visit button in hover state */
-.portfolio-grid div[class*="absolute inset-0"] .mt-1.text-xs span {
-  background-color: rgba(75, 85, 99, 0.7) !important;
-  padding: 0.25rem 0.75rem !important;
-  border-radius: 9999px !important;
-  transition: background-color 0.2s ease !important;
-  cursor: pointer !important;
-}
-.portfolio-grid div[class*="absolute inset-0"] .mt-1.text-xs span:hover {
-  background-color: rgba(107, 114, 128, 0.8) !important;
+  transition: background-color 0ms ease;
 }
 
 /* Force Inter font family across all elements */
@@ -363,7 +198,7 @@ body {
   display: block;
 }
 
-/* WebView-specific styles */
+/* WebView-specific styles - needed for compatibility */
 .webview body {
   /* Fix for WebView rendering issues */
   -webkit-transform: translateZ(0);
@@ -372,10 +207,10 @@ body {
   overflow-x: hidden;
   overscroll-behavior-y: none;
   
-  /* Ensure content is visible - force display properties */
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
+  /* Ensure content is visible */
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 /* Hardware acceleration for smoother rendering in WebViews */
@@ -386,9 +221,9 @@ body {
 
 /* Fix for WebView loading state */
 .webview main {
-  visibility: visible !important;
-  opacity: 1 !important;
-  display: block !important;
+  visibility: visible;
+  opacity: 1;
+  display: block;
 }
 
 /* Add shimmer effect to links, buttons, and interactive elements with deeper purple */
@@ -430,7 +265,7 @@ body {
   }
 }
 
-/* Button components */
+/* Global button components */
 .btn-primary {
   padding: 0.5rem 1rem;
   background-color: #9333ea; /* purple-600 */
@@ -460,7 +295,7 @@ body {
 .dark .btn-secondary {
   background-color: rgb(var(--dark-purple-secondary)); /* Dark purple from our CSS vars */
   color: white;
-  border-color: rgb(var(--dark-purple-accent), 0.5); /* Purple accent with opacity */
+  border-color: rgba(var(--dark-purple-accent), 0.5); /* Purple accent with opacity */
 }
 
 .btn-secondary:hover {
@@ -469,11 +304,49 @@ body {
 }
 
 .dark .btn-secondary:hover {
-  background-color: rgb(var(--dark-purple-accent), 0.8); /* Slightly brighter when hovered */
+  background-color: rgba(var(--dark-purple-accent), 0.8); /* Slightly brighter when hovered */
   border-color: rgb(var(--accent-purple-500)); /* Brighter border on hover */
 }
 
-/* Card component */
+/* Global link component */
+.link-underline {
+  position: relative;
+  color: #9333ea; /* purple-600 for light mode */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.dark .link-underline {
+  color: #d8b4fe; /* purple-300 for dark mode */
+}
+
+.link-underline:hover {
+  color: #7e22ce; /* purple-700 for light mode hover */
+}
+
+.dark .link-underline:hover {
+  color: #e9d5ff; /* purple-200 for dark mode hover - brighter */
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Global card component */
 .card {
   background-color: white;
   padding: 1.5rem;
@@ -511,6 +384,7 @@ body {
   ); /* Slightly brighter on hover */
 }
 
+/* Global section titles */
 .section-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -560,262 +434,4 @@ body {
   0% { opacity: 0.5; transform: scale(0.95); }
   50% { opacity: 0.8; transform: scale(1.05); }
   100% { opacity: 0.5; transform: scale(0.95); }
-}
-
-/* Custom Portfolio Styles - Added with high specificity to prevent reset script from overriding */
-.portfolio-grid .custom-card,
-.portfolio-grid > div > div {
-  background: white !important;
-  border: 1px solid #e5e7eb !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-  overflow: hidden !important;
-}
-
-/* Card hover effect - v5.0 - Enhanced animation and shadow */
-.portfolio-grid .custom-card:hover,
-.portfolio-grid > div > div:hover {
-  box-shadow: 0 6px 16px rgba(147, 51, 234, 0.3) !important;
-  transform: translateY(-5px) !important;
-  border-color: rgba(147, 51, 234, 0.4) !important;
-  animation: cardPulse 2s infinite !important;
-}
-
-/* Define card pulse animation */
-@keyframes cardPulse {
-  0% { box-shadow: 0 6px 16px rgba(147, 51, 234, 0.3) !important; }
-  50% { box-shadow: 0 8px 24px rgba(147, 51, 234, 0.4) !important; }
-  100% { box-shadow: 0 6px 16px rgba(147, 51, 234, 0.3) !important; }
-}
-
-.portfolio-grid .custom-overlay,
-.portfolio-grid div[class*="absolute inset-0"] {
-  background: linear-gradient(to top, rgba(31, 41, 55, 0.95), rgba(55, 65, 81, 0.9)) !important;
-  opacity: 0;
-  transition: all 0.3s ease !important;
-  transform: translateY(8px);
-}
-
-.portfolio-grid div[class*="absolute inset-0"]:hover,
-.portfolio-grid .custom-overlay:hover {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* Increased size of logos within the cards */
-.portfolio-grid img {
-  max-height: 70px !important; /* Increased from 50px to match above */
-  max-width: 90% !important; /* Control width to maintain proportions */
-  object-fit: contain !important;
-  transition: transform 0.3s ease !important;
-  margin: 0 auto !important; /* Center the logo horizontally */
-  display: block !important; /* Ensure it's a block element for margin auto to work */
-  filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.08)) !important; /* Enhanced shadow */
-}
-
-/* Logo container styling */
-.portfolio-grid .bg-white,
-.portfolio-grid div.h-\[45px\] {
-  background: white !important;
-  border-radius: 6px !important; /* Match container radius from main styling */
-  padding: 8px !important; /* Increased from 6px */
-  height: 85px !important; /* Match height from main styling (increased from 60px) */
-  width: 100% !important;
-  max-width: 160px !important; /* Match width from main styling */
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important; /* Match shadow from main styling */
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-  margin: 0 auto !important;
-}
-
-.portfolio-grid .animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out !important;
-}
-
-.portfolio-grid .hover\:animate-card-hover:hover {
-  animation: cardHover 0.3s ease-in-out !important;
-}
-
-/* Custom link styles */
-.link-underline {
-  position: relative;
-  color: #9333ea; /* purple-600 */
-}
-
-.dark .link-underline {
-  color: #d8b4fe; /* purple-300 */
-  text-shadow: 0 0 5px rgba(216, 180, 254, 0.3);
-  position: relative;
-  font-family: 'Inter', sans-serif;
-}
-
-.link-underline:hover {
-  color: #7e22ce; /* purple-700 */
-}
-
-.dark .link-underline:hover {
-  color: #e9d5ff; /* purple-200 */
-  text-shadow: 0 0 8px rgba(233, 213, 255, 0.6);
-}
-
-.link-underline:after {
-  content: '';
-  background-color: #9333ea; /* purple-600 */
-  height: 2px;
-  width: 0;
-  left: 0;
-  bottom: -4px;
-  position: absolute;
-  transition-duration: 300ms;
-  border-radius: 2px;
-}
-
-.dark .link-underline:after {
-  background: linear-gradient(90deg, #c084fc, #e9d5ff);
-  box-shadow: 0 0 6px rgba(216, 180, 254, 0.7);
-  height: 2.5px;
-}
-
-.link-underline:hover:after {
-  width: 100%;
-}
-
-/* Enhance focus states for accessibility */
-.dark *:focus {
-  outline: 2px solid rgba(192, 132, 252, 0.5);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
-}
-
-/* Text gradient utilities with enhanced purple theme */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(to right, #c084fc, #9333ea); /* purple-400 to purple-600 */
-}
-
-.dark .text-gradient {
-  background-image: linear-gradient(to right, #d8b4fe, #a855f7); /* Brighter purples for dark mode */
-  text-shadow: 0 2px 10px rgba(192, 132, 252, 0.3);
-  position: relative;
-}
-
-/* Diagonal purple gradient */
-.dark .text-gradient-diagonal {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(135deg, #d8b4fe, #8b5cf6);
-  text-shadow: 0 2px 10px rgba(192, 132, 252, 0.3);
-}
-
-/* Purple shine effect for special elements */
-.dark .purple-shine {
-  position: relative;
-  overflow: hidden;
-}
-
-.dark .purple-shine::after {
-  content: '';
-  position: absolute;
-  top: -110%;
-  left: -210%;
-  width: 200%;
-  height: 200%;
-  opacity: 0;
-  transform: rotate(30deg);
-  background: linear-gradient(
-    to right, 
-    rgba(255, 255, 255, 0) 0%,
-    rgba(139, 92, 246, 0.1) 77%,
-    rgba(139, 92, 246, 0.3) 92%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
-
-.dark .purple-shine:hover::after {
-  opacity: 1;
-  top: -30%;
-  left: -30%;
-  transition-property: left, top, opacity;
-  transition-duration: 0.7s, 0.7s, 0.15s;
-  transition-timing-function: ease;
-}
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-  .card {
-    padding: 1rem; /* Smaller padding on tiny screens */
-  }
-  
-  h1 {
-    font-size: 1.5rem; /* Smaller headings on mobile */
-  }
-  
-  h2 {
-    font-size: 1.25rem;
-  }
-}
-
-/* Dark Purple Theme Special Effects */
-
-/* Ultra-deep glowing purple border effect */
-.dark .purple-border-glow {
-  border: 1px solid rgba(76, 29, 149, 0.45);
-  box-shadow: 0 0 15px rgba(76, 29, 149, 0.35);
-  transition: all 0.3s ease;
-}
-
-.dark .purple-border-glow:hover, 
-.dark .purple-border-glow:focus {
-  border-color: rgba(91, 33, 182, 0.9);
-  box-shadow: 0 0 20px rgba(76, 29, 149, 0.55), 0 0 30px rgba(59, 7, 100, 0.25);
-}
-
-/* Ultra-deep purple neon text effect */
-.dark .purple-neon {
-  color: #c084fc;
-  text-shadow: 
-    0 0 5px rgba(76, 29, 149, 0.8),
-    0 0 10px rgba(91, 33, 182, 0.7),
-    0 0 15px rgba(91, 33, 182, 0.5),
-    0 0 20px rgba(76, 29, 149, 0.4),
-    0 0 30px rgba(59, 7, 100, 0.3);
-}
-
-/* Ultra-deep purple spotlight effect for important sections */
-.dark .purple-spotlight {
-  position: relative;
-  z-index: 1;
-}
-
-.dark .purple-spotlight::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background: radial-gradient(
-    circle at center,
-    rgba(76, 29, 149, 0.35),
-    rgba(59, 7, 100, 0.2) 40%,
-    transparent 75%
-  );
-  border-radius: inherit;
-}
-
-/* End of styles */
-/* Gradient text classes for light/dark mode */
-.bg-gradient-light {
-  background: linear-gradient(to right, #a78bfa, #8b5cf6);
-}
-
-.dark .bg-gradient-dark {
-  background: linear-gradient(to right, #d8b4fe, #e9d5ff);
-  box-shadow: 0 0 10px rgba(216, 180, 254, 0.2);
 }

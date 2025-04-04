@@ -30,8 +30,7 @@ function ErrorFallback() {
             window.location.reload();
           }
         }}
-        className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-700 text-white py-2 px-6 rounded-md font-inter"
-        style={{ fontFamily: 'Inter, sans-serif' }}
+        className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-800 dark:hover:bg-purple-700 text-white py-2 px-6 rounded-md font-inter font-sans"
       >
         Refresh page
       </button>
@@ -95,7 +94,7 @@ export default function ClientLayout({
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
       {/* Always render the layout to avoid hydration mismatches */}
-      <div className="flex flex-col min-h-screen font-inter" style={{ fontFamily: 'Inter, sans-serif' }}>
+      <div className="flex flex-col min-h-screen font-inter font-sans">
         <UltraSimpleNavbar />
         <main className="flex-grow py-10 mt-2">
           <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-[32px]">
@@ -109,15 +108,7 @@ export default function ClientLayout({
       
       {/* Show loading overlay until mounted, but only on client */}
       {!mounted && (
-        <div id="loading-overlay" style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 9998,
-          display: 'none'
-        }}>
+        <div id="loading-overlay" className="fixed inset-0 z-[9998] hidden">
           <script
             dangerouslySetInnerHTML={{
               __html: `

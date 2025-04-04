@@ -41,40 +41,14 @@ export default function LoadingFallback({ message = 'Loading...' }: LoadingFallb
 
   return (
     <div 
-      className="loading-fallback-container"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: isDarkMode ? '#121212' : 'white',
-        zIndex: 9999,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: 'system-ui, sans-serif',
-        opacity: 1,
-        visibility: 'visible',
-        // Hardware acceleration for smoother animation in WebView
-        WebkitTransform: 'translateZ(0)',
-        transform: 'translateZ(0)',
-      }}
+      className={`loading-fallback-container fixed inset-0 flex flex-col items-center justify-center font-sans translate-z-0 z-[9999] ${
+        isDarkMode ? 'bg-[#121212]' : 'bg-white'
+      }`}
     >
       <div 
-        className="loading-spinner"
-        style={{
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          border: `3px solid ${isDarkMode ? '#27272a' : '#e5e7eb'}`,
-          borderTopColor: '#9333ea', // Purple accent color works in both themes
-          animation: 'spin 1s linear infinite',
-          // Hardware acceleration for smoother animation
-          WebkitTransform: 'translateZ(0)',
-          transform: 'translateZ(0)',
-        }}
+        className={`loading-spinner w-10 h-10 rounded-full border-3 border-purple-600 border-t-purple-600 animate-spin translate-z-0 ${
+          isDarkMode ? 'border-zinc-800' : 'border-gray-200'
+        }`}
       />
       <style jsx global>{`
         @keyframes spin {
@@ -88,20 +62,14 @@ export default function LoadingFallback({ message = 'Loading...' }: LoadingFallb
         
         /* Ensure loading container is always visible */
         .loading-fallback-container {
-          opacity: 1 !important;
-          visibility: visible !important;
-          display: flex !important;
+          opacity: 1;
+          visibility: visible;
+          display: flex;
         }
       `}</style>
-      <p 
-        style={{ 
-          marginTop: '16px', 
-          color: isDarkMode ? '#e5e7eb' : '#4b5563',
-          // Ensure text is visible
-          opacity: 1,
-          visibility: 'visible',
-        }}
-      >
+      <p className={`mt-4 visible opacity-100 ${
+        isDarkMode ? 'text-gray-200' : 'text-gray-600'
+      }`}>
         {message}
       </p>
     </div>
