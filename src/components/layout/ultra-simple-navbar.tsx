@@ -32,7 +32,16 @@ export default function UltraSimpleNavbar() {
             mutation.attributeName === 'class'
           ) {
             const htmlElement = document.documentElement;
-            setIsDarkMode(htmlElement.classList.contains('dark'));
+            const newIsDarkMode = htmlElement.classList.contains('dark');
+            setIsDarkMode(newIsDarkMode);
+            
+            // Reapply wordmark styling whenever theme changes
+            setTimeout(() => {
+              const brandWordmark = document.querySelector('.brand-wordmark') as HTMLElement | null;
+              if (brandWordmark) {
+                brandWordmark.style.color = newIsDarkMode ? '#ffffff' : '#111827';
+              }
+            }, 50);
           }
         });
       });
@@ -42,13 +51,32 @@ export default function UltraSimpleNavbar() {
         attributeFilter: ['class'],
       });
       
+      // Ensure wordmark styling is applied directly
+      const applyWordmarkStyling = () => {
+        // Direct DOM manipulation to force the wordmark styling
+        const brandWordmark = document.querySelector('.brand-wordmark') as HTMLElement | null;
+        const brandWordmarkText = document.querySelector('.brand-wordmark-text') as HTMLElement | null;
+        
+        if (brandWordmark) {
+          brandWordmark.style.color = isDarkMode ? '#ffffff' : '#111827';
+          brandWordmark.style.textDecoration = 'none';
+        }
+        
+        if (brandWordmarkText) {
+          brandWordmarkText.style.color = 'inherit';
+        }
+      };
+      
+      // Apply immediately and whenever dark mode changes
+      applyWordmarkStyling();
+      
       return () => observer.disconnect();
     }
-  }, []);
+  }, [isDarkMode]);
   
   return (
     <nav className={`
-      relative py-4 
+      relative py-6 px-8
       bg-gray-100 dark:bg-[#12022e] 
       text-gray-900 dark:text-white 
       border-b border-gray-200 dark:border-purple-950
@@ -59,13 +87,16 @@ export default function UltraSimpleNavbar() {
       <div className="nav-container">
         {/* Left side - Logo/Name */}
         <div>
-          <Link href="/" className="text-lg font-semibold no-underline text-gray-900 dark:text-white">
-            Hey - I&apos;m Samir
+          <Link 
+            href="/" 
+            className="brand-wordmark text-lg font-semibold no-underline transition-colors duration-300"
+          >
+            <span className="brand-wordmark-text">Hey - I&apos;m Samir</span>
           </Link>
         </div>
         
         {/* Right side - Navigation links (desktop) */}
-        <div className="desktop-nav flex gap-8">
+        <div className="desktop-nav flex gap-12">
           <Link 
             href="/profile/" 
             className={`nav-link ${pathname.startsWith("/profile") ? 'active' : ''}`}
@@ -151,6 +182,30 @@ export default function UltraSimpleNavbar() {
       </div>
       
       <style jsx global>{`
+        /* Force wordmark styling */
+        .brand-wordmark {
+          color: #111827 !important;
+          text-decoration: none !important;
+        }
+        
+        .dark .brand-wordmark, 
+        html.dark .brand-wordmark {
+          color: #ffffff !important;
+        }
+        
+        .brand-wordmark:hover {
+          color: #7c3aed !important;
+        }
+        
+        .dark .brand-wordmark:hover,
+        html.dark .brand-wordmark:hover {
+          color: #e9d5ff !important;
+        }
+        
+        .brand-wordmark-text {
+          color: inherit !important;
+        }
+        
         /* Only hide desktop menu and show mobile menu at very small screens where menu items would crowd */
         @media (max-width: 420px) {
           .desktop-nav {

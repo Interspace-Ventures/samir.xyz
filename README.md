@@ -31,9 +31,10 @@ A cutting-edge personal portfolio website leveraging modern web technologies to 
   - [Styling Approach](#styling-approach)
   - [Performance Optimization](#performance-optimization)
   - [Error Handling](#error-handling)
+  - [Code Quality Best Practices](#code-quality-best-practices)
 - [Artificial Intelligence Model Instructions](#artificial-intelligence-model-instructions)
   - [Model Context](#model-context)
-  - [Five Laws of Artificial Intelligence](#five-laws-of-artificial-intelligence)
+  - [Six Laws of Artificial Intelligence](#six-laws-of-artificial-intelligence)
 - [Building and Running](#building-and-running)
 - [Project Cleanup Notes](#project-cleanup-notes)
 - [Version History](#version-history)
@@ -237,6 +238,24 @@ The `tools/archive` directory contains previous scripts that have been preserved
 - Avoid error suppression in favor of proper error handling
 - Log errors appropriately for debugging
 
+### Code Quality Best Practices
+
+- **No shortcuts that compromise quality** - Never use bad coding practices to solve problems quickly. Quality must never be sacrificed for speed.
+  
+- **No `!important` flags in CSS** - CSS should be structured with proper specificity hierarchies, not forced with `!important` flags which create maintenance problems.
+  
+- **No inline styles** - All styling should be managed through Tailwind utility classes or component-specific stylesheets, never with inline style attributes.
+  
+- **Consistent component architecture** - All components should follow the same patterns and architecture for maintainability.
+  
+- **Proper separation of concerns** - Keep component logic, styling, and markup appropriately separated following industry best practices.
+  
+- **10x engineer mindset** - Write clean, optimized, maintainable code that follows all industry best practices, enabling future developers to easily understand and extend the codebase.
+  
+- **Global vs. component-specific styles** - Keep global styles (in globals.css) truly global, with component-specific styles contained within their respective component files.
+  
+- **Accessibility standards** - Maintain proper accessibility practices throughout the codebase including proper semantic HTML, ARIA attributes, and keyboard navigation support.
+
 ## Artificial Intelligence Model Instructions
 
 ### Model Context
@@ -253,7 +272,7 @@ When working with this codebase, please adhere to these best practices:
 
 5. **Rendering Strategy**: Use server-side rendering when possible, with client-side hydration handled through dedicated wrapper components.
 
-### Five Laws of Artificial Intelligence
+### Six Laws of Artificial Intelligence
 
 1. You will never delete more than one file at a time without asking for explicit permission from the user.
 
@@ -264,6 +283,8 @@ When working with this codebase, please adhere to these best practices:
 4. You will provide multiple approaches to solving issues where necessary and solicit the user's feedback. You will provide your recommendation for best approach.
 
 5. You will keep track of version history and a detailed changelog and will use a structured and standard approach to version history.
+
+6. You will always prioritize code quality and follow best practices, never implementing shortcuts or "hacky" solutions even when they might seem faster. Quality code is maintainable code; use proper CSS specificity instead of `!important`, Tailwind classes instead of inline styles, and appropriate component architecture rather than quick fixes.
 
 ## Building and Running
 
@@ -329,6 +350,15 @@ The codebase has been significantly optimized to:
    - Added documentation cleanup tracking in version-config.json
    - Integrated documentation consolidation into the application startup process
 
+8. **CSS and Styling Improvements**:
+   - Removed all `!important` flags from stylesheets for improved maintainability
+   - Replaced inline style attributes with Tailwind utility classes throughout the codebase
+   - Standardized the globals.css structure with proper layer organization
+   - Established consistent link styling with proper dark/light theme support
+   - Implemented proper CSS variable usage for theme colors
+   - Created consistent component-specific styling patterns
+   - Added clear code quality guidelines for future development
+
 ## Version History
 
 This project follows a structured versioning system with detailed change tracking in the [docs/CHANGELOG.md](./CHANGELOG.md).
@@ -343,16 +373,15 @@ The project follows Semantic Versioning with the following custom guidelines:
 
 ### Latest Version
 
-Current version: 7.4.0 (2025-03-31)
+Current version: 8.0.0 (2025-04-04)
 
 Key updates in the latest version:
-- Changed documentation approach to use the root README.md as the single source of truth
-- Updated all documentation scripts to point to the root README.md instead of docs/consolidated-README.md
-- Created symlink from docs/consolidated-README.md to root README.md for backward compatibility
-- Modified consolidate-readmes.sh and final-documentation-cleanup.sh to support the new approach
-- Improved documentation organization for better discoverability
-- Enhanced scripts to handle additional markdown files and directories consistently
-- Made documentation more accessible by placing the comprehensive guide in the root directory
+- **Code Quality Improvements** - Removed all `!important` flags from CSS and replaced inline styles with Tailwind classes
+- **Standardized CSS Structure** - Reorganized globals.css with proper layer organization and consistent theming variables
+- **Enhanced Component Organization** - Improved separation of concerns with component-specific styles
+- **Extended Documentation** - Added comprehensive Code Quality Best Practices section to documentation
+- **Updated Coding Principles** - Added a sixth "Law of AI" focused on maintaining code quality
+- **Coding Best Practices** - Established eight core principles for maintainable, high-quality code
 
 For detailed changes across all versions, see the [CHANGELOG.md](./CHANGELOG.md).
 

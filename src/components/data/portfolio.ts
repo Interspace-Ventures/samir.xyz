@@ -4,25 +4,24 @@ import { Company } from '../types';
 const safePath = (imageName: string) => {
   // For special cases with specific naming patterns
   const specialNames: Record<string, string> = {
-    'Swansea City AFC': 'SwanseaCityAFC',
-    'The Coffee': 'TheCoffee',
-    'The Food Company': 'TheFoodCompany',
-    'Hey I\'m Samir': 'hey-im-samir', // Use hyphenated version
-    'Interspace': 'interspace', // Handle lowercase
-    'margin': 'margin', // Already correct
-    'Solo': 'solo-logo-2025', // Special case
-    'Predictive.film': 'predictive-film-icon', // Special case
-    '2 Days Early': '2DE-Interspace', // Special case
+    'Swansea City AFC': 'Swansea City AFC',
+    'The Coffee': 'The Coffee',
+    'The Food Company': 'The Food Company',
+    'Hey I\'m Samir': 'hey-im-samir',
+    'Interspace': 'interspace',
+    'margin': 'margin',
+    'Solo': 'solo-logo-2025',
+    'Predictive.film': 'predictive-film-icon',
+    '2 Days Early': '2DE-Interspace',
   };
 
   // Check if it's a special case
   if (imageName in specialNames) {
-    return `/attached_assets/${specialNames[imageName]}.png`;
+    return `/assets/${specialNames[imageName]}.png`;
   }
   
   // Regular case - just replace spaces and use the name
-  const sanitizedName = imageName.replace(/\s+/g, '');
-  return `/attached_assets/${sanitizedName}.png`;
+  return `/assets/${imageName}.png`;
 };
 
 export const companies: Company[] = [

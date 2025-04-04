@@ -33,12 +33,8 @@ export default function PortfolioPage() {
         
         {/* Stats Section */}
         <div className="stats-section">
-          <div className="section-header">
-            <h2 className="section-title">Portfolio Performance</h2>
-          </div>
-          
-          {/* First row - Count metrics */}
-          <div className="stats-grid mb-8">
+          {/* All metrics in a single 4x2 grid */}
+          <div className="stats-grid-container">
             <div>
               <div className="stat-label"># Investments</div>
               <div className="stat-value">32</div>
@@ -55,10 +51,6 @@ export default function PortfolioPage() {
               <div className="stat-label"># Busts</div>
               <div className="stat-value">4</div>
             </div>
-          </div>
-          
-          {/* Second row - Performance metrics */}
-          <div className="stats-grid">
             <div>
               <div className="stat-label">TVPI</div>
               <div className="stat-value">1.44x</div>
@@ -81,9 +73,6 @@ export default function PortfolioPage() {
         {/* Category Filters */}
         <div className="mb-8">
           <div className="filter-section">
-            <div className="filter-header">
-              <h3 className="filter-title">Filter by Category</h3>
-            </div>
             <div className="filter-button-container">
               {categories.map(category => (
                 <Button
@@ -104,12 +93,8 @@ export default function PortfolioPage() {
         
         {/* Portfolio cards container */}
         <div className="portfolio-cards-container">
-          <div className="section-header">
-            <h2 className="section-title">Portfolio Companies</h2>
-          </div>
-          
-          {/* Portfolio grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Portfolio grid - made responsive with 1 column on mobile, 2 standard, 3 on large screens */}
+          <div className="portfolio-grid">
             {filteredCompanies.map(company => (
               <div key={company.name} className="transition-opacity duration-200">
                 <CompanyCard 
@@ -170,7 +155,7 @@ const CompanyCard = memo(function CompanyCard({ company, isDark }: { company: an
               <img
                 src={company.logo}
                 alt={company.name}
-                className="card-image"
+                className="card-image bg-white"
                 onError={() => setImageError(true)}
                 loading="lazy"
               />
