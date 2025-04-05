@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#2c104a' }, // Updated to dark purple
+    { media: '(prefers-color-scheme: dark)', color: '#2a3bff' }, // Updated to match logo gradient
   ],
   width: 'device-width',
   initialScale: 1,
