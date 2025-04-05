@@ -103,16 +103,17 @@ body.fade-in {
     gap: 0.125rem !important;
   }
   
-  /* Force spacing between menu items */
-  nav a.nav-item + a.nav-item {
-    margin-left: 2rem !important;
+  /* Minimal spacing between menu items */
+  nav a.nav-item {
+    margin-right: 0.125rem !important;
+    color: white !important;
   }
   
-  /* Ensure proper wordmark styling */
-  nav a:not(.nav-item) {
-    color: white !important;
-    text-decoration: none !important;
-    font-weight: bold !important;
+  /* Fix for logo image */
+  nav img {
+    max-height: 100% !important;
+    width: auto !important;
+    display: block !important;
   }
   
   /* Navbar styles */
@@ -640,4 +641,9 @@ body {
   border-radius: 0.25rem !important;
   font-weight: 500 !important;
   letter-spacing: 0.025em !important;
+}
+/* Additional navbar styling for the ultra simple navbar */
+.navbar-white-text a {
+  color: white !important;
+  text-decoration: none !important;
 }
