@@ -30,6 +30,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         
+        <link rel="icon" href="/assets/images/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/assets/images/favicon.png" />
+        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode,menu,light_mode" />
         
         {/* Inline CSS to prevent FOUC (Flash of Unstyled Content) */}

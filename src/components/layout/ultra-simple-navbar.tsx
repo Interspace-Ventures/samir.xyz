@@ -71,11 +71,11 @@ export default function UltraSimpleNavbar() {
         <div className="flex items-center py-2">
           <Link href="/" className="flex items-center">
             <img
-              src="/assets/images/samir-logo.svg"
+              src="/assets/images/samir-full-logo.svg"
               alt="samir.xyz" 
               className="w-auto"
               style={{
-                height: '1.8rem', // Larger than the navbar text (which is text-sm)
+                height: '2rem',
                 maxHeight: '100%',
                 maxWidth: '100%'
               }}
