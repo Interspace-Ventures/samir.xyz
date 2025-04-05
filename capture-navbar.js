@@ -1,48 +1,94 @@
-// Simple script to capture the navbar with Puppeteer
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-const path = require('path');
 
 async function captureNavbar() {
-  console.log('Launching browser...');
+  // Launch puppeteer with appropriate flags for Replit environment
   const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    headless: 'new',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--single-process',
+      '--disable-gpu'
+    ]
   });
-  
+
   try {
-    console.log('Creating page...');
     const page = await browser.newPage();
-    
-    // Set viewport to a reasonable size
+
+    // Custom logging
+    page.on('console', msg => console.log('BROWSER LOG:', msg.text()));
+    page.on('pageerror', error => console.log('BROWSER ERROR:', error.message));
+
+    // Set viewport
     await page.setViewport({ width: 1280, height: 800 });
+
+    // Navigate to the page and wait for content to load
+    console.log('Navigating to http://localhost:5000/profile/');
     
-    console.log('Navigating to website...');
-    await page.goto('http://localhost:5000/profile/', { 
-      waitUntil: 'networkidle2',
-      timeout: 30000 
+    // Navigate with retry logic
+    let attempts = 0;
+    const maxAttempts = 3;
+    let success = false;
+    
+    while (!success && attempts < maxAttempts) {
+      try {
+        attempts++;
+        await page.goto('http://localhost:5000/profile/', {
+          waitUntil: 'networkidle0',
+          timeout: 30000
+        });
+        success = true;
+      } catch (err) {
+        console.log(`Navigation attempt ${attempts} failed: ${err.message}`);
+        if (attempts >= maxAttempts) throw err;
+        await new Promise(r => setTimeout(r, 2000)); // Wait before retrying
+      }
+    }
+
+    // Wait for the navbar to be rendered
+    await page.waitForSelector('nav', { timeout: 10000 });
+    console.log('Found navbar element');
+
+    // Extract the navbar HTML
+    const navbarHTML = await page.evaluate(() => {
+      const navbar = document.querySelector('nav');
+      return navbar ? navbar.outerHTML : null;
+    });
+
+    if (navbarHTML) {
+      console.log('Navbar HTML captured:');
+      console.log(navbarHTML.substring(0, 300) + '...');
+      fs.writeFileSync('navbar.html', navbarHTML);
+      console.log('Navbar HTML saved to navbar.html');
+    } else {
+      console.log('Failed to capture navbar HTML');
+    }
+
+    // Check for logo
+    const logoExists = await page.evaluate(() => {
+      return !!document.querySelector('img[src="/assets/images/samir-full-logo.svg"]');
     });
     
-    // Wait for navbar to be visible
-    console.log('Waiting for navbar to load...');
-    await page.waitForSelector('nav', { timeout: 5000 });
-    
-    // Extract the navbar element
-    const navbar = await page.$('nav');
-    if (!navbar) {
-      throw new Error('Navbar element not found');
+    console.log(`Logo image element exists: ${logoExists}`);
+
+    // Capture screenshot of navbar
+    const navbarElement = await page.$('nav');
+    if (navbarElement) {
+      await navbarElement.screenshot({ path: 'navbar.png' });
+      console.log('Navbar screenshot saved to navbar.png');
     }
-    
-    // Capture screenshot of the navbar
-    console.log('Capturing screenshot...');
-    const screenshot = await navbar.screenshot();
-    
-    // Save the screenshot
-    const screenshotPath = path.join(__dirname, 'navbar-screenshot.png');
-    fs.writeFileSync(screenshotPath, screenshot);
-    
-    console.log(`Screenshot saved to ${screenshotPath}`);
+
+    // Capture full page screenshot for reference
+    await page.screenshot({ path: 'full-page.png' });
+    console.log('Full page screenshot saved to full-page.png');
+
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error during navbar capture:', error);
   } finally {
     await browser.close();
   }

@@ -1,29 +1,38 @@
 const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
 
-// Process the image to extract the white text and make the background transparent
 async function processImage() {
   try {
-    // The image has white text on purple background
-    // We'll use the white content as a mask
-    await sharp('attached_assets/1.png')
-      // Extract alpha channel from white text (invert because white becomes transparent in extractChannel)
-      .extractChannel(0) // Extract red channel (all channels are similar since text is white)
-      .negate() // Invert so white text becomes black
-      .threshold(200) // Make it binary - text becomes fully white, background fully black
-      .toBuffer()
-      .then(mask => {
-        // Use the mask with the original image
-        return sharp('attached_assets/1.png')
-          .ensureAlpha()
-          .joinChannel(mask, { raw: { width: 900, height: 418, channels: 1 } })
-          .png()
-          .toFile('public/assets/images/samir-logo-transparent.png');
-      });
-
-    console.log('Image processed successfully!');
+    console.log('Processing logo image...');
+    
+    // Input path
+    const inputPath = './public/assets/images/original/samir-logo-with-bg.png';
+    
+    // Output path
+    const outputPath = './public/assets/images/samir-full-logo.png';
+    
+    // Process the image using sharp
+    await sharp(inputPath)
+      // Remove the black background - make black transparent
+      .ensureAlpha()
+      .composite([{
+        input: Buffer.from(
+          '<svg><rect width="100%" height="100%" fill="black"/></svg>'
+        ),
+        blend: 'dest-out'
+      }])
+      // Resize to appropriate height while maintaining aspect ratio
+      .resize({ height: 36, fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      // Output as PNG with transparency
+      .png({ quality: 100 })
+      .toFile(outputPath);
+    
+    console.log(`Image processed successfully and saved to ${outputPath}`);
   } catch (error) {
     console.error('Error processing image:', error);
   }
 }
 
+// Run the function
 processImage();
