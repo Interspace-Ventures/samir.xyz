@@ -73,8 +73,9 @@ export default function UltraSimpleNavbar() {
             <img
               src="/assets/images/samir-logo.svg"
               alt="samir.xyz" 
-              className="h-6 w-auto"
+              className="w-auto"
               style={{
+                height: '1.35rem', // About 10% smaller than h-6 (1.5rem)
                 maxHeight: '100%',
                 maxWidth: '100%'
               }}
