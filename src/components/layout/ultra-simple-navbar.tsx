@@ -78,18 +78,18 @@ export default function UltraSimpleNavbar() {
         </div>
         
         {/* Right side - Navigation links */}
-        <div className="flex items-center justify-end ml-auto">
+        <div className="flex items-center justify-end ml-auto" style={{ gap: '0.25rem' }}>
           <Link 
             href="/profile/" 
             className={`nav-item text-white text-sm uppercase ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
-            style={{ color: 'white', marginRight: '1.25rem' }}
+            style={{ color: 'white', marginRight: '0.25rem' }}
           >
             ABOUT
           </Link>
           <Link 
             href="/portfolio/" 
             className={`nav-item text-white text-sm uppercase ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
-            style={{ color: 'white', marginRight: '1.25rem' }}
+            style={{ color: 'white', marginRight: '0.25rem' }}
           >
             PORTFOLIO
           </Link>
