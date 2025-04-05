@@ -12,24 +12,40 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [8.6.0] - 2025-04-05
+
+### Documentation Clean-up and Consolidation
+
+- **Documentation Structure Improvements**
+  - Consolidated all documentation to use root README.md as single source of truth
+  - Updated directory READMEs in /docs, /tools, and /config to point to the main documentation
+  - Removed redundant files (docs/index.md, docs/consolidated-README.md)
+  - Added latest documentation consolidation info to root CHANGELOG.md
+  - Simplified documentation structure for better maintainability
+  - Updated cross-references between documentation files for consistency
+
+## [8.5.0] - 2025-04-05
+
+### Enhanced Navbar Styling
+
+- **Improved Navigation Menu Design**
+  - Increased spacing between menu items (from gap-12 to gap-24)
+  - Converted navigation links to uppercase for better visual impact
+  - Added subtle letter-spacing and hover effects for improved interaction
+  - Changed "About" to "Profile" for consistent naming throughout site
+  - Enhanced mobile menu to match desktop navigation styling
+  - Improved overall typography with better font weight and transitions
+
 ## [8.4.0] - 2025-04-04
 
 ### Consistent Layout & Padding 
 
 - **Standardized Page Layout**
   - Fixed inconsistency between navbar and page content padding
-  - Updated all content containers to use px-8 padding to match navbar styling
-  - Removed responsive padding variants (px-4 sm:px-[32px]) for a more consistent look
-  - Maintained maximum width constraint (max-w-[1200px]) for proper content sizing
-  - Enhanced visual consistency across all pages with uniform horizontal spacing
-
-### File Cleanup
-
-- **Removed Legacy HTML Files**
-  - Deleted obsolete index.html from public folder that was causing redirection conflicts
-  - Standardized on Next.js app routing for all page handling
-  - Cleaned up project structure for better maintainability
-  - Improved overall project organization
+  - Removed redundant padding from page components (profile, portfolio, ventures)
+  - Relied on client-layout wrapper for consistent px-8 padding
+  - Ensured visual cohesion between navbar and page content
+  - Created seamless and consistent layout spacing throughout the site
 
 ## [8.3.0] - 2025-04-04
 
