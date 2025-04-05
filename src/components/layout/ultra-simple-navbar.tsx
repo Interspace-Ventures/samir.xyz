@@ -75,7 +75,7 @@ export default function UltraSimpleNavbar() {
               alt="samir.xyz" 
               className="w-auto"
               style={{
-                height: '1.35rem', // About 10% smaller than h-6 (1.5rem)
+                height: '1.8rem', // Larger than the navbar text (which is text-sm)
                 maxHeight: '100%',
                 maxWidth: '100%'
               }}
