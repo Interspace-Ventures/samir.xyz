@@ -65,26 +65,16 @@ export default function UltraSimpleNavbar() {
   }, []);
   
   return (
-    <nav className="bg-[#12022e] py-3 px-5 md:px-8">
+    <nav className="bg-[#12022e] py-3 px-5 md:px-8 navbar-white-text">
       <div className="flex flex-row items-center justify-between max-w-6xl mx-auto">
-        {/* Left side - Logo/Name */}
-        <div className="flex-1">
-          <Link 
-            href="/" 
-            className="flex items-center"
-          >
-            <div className="relative h-10 md:h-12 w-32 md:w-40">
-              <img
-                src="/assets/images/samir-logo.png"
-                alt="samir.xyz"
-                className="h-full w-auto"
-                style={{ 
-                  filter: 'brightness(0) invert(1)',  // This makes the logo white with transparent background
-                  maxHeight: '100%',
-                  maxWidth: '100%'
-                }}
-              />
-            </div>
+        {/* Left side - Logo */}
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center">
+            <img
+              src="/assets/images/samir-logo.png"
+              alt="samir.xyz" 
+              className="h-8 w-auto"
+            />
           </Link>
         </div>
         
@@ -92,22 +82,22 @@ export default function UltraSimpleNavbar() {
         <div className="flex items-center justify-end ml-auto" style={{ gap: '0.125rem' }}>
           <Link 
             href="/profile/" 
-            className={`nav-item text-white text-sm uppercase ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
-            style={{ color: 'white', marginRight: '0.125rem' }}
+            className={`nav-item text-sm uppercase ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
+            style={{ color: 'white !important', marginRight: '0.125rem' }}
           >
             ABOUT
           </Link>
           <Link 
             href="/portfolio/" 
-            className={`nav-item text-white text-sm uppercase ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
-            style={{ color: 'white', marginRight: '0.125rem' }}
+            className={`nav-item text-sm uppercase ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
+            style={{ color: 'white !important', marginRight: '0.125rem' }}
           >
             PORTFOLIO
           </Link>
           <Link 
             href="/ventures/" 
-            className={`nav-item text-white text-sm uppercase ${pathname.startsWith("/ventures") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
-            style={{ color: 'white' }}
+            className={`nav-item text-sm uppercase ${pathname.startsWith("/ventures") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
+            style={{ color: 'white !important' }}
           >
             VENTURES
           </Link>
