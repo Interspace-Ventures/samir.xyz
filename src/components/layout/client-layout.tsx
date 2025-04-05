@@ -4,7 +4,9 @@ import React, { useEffect, useState } from "react";
 import UltraSimpleNavbar from "./ultra-simple-navbar";
 import Footer from "./footer";
 import ErrorBoundary from "../error-boundary";
+import PageTransition from "../compat/page-transition";
 import dynamic from "next/dynamic";
+import { applyAllRenderingOptimizations } from "../../utils/page-render-optimizer";
 
 // Import the loading fallback component with ssr: false to ensure it only runs on client
 const LoadingFallback = dynamic(
@@ -50,6 +52,7 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   const [mounted, setMounted] = useState(false);
+  const [contentReady, setContentReady] = useState(false);
   
   // Handle errors in ErrorBoundary
   const handleError = (error: Error) => {
@@ -59,11 +62,11 @@ export default function ClientLayout({
     }
   };
   
-  // Clean theme detection
+  // Apply rendering optimizations and theme detection
   useEffect(() => {
     try {
-      // Theme detection is now handled by the WebView compatibility module
-      // This keeps the client layout component clean and focused
+      // Apply all rendering optimizations for smoother loading
+      applyAllRenderingOptimizations();
       
       // Listen for changes in system preference
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -85,16 +88,38 @@ export default function ClientLayout({
     }
   }, []);
   
-  // Track component mount state
+  // Unified mounting and content readiness approach
   useEffect(() => {
+    // Mark as mounted immediately
     setMounted(true);
-    console.log('ClientLayout mounted and visible');
+    
+    // Use requestAnimationFrame to wait for painting to complete
+    requestAnimationFrame(() => {
+      // Allow time for the DOM to be fully painted
+      setTimeout(() => {
+        setContentReady(true);
+        console.log('Content ready and fully rendered');
+        
+        // Add a class to the html element to show we're fully loaded
+        document.documentElement.classList.add('content-ready');
+        
+        // Tell the browser we're idle - good time to preload other resources
+        if ('requestIdleCallback' in window) {
+          (window as any).requestIdleCallback(() => {
+            console.log('Page idle - all content rendered');
+          });
+        }
+      }, 50); // Short delay to ensure rendering is complete
+    });
   }, []);
   
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
+      {/* Add the PageTransition component to manage smooth transitions */}
+      <PageTransition timeout={80} />
+      
       {/* Always render the layout to avoid hydration mismatches */}
-      <div className="flex flex-col min-h-screen font-inter font-sans">
+      <div className={`flex flex-col min-h-screen font-inter font-sans ${contentReady ? 'content-visible' : 'content-loading'}`}>
         <UltraSimpleNavbar />
         <main className="flex-grow py-8 mt-0">
           <div className="max-w-[1200px] mx-auto w-full px-8">
@@ -106,17 +131,21 @@ export default function ClientLayout({
         <Footer />
       </div>
       
-      {/* Show loading overlay until mounted, but only on client */}
-      {!mounted && (
-        <div id="loading-overlay" className="fixed inset-0 z-[9998] hidden">
+      {/* Simplified loading indicator that shows until content is fully ready */}
+      {!contentReady && (
+        <div id="page-loading-indicator" className="fixed inset-0 z-[9999] bg-opacity-75 flex items-center justify-center">
           <script
             dangerouslySetInnerHTML={{
               __html: `
-                document.getElementById('loading-overlay').style.display = 'block';
+                // This script ensures the loading indicator is visible before React hydrates
+                document.getElementById('page-loading-indicator').style.backgroundColor = 
+                  document.documentElement.classList.contains('dark') 
+                    ? 'rgba(18, 2, 46, 0.75)' 
+                    : 'rgba(255, 255, 255, 0.75)';
               `
             }}
           />
-          <LoadingFallback />
+          <LoadingFallback message="Loading content..." />
         </div>
       )}
     </ErrorBoundary>

@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Optimize initial page load rendering */
+html.rendering {
+  visibility: hidden;
+}
+
+html.render-complete {
+  visibility: visible;
+}
+
+/* Prevent Flash Of Unstyled Content (FOUC) */
+html {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+/* Add smooth page transitions */
+body {
+  transition-property: opacity, background-color;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  opacity: 1;
+}
+
+/* Fade-in animation for body content */
+body.fade-in {
+  animation: fadeIn 300ms ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Class for content-ready state */
+.content-visible {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.content-loading {
+  opacity: 0;
+}
+
+/* Prevent content shift on theme switching */
+.no-transition, .no-transition * {
+  transition: none !important;
+}
+
 @layer components {
   .dark-theme-glow {
     text-shadow: 0 0 10px rgba(76, 29, 149, 0.8), 0 0 15px rgba(59, 7, 100, 0.4);
@@ -29,6 +78,41 @@
   
   .brand-wordmark-text {
     color: inherit;
+  }
+  
+  /* Force navbar items to be white */
+  .nav-item {
+    color: white !important;
+    text-decoration: none !important;
+  }
+  
+  /* Ensure navbar stays on the same line with right alignment */
+  nav > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+  
+  /* Right-align the nav menu items */
+  nav > div > div:last-child {
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-left: auto !important;
+    gap: 1.25rem !important;
+  }
+  
+  /* Force spacing between menu items */
+  nav a.nav-item + a.nav-item {
+    margin-left: 2rem !important;
+  }
+  
+  /* Ensure proper wordmark styling */
+  nav a:not(.nav-item) {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
   }
   
   /* Navbar styles */

@@ -12,6 +12,43 @@ This project uses a custom implementation of Semantic Versioning:
 - **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
 - **Patch versions (0.0.X)**: Individual commits within a single chat session
 
+## [8.9.0] - 2025-04-05
+
+### Enhanced Navbar Right Alignment
+
+- **Improved Right Alignment of Navigation Menu**
+  - Changed navigation menu items to be properly right-aligned
+  - Removed flex-1 from wordmark to ensure proper spacing
+  - Added justify-end to the menu container for consistent alignment
+  - Enhanced CSS with additional rules to force right alignment
+  - Added margin-left: auto to push menu items to the right side
+  - Applied multiple defensive CSS rules to ensure consistent alignment across browsers
+
+## [8.8.0] - 2025-04-05
+
+### Critical Navbar Styling Fixes
+
+- **Fixed Critical Navbar Display Issues**
+  - Fixed blue text issue by forcing text color to white with inline styles and CSS
+  - Ensured navbar items appear on the same horizontal line as the wordmark
+  - Reorganized navbar layout to properly right-align menu items
+  - Added defensive CSS with direct DOM manipulation to guarantee white text
+  - Used flex-1 on wordmark container to ensure it takes proper space
+  - Added !important flag for nav-item text color to override any other styles
+
+## [8.7.0] - 2025-04-05
+
+### Navbar Layout Fix
+
+- **Fixed Navbar Layout Regression**
+  - Completely refactored navbar component to fix alignment issues
+  - Fixed cramped menu items that were running together without spacing
+  - Removed accidentally visible "Open main menu" button that appeared in desktop view
+  - Added proper spacing between navigation items using mx-8/md:mx-12 classes
+  - Improved overall padding and margins for better visual balance
+  - Maintained uppercase styling for menu items (ABOUT, PORTFOLIO, VENTURES)
+  - Simplified component code by removing unused mobile menu logic
+
 ## [8.6.0] - 2025-04-05
 
 ### Documentation Clean-up and Consolidation
