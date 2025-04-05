@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -70,10 +71,20 @@ export default function UltraSimpleNavbar() {
         <div className="flex-1">
           <Link 
             href="/" 
-            className="text-white text-2xl md:text-3xl font-bold no-underline tracking-tight"
-            style={{ color: 'white' }}
+            className="flex items-center"
           >
-            Hey - I&apos;m Samir
+            <div className="relative h-10 md:h-12 w-32 md:w-40">
+              <img
+                src="/assets/images/samir-logo.png"
+                alt="samir.xyz"
+                className="h-full w-auto"
+                style={{ 
+                  filter: 'brightness(0) invert(1)',  // This makes the logo white with transparent background
+                  maxHeight: '100%',
+                  maxWidth: '100%'
+                }}
+              />
+            </div>
           </Link>
         </div>
         
