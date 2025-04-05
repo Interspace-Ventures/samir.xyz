@@ -68,12 +68,16 @@ export default function UltraSimpleNavbar() {
     <nav className="bg-[#12022e] py-3 px-5 md:px-8 navbar-white-text">
       <div className="flex flex-row items-center justify-between max-w-6xl mx-auto">
         {/* Left side - Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center py-2">
           <Link href="/" className="flex items-center">
             <img
-              src="/assets/images/samir-logo.png"
+              src="/assets/images/samir-logo.svg"
               alt="samir.xyz" 
-              className="h-8 w-auto"
+              className="h-6 w-auto"
+              style={{
+                maxHeight: '100%',
+                maxWidth: '100%'
+              }}
             />
           </Link>
         </div>
