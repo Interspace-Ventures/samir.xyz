@@ -76,60 +76,49 @@ export default function UltraSimpleNavbar() {
   
   return (
     <nav className={`
-      relative py-6 px-8
-      bg-gray-100 dark:bg-[#12022e] 
-      text-gray-900 dark:text-white 
-      border-b border-gray-200 dark:border-purple-950
-      transition-colors duration-300 
-      ${isDarkMode ? 'dark:shadow-[0_0_15px_rgba(91,33,182,0.7)]' : ''}
+      relative py-4 px-8
+      bg-[#12022e] 
+      text-white 
+      transition-colors duration-300
       z-50
     `}>
-      <div className="nav-container">
+      <div className="flex flex-row items-center w-full">
         {/* Left side - Logo/Name */}
-        <div>
+        <div className="flex-1 flex items-center">
           <Link 
             href="/" 
-            className="brand-wordmark text-lg font-semibold no-underline transition-colors duration-300"
+            className="text-white text-3xl font-bold no-underline tracking-tight brand-wordmark"
           >
-            <span className="brand-wordmark-text">Hey - I&apos;m Samir</span>
+            Hey - I&apos;m Samir
           </Link>
         </div>
         
         {/* Right side - Navigation links (desktop) */}
-        <div className="desktop-nav flex gap-12">
+        <div className="desktop-nav flex items-center justify-end flex-1" style={{ gap: '2.5rem' }}>
           <Link 
             href="/profile/" 
             className={`nav-link ${pathname.startsWith("/profile") ? 'active' : ''}`}
           >
-            About
-            {pathname.startsWith("/profile") && (
-              <span className="nav-link-indicator"></span>
-            )}
+            ABOUT
           </Link>
           <Link 
             href="/portfolio/" 
             className={`nav-link ${pathname.startsWith("/portfolio") ? 'active' : ''}`}
           >
-            Portfolio
-            {pathname.startsWith("/portfolio") && (
-              <span className="nav-link-indicator"></span>
-            )}
+            PORTFOLIO
           </Link>
           <Link 
             href="/ventures/" 
             className={`nav-link ${pathname.startsWith("/ventures") ? 'active' : ''}`}
           >
-            Ventures
-            {pathname.startsWith("/ventures") && (
-              <span className="nav-link-indicator"></span>
-            )}
+            VENTURES
           </Link>
         </div>
         
         {/* Mobile menu button - Hidden by default on larger screens */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="mobile-menu-button bg-transparent border-none cursor-pointer p-2 hidden items-center"
+          className="mobile-menu-button bg-transparent border-none cursor-pointer p-2 hidden items-center text-white ml-4"
           aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
         >
           <span className="sr-only">
@@ -147,63 +136,110 @@ export default function UltraSimpleNavbar() {
       <div
         className={`
           mobile-menu absolute w-full left-0 
-          bg-white dark:bg-purple-950
+          bg-[#12022e]
           px-0 py-4
           ${isMenuOpen 
-            ? 'top-14 opacity-100 visible shadow-md dark:shadow-purple-900/60 border-b border-gray-200 dark:border-purple-900' 
+            ? 'top-16 opacity-100 visible' 
             : '-top-80 opacity-0 invisible'
           }
           z-50 transition-all duration-300 ease-in-out
         `}
       >
-        <div className="nav-container py-2 flex flex-col gap-4">
+        <div className="py-2 flex flex-col gap-6 px-8">
           <Link 
             href="/profile/" 
             className={`mobile-nav-link ${pathname.startsWith("/profile") ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            About
+            ABOUT
           </Link>
           <Link 
             href="/portfolio/" 
             className={`mobile-nav-link ${pathname.startsWith("/portfolio") ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            Portfolio
+            PORTFOLIO
           </Link>
           <Link 
             href="/ventures/" 
             className={`mobile-nav-link ${pathname.startsWith("/ventures") ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            Ventures
+            VENTURES
           </Link>
         </div>
       </div>
       
       <style jsx global>{`
-        /* Force wordmark styling */
+        /* Hamburger menu styling */
+        .hamburger-line {
+          height: 2px;
+          width: 1.25rem;
+          background-color: white;
+          margin-bottom: 0.25rem;
+          transition: all 0.3s;
+        }
+        
+        .hamburger-line.middle.open {
+          opacity: 0;
+        }
+        
+        .hamburger-line.top.open {
+          transform: translateY(0.375rem) rotate(45deg);
+        }
+        
+        .hamburger-line.bottom.open {
+          transform: translateY(-0.375rem) rotate(-45deg);
+        }
+        
+        /* Brand wordmark styling */
         .brand-wordmark {
-          color: #111827 !important;
-          text-decoration: none !important;
+          color: white !important;
+          font-weight: 700 !important;
+          font-size: 1.75rem !important;
+          line-height: 1.2 !important;
         }
         
-        .dark .brand-wordmark, 
-        html.dark .brand-wordmark {
-          color: #ffffff !important;
+        /* Nav link styling */
+        .nav-link {
+          position: relative;
+          padding-bottom: 0.25rem;
+          font-weight: 400;
+          font-size: 0.85rem;
+          color: white;
+          text-decoration: none;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
         
-        .brand-wordmark:hover {
-          color: #7c3aed !important;
+        .nav-link:hover {
+          opacity: 0.8;
         }
         
-        .dark .brand-wordmark:hover,
-        html.dark .brand-wordmark:hover {
-          color: #e9d5ff !important;
+        .nav-link.active {
+          font-weight: 500;
+          color: white;
+          border-bottom: 2px solid white;
         }
         
-        .brand-wordmark-text {
-          color: inherit !important;
+        /* Mobile nav link styling */
+        .mobile-nav-link {
+          padding: 0.5rem 0;
+          font-weight: 500;
+          color: white;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+        
+        .mobile-nav-link:hover {
+          opacity: 0.8;
+        }
+        
+        .mobile-nav-link.active {
+          font-weight: 600;
+          color: white;
+          padding-left: 0.5rem;
+          border-left: 2px solid white;
         }
         
         /* Only hide desktop menu and show mobile menu at very small screens where menu items would crowd */

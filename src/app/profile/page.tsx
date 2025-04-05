@@ -8,7 +8,7 @@ import { IMAGE_BASE_PATH, ASSET_PATHS } from "../../config/paths";
  */
 export default function Profile() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-[32px]">
+    <div className="max-w-4xl mx-auto">
       <div className="mt-6 mb-8 font-inter">
         {/* Header text section without profile image */}
         <div>
