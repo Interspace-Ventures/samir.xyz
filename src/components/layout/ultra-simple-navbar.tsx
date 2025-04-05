@@ -67,24 +67,22 @@ export default function UltraSimpleNavbar() {
   return (
     <nav className="bg-[#12022e] py-3 px-5 md:px-8 navbar-white-text">
       <div className="flex flex-row items-center justify-between max-w-6xl mx-auto">
-        {/* Left side - Logo */}
-        <div className="flex items-center py-2">
+        {/* Logo and wordmark */}
+        <div className="flex items-center">
           <Link href="/" className="flex items-center">
-            <img
-              src="/assets/images/samir-full-logo.svg"
-              alt="samir.xyz" 
-              className="w-auto"
-              style={{
-                height: '2rem',
-                maxHeight: '100%',
-                maxWidth: '100%'
-              }}
+            <Image 
+              src="/assets/images/samir-logo-wordmark.svg" 
+              alt="CTVE KTTVE Logo" 
+              width={250} 
+              height={50} 
+              priority
+              className="h-8 w-auto"
             />
           </Link>
         </div>
         
-        {/* Right side - Navigation links */}
-        <div className="flex items-center justify-end ml-auto" style={{ gap: '0.125rem' }}>
+        {/* Navigation links */}
+        <div className="flex items-center" style={{ gap: '0.125rem' }}>
           <Link 
             href="/profile/" 
             className={`nav-item text-sm uppercase ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
