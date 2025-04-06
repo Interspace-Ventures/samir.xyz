@@ -155,7 +155,7 @@ const CompanyCard = memo(function CompanyCard({ company, isDark }: { company: an
               <img
                 src={company.logo}
                 alt={company.name}
-                className="card-image bg-white"
+                className="card-image"
                 onError={() => setImageError(true)}
                 loading="lazy"
               />
