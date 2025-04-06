@@ -18,8 +18,7 @@
       document.documentElement.classList.remove('rendering');
       document.documentElement.classList.add('render-complete');
       
-      // Add fade-in class to body for smooth appearance
-      document.body.classList.add('fade-in');
+      // No longer adding fade-in class to prevent hydration errors
       
       console.log('[PageSyncLoader] Content now visible');
     });
