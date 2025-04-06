@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
+const path = require('path');
 
-(async () => {
+async function takeScreenshot() {
   console.log('Launching browser...');
   const browser = await puppeteer.launch({
     headless: 'new',
@@ -11,26 +13,28 @@ const puppeteer = require('puppeteer');
     console.log('Creating new page...');
     const page = await browser.newPage();
     
-    console.log('Setting viewport...');
-    await page.setViewport({ width: 1280, height: 800 });
+    // Set viewport size
+    await page.setViewport({ width: 1200, height: 800 });
     
-    console.log('Navigating to website...');
-    await page.goto('http://localhost:5000/profile/', { 
+    console.log('Navigating to portfolio page...');
+    await page.goto('http://localhost:5000/portfolio/', { 
       waitUntil: 'networkidle2',
       timeout: 30000
     });
     
-    console.log('Page loaded, waiting for content to render...');
-    await page.waitForSelector('nav', { timeout: 5000 });
+    // Wait a bit for any animations or delayed loading
+    await new Promise(resolve => setTimeout(resolve, 2000));
     
     console.log('Taking screenshot...');
-    await page.screenshot({ path: './screenshots/website-screenshot.png', fullPage: true });
+    const screenshotPath = path.join(process.cwd(), 'portfolio-screenshot.png');
+    await page.screenshot({ path: screenshotPath, fullPage: true });
     
-    console.log('Screenshot saved successfully!');
+    console.log();
   } catch (error) {
-    console.error('Error during screenshot capture:', error);
+    console.error('Error taking screenshot:', error);
   } finally {
     await browser.close();
-    console.log('Browser closed');
   }
-})();
+}
+
+takeScreenshot();

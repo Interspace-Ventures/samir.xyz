@@ -577,6 +577,7 @@ body {
 * These styles are added directly to globals.css with !important to ensure they apply
 * High specificity selectors are used to override any conflicting styles
 * Last updated: 2025-04-05
+*/
 
 /* Portfolio motto styling */
 .portfolio-motto {
@@ -651,6 +652,7 @@ body {
   font-weight: 500 !important;
   letter-spacing: 0.025em !important;
 }
+*/
 /* Additional navbar styling for the ultra simple navbar */
 .navbar-white-text a {
   color: white !important;
