@@ -2,11 +2,17 @@
 
 echo "Starting Next.js development server..."
 
-# Create necessary public directories
-mkdir -p public/attached_assets
-mkdir -p public/logos/ventures
-mkdir -p public/images
-mkdir -p public/screenshots
+# Run the asset organization script instead of just creating directories
+if [ -f "tools/scripts/organize-assets.sh" ]; then
+  echo "Running asset organization script..."
+  bash tools/scripts/organize-assets.sh
+else
+  # Fallback if script doesn't exist
+  echo "Asset organization script not found, creating directories manually..."
+  mkdir -p public/attached_assets
+  mkdir -p public/logos/ventures
+  mkdir -p public/images
+fi
 
 # Basic environment setup
 export NODE_ENV=development

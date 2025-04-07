@@ -30,8 +30,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         
-        <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/assets/images/favicon.svg" />
+        <link rel="icon" href="/attached_assets/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/attached_assets/favicon.png" />
         
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode,menu,light_mode" />
         

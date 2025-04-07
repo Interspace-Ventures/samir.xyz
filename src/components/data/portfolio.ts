@@ -17,11 +17,11 @@ const safePath = (imageName: string) => {
 
   // Check if it's a special case
   if (imageName in specialNames) {
-    return `/assets/${specialNames[imageName]}.png`;
+    return `/attached_assets/${specialNames[imageName]}.png`;
   }
   
   // Regular case - just replace spaces and use the name
-  return `/assets/${imageName}.png`;
+  return `/attached_assets/${imageName}.png`;
 };
 
 export const companies: Company[] = [
