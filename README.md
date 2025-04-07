@@ -1,16 +1,25 @@
-# Portfolio Website Documentation
+### Seven Laws of Artificial Intelligence
 
-A cutting-edge personal portfolio website leveraging modern web technologies to create an immersive and interactive developer showcase. Designed to provide a dynamic, technologically advanced presentation of professional achievements through innovative design and interaction patterns.
+1. You will never delete more than one file at a time without asking for explicit permission from the user.
 
-## Table of Contents
+2. You will focus on the issue that the user explicitly asks you to focus on and will not attempt to solve other issues unless instructed by the user.
 
-- [Overview](#overview)
-- [Tech Stack](#tech-stack)
-  - [Core Framework & Runtime](#core-framework--runtime)
-  - [Frontend Libraries](#frontend-libraries)
-  - [Styling & UI](#styling--ui)
-  - [CSS Processing](#css-processing)
-  - [Development & Deployment](#development--deployment)
+3. You will provide a concrete approach and plan for each user interaction thread. You will solve issues iteratively and check in with the user for guidance and to explain what you are doing on a periodic basis.
+
+4. You will provide multiple approaches to solving issues where necessary and solicit the user's feedback. You will provide your recommendation for best approach.
+
+5. You will keep track of version history and a detailed changelog and will use a structured and standard approach to version history.
+
+6. You will always prioritize code quality and follow best practices, never implementing shortcuts or "hacky" solutions even when they might seem faster. Quality code is maintainable code; use proper CSS specificity instead of `!important`, Tailwind classes instead of inline styles, and appropriate component architecture rather than quick fixes.
+
+7. You will implement solutions with a systems-thinking approach that considers long-term maintainability and scalability. This includes:
+   - Using centralized configuration and avoiding duplication of code or assets
+   - Creating proper abstractions rather than copy-pasting similar code
+   - Ensuring backward compatibility when refactoring
+   - Addressing the root cause of issues rather than symptoms
+   - Testing changes thoroughly before considering work complete
+   - Documenting architectural decisions and their implications
+   - Never introducing technical debt knowingly — always factor in the time to do things properly
 - [Project Structure](#project-structure)
   - [Core Directories](#core-directories)
   - [Supporting Directories](#supporting-directories)
@@ -34,7 +43,7 @@ A cutting-edge personal portfolio website leveraging modern web technologies to 
   - [Code Quality Best Practices](#code-quality-best-practices)
 - [Artificial Intelligence Model Instructions](#artificial-intelligence-model-instructions)
   - [Model Context](#model-context)
-  - [Six Laws of Artificial Intelligence](#six-laws-of-artificial-intelligence)
+  - [Seven Laws of Artificial Intelligence](#seven-laws-of-artificial-intelligence)
 - [Building and Running](#building-and-running)
 - [Project Cleanup Notes](#project-cleanup-notes)
 - [Version History](#version-history)
@@ -272,7 +281,7 @@ When working with this codebase, please adhere to these best practices:
 
 5. **Rendering Strategy**: Use server-side rendering when possible, with client-side hydration handled through dedicated wrapper components.
 
-### Six Laws of Artificial Intelligence
+### Seven Laws of Artificial Intelligence
 
 1. You will never delete more than one file at a time without asking for explicit permission from the user.
 
@@ -285,6 +294,15 @@ When working with this codebase, please adhere to these best practices:
 5. You will keep track of version history and a detailed changelog and will use a structured and standard approach to version history.
 
 6. You will always prioritize code quality and follow best practices, never implementing shortcuts or "hacky" solutions even when they might seem faster. Quality code is maintainable code; use proper CSS specificity instead of `!important`, Tailwind classes instead of inline styles, and appropriate component architecture rather than quick fixes.
+
+7. You will implement solutions with a systems-thinking approach that considers long-term maintainability and scalability. This includes:
+   - Using centralized configuration and avoiding duplication of code or assets
+   - Creating proper abstractions rather than copy-pasting similar code
+   - Ensuring backward compatibility when refactoring
+   - Addressing the root cause of issues rather than symptoms
+   - Testing changes thoroughly before considering work complete
+   - Documenting architectural decisions and their implications
+   - Never introducing technical debt knowingly — always factor in the time to do things properly
 
 ## Building and Running
 
@@ -309,9 +327,15 @@ The codebase has been significantly optimized to:
    - Eliminated code causing hydration errors and unexpected behavior
 
 2. **Optimize Development Process**:
-   - Improved `start.sh` to perform selective cache clearing instead of aggressive wiping on each run
+   - Improved `start.sh` to automatically run the `organize-assets.sh` script for asset management
    - Optimized environment variables to follow best practices
    - Streamlined the development server startup process
+
+3. **Consolidate Asset Directories**:
+   - Centralized all assets in `public/attached_assets` for better organization
+   - Created automatic symlinks and copies for backward compatibility
+   - Eliminated redundant asset directories
+   - Integrated asset management into the application startup process
 
 3. **Modernize Component Architecture**:
    - Refactored `ClientWrapper` to use modern React 19 patterns and proper Suspense handling
@@ -331,26 +355,15 @@ The codebase has been significantly optimized to:
    - Added better logging for debugging purposes
 
 6. **Asset Management & Project Structure**:
-   - Created `organize-assets.sh` script to ensure consistent asset organization
-   - Consolidated all assets into a single `/public/attached_assets` folder
-   - Implemented automatic asset migration to avoid duplication
-   - Normalized image assets with consistent naming conventions
-   - Updated paths configuration for consistent image references
-   - Removed duplicate configuration files to simplify maintenance
-   - Streamlined project structure by eliminating unnecessary directories and files
-   - Created `cleanup-test-dirs.sh` to safely move test/debug directories to a backup location
-   - Removed ten test/debug directories from src/app to improve codebase maintainability
-
-7. **Documentation Consolidation**:
-   - Created `consolidate-readmes.sh` script to centralize all documentation in the `/docs` folder
-   - Implemented `final-documentation-cleanup.sh` to handle comprehensive documentation management
-   - Moved all README files and other documentation to a single location in `/docs`
-   - Added symlinks from original README locations to maintain backward compatibility
-   - Updated the root README.md to be concise and point to the consolidated documentation
-   - Added documentation cleanup tracking in version-config.json
+   - Implemented a single source of truth for assets in `public/attached_assets`
+   - Removed redundant asset directories and eliminated duplicate image files
+   - Added symlinks for backward compatibility to prevent breaking changes
+   - Integrated asset management into application startup for automated organization
+   - Documented asset structure and organization pattern for future maintenance
+   - Cleaned up root directory by moving non-essential files to appropriate locations
    - Integrated documentation consolidation into the application startup process
 
-8. **CSS and Styling Improvements**:
+7. **CSS and Styling Improvements**:
    - Removed all `!important` flags from stylesheets for improved maintainability
    - Replaced inline style attributes with Tailwind utility classes throughout the codebase
    - Standardized the globals.css structure with proper layer organization
