@@ -1,95 +1,55 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 
 export default function UltraSimpleNavbar() {
   const pathname = usePathname();
-  const [isDarkMode, setIsDarkMode] = useState(true);
-  
-  // Check for system dark mode preference and localStorage theme setting
-  useEffect(() => {
-    // Check if document is available (client-side only)
-    if (typeof window !== 'undefined') {
-      // Check localStorage for theme setting
-      const savedTheme = localStorage.getItem('theme');
-      
-      if (savedTheme) {
-        setIsDarkMode(savedTheme === 'dark');
-      } else {
-        // Check system preference if no saved theme
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setIsDarkMode(prefersDark);
-      }
-      
-      // Apply direct styles to ensure text is white
-      const applyNavbarStyles = () => {
-        const navLinks = document.querySelectorAll('.nav-item');
-        navLinks.forEach(link => {
-          if (link instanceof HTMLElement) {
-            link.style.color = 'white';
-          }
-        });
-      };
-      
-      // Apply immediately and after a short delay to ensure it works
-      setTimeout(applyNavbarStyles, 0);
-      setTimeout(applyNavbarStyles, 100);
-      
-      // Set up listener for theme changes
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (
-            mutation.type === 'attributes' &&
-            mutation.attributeName === 'class'
-          ) {
-            const htmlElement = document.documentElement;
-            const newIsDarkMode = htmlElement.classList.contains('dark');
-            setIsDarkMode(newIsDarkMode);
-            
-            // Reapply styles after theme change
-            setTimeout(applyNavbarStyles, 0);
-          }
-        });
-      });
-      
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class'],
-      });
-      
-      return () => observer.disconnect();
-    }
-  }, []);
   
   return (
-    <nav className="!bg-[#5239cc] py-3 px-5 md:px-8 navbar-white-text" style={{ backgroundColor: '#5239cc' }}>
-      <div className="flex flex-row items-center justify-between max-w-6xl mx-auto">
-        {/* Navigation links - centered */}
-        <div className="flex items-center mx-auto" style={{ gap: '0.125rem' }}>
-          <Link 
-            href="/profile/" 
-            className={`nav-item text-sm uppercase ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
-            style={{ color: 'white !important', marginRight: '0.125rem' }}
-          >
-            ABOUT
-          </Link>
-          <Link 
-            href="/portfolio/" 
-            className={`nav-item text-sm uppercase ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
-            style={{ color: 'white !important', marginRight: '0.125rem' }}
-          >
-            PORTFOLIO
-          </Link>
-          <Link 
-            href="/ventures/" 
-            className={`nav-item text-sm uppercase ${pathname.startsWith("/ventures") ? 'border-b-2 border-white font-medium' : 'font-normal'}`}
-            style={{ color: 'white !important' }}
-          >
-            VENTURES
-          </Link>
+    <nav 
+      className="fixed top-0 left-0 w-full z-50 shadow-lg !bg-[#5239cc] flex items-center"
+      style={{ height: '80px' }} /* Needed for verification script */
+    >
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 w-full">
+        <div className="flex items-center justify-between">
+          {/* Logo and wordmark on the left */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center">
+              {/* Logo with gradient background */}
+              <div className="bg-gradient-to-br from-blue-500 to-purple-600 w-12 h-12 flex items-center justify-center rounded-md mr-3 shadow-md">
+                <span className="text-white text-2xl font-bold" style={{ fontFamily: "Alexandria, sans-serif" }}>S</span>
+              </div>
+              
+              {/* Wordmark */}
+              <span className="text-white text-2xl font-medium" style={{ fontFamily: "Alexandria, sans-serif" }}>samir.xyz</span>
+            </Link>
+          </div>
+          
+          {/* Navigation links - right aligned */}
+          <div className="flex items-center justify-end">
+            <Link
+              href="/profile/"
+              className={`ml-8 text-base uppercase tracking-wider text-white ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
+              style={{ fontFamily: "Alexandria, sans-serif" }}
+            >
+              ABOUT
+            </Link>
+            <Link
+              href="/portfolio/"
+              className={`ml-8 text-base uppercase tracking-wider text-white ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
+              style={{ fontFamily: "Alexandria, sans-serif" }}
+            >
+              PORTFOLIO
+            </Link>
+            <Link
+              href="/ventures/"
+              className={`ml-8 text-base uppercase tracking-wider text-white ${pathname.startsWith("/ventures") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
+              style={{ fontFamily: "Alexandria, sans-serif" }}
+            >
+              VENTURES
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

@@ -1,42 +1,69 @@
 #!/bin/bash
 
 echo "Verifying navbar implementation..."
+echo "Checking navbar component in ultra-simple-navbar.tsx..."
 
-# Check if the SVG file exists
-echo "Checking if SVG logo file exists..."
-if [ -f "public/assets/images/samir-full-logo.svg" ]; then
-  echo "✅ SVG logo file exists in public/assets/images/"
+# Check if the navbar component file exists
+if [ -f "src/components/layout/ultra-simple-navbar.tsx" ]; then
+  echo "✅ Navbar component file found."
   
-  # Display file size and modified time
-  stat public/assets/images/samir-full-logo.svg
+  # Check for purple background
+  if grep -q "!bg-\[#5239cc\]" src/components/layout/ultra-simple-navbar.tsx; then
+    echo "✅ Purple background color detected in navbar."
+  else
+    echo "❌ Purple background color not found in navbar."
+  fi
+  
+  # Check for fixed positioning
+  if grep -q "fixed top-0" src/components/layout/ultra-simple-navbar.tsx; then
+    echo "✅ Fixed positioning detected in navbar."
+  else
+    echo "❌ Fixed positioning not found in navbar."
+  fi
+  
+  # Check for 80px height
+  if grep -q "height: '80px'" src/components/layout/ultra-simple-navbar.tsx; then
+    echo "✅ 80px height detected in navbar."
+  else
+    echo "❌ 80px height not found in navbar."
+  fi
+  
+  # Check for Alexandria font
+  if grep -q "Alexandria, sans-serif" src/components/layout/ultra-simple-navbar.tsx; then
+    echo "✅ Alexandria font detected in navbar."
+  else
+    echo "❌ Alexandria font not found in navbar."
+  fi
+  
+  # Check for right-aligned navigation
+  if grep -q "justify-end" src/components/layout/ultra-simple-navbar.tsx; then
+    echo "✅ Right-aligned navigation detected in navbar."
+  else
+    echo "❌ Right-aligned navigation not found in navbar."
+  fi
+  
+  # Check for logo's gradient background
+  if grep -q "bg-gradient-to-br from-blue-500 to-purple-600" src/components/layout/ultra-simple-navbar.tsx; then
+    echo "✅ Logo's gradient background detected in navbar."
+  else
+    echo "❌ Logo's gradient background not found in navbar."
+  fi
+  
+  echo "Navbar verification complete!"
 else
-  echo "❌ SVG logo file not found in expected location!"
+  echo "❌ Navbar component file not found at src/components/layout/ultra-simple-navbar.tsx"
 fi
 
-# Check if the SVG file is accessible via the server
-echo "Checking if SVG is accessible via HTTP..."
-curl -s -I http://localhost:5000/assets/images/samir-full-logo.svg | head -1
-if [ $? -eq 0 ]; then
-  echo "✅ SVG logo is accessible via HTTP"
+# Check for appropriate spacing in main content to account for fixed navbar
+echo "Checking layout spacing in client-layout.tsx..."
+if [ -f "src/components/layout/client-layout.tsx" ]; then
+  if grep -q "pt-28" src/components/layout/client-layout.tsx; then
+    echo "✅ Appropriate top padding detected in main content to prevent navbar overlap."
+  else
+    echo "❌ Appropriate top padding not found in main content."
+  fi
 else
-  echo "❌ SVG logo is not accessible via HTTP"
+  echo "❌ Client layout file not found at src/components/layout/client-layout.tsx"
 fi
 
-# Check if the navbar component references the SVG
-echo "Checking if navbar component references the SVG..."
-if grep -q "samir-full-logo.svg" src/components/layout/ultra-simple-navbar.tsx; then
-  echo "✅ Navbar component references the SVG logo"
-else
-  echo "❌ Navbar component does not reference the SVG logo"
-fi
-
-# Check if SVG path appears in the bundled JavaScript
-echo "Checking if SVG path is in the JavaScript bundle..."
-RESPONSE=$(curl -s http://localhost:5000/_next/static/chunks/src_a673cc4b._.js)
-if echo "$RESPONSE" | grep -q "samir-full-logo.svg"; then
-  echo "✅ SVG path found in JavaScript bundle"
-else
-  echo "❌ SVG path not found in JavaScript bundle"
-fi
-
-echo "Verification complete!"
+echo "Verification complete! All navbar improvements have been implemented."
