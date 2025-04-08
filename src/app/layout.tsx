@@ -1,4 +1,4 @@
-import { inter } from "../config/fonts";
+import { inter, alexandria } from "../config/fonts";
 import "./globals.css";
 import { metadata, viewport } from "./metadata";
 import ClientLayout from "../components/layout/client-layout";
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html 
       lang="en" 
-      className={inter.className}
+      className={`${inter.className} ${alexandria.className} ${inter.variable} ${alexandria.variable}`}
       suppressHydrationWarning
     >
       <head>

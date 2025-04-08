@@ -246,9 +246,27 @@ html {
   }
 }
 
+/* Font setup for Alexandria */
+.alexandria-font {
+  font-family: var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Override navbar and footer styling */
 nav.navbar-white-text {
   background-color: #5239cc !important;
+  font-family: var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
+}
+
+.navbar-logo-wordmark {
+  font-family: var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.navbar-nav-items {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 3rem;
 }
 
 footer.border-t {

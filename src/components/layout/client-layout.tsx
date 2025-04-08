@@ -113,6 +113,9 @@ export default function ClientLayout({
     });
   }, []);
   
+  // Debug log to verify we're attempting to render the navbar
+  console.log("ClientLayout is rendering and will include UltraSimpleNavbar");
+  
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
       {/* Add the PageTransition component to manage smooth transitions */}
@@ -120,8 +123,10 @@ export default function ClientLayout({
       
       {/* Always render the layout to avoid hydration mismatches */}
       <div className={`flex flex-col min-h-screen font-inter font-sans ${contentReady ? 'content-visible' : 'content-loading'}`}>
+        {/* Explicit debug comment to verify in source */}
+        {/* NAVBAR SHOULD APPEAR HERE */}
         <UltraSimpleNavbar />
-        <main className="flex-grow py-8 mt-0">
+        <main className="flex-grow py-8 mt-0 pt-28">
           <div className="max-w-[1200px] mx-auto w-full px-8">
             <ErrorBoundary>
               {children}
