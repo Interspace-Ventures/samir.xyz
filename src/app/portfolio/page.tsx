@@ -78,32 +78,26 @@ export default function PortfolioPage() {
         </div>
       </div>
       
-      {/* Category filters - Enhanced styled buttons */}
-      <div className="flex flex-wrap gap-3 mb-8 bg-gradient-to-r from-gray-900 to-gray-800 p-4 rounded-xl max-w-[800px] shadow-lg border border-gray-700">
-        <Button
-          variant={selectedCategory === 'All' ? "default" : "outline"}
-          size="sm"
-          className={selectedCategory === 'All' 
-            ? "bg-gradient-to-r from-purple-700 to-purple-500 text-white border-none font-medium shadow-md hover:from-purple-800 hover:to-purple-600 transform hover:scale-105 transition-all" 
-            : "bg-gray-800/60 text-gray-200 border border-gray-600 hover:border-purple-400 hover:text-white hover:bg-gray-700 transform hover:scale-105 transition-all"}
-          onClick={() => setSelectedCategory('All')}
-        >
-          All
-        </Button>
-        
-        {categories.map(category => (
-          <Button
-            key={category}
-            variant={selectedCategory === category ? "default" : "outline"}
-            size="sm"
-            className={selectedCategory === category 
-              ? "bg-gradient-to-r from-purple-700 to-purple-500 text-white border-none font-medium shadow-md hover:from-purple-800 hover:to-purple-600 transform hover:scale-105 transition-all" 
-              : "bg-gray-800/60 text-gray-200 border border-gray-600 hover:border-purple-400 hover:text-white hover:bg-gray-700 transform hover:scale-105 transition-all"}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </Button>
-        ))}
+      {/* Category filters - Using shadcn filter variant with data-state attribute */}
+      <div className="flex flex-wrap gap-2 mb-8 max-w-[800px]">
+        {categories.map((category, index) => {
+          // Skip duplicate "All" category
+          if (index > 0 && category === "All") return null;
+          
+          const isActive = selectedCategory === category;
+          
+          return (
+            <Button
+              key={category}
+              variant="filter"
+              size="sm"
+              data-state={isActive ? "active" : "inactive"}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </Button>
+          );
+        })}
       </div>
       
       {/* Company Grid - With white background container and always 2 columns */}

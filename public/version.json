@@ -1,17 +1,16 @@
 {
-  "version": "8.12.3",
+  "version": "8.13.0",
   "name": "Portfolio Website",
   "description": "Personal portfolio website showcasing professional projects through an AI-enhanced interactive design",
-  "lastUpdated": "2025-04-06",
+  "lastUpdated": "2025-04-07",
   "changes": [
-    "Enhanced filter categories with gradient backgrounds, hover effects, and animations",
-    "Added visual polish with shadow effects and improved spacing for filter buttons",
-    "Implemented subtle hover scaling animations for better interactivity",
-    "Refined the filter container with gradient background and border styling",
+    "Updated navbar and footer background color to #5239cc for consistent branding",
+    "Simplified portfolio filter categories to match the provided design",
+    "Fixed duplicate 'All' button issue in the portfolio filters",
+    "Enhanced styling of active filter categories with purple background and white text",
+    "Maintained portfolio stats section with TVPI, Gross Multiple, Net Multiple, and IRR metrics",
     "Ensured portfolio cards display in 2 columns on all screen sizes, including mobile",
-    "Improved company card styling with full width and proper responsive layout",
-    "Reverted stats section to match original design with 4 columns layout",
-    "Added complete stats display with TVPI, Gross Multiple, Net Multiple, and IRR"
+    "Improved the overall visual consistency of the website"
   ],
   "features": {
     "documentationCleanup": true,
@@ -25,14 +24,16 @@
     "codeQualityImprovement": true
   },
   "previousVersion": {
-    "version": "8.11.0",
+    "version": "8.12.3",
     "changes": [
-      "Updated asset path references in portfolio.ts from `/assets/` to `/attached_assets/`",
-      "Updated favicon references in layout.tsx from `/assets/images/favicon.svg` to `/attached_assets/favicon.png`",
-      "Fixed README.md table of contents link to point correctly to 'Seven Laws of Artificial Intelligence' section",
-      "Verified all asset references using the centralized path structure",
-      "Eliminated 404 errors for images by ensuring consistent asset path usage",
-      "Applied Law #7 principle of using centralized configuration and avoiding duplication"
+      "Enhanced filter categories with gradient backgrounds, hover effects, and animations",
+      "Added visual polish with shadow effects and improved spacing for filter buttons",
+      "Implemented subtle hover scaling animations for better interactivity",
+      "Refined the filter container with gradient background and border styling",
+      "Ensured portfolio cards display in 2 columns on all screen sizes, including mobile",
+      "Improved company card styling with full width and proper responsive layout",
+      "Reverted stats section to match original design with 4 columns layout",
+      "Added complete stats display with TVPI, Gross Multiple, Net Multiple, and IRR"
     ]
   },
   "olderVersion": {

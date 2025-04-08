@@ -4,16 +4,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-purple-700 text-white hover:bg-purple-800",
-        secondary: "bg-gray-800 text-white hover:bg-gray-700",
-        destructive: "bg-red-500 text-white hover:bg-red-600",
-        outline: "border border-gray-600 bg-transparent hover:bg-gray-800 text-white",
-        ghost: "hover:bg-gray-800 text-gray-300 hover:text-white",
-        link: "text-blue-500 underline-offset-4 hover:underline",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+        // Add a custom variant specifically for portfolio filter categories
+        filter: "border border-input bg-background hover:bg-[#5239cc] hover:text-white data-[state=active]:bg-[#5239cc] data-[state=active]:text-white",
       },
       size: {
         default: "h-9 px-4 py-2",

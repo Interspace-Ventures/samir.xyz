@@ -65,7 +65,7 @@ export default function UltraSimpleNavbar() {
   }, []);
   
   return (
-    <nav className="bg-[#12022e] py-3 px-5 md:px-8 navbar-white-text">
+    <nav className="!bg-[#5239cc] py-3 px-5 md:px-8 navbar-white-text" style={{ backgroundColor: '#5239cc' }}>
       <div className="flex flex-row items-center justify-between max-w-6xl mx-auto">
         {/* Navigation links - centered */}
         <div className="flex items-center mx-auto" style={{ gap: '0.125rem' }}>
