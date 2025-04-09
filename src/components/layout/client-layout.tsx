@@ -8,6 +8,9 @@ import PageTransition from "../compat/page-transition";
 import dynamic from "next/dynamic";
 import { applyAllRenderingOptimizations } from "../../utils/page-render-optimizer";
 
+// Import navbar with no SSR to avoid hydration issues
+const DirectNavbar = dynamic(() => import("./DirectNavbar"), { ssr: false });
+
 // Import the loading fallback component with ssr: false to ensure it only runs on client
 const LoadingFallback = dynamic(
   () => import("../compat/loading-fallback"),
@@ -114,7 +117,7 @@ export default function ClientLayout({
   }, []);
   
   // Debug log to verify we're attempting to render the navbar
-  console.log("ClientLayout is rendering and will include UltraSimpleNavbar");
+  console.log("ClientLayout is rendering and will include both UltraSimpleNavbar and DirectNavbar");
   
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
@@ -126,6 +129,7 @@ export default function ClientLayout({
         {/* Explicit debug comment to verify in source */}
         {/* NAVBAR SHOULD APPEAR HERE */}
         <UltraSimpleNavbar />
+        <DirectNavbar />
         <main className="flex-grow py-8 mt-0 pt-28">
           <div className="max-w-[1200px] mx-auto w-full px-8">
             <ErrorBoundary>
