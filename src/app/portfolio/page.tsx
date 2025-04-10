@@ -37,52 +37,44 @@ export default function PortfolioPage() {
         </p>
       </div>
       
-      {/* Stats Section - Styled as a table with purple headers */}
+      {/* Stats Section - Styled to match the dark theme design from the screenshot */}
       <div className="mb-10 w-full max-w-[800px]">
-        <div className="overflow-hidden border border-purple-100 rounded-lg shadow-sm">
-          <table className="min-w-full divide-y divide-purple-200">
-            {/* Removed header as requested */}
-            <tbody className="bg-white">
-              {/* Row 1: First set of 4 metrics */}
-              <tr className="divide-x divide-purple-100">
-                <td className="px-6 py-4">
-                  <div className="text-xs text-purple-500 uppercase font-medium mb-1"># Investments</div>
-                  <div className="text-2xl font-bold text-gray-900">32</div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-xs text-purple-500 uppercase font-medium mb-1"># Markups</div>
-                  <div className="text-2xl font-bold text-gray-900">13</div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-xs text-purple-500 uppercase font-medium mb-1"># Acquisitions</div>
-                  <div className="text-2xl font-bold text-gray-900">2</div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-xs text-purple-500 uppercase font-medium mb-1"># Busts</div>
-                  <div className="text-2xl font-bold text-gray-900">4</div>
-                </td>
-              </tr>
-              {/* Row 2: Second set of 4 metrics */}
-              <tr className="divide-x divide-purple-100 bg-purple-50">
-                <td className="px-6 py-4">
-                  <div className="text-xs text-purple-500 uppercase font-medium mb-1">TVPI</div>
-                  <div className="text-2xl font-bold text-gray-900">1.44x</div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-xs text-purple-500 uppercase font-medium mb-1">Gross Multiple</div>
-                  <div className="text-2xl font-bold text-gray-900">1.22x</div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-xs text-purple-500 uppercase font-medium mb-1">Net Multiple</div>
-                  <div className="text-2xl font-bold text-gray-900">1.12x</div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-xs text-purple-500 uppercase font-medium mb-1">IRR</div>
-                  <div className="text-2xl font-bold text-gray-900">10%</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="grid grid-cols-4 gap-8 bg-[#1a1d23] p-6 rounded-lg">
+          {/* Row 1: Top metrics */}
+          <div className="text-left">
+            <div className="text-gray-400 font-medium mb-1"># Investments</div>
+            <div className="text-3xl font-bold text-white">32</div>
+          </div>
+          <div className="text-left">
+            <div className="text-gray-400 font-medium mb-1"># Markups</div>
+            <div className="text-3xl font-bold text-white">13</div>
+          </div>
+          <div className="text-left">
+            <div className="text-gray-400 font-medium mb-1"># Acquisitions</div>
+            <div className="text-3xl font-bold text-white">2</div>
+          </div>
+          <div className="text-left">
+            <div className="text-gray-400 font-medium mb-1"># Busts</div>
+            <div className="text-3xl font-bold text-white">4</div>
+          </div>
+          
+          {/* Row 2: Bottom metrics */}
+          <div className="text-left">
+            <div className="text-gray-400 font-medium mb-1">TVPI</div>
+            <div className="text-3xl font-bold text-white">1.44x</div>
+          </div>
+          <div className="text-left">
+            <div className="text-gray-400 font-medium mb-1">Gross Multiple</div>
+            <div className="text-3xl font-bold text-white">1.22x</div>
+          </div>
+          <div className="text-left">
+            <div className="text-gray-400 font-medium mb-1">Net Multiple</div>
+            <div className="text-3xl font-bold text-white">1.12x</div>
+          </div>
+          <div className="text-left">
+            <div className="text-gray-400 font-medium mb-1">IRR</div>
+            <div className="text-3xl font-bold text-white">10%</div>
+          </div>
         </div>
       </div>
       
