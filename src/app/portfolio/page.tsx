@@ -37,43 +37,47 @@ export default function PortfolioPage() {
         </p>
       </div>
       
-      {/* Stats Section - Styled to match the dark theme design from the screenshot */}
-      <div className="mb-10 w-full max-w-[800px]">
-        <div className="grid grid-cols-4 gap-8 bg-[#1a1d23] p-6 rounded-lg">
-          {/* Row 1: Top metrics */}
+      {/* Stats Section - Styled to match the single column format from the screenshot */}
+      <div className="mb-10 w-full max-w-[400px]">
+        <div className="bg-white px-6 py-8 flex flex-col gap-2">
           <div className="text-left">
-            <div className="text-gray-400 font-medium mb-1"># Investments</div>
-            <div className="text-3xl font-bold text-white">32</div>
-          </div>
-          <div className="text-left">
-            <div className="text-gray-400 font-medium mb-1"># Markups</div>
-            <div className="text-3xl font-bold text-white">13</div>
-          </div>
-          <div className="text-left">
-            <div className="text-gray-400 font-medium mb-1"># Acquisitions</div>
-            <div className="text-3xl font-bold text-white">2</div>
-          </div>
-          <div className="text-left">
-            <div className="text-gray-400 font-medium mb-1"># Busts</div>
-            <div className="text-3xl font-bold text-white">4</div>
+            <div className="text-black font-medium text-xl mb-0"># Investments</div>
+            <div className="text-4xl font-bold text-black leading-tight mb-2">32</div>
           </div>
           
-          {/* Row 2: Bottom metrics */}
           <div className="text-left">
-            <div className="text-gray-400 font-medium mb-1">TVPI</div>
-            <div className="text-3xl font-bold text-white">1.44x</div>
+            <div className="text-black font-medium text-xl mb-0"># Markups</div>
+            <div className="text-4xl font-bold text-black leading-tight mb-2">13</div>
           </div>
+          
           <div className="text-left">
-            <div className="text-gray-400 font-medium mb-1">Gross Multiple</div>
-            <div className="text-3xl font-bold text-white">1.22x</div>
+            <div className="text-black font-medium text-xl mb-0"># Acquisitions</div>
+            <div className="text-4xl font-bold text-black leading-tight mb-2">2</div>
           </div>
+          
           <div className="text-left">
-            <div className="text-gray-400 font-medium mb-1">Net Multiple</div>
-            <div className="text-3xl font-bold text-white">1.12x</div>
+            <div className="text-black font-medium text-xl mb-0"># Busts</div>
+            <div className="text-4xl font-bold text-black leading-tight mb-2">4</div>
           </div>
+          
           <div className="text-left">
-            <div className="text-gray-400 font-medium mb-1">IRR</div>
-            <div className="text-3xl font-bold text-white">10%</div>
+            <div className="text-black font-medium text-xl mb-0">TVPI</div>
+            <div className="text-4xl font-bold text-black leading-tight mb-2">1.44x</div>
+          </div>
+          
+          <div className="text-left">
+            <div className="text-black font-medium text-xl mb-0">Gross Multiple</div>
+            <div className="text-4xl font-bold text-black leading-tight mb-2">1.22x</div>
+          </div>
+          
+          <div className="text-left">
+            <div className="text-black font-medium text-xl mb-0">Net Multiple</div>
+            <div className="text-4xl font-bold text-black leading-tight mb-2">1.12x</div>
+          </div>
+          
+          <div className="text-left">
+            <div className="text-black font-medium text-xl mb-0">IRR</div>
+            <div className="text-4xl font-bold text-black leading-tight mb-0">10%</div>
           </div>
         </div>
       </div>
