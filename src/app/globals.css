@@ -391,3 +391,33 @@ footer, footer.border-t, .emergency-footer, .sync-emergency-footer {
 }
 
 /* Note: Custom button styling has been moved to shadcn button variants */
+
+/* Portfolio Stats Styling */
+.portfolio-stats-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 2.5rem;
+}
+
+.portfolio-stat-item {
+  margin-bottom: 8px;
+}
+
+.portfolio-stat-label {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: black;
+  line-height: 1.3;
+}
+
+.portfolio-stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  color: black;
+}
