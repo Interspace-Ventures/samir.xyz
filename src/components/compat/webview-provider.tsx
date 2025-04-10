@@ -59,13 +59,13 @@ export default function WebViewProvider({ children }: WebViewProviderProps) {
         <div 
           id="webview-indicator" 
           data-webview="true" 
-          style={{ display: 'none' }}
+          className="hidden"
         />
       )}
       
       {/* Show loading overlay for WebViews only after initialization and brief delay */}
       {isWebView && showLoading && !isInitialized && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+        <div className="fixed inset-0 z-[9999]">
           <LoadingFallback message="Loading your page..." />
         </div>
       )}

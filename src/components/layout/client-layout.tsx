@@ -125,39 +125,17 @@ export default function ClientLayout({
       
       {/* Always render the layout to avoid hydration mismatches */}
       <div 
-        className={`flex flex-col min-h-screen font-inter font-sans ${contentReady ? 'content-visible' : 'content-loading'}`}
-        style={{ 
-          margin: 0, 
-          padding: 0, 
-          width: '100vw', 
-          maxWidth: '100vw', 
-          overflowX: 'hidden', 
-          boxSizing: 'border-box' 
-        }}
+        className={`flex flex-col min-h-screen font-inter font-sans m-0 p-0 w-screen max-w-screen overflow-x-hidden box-border ${contentReady ? 'content-visible' : 'content-loading'}`}
       >
         {/* Explicit debug comment to verify in source */}
         {/* NAVBAR SHOULD APPEAR HERE */}
         <SimplestNavbar />
         {/* No need for a spacer div - we'll handle content positioning differently */}
         <main 
-          className="flex-grow"
-          style={{ 
-            width: '100vw', 
-            maxWidth: '100vw', 
-            overflowX: 'hidden', 
-            boxSizing: 'border-box',
-            margin: '80px 0 0 0', /* This pushes content down exactly the height of navbar */
-            padding: 0
-          }}
+          className="flex-grow w-screen max-w-screen overflow-x-hidden box-border mt-20 p-0"
         >
           <div 
-            className="max-w-[1200px] mx-auto w-full"
-            style={{ 
-              boxSizing: 'border-box',
-              margin: '0 auto', 
-              padding: '0 48px', /* More generous side padding */
-              marginTop: 0
-            }}
+            className="max-w-[1200px] mx-auto w-full box-border px-12 mt-0"
           >
             <ErrorBoundary>
               {children}
