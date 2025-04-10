@@ -7,6 +7,7 @@ import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { Card } from '../../components/ui/card';
 import { CompanyCard } from './components/CompanyCard';
+import StatsDisplay from './components/StatsDisplay';
 import styles from './styles.module.css';
 
 export default function PortfolioPage() {
@@ -37,50 +38,8 @@ export default function PortfolioPage() {
         </p>
       </div>
       
-      {/* Stats Section - Styled to match the single column format from the screenshot */}
-      <div className="mb-10 w-full max-w-[400px]">
-        <div className="bg-white px-6 py-8 flex flex-col gap-2">
-          <div className="text-left">
-            <div className="text-black font-medium text-xl mb-0"># Investments</div>
-            <div className="text-4xl font-bold text-black leading-tight mb-2">32</div>
-          </div>
-          
-          <div className="text-left">
-            <div className="text-black font-medium text-xl mb-0"># Markups</div>
-            <div className="text-4xl font-bold text-black leading-tight mb-2">13</div>
-          </div>
-          
-          <div className="text-left">
-            <div className="text-black font-medium text-xl mb-0"># Acquisitions</div>
-            <div className="text-4xl font-bold text-black leading-tight mb-2">2</div>
-          </div>
-          
-          <div className="text-left">
-            <div className="text-black font-medium text-xl mb-0"># Busts</div>
-            <div className="text-4xl font-bold text-black leading-tight mb-2">4</div>
-          </div>
-          
-          <div className="text-left">
-            <div className="text-black font-medium text-xl mb-0">TVPI</div>
-            <div className="text-4xl font-bold text-black leading-tight mb-2">1.44x</div>
-          </div>
-          
-          <div className="text-left">
-            <div className="text-black font-medium text-xl mb-0">Gross Multiple</div>
-            <div className="text-4xl font-bold text-black leading-tight mb-2">1.22x</div>
-          </div>
-          
-          <div className="text-left">
-            <div className="text-black font-medium text-xl mb-0">Net Multiple</div>
-            <div className="text-4xl font-bold text-black leading-tight mb-2">1.12x</div>
-          </div>
-          
-          <div className="text-left">
-            <div className="text-black font-medium text-xl mb-0">IRR</div>
-            <div className="text-4xl font-bold text-black leading-tight mb-0">10%</div>
-          </div>
-        </div>
-      </div>
+      {/* Stats Section - Using dedicated component */}
+      <StatsDisplay />
       
       {/* Category filters - styled with better UI */}
       <div className="mb-8 max-w-[800px]">
