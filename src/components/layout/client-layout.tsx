@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import UltraSimpleNavbar from "./ultra-simple-navbar";
 import Footer from "./footer";
 import ErrorBoundary from "../error-boundary";
 import PageTransition from "../compat/page-transition";
@@ -9,7 +8,7 @@ import dynamic from "next/dynamic";
 import { applyAllRenderingOptimizations } from "../../utils/page-render-optimizer";
 
 // Import navbar with no SSR to avoid hydration issues
-const DirectNavbar = dynamic(() => import("./DirectNavbar"), { ssr: false });
+const SimplestNavbar = dynamic(() => import("./SimplestNavbar"), { ssr: false });
 
 // Import the loading fallback component with ssr: false to ensure it only runs on client
 const LoadingFallback = dynamic(
@@ -117,7 +116,7 @@ export default function ClientLayout({
   }, []);
   
   // Debug log to verify we're attempting to render the navbar
-  console.log("ClientLayout is rendering and will include both UltraSimpleNavbar and DirectNavbar");
+  console.log("ClientLayout is rendering and will include SimplestNavbar");
   
   return (
     <ErrorBoundary fallback={<ErrorFallback />} onError={handleError}>
@@ -125,13 +124,41 @@ export default function ClientLayout({
       <PageTransition timeout={80} />
       
       {/* Always render the layout to avoid hydration mismatches */}
-      <div className={`flex flex-col min-h-screen font-inter font-sans ${contentReady ? 'content-visible' : 'content-loading'}`}>
+      <div 
+        className={`flex flex-col min-h-screen font-inter font-sans ${contentReady ? 'content-visible' : 'content-loading'}`}
+        style={{ 
+          margin: 0, 
+          padding: 0, 
+          width: '100vw', 
+          maxWidth: '100vw', 
+          overflowX: 'hidden', 
+          boxSizing: 'border-box' 
+        }}
+      >
         {/* Explicit debug comment to verify in source */}
         {/* NAVBAR SHOULD APPEAR HERE */}
-        <UltraSimpleNavbar />
-        <DirectNavbar />
-        <main className="flex-grow py-8 mt-0 pt-28">
-          <div className="max-w-[1200px] mx-auto w-full px-8">
+        <SimplestNavbar />
+        {/* No need for a spacer div - we'll handle content positioning differently */}
+        <main 
+          className="flex-grow"
+          style={{ 
+            width: '100vw', 
+            maxWidth: '100vw', 
+            overflowX: 'hidden', 
+            boxSizing: 'border-box',
+            margin: '80px 0 0 0', /* This pushes content down exactly the height of navbar */
+            padding: 0
+          }}
+        >
+          <div 
+            className="max-w-[1200px] mx-auto w-full"
+            style={{ 
+              boxSizing: 'border-box',
+              margin: '0 auto', 
+              padding: '0 48px', /* More generous side padding */
+              marginTop: 0
+            }}
+          >
             <ErrorBoundary>
               {children}
             </ErrorBoundary>

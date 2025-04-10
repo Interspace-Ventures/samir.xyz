@@ -35,53 +35,50 @@ const Footer = () => {
   useEffect(() => {
     setYear(new Date().getFullYear().toString())
     setMounted(true)
-  }, [])
+  }, []);
 
   // Detect if we're in dark mode for proper styling
   const isDark = mounted && resolvedTheme === 'dark'
   
-  // Colors based on dark/light mode with updated purple theme
-  const colors = {
-    bg: isDark ? "#5239cc" : "#f3f4f6", // Updated purple background for dark mode (#5239cc)
-    text: isDark ? "#d8b4fe" : "#6b7280", // Purple-300 for dark mode text (matches link-underline)
-    textHighlight: isDark ? "#ffffff" : "#111827",
-    accent: isDark ? "#5b21b6" : "#8b5cf6", // Ultra-deep purple accent for branding
-    accentHover: isDark ? "#6d28d9" : "#7c3aed", // Slightly brighter on hover but still ultra-deep
-    muted: isDark ? "#4c1d95" : "#9ca3af", // Ultra-deep vibrant muted text
-    border: isDark ? "#3b0764" : "#e5e7eb", // Ultra-deep purple border
-    glow: isDark ? "0 0 15px rgba(91, 33, 182, 0.7)" : "none", // Enhanced ultra-deep purple glow
-  };
+  // Fixed color for consistent purple theme regardless of dark/light mode
+  const purpleColor = "#5239cc";
 
   return (
-    <footer className={`w-full mt-10 transition-colors duration-300 border-t ${
-      isDark 
-        ? '!bg-[#5239cc] border-purple-950/50 shadow-[0_-5px_15px_-2px_rgba(59,7,100,0.35),0_-2px_10px_rgba(91,33,182,0.25),0_0_15px_rgba(91,33,182,0.7)] text-purple-300' 
-        : '!bg-gray-50 border-gray-200 text-gray-600'
-    }`} style={{ backgroundColor: isDark ? '#5239cc' : '#f9fafb' }}>
-      <div className="max-w-[1200px] mx-auto py-6 px-4 sm:px-[32px] flex flex-col gap-4">
-        <div className="footer-content flex flex-col justify-between items-center gap-4">
-          <div className="text-sm font-inter">
+    <footer 
+      className="w-full mt-10 !bg-[#5239cc] text-white"
+      style={{ 
+        backgroundColor: purpleColor,
+        width: '100vw',
+        margin: '0',
+        padding: '0',
+        borderWidth: '0',
+        boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.15)',
+        fontFamily: "Alexandria, sans-serif"
+      }}
+    >
+      <div className="max-w-[1200px] mx-auto py-6 px-4 sm:px-[32px]">
+        <div className="footer-content flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-sm" style={{ color: 'white' }}>
             © <Link 
                 href="/ventures" 
-                className="link-underline font-medium"
+                className="font-medium hover:underline"
+                style={{ color: 'white', textDecoration: 'none' }}
               >
                 Interspace Ventures
               </Link> {year || "2025"}
           </div>
-          <div className={`text-xs font-inter ${isDark ? 'text-purple-300/80' : 'text-gray-500'}`}>
-            Built with Replit AI at the speed of thought • v{versionInfo.version}
+          <div className="text-xs" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+            Built with Replit AI at the speed of thought • 
+            <Link 
+              href="/CHANGELOG.md"
+              className="hover:underline ml-1"
+              style={{ color: 'rgba(255, 255, 255, 0.9)' }}
+            >
+              v{versionInfo.version}
+            </Link>
           </div>
         </div>
       </div>
-      
-      <style jsx global>{`
-        @media (min-width: 768px) {
-          .footer-content {
-            flex-direction: row;
-            align-items: center;
-          }
-        }
-      `}</style>
     </footer>
   )
 }

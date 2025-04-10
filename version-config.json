@@ -1,18 +1,30 @@
 {
-  "version": "8.14.0",
+  "version": "8.15.0",
   "name": "Portfolio Website",
   "description": "Personal portfolio website showcasing professional projects through an AI-enhanced interactive design",
-  "lastUpdated": "2025-04-07",
+  "lastUpdated": "2025-04-09",
   "changes": [
-    "Implemented shadcn CSS variable system for more consistent theming",
-    "Created custom button variant for filter categories to avoid conflicts",
-    "Added proper theme configuration using shadcn conventions",
-    "Updated globals.css to use CSS variables for colors and design tokens",
-    "Replaced direct color references with CSS variables",
-    "Refactored button component to use data attributes for state",
-    "Eliminated !important flags by implementing proper CSS specificity"
+    "Implemented a simplified navbar component with improved structure and styling",
+    "Created an emergency navbar that loads via a separate script for guaranteed rendering",
+    "Fixed menu items to appear on the same line as logo with proper spacing",
+    "Ensured navbar is fixed to the top when scrolling with proper stacking",
+    "Updated navbar with Alexandria font, purple background color, and correct dimensions",
+    "Enhanced navbar with right-aligned navigation links and proper wordmark logo positioning",
+    "Updated footer with version number linked to changelog and consistent purple styling"
   ],
   "previousVersion": {
+    "version": "8.14.0",
+    "changes": [
+      "Implemented shadcn CSS variable system for more consistent theming",
+      "Created custom button variant for filter categories to avoid conflicts",
+      "Added proper theme configuration using shadcn conventions",
+      "Updated globals.css to use CSS variables for colors and design tokens",
+      "Replaced direct color references with CSS variables",
+      "Refactored button component to use data attributes for state",
+      "Eliminated !important flags by implementing proper CSS specificity"
+    ]
+  },
+  "olderVersion": {
     "version": "8.13.1",
     "changes": [
       "Fixed styling issue with navbar and footer background color not correctly displaying #5239cc",
@@ -21,18 +33,6 @@
       "Resolved Button component styling conflicts by removing defaults that were overriding custom styles",
       "Maintained portfolio stats section with TVPI, Gross Multiple, Net Multiple, and IRR metrics",
       "Ensured portfolio cards display in 2 columns on all screen sizes, including mobile"
-    ]
-  },
-  "olderVersion": {
-    "version": "8.13.0",
-    "changes": [
-      "Updated navbar and footer background color to #5239cc for consistent branding",
-      "Simplified portfolio filter categories to match the provided design",
-      "Fixed duplicate 'All' button issue in the portfolio filters",
-      "Enhanced styling of active filter categories with purple background and white text",
-      "Maintained portfolio stats section with TVPI, Gross Multiple, Net Multiple, and IRR metrics",
-      "Ensured portfolio cards display in 2 columns on all screen sizes, including mobile",
-      "Improved the overall visual consistency of the website"
     ]
   },
   "features": {
