@@ -97,11 +97,7 @@ export function VenturesCard({ name, description, imagePath, link, priority = fa
                   src={fullImagePath}
                   alt={name}
                   fill={true}
-                  style={{ 
-                    objectFit: 'contain',
-                    objectPosition: 'center',
-                    fontFamily: 'Inter, sans-serif', // Ensure alt text uses Inter
-                  }}
+                  className={`object-contain object-center font-inter transition-all duration-300 ${isDark ? 'filter-none' : ''}`}
                   onError={(e) => {
                     console.warn(`[VenturesCard] Image error for ${name}: ${fullImagePath}`);
                     
@@ -118,13 +114,12 @@ export function VenturesCard({ name, description, imagePath, link, priority = fa
                   }}
                   priority={priority}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className={`transition-all duration-300 ${isDark ? 'filter-none' : ''}`}
                 />
               </div>
             </div>
           ) : (
             <div className="mb-4 h-24 w-full flex items-center justify-center overflow-hidden rounded-md bg-gradient-to-r from-purple-800 to-purple-900 border border-purple-700/30">
-              <div className="text-3xl font-bold text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
+              <div className="text-3xl font-bold text-white font-inter">
                 {initials}
               </div>
             </div>

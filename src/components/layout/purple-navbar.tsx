@@ -7,116 +7,45 @@ export default function PurpleNavbar() {
   const pathname = usePathname();
   
   return (
-    <nav 
-      style={{
-        height: '80px',
-        backgroundColor: '#5239cc',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        zIndex: 50,
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-      }}
-    >
-      <div 
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '0 1rem',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
-        }}
-      >
+    <nav className="h-20 bg-[#5239cc] fixed top-0 left-0 w-full z-50 shadow-md">
+      <div className="max-w-[1200px] mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo and wordmark on the left */}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center no-underline">
             {/* Logo with gradient background */}
-            <div 
-              style={{
-                background: 'linear-gradient(135deg, #4285f4 0%, #8c5ad7 100%)',
-                width: '48px',
-                height: '48px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '6px',
-                marginRight: '12px',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-              }}
-            >
-              <span 
-                style={{ 
-                  color: 'white',
-                  fontSize: '24px',
-                  fontWeight: 'bold',
-                  fontFamily: "Alexandria, sans-serif"
-                }}
-              >
+            <div className="bg-gradient-to-br from-[#4285f4] to-[#8c5ad7] w-12 h-12 flex items-center justify-center rounded-md mr-3 shadow-md">
+              <span className="text-white text-2xl font-bold font-alexandria">
                 S
               </span>
             </div>
             
             {/* Wordmark */}
-            <span 
-              style={{
-                color: 'white',
-                fontSize: '24px',
-                fontWeight: '500',
-                fontFamily: "Alexandria, sans-serif"
-              }}
-            >
+            <span className="text-white text-2xl font-medium font-alexandria">
               samir.xyz
             </span>
           </Link>
         </div>
         
         {/* Navigation links - right aligned */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+        <div className="flex items-center justify-end">
           <Link
             href="/profile/"
-            style={{
-              marginLeft: '32px',
-              fontSize: '16px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              color: 'white',
-              fontWeight: pathname.startsWith("/profile") ? 'bold' : 'normal',
-              textDecoration: pathname.startsWith("/profile") ? 'underline' : 'none',
-              fontFamily: "Alexandria, sans-serif"
-            }}
+            className={`ml-8 text-base uppercase tracking-wider text-white font-alexandria
+              ${pathname.startsWith("/profile") ? 'font-bold underline' : 'font-normal no-underline'}`}
           >
             ABOUT
           </Link>
           <Link
             href="/portfolio/"
-            style={{
-              marginLeft: '32px',
-              fontSize: '16px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              color: 'white',
-              fontWeight: pathname.startsWith("/portfolio") ? 'bold' : 'normal',
-              textDecoration: pathname.startsWith("/portfolio") ? 'underline' : 'none',
-              fontFamily: "Alexandria, sans-serif"
-            }}
+            className={`ml-8 text-base uppercase tracking-wider text-white font-alexandria
+              ${pathname.startsWith("/portfolio") ? 'font-bold underline' : 'font-normal no-underline'}`}
           >
             PORTFOLIO
           </Link>
           <Link
             href="/ventures/"
-            style={{
-              marginLeft: '32px',
-              fontSize: '16px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              color: 'white',
-              fontWeight: pathname.startsWith("/ventures") ? 'bold' : 'normal',
-              textDecoration: pathname.startsWith("/ventures") ? 'underline' : 'none',
-              fontFamily: "Alexandria, sans-serif"
-            }}
+            className={`ml-8 text-base uppercase tracking-wider text-white font-alexandria
+              ${pathname.startsWith("/ventures") ? 'font-bold underline' : 'font-normal no-underline'}`}
           >
             VENTURES
           </Link>
