@@ -15,19 +15,19 @@ export const CompanyCard = React.memo(({ company, isDark }: CompanyCardProps) =>
   const shouldShowFallback = !company.logo || imageError;
   
   return (
-    <div className="transition-opacity duration-100 w-full h-full">
-      <div className="rounded-xl bg-white shadow-sm overflow-hidden h-[150px] w-full">
+    <div className="transition-all duration-200 hover:shadow-md w-full">
+      <div className="rounded-lg bg-white shadow-sm border border-gray-100 overflow-hidden h-[180px] w-full">
         <a 
           href={company.website || '#'} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="block h-full w-full relative"
+          className="block h-full w-full relative hover:bg-gray-50 transition-colors"
         >
-          {/* Status badges */}
+          {/* Status badges - Improved styling */}
           {company.markup && (
             <Badge 
               variant="default"
-              className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium transition-colors border-transparent bg-purple-700 text-white absolute top-2 right-2 z-10"
+              className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-md text-xs font-medium bg-purple-600 text-white shadow-sm"
             >
               Markup
             </Badge>
@@ -36,14 +36,14 @@ export const CompanyCard = React.memo(({ company, isDark }: CompanyCardProps) =>
           {company.acquired && (
             <Badge 
               variant="secondary"
-              className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium transition-colors border-transparent bg-gray-700 text-white absolute top-2 right-2 z-10"
+              className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-md text-xs font-medium bg-blue-600 text-white shadow-sm"
             >
               Acquired
             </Badge>
           )}
 
           {/* Card content */}
-          <div className="h-full flex items-center justify-center p-4">
+          <div className="h-full flex flex-col items-center justify-center p-4">
             {shouldShowFallback ? (
               <div className="text-gray-400">No image</div>
             ) : (
@@ -57,6 +57,10 @@ export const CompanyCard = React.memo(({ company, isDark }: CompanyCardProps) =>
                 />
               </div>
             )}
+            {/* Company name below logo */}
+            <div className="mt-auto pt-2 text-center">
+              <p className="text-sm font-medium text-gray-800">{company.name}</p>
+            </div>
           </div>
         </a>
       </div>
