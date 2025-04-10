@@ -87,7 +87,7 @@ export default function UltraSimpleNavbar() {
       navbar.innerHTML = `
         <div class="purple-navbar-container">
           <div class="purple-navbar-logo-container">
-            <a href="/" style="display: flex; align-items: center; text-decoration: none;">
+            <a href="/" class="flex items-center no-underline">
               <div class="purple-navbar-logo">
                 <span class="purple-navbar-logo-text">S</span>
               </div>
@@ -95,8 +95,8 @@ export default function UltraSimpleNavbar() {
             </a>
           </div>
           <div class="purple-navbar-links">
-            <a href="/profile/" class="purple-navbar-link" style="margin-right: 32px;">ABOUT</a>
-            <a href="/portfolio/" class="purple-navbar-link" style="margin-right: 32px;">PORTFOLIO</a>
+            <a href="/profile/" class="purple-navbar-link mr-8">ABOUT</a>
+            <a href="/portfolio/" class="purple-navbar-link mr-8">PORTFOLIO</a>
             <a href="/ventures/" class="purple-navbar-link">VENTURES</a>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function UltraSimpleNavbar() {
       // Add padding to main content to prevent overlap
       const mainContent = document.querySelector('main');
       if (mainContent) {
-        mainContent.style.paddingTop = '100px';
+        mainContent.classList.add('pt-[100px]');
       }
       
       console.log('Direct navbar injection successful');
@@ -126,28 +126,17 @@ export default function UltraSimpleNavbar() {
   
   return (
     <nav 
-      className="fixed top-0 left-0 w-full z-50 shadow-lg"
-      style={{ 
-        height: '80px',
-        width: '100vw',
-        left: 0,
-        right: 0,
-        margin: 0,
-        padding: 0,
-        borderWidth: 0,
-        backgroundColor: '#5239cc'
-      }}
+      className="fixed top-0 left-0 w-screen h-20 z-50 shadow-lg m-0 p-0 border-0 bg-[#5239cc]"
     >
       <div className="max-w-[1200px] mx-auto px-6 w-full h-full">
-        <div className="flex items-center justify-between h-full" style={{ flexWrap: 'nowrap' }}>
+        <div className="flex items-center justify-between h-full flex-nowrap">
           {/* Logo and wordmark on the left */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               {/* Logo with gradient background */}
               <div className="bg-gradient-to-br from-blue-500 to-purple-600 w-12 h-12 flex items-center justify-center rounded-md mr-3 shadow-md">
                 <span 
-                  className="text-white text-2xl font-bold" 
-                  style={{ fontFamily: "Alexandria, sans-serif" }}
+                  className="text-white text-2xl font-bold font-alexandria"
                 >
                   S
                 </span>
@@ -155,8 +144,7 @@ export default function UltraSimpleNavbar() {
               
               {/* Wordmark */}
               <span 
-                className="text-white text-2xl font-medium" 
-                style={{ fontFamily: "Alexandria, sans-serif" }}
+                className="text-white text-2xl font-medium font-alexandria"
               >
                 samir.xyz
               </span>
@@ -164,25 +152,22 @@ export default function UltraSimpleNavbar() {
           </div>
           
           {/* Navigation links - right aligned */}
-          <div className="flex items-center justify-end gap-8" style={{ flexWrap: 'nowrap', flexShrink: 0 }}>
+          <div className="flex items-center justify-end gap-8 flex-nowrap flex-shrink-0">
             <Link
               href="/profile/"
-              className={`text-base uppercase tracking-wider text-white ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
-              style={{ fontFamily: "Alexandria, sans-serif" }}
+              className={`text-base uppercase tracking-wider text-white font-alexandria ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
             >
               ABOUT
             </Link>
             <Link
               href="/portfolio/"
-              className={`text-base uppercase tracking-wider text-white ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
-              style={{ fontFamily: "Alexandria, sans-serif" }}
+              className={`text-base uppercase tracking-wider text-white font-alexandria ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
             >
               PORTFOLIO
             </Link>
             <Link
               href="/ventures/"
-              className={`text-base uppercase tracking-wider text-white ${pathname.startsWith("/ventures") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
-              style={{ fontFamily: "Alexandria, sans-serif" }}
+              className={`text-base uppercase tracking-wider text-white font-alexandria ${pathname.startsWith("/ventures") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
             >
               VENTURES
             </Link>
