@@ -42,10 +42,10 @@ const Footer = () => {
 
   return (
     <footer 
-      className="w-full mt-10 bg-[#5239cc] text-white w-screen m-0 p-0 border-0 shadow-md font-alexandria"
+      className="mt-10 bg-[#5239cc] text-white w-screen m-0 p-0 border-0 shadow-md font-alexandria"
     >
-      <div className="max-w-[1200px] mx-auto py-6 px-4 sm:px-[32px]">
-        <div className="footer-content flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="max-w-[1200px] mx-auto py-6 px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-white">
             © <Link 
                 href="/ventures" 
