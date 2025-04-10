@@ -41,13 +41,7 @@ export default function PortfolioPage() {
       <div className="mb-10 w-full max-w-[800px]">
         <div className="overflow-hidden border border-purple-100 rounded-lg shadow-sm">
           <table className="min-w-full divide-y divide-purple-200">
-            <thead className="bg-purple-600">
-              <tr>
-                <th colSpan={4} className="px-6 py-3 text-center text-sm font-semibold text-white uppercase tracking-wider">
-                  Investment Performance Metrics
-                </th>
-              </tr>
-            </thead>
+            {/* Removed header as requested */}
             <tbody className="bg-white">
               {/* Row 1: First set of 4 metrics */}
               <tr className="divide-x divide-purple-100">
@@ -95,7 +89,6 @@ export default function PortfolioPage() {
       {/* Category filters - styled with better UI */}
       <div className="mb-8 max-w-[800px]">
         <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-          <h3 className="text-gray-700 font-medium mb-3">Filter by Category:</h3>
           <div className="flex flex-wrap gap-2">
             {categories.map((category, index) => {
               // Skip duplicate "All" category
