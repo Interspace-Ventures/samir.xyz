@@ -37,7 +37,34 @@ export default function RootLayout({
         
         {/* Inline CSS to prevent FOUC (Flash of Unstyled Content) */}
         <style dangerouslySetInnerHTML={{ __html: `
-          body { opacity: 1 !important; visibility: visible !important; }
+          html, body { 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            width: 100vw !important; 
+            max-width: 100vw !important; 
+            overflow-x: hidden !important;
+            opacity: 1 !important; 
+            visibility: visible !important;
+          }
+          
+          /* Fix for white borders */
+          body > div, #__next, div[data-nextjs-root] {
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow-x: hidden !important;
+          }
+          
+          /* Full width nav and footer */
+          nav, .emergency-navbar, .purple-navbar-direct, footer, .emergency-footer, .sync-emergency-footer {
+            width: 100vw !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            border: none !important;
+            box-sizing: border-box !important;
+          }
           
           /* WebView-specific optimizations that need to be applied early */
           .webview body {

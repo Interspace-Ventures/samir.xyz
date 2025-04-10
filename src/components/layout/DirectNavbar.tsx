@@ -9,7 +9,7 @@ export default function DirectNavbar() {
       position: 'fixed',
       top: 0,
       left: 0,
-      width: '100%',
+      width: '100vw',
       height: '80px',
       backgroundColor: '#5239cc',
       color: 'white',
@@ -24,7 +24,8 @@ export default function DirectNavbar() {
         maxWidth: '1200px',
         margin: '0 auto',
         height: '100%',
-        padding: '0 24px'
+        padding: '0 24px',
+        flexWrap: 'nowrap'
       }}>
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -54,12 +55,14 @@ export default function DirectNavbar() {
         <div style={{
           display: 'flex',
           justifyContent: 'flex-end',
-          alignItems: 'center'
+          alignItems: 'center',
+          gap: '32px',
+          flexWrap: 'nowrap',
+          flexShrink: 0
         }}>
           <Link href="/profile">
             <span style={{
               color: 'white',
-              margin: '0 16px',
               fontSize: '16px',
               textTransform: 'uppercase',
               letterSpacing: '0.05em'
@@ -68,7 +71,6 @@ export default function DirectNavbar() {
           <Link href="/portfolio">
             <span style={{
               color: 'white',
-              margin: '0 16px',
               fontSize: '16px',
               textTransform: 'uppercase',
               letterSpacing: '0.05em'
@@ -77,7 +79,6 @@ export default function DirectNavbar() {
           <Link href="/ventures">
             <span style={{
               color: 'white',
-              margin: '0 16px',
               fontSize: '16px',
               textTransform: 'uppercase',
               letterSpacing: '0.05em'

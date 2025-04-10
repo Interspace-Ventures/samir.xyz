@@ -16,7 +16,7 @@ export default function UltraSimpleNavbar() {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
+        width: 100vw;
         height: 80px;
         background-color: #5239cc;
         color: white;
@@ -25,6 +25,10 @@ export default function UltraSimpleNavbar() {
         font-family: Alexandria, sans-serif;
         display: flex;
         justify-content: center;
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+        right: 0;
       }
       .purple-navbar-container {
         max-width: 1200px;
@@ -34,6 +38,7 @@ export default function UltraSimpleNavbar() {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 0 auto;
       }
       .purple-navbar-logo-container {
         display: flex;
@@ -90,8 +95,8 @@ export default function UltraSimpleNavbar() {
             </a>
           </div>
           <div class="purple-navbar-links">
-            <a href="/profile/" class="purple-navbar-link">ABOUT</a>
-            <a href="/portfolio/" class="purple-navbar-link">PORTFOLIO</a>
+            <a href="/profile/" class="purple-navbar-link" style="margin-right: 32px;">ABOUT</a>
+            <a href="/portfolio/" class="purple-navbar-link" style="margin-right: 32px;">PORTFOLIO</a>
             <a href="/ventures/" class="purple-navbar-link">VENTURES</a>
           </div>
         </div>
@@ -121,11 +126,20 @@ export default function UltraSimpleNavbar() {
   
   return (
     <nav 
-      className="fixed top-0 left-0 w-full z-50 shadow-lg !bg-[#5239cc]"
-      style={{ height: '80px' }}
+      className="fixed top-0 left-0 w-full z-50 shadow-lg"
+      style={{ 
+        height: '80px',
+        width: '100vw',
+        left: 0,
+        right: 0,
+        margin: 0,
+        padding: 0,
+        borderWidth: 0,
+        backgroundColor: '#5239cc'
+      }}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 w-full h-full">
-        <div className="flex items-center justify-between h-full">
+      <div className="max-w-[1200px] mx-auto px-6 w-full h-full">
+        <div className="flex items-center justify-between h-full" style={{ flexWrap: 'nowrap' }}>
           {/* Logo and wordmark on the left */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
@@ -150,24 +164,24 @@ export default function UltraSimpleNavbar() {
           </div>
           
           {/* Navigation links - right aligned */}
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end gap-8" style={{ flexWrap: 'nowrap', flexShrink: 0 }}>
             <Link
               href="/profile/"
-              className={`ml-8 text-base uppercase tracking-wider text-white ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
+              className={`text-base uppercase tracking-wider text-white ${pathname.startsWith("/profile") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
               style={{ fontFamily: "Alexandria, sans-serif" }}
             >
               ABOUT
             </Link>
             <Link
               href="/portfolio/"
-              className={`ml-8 text-base uppercase tracking-wider text-white ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
+              className={`text-base uppercase tracking-wider text-white ${pathname.startsWith("/portfolio") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
               style={{ fontFamily: "Alexandria, sans-serif" }}
             >
               PORTFOLIO
             </Link>
             <Link
               href="/ventures/"
-              className={`ml-8 text-base uppercase tracking-wider text-white ${pathname.startsWith("/ventures") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
+              className={`text-base uppercase tracking-wider text-white ${pathname.startsWith("/ventures") ? 'border-b-2 border-white font-semibold' : 'font-normal'}`}
               style={{ fontFamily: "Alexandria, sans-serif" }}
             >
               VENTURES

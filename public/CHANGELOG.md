@@ -2,22 +2,6 @@
 
 All notable changes to the Portfolio Website project will be documented in this file.
 
-## [8.15.0] - 2025-04-09
-
-### Added
-- Created an emergency navbar that loads via a separate script for guaranteed rendering
-- Enhanced navbar with right-aligned navigation links and proper wordmark logo positioning
-
-### Changed
-- Implemented a simplified navbar component with improved structure and styling
-- Updated navbar with Alexandria font, purple background color, and correct dimensions (80px height)
-- Fixed navbar position to stay at the top when scrolling
-- Updated footer with version number linked to changelog and consistent purple styling
-
-### Fixed
-- Fixed menu items to appear on the same line as logo with proper spacing
-- Ensured navbar spans the full width of the page with no white borders
-
 ## [8.14.0] - 2025-04-07
 
 ### Added
