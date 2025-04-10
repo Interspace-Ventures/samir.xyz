@@ -27,8 +27,7 @@ export function VenturesGrid({ ventures }: VenturesGridProps) {
       {ventures.map((venture, index) => (
         <div 
           key={index} 
-          className="h-full transform transition-all duration-300 hover:translate-y-[-4px]"
-          style={{ fontFamily: 'Inter, sans-serif' }} // Ensure consistent font
+          className="h-full transform transition-all duration-300 hover:translate-y-[-4px] font-inter"
         >
           <VenturesCard
             name={venture.name}

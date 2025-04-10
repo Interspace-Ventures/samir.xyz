@@ -70,16 +70,14 @@ export default function Ventures() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="max-w-4xl mx-auto text-center mb-12 pt-8">
-        <h1 className={`text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent 
+        <h1 className={`text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent font-inter
           ${isDark 
             ? 'bg-gradient-to-r from-purple-300 to-purple-500 dark:purple-neon' 
             : 'bg-gradient-to-r from-purple-500 to-purple-700'}`}
-          style={{ fontFamily: 'Inter, sans-serif' }}
         >
           Interspace Ventures
         </h1>
-        <p className={`text-lg max-w-3xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
-           style={{ fontFamily: 'Inter, sans-serif' }}
+        <p className={`text-lg max-w-3xl mx-auto font-inter ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
         >
           I create apps and concepts by coding at the speed of thought using Replit.
         </p>

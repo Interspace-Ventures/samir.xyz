@@ -26,6 +26,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        inter: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        alexandria: ['Alexandria', 'system-ui', 'sans-serif'],
       },
       colors: {
         background: "hsl(var(--background))",
