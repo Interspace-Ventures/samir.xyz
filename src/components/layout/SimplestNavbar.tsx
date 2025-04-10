@@ -7,67 +7,29 @@ import { usePathname } from "next/navigation";
 export default function SimplestNavbar() {
   const pathname = usePathname();
 
-  // Use inline styles without any spacers or extra divs
+  // Use Tailwind classes instead of inline styles
   return (
     <header
-      style={{
-        position: "fixed", /* Use fixed positioning to ensure compatibility */
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "80px",
-        backgroundColor: "#5239cc",
-        display: "flex",
-        justifyContent: "center",
-        zIndex: 1000,
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)"
-      }}
+      className="fixed top-0 left-0 w-full h-20 bg-[#5239cc] flex justify-center z-[1000] shadow-md"
     >
       {/* Container with max width */}
       <div 
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "100%",
-          maxWidth: "1200px",
-          padding: "0 32px"
-        }}
+        className="flex justify-between items-center w-full max-w-[1200px] px-8"
       >
         {/* Left side - logo and wordmark */}
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center no-underline">
             <div 
-              style={{
-                background: "linear-gradient(135deg, #4285f4 0%, #8c5ad7 100%)",
-                width: "48px",
-                height: "48px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "8px",
-                marginRight: "16px",
-                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)"
-              }}
+              className="bg-gradient-to-br from-[#4285f4] to-[#8c5ad7] w-12 h-12 flex items-center justify-center rounded-md mr-4 shadow-sm"
             >
               <span 
-                style={{
-                  color: "white",
-                  fontSize: "24px",
-                  fontWeight: "bold",
-                  fontFamily: "Alexandria, sans-serif"
-                }}
+                className="text-white text-2xl font-bold font-alexandria"
               >
                 S
               </span>
             </div>
             <span 
-              style={{
-                color: "white",
-                fontSize: "24px",
-                fontWeight: 500,
-                fontFamily: "Alexandria, sans-serif"
-              }}
+              className="text-white text-2xl font-medium font-alexandria"
             >
               samir.xyz
             </span>
@@ -75,55 +37,28 @@ export default function SimplestNavbar() {
         </div>
         
         {/* Right side - navigation links */}
-        <div style={{ display: "flex", gap: "32px" }}>
+        <div className="flex gap-8">
           <Link 
             href="/profile/"
-            style={{
-              color: "white",
-              fontSize: "16px",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              fontFamily: "Alexandria, sans-serif",
-              textDecoration: "none",
-              ...(pathname?.startsWith("/profile") && {
-                borderBottom: "2px solid white",
-                fontWeight: 600
-              })
-            }}
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline ${
+              pathname?.startsWith("/profile") ? "border-b-2 border-white font-semibold" : ""
+            }`}
           >
             ABOUT
           </Link>
           <Link 
             href="/portfolio/"
-            style={{
-              color: "white",
-              fontSize: "16px",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              fontFamily: "Alexandria, sans-serif",
-              textDecoration: "none",
-              ...(pathname?.startsWith("/portfolio") && {
-                borderBottom: "2px solid white",
-                fontWeight: 600
-              })
-            }}
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline ${
+              pathname?.startsWith("/portfolio") ? "border-b-2 border-white font-semibold" : ""
+            }`}
           >
             PORTFOLIO
           </Link>
           <Link 
             href="/ventures/"
-            style={{
-              color: "white",
-              fontSize: "16px",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              fontFamily: "Alexandria, sans-serif",
-              textDecoration: "none",
-              ...(pathname?.startsWith("/ventures") && {
-                borderBottom: "2px solid white",
-                fontWeight: 600
-              })
-            }}
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline ${
+              pathname?.startsWith("/ventures") ? "border-b-2 border-white font-semibold" : ""
+            }`}
           >
             VENTURES
           </Link>

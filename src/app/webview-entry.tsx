@@ -43,38 +43,14 @@ export default function WebViewEntry() {
 
   // Show a minimal loading state for WebViews
   return (
-    <div 
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'white',
-        zIndex: 9999,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: 'system-ui, sans-serif',
-      }}
-    >
-      <div 
-        style={{
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          border: '3px solid #e5e7eb',
-          borderTopColor: '#9333ea',
-          animation: 'spin 1s linear infinite',
-        }}
-      />
+    <div className="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center font-sans">
+      <div className="w-10 h-10 rounded-full border-3 border-gray-200 border-t-purple-600 animate-spin" />
       <style jsx global>{`
         @keyframes spin {
           to { transform: rotate(360deg); }
         }
       `}</style>
-      <p style={{ marginTop: '16px', color: '#4b5563' }}>Loading your profile...</p>
+      <p className="mt-4 text-gray-600">Loading your profile...</p>
     </div>
   );
 }
