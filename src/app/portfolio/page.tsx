@@ -3,12 +3,11 @@
 import { useState, memo } from 'react';
 import { companies, categories } from '../../components/data/portfolio';
 import { useTheme } from 'next-themes';
-import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { Card } from '../../components/ui/card';
 import { CompanyCard } from './components/CompanyCard';
 import StatsDisplay from './components/StatsDisplay';
-import FilterCategories from './components/FilterCategories';
+import FilterCategoriesNew from './components/FilterCategoriesNew';
 import styles from './styles.module.css';
 
 export default function PortfolioPage() {
