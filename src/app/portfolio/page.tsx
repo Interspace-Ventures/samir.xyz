@@ -38,33 +38,30 @@ export default function PortfolioPage() {
         </p>
       </div>
       
-      {/* Stats Section - Using dedicated component with Tailwind classes */}
-      <StatsDisplay />
+      {/* Stats Section - Using dedicated component with constrained width */}
+      <div className="w-full max-w-[800px]">
+        <StatsDisplay />
+      </div>
       
-      {/* Category filters - with cleaner UI and no header */}
-      <div className="mb-8 max-w-[800px]">
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category, index) => {
-              // Skip duplicate "All" category
-              if (index > 0 && category === "All") return null;
-              
-              const isActive = selectedCategory === category;
-              
-              return (
-                <Button
-                  key={category}
-                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all duration-200
-                    ${isActive 
-                      ? 'bg-purple-600 text-white shadow-sm' 
-                      : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'}`}
-                  onClick={() => setSelectedCategory(category)}
-                >
-                  {category}
-                </Button>
-              );
-            })}
-          </div>
+      {/* Category filters using custom filter-categories styles */}
+      <div className="max-w-[800px] w-full">
+        <div className="filter-categories-container">
+          {categories.map((category, index) => {
+            // Skip duplicate "All" category
+            if (index > 0 && category === "All") return null;
+            
+            const isActive = selectedCategory === category;
+            
+            return (
+              <button
+                key={category}
+                className={`filter-category-button ${isActive ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </button>
+            );
+          })}
         </div>
       </div>
       
