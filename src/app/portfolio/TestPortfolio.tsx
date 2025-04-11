@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { companies } from '../../components/data/portfolio'
+import { companies, Company } from '../../components/data/portfolio'
 import FilterButtons from '../../components/portfolio/filter-buttons'
 import PortfolioGrid from '../../components/portfolio/portfolio-grid'
 import StatsSection from '../../components/portfolio/stats-section'
