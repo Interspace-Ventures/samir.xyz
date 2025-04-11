@@ -524,39 +524,38 @@ html {
 .filter-categories-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 20px;
   width: 100%;
-  padding: 8px 0;
+  padding: 0;
 }
 
 .filter-category-button {
-  background-color: #f8f9fa;
-  color: #111;
-  font-size: 18px;
+  background-color: white;
+  color: black;
+  font-size: 1.125rem;
   font-weight: normal;
   border: 1px solid #d1d5db;
   border-radius: 5px;
-  padding: 6px 16px;
+  padding: 4px 20px;
   transition: all 0.2s ease;
   cursor: pointer;
   min-width: 80px;
   text-align: center;
   box-sizing: border-box;
   margin: 0;
-  line-height: 1.3;
+  line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .filter-category-button:hover {
-  border-color: #9ca3af;
   background-color: #f3f4f6;
 }
 
 .filter-category-button.active {
-  background-color: white;
-  color: #5239cc;
+  background-color: #5239cc;
+  color: white;
   border-color: #5239cc;
   font-weight: 500;
-  box-shadow: 0 1px 2px rgba(82, 57, 204, 0.1);
 }
