@@ -1,27 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .logo-text {
-      fill: white;
-    }
-    .logo-bg {
-      fill: url(#gradient);
-    }
-  </style>
-  
-  <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4285f4" />
-      <stop offset="100%" style="stop-color:#8c5ad7" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Background square for the S logo -->
-  <rect class="logo-bg" x="20" y="14" width="52" height="52" rx="4" />
-  
-  <!-- S Letter -->
-  <text x="34" y="50" font-family="Alexandria, sans-serif" font-size="32" font-weight="700" class="logo-text">S</text>
-  
-  <!-- samir.xyz text -->
-  <text x="90" y="50" font-family="Alexandria, sans-serif" font-size="32" font-weight="500" class="logo-text">samir.xyz</text>
+<svg width="240" height="50" viewBox="0 0 240 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple white text for "samir.xyz" -->
+  <text x="10" y="35" font-family="Arial, sans-serif" font-size="30" font-weight="600" fill="white">samir.xyz</text>
 </svg>
