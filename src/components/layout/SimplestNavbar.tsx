@@ -8,7 +8,7 @@ export default function SimplestNavbar() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-0 left-0 w-screen h-20 bg-[#5239cc] flex justify-center z-[1000] shadow-md">
+    <header className="fixed top-0 left-0 w-screen h-20 bg-[#5239cc] flex justify-center items-center z-[1000] shadow-md">
       {/* Container with max width */}
       <div className="max-w-[1200px] w-full h-full flex justify-between items-center px-6">
         {/* Left side - logo and wordmark */}
@@ -23,10 +23,10 @@ export default function SimplestNavbar() {
         </div>
         
         {/* Right side - navigation links */}
-        <div className="flex items-center justify-end gap-8 flex-nowrap flex-shrink-0 ml-auto">
+        <nav className="flex items-center justify-end gap-8 flex-nowrap flex-shrink-0 ml-auto">
           <Link 
             href="/profile/"
-            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 ${
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 pb-1 ${
               pathname?.startsWith("/profile") ? "border-b-2 border-white font-semibold" : ""
             }`}
           >
@@ -34,7 +34,7 @@ export default function SimplestNavbar() {
           </Link>
           <Link 
             href="/portfolio/"
-            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 ${
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 pb-1 ${
               pathname?.startsWith("/portfolio") ? "border-b-2 border-white font-semibold" : ""
             }`}
           >
@@ -42,13 +42,13 @@ export default function SimplestNavbar() {
           </Link>
           <Link 
             href="/ventures/"
-            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 ${
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 pb-1 ${
               pathname?.startsWith("/ventures") ? "border-b-2 border-white font-semibold" : ""
             }`}
           >
             VENTURES
           </Link>
-        </div>
+        </nav>
       </div>
     </header>
   );
