@@ -12,7 +12,7 @@ export default function SimplestNavbar() {
       {/* Container with max width */}
       <div className="max-w-[1200px] w-full h-full flex justify-between items-center px-6">
         {/* Left side - logo and wordmark */}
-        <div className="flex items-center">
+        <div className="flex items-center justify-start flex-shrink-0">
           <Link href="/" className="flex items-center no-underline">
             {/* Logo with gradient background */}
             <div className="bg-gradient-to-br from-[#4285f4] to-[#8c5ad7] w-12 h-12 flex items-center justify-center rounded-md mr-4 shadow-md">
@@ -23,7 +23,7 @@ export default function SimplestNavbar() {
         </div>
         
         {/* Right side - navigation links */}
-        <div className="flex items-center gap-8 flex-nowrap">
+        <div className="flex items-center justify-end gap-8 flex-nowrap flex-shrink-0 ml-auto">
           <Link 
             href="/profile/"
             className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 ${
