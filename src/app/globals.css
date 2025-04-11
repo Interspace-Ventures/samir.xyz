@@ -275,74 +275,7 @@ html {
   padding: 0;
 }
 
-/* Navigation and footer helper classes */
-.navbar-container {
-  max-width: 1200px;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-container {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-}
-
-.logo-container {
-  background: linear-gradient(135deg, #4285f4 0%, #8c5ad7 100%);
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  margin-right: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.logo-text {
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  font-family: var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
-}
-
-.wordmark {
-  color: white;
-  font-size: 24px;
-  font-weight: 500;
-  font-family: var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
-}
-
-/* Navigation links */
-.navigation-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nav-link {
-  color: white;
-  font-size: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  font-family: var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
-  padding-bottom: 4px;
-}
-
-.nav-link-active {
-  border-bottom: 2px solid white;
-  font-weight: 600;
-}
+/* Note: Navigation and footer styles moved to /src/components/layout/layout.css */
 
 /* Note: Custom button styling has been moved to shadcn button variants */
 
