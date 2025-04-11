@@ -44,9 +44,9 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using direct CSS classes */}
+      {/* Category filters using existing global CSS classes */}
       <div className="max-w-[800px] w-full mb-6">
-        <div className="flex flex-wrap py-2">
+        <div className="filter-categories-container">
           {categories.map((category, index) => {
             // Skip duplicate "All" category
             if (index > 0 && category === "All") return null;
@@ -56,7 +56,7 @@ export default function PortfolioPage() {
             return (
               <button
                 key={category}
-                className={`filter-button ${isActive ? 'active' : ''}`}
+                className={`filter-category-button ${isActive ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(category)}
                 data-testid={`filter-button-${category}`}
               >
