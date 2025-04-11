@@ -8,6 +8,7 @@ import { Badge } from '../../components/ui/badge';
 import { Card } from '../../components/ui/card';
 import { CompanyCard } from './components/CompanyCard';
 import StatsDisplay from './components/StatsDisplay';
+import FilterCategories from './components/FilterCategories';
 import styles from './styles.module.css';
 
 export default function PortfolioPage() {
@@ -43,26 +44,12 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using custom filter-categories styles */}
+      {/* Category filters using module-scoped CSS */}
       <div className="max-w-[800px] w-full">
-        <div className="filter-categories-container">
-          {categories.map((category, index) => {
-            // Skip duplicate "All" category
-            if (index > 0 && category === "All") return null;
-            
-            const isActive = selectedCategory === category;
-            
-            return (
-              <button
-                key={category}
-                className={`filter-category-button ${isActive ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </button>
-            );
-          })}
-        </div>
+        <FilterCategories 
+          selectedCategory={selectedCategory} 
+          onCategoryChange={setSelectedCategory} 
+        />
       </div>
       
       {/* Company Grid - With white background container and always 2 cards per row */}
