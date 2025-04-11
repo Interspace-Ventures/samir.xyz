@@ -44,12 +44,31 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using module-scoped CSS */}
+      {/* Category filters using direct Tailwind classes */}
       <div className="max-w-[800px] w-full">
-        <FilterCategories 
-          selectedCategory={selectedCategory} 
-          onCategoryChange={setSelectedCategory} 
-        />
+        <div className="flex flex-wrap gap-2 my-4">
+          {categories.map((category, index) => {
+            // Skip duplicate "All" category
+            if (index > 0 && category === "All") return null;
+            
+            const isActive = selectedCategory === category;
+            
+            return (
+              <button
+                key={category}
+                className={`px-4 py-2 text-base font-normal rounded-md transition-all
+                  ${isActive 
+                    ? 'bg-white text-[#5239cc] border border-[#5239cc] font-medium' 
+                    : 'bg-[#f8f9fa] text-gray-700 border border-gray-300 hover:border-gray-400 hover:bg-gray-100'
+                  }`}
+                onClick={() => setSelectedCategory(category)}
+                data-testid={`filter-button-${category}`}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
       </div>
       
       {/* Company Grid - With white background container and always 2 cards per row */}
