@@ -4,68 +4,59 @@ import { useState } from 'react';
 import { useTheme } from 'next-themes';
 import { Button } from '../../components/ui/button';
 import { cn } from '../../lib/utils';
+import { companies, categories } from '../../components/data/portfolio';
+import { Company } from '../../components/types';
 
-// Sample data for now - we'll replace with actual data imports when fixed
-const companies = [
-  { 
-    name: "Company One", 
-    category: "SaaS", 
-    logo: "/logos/ventures/interspace.png",
-    url: "https://example.com",
-    description: "A great company doing important things"
-  },
-  { 
-    name: "Company Two", 
-    category: "AI", 
-    logo: "/logos/ventures/perspectives.png",
-    url: "https://example.com",
-    description: "AI-powered solutions for businesses"
-  },
-  { 
-    name: "Company Three", 
-    category: "Web3", 
-    logo: "/logos/ventures/predictive.film-icon-2025.png",
-    url: "https://example.com",
-    description: "Blockchain innovation platform"
-  },
-  { 
-    name: "Company Four", 
-    category: "SaaS", 
-    logo: "/logos/ventures/solo-wordmark---gradient-2025.png",
-    url: "https://example.com",
-    description: "Productivity tools for teams"
-  }
-];
-
-const categories = ["All", "SaaS", "AI", "Web3"];
-
-// Simple company card component
-const CompanyCard = ({ company, isDark }: { company: any, isDark: boolean }) => {
+// Improved company card component
+const CompanyCard = ({ company, isDark }: { company: Company, isDark: boolean }) => {
+  // Use a default logo path from our known working public directory
+  const getLogoPath = (name: string) => {
+    // Map company names to known logo files in our public directory
+    const logoMap: Record<string, string> = {
+      'Interspace': '/logos/ventures/interspace.png',
+      'Solo': '/logos/ventures/solo-wordmark---gradient-2025.png',
+      'Predictive.film': '/logos/ventures/predictive.film-icon-2025.png',
+      'Hey I\'m Samir': '/logos/ventures/hey-im-samir.png',
+      '2 Days Early': '/logos/ventures/2de-interspace.png',
+    };
+    
+    return logoMap[name] || '/logos/ventures/perspectives.png'; // fallback logo
+  };
+  
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all duration-300">
       <div className="flex items-center mb-3">
         <div className="w-10 h-10 mr-3 bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
           <img
-            src={company.logo}
+            src={getLogoPath(company.name)}
             alt={`${company.name} logo`}
             className="w-8 h-8 object-contain"
           />
         </div>
-        <h3 className="font-medium text-lg">{company.name}</h3>
+        <h3 className="font-medium text-lg">
+          {company.name}
+          {company.markup && <span className="ml-2 text-xs text-green-600 font-medium">↑</span>}
+          {company.acquired && <span className="ml-2 text-xs text-blue-600 font-medium">✓</span>}
+        </h3>
       </div>
       <p className="text-gray-600 text-sm mb-3">{company.description}</p>
       <div className="flex justify-between items-center">
         <span className="text-xs font-semibold px-2 py-1 bg-gray-100 rounded-full">
           {company.category}
         </span>
-        <a 
-          href={company.url} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-[#5239cc] hover:text-[#3b2aa1] text-sm font-medium"
-        >
-          Visit →
-        </a>
+        {company.markup ? (
+          <span className="text-xs font-semibold px-2 py-1 bg-green-50 text-green-600 rounded-full">
+            Markup
+          </span>
+        ) : company.acquired ? (
+          <span className="text-xs font-semibold px-2 py-1 bg-blue-50 text-blue-600 rounded-full">
+            Acquired
+          </span>
+        ) : (
+          <span className="text-sm text-gray-400">
+            Active
+          </span>
+        )}
       </div>
     </div>
   );
