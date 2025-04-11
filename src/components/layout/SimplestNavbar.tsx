@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import "./layout.css";
 
 export default function SimplestNavbar() {
   const pathname = usePathname();

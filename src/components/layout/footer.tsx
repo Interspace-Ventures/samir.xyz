@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { getVersionInfoSync } from "../../utils/version"
+import "./layout.css"
 
 const Footer = () => {
   const [year, setYear] = useState("")
