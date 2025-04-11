@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Card, CardContent } from '../ui/card'
-import { Company } from '../types'
+import { Company } from '../data/portfolio'
 
 interface PortfolioCardProps {
   company: Company
@@ -13,7 +13,7 @@ export default function PortfolioCard({ company }: PortfolioCardProps) {
     <Card className="overflow-hidden flex flex-col h-full transition-all duration-200 hover:shadow-md">
       <div className="p-4 aspect-[3/2] flex items-center justify-center bg-gray-50">
         <img 
-          src={company.logo || '/placeholder-logo.png'} 
+          src={company.logo || '/logos/companies/placeholder-logo.svg'} 
           alt={`${company.name} logo`}
           className="max-w-[80%] max-h-[80%] object-contain"
         />
