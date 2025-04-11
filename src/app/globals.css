@@ -339,6 +339,17 @@ html {
   font-family: var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
 }
 
+.navbar-logo img {
+  height: 2rem;
+  margin-left: 0.75rem;
+  opacity: 0.95;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-logo img:hover {
+  opacity: 1;
+}
+
 .navbar-nav {
   display: flex;
   align-items: center;
