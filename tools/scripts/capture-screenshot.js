@@ -51,9 +51,14 @@ async function captureScreenshot() {
         const hasHydrationCode = data.includes('useHydration') || data.includes('__NEXT_DATA__');
         console.log(`Contains hydration code: ${hasHydrationCode}`);
         
-        // Save the HTML for analysis
-        require('fs').writeFileSync('page.html', data);
-        console.log('Full page HTML saved to page.html');
+        // Save the HTML for analysis in a temp directory
+        const fs = require('fs');
+        const tempDir = './tools/tmp';
+        if (!fs.existsSync(tempDir)) {
+          fs.mkdirSync(tempDir, { recursive: true });
+        }
+        fs.writeFileSync(`${tempDir}/page.html`, data);
+        console.log(`Full page HTML saved to ${tempDir}/page.html`);
       });
     });
     

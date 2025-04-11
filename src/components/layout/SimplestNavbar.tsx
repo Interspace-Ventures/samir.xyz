@@ -15,7 +15,7 @@ export default function SimplestNavbar() {
         <div className="navbar-logo">
           <Link href="/" className="logo-link">
             <img 
-              src="/logos/samir-logo-transparent.svg" 
+              src="/attached_assets/samir.xyz dark.png" 
               alt="samir.xyz logo" 
               className="samir-logo"
             />
