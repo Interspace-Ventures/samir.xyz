@@ -1,7 +1,7 @@
 "use client"
 
-import SimplePortfolio from './SimplePortfolio';
+import TestPortfolio from './TestPortfolio';
 
 export default function PortfolioPage() {
-  return <SimplePortfolio />;
+  return <TestPortfolio />;
 }
