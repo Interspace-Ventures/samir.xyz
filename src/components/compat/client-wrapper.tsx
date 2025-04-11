@@ -1,31 +1,56 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import WebViewProvider from './webview-provider';
-import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react';
 
-interface ClientWrapperProps {
+interface ClientCompatWrapperProps {
   children: React.ReactNode;
 }
 
 /**
- * Client Wrapper Component
- * 
- * This component wraps content with necessary client-side providers
- * Uses next/dynamic with ssr: false to prevent hydration mismatches
+ * ClientCompatWrapper provides client-side compatibility features
+ * based on the user's browser and environment
  */
-function ClientWrapperInner({ children }: ClientWrapperProps) {
-  // Always render children on initial pass for SSR
-  // Then let WebViewProvider handle client-side optimizations
-  return (
-    <WebViewProvider>
-      {children}
-    </WebViewProvider>
-  );
+export default function ClientCompatWrapper({ children }: ClientCompatWrapperProps) {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+    
+    // Detect WebView environments
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isWebView = 
+      userAgent.includes('wv') || 
+      (/(iphone|ipod|ipad)/.test(userAgent) && !userAgent.includes('safari')) ||
+      userAgent.includes('electron') ||
+      !!window.webkit?.messageHandlers ||
+      !!window.Android ||
+      !!window.MSApp ||
+      !!window.ReactNativeWebView;
+    
+    if (isWebView) {
+      document.documentElement.classList.add('webview');
+      
+      // Apply WebView-specific optimizations
+      if (document.body) {
+        // Prevent scrolling issues on iOS WebViews
+        document.body.style.webkitOverflowScrolling = 'touch';
+        
+        // Hardware acceleration
+        document.body.style.transform = 'translateZ(0)';
+        document.body.style.webkitTransform = 'translateZ(0)';
+      }
+    }
+    
+    // Add class to indicate JS is available (used for progressive enhancement)
+    document.documentElement.classList.add('js-enabled');
+    document.documentElement.classList.remove('no-js');
+  }, []);
+  
+  if (!mounted) {
+    // Return a placeholder while client-side code initializes
+    // This prevents hydration mismatch errors
+    return <div id="client-wrapper-loading" aria-hidden="true" />;
+  }
+  
+  return <>{children}</>;
 }
-
-// Use dynamic import with ssr: false to ensure clean client-side only rendering
-// This avoids hydration mismatches between server and client rendering
-export default dynamic(() => Promise.resolve(ClientWrapperInner), {
-  ssr: false
-});

@@ -1,79 +1,55 @@
 "use client"
 
-import { useState, useEffect } from 'react'
-import { useTheme } from 'next-themes'
+import React from 'react'
 
-interface Stat {
+type StatItem = {
   label: string
   value: string
 }
 
-interface StatsGroup {
-  top: Stat[]
-  bottom: Stat[]
-}
-
-const defaultStats: StatsGroup = {
-  top: [
+const statsData: StatItem[][] = [
+  [
     { label: "# Investments", value: "32" },
     { label: "# Markups", value: "13" },
     { label: "# Acquisitions", value: "2" },
-    { label: "# Busts", value: "4" },
+    { label: "# Busts", value: "4" }
   ],
-  bottom: [
+  [
     { label: "TVPI", value: "1.44x" },
     { label: "Gross Multiple", value: "1.22x" },
     { label: "Net Multiple", value: "1.12x" },
-    { label: "IRR", value: "10%" },
+    { label: "IRR", value: "10%" }
   ]
-}
+]
 
-const StatsSection = () => {
-  const [stats] = useState<StatsGroup>(defaultStats)
-  const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  
-  // Handle client side mounting for theme detection
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Detect if we're in dark mode for proper styling
-  const isDark = mounted && resolvedTheme === 'dark'
-
+/**
+ * StatsSection component displays portfolio metrics in a table layout
+ * with 2 rows of 4 KPIs as requested
+ */
+export default function StatsSection() {
   return (
-    <div className="w-full transform-gpu bg-black p-6 mb-8 rounded-lg">
-      <div className="grid grid-rows-2 gap-10">
-        {/* Top Row - Investments & Stats */}
-        <div className="grid grid-cols-4 gap-4">
-          {stats.top.map((stat) => (
-            <div key={stat.label} className="flex flex-col space-y-2">
-              <div className="text-gray-400 text-sm font-medium">
-                {stat.label}
+    <div className="w-full max-w-[800px] mb-8 bg-white rounded-lg border border-gray-100 shadow-sm p-6">
+      <div className="grid grid-cols-1 gap-6">
+        {/* Render stats as a table with 2 rows of 4 columns */}
+        {statsData.map((row, rowIndex) => (
+          <div key={`row-${rowIndex}`} className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {row.map((stat) => (
+              <div 
+                key={stat.label} 
+                className="p-3 rounded-md bg-gray-50 hover:bg-gray-100 transition-all duration-200 
+                       flex flex-col items-center text-center transform hover:-translate-y-0.5"
+              >
+                <h3 className="text-sm font-medium text-gray-600 mb-1 w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                  {stat.label}
+                </h3>
+                <p className="text-2xl font-bold text-black m-0">
+                  {stat.value}
+                </p>
               </div>
-              <div className="text-white text-3xl font-semibold">
-                {stat.value}
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        {/* Bottom Row - Performance Metrics */}
-        <div className="grid grid-cols-4 gap-4">
-          {stats.bottom.map((stat) => (
-            <div key={stat.label} className="flex flex-col space-y-2">
-              <div className="text-gray-400 text-sm font-medium">
-                {stat.label}
-              </div>
-              <div className="text-white text-3xl font-semibold">
-                {stat.value}
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   )
 }
-
-export default StatsSection;
