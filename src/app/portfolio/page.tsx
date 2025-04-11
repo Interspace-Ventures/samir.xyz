@@ -11,7 +11,7 @@ import FilterCategoriesNew from './components/FilterCategoriesNew';
 import styles from './styles.module.css';
 
 export default function PortfolioPage() {
-  console.log("Portfolio page rendering");
+  // Initialize the page
   
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const { resolvedTheme } = useTheme();
@@ -22,8 +22,6 @@ export default function PortfolioPage() {
     : companies.filter(company => company.category === selectedCategory);
   
   const isDark = resolvedTheme === 'dark';
-  
-  console.log("Button component available:", typeof Button === 'function');
 
   // Stats calculations
   const totalCompanies = companies.length;
@@ -47,35 +45,12 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using direct Tailwind classes for reliable rendering */}
-      <div className="max-w-[800px] w-full mb-6">
-        <div className="flex flex-wrap gap-3 py-2">
-          {categories.map((category, index) => {
-            // Skip duplicate "All" category
-            if (index > 0 && category === "All") return null;
-            
-            const isActive = selectedCategory === category;
-            
-            return (
-              <button
-                key={category}
-                className={`
-                  inline-flex items-center justify-center whitespace-nowrap 
-                  rounded-md px-5 py-2 text-lg font-normal min-w-[80px] shadow-sm
-                  transition-all duration-200
-                  ${isActive 
-                    ? 'bg-[#5239cc] text-white border border-[#5239cc]' 
-                    : 'bg-white text-black border border-gray-300 hover:bg-gray-100'}
-                `}
-                onClick={() => setSelectedCategory(category)}
-                data-testid={`filter-button-${category}`}
-              >
-                {category}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      {/* Category filters using dedicated component for reliable rendering */}
+      <FilterCategoriesNew 
+        categories={[...categories]} 
+        selectedCategory={selectedCategory} 
+        onSelectCategory={setSelectedCategory} 
+      />
       
       {/* Company Grid - With white background container and always 2 cards per row */}
       <div id="white-container" className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 w-full max-w-[800px] mx-auto mb-12">
