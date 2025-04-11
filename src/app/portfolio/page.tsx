@@ -8,8 +8,8 @@ import { Card } from '../../components/ui/card';
 import { CompanyCard } from './components/CompanyCard';
 import StatsDisplay from './components/StatsDisplay';
 import FilterCategories from './components/FilterCategories';
-import { FilterButton } from './components/FilterButton';
 import styles from './styles.module.css';
+import '../filter-styles.css';
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -44,9 +44,9 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using custom FilterButton component */}
+      {/* Category filters using direct CSS classes */}
       <div className="max-w-[800px] w-full mb-6">
-        <div className="flex flex-wrap gap-3 py-2">
+        <div className="flex flex-wrap py-2">
           {categories.map((category, index) => {
             // Skip duplicate "All" category
             if (index > 0 && category === "All") return null;
@@ -54,14 +54,14 @@ export default function PortfolioPage() {
             const isActive = selectedCategory === category;
             
             return (
-              <FilterButton
+              <button
                 key={category}
-                active={isActive}
+                className={`filter-button ${isActive ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(category)}
                 data-testid={`filter-button-${category}`}
               >
                 {category}
-              </FilterButton>
+              </button>
             );
           })}
         </div>
