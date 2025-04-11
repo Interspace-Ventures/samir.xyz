@@ -15,7 +15,7 @@ export default function SimplestNavbar() {
         <div className="navbar-logo">
           <Link href="/" className="flex items-center no-underline">
             <img 
-              src="/logos/samir-logo-white.png" 
+              src="/logos/samir-logo-transparent.svg" 
               alt="samir.xyz logo" 
               className="samir-logo"
             />
