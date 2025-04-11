@@ -38,52 +38,12 @@ export default function PortfolioPage() {
         </p>
       </div>
       
-      {/* Stats Section - Using global CSS classes */}
-      <div className="portfolio-stats-container">
-        <div className="portfolio-stat-item">
-          <h3 className="portfolio-stat-label"># Investments</h3>
-          <p className="portfolio-stat-value">32</p>
-        </div>
-        
-        <div className="portfolio-stat-item">
-          <h3 className="portfolio-stat-label"># Markups</h3>
-          <p className="portfolio-stat-value">13</p>
-        </div>
-        
-        <div className="portfolio-stat-item">
-          <h3 className="portfolio-stat-label"># Acquisitions</h3>
-          <p className="portfolio-stat-value">2</p>
-        </div>
-        
-        <div className="portfolio-stat-item">
-          <h3 className="portfolio-stat-label"># Busts</h3>
-          <p className="portfolio-stat-value">4</p>
-        </div>
-        
-        <div className="portfolio-stat-item">
-          <h3 className="portfolio-stat-label">TVPI</h3>
-          <p className="portfolio-stat-value">1.44x</p>
-        </div>
-        
-        <div className="portfolio-stat-item">
-          <h3 className="portfolio-stat-label">Gross Multiple</h3>
-          <p className="portfolio-stat-value">1.22x</p>
-        </div>
-        
-        <div className="portfolio-stat-item">
-          <h3 className="portfolio-stat-label">Net Multiple</h3>
-          <p className="portfolio-stat-value">1.12x</p>
-        </div>
-        
-        <div className="portfolio-stat-item">
-          <h3 className="portfolio-stat-label">IRR</h3>
-          <p className="portfolio-stat-value">10%</p>
-        </div>
-      </div>
+      {/* Stats Section - Using dedicated component with Tailwind classes */}
+      <StatsDisplay />
       
-      {/* Category filters - styled with better UI */}
+      {/* Category filters - with cleaner UI and no header */}
       <div className="mb-8 max-w-[800px]">
-        <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <div className="flex flex-wrap gap-2">
             {categories.map((category, index) => {
               // Skip duplicate "All" category
@@ -94,9 +54,9 @@ export default function PortfolioPage() {
               return (
                 <Button
                   key={category}
-                  className={`px-4 py-1 rounded-md text-sm font-medium transition-all duration-200
+                  className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all duration-200
                     ${isActive 
-                      ? 'bg-purple-600 text-white shadow-md' 
+                      ? 'bg-purple-600 text-white shadow-sm' 
                       : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'}`}
                   onClick={() => setSelectedCategory(category)}
                 >
@@ -110,7 +70,6 @@ export default function PortfolioPage() {
       
       {/* Company Grid - With white background container and always 2 cards per row */}
       <div id="white-container" className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 w-full max-w-[800px] mx-auto mb-12">
-        <h3 className="text-gray-700 font-medium mb-4 pb-2 border-b border-gray-100">Portfolio Companies:</h3>
         <div className="portfolio-grid grid grid-cols-1 sm:grid-cols-2 gap-6">
           {filteredCompanies.map((company) => (
             <CompanyCard key={company.name} company={company} isDark={isDark} />
