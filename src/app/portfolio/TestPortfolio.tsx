@@ -82,7 +82,7 @@ export default function TestPortfolio() {
                 data-testid={`filter-button-${category}`}
                 variant="filter"
                 size="filter"
-                aria-selected={isSelected}
+                data-state={isSelected ? "selected" : "default"}
               >
                 {category}
               </Button>

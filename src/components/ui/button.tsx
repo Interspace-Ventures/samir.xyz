@@ -15,7 +15,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // Custom portfolio filter button variant with exact styles from design reference
-        filter: "bg-white border border-gray-300 text-gray-700 shadow-sm hover:border-[#5239cc] hover:text-[#5239cc] transition-all duration-200 aria-[selected=true]:bg-[#5239cc] aria-[selected=true]:text-white aria-[selected=true]:border-[#5239cc] aria-[selected=true]:hover:bg-[#3b2aa1]",
+        filter: "bg-white border border-gray-300 text-gray-700 shadow-sm hover:border-[#5239cc] hover:text-[#5239cc] transition-all duration-200 data-[state=selected]:bg-[#5239cc] data-[state=selected]:text-white data-[state=selected]:border-[#5239cc] data-[state=selected]:hover:bg-[#3b2aa1]",
       },
       size: {
         default: "h-9 px-4 py-2",
