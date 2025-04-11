@@ -3,43 +3,48 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import "./layout.css";
 
 export default function SimplestNavbar() {
   const pathname = usePathname();
 
   return (
-    <header>
+    <header className="fixed top-0 left-0 w-screen h-20 bg-[#5239cc] flex justify-center z-[1000] shadow-md">
       {/* Container with max width */}
-      <div className="navbar-container">
+      <div className="max-w-[1200px] w-full h-full flex justify-between items-center px-6">
         {/* Left side - logo and wordmark */}
         <div className="flex items-center">
           <Link href="/" className="flex items-center no-underline">
             {/* Logo with gradient background */}
-            <div className="logo-container">
-              <span className="logo-text">S</span>
+            <div className="bg-gradient-to-br from-[#4285f4] to-[#8c5ad7] w-12 h-12 flex items-center justify-center rounded-md mr-4 shadow-md">
+              <span className="text-white text-2xl font-bold font-alexandria">S</span>
             </div>
-            <span className="wordmark">samir.xyz</span>
+            <span className="text-white text-2xl font-medium font-alexandria">samir.xyz</span>
           </Link>
         </div>
         
         {/* Right side - navigation links */}
-        <div className="navigation-links">
+        <div className="flex items-center gap-8 flex-nowrap">
           <Link 
             href="/profile/"
-            className={`nav-link ${pathname?.startsWith("/profile") ? "nav-link-active" : ""}`}
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 ${
+              pathname?.startsWith("/profile") ? "border-b-2 border-white font-semibold" : ""
+            }`}
           >
             ABOUT
           </Link>
           <Link 
             href="/portfolio/"
-            className={`nav-link ${pathname?.startsWith("/portfolio") ? "nav-link-active" : ""}`}
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 ${
+              pathname?.startsWith("/portfolio") ? "border-b-2 border-white font-semibold" : ""
+            }`}
           >
             PORTFOLIO
           </Link>
           <Link 
             href="/ventures/"
-            className={`nav-link ${pathname?.startsWith("/ventures") ? "nav-link-active" : ""}`}
+            className={`text-white text-base uppercase tracking-wider font-alexandria no-underline hover:opacity-90 ${
+              pathname?.startsWith("/ventures") ? "border-b-2 border-white font-semibold" : ""
+            }`}
           >
             VENTURES
           </Link>

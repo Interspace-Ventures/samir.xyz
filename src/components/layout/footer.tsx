@@ -4,7 +4,6 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { getVersionInfoSync } from "../../utils/version"
-import "./layout.css"
 
 const Footer = () => {
   const [year, setYear] = useState("")
@@ -42,9 +41,9 @@ const Footer = () => {
   const isDark = mounted && resolvedTheme === 'dark';
 
   return (
-    <footer>
-      <div className="footer-container">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 py-4">
+    <footer className="mt-10 bg-[#5239cc] text-white w-screen">
+      <div className="max-w-[1200px] mx-auto py-6 px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm text-white">
             © <Link 
                 href="/ventures" 
