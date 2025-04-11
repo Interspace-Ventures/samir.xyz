@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -15,7 +15,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         // Custom variant for portfolio filter categories that match the image
-        filter: "border border-gray-300 bg-white text-black font-normal rounded-md px-5 py-2 text-lg hover:bg-gray-100 data-[state=active]:bg-[#5239cc] data-[state=active]:text-white data-[state=active]:border-[#5239cc] shadow-sm min-w-[80px] transition-all duration-200",
+        filter: "bg-white border border-gray-300 text-gray-900 shadow-sm hover:bg-gray-100 aria-selected:bg-[#5239cc] aria-selected:text-white aria-selected:border-[#5239cc]",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -23,6 +23,7 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-6",
         xl: "h-12 rounded-md px-8 text-base",
         icon: "h-9 w-9",
+        filter: "min-w-[80px] px-5 py-2 text-lg font-normal",
       },
     },
     defaultVariants: {
