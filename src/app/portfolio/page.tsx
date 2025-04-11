@@ -12,6 +12,8 @@ import FilterCategories from './components/FilterCategories';
 import styles from './styles.module.css';
 
 export default function PortfolioPage() {
+  console.log("Portfolio page rendering");
+  
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const { resolvedTheme } = useTheme();
   
@@ -21,6 +23,8 @@ export default function PortfolioPage() {
     : companies.filter(company => company.category === selectedCategory);
   
   const isDark = resolvedTheme === 'dark';
+  
+  console.log("Button component available:", typeof Button === 'function');
 
   // Stats calculations
   const totalCompanies = companies.length;
