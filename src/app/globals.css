@@ -339,27 +339,32 @@ html {
   font-family: var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
 }
 
-.navbar-logo img {
-  height: 2rem;
-  margin-left: 0.75rem;
-  opacity: 0.95;
+/* Remove general img styles for navbar to avoid conflicts */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  display: flex;
+  text-decoration: none;
+  border: none;
+}
+
+/* Specific styles just for the logo */
+.samir-logo {
+  height: 32px;
+  width: auto;
+  margin: 0 0 0 0.75rem;
+  padding: 0;
+  opacity: 1;
+  background: transparent !important;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1));
   transition: opacity 0.2s ease;
 }
 
-.navbar-logo img:hover {
-  opacity: 1;
-}
-
-.samir-logo {
-  height: 2.25rem;
-  width: auto;
-  margin: 0;
-  padding: 0;
-  opacity: 1;
-  /* SVG already has transparent background */
-  background: transparent;
-  /* Drop shadow to make white text stand out against color backgrounds */
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1));
+.samir-logo:hover {
+  opacity: 0.95;
 }
 
 .navbar-nav {

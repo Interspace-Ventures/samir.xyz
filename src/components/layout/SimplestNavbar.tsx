@@ -13,7 +13,7 @@ export default function SimplestNavbar() {
       <div className="navbar-content">
         {/* Left side - logo and wordmark */}
         <div className="navbar-logo">
-          <Link href="/" className="flex items-center no-underline">
+          <Link href="/" className="logo-link">
             <img 
               src="/logos/samir-logo-transparent.svg" 
               alt="samir.xyz logo" 
