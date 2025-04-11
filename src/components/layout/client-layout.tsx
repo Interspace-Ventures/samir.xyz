@@ -130,8 +130,10 @@ export default function ClientLayout({
         {/* Explicit debug comment to verify in source */}
         {/* NAVBAR SHOULD APPEAR HERE */}
         <SimplestNavbar />
-        {/* Main content area with proper spacing for fixed header */}
-        <main className="flex-grow w-screen max-w-screen overflow-x-hidden box-border mt-24 p-0">
+        {/* Spacer div to account for fixed header height */}
+        <div className="h-20 w-full"></div>
+        {/* Main content area */}
+        <main className="flex-grow w-screen max-w-screen overflow-x-hidden box-border p-0">
           <div className="max-w-[1200px] mx-auto w-full box-border px-6 md:px-12 mt-0">
             <ErrorBoundary>
               {children}
