@@ -353,14 +353,13 @@ html {
 
 /* Specific styles just for the logo */
 .samir-logo {
-  height: 32px;
+  height: 24px;
   width: auto;
   margin: 0 0 0 0.75rem;
   padding: 0;
   opacity: 1;
+  /* Show the image exactly as is, no transformations */
   background: transparent !important;
-  /* Image white logo appears on dark navbar, invert makes it visible */
-  filter: brightness(0) invert(1);
   transition: opacity 0.2s ease;
 }
 
