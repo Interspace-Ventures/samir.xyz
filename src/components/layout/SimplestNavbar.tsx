@@ -19,6 +19,11 @@ export default function SimplestNavbar() {
               <span className="logo-letter">S</span>
             </div>
             <span className="logo-text">samir.xyz</span>
+            <img 
+              src="/logos/solo-logo.png" 
+              alt="Solo Logo" 
+              className="ml-3 h-8 opacity-90"
+            />
           </Link>
         </div>
         
