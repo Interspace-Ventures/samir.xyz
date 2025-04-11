@@ -14,15 +14,10 @@ export default function SimplestNavbar() {
         {/* Left side - logo and wordmark */}
         <div className="navbar-logo">
           <Link href="/" className="flex items-center no-underline">
-            {/* Logo with gradient background */}
-            <div className="logo-badge">
-              <span className="logo-letter">S</span>
-            </div>
-            <span className="logo-text">samir.xyz</span>
             <img 
-              src="/logos/solo-logo.png" 
-              alt="Solo Logo" 
-              className="ml-3 h-8 opacity-90"
+              src="/logos/samir-logo-white.png" 
+              alt="samir.xyz logo" 
+              className="samir-logo"
             />
           </Link>
         </div>
