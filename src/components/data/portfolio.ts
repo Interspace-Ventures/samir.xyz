@@ -1,58 +1,76 @@
-import { Company } from '../types';
+export interface Company {
+  name: string;
+  logo?: string;
+  category: string;
+  description: string;
+  markup?: boolean;
+  acquired?: boolean;
+}
 
-// Helper function to safely convert image paths with spaces
-const safePath = (imageName: string) => {
-  // For special cases with specific naming patterns
-  const specialNames: Record<string, string> = {
-    'Swansea City AFC': 'Swansea City AFC',
-    'The Coffee': 'The Coffee',
-    'The Food Company': 'The Food Company',
-    'Hey I\'m Samir': 'hey-im-samir',
-    'Interspace': 'interspace',
-    'margin': 'margin',
-    'Solo': 'solo-logo-2025',
-    'Predictive.film': 'predictive-film-icon',
-    '2 Days Early': '2DE-Interspace',
-  };
-
-  // Check if it's a special case
-  if (imageName in specialNames) {
-    return `/attached_assets/${specialNames[imageName]}.png`;
-  }
-  
-  // Regular case - just replace spaces and use the name
-  return `/attached_assets/${imageName}.png`;
-};
+export const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'];
 
 export const companies: Company[] = [
-  { name: 'Afar', logo: safePath('Afar'), category: 'Health', description: 'Low sugar high protein savory snack bars.' },
-  { name: 'AON3D', logo: safePath('AON3D'), category: 'SaaS', markup: true, description: 'Industrial 3D printing solutions for high-performance thermoplastics.' },
-  { name: 'Aura', logo: safePath('Aura'), category: 'Health', markup: true, description: 'Digital mental health platform offering mindfulness meditation, life coaching, and therapy.' },
-  { name: 'Backpack', logo: safePath('Backpack'), category: 'Fintech', description: 'Modern 529 college savings platform making education investing accessible.' },
-  { name: 'GEM', logo: safePath('GEM'), category: 'Health', markup: true, description: 'Real food daily bites made from algae, plants, and probiotics to optimize your daily nutrition.' },
-  { name: 'Goodmylk', logo: safePath('Goodmylk'), category: 'Health', description: 'Plant-based dairy alternatives made from simple, wholesome ingredients.' },
-  { name: 'Harper', logo: safePath('Harper'), category: 'Fintech', description: 'Digital-first insurance platform for modern businesses.' },
-  { name: 'Hedgehog', logo: safePath('Hedgehog'), category: 'Health', description: 'Digital health platform for personalized wellness and preventive care.' },
-  { name: 'Juneshine', logo: safePath('Juneshine'), category: 'Retail', markup: true, description: 'Premium hard kombucha brewed with real organic ingredients and probiotics.' },
-  { name: 'Kartera', logo: safePath('Kartera'), category: 'Fintech', description: 'Digital asset management platform for institutional investors.' },
-  { name: 'Keep', logo: safePath('Keep'), category: 'Fintech', description: 'All-in-one banking for any business.' },
-  { name: 'margin', logo: safePath('margin'), category: 'SaaS', description: 'Increase profitability by measuring cost & revenue of every user action.' },
-  { name: 'Maridea', logo: safePath('Maridea'), category: 'Fintech', markup: true, description: 'Wealth management platform for high-net-worth individuals.' },
-  { name: 'Playbook', logo: safePath('Playbook'), category: 'Health', description: 'Platform enabling fitness creators to build, manage and grow their digital business.' },
-  { name: 'RPM', logo: safePath('RPM'), category: 'Health', acquired: true, description: 'At-home fitness programming combining functional movement with high-intensity training.' },
-  { name: 'Rely', logo: safePath('Rely'), category: 'Fintech', description: 'An AI-powered knowledge base and automation platform for the property management industry.' },
-  { name: 'Restream', logo: safePath('Restream'), category: 'SaaS', description: 'Multi-platform streaming solution for content creators and businesses.' },
-  { name: 'Sanzo', logo: safePath('Sanzo'), category: 'Retail', markup: true, description: 'Asian-inspired sparkling water made with real fruit and no added sugar.' },
-  { name: 'Soot', logo: safePath('Soot'), category: 'SaaS', markup: true, description: 'Visual-first filing system powered by AI.' },
-  { name: 'Sugar', logo: safePath('Sugar'), category: 'SaaS', acquired: true, description: 'Property management platform streamlining operations and resident experience.' },
-  { name: 'Sundae', logo: safePath('Sundae'), category: 'Fintech', description: 'Marketplace for distressed property sales connecting sellers with investors.' },
-  { name: 'Superplastic', logo: safePath('Superplastic'), category: 'Retail', description: 'Digital-first luxury brand creating synthetic celebrities and collectible art toys.' },
-  { name: 'Swan', logo: safePath('Swan'), category: 'Fintech', markup: true, description: 'Bitcoin savings and investment platform for long-term wealth building.' },
-  { name: 'Swansea City AFC', logo: safePath('Swansea City AFC'), category: 'Retail', description: 'Professional football club competing in the English Football League Championship.' },
-  { name: 'Techmate', logo: safePath('Techmate'), category: 'SaaS', description: 'AI-powered technical support automation platform.' },
-  { name: 'The Coffee', logo: safePath('The Coffee'), category: 'Retail', markup: true, description: 'Premium coffee brand focused on quality beans and innovative brewing methods.' },
-  { name: 'The Food Company', logo: safePath('The Food Company'), category: 'Retail', description: 'Innovative food products and sustainable packaging solutions.' },
-  { name: 'Waldo', logo: safePath('Waldo'), category: 'Fintech', description: 'Next-gen fraud and compliance monitoring tools.' }
+  {
+    name: "HealthHub",
+    logo: "/logos/companies/healthhub.png",
+    category: "Health",
+    description: "AI-powered health analytics platform for predictive care",
+    markup: true
+  },
+  {
+    name: "PayFlow",
+    logo: "/logos/companies/payflow.png",
+    category: "Fintech",
+    description: "Modern payment infrastructure for global businesses",
+    markup: true
+  },
+  {
+    name: "RetailGenius",
+    logo: "/logos/companies/retailgenius.png",
+    category: "Retail",
+    description: "Inventory optimization software for retail chains",
+    acquired: true
+  },
+  {
+    name: "DataSync",
+    logo: "/logos/companies/datasync.png",
+    category: "SaaS",
+    description: "Enterprise data synchronization platform",
+    markup: true
+  },
+  {
+    name: "CloudSecure",
+    logo: "/logos/companies/cloudsecure.png", 
+    category: "SaaS",
+    description: "Zero-trust security framework for cloud applications",
+    markup: true
+  },
+  {
+    name: "MediTrack",
+    logo: "/logos/companies/meditrack.png",
+    category: "Health",
+    description: "Medical supply chain management system",
+    markup: false
+  },
+  {
+    name: "FinanceForward",
+    logo: "/logos/companies/financeforward.png",
+    category: "Fintech",
+    description: "B2B financing platform for SMBs",
+    markup: true
+  },
+  {
+    name: "ShopSmart",
+    logo: "/logos/companies/shopsmart.png",
+    category: "Retail",
+    description: "AI shopping assistant for e-commerce",
+    acquired: true
+  },
+  {
+    name: "DevOpsNinja",
+    logo: "/logos/companies/devopsninja.png",
+    category: "SaaS",
+    description: "Automated CI/CD pipeline management",
+    markup: true
+  }
 ];
-
-export const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'] as const;

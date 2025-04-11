@@ -1,9 +1,2 @@
-export interface Company {
-  name: string;
-  logo: string;
-  description: string;
-  category: 'Fintech' | 'Health' | 'Retail' | 'SaaS';
-  markup?: boolean;
-  acquired?: boolean;
-  website?: string;
-}
+// Re-export the Company interface from portfolio data
+export * from './data/portfolio';

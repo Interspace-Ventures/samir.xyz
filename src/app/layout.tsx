@@ -1,7 +1,7 @@
 import { inter, alexandria } from "../config/fonts";
 import "./globals.css";
 import { metadata, viewport } from "./metadata";
-import ClientLayout from "../components/layout/client-layout";
+import Layout from "../components/layout/layout";
 import ClientCompatWrapper from "../components/compat/client-wrapper";
 
 /**
@@ -132,9 +132,9 @@ export default function RootLayout({
       >
         {/* WebView compatibility provider - cleanly handles WebView-specific optimizations */}
         <ClientCompatWrapper>
-          <ClientLayout>
+          <Layout>
             {children}
-          </ClientLayout>
+          </Layout>
         </ClientCompatWrapper>
         
         {/* Fail-safe script to show content if it seems hidden after load */}
