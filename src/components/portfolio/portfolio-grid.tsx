@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { Company } from '../types'
+import { Company } from '../data/portfolio'
 import PortfolioCard from './portfolio-card'
 
 interface PortfolioGridProps {
