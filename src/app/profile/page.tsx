@@ -76,13 +76,6 @@ export default function Profile() {
             rel="noopener noreferrer"
           >
             Twitter
-          </a>, share perspectives on <a 
-            href="https://substack.com" 
-            className="link-underline" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            Substack
           </a> and write fintech & stratfin posts at <a 
             href="https://interspace.sh" 
             className="link-underline" 
