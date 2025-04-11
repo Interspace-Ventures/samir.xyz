@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 interface FilterCategoriesProps {
-  categories: string[];
+  categories: readonly string[] | string[];
   selectedCategory: string;
   onSelectCategory: (category: string) => void;
 }
