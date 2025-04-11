@@ -41,22 +41,22 @@ const Footer = () => {
   const isDark = mounted && resolvedTheme === 'dark';
 
   return (
-    <footer className="mt-10 bg-[#5239cc] text-white w-screen">
-      <div className="max-w-[1200px] mx-auto py-6 px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-white">
+    <footer className="footer-container">
+      <div className="footer-content">
+        <div className="footer-row">
+          <div className="footer-copyright">
             © <Link 
                 href="/ventures" 
-                className="font-medium hover:underline text-white no-underline"
+                className="footer-copyright-link"
               >
                 Interspace Ventures
               </Link> {year || "2025"}
           </div>
-          <div className="text-xs text-white/80">
+          <div className="footer-version">
             Built with Replit AI at the speed of thought • 
             <Link 
               href="/CHANGELOG.md"
-              className="hover:underline ml-1 text-white/90"
+              className="footer-version-link"
             >
               v{versionInfo.version}
             </Link>
