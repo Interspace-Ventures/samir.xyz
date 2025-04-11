@@ -520,42 +520,4 @@ html {
   color: black;
 }
 
-/* Portfolio Filter Categories Styling */
-.filter-categories-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  padding: 0;
-}
-
-.filter-category-button {
-  background-color: white;
-  color: black;
-  font-size: 1.125rem;
-  font-weight: normal;
-  border: 1px solid #d1d5db;
-  border-radius: 5px;
-  padding: 4px 20px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  min-width: 80px;
-  text-align: center;
-  box-sizing: border-box;
-  margin: 0;
-  line-height: 1.5;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.filter-category-button:hover {
-  background-color: #f3f4f6;
-}
-
-.filter-category-button.active {
-  background-color: #5239cc;
-  color: white;
-  border-color: #5239cc;
-  font-weight: 500;
-}
+/* Note: Filter category styling has been moved to the shadcn Button component with a custom 'filter' variant */

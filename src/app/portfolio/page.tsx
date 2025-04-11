@@ -3,13 +3,13 @@
 import { useState, memo } from 'react';
 import { companies, categories } from '../../components/data/portfolio';
 import { useTheme } from 'next-themes';
+import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { Card } from '../../components/ui/card';
 import { CompanyCard } from './components/CompanyCard';
 import StatsDisplay from './components/StatsDisplay';
 import FilterCategories from './components/FilterCategories';
 import styles from './styles.module.css';
-import '../filter-styles.css';
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -44,9 +44,9 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using existing global CSS classes */}
+      {/* Category filters using shadcn Button with filter variant */}
       <div className="max-w-[800px] w-full mb-6">
-        <div className="filter-categories-container">
+        <div className="flex flex-wrap gap-3 py-2">
           {categories.map((category, index) => {
             // Skip duplicate "All" category
             if (index > 0 && category === "All") return null;
@@ -54,14 +54,15 @@ export default function PortfolioPage() {
             const isActive = selectedCategory === category;
             
             return (
-              <button
+              <Button
                 key={category}
-                className={`filter-category-button ${isActive ? 'active' : ''}`}
+                variant="filter"
+                data-state={isActive ? 'active' : 'inactive'}
                 onClick={() => setSelectedCategory(category)}
                 data-testid={`filter-button-${category}`}
               >
                 {category}
-              </button>
+              </Button>
             );
           })}
         </div>
