@@ -3,12 +3,12 @@
 import { useState, memo } from 'react';
 import { companies, categories } from '../../components/data/portfolio';
 import { useTheme } from 'next-themes';
-import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { Card } from '../../components/ui/card';
 import { CompanyCard } from './components/CompanyCard';
 import StatsDisplay from './components/StatsDisplay';
 import FilterCategories from './components/FilterCategories';
+import { FilterButton } from './components/FilterButton';
 import styles from './styles.module.css';
 
 export default function PortfolioPage() {
@@ -44,9 +44,9 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using direct Tailwind classes */}
-      <div className="max-w-[800px] w-full">
-        <div className="flex flex-wrap gap-2 my-4">
+      {/* Category filters using custom FilterButton component */}
+      <div className="max-w-[800px] w-full mb-6">
+        <div className="flex flex-wrap gap-3 py-2">
           {categories.map((category, index) => {
             // Skip duplicate "All" category
             if (index > 0 && category === "All") return null;
@@ -54,18 +54,14 @@ export default function PortfolioPage() {
             const isActive = selectedCategory === category;
             
             return (
-              <button
+              <FilterButton
                 key={category}
-                className={`px-4 py-2 text-base font-normal rounded-md transition-all
-                  ${isActive 
-                    ? 'bg-white text-[#5239cc] border border-[#5239cc] font-medium' 
-                    : 'bg-[#f8f9fa] text-gray-700 border border-gray-300 hover:border-gray-400 hover:bg-gray-100'
-                  }`}
+                active={isActive}
                 onClick={() => setSelectedCategory(category)}
                 data-testid={`filter-button-${category}`}
               >
                 {category}
-              </button>
+              </FilterButton>
             );
           })}
         </div>
