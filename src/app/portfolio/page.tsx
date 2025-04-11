@@ -1,18 +1,14 @@
 "use client"
 
-import { useState, memo } from 'react';
+import { useState } from 'react';
 import { companies, categories } from '../../components/data/portfolio';
 import { useTheme } from 'next-themes';
-import { Badge } from '../../components/ui/badge';
-import { Card } from '../../components/ui/card';
 import { CompanyCard } from './components/CompanyCard';
 import StatsDisplay from './components/StatsDisplay';
-import FilterCategoriesNew from './components/FilterCategoriesNew';
 import styles from './styles.module.css';
 
 export default function PortfolioPage() {
   // Initialize the page
-  
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const { resolvedTheme } = useTheme();
   
@@ -22,13 +18,6 @@ export default function PortfolioPage() {
     : companies.filter(company => company.category === selectedCategory);
   
   const isDark = resolvedTheme === 'dark';
-
-  // Stats calculations
-  const totalCompanies = companies.length;
-  const acquiredCompanies = companies.filter(c => c.acquired).length;
-  const markupCompanies = companies.filter(c => c.markup).length;
-  const bustedCompanies = 4; // Hardcoded for now based on reference
-  const tvpi = "1.8x"; // Time Value Paid In - Hardcoded based on reference
 
   return (
     <div className={styles.portfolioContainer}>
@@ -45,12 +34,32 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using dedicated component for reliable rendering */}
-      <FilterCategoriesNew 
-        categories={[...categories]} 
-        selectedCategory={selectedCategory} 
-        onSelectCategory={setSelectedCategory} 
-      />
+      {/* Filter Categories - Inline implementation to avoid rendering issues */}
+      <div className="max-w-[800px] w-full mb-6">
+        <div className="flex flex-wrap gap-3 py-2" data-testid="portfolio-filter-categories">
+          {categories.map((category, index) => {
+            // Skip duplicate "All" category
+            if (index > 0 && category === "All") return null;
+            
+            const isSelected = selectedCategory === category;
+            
+            return (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                data-testid={`filter-button-${category}`}
+                className={`inline-flex items-center justify-center whitespace-nowrap rounded-md 
+                  min-w-[80px] px-5 py-2 text-lg font-normal shadow-sm transition-all duration-200
+                  ${isSelected 
+                    ? 'bg-[#5239cc] text-white border border-[#5239cc]' 
+                    : 'bg-white text-black border border-gray-300 hover:bg-gray-100'}`}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
+      </div>
       
       {/* Company Grid - With white background container and always 2 cards per row */}
       <div id="white-container" className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 w-full max-w-[800px] mx-auto mb-12">
