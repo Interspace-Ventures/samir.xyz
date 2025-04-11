@@ -7,9 +7,13 @@ async function fetchNavbar() {
     const response = await fetch('http://localhost:5000/profile/');
     const html = await response.text();
 
-    // Save the full HTML
-    fs.writeFileSync('page.html', html);
-    console.log('Full page HTML saved to page.html');
+    // Save the full HTML to a temporary directory
+    const tempDir = './tools/tmp';
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+    fs.writeFileSync(`${tempDir}/page.html`, html);
+    console.log(`Full page HTML saved to ${tempDir}/page.html`);
 
     // Extract the navbar HTML using regex
     const navbarRegex = /<nav[^>]*>[\s\S]*?<\/nav>/i;
@@ -17,8 +21,8 @@ async function fetchNavbar() {
 
     if (navbarMatch) {
       const navbarHtml = navbarMatch[0];
-      fs.writeFileSync('navbar.html', navbarHtml);
-      console.log('Navbar HTML extracted and saved to navbar.html');
+      fs.writeFileSync(`${tempDir}/navbar.html`, navbarHtml);
+      console.log(`Navbar HTML extracted and saved to ${tempDir}/navbar.html`);
       console.log('Navbar HTML preview:');
       console.log(navbarHtml.substring(0, 500) + (navbarHtml.length > 500 ? '...' : ''));
     } else {
