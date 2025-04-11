@@ -141,11 +141,6 @@ const FilterCategories = ({ selectedCategory, onCategorySelect }: {
               variant="filter"
               size="filter"
               aria-selected={isSelected}
-              className={cn(
-                // Use the custom variant from shadcn Button component
-                isSelected && "bg-[#5239cc] text-white border-[#5239cc]",
-                "transition-all duration-200"
-              )}
             >
               {category}
             </Button>
