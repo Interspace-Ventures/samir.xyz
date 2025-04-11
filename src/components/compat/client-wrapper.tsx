@@ -6,6 +6,16 @@ interface ClientCompatWrapperProps {
   children: React.ReactNode;
 }
 
+// Define window with custom properties for WebView detection
+declare global {
+  interface Window {
+    webkit?: { messageHandlers?: unknown };
+    Android?: unknown;
+    MSApp?: unknown;
+    ReactNativeWebView?: unknown;
+  }
+}
+
 /**
  * ClientCompatWrapper provides client-side compatibility features
  * based on the user's browser and environment
@@ -32,12 +42,15 @@ export default function ClientCompatWrapper({ children }: ClientCompatWrapperPro
       
       // Apply WebView-specific optimizations
       if (document.body) {
-        // Prevent scrolling issues on iOS WebViews
-        document.body.style.webkitOverflowScrolling = 'touch';
-        
         // Hardware acceleration
         document.body.style.transform = 'translateZ(0)';
-        document.body.style.webkitTransform = 'translateZ(0)';
+        
+        // Apply iOS-specific styles with type assertion
+        const bodyStyle = document.body.style as any;
+        if (bodyStyle) {
+          bodyStyle.webkitOverflowScrolling = 'touch';
+          bodyStyle.webkitTransform = 'translateZ(0)';
+        }
       }
     }
     
