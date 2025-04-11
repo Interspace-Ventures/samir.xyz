@@ -24,7 +24,7 @@ export const CompanyCard = React.memo(({ company, isDark }: CompanyCardProps) =>
           className="block h-full w-full relative hover:bg-gray-50 transition-colors"
         >
           {/* Status badges - Improved styling */}
-          {company.markup && (
+          {company.markup && !company.acquired && (
             <Badge 
               variant="default"
               className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-md text-xs font-medium bg-purple-600 text-white shadow-sm"
@@ -33,7 +33,7 @@ export const CompanyCard = React.memo(({ company, isDark }: CompanyCardProps) =>
             </Badge>
           )}
           
-          {company.acquired && (
+          {company.acquired && !company.markup && (
             <Badge 
               variant="secondary"
               className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-md text-xs font-medium bg-blue-600 text-white shadow-sm"
@@ -41,25 +41,36 @@ export const CompanyCard = React.memo(({ company, isDark }: CompanyCardProps) =>
               Acquired
             </Badge>
           )}
+          
+          {company.markup && company.acquired && (
+            <Badge 
+              variant="outline"
+              className="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-md text-xs font-medium bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-sm"
+            >
+              Markup & Acquired
+            </Badge>
+          )}
 
           {/* Card content */}
           <div className="h-full flex flex-col items-center justify-center p-4">
             {shouldShowFallback ? (
-              <div className="text-gray-400">No image</div>
+              <div className="flex items-center justify-center h-16 text-gray-400 italic">
+                <span>No logo available</span>
+              </div>
             ) : (
-              <div className="flex items-center justify-center h-full w-full">
+              <div className="flex items-center justify-center h-16 w-full">
                 <img
                   src={company.logo}
-                  alt={company.name}
-                  className="max-h-[100px] max-w-[140px] object-contain"
+                  alt={`${company.name} logo`}
+                  className="max-h-[80px] max-w-[120px] object-contain"
                   onError={() => setImageError(true)}
                   loading="lazy"
                 />
               </div>
             )}
             {/* Company name below logo */}
-            <div className="mt-auto pt-2 text-center">
-              <p className="text-sm font-medium text-gray-800">{company.name}</p>
+            <div className="mt-auto pt-3 text-center w-full">
+              <p className="text-sm font-medium text-gray-800 truncate max-w-full">{company.name}</p>
             </div>
           </div>
         </a>
