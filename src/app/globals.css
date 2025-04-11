@@ -343,24 +343,29 @@ html {
 .navbar-logo {
   display: flex;
   align-items: center;
+  margin-left: 1rem;
 }
 
 .logo-link {
   display: flex;
   text-decoration: none;
   border: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Specific styles just for the logo */
+/* Specific styles just for the logo - important to prevent other styles from overriding */
 .samir-logo {
-  height: 24px;
-  width: auto;
-  margin: 0 0 0 0.75rem;
-  padding: 0;
-  opacity: 1;
-  /* Show the image exactly as is, no transformations */
-  background: transparent !important;
-  transition: opacity 0.2s ease;
+  height: 30px !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 1 !important;
+  /* No filters or transformations whatsoever */
+  filter: none !important;
+  background: none !important;
+  max-width: none !important;
+  object-fit: contain !important;
 }
 
 .samir-logo:hover {
