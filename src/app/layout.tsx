@@ -56,7 +56,7 @@ export default function RootLayout({
           }
           
           /* Full width nav and footer */
-          nav, .emergency-navbar, .purple-navbar-direct, footer, .emergency-footer, .sync-emergency-footer {
+          nav, header, .emergency-navbar, .purple-navbar-direct, footer, .emergency-footer, .sync-emergency-footer {
             width: 100vw !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -64,6 +64,24 @@ export default function RootLayout({
             right: 0 !important;
             border: none !important;
             box-sizing: border-box !important;
+          }
+          
+          /* Navigation styling */
+          header, nav {
+            background-color: #5239cc !important;
+            position: fixed !important;
+            top: 0 !important;
+            height: 80px !important;
+            z-index: 1000 !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+          }
+          
+          /* Footer styling */
+          footer {
+            background-color: #5239cc !important;
+            color: white !important;
+            position: relative !important;
+            z-index: 900 !important;
           }
           
           /* WebView-specific optimizations that need to be applied early */
