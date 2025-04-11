@@ -48,7 +48,7 @@ export default function PortfolioPage() {
         <StatsDisplay />
       </div>
       
-      {/* Category filters using shadcn Button with filter variant */}
+      {/* Category filters using direct Tailwind classes for reliable rendering */}
       <div className="max-w-[800px] w-full mb-6">
         <div className="flex flex-wrap gap-3 py-2">
           {categories.map((category, index) => {
@@ -58,15 +58,21 @@ export default function PortfolioPage() {
             const isActive = selectedCategory === category;
             
             return (
-              <Button
+              <button
                 key={category}
-                variant="filter"
-                data-state={isActive ? 'active' : 'inactive'}
+                className={`
+                  inline-flex items-center justify-center whitespace-nowrap 
+                  rounded-md px-5 py-2 text-lg font-normal min-w-[80px] shadow-sm
+                  transition-all duration-200
+                  ${isActive 
+                    ? 'bg-[#5239cc] text-white border border-[#5239cc]' 
+                    : 'bg-white text-black border border-gray-300 hover:bg-gray-100'}
+                `}
                 onClick={() => setSelectedCategory(category)}
                 data-testid={`filter-button-${category}`}
               >
                 {category}
-              </Button>
+              </button>
             );
           })}
         </div>
