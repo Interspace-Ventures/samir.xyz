@@ -1,33 +1,20 @@
 /** @type {import('next').NextConfig} */
 
-// Basic configuration for stability
+// Most basic Next.js configuration for maximum stability
 const nextConfig = {
-  // Core configuration
+  // Disable strict mode to prevent double rendering in development
   reactStrictMode: false,
-  trailingSlash: true,
   
-  // Support for Replit environment
+  // Keep server-side functionality intact for this project
   output: 'standalone',
   
-  // Disable unnecessary features
+  // Disable source maps to avoid errors
   productionBrowserSourceMaps: false,
   
-  // Simple image optimization
+  // Simplify image handling
   images: {
     unoptimized: true,
-  },
-  
-  // Security headers
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-        ],
-      },
-    ];
-  },
+  }
 };
 
 module.exports = nextConfig;
