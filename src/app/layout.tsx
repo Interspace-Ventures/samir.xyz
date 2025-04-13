@@ -124,8 +124,7 @@ export default function RootLayout({
           })();
         ` }} />
         
-        {/* Synchronous page loading script */}
-        <script src="/page-sync-loader.js" defer></script>
+        {/* Removed page-sync-loader.js */}
       </head>
       <body 
         className="antialiased"
