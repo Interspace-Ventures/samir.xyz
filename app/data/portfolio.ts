@@ -7,70 +7,90 @@ export interface Company {
   acquired?: boolean;
 }
 
+// Define available categories for filtering
 export const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'];
 
+// Company data for portfolio
 export const companies: Company[] = [
   {
-    name: "HealthHub",
-    logo: "/logos/companies/healthhub.svg",
-    category: "Health",
-    description: "AI-powered health analytics platform for predictive care",
-    markup: true
-  },
-  {
-    name: "PayFlow",
-    logo: "/logos/companies/payflow.svg",
+    name: "FinanceFlow",
+    logo: "/logos/companies/financeflow.svg",
     category: "Fintech",
-    description: "Modern payment infrastructure for global businesses",
+    description: "Automated financial management platform for small businesses.",
     markup: true
   },
   {
-    name: "RetailGenius",
-    logo: "/logos/companies/retailgenius.svg",
+    name: "HealthTrack",
+    logo: "/logos/companies/healthtrack.svg",
+    category: "Health",
+    description: "Digital health tracking platform for patients and providers.",
+    markup: true
+  },
+  {
+    name: "RetailPro",
+    logo: "/logos/companies/retailpro.svg",
     category: "Retail",
-    description: "Inventory optimization software for retail chains",
+    description: "Retail management and POS solution for small to medium businesses.",
     acquired: true
   },
   {
-    name: "DataSync",
-    logo: "/logos/companies/datasync.svg",
+    name: "SaaSMetrics",
+    logo: "/logos/companies/saasmetrics.svg",
     category: "SaaS",
-    description: "Enterprise data synchronization platform",
-    markup: true
+    description: "Analytics solution for SaaS companies to track KPIs and growth metrics."
   },
   {
-    name: "CloudSecure",
-    logo: "/logos/companies/cloudsecure.svg", 
-    category: "SaaS",
-    description: "Zero-trust security framework for cloud applications",
-    markup: true
-  },
-  {
-    name: "MediTrack",
-    logo: "/logos/companies/meditrack.svg",
-    category: "Health",
-    description: "Medical supply chain management system",
-    markup: false
-  },
-  {
-    name: "FinanceForward",
-    logo: "/logos/companies/financeforward.svg",
+    name: "PaymentGate",
+    logo: "/logos/companies/paymentgate.svg",
     category: "Fintech",
-    description: "B2B financing platform for SMBs",
+    description: "Secure payment processing gateway for international transactions.",
     markup: true
   },
   {
-    name: "ShopSmart",
-    logo: "/logos/companies/shopsmart.svg",
+    name: "HealthAI",
+    logo: "/logos/companies/healthai.svg",
+    category: "Health",
+    description: "AI-powered diagnostic assistant for healthcare providers.",
+    markup: true
+  },
+  {
+    name: "RetailInsight",
+    logo: "/logos/companies/retailinsight.svg",
     category: "Retail",
-    description: "AI shopping assistant for e-commerce",
+    description: "Customer analytics platform for retail businesses."
+  },
+  {
+    name: "CloudManage",
+    logo: "/logos/companies/cloudmanage.svg",
+    category: "SaaS",
+    description: "Cloud infrastructure management and optimization tool.",
+    markup: true
+  },
+  {
+    name: "CryptoTrade",
+    logo: "/logos/companies/cryptotrade.svg",
+    category: "Fintech",
+    description: "Cryptocurrency trading and portfolio management platform.",
+    markup: true
+  },
+  {
+    name: "MedSchedule",
+    logo: "/logos/companies/medschedule.svg",
+    category: "Health",
+    description: "Appointment scheduling system for medical practices."
+  },
+  {
+    name: "InventoryPlus",
+    logo: "/logos/companies/inventoryplus.svg",
+    category: "Retail",
+    description: "Inventory management system with predictive ordering capabilities.",
     acquired: true
   },
   {
-    name: "DevOpsNinja",
-    logo: "/logos/companies/devopsninja.svg",
+    name: "DataSyncPro",
+    logo: "/logos/companies/datasyncpro.svg",
     category: "SaaS",
-    description: "Automated CI/CD pipeline management",
+    description: "Data synchronization and integration platform for enterprise applications.",
     markup: true
   }
 ];

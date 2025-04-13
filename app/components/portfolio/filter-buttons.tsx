@@ -1,26 +1,35 @@
+import { useState } from "react";
+import { Button } from "../ui/button";
 import { categories } from "../../data/portfolio";
 
-interface FilterButtonsProps {
+type FilterButtonsProps = {
   selectedCategory: string;
   onChange: (category: string) => void;
-}
+};
 
 export default function FilterButtons({ selectedCategory, onChange }: FilterButtonsProps) {
   return (
-    <div className="flex flex-wrap gap-2 mb-6">
-      {categories.map((category) => (
-        <button
-          key={category}
-          onClick={() => onChange(category)}
-          className={`px-4 py-2 rounded-md ${
-            selectedCategory === category
-              ? "bg-purple-700 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          {category}
-        </button>
-      ))}
+    <div className="max-w-[800px] w-full mb-6">
+      <h2 className="text-lg font-medium mb-3 text-gray-900">Filter by Category</h2>
+      <div className="flex flex-wrap gap-3 py-2" data-testid="portfolio-filter-categories">
+        {categories.map((category) => {
+          const isSelected = selectedCategory === category;
+          
+          return (
+            <Button
+              key={category}
+              onClick={() => onChange(category)}
+              data-testid={`filter-button-${category}`}
+              variant="filter"
+              size="filter"
+              data-state={isSelected ? "selected" : "default"}
+              className="rounded-md"
+            >
+              {category}
+            </Button>
+          );
+        })}
+      </div>
     </div>
   );
 }
