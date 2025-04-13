@@ -3,5 +3,5 @@
 # Export port setting
 export PORT=5000
 
-# Run our simple static server instead of Next.js
-exec bun run static-server.js
+# Try using ESM compatibility flag for Next.js
+NODE_OPTIONS="--no-warnings --experimental-modules" exec bun next dev -p $PORT --hostname 0.0.0.0
