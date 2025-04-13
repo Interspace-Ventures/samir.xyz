@@ -1,6 +1,6 @@
 {
   "Start application": {
-    "command": "./start.sh",
+    "command": "bun static-server.js",
     "wait_for_port": 5000
   }
 }
