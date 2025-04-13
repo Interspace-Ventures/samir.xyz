@@ -16,9 +16,7 @@ async function main() {
     // Run the remix dev command with custom options
     const remixProcess = spawn("npx", [
       "@remix-run/dev",
-      "--no-restart",
-      "--port", "5000",
-      "--host", "0.0.0.0"
+      "--port", "5000"
     ], {
       stdio: "inherit",
       shell: true
