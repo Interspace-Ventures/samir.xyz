@@ -1,4 +1,9 @@
+import { useState } from "react";
 import type { MetaFunction } from "@remix-run/node";
+import { companies } from "../data/portfolio";
+import FilterButtons from "../components/portfolio/filter-buttons";
+import PortfolioGrid from "../components/portfolio/portfolio-grid";
+import StatsSection from "../components/portfolio/stats-section";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,47 +13,32 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Portfolio() {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  
   return (
-    <div>
-      <h1>Portfolio</h1>
-      <p>Explore a selection of my fintech and financial projects.</p>
-      
-      <div className="project-grid">
-        <div className="project-card">
-          <div><span className="category-badge">Finance</span></div>
-          <h3>Financial Dashboard</h3>
-          <p>Interactive dashboard for financial data visualization</p>
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-screen-lg mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">Investment Portfolio</h1>
+          <p className="text-lg text-gray-600">
+            A collection of companies I've invested in across various sectors.
+          </p>
+        </header>
         
-        <div className="project-card">
-          <div><span className="category-badge">Fintech</span></div>
-          <h3>Payment Processing API</h3>
-          <p>Secure API for processing payments with multiple providers</p>
-        </div>
+        {/* Stats Section */}
+        <StatsSection />
         
-        <div className="project-card">
-          <div><span className="category-badge">Finance</span></div>
-          <h3>Banking Interface</h3>
-          <p>User-friendly interface for banking applications</p>
-        </div>
+        {/* Filter Buttons */}
+        <FilterButtons 
+          selectedCategory={selectedCategory} 
+          onChange={setSelectedCategory}
+        />
         
-        <div className="project-card">
-          <div><span className="category-badge">Mobile</span></div>
-          <h3>Expense Tracker</h3>
-          <p>Mobile app for tracking personal and business expenses</p>
-        </div>
-        
-        <div className="project-card">
-          <div><span className="category-badge">Finance</span></div>
-          <h3>Investment Platform</h3>
-          <p>Platform for managing investments and portfolio analysis</p>
-        </div>
-        
-        <div className="project-card">
-          <div><span className="category-badge">Security</span></div>
-          <h3>Security Compliance Tool</h3>
-          <p>Tool for ensuring financial security compliance</p>
-        </div>
+        {/* Portfolio Grid */}
+        <PortfolioGrid 
+          companies={companies} 
+          category={selectedCategory}
+        />
       </div>
     </div>
   );
