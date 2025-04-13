@@ -11,11 +11,11 @@ if [ ! -f "public/logos/companies/Afar.png" ]; then
   cp -r public/* public/logos/companies/ 2>/dev/null || true
 fi
 
-# Skip the tailwind build for now as we're having npm issues
-echo "Skipping Tailwind CSS build due to npm issues..."
+# Build the consolidated CSS file
+echo "Building Tailwind CSS from consolidated file..."
 mkdir -p public/build
-# Create a minimal CSS file to get started
-cat > public/build/app.css << EOL
+# Create our consolidated CSS file
+cat > public/build/consolidated.css << EOL
 /* Base Tailwind Utilities */
 .container { width: 100%; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
 @media (min-width: 640px) { .container { max-width: 640px; } }

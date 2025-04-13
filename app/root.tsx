@@ -9,9 +9,9 @@ import {
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import Navbar from "./components/layout/navbar";
 
-// Global styles and Tailwind CSS
+// Consolidated global styles with Tailwind CSS
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "/build/app.css" },
+  { rel: "stylesheet", href: "/build/consolidated.css" },
 ];
 
 export const meta: MetaFunction = () => {
