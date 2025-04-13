@@ -1,7 +1,11 @@
-const path = require('path');
-const express = require('express');
-const { createRequestHandler } = require('@remix-run/express');
-const compression = require('compression');
+import path from 'path';
+import express from 'express';
+import { createRequestHandler } from '@remix-run/express';
+import compression from 'compression';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,11 +20,14 @@ app.use(
 );
 app.use(express.static('public', { maxAge: '1h' }));
 
+// For Remix build
+const BUILD_DIR = path.join(process.cwd(), "build");
+
 // Add Remix request handler
 app.all(
   '*',
   createRequestHandler({
-    build: require(path.resolve('./build')),
+    build: await import(BUILD_DIR),
     mode: process.env.NODE_ENV
   })
 );
