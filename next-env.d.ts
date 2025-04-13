@@ -1,1 +1,0 @@
-config/nextjs/next-env.d.ts
