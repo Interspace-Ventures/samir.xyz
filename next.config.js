@@ -1,12 +1,9 @@
 /** @type {import('next').NextConfig} */
 
-// Most basic Next.js configuration for maximum stability
+// Next.js configuration with updated properties
 const nextConfig = {
   // Disable strict mode to prevent double rendering in development
   reactStrictMode: false,
-  
-  // Keep server-side functionality intact for this project
-  output: 'standalone',
   
   // Disable source maps to avoid errors
   productionBrowserSourceMaps: false,
@@ -16,10 +13,16 @@ const nextConfig = {
     unoptimized: true,
   },
   
-  // Allow Replit domain for cross-origin in development
-  experimental: {
-    allowedDevOrigins: ['.replit.dev', '.repl.co']
-  },
+  // Transpile dependencies that may not be ESM compatible
+  transpilePackages: [
+    '@radix-ui',
+    'lucide-react',
+    'class-variance-authority',
+    'tailwind-merge'
+  ],
+  
+  // Server configuration
+  serverExternalPackages: [],
   
   // Add security headers for cross-origin
   async headers() {
@@ -34,4 +37,4 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+export default nextConfig;
