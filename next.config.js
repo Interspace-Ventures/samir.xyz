@@ -14,6 +14,23 @@ const nextConfig = {
   // Simplify image handling
   images: {
     unoptimized: true,
+  },
+  
+  // Allow Replit domain for cross-origin in development
+  experimental: {
+    allowedDevOrigins: ['.replit.dev', '.repl.co']
+  },
+  
+  // Add security headers for cross-origin
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' }
+        ],
+      },
+    ];
   }
 };
 
