@@ -13,84 +13,84 @@ export const categories = ['All', 'Fintech', 'Health', 'Retail', 'SaaS'];
 // Company data for portfolio
 export const companies: Company[] = [
   {
-    name: "FinanceForward",
-    logo: "/logos/companies/financeforward.svg",
+    name: "Afar",
+    logo: "/logos/companies/Afar.png",
     category: "Fintech",
-    description: "Automated financial management platform for small businesses.",
+    description: "Modern travel experience platform for explorers.",
     markup: true
   },
   {
-    name: "MediTrack",
-    logo: "/logos/companies/meditrack.svg",
+    name: "AON3D",
+    logo: "/logos/companies/AON3D.png",
     category: "Health",
-    description: "Digital health tracking platform for patients and providers.",
+    description: "Industrial 3D printing solutions for high-performance parts.",
     markup: true
   },
   {
-    name: "RetailGenius",
-    logo: "/logos/companies/retailgenius.svg",
-    category: "Retail",
-    description: "Retail management and POS solution for small to medium businesses.",
+    name: "Aura",
+    logo: "/logos/companies/Aura.png",
+    category: "SaaS",
+    description: "Digital security that protects you and your family.",
     acquired: true
   },
   {
-    name: "DevOpsNinja",
-    logo: "/logos/companies/devopsninja.svg",
+    name: "Backpack",
+    logo: "/logos/companies/Backpack.png",
     category: "SaaS",
-    description: "Analytics solution for SaaS companies to track KPIs and growth metrics."
+    description: "All-in-one travel planning and booking platform."
   },
   {
-    name: "PayFlow",
-    logo: "/logos/companies/payflow.svg",
-    category: "Fintech",
-    description: "Secure payment processing gateway for international transactions.",
-    markup: true
-  },
-  {
-    name: "HealthHub",
-    logo: "/logos/companies/healthhub.svg",
+    name: "Goodmylk",
+    logo: "/logos/companies/Goodmylk.png",
     category: "Health",
-    description: "AI-powered diagnostic assistant for healthcare providers.",
+    description: "Plant-based dairy alternatives with clean ingredients.",
     markup: true
   },
   {
-    name: "ShopSmart",
-    logo: "/logos/companies/shopsmart.svg",
-    category: "Retail",
-    description: "Customer analytics platform for retail businesses."
+    name: "Harper",
+    logo: "/logos/companies/Harper.png",
+    category: "Health",
+    description: "Personalized holistic wellness platform.",
+    markup: true
   },
   {
-    name: "CloudSecure",
-    logo: "/logos/companies/cloudsecure.svg",
+    name: "Juneshine",
+    logo: "/logos/companies/Juneshine.png",
+    category: "Retail",
+    description: "Organic hard kombucha beverages with clean ingredients."
+  },
+  {
+    name: "Kartera",
+    logo: "/logos/companies/Kartera.png",
     category: "SaaS",
-    description: "Cloud infrastructure management and optimization tool.",
+    description: "Digital asset management platform for enterprises.",
     markup: true
   },
   {
-    name: "PayFlow Crypto",
-    logo: "/logos/companies/payflow.svg",
+    name: "Keep",
+    logo: "/logos/companies/Keep.png",
     category: "Fintech",
-    description: "Cryptocurrency trading and portfolio management platform.",
+    description: "Cryptocurrency security and management solution.",
     markup: true
   },
   {
-    name: "MediTrack Pro",
-    logo: "/logos/companies/meditrack.svg",
-    category: "Health",
-    description: "Appointment scheduling system for medical practices."
+    name: "Restream",
+    logo: "/logos/companies/Restream.png",
+    category: "SaaS",
+    description: "Multi-platform live streaming solution for creators."
   },
   {
-    name: "RetailGenius Plus",
-    logo: "/logos/companies/retailgenius.svg",
+    name: "Sanzo",
+    logo: "/logos/companies/Sanzo.png",
     category: "Retail",
-    description: "Inventory management system with predictive ordering capabilities.",
+    description: "Asian-inspired sparkling water with real fruit.",
     acquired: true
   },
   {
-    name: "DataSync",
-    logo: "/logos/companies/datasync.svg",
-    category: "SaaS",
-    description: "Data synchronization and integration platform for enterprise applications.",
+    name: "Superplastic",
+    logo: "/logos/companies/Superplastic.png",
+    category: "Retail",
+    description: "Digital and physical collectibles, art, and entertainment.",
     markup: true
   }
 ];

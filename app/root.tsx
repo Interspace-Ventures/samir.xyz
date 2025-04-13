@@ -9,9 +9,9 @@ import {
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import Navbar from "./components/layout/navbar";
 
-// Tailwind CSS will be created during build in /app/tailwind.css
+// Global styles and Tailwind CSS
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "/tailwind.css" },
+  { rel: "stylesheet", href: "/build/app.css" },
 ];
 
 export const meta: MetaFunction = () => {

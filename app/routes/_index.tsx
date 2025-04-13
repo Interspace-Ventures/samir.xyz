@@ -80,22 +80,22 @@ export default function Index() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
-                  title: "FinanceForward",
+                  title: "Afar",
                   category: "Fintech",
-                  description: "Automated financial management platform for small businesses.",
-                  imagePath: "/logos/companies/financeforward.svg"
+                  description: "Modern travel experience platform for explorers.",
+                  imagePath: "/logos/companies/Afar.png"
                 },
                 {
-                  title: "HealthHub",
+                  title: "AON3D",
                   category: "Health",
-                  description: "Digital health tracking platform for patients and providers.",
-                  imagePath: "/logos/companies/healthhub.svg"
+                  description: "Industrial 3D printing solutions for high-performance parts.",
+                  imagePath: "/logos/companies/AON3D.png"
                 },
                 {
-                  title: "RetailGenius",
+                  title: "Superplastic",
                   category: "Retail",
-                  description: "Retail management and POS solution for small to medium businesses.",
-                  imagePath: "/logos/companies/retailgenius.svg"
+                  description: "Digital and physical collectibles, art, and entertainment.",
+                  imagePath: "/logos/companies/Superplastic.png"
                 }
               ].map((project, index) => (
                 <Card key={index} className="overflow-hidden transition-all duration-200 hover:shadow-md">
