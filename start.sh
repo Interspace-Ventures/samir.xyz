@@ -3,5 +3,5 @@
 # Export port setting
 export PORT=5000
 
-# Run Next.js in the most compatible mode
-exec bun --bun next dev -p $PORT --hostname 0.0.0.0
+# Run our simple static server instead of Next.js
+exec bun run static-server.js

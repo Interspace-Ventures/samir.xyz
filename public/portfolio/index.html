@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Samir's Portfolio</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    header {
+      background-color: #5239cc;
+      color: white;
+      padding: 1rem 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+    
+    nav {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .project-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+    }
+    
+    .category-badge {
+      display: inline-block;
+      background-color: #5239cc;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    footer {
+      background-color: #5239cc;
+      color: white;
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">samir.xyz</div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/portfolio/">Portfolio</a>
+        <a href="/profile/">About</a>
+        <a href="/ventures/">Ventures</a>
+      </div>
+    </nav>
+  </header>
+  
+  <main>
+    <h1>Portfolio</h1>
+    <p>Explore a selection of my fintech and financial projects.</p>
+    
+    <div class="project-grid">
+      <div class="project-card">
+        <div><span class="category-badge">Finance</span></div>
+        <h3>Financial Dashboard</h3>
+        <p>Interactive dashboard for financial data visualization</p>
+      </div>
+      
+      <div class="project-card">
+        <div><span class="category-badge">Fintech</span></div>
+        <h3>Payment Processing API</h3>
+        <p>Secure API for processing payments with multiple providers</p>
+      </div>
+      
+      <div class="project-card">
+        <div><span class="category-badge">Finance</span></div>
+        <h3>Banking Interface</h3>
+        <p>User-friendly interface for banking applications</p>
+      </div>
+      
+      <div class="project-card">
+        <div><span class="category-badge">Mobile</span></div>
+        <h3>Expense Tracker</h3>
+        <p>Mobile app for tracking personal and business expenses</p>
+      </div>
+      
+      <div class="project-card">
+        <div><span class="category-badge">Finance</span></div>
+        <h3>Investment Platform</h3>
+        <p>Platform for managing investments and portfolio analysis</p>
+      </div>
+      
+      <div class="project-card">
+        <div><span class="category-badge">Security</span></div>
+        <h3>Security Compliance Tool</h3>
+        <p>Tool for ensuring financial security compliance</p>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Samir. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
