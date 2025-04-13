@@ -1,5 +1,5 @@
 import { forwardRef, ReactNode } from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "../../config/utils";
 
 // Define button variants (simplified from original)
 const buttonVariants = {

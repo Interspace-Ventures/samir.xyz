@@ -6,8 +6,7 @@
 
 import type { EntryContext } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-// Use the stringified simple rendering approach
-import * as ReactDOMServer from "react-dom/server";
+import { renderToString } from "react-dom/server.browser";
 
 export default function handleRequest(
   request: Request,
@@ -15,14 +14,13 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  // Simple handler function for SSR
-  let html = ReactDOMServer.renderToString(
+  const markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />
   );
 
   responseHeaders.set("Content-Type", "text/html");
 
-  return new Response("<!DOCTYPE html>" + html, {
+  return new Response("<!DOCTYPE html>" + markup, {
     status: responseStatusCode,
     headers: responseHeaders,
   });
