@@ -1,9 +1,9 @@
 import { useState } from "react";
 import type { MetaFunction } from "@remix-run/node";
 import { companies } from "../data/portfolio";
-import FilterButtons from "../components/portfolio/filter-buttons";
-import PortfolioGrid from "../components/portfolio/portfolio-grid";
-import StatsSection from "../components/portfolio/stats-section";
+import FilterButtons from "../portfolio/filter-buttons";
+import PortfolioGrid from "../portfolio/portfolio-grid";
+import StatsSection from "../portfolio/stats-section";
 
 export const meta: MetaFunction = () => {
   return [

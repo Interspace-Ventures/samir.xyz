@@ -7,11 +7,12 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
-import Navbar from "./components/layout/navbar";
+import Navbar from "./layout/navbar";
 
 // Consolidated global styles with Tailwind CSS
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: "/build/consolidated.css" },
+  { rel: "stylesheet", href: "/styles/consolidated.css" },
 ];
 
 export const meta: MetaFunction = () => {
