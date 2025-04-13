@@ -1,90 +1,67 @@
-"use client"
-
-import { VenturesGrid } from "../../components/ventures/ventures-grid";
-import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
-import { ASSET_PATHS } from "../../config/paths";
-
 /**
- * Main Ventures page
- * - Uses consolidated components for improved maintainability 
- * - Clean implementation with Tailwind CSS
- * - Added dark/light mode support
+ * Ventures page with simple styling
  */
-export default function Ventures() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  
-  // Handle client side mounting for theme detection
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Detect if we're in dark mode for proper styling
-  const isDark = mounted && resolvedTheme === 'dark';
-  
-  // All venture data with consistent image paths using centralized path config
+export default function VenturesPage() {
+  // Sample ventures data
   const ventures = [
     {
-      name: "2 Days Early",
-      description: "Current and former Chime operator community built by operators for operators",
-      imagePath: `${ASSET_PATHS.VENTURES}2de-interspace.png`, // Using centralized path config
-      link: "https://2daysearly.com",
-      priority: true
+      id: 1,
+      name: "Fintech Innovation Lab",
+      description: "Incubating next-generation financial technology startups.",
+      stage: "Early Stage"
     },
     {
-      name: "Solo",
-      description: "The first design-forward climbing app",
-      imagePath: `${ASSET_PATHS.VENTURES}solo-wordmark---gradient-2025.png`, // Using centralized path config
-      link: "https://soloclimbing.com",
-      priority: true
+      id: 2,
+      name: "Digital Banking Platform",
+      description: "Building accessible digital banking tools for everyone.",
+      stage: "Growth"
     },
     {
-      name: "Predictive:film",
-      description: "AI-powered film predictions",
-      imagePath: `${ASSET_PATHS.VENTURES}predictive.film-icon-2025.png`, // Using centralized path config
-      link: "https://predictive.film"
-    },
-    {
-      name: "Interspace",
-      description: "Over-engineered fintech and stratfin perspectives",
-      imagePath: `${ASSET_PATHS.VENTURES}interspace.png`, // Using centralized path config
-      link: "https://interspace.sh",
-      priority: true
-    },
-    {
-      name: "Hey - I'm Samir",
-      description: "I drive business impact in fintech.",
-      imagePath: `${ASSET_PATHS.VENTURES}hey-im-samir.png`, // Using centralized path config
-      link: "https://heyimsamir.com",
-      priority: true
-    },
-    {
-      name: "Perspectives",
-      description: "Fintech & stratfin deep dives",
-      imagePath: `${ASSET_PATHS.VENTURES}perspectives.png`, // Using centralized path config
-      link: "https://perspectives.fyi"
+      id: 3,
+      name: "Blockchain Solutions",
+      description: "Exploring blockchain applications for financial services.",
+      stage: "Research"
     }
   ];
   
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="max-w-4xl mx-auto text-center mb-12 pt-8">
-        <h1 className={`text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent font-inter
-          ${isDark 
-            ? 'bg-gradient-to-r from-purple-300 to-purple-500 dark:purple-neon' 
-            : 'bg-gradient-to-r from-purple-500 to-purple-700'}`}
-        >
+    <div>
+      <div style={{ marginBottom: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
           Interspace Ventures
         </h1>
-        <p className={`text-lg max-w-3xl mx-auto font-inter ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
-        >
-          I create apps and concepts by coding at the speed of thought using Replit.
+        <p style={{ color: '#4a5568', marginBottom: '1.5rem' }}>
+          Investing in and building the future of fintech and financial services.
         </p>
       </div>
       
-      <div className="mb-16">
-        <VenturesGrid ventures={ventures} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        {ventures.map((venture) => (
+          <div key={venture.id} style={{ 
+            border: '1px solid #e2e8f0', 
+            borderRadius: '0.5rem', 
+            padding: '2rem',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+                {venture.name}
+              </h2>
+              <span style={{ 
+                backgroundColor: '#5239cc',
+                color: 'white',
+                padding: '0.375rem 0.75rem',
+                borderRadius: '1rem',
+                fontSize: '0.75rem'
+              }}>
+                {venture.stage}
+              </span>
+            </div>
+            <p style={{ color: '#4a5568', fontSize: '1.125rem' }}>
+              {venture.description}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
