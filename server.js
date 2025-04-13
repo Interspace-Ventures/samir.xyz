@@ -1,41 +1,30 @@
-// Simple server for Remix
-import { createRequestHandler } from "@remix-run/node";
-import * as path from "path";
-import * as url from "url";
+const path = require('path');
+const express = require('express');
+const { createRequestHandler } = require('@remix-run/express');
+const compression = require('compression');
 
-// ES Module workarounds
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
-const BUILD_DIR = path.join(__dirname, "build");
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-// Create the request handler from the built Remix app
-// https://remix.run/docs/en/main/start/quickstart#create-a-request-handler
-const handler = createRequestHandler({
-  build: await import(BUILD_DIR),
-  mode: process.env.NODE_ENV,
-});
+// Add compression middleware
+app.use(compression());
 
-// Create the server
-import { serve } from "@hono/node-server";
-import { Hono } from "hono";
-import { serveStatic } from "@hono/node-server/serve-static";
+// Serve static files from the public directory
+app.use(
+  '/build',
+  express.static('public/build', { immutable: true, maxAge: '1y' })
+);
+app.use(express.static('public', { maxAge: '1h' }));
 
-const app = new Hono();
+// Add Remix request handler
+app.all(
+  '*',
+  createRequestHandler({
+    build: require(path.resolve('./build')),
+    mode: process.env.NODE_ENV
+  })
+);
 
-// Serve static files
-app.use("/build/*", serveStatic({ root: "./" }));
-app.use("/logos/*", serveStatic({ root: "./public" }));
-
-// Handle all other requests with Remix
-app.use("*", async (c) => {
-  const req = c.req.raw;
-  const res = await handler(req);
-  return res;
-});
-
-// Start the server
-const port = process.env.PORT || 3000;
-console.log(`Server listening on http://localhost:${port}`);
-serve({
-  fetch: app.fetch,
-  port: port,
+app.listen(PORT, () => {
+  console.log(`Express server listening on port ${PORT}`);
 });
