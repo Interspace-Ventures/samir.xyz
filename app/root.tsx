@@ -2,11 +2,12 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@re
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import Navbar from "./layout/navbar";
 
-// Use the links function to link CSS rather than importing directly
-// This resolves the module import error
+// Import the Tailwind CSS file directly
+import styles from "./styles/tailwind.css";
 
+// Use the links function to link CSS
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "/build/app.css" },
+  { rel: "stylesheet", href: styles },
   { rel: "icon", href: "/favicon.ico" },
 ];
 
