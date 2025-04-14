@@ -1,59 +1,42 @@
 /**
- * Path configurations for the application
+ * Simple path configuration
  * 
- * This file centralizes all path references to ensure consistency
- * and make it easier to update paths across the application.
+ * This file provides basic paths for assets in our application.
  */
 
-// Base paths
-export const BASE_URL = '/';
-export const ASSETS_PATH = '/img';
+// Images directory
+export const IMG_PATH = '/img';
 
-// Image paths by category
-export const IMAGES = {
-  // Common images (icons, backgrounds, etc.)
-  common: `${ASSETS_PATH}/common`,
-  
-  // Company logos and images
-  companies: `${ASSETS_PATH}/companies`,
-  
-  // Profile images
-  profiles: `${ASSETS_PATH}/profiles`,
-  
-  // Venture logos and images
-  ventures: `${ASSETS_PATH}/ventures`,
-};
-
-// Legacy path mapping for backward compatibility
-export const LEGACY_PATHS = {
-  'assets/companies': IMAGES.companies,
-  'assets/images': IMAGES.common,
-  'assets/profiles': IMAGES.profiles,
-  'assets/ventures': IMAGES.ventures,
-  'assets/icons': IMAGES.common,
-  'logos/companies': IMAGES.companies,
-};
+// Image category paths
+export const COMPANY_LOGOS = `${IMG_PATH}/companies`;
+export const PROFILE_IMAGES = `${IMG_PATH}/profiles`;
+export const VENTURE_IMAGES = `${IMG_PATH}/ventures`;
+export const COMMON_IMAGES = `${IMG_PATH}/common`;
 
 /**
- * Helper function to transform old asset paths to new structure
- * @param path Original asset path
- * @returns Updated path using the new structure
+ * Gets appropriate image path for a company logo
  */
-export function getAssetPath(path: string): string {
-  if (!path) return '';
-  
-  // If path already starts with our new asset path, return as is
-  if (path.startsWith(ASSETS_PATH)) {
-    return path;
-  }
-  
-  // Handle legacy paths
-  for (const [oldPath, newPath] of Object.entries(LEGACY_PATHS)) {
-    if (path.startsWith(`/${oldPath}`) || path.startsWith(oldPath)) {
-      return path.replace(new RegExp(`^/?${oldPath}`), newPath);
-    }
-  }
-  
-  // If no match found, return the original path
-  return path;
+export function getCompanyLogoPath(filename: string): string {
+  return `${COMPANY_LOGOS}/${filename}`;
+}
+
+/**
+ * Gets appropriate image path for a profile image
+ */
+export function getProfileImagePath(filename: string): string {
+  return `${PROFILE_IMAGES}/${filename}`;
+}
+
+/**
+ * Gets appropriate image path for a venture image
+ */
+export function getVentureImagePath(filename: string): string {
+  return `${VENTURE_IMAGES}/${filename}`;
+}
+
+/**
+ * Gets appropriate path for a common image
+ */
+export function getCommonImagePath(filename: string): string {
+  return `${COMMON_IMAGES}/${filename}`;
 }
