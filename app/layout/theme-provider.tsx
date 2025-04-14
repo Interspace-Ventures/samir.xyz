@@ -6,10 +6,10 @@ type ThemeProviderProps = {
 }
 
 /**
- * Simplified ThemeProvider for Remix
+ * Enhanced ThemeProvider for Remix with WebView compatibility
  * 
- * This is a basic implementation that supports light/dark themes
- * without relying on Next.js libraries
+ * This implementation supports light/dark themes without relying on Next.js libraries
+ * and includes special handling for WebView environments
  */
 export function ThemeProvider({ 
   children, 
@@ -19,35 +19,68 @@ export function ThemeProvider({
   const [mounted, setMounted] = useState(false);
   // Current theme state
   const [theme, setTheme] = useState<string>(defaultTheme);
+  // Track if we're in a WebView for special handling
+  const [isWebView, setIsWebView] = useState(false);
 
-  // Initialize theme on mount
+  // Initialize theme on mount and detect WebView
   useEffect(() => {
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem("theme");
+    // Detect if we're in a WebView environment
+    const detectWebView = () => {
+      try {
+        // Check for WebView in user agent
+        const ua = navigator.userAgent || '';
+        const isWebViewEnv = /(WebView|wv)/.test(ua) || 
+          /Android.*(wv|.NET)/.test(ua) ||
+          /iPhone|iPad.*AppleWebKit(?!.*Safari)/.test(ua) ||
+          /FB_IAB|FBAN|FBAV|Line|Instagram|NAVER|KAKAOTALK|Electron|Capacitor|Cordova/.test(ua);
+          
+        // Also check URL parameters
+        const hasWebViewParam = window.location.search.includes('webview=true');
+        
+        return isWebViewEnv || hasWebViewParam;
+      } catch (e) {
+        return false;
+      }
+    };
     
-    // Apply system preference if requested
-    if (savedTheme === "system" || (!savedTheme && defaultTheme === "system")) {
+    // Set WebView state
+    setIsWebView(detectWebView());
+    
+    // For WebView, apply system preference directly for immediate visibility
+    if (detectWebView()) {
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       setTheme(prefersDark ? "dark" : "light");
+      applyTheme(prefersDark ? "dark" : "light");
+    } else {
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem("theme");
       
-      // Watch for system preference changes
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handleChange = (e: MediaQueryListEvent) => {
-        setTheme(e.matches ? "dark" : "light");
-        applyTheme(e.matches ? "dark" : "light");
-      };
-      
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    } 
-    // Otherwise use saved or default theme
-    else {
-      const themeToApply = savedTheme || defaultTheme;
-      setTheme(themeToApply);
-      applyTheme(themeToApply);
+      // Apply system preference if requested
+      if (savedTheme === "system" || (!savedTheme && defaultTheme === "system")) {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setTheme(prefersDark ? "dark" : "light");
+        
+        // Watch for system preference changes
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const handleChange = (e: MediaQueryListEvent) => {
+          setTheme(e.matches ? "dark" : "light");
+          applyTheme(e.matches ? "dark" : "light");
+        };
+        
+        mediaQuery.addEventListener("change", handleChange);
+        return () => mediaQuery.removeEventListener("change", handleChange);
+      } 
+      // Otherwise use saved or default theme
+      else {
+        const themeToApply = savedTheme || defaultTheme;
+        setTheme(themeToApply);
+        applyTheme(themeToApply);
+      }
     }
     
     setMounted(true);
+    console.log("ThemeProvider initialized, WebView:", detectWebView());
+    
   }, [defaultTheme]);
 
   // Function to apply theme to document
@@ -64,7 +97,9 @@ export function ThemeProvider({
     window.theme = {
       current: theme,
       setTheme: (newTheme: string) => {
-        localStorage.setItem("theme", newTheme);
+        if (!isWebView) {
+          localStorage.setItem("theme", newTheme);
+        }
         setTheme(newTheme);
         applyTheme(newTheme);
       }
@@ -72,7 +107,7 @@ export function ThemeProvider({
     
     // Apply theme whenever it changes
     applyTheme(theme);
-  }, [theme]);
+  }, [theme, isWebView]);
 
   // Skip rendering until after client-side hydration
   if (!mounted) {
