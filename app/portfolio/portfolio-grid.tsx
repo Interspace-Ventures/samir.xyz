@@ -1,4 +1,4 @@
-import { Company } from "../data/portfolio";
+import { Company } from "../config/data/portfolio";
 import PortfolioCard from "./portfolio-card";
 
 interface PortfolioGridProps {

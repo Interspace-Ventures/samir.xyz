@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../layout/button";
-import { categories } from "../data/portfolio";
+import { categories } from "../config/data/portfolio";
 
 type FilterButtonsProps = {
   selectedCategory: string;

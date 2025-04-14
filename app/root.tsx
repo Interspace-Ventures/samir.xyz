@@ -13,6 +13,7 @@ import Navbar from "./layout/navbar";
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: "/build/consolidated.css" },
   { rel: "stylesheet", href: "/styles/consolidated.css" },
+  { rel: "icon", href: "/assets/icons/favicon.png" },
 ];
 
 export const meta: MetaFunction = () => {

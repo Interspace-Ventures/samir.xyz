@@ -1,5 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../layout/card";
+import VenturesGrid from "../ventures/ventures-grid";
+import { 
+  ventures, 
+  investmentVentures,
+  investmentCriteria 
+} from "../config/data/ventures";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,82 +13,6 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Explore Samir's venture investments and entrepreneurial projects." },
   ];
 };
-
-// Venture data
-const ventures = [
-  {
-    name: "Fintech Accelerator",
-    stage: "Active",
-    stageColor: "green",
-    description: "An accelerator program focused on helping early-stage fintech startups gain traction and secure funding. Currently supporting 12 companies through their growth journey.",
-    metrics: [
-      { label: "Companies", value: "12" },
-      { label: "Investments", value: "$3.6M" },
-      { label: "Success Rate", value: "73%" }
-    ]
-  },
-  {
-    name: "Banking API Platform",
-    stage: "Seed Stage",
-    stageColor: "blue",
-    description: "A platform that provides banking APIs for developers to build and embed financial services into their applications. Currently in development with beta testing scheduled for Q3.",
-    metrics: [
-      { label: "Team Size", value: "8" },
-      { label: "Funding", value: "$2.1M" },
-      { label: "Partners", value: "4" }
-    ]
-  },
-  {
-    name: "Financial Education Initiative",
-    stage: "Launched",
-    stageColor: "purple",
-    description: "A non-profit initiative to improve financial literacy through free educational resources and workshops targeted at underserved communities.",
-    metrics: [
-      { label: "Workshops", value: "45" },
-      { label: "Participants", value: "780+" },
-      { label: "NPS", value: "92" }
-    ]
-  },
-  {
-    name: "Crypto Payment Gateway",
-    stage: "In Development",
-    stageColor: "amber",
-    description: "A payment gateway that enables businesses to accept cryptocurrencies as payment with seamless conversion to fiat currencies.",
-    metrics: [
-      { label: "Beta Testers", value: "14" },
-      { label: "Currencies", value: "8" },
-      { label: "Transactions", value: "$56K" }
-    ]
-  }
-];
-
-// Investment criteria data
-const investmentCriteria = [
-  {
-    category: "Business Model",
-    items: [
-      "Subscription or transaction-based revenue",
-      "Clear path to profitability",
-      "Scalable with reasonable CAC"
-    ]
-  },
-  {
-    category: "Team",
-    items: [
-      "Domain expertise in finance or technology",
-      "Strong technical co-founder",
-      "Previous startup experience preferred"
-    ]
-  },
-  {
-    category: "Market",
-    items: [
-      "TAM > $1B",
-      "Growing market segment",
-      "Clear competitive advantage"
-    ]
-  }
-];
 
 export default function Ventures() {
   // Function to determine badge background color
@@ -107,12 +37,18 @@ export default function Ventures() {
           </p>
         </header>
 
-        {/* Ventures Grid */}
+        {/* Ventures Projects */}
         <section className="mb-16">
-          <h2 className="text-2xl font-semibold mb-6">Current Ventures</h2>
+          <h2 className="text-2xl font-semibold mb-6">Projects</h2>
+          <VenturesGrid ventures={ventures} />
+        </section>
+        
+        {/* Investment Ventures */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-semibold mb-6">Investment Portfolio</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {ventures.map((venture, index) => (
+            {investmentVentures.map((venture, index) => (
               <Card key={index} className="h-full hover:shadow-md transition-shadow">
                 <CardHeader className="pb-2">
                   <div className="flex items-start justify-between mb-1">

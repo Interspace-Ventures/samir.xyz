@@ -1,5 +1,5 @@
 import { Card, CardContent } from "../layout/card";
-import { Company } from "../data/portfolio";
+import { Company } from "../config/data/portfolio";
 
 interface PortfolioCardProps {
   company: Company;
@@ -10,7 +10,7 @@ export default function PortfolioCard({ company }: PortfolioCardProps) {
     <Card className="overflow-hidden flex flex-col h-full transition-all duration-200 hover:shadow-md">
       <div className="p-4 aspect-[3/2] flex items-center justify-center bg-gray-50">
         <img 
-          src={company.logo || '/logos/companies/placeholder-logo.svg'} 
+          src={company.logo || '/assets/companies/placeholder-logo.svg'} 
           alt={`${company.name} logo`}
           className="max-w-[80%] max-h-[80%] object-contain"
         />

@@ -83,19 +83,19 @@ export default function Index() {
                   title: "Afar",
                   category: "Fintech",
                   description: "Modern travel experience platform for explorers.",
-                  imagePath: "/logos/companies/Afar.png"
+                  imagePath: "/assets/companies/afar.png"
                 },
                 {
                   title: "AON3D",
                   category: "Health",
                   description: "Industrial 3D printing solutions for high-performance parts.",
-                  imagePath: "/logos/companies/AON3D.png"
+                  imagePath: "/assets/companies/aon3d.png"
                 },
                 {
                   title: "Superplastic",
                   category: "Retail",
                   description: "Digital and physical collectibles, art, and entertainment.",
-                  imagePath: "/logos/companies/Superplastic.png"
+                  imagePath: "/assets/companies/superplastic.png"
                 }
               ].map((project, index) => (
                 <Card key={index} className="overflow-hidden transition-all duration-200 hover:shadow-md">

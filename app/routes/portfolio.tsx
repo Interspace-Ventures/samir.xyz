@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { MetaFunction } from "@remix-run/node";
-import { companies } from "../data/portfolio";
+import { companies } from "../config/data/portfolio";
 import FilterButtons from "../portfolio/filter-buttons";
 import PortfolioGrid from "../portfolio/portfolio-grid";
 import StatsSection from "../portfolio/stats-section";
