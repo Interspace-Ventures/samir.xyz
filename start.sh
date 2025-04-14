@@ -16,8 +16,7 @@ echo "Building Tailwind CSS file..."
 mkdir -p public/build
 
 # Create Tailwind CSS file
-cat > public/build/tailwind.css << EOL
-@tailwind base;
+TAILWIND_CSS="@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -50,7 +49,15 @@ cat > public/build/tailwind.css << EOL
   .company-category { 
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-600;
   }
-}
+}"
+
+# Write to both filenames for compatibility
+cat > public/build/tailwind.css << EOL
+$TAILWIND_CSS
+EOL
+
+cat > public/build/app.css << EOL
+$TAILWIND_CSS
 EOL
 
 echo "Starting Remix development server..."
