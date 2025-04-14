@@ -5,17 +5,17 @@ export NODE_ENV=development
 # Make sure the public/build directory exists for assets
 mkdir -p public/build
 
-# Create a flat image directory structure
-mkdir -p public/img/companies
-mkdir -p public/img/common
-mkdir -p public/img/profiles
-mkdir -p public/img/ventures
+# Ensure we have the standard asset directories
+mkdir -p public/assets/companies
+mkdir -p public/assets/images
+mkdir -p public/assets/profiles
+mkdir -p public/assets/ventures
 
 # Build the Tailwind CSS file
 echo "Building Tailwind CSS from consolidated file..."
 mkdir -p public/build
 
-# Create a basic Tailwind CSS file - will be processed by Remix
+# Create Tailwind CSS files - create both to ensure compatibility
 cat > public/build/tailwind.css << EOL
 @tailwind base;
 @tailwind components;
@@ -52,6 +52,9 @@ cat > public/build/tailwind.css << EOL
   }
 }
 EOL
+
+# Create a copy with app.css name as that's what the error is looking for
+cp public/build/tailwind.css public/build/app.css
 
 echo "Starting Remix development server..."
 npx remix dev

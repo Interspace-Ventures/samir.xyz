@@ -5,10 +5,8 @@ import Navbar from "./layout/navbar";
 // Use the links function to link CSS rather than importing directly
 // This resolves the module import error
 
-import styles from "./styles/app.css";
-
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: styles },
+  { rel: "stylesheet", href: "/build/tailwind.css" },
   { rel: "icon", href: "/favicon.ico" },
 ];
 

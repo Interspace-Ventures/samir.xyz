@@ -1,42 +1,42 @@
 /**
- * Simple path configuration
+ * Standard asset paths
  * 
- * This file provides basic paths for assets in our application.
+ * Centralizes all asset paths for easier management and updates
  */
 
-// Images directory
-export const IMG_PATH = '/img';
+// Base asset path
+export const ASSETS_PATH = '/assets';
 
-// Image category paths
-export const COMPANY_LOGOS = `${IMG_PATH}/companies`;
-export const PROFILE_IMAGES = `${IMG_PATH}/profiles`;
-export const VENTURE_IMAGES = `${IMG_PATH}/ventures`;
-export const COMMON_IMAGES = `${IMG_PATH}/common`;
+// Asset category paths
+export const COMPANIES_PATH = `${ASSETS_PATH}/companies`;
+export const IMAGES_PATH = `${ASSETS_PATH}/images`;
+export const PROFILES_PATH = `${ASSETS_PATH}/profiles`;
+export const VENTURES_PATH = `${ASSETS_PATH}/ventures`;
 
 /**
- * Gets appropriate image path for a company logo
+ * Gets the path for a company image/logo
  */
-export function getCompanyLogoPath(filename: string): string {
-  return `${COMPANY_LOGOS}/${filename}`;
+export function getCompanyPath(filename: string): string {
+  return `${COMPANIES_PATH}/${filename}`;
 }
 
 /**
- * Gets appropriate image path for a profile image
+ * Gets the path for a general image
  */
-export function getProfileImagePath(filename: string): string {
-  return `${PROFILE_IMAGES}/${filename}`;
+export function getImagePath(filename: string): string {
+  return `${IMAGES_PATH}/${filename}`;
 }
 
 /**
- * Gets appropriate image path for a venture image
+ * Gets the path for a profile image
  */
-export function getVentureImagePath(filename: string): string {
-  return `${VENTURE_IMAGES}/${filename}`;
+export function getProfilePath(filename: string): string {
+  return `${PROFILES_PATH}/${filename}`;
 }
 
 /**
- * Gets appropriate path for a common image
+ * Gets the path for a venture image
  */
-export function getCommonImagePath(filename: string): string {
-  return `${COMMON_IMAGES}/${filename}`;
+export function getVenturePath(filename: string): string {
+  return `${VENTURES_PATH}/${filename}`;
 }

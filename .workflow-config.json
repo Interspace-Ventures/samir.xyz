@@ -1,7 +1,7 @@
 {
-  "Start application": {
-    "command": "./start.sh",
-    "wait_for_port": 5000,
-    "show": true
+  "workflows": {
+    "Start application": {
+      "wait_for_port": 5000
+    }
   }
 }
