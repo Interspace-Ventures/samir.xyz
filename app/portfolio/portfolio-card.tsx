@@ -1,16 +1,43 @@
 import { Card, CardContent } from "../layout/card";
 import { Company } from "../config/data/portfolio";
+import { COMMON_IMAGES, getCompanyLogoPath } from "../config/paths";
 
 interface PortfolioCardProps {
   company: Company;
 }
 
 export default function PortfolioCard({ company }: PortfolioCardProps) {
+  // Helper to get the proper logo path
+  const getLogoPath = () => {
+    if (!company.logo) {
+      return `${COMMON_IMAGES}/placeholder-logo.svg`;
+    }
+    
+    // If it's already a full path starting with /img/
+    if (company.logo.startsWith('/img/')) {
+      return company.logo;
+    }
+    
+    // If it's just a filename
+    if (!company.logo.includes('/')) {
+      return getCompanyLogoPath(company.logo);
+    }
+    
+    // If it's an old path, extract the filename and use our helper
+    const filename = company.logo.split('/').pop();
+    if (filename) {
+      return getCompanyLogoPath(filename);
+    }
+    
+    // Fallback to original
+    return company.logo;
+  };
+  
   return (
     <Card className="overflow-hidden flex flex-col h-full transition-all duration-200 hover:shadow-md">
       <div className="p-4 aspect-[3/2] flex items-center justify-center bg-gray-50">
         <img 
-          src={company.logo || '/assets/companies/placeholder-logo.svg'} 
+          src={getLogoPath()} 
           alt={`${company.name} logo`}
           className="max-w-[80%] max-h-[80%] object-contain"
         />

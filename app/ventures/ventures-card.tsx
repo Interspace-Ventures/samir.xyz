@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ASSET_PATHS } from "../config/paths";
+import { getVentureImagePath } from "../config/paths";
 
 interface VenturesCardProps {
   name: string;
@@ -27,34 +27,20 @@ export default function VenturesCard({ name, description, imagePath, link, prior
     .toUpperCase()
     .substring(0, 2);
   
-  // Enhanced image path handling with fallback options
+  // Simplified image path handling
   const computeImagePath = () => {
-    // If path already starts with '/', use as is
-    if (imagePath.startsWith('/')) {
-      // Handle old paths to logos, updating them to the new structure
-      if (imagePath.startsWith('/logos/ventures/')) {
-        const filename = imagePath.split('/').pop();
-        if (filename) {
-          return `${ASSET_PATHS.VENTURES}${filename.toLowerCase().replace(/\s+/g, '-')}`;
-        }
-      }
+    // If it's a full path already, use it as is
+    if (imagePath.startsWith('/img/')) {
       return imagePath;
     }
     
-    // For paths with filenames, ensure we use the standard location
-    if (imagePath.includes('/')) {
-      // Try to find the right path based on context clues in the path
-      if (imagePath.includes('attached_assets/')) {
-        return `${ASSET_PATHS.ATTACHED}${imagePath.split('attached_assets/')[1]}`;
-      }
+    // Get just the filename
+    const filename = imagePath.includes('/') 
+      ? imagePath.split('/').pop() || imagePath 
+      : imagePath;
       
-      // Default to just adding a leading slash
-      return `/${imagePath}`;
-    }
-    
-    // For simple filenames, use the ventures logos path
-    // This assumes it's just a filename like "interspace.png"
-    return `${ASSET_PATHS.VENTURES}${imagePath.toLowerCase().replace(/\s+/g, '-')}`;
+    // Use our helper to get the proper path
+    return getVentureImagePath(filename);
   };
   
   const fullImagePath = computeImagePath();
