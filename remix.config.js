@@ -16,4 +16,9 @@ export default {
     v3_singleFetch: true,
     v3_throwAbortReason: true
   },
+  // Point to configuration files in their new locations
+  tailwind: {
+    config: "./config/tailwind.config.cjs",
+    postcssConfig: "./config/postcss.config.cjs",
+  }
 };
