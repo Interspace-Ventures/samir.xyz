@@ -1,22 +1,3 @@
-#!/bin/bash
-export PORT=5000
-export NODE_ENV=development
-
-# Make sure the public/build directory exists for assets
-mkdir -p public/build
-
-# Create a flat image directory structure
-mkdir -p public/img/companies
-mkdir -p public/img/common
-mkdir -p public/img/profiles
-mkdir -p public/img/ventures
-
-# Build the Tailwind CSS file
-echo "Building Tailwind CSS from consolidated file..."
-mkdir -p public/build
-
-# Create a basic Tailwind CSS file - will be processed by Remix
-cat > public/build/tailwind.css << EOL
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -51,7 +32,3 @@ cat > public/build/tailwind.css << EOL
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-600;
   }
 }
-EOL
-
-echo "Starting Remix development server..."
-npx remix dev
