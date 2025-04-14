@@ -1,140 +1,78 @@
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
-import { Button } from "../layout/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../layout/card";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Samir's Portfolio - Home" },
-    { name: "description", content: "Welcome to Samir's professional portfolio showcasing expertise in finance and technology." },
+    { title: "Portfolio - Home" },
+    { name: "description", content: "A developer productivity portfolio website" },
   ];
 };
 
+// Loader function to load data for this route
+export async function loader() {
+  // Here you would typically fetch data from a database or API
+  // For now, we'll return a simple object
+  return json({
+    featuredProjects: [
+      { id: 1, name: "Project Alpha", description: "A cutting-edge development tool" },
+      { id: 2, name: "Project Beta", description: "Streamlined workflow automation" },
+      { id: 3, name: "Project Gamma", description: "Developer productivity suite" },
+    ],
+  });
+}
+
 export default function Index() {
+  const { featuredProjects } = useLoaderData<typeof loader>();
+
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-indigo-700 to-purple-800 text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Venture Capital & Technology</h1>
-            <p className="text-xl mb-8">
-              Building and investing in the next generation of groundbreaking companies.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Link to="/portfolio" className="inline-flex">
-                <Button 
-                  variant="default" 
-                  size="lg"
-                  className="bg-white text-indigo-800 hover:bg-gray-100"
-                >
-                  View Portfolio
-                </Button>
-              </Link>
-              <Link to="/ventures" className="inline-flex">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10"
-                >
-                  Our Ventures
-                </Button>
-              </Link>
+    <div className="container mx-auto px-4 py-8">
+      <header className="mb-12 text-center">
+        <h1 className="text-4xl font-bold mb-4">Developer Portfolio</h1>
+        <p className="text-xl text-gray-600">
+          A showcase of innovative projects and development tools
+        </p>
+      </header>
+
+      <nav className="flex justify-center space-x-6 mb-12">
+        <Link to="/" className="text-primary font-medium hover:underline">
+          Home
+        </Link>
+        <Link to="/portfolio" className="text-gray-600 hover:text-primary hover:underline">
+          Portfolio
+        </Link>
+        <Link to="/ventures" className="text-gray-600 hover:text-primary hover:underline">
+          Ventures
+        </Link>
+        <Link to="/profile" className="text-gray-600 hover:text-primary hover:underline">
+          Profile
+        </Link>
+      </nav>
+
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {featuredProjects.map((project) => (
+            <div key={project.id} className="card p-6">
+              <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
+              <p className="text-gray-600 mb-4">{project.description}</p>
+              <button className="btn btn-primary">View Project</button>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <p className="text-4xl font-bold text-indigo-700">32</p>
-                <p className="text-gray-600 mt-2">Investments</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-indigo-700">$42M</p>
-                <p className="text-gray-600 mt-2">Capital Deployed</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-indigo-700">13</p>
-                <p className="text-gray-600 mt-2">Markups</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-indigo-700">1.44x</p>
-                <p className="text-gray-600 mt-2">TVPI</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Projects Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold mb-12 text-center">Featured Investments</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Afar",
-                  category: "Fintech",
-                  description: "Modern travel experience platform for explorers.",
-                  imagePath: "/assets/companies/afar.png"
-                },
-                {
-                  title: "AON3D",
-                  category: "Health",
-                  description: "Industrial 3D printing solutions for high-performance parts.",
-                  imagePath: "/assets/companies/aon3d.png"
-                },
-                {
-                  title: "Superplastic",
-                  category: "Retail",
-                  description: "Digital and physical collectibles, art, and entertainment.",
-                  imagePath: "/assets/companies/superplastic.png"
-                }
-              ].map((project, index) => (
-                <Card key={index} className="overflow-hidden transition-all duration-200 hover:shadow-md">
-                  <div className="aspect-[3/2] bg-gray-50 flex items-center justify-center p-6">
-                    <img 
-                      src={project.imagePath} 
-                      alt={`${project.title} logo`}
-                      className="max-w-[80%] max-h-[80%] object-contain"
-                    />
-                  </div>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle>{project.title}</CardTitle>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                        {project.category}
-                      </span>
-                    </div>
-                    <CardDescription>{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardFooter>
-                    <Link to="/portfolio" className="inline-flex">
-                      <Button variant="outline" size="sm">
-                        View Details
-                      </Button>
-                    </Link>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-            
-            <div className="mt-12 text-center">
-              <Link to="/portfolio" className="inline-flex">
-                <Button variant="default" className="bg-indigo-700 hover:bg-indigo-800">
-                  View All Investments
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
+      <section className="bg-gray-50 p-8 rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">About This Project</h2>
+        <p className="text-gray-700 mb-4">
+          This portfolio website is built with Remix, React, TypeScript, and Tailwind CSS.
+          It showcases a collection of projects and developer tools designed to improve
+          productivity and enhance the development experience.
+        </p>
+        <p className="text-gray-700">
+          Explore the different sections to learn more about our work and approach
+          to software development.
+        </p>
       </section>
     </div>
   );
