@@ -1,100 +1,58 @@
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useState } from "react";
 import type { MetaFunction } from "@remix-run/node";
+import { companies, categories } from "../config/data/portfolio";
+import PortfolioGrid from "../portfolio/portfolio-grid";
+import FilterCategories from "../portfolio/filter-categories";
+import StatsSection from "../portfolio/stats-section";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Portfolio - Projects" },
-    { name: "description", content: "View our portfolio of developer tools and projects" },
+    { title: "Portfolio - Companies" },
+    { name: "description", content: "View our portfolio of companies and investments" },
   ];
 };
 
 // Loader function to load data for this route
 export async function loader() {
-  // Here you would typically fetch data from a database or API
+  // For now we're using the static data from our config file
+  // This could be enhanced to fetch from an API or database
   return json({
-    projects: [
-      { 
-        id: 1, 
-        name: "Developer Toolkit", 
-        category: "Productivity",
-        description: "A comprehensive suite of tools for modern web development" 
-      },
-      { 
-        id: 2, 
-        name: "Code Analytics", 
-        category: "Analytics",
-        description: "Real-time code quality and performance analytics" 
-      },
-      { 
-        id: 3, 
-        name: "API Manager", 
-        category: "Backend",
-        description: "Streamlined API development and management platform" 
-      },
-      { 
-        id: 4, 
-        name: "UI Component Library", 
-        category: "Frontend",
-        description: "Customizable and accessible UI components for web apps" 
-      },
-      { 
-        id: 5, 
-        name: "Cloud Deployment Tool", 
-        category: "DevOps",
-        description: "Simplified cloud deployment for web applications" 
-      },
-      { 
-        id: 6, 
-        name: "Data Visualization Kit", 
-        category: "Frontend",
-        description: "Interactive data visualization components and charts" 
-      },
-    ],
-    categories: ["All", "Productivity", "Analytics", "Backend", "Frontend", "DevOps"]
+    companies,
+    categories
   });
 }
 
 export default function Portfolio() {
-  const { projects, categories } = useLoaderData<typeof loader>();
+  const { companies, categories } = useLoaderData<typeof loader>();
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <header className="mb-12">
-        <h1 className="text-3xl font-bold mb-2">Project Portfolio</h1>
+      <header className="mb-8 md:mb-12">
+        <h1 className="text-3xl font-bold mb-2">Company Portfolio</h1>
         <p className="text-gray-600">
-          Explore our collection of developer tools and projects
+          Explore our collection of invested companies across different sectors
         </p>
       </header>
 
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Filter by Category</h2>
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className="px-4 py-2 bg-gray-100 rounded-md hover:bg-gray-200 text-sm font-medium"
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+      {/* Stats section - visible on desktop */}
+      <div className="hidden md:block mb-10">
+        <StatsSection />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <div key={project.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="p-6">
-              <span className="inline-block px-2 py-1 bg-gray-100 text-xs rounded-full mb-2">
-                {project.category}
-              </span>
-              <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
-              <p className="text-gray-600 mb-4">{project.description}</p>
-              <button className="btn btn-primary">View Details</button>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* Category filter */}
+      <FilterCategories 
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+      />
+
+      {/* Portfolio grid */}
+      <PortfolioGrid 
+        companies={companies}
+        category={selectedCategory}
+      />
     </div>
   );
 }
