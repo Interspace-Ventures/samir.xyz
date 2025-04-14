@@ -1,6 +1,6 @@
 import React from 'react';
-import { Badge } from "../ui/badge";
-import { Company } from "../../data/portfolio";
+import { Badge } from "../layout/badge";
+import { Company } from "../config/data/portfolio";
 
 interface CompanyCardProps {
   company: Company;

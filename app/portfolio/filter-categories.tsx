@@ -1,5 +1,5 @@
 import React from 'react';
-import { categories } from '../../data/portfolio';
+import { categories } from '../config/data/portfolio';
 
 interface FilterCategoriesProps {
   selectedCategory: string;

@@ -1,33 +1,22 @@
-"use client";
-
-import React from "react";
-import { VenturesCard } from "./ventures-card";
-
-interface Venture {
-  name: string;
-  description: string;
-  imagePath: string;
-  link: string;
-  priority?: boolean;
-}
+import VenturesCard from "./ventures-card";
+import { Venture } from "../config/data/ventures";
 
 interface VenturesGridProps {
   ventures: Venture[];
 }
 
 /**
- * Consolidated VenturesGrid component
+ * VenturesGrid component for Remix
  * - Uses Tailwind CSS grid for responsive layout
  * - Consistent styling with the rest of the application
- * - Clean implementation without inline styles
  */
-export function VenturesGrid({ ventures }: VenturesGridProps) {
+export default function VenturesGrid({ ventures }: VenturesGridProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {ventures.map((venture, index) => (
         <div 
           key={index} 
-          className="h-full transform transition-all duration-300 hover:translate-y-[-4px] font-inter"
+          className="h-full transform transition-all duration-300 hover:translate-y-[-4px]"
         >
           <VenturesCard
             name={venture.name}
