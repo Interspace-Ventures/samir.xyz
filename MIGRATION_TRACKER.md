@@ -11,14 +11,18 @@ This document tracks the progress of migrating the website from Next.js framewor
   - `/public/assets/companies` - Company logos and images
   - `/public/assets/ventures` - Venture logos and images  
   - `/public/assets/profiles` - Profile photos
+  - `/public/assets/logos` - Brand logos and primary brand assets
   - `/public/assets/images` - General images
-  - `/public/assets/icons` - Icon files
+  - `/public/assets/icons` - Icon files including favicon and app icons
   - `/public/assets/documents` - Document files
   - Added README.md file documenting the asset structure
   - Merged and normalized files from legacy directories:
     - `/public/logos/companies` → `/public/assets/companies` (converted to lowercase with hyphens)
     - `/public/logos/ventures` → `/public/assets/ventures` (normalized naming)
     - `/public/images` → `/public/assets/profiles` and `/public/assets/images` (categorized by type)
+  - Removed redundant directories:
+    - Eliminated `/public/logos` and `/public/screenshots` directories
+    - Moved files from root `/public` directory to appropriate `/public/assets` subdirectories
 
 - [x] Updated image paths in components
   - Updated portfolio.ts file with new image paths

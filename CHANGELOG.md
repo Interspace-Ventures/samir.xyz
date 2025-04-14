@@ -2,6 +2,22 @@
 
 All notable changes to the Portfolio Website project will be documented in this file.
 
+## [8.16.0] - 2025-04-14
+
+### Added
+- Created logical subdirectories for companies, ventures, profiles, logos, icons, images, and documents
+- Created proper favicon and icon files in the assets/icons directory
+
+### Changed
+- Reorganized all assets into standardized directory structure in /public/assets
+- Implemented consistent naming conventions for all asset files
+- Updated all image path references to use the new standardized directory structure
+- Updated root.tsx to reference the correct asset paths for stylesheets and icons
+
+### Removed
+- Eliminated redundant /public/logos and /public/screenshots directories
+- Removed duplicate files from root /public directory
+
 ## [8.15.0] - 2025-04-09
 
 ### Added

@@ -1,27 +1,27 @@
 {
-  "version": "8.15.0",
+  "version": "8.16.0",
   "name": "Portfolio Website",
   "description": "Personal portfolio website showcasing professional projects through an AI-enhanced interactive design",
-  "lastUpdated": "2025-04-09",
+  "lastUpdated": "2025-04-14",
   "changes": [
-    "Implemented a simplified navbar component with improved structure and styling",
-    "Created an emergency navbar that loads via a separate script for guaranteed rendering",
-    "Fixed menu items to appear on the same line as logo with proper spacing",
-    "Ensured navbar is fixed to the top when scrolling with proper stacking",
-    "Updated navbar with Alexandria font, purple background color, and correct dimensions",
-    "Enhanced navbar with right-aligned navigation links and proper wordmark logo positioning",
-    "Updated footer with version number linked to changelog and consistent purple styling"
+    "Reorganized all assets into standardized directory structure in /public/assets",
+    "Created logical subdirectories for companies, ventures, profiles, logos, icons, images, and documents",
+    "Implemented consistent naming conventions for all asset files",
+    "Updated all image path references to use the new standardized directory structure",
+    "Removed redundant /public/logos and /public/screenshots directories",
+    "Created proper favicon and icon files in the assets/icons directory",
+    "Updated root.tsx to reference the correct asset paths for stylesheets and icons"
   ],
   "previousVersion": {
-    "version": "8.14.0",
+    "version": "8.15.0",
     "changes": [
-      "Implemented shadcn CSS variable system for more consistent theming",
-      "Created custom button variant for filter categories to avoid conflicts",
-      "Added proper theme configuration using shadcn conventions",
-      "Updated globals.css to use CSS variables for colors and design tokens",
-      "Replaced direct color references with CSS variables",
-      "Refactored button component to use data attributes for state",
-      "Eliminated !important flags by implementing proper CSS specificity"
+      "Implemented a simplified navbar component with improved structure and styling",
+      "Created an emergency navbar that loads via a separate script for guaranteed rendering",
+      "Fixed menu items to appear on the same line as logo with proper spacing",
+      "Ensured navbar is fixed to the top when scrolling with proper stacking",
+      "Updated navbar with Alexandria font, purple background color, and correct dimensions",
+      "Enhanced navbar with right-aligned navigation links and proper wordmark logo positioning",
+      "Updated footer with version number linked to changelog and consistent purple styling"
     ]
   },
   "olderVersion": {
