@@ -21,7 +21,7 @@ export default function VenturesGrid({ ventures }: VenturesGridProps) {
           <VenturesCard
             name={venture.name}
             description={venture.description}
-            imagePath={venture.imagePath}
+            imagePath={venture.image}
             link={venture.link}
             priority={venture.priority}
           />
