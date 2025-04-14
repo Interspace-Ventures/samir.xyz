@@ -16,7 +16,7 @@ mkdir -p public/assets/ventures
 
 echo "Processing CSS..."
 # Create a simple CSS file
-cat > ./public/tailwind.css << CSSEOF
+cat > ./public/tailwind.css << EOL
 /* Base styles */
 body {
   font-family: system-ui, -apple-system, sans-serif;
@@ -36,7 +36,7 @@ body {
 .text-sm { font-size: 0.875rem; }
 .text-gray-600 { color: #4b5563; }
 .bg-gray-100 { background-color: #f3f4f6; }
-CSSEOF
+EOL
 
 echo "Starting Remix development server..."
 # Kill any existing processes using port 5000
