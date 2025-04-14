@@ -57,4 +57,7 @@ EOL
 cp public/build/tailwind.css public/build/app.css
 
 echo "Starting Remix development server..."
+# Kill any existing processes using port 5000
+kill $(lsof -t -i:5000) 2>/dev/null || true
+# Start Remix dev server
 npx remix dev

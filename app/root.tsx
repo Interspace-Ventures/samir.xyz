@@ -6,7 +6,7 @@ import Navbar from "./layout/navbar";
 // This resolves the module import error
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "/build/tailwind.css" },
+  { rel: "stylesheet", href: "/build/app.css" },
   { rel: "icon", href: "/favicon.ico" },
 ];
 
