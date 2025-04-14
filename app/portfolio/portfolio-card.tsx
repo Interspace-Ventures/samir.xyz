@@ -1,6 +1,6 @@
 import { Card, CardContent } from "../layout/card";
 import { Company } from "../config/data/portfolio";
-import { COMMON_IMAGES, getCompanyLogoPath } from "../config/paths";
+import { IMAGES_PATH, getCompanyPath } from "../config/paths";
 
 interface PortfolioCardProps {
   company: Company;
@@ -10,23 +10,23 @@ export default function PortfolioCard({ company }: PortfolioCardProps) {
   // Helper to get the proper logo path
   const getLogoPath = () => {
     if (!company.logo) {
-      return `${COMMON_IMAGES}/placeholder-logo.svg`;
+      return `${IMAGES_PATH}/placeholder-logo.svg`;
     }
     
-    // If it's already a full path starting with /img/
-    if (company.logo.startsWith('/img/')) {
+    // If it's already a full path starting with /assets/
+    if (company.logo.startsWith('/assets/')) {
       return company.logo;
     }
     
     // If it's just a filename
     if (!company.logo.includes('/')) {
-      return getCompanyLogoPath(company.logo);
+      return getCompanyPath(company.logo);
     }
     
     // If it's an old path, extract the filename and use our helper
     const filename = company.logo.split('/').pop();
     if (filename) {
-      return getCompanyLogoPath(filename);
+      return getCompanyPath(filename);
     }
     
     // Fallback to original

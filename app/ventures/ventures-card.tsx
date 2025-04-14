@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getVentureImagePath } from "../config/paths";
+import { getVenturePath } from "../config/paths";
 
 interface VenturesCardProps {
   name: string;
@@ -30,7 +30,7 @@ export default function VenturesCard({ name, description, imagePath, link, prior
   // Simplified image path handling
   const computeImagePath = () => {
     // If it's a full path already, use it as is
-    if (imagePath.startsWith('/img/')) {
+    if (imagePath.startsWith('/assets/')) {
       return imagePath;
     }
     
@@ -40,7 +40,7 @@ export default function VenturesCard({ name, description, imagePath, link, prior
       : imagePath;
       
     // Use our helper to get the proper path
-    return getVentureImagePath(filename);
+    return getVenturePath(filename);
   };
   
   const fullImagePath = computeImagePath();
