@@ -1,7 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
-import { Button } from "../components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Button } from "../layout/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../layout/card";
 
 export const meta: MetaFunction = () => {
   return [
