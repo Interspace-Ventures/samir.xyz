@@ -1,72 +1,59 @@
 /**
- * Path Configuration
+ * Path configurations for the application
  * 
- * This file centralizes all path definitions for assets, images, and other static files
- * to make future updates easier and more consistent.
+ * This file centralizes all path references to ensure consistency
+ * and make it easier to update paths across the application.
  */
 
-// Base paths for different asset types
+// Base paths
 export const BASE_URL = '/';
-export const IMAGE_BASE_PATH = '/';
-export const ASSET_BASE_PATH = '/';
+export const ASSETS_PATH = '/img';
 
-// Specific asset path categories
-export const ASSET_PATHS = {
-  // Main assets directories
-  MAIN: `${ASSET_BASE_PATH}assets/`,
-  IMAGES: `${ASSET_BASE_PATH}assets/images/`,
-  PROFILES: `${ASSET_BASE_PATH}assets/profiles/`,
-  COMPANIES: `${ASSET_BASE_PATH}assets/companies/`,
-  VENTURES: `${ASSET_BASE_PATH}assets/ventures/`,
-  ICONS: `${ASSET_BASE_PATH}assets/icons/`,
+// Image paths by category
+export const IMAGES = {
+  // Common images (icons, backgrounds, etc.)
+  common: `${ASSETS_PATH}/common`,
   
-  // Documents
-  DOCUMENTS: `${ASSET_BASE_PATH}assets/documents/`,
-  REPORTS: `${ASSET_BASE_PATH}assets/documents/reports/`,
-  PRESENTATIONS: `${ASSET_BASE_PATH}assets/documents/presentations/`,
+  // Company logos and images
+  companies: `${ASSETS_PATH}/companies`,
   
-  // For backward compatibility
-  ATTACHED: `${ASSET_BASE_PATH}assets/`,
+  // Profile images
+  profiles: `${ASSETS_PATH}/profiles`,
   
-  // Legacy paths (kept for backward compatibility during migration)
-  logos: {
-    main: `${IMAGE_BASE_PATH}assets/images/logo.svg`,
-    icon: `${IMAGE_BASE_PATH}assets/images/icon.svg`,
-    companies: `${IMAGE_BASE_PATH}assets/companies/`
-  },
-  
-  images: {
-    profiles: `${IMAGE_BASE_PATH}assets/profiles/`,
-    backgrounds: `${IMAGE_BASE_PATH}assets/images/backgrounds/`,
-    icons: `${IMAGE_BASE_PATH}assets/icons/`
-  },
-  
-  documents: {
-    reports: `${ASSET_BASE_PATH}assets/documents/reports/`,
-    presentations: `${ASSET_BASE_PATH}assets/documents/presentations/`
-  },
+  // Venture logos and images
+  ventures: `${ASSETS_PATH}/ventures`,
 };
 
-// URL paths for different sections of the application
-export const APP_PATHS = {
-  home: '/',
-  portfolio: '/portfolio',
-  profile: '/profile',
-  ventures: '/ventures',
-  
-  // Add other app paths as needed
-  about: '/about',
-  contact: '/contact',
-  blog: '/blog',
+// Legacy path mapping for backward compatibility
+export const LEGACY_PATHS = {
+  'assets/companies': IMAGES.companies,
+  'assets/images': IMAGES.common,
+  'assets/profiles': IMAGES.profiles,
+  'assets/ventures': IMAGES.ventures,
+  'assets/icons': IMAGES.common,
+  'logos/companies': IMAGES.companies,
 };
 
-// API endpoints
-export const API_PATHS = {
-  base: '/api',
-  data: '/api/data',
-  auth: '/api/auth',
+/**
+ * Helper function to transform old asset paths to new structure
+ * @param path Original asset path
+ * @returns Updated path using the new structure
+ */
+export function getAssetPath(path: string): string {
+  if (!path) return '';
   
-  // Add other API paths as needed
-  companies: '/api/companies',
-  ventures: '/api/ventures',
-};
+  // If path already starts with our new asset path, return as is
+  if (path.startsWith(ASSETS_PATH)) {
+    return path;
+  }
+  
+  // Handle legacy paths
+  for (const [oldPath, newPath] of Object.entries(LEGACY_PATHS)) {
+    if (path.startsWith(`/${oldPath}`) || path.startsWith(oldPath)) {
+      return path.replace(new RegExp(`^/?${oldPath}`), newPath);
+    }
+  }
+  
+  // If no match found, return the original path
+  return path;
+}
