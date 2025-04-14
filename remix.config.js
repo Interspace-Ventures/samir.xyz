@@ -1,24 +1,21 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 export default {
   ignoredRouteFiles: ["**/.*"],
-  appDirectory: "app",
-  assetsBuildDirectory: "public/build",
+  // Define the public asset directory
   publicPath: "/build/",
+  // Define where your build files should be placed
+  assetsBuildDirectory: "public/build",
+  // Define the directory for your server build
   serverBuildPath: "build/index.js",
-  serverModuleFormat: "esm", // Changed to match package.json type: module
-  serverDependenciesToBundle: [
-    /^(?!node:)/,  // Bundle everything except node: built-ins
-  ],
+  // Configure how Tailwind integrates with Remix
+  tailwind: true,
+  postcss: true,
+  // Opt into v3 features for React Router v7 compatibility
   future: {
     v3_fetcherPersist: true,
-    v3_lazyRouteDiscovery: true, 
+    v3_lazyRouteDiscovery: true,
     v3_relativeSplatPath: true,
     v3_singleFetch: true,
-    v3_throwAbortReason: true
+    v3_throwAbortReason: true,
   },
-  // Point to configuration files in their new locations
-  tailwind: {
-    config: "./config/tailwind.config.cjs",
-    postcssConfig: "./config/postcss.config.cjs",
-  }
 };

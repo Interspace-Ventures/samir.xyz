@@ -47,53 +47,56 @@ This portfolio website was built to showcase professional achievements in a mode
 ## Tech Stack
 
 ### Core Framework & Runtime
-- **Bun Runtime**: Fast JavaScript/TypeScript runtime (critical for this project)
-- **Next.js (v15.2.3)**: Framework for server-side rendering and client-side hydration
+- **Node.js (v20.x)**: JavaScript runtime for the server
+- **Remix (v2.16.5)**: React framework for server-side rendering with modern web standards
 - **TypeScript (v5.8.2)**: Typed superset of JavaScript for safe development
 
 ### Frontend Libraries
 - **React (v19.0.0)**: Library for building dynamic user interface components
 - **React DOM (v19.0.0)**: DOM-specific methods for React
-- **@tanstack/react-query (v5.69.0)**: Data fetching and state management
-- **react-hydration-provider (v2.1.0)**: Hydration safety utilities for React
-- **next-themes (v0.4.6)**: Theme management for Next.js
+- **isbot (v5.1.26)**: Bot detection for optimizing server responses
 
 ### Styling & UI
 - **Tailwind CSS (v4.0.15)**: Utility-first CSS framework for responsive styling
 - **@tailwindcss/typography (v0.5.16)**: Typography plugin for Tailwind CSS
 - **tailwind-merge (v3.0.2)**: Utility for merging Tailwind CSS classes
 - **tailwindcss-animate (v1.0.7)**: Animation utilities for Tailwind CSS
-- **@svgr/webpack (v8.1.0)**: Transform SVGs into React components
+- **class-variance-authority (v0.7.1)**: Utility for creating component variants
+- **shadcn (v2.4.0-canary.17)**: UI component library
 
 ### CSS Processing
 - **postcss (v8.5.3)**: Tool for transforming CSS with JavaScript
-- **@tailwindcss/postcss (v4.0.15)**: PostCSS plugin for Tailwind
 - **autoprefixer (v10.4.21)**: PostCSS plugin to parse CSS and add vendor prefixes
-- **critters (v0.0.23)**: Critical CSS inlining tool
 
-### Development & Deployment
-- **http-server (v14.1.1)**: Simple HTTP server for static content
-- **vercel (v41.4.1)**: Deployment platform integration
+### Fonts
+- **@fontsource/alexandria (v5.2.5)**: Self-hosted font package
 
 ## Project Structure
 
 ### Core Directories
 
-- **`/src`**: Main application source code
-  - `/app`: Next.js application routes and pages
+- **`/app`**: Main Remix application source code
+  - `/routes`: Remix route files
   - `/components`: Reusable React components
-  - `/config`: Application configuration files
-  - `/lib`: Utility functions and shared libraries
+  - `/config`: Application configuration files 
+  - `/layout`: Layout components and UI structure
   - `/styles`: Global styles and Tailwind configuration
+  - `/portfolio`: Portfolio-specific components
+  - `/ventures`: Ventures-specific components
 
 - **`/public`**: Static assets served directly
-  - `/attached_assets`: Primary location for all image assets (consolidated)
-  - `/logos/ventures`: Processed venture logo files (automatically generated)
-  - `/icons`: Icon assets for the UI
-  - `/images`: Additional image assets for content
+  - `/assets`: Primary location for all categorized assets
+    - `/icons`: Icon assets for the UI
+    - `/images`: Content images
+    - `/logos`: Logo files
+  - `/build`: Remix build output for client assets
+  - `/styles`: Global stylesheets
 
 - **`/config`**: Configuration files
-  - Contains modular configuration files and settings
+  - Contains modular configuration files including Tailwind, PostCSS, etc.
+
+- **`/server`**: Server-related files
+  - Contains server scripts for production and development
 
 - **`/tools`**: Development and maintenance tools
   - `/scripts`: Helper scripts for automation and asset management
@@ -104,11 +107,10 @@ This portfolio website was built to showcase professional achievements in a mode
 
 ### Supporting Directories
 
-- **`/out`**: Static HTML export from Next.js build
-  - Contains the pre-rendered HTML, CSS, and assets
+- **`/build`**: Remix server build output
 - **`/attached_assets`**: Original asset files (moved to public during startup)
 - **`/node_modules`**: Third-party dependencies (generated)
-- **`/.next`**: Next.js build cache (generated)
+- **`/temp-backup`**: Temporary backup of files during migration
 
 ### Naming Conventions
 
@@ -116,19 +118,19 @@ The project follows consistent naming conventions for better readability and mai
 
 - **Files and Directories**: Uses `kebab-case` for script files and config files (e.g., `organize-assets.sh`)
 - **React Components**: Uses `PascalCase` for component names and their files (e.g., `ClientWrapper.tsx`)
-- **React Pages**: Follows Next.js naming convention with lowercase `page.tsx` in directories representing routes
+- **React Routes**: Follows Remix naming convention with files in `routes` directory like `_index.tsx` and route-specific files
 - **CSS and Style Files**: Uses `kebab-case` (e.g., `globals.css`)
-- **Configuration Files**: Uses standard naming with appropriate extensions (e.g., `next.config.js`, `tailwind.config.cjs`)
+- **Configuration Files**: Uses standard naming with appropriate extensions (e.g., `remix.config.js`, `tailwind.config.cjs`)
 - **Utility Scripts**: Uses `kebab-case` with descriptive prefixes (e.g., `organize-assets.sh`)
 
 ## Configuration
 
 ### Core Configuration
 
-- **next.config.js** - Main Next.js configuration
-  - Contains settings for image optimization, CORS headers, and development environment
-  - Configures cross-origin settings for Replit
-  - Sets cache headers for static assets
+- **remix.config.js** - Main Remix configuration
+  - Configures server and client build paths
+  - Sets up module format and dependencies to bundle
+  - Points to config files in their appropriate locations
 
 ### Styling Configuration
 
@@ -143,7 +145,7 @@ The project follows consistent naming conventions for better readability and mai
 
 ### Asset Configuration
 
-- **src/config/paths.ts** - Centralizes path configurations for consistent asset references
+- **app/config/paths.ts** - Centralizes path configurations for consistent asset references
 - **tools/scripts/organize-assets.sh** - Script for normalizing and organizing image assets
 
 ### Configuration Best Practices
@@ -151,7 +153,7 @@ The project follows consistent naming conventions for better readability and mai
 1. **Keep it Simple**: Avoid creating multiple configuration files for the same tool
 2. **Centralize Settings**: Use a single source of truth for configuration values
 3. **Document Changes**: Add comments for complex configuration options
-4. **Follow Official Patterns**: Adhere to Next.js and Tailwind CSS recommended patterns
+4. **Follow Official Patterns**: Adhere to Remix and Tailwind CSS recommended patterns
 5. **Performance Optimization**: Include specific performance enhancements in the configuration
 
 ## Development Tools & Scripts
@@ -205,9 +207,9 @@ The `tools/archive` directory contains previous scripts that have been preserved
 ### Component Structure
 
 - Keep components simple and focused on a single responsibility
-- Use the ClientWrapper for client-side only components
-- Prefer server components when possible
-- Follow established component patterns for consistency
+- Use proper error boundaries for component error handling
+- Follow Remix's component and route architecture
+- Organize components by domain and feature
 
 ### Styling Approach
 
@@ -218,10 +220,10 @@ The `tools/archive` directory contains previous scripts that have been preserved
 
 ### Performance Optimization
 
-- Utilize Next.js image optimization
-- Implement proper code splitting
-- Minimize client-side JavaScript
-- Follow asset optimization best practices
+- Utilize Remix's built-in asset handling
+- Implement proper code splitting with route-based modules
+- Minimize client-side JavaScript with progressive enhancement
+- Follow Remix's recommended data loading patterns
 
 ### Error Handling
 
@@ -254,15 +256,15 @@ The `tools/archive` directory contains previous scripts that have been preserved
 
 When working with this codebase, please adhere to these best practices:
 
-1. **Runtime Environment**: Always use Bun runtime for optimal performance in the Replit environment. Do not substitute with Node.js.
+1. **Runtime Environment**: Use Node.js for the server runtime. The project no longer uses Bun.
 
-2. **Source Map Configuration**: Source maps must remain disabled to prevent client-side hydration errors. This configuration exists in `next.config.js` and environment variables in `start.sh`.
+2. **Framework**: This project is built with Remix, not Next.js. Follow Remix conventions for routing, data loading, and components.
 
-3. **Component Structure**: The application uses a specialized `ClientWrapper` component architecture to safely handle client-side hydration issues in the Replit environment.
+3. **CSS Strategy**: Use Tailwind CSS for styling. The project uses a consolidated approach with minimal global CSS.
 
-4. **Next.js Configuration**: The `next.config.js` file contains specific Turbopack and webpack configurations designed for Replit compatibility.
+4. **Component Structure**: React components are organized in domain-specific directories (/layout, /portfolio, /ventures) for better separation of concerns.
 
-5. **Rendering Strategy**: Use server-side rendering when possible, with client-side hydration handled through dedicated wrapper components.
+5. **Error Handling**: Use proper error boundaries with the ErrorBoundary component to catch and display errors gracefully.
 
 ### Seven Laws of Artificial Intelligence
 
@@ -315,22 +317,23 @@ The codebase has been significantly optimized to:
    - Streamlined the development server startup process
 
 3. **Consolidate Asset Directories**:
-   - Centralized all assets in `public/attached_assets` for better organization
-   - Created automatic symlinks and copies for backward compatibility
-   - Eliminated redundant asset directories
+   - Reorganized all assets in `public/assets` with logical subdirectories
+   - Created backward compatibility mappings in app/config/paths.ts
+   - Eliminated redundant asset directories and duplicate files
    - Integrated asset management into the application startup process
 
 3. **Modernize Component Architecture**:
-   - Refactored `ClientWrapper` to use modern React 19 patterns and proper Suspense handling
-   - Simplified `client-theme-provider` for better compatibility
-   - Added proper error boundaries for better error handling instead of error suppression
+   - Implemented Remix-based component organization with domain-specific directories
+   - Added proper error boundary components for each route
+   - Created a simplified theme provider compatible with Remix architecture
+   - Organized components by feature rather than technical concern
 
 4. **Improve Configuration**:
-   - Updated `next.config.js` to follow Next.js 15 best practices
-   - Added appropriate CORS and cache headers
-   - Improved development performance settings
+   - Added `remix.config.js` to configure the application properly
+   - Set up appropriate server port and host configurations
    - Consolidated duplicate Tailwind and PostCSS configurations
    - Enhanced Tailwind config with optimized animations and responsive design features
+   - Migrated from Next.js to Remix framework
 
 5. **Better Error Handling**:
    - Implemented proper error boundaries to catch and display errors
@@ -338,13 +341,13 @@ The codebase has been significantly optimized to:
    - Added better logging for debugging purposes
 
 6. **Asset Management & Project Structure**:
-   - Implemented a single source of truth for assets in `public/attached_assets`
-   - Removed redundant asset directories and eliminated duplicate image files
-   - Added symlinks for backward compatibility to prevent breaking changes
-   - Integrated asset management into application startup for automated organization
-   - Documented asset structure and organization pattern for future maintenance
-   - Cleaned up root directory by moving non-essential files to appropriate locations
-   - Integrated documentation consolidation into the application startup process
+   - Implemented a single source of truth for assets in `public/assets`
+   - Created a simplified folder structure with domain-specific component directories
+   - Established consistent naming patterns for files and components
+   - Implemented Remix-compatible asset loading approaches
+   - Documented the asset structure and organization pattern for future maintenance
+   - Cleaned up root directory by moving files to appropriate locations
+   - Created clean separation between configuration, layout, and domain components
 
 7. **CSS and Styling Improvements**:
    - Removed all `!important` flags from stylesheets for improved maintainability
@@ -369,15 +372,15 @@ The project follows Semantic Versioning with the following custom guidelines:
 
 ### Latest Version
 
-Current version: 8.0.0 (2025-04-04)
+Current version: 9.0.0 (2025-04-14)
 
 Key updates in the latest version:
-- **Code Quality Improvements** - Removed all `!important` flags from CSS and replaced inline styles with Tailwind classes
-- **Standardized CSS Structure** - Reorganized globals.css with proper layer organization and consistent theming variables
-- **Enhanced Component Organization** - Improved separation of concerns with component-specific styles
-- **Extended Documentation** - Added comprehensive Code Quality Best Practices section to documentation
-- **Updated Coding Principles** - Added a sixth "Law of AI" focused on maintaining code quality
-- **Coding Best Practices** - Established eight core principles for maintainable, high-quality code
+- **Framework Migration** - Migrated from Next.js to Remix for improved developer experience and performance
+- **Simplified Structure** - Created a dramatically simplified folder structure with domain-specific organization
+- **Dependency Cleanup** - Removed unnecessary dependencies including Next.js-related packages and Bun runtime
+- **Modern CSS Approach** - Consolidated CSS using Tailwind + minimal global CSS to reduce styling conflicts
+- **Improved Documentation** - Updated all documentation to reflect the current Remix-based architecture
+- **Enhanced Asset Management** - Reorganized assets with logical directory structure and proper referencing
 
 For detailed changes across all versions, see the [CHANGELOG.md](./CHANGELOG.md).
 
