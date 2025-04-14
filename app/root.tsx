@@ -2,9 +2,12 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@re
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import Navbar from "./layout/navbar";
 
-// Use the links function to link CSS directly from the build directory
+// Import the CSS file
+import styles from "./app.css";
+
+// Use the links function to link CSS
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "/build/tailwind.css" },
+  { rel: "stylesheet", href: styles },
   { rel: "icon", href: "/favicon.ico" },
 ];
 

@@ -5,22 +5,20 @@
  * making it easy to maintain and update font choices.
  */
 
-import { Inter, Alexandria } from "next/font/google";
+// Import fonts via CSS instead of Next.js
+// We're using standard CSS imports in our global CSS file
 
-// Configure Inter font
-export const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
+// Font configurations (constants only, no dynamic loading)
+export const interConfig = {
+  name: "Inter",
   variable: "--font-inter",
-});
+};
 
-// Configure Alexandria font
-export const alexandria = Alexandria({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
+export const alexandriaConfig = {
+  name: "Alexandria",
   variable: "--font-alexandria",
-});
+  weights: ["400", "500", "600", "700"],
+};
 
 // Font family strings for direct CSS usage
 export const fontFamilies = {
