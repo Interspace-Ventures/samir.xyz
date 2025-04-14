@@ -99,4 +99,4 @@ cat > public/build/consolidated.css << EOL
 EOL
 
 echo "Starting Remix development server..."
-node ./remix-dev.js
+node ./server/remix-dev.js
