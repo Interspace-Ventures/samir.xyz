@@ -11,15 +11,8 @@ mkdir -p public/assets/images
 mkdir -p public/assets/profiles
 mkdir -p public/assets/ventures
 
-# Build the Tailwind CSS file
-echo "Building Tailwind CSS file..."
-mkdir -p public/styles
-
-# Process the CSS file with Tailwind CLI
-npx tailwindcss -i ./public/styles/app.css -o ./public/styles/app.css
-
 echo "Starting Remix development server..."
 # Kill any existing processes using port 5000
 kill $(lsof -t -i:5000) 2>/dev/null || true
-# Start Remix dev server
+# Start Remix dev server (Remix will handle CSS processing automatically)
 npx remix dev
