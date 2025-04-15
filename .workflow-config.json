@@ -1,8 +1,8 @@
 {
   "workflows": {
     "Start application": {
-      "command": "mkdir -p public/build && cp ./app/tailwind.css ./public/tailwind.css && npx remix dev -p 8080",
-      "wait_for_port": 8080
+      "command": "./start-remix.sh",
+      "wait_for_port": 12345
     }
   }
 }
