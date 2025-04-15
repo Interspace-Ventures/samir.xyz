@@ -14,14 +14,14 @@ mkdir -p public/assets/images
 mkdir -p public/assets/profiles
 mkdir -p public/assets/ventures
 
-echo "Processing CSS..."
-# Build Tailwind CSS
-./tailwind-build.sh
+echo "Building Tailwind CSS..."
+# Process Tailwind CSS
+npx tailwindcss -i ./app/tailwind.css -o ./public/tailwind.css
 
 echo "Starting Remix development server..."
 # Kill any existing processes using port 5000
 kill $(lsof -t -i:5000) 2>/dev/null || true
 
-# Start Remix dev server with Bun
-echo "Executing: bun run remix dev"
-bun run remix dev
+# Start Remix dev server
+echo "Executing: npx remix dev"
+npx remix dev
