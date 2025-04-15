@@ -2,7 +2,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { MetaFunction } from "@remix-run/node";
 import VenturesGrid from "../ventures/ventures-grid";
-import { ventures as venturesData } from "../config/data/ventures";
+import { ventures as venturesData } from "../data/ventures";
 
 export const meta: MetaFunction = () => {
   return [
