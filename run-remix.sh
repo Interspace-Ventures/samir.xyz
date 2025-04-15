@@ -16,12 +16,12 @@ mkdir -p public/assets/ventures
 
 echo "Building Tailwind CSS..."
 # Process Tailwind CSS
-npx tailwindcss -i ./app/tailwind.css -o ./public/tailwind.css
+npx -p tailwindcss tailwindcss -i ./app/tailwind.css -o ./public/tailwind.css
 
 echo "Starting Remix development server..."
 # Kill any existing processes using port 5000
 kill $(lsof -t -i:5000) 2>/dev/null || true
 
 # Start Remix dev server with npx
-echo "Executing: npx remix dev"
-npx remix dev
+echo "Executing: npx remix dev -p 5000"
+npx remix dev -p 5000

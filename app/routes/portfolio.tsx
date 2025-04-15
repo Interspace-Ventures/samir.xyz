@@ -2,7 +2,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import type { MetaFunction } from "@remix-run/node";
-import { companies, categories } from "../config/data/portfolio";
+import { companies, categories } from "../data/portfolio";
 import PortfolioGrid from "../portfolio/portfolio-grid";
 import FilterCategories from "../portfolio/filter-categories";
 import StatsSection from "../portfolio/stats-section";
