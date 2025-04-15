@@ -9,7 +9,6 @@ export interface Venture {
 
 // Venture data for ventures page
 export const ventures: Venture[] = [
-  // Original ventures
   {
     name: "Future Fund",
     description: "Early-stage investment fund focused on disruptive technologies and AI-driven startups.",
@@ -47,28 +46,5 @@ export const ventures: Venture[] = [
     description: "Investment fund focusing on technologies addressing climate change and sustainability.",
     image: "/assets/ventures/climate-tech.png",
     link: "/ventures/climate-tech-fund"
-  },
-  
-  // Additional ventures from src directory
-  {
-    name: "Fintech Innovation Lab",
-    description: "Incubating next-generation financial technology startups.",
-    image: "/assets/ventures/fintech-innovation-lab.png",
-    link: "/ventures/fintech-innovation-lab",
-    stage: "Early Stage"
-  },
-  {
-    name: "Digital Banking Platform",
-    description: "Building accessible digital banking tools for everyone.",
-    image: "/assets/ventures/digital-banking-platform.png",
-    link: "/ventures/digital-banking-platform",
-    stage: "Growth"
-  },
-  {
-    name: "Blockchain Solutions",
-    description: "Exploring blockchain applications for financial services.",
-    image: "/assets/ventures/blockchain-solutions.png",
-    link: "/ventures/blockchain-solutions",
-    stage: "Research"
   }
 ];
