@@ -1,7 +1,9 @@
 # Build output
+build/
+public/build/
+.cache/
 .next/
 out/
-build/
 dist/
 
 # Dependencies
@@ -32,8 +34,8 @@ yarn-error.log*
 # Unnecessary directories
 .backup/
 .config/
-.cache/
 .upm/
+.cache/
 
 # Editor directories
 .idea/
