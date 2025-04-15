@@ -1,3 +1,4 @@
 #!/bin/bash
-# This script is a wrapper for run-remix.sh to maintain compatibility with workflow config
+# This script directly executes run-remix.sh
+chmod +x ./run-remix.sh
 ./run-remix.sh

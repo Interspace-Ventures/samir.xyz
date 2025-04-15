@@ -15,8 +15,10 @@ mkdir -p public/assets/profiles
 mkdir -p public/assets/ventures
 
 echo "Building Tailwind CSS..."
-# Process Tailwind CSS
-npx -p tailwindcss tailwindcss -i ./app/tailwind.css -o ./public/tailwind.css
+# Copy the raw CSS file first as a fallback
+cp ./app/tailwind.css ./public/tailwind.css
+# Then try to process with PostCSS if available
+npx postcss ./app/tailwind.css -o ./public/tailwind.css || echo "Falling back to unprocessed CSS"
 
 echo "Starting Remix development server..."
 # Kill any existing processes using port 5000
