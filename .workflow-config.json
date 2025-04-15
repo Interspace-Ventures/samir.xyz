@@ -1,7 +1,7 @@
 {
   "workflows": {
     "Start application": {
-      "command": "./run-remix.sh",
+      "command": "pkill -9 node || true && cp ./app/tailwind.css ./public/tailwind.css && npx remix dev",
       "wait_for_port": 5000
     }
   }

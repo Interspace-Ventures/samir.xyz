@@ -10,8 +10,8 @@ export const links: LinksFunction = () => [
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Portfolio App" },
-    { name: "description", content: "A developer productivity portfolio website" },
+    { title: "Portfolio App (Shadcn UI)" },
+    { name: "description", content: "A developer productivity portfolio website with Shadcn UI" },
   ];
 };
 
