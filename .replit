@@ -13,6 +13,10 @@ localPort = 3001
 externalPort = 3001
 
 [[ports]]
+localPort = 4040
+externalPort = 6800
+
+[[ports]]
 localPort = 4747
 externalPort = 3002
 
@@ -21,12 +25,32 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
+localPort = 5050
+externalPort = 6000
+
+[[ports]]
+localPort = 6060
+externalPort = 8000
+
+[[ports]]
+localPort = 7654
+externalPort = 5173
+
+[[ports]]
 localPort = 7777
 externalPort = 3003
 
 [[ports]]
 localPort = 8080
 externalPort = 8080
+
+[[ports]]
+localPort = 9876
+externalPort = 5000
+
+[[ports]]
+localPort = 12345
+externalPort = 4200
 
 [deployment]
 run = ["sh", "-c", "npm run dev -p 5000 --hostname 0.0.0.0"]

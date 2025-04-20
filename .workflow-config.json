@@ -1,8 +1,8 @@
 {
   "workflows": {
     "Start application": {
-      "command": "./start-remix.sh",
-      "wait_for_port": 12345
+      "command": "./run-remix.sh",
+      "wait_for_port": 6060
     }
   }
 }
