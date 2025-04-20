@@ -7,7 +7,7 @@ pkill -9 node 2>/dev/null || true
 sleep 3
 
 # Use a very unique port to avoid conflicts
-SERVER_PORT=9876
+SERVER_PORT=7654
 
 # Check if our port is available
 if lsof -i:$SERVER_PORT > /dev/null 2>&1; then
@@ -27,6 +27,10 @@ mkdir -p public/assets/ventures
 echo "Building Tailwind CSS..."
 cp ./app/tailwind.css ./public/tailwind.css
 
+# Build the Remix application first
+echo "Building Remix application..."
+npx remix build
+
 # Clear the terminal
 clear
 
@@ -36,4 +40,5 @@ export NODE_ENV=development
 
 echo "Starting Remix development server on port $SERVER_PORT..."
 echo "----------------------------------------"
+# Instead of using remix-serve, use the dev server which doesn't need a build directory
 npx remix dev -p $SERVER_PORT
