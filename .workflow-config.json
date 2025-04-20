@@ -2,7 +2,7 @@
   "workflows": {
     "Start application": {
       "command": "./run-remix.sh",
-      "wait_for_port": 3090,
+      "wait_for_port": 60000,
       "run_non_interactively": false
     }
   }
