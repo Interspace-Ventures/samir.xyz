@@ -2,10 +2,10 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import type { MetaFunction } from "@remix-run/node";
-import { companies, categories } from "../data/portfolio";
-import PortfolioGrid from "../portfolio/portfolio-grid-shadcn";
-import FilterCategories from "../portfolio/filter-categories-shadcn";
-import StatsSection from "../portfolio/stats-section-shadcn";
+import { companies, categories } from "../config/data/portfolio";
+import PortfolioGrid from "../portfolio/portfolio-grid";
+import FilterCategories from "../portfolio/filter-categories";
+import StatsSection from "../portfolio/stats-section";
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,7 +32,7 @@ export default function Portfolio() {
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8 md:mb-12">
         <h1 className="text-3xl font-bold mb-2">Company Portfolio</h1>
-        <p className="text-muted-foreground">
+        <p className="text-gray-600">
           Explore our collection of invested companies across different sectors
         </p>
       </header>

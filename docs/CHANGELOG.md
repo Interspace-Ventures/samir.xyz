@@ -2,40 +2,6 @@
 
 All notable changes to the Portfolio Website project will be documented in this file.
 
-## [9.1.0] - 2025-04-15
-
-### Added
-- Updated profile page with personalized information and content
-- Added detailed README documentation for the cleanup process
-
-### Changed
-- Simplified run-remix.sh script for better reliability and maintainability
-- Updated all documentation references to use run-remix.sh instead of start.sh
-- Updated .gitignore to properly reflect the Remix project structure
-
-### Removed
-- Removed redundant src directory after migrating all unique content
-- Removed temp-migration directories after confirming content preservation
-- Eliminated temp-backup directory after asset consolidation
-- Removed start.sh wrapper script to simplify the workflow
-
-## [9.0.0] - 2025-04-14
-
-### Added
-- Created full Remix project structure with proper routing and data loading
-- Implemented ThemeProvider compatible with Remix architecture
-- Added error boundary components for all routes
-
-### Changed
-- Migrated from Next.js to Remix for improved developer experience
-- Refactored all components to follow Remix patterns and conventions
-- Consolidated styling to use Tailwind CSS with minimal global styles
-- Reorganized directory structure to follow Remix conventions
-
-### Removed
-- Removed Next.js-specific components and dependencies
-- Eliminated Bun runtime dependencies in favor of standard Node.js
-
 ## [8.16.0] - 2025-04-14
 
 ### Added
