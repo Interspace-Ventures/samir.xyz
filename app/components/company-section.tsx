@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 
@@ -9,7 +9,7 @@ type Tag = {
   name: string;
 };
 
-type Company = {
+type Portfolio = {
   id: number;
   name: string;
   category: string;
@@ -44,39 +44,39 @@ export default function CompanySection() {
     }
   });
 
-  // Fetch all companies
+  // Fetch all portfolio items
   const { 
-    data: companies = [],
-    isLoading: isLoadingCompanies,
-    error: companiesError 
-  } = useQuery<Company[]>({
-    queryKey: ['companies'],
+    data: portfolioItems = [],
+    isLoading: isLoadingPortfolio,
+    error: portfolioError 
+  } = useQuery<Portfolio[]>({
+    queryKey: ['portfolio'],
     queryFn: async () => {
-      const res = await fetch('/api/companies');
+      const res = await fetch('/api/portfolio');
       if (!res.ok) {
-        throw new Error('Failed to fetch companies');
+        throw new Error('Failed to fetch portfolio items');
       }
       return res.json();
     }
   });
 
-  // Filter companies by selected category
-  const filteredCompanies = companies.filter(company => 
-    selectedCategory === 'All' || company.category === selectedCategory
+  // Filter portfolio items by selected category
+  const filteredItems = portfolioItems.filter(item => 
+    selectedCategory === 'All' || item.category === selectedCategory
   );
 
-  if (isLoadingCategories || isLoadingCompanies) {
+  if (isLoadingCategories || isLoadingPortfolio) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
 
-  if (categoriesError || companiesError) {
+  if (categoriesError || portfolioError) {
     return <div className="min-h-screen flex items-center justify-center">Error loading data</div>;
   }
 
   return (
     <section className="py-20 bg-black text-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12">Companies</h2>
+        <h2 className="text-3xl font-bold mb-12">Portfolio</h2>
         
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 mb-10">
@@ -95,18 +95,18 @@ export default function CompanySection() {
           ))}
         </div>
 
-        {/* Company Grid */}
+        {/* Portfolio Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCompanies.map(company => (
+          {filteredItems.map(item => (
             <div 
-              key={company.id} 
+              key={item.id} 
               className="relative bg-white rounded-lg p-8 flex items-center justify-center h-48"
             >
               {/* Company Logo */}
               <div className="relative h-16 flex items-center justify-center">
                 <Image
-                  src={company.logoUrl}
-                  alt={company.name}
+                  src={item.logoUrl}
+                  alt={item.name}
                   width={160}
                   height={60}
                   style={{ objectFit: 'contain' }}
@@ -114,9 +114,9 @@ export default function CompanySection() {
               </div>
               
               {/* Tags */}
-              {company.tags.length > 0 && (
+              {item.tags.length > 0 && (
                 <div className="absolute top-4 right-4 flex gap-2">
-                  {company.tags.map(tag => (
+                  {item.tags.map(tag => (
                     <span 
                       key={tag.id} 
                       className={`px-2 py-1 text-xs rounded ${
@@ -134,9 +134,9 @@ export default function CompanySection() {
               )}
               
               {/* Link overlay if website available */}
-              {company.website && (
+              {item.website && (
                 <a
-                  href={company.website}
+                  href={item.website}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="absolute inset-0 z-10 opacity-0 hover:opacity-100 bg-black bg-opacity-10 transition-opacity duration-300 flex items-center justify-center rounded-lg"
