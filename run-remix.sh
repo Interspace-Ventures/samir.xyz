@@ -1,1 +1,0 @@
-run-nextjs.sh
