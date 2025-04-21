@@ -1,40 +1,21 @@
 {
   "name": "workspace",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "next build",
-    "dev": "next dev -p 5000 --hostname 0.0.0.0",
-    "start": "next start -p 5000 --hostname 0.0.0.0"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@fontsource/alexandria": "^5.2.5",
-    "@remix-run/dev": "^2.16.5",
-    "@remix-run/node": "^2.16.5",
-    "@remix-run/react": "^2.16.5",
-    "@remix-run/serve": "^2.16.5",
     "@tailwindcss/typography": "^0.5.16",
-    "@types/node": "^22.13.11",
-    "@types/react": "^19.0.12",
-    "@types/react-dom": "^19.0.4",
-    "autoprefixer": "^10.4.21",
     "class-variance-authority": "^0.7.1",
-    "isbot": "^5.1.26",
-    "postcss": "^8.5.3",
-    "postcss-cli": "^11.0.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "shadcn": "^2.4.0-canary.17",
-    "tailwind-merge": "^3.0.2",
-    "tailwindcss": "^4.1.4",
-    "tailwindcss-animate": "^1.0.7",
-    "tailwindcss-cli": "^0.1.2",
-    "typescript": "^5.8.2"
-  },
-  "type": "module"
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.7.4",
+    "lucide-react": "^0.501.0",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.2.0"
+  }
 }

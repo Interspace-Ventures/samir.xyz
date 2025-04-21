@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-bun node_modules/@remix-run/dev/dist/cli.js dev --port 5000 --host 0.0.0.0
