@@ -22,16 +22,27 @@ model Tag {
 
 // Portfolio model - Stores company portfolio items
 model Portfolio {
-  id         Int       @id @default(autoincrement())
-  name       String    // Company name
-  category   String    // Portfolio category (e.g., "Fintech", "Health", "Retail", "SaaS")
-  logoUrl    String    // URL to company logo
-  website    String?   // Optional URL to company website
-  featured   Boolean   @default(false) // Whether to feature prominently
-  order      Int       @default(0)     // Display order (lower numbers appear first)
-  createdAt  DateTime  @default(now()) // When item was added
-  updatedAt  DateTime  @updatedAt      // When item was last updated
-  tags       Tag[]     @relation("PortfolioToTag") // Tags associated with this portfolio item
+  id                  Int       @id @default(autoincrement())
+  name                String    // Company name
+  category            String    // Portfolio category (e.g., "Fintech", "Health", "Retail", "SaaS")
+  logoUrl             String    // URL to company logo
+  website             String?   // Optional URL to company website
+  featured            Boolean   @default(false) // Whether to feature prominently
+  order               Int       @default(0)     // Display order (lower numbers appear first)
+  
+  // Investment and financial data
+  investmentDate      DateTime? // When the investment was made
+  initialInvestment   Float?    // Initial investment amount
+  currentValuation    Float?    // Current valuation of the investment
+  exitDate            DateTime? // Date of exit/acquisition (if applicable)
+  exitAmount          Float?    // Amount received on exit (if applicable)
+  returnMultiple      Float?    // Investment return multiple (e.g., 2.5x)
+  annualizedReturn    Float?    // Annualized percentage return
+  status              String?   // Investment status (e.g., "Active", "Exited", "Written Off")
+  
+  createdAt           DateTime  @default(now()) // When item was added
+  updatedAt           DateTime  @updatedAt      // When item was last updated
+  tags                Tag[]     @relation("PortfolioToTag") // Tags associated with this portfolio item
 }
 
 // Category model - For grouping portfolio items by category
