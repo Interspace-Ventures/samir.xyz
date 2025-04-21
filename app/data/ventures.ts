@@ -1,1 +1,0 @@
-../config/data/ventures.ts
