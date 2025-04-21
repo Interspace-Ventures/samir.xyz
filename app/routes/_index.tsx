@@ -1,36 +1,36 @@
 import { json } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import type { MetaFunction } from "@remix-run/node";
-import { Button } from "../components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
-import { companies } from "../data/portfolio";
-import { ventures } from "../data/ventures";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Samir.xyz - Home" },
-    { name: "description", content: "Portfolio and ventures by Samir" },
+    { title: "Portfolio - Home" },
+    { name: "description", content: "A developer productivity portfolio website" },
   ];
 };
 
 // Loader function to load data for this route
 export async function loader() {
-  // Use actual data from our portfolio and ventures
+  // Here you would typically fetch data from a database or API
+  // For now, we'll return a simple object
   return json({
-    // Get the top 3 companies by categories for featured items
-    featuredCompanies: companies.slice(0, 3),
-    // Get priority ventures
-    featuredVentures: ventures.filter(v => v.priority).slice(0, 2)
+    featuredProjects: [
+      { id: 1, name: "Project Alpha", description: "A cutting-edge development tool" },
+      { id: 2, name: "Project Beta", description: "Streamlined workflow automation" },
+      { id: 3, name: "Project Gamma", description: "Developer productivity suite" },
+    ],
   });
 }
 
 export default function Index() {
+  const { featuredProjects } = useLoaderData<typeof loader>();
+
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-12 text-center">
-        <h1 className="text-4xl font-bold mb-4">Samir's Portfolio</h1>
-        <p className="text-xl text-muted-foreground">
-          Investments, ventures, and projects
+        <h1 className="text-4xl font-bold mb-4">Developer Portfolio</h1>
+        <p className="text-xl text-gray-600">
+          A showcase of innovative projects and development tools
         </p>
       </header>
 
@@ -38,77 +38,42 @@ export default function Index() {
         <Link to="/" className="text-primary font-medium hover:underline">
           Home
         </Link>
-        <Link to="/portfolio" className="text-muted-foreground hover:text-primary hover:underline">
+        <Link to="/portfolio" className="text-gray-600 hover:text-primary hover:underline">
           Portfolio
         </Link>
-        <Link to="/ventures" className="text-muted-foreground hover:text-primary hover:underline">
+        <Link to="/ventures" className="text-gray-600 hover:text-primary hover:underline">
           Ventures
         </Link>
-        <Link to="/profile" className="text-muted-foreground hover:text-primary hover:underline">
+        <Link to="/profile" className="text-gray-600 hover:text-primary hover:underline">
           Profile
         </Link>
       </nav>
 
       <section className="mb-16">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Featured Sections</h2>
-          <div className="flex gap-4">
-            <Button variant="outline" asChild>
-              <Link to="/portfolio">View Portfolio</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/ventures">Explore Ventures</Link>
-            </Button>
-          </div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Portfolio</CardTitle>
-              <CardDescription>Companies and investments</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Browse through the collection of companies in various sectors including Fintech, Health, Retail, and SaaS.</p>
-            </CardContent>
-            <CardFooter>
-              <Button variant="outline" asChild>
-                <Link to="/portfolio">View Portfolio</Link>
-              </Button>
-            </CardFooter>
-          </Card>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle>Ventures</CardTitle>
-              <CardDescription>Strategic investments and partnerships</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Discover innovative ventures exploring new frontiers in technology and business.</p>
-            </CardContent>
-            <CardFooter>
-              <Button variant="outline" asChild>
-                <Link to="/ventures">Explore Ventures</Link>
-              </Button>
-            </CardFooter>
-          </Card>
+        <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {featuredProjects.map((project) => (
+            <div key={project.id} className="card p-6">
+              <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
+              <p className="text-gray-600 mb-4">{project.description}</p>
+              <button className="btn btn-primary">View Project</button>
+            </div>
+          ))}
         </div>
       </section>
 
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>About</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="mb-4">
-            This portfolio website showcases investments, ventures and projects across multiple sectors.
-            Browse through the different sections to learn more about our work and approach.
-          </p>
-          <p>
-            Built with Remix, React, TypeScript, and Tailwind CSS with shadcn/ui components.
-          </p>
-        </CardContent>
-      </Card>
+      <section className="bg-gray-50 p-8 rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">About This Project</h2>
+        <p className="text-gray-700 mb-4">
+          This portfolio website is built with Remix, React, TypeScript, and Tailwind CSS.
+          It showcases a collection of projects and developer tools designed to improve
+          productivity and enhance the development experience.
+        </p>
+        <p className="text-gray-700">
+          Explore the different sections to learn more about our work and approach
+          to software development.
+        </p>
+      </section>
     </div>
   );
 }

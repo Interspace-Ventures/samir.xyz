@@ -1,72 +1,24 @@
-modules = ["nodejs-20"]
-run = "npm run dev"
+modules = ["bun", "nodejs-20"]
+run = "bun run dev"
 
 [nix]
 channel = "stable-24_05"
-
-[[ports]]
-localPort = 3000
-externalPort = 3000
 
 [[ports]]
 localPort = 3001
 externalPort = 3001
 
 [[ports]]
-localPort = 3090
-externalPort = 8008
-
-[[ports]]
-localPort = 4040
-externalPort = 6800
-
-[[ports]]
-localPort = 4747
-externalPort = 3002
-
-[[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 5050
-externalPort = 6000
-
-[[ports]]
-localPort = 6060
-externalPort = 8000
-
-[[ports]]
-localPort = 7654
-externalPort = 5173
-
-[[ports]]
-localPort = 7777
-externalPort = 3003
 
 [[ports]]
 localPort = 8080
 externalPort = 8080
 
-[[ports]]
-localPort = 9876
-externalPort = 5000
-
-[[ports]]
-localPort = 12345
-externalPort = 4200
-
-[[ports]]
-localPort = 20000
-externalPort = 8081
-
-[[ports]]
-localPort = 60000
-externalPort = 8099
-
 [deployment]
-run = ["sh", "-c", "npm run dev -p 5000 --hostname 0.0.0.0"]
-build = ["sh", "-c", "npm run build"]
+run = ["sh", "-c", "bun run dev -p 5000 --hostname 0.0.0.0"]
+build = ["sh", "-c", "bun run build"]
 
 [workflows]
 runButton = "Project"
@@ -78,7 +30,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "bun run dev"
 
 [[workflows.workflow]]
 name = "Project"
@@ -101,4 +53,4 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "./run-remix.sh"
+args = "./start.sh"

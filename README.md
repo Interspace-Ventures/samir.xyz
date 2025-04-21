@@ -163,7 +163,7 @@ The project follows consistent naming conventions for better readability and mai
 Located in `tools/scripts/organize-assets.sh`, this script handles asset organization and normalization:
 
 - **Purpose**: Ensures consistent image asset locations and naming conventions
-- **When it runs**: Automatically executed during the `run-remix.sh` startup process
+- **When it runs**: Automatically executed during the `start.sh` startup process
 - **What it does**:
   1. Creates necessary directories for assets
   2. Copies images from `attached_assets` to `public/attached_assets`
@@ -291,14 +291,14 @@ When working with this codebase, please adhere to these best practices:
 
 ## Building and Running
 
-The application is configured to run automatically through the "Start application" workflow, which executes `./run-remix.sh`.
+The application is configured to run automatically through the "Start application" workflow, which executes `./start.sh`.
 
 ```bash
 # View application version
 cat version.json
 
 # Manual start (if needed)
-./run-remix.sh
+./start.sh
 ```
 
 The application will be available at the designated Replit URL or locally at [http://localhost:5000](http://localhost:5000).
@@ -312,7 +312,7 @@ The codebase has been significantly optimized to:
    - Eliminated code causing hydration errors and unexpected behavior
 
 2. **Optimize Development Process**:
-   - Improved `run-remix.sh` to streamline the asset management and server startup
+   - Improved `start.sh` to automatically run the `organize-assets.sh` script for asset management
    - Optimized environment variables to follow best practices
    - Streamlined the development server startup process
 
@@ -372,16 +372,9 @@ The project follows Semantic Versioning with the following custom guidelines:
 
 ### Latest Version
 
-Current version: 9.1.0 (2025-04-15)
+Current version: 9.0.0 (2025-04-14)
 
 Key updates in the latest version:
-- **Codebase Cleanup** - Removed redundant src and temp directories after migrating all content
-- **Script Optimization** - Simplified run-remix.sh and removed unnecessary start.sh wrapper
-- **Data Consolidation** - Merged all companies and ventures from duplicate sources
-- **Profile Enhancement** - Updated profile content with personalized information
-- **Documentation Update** - Updated all scripts and workflow references in documentation
-
-Previous version: 9.0.0 (2025-04-14)
 - **Framework Migration** - Migrated from Next.js to Remix for improved developer experience and performance
 - **Simplified Structure** - Created a dramatically simplified folder structure with domain-specific organization
 - **Dependency Cleanup** - Removed unnecessary dependencies including Next.js-related packages and Bun runtime

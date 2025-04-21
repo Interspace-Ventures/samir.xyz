@@ -1,6 +1,6 @@
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
-import NavbarShadcn from "./layout/navbar-shadcn";
+import Navbar from "./layout/navbar";
 
 // Use the links function to link CSS
 export const links: LinksFunction = () => [
@@ -17,21 +17,21 @@ export const meta: MetaFunction = () => {
 
 export default function App() {
   return (
-    <html lang="en" className="antialiased">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body>
         <div className="flex flex-col min-h-screen">
-          <NavbarShadcn />
+          <Navbar />
           <main className="flex-grow">
             <Outlet />
           </main>
-          <footer className="mt-auto py-4 bg-muted/50">
-            <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
+          <footer className="mt-auto py-4 bg-gray-100">
+            <div className="container mx-auto px-4 text-center text-gray-600 text-sm">
               Portfolio App &copy; {new Date().getFullYear()}
             </div>
           </footer>
@@ -53,11 +53,11 @@ export function ErrorBoundary() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-background text-foreground">
+      <body>
         <div className="error-container p-8 text-center">
           <h1 className="text-2xl font-bold mb-4">Application Error</h1>
           <p className="mb-4">Sorry, an unexpected error has occurred.</p>
-          <a href="/" className="text-primary hover:underline">
+          <a href="/" className="text-blue-500 hover:underline">
             Return to homepage
           </a>
         </div>
