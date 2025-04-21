@@ -1,0 +1,73 @@
+// Personal Portfolio Website - Prisma Schema
+// This schema defines the data models for the portfolio website
+// Learn more about Prisma schemas: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Project model - Stores portfolio projects information
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String   // Project title
+  description String   // Detailed project description
+  imageUrl    String?  // Optional URL to project screenshot or cover image
+  link        String?  // Optional URL to live project
+  github      String?  // Optional URL to GitHub repository
+  featured    Boolean  @default(false) // Whether to feature on homepage
+  createdAt   DateTime @default(now()) // When project was added
+  updatedAt   DateTime @updatedAt      // When project was last updated
+  tags        Tag[]    @relation("ProjectToTag") // Technologies used in project
+}
+
+// Tag model - Technology tags that can be associated with projects
+model Tag {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique // Unique tag name (e.g., "React", "TypeScript")
+  projects  Project[] @relation("ProjectToTag") // Projects using this technology
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  companies Company[] @relation("CompanyToTag") // Companies associated with this tag
+}
+
+// Venture model - Stores information about creative ventures and side projects
+model Venture {
+  id          Int      @id @default(autoincrement())
+  name        String   // Venture name
+  description String   // Description of the venture
+  logoUrl     String?  // Optional URL to venture logo
+  website     String?  // Optional URL to venture website
+  industry    String?  // Optional industry category
+  founded     Int?     // Optional founding year
+  featured    Boolean  @default(false) // Whether to feature on homepage
+  createdAt   DateTime @default(now()) // When venture was added
+  updatedAt   DateTime @updatedAt      // When venture was last updated
+}
+
+// Company model - Stores portfolio companies information
+model Company {
+  id         Int       @id @default(autoincrement())
+  name       String    // Company name
+  category   String    // Portfolio category (e.g., "Client", "Employer", "Partner")
+  logoUrl    String    // URL to company logo
+  website    String?   // Optional URL to company website
+  featured   Boolean   @default(false) // Whether to feature prominently
+  order      Int       @default(0)     // Display order (lower numbers appear first)
+  createdAt  DateTime  @default(now()) // When company was added
+  updatedAt  DateTime  @updatedAt      // When company was last updated
+  tags       Tag[]     @relation("CompanyToTag") // Tags associated with this company
+}
+
+// Category model - For grouping companies by portfolio category
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique // Category name (e.g., "Clients", "Employers")
+  order     Int      @default(0) // Display order
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
