@@ -6,11 +6,8 @@ import { useEffect, useState } from 'react';
 interface InvestmentMetrics {
   investment_date?: Date | string | null;
   initial_investment?: number | null;
+  original_valuation?: number | null;
   current_valuation?: number | null;
-  return_multiple?: number | null;
-  annualized_return?: number | null;
-  exit_date?: Date | string | null;
-  exit_amount?: number | null;
   investment_status?: string | null;
 }
 
@@ -104,11 +101,13 @@ export default function InvestmentMetrics({ data, showDetailed = true }: Investm
           <div className="text-gray-500">Invested:</div>
           <div className="text-right">{formatDate(metrics.investment_date)}</div>
           
-          {/* Return Multiple (if available) */}
-          {metrics.return_multiple && metrics.return_multiple > 0 && (
+          {/* Calculate multiple if we have both values */}
+          {metrics.initial_investment && metrics.current_valuation && (
             <>
-              <div className="text-gray-500">Multiple:</div>
-              <div className="text-right font-medium">{formatMultiple(metrics.return_multiple)}</div>
+              <div className="text-gray-500">Performance:</div>
+              <div className="text-right font-medium">
+                {formatMultiple(metrics.current_valuation / metrics.initial_investment)}
+              </div>
             </>
           )}
         </div>
@@ -144,42 +143,29 @@ export default function InvestmentMetrics({ data, showDetailed = true }: Investm
           </>
         )}
         
+        {/* Original Valuation */}
+        {metrics.original_valuation && (
+          <>
+            <div className="text-gray-500">Original Value:</div>
+            <div className="text-right">{formatCurrency(metrics.original_valuation)}</div>
+          </>
+        )}
+        
         {/* Current Valuation */}
         {metrics.current_valuation && (
           <>
-            <div className="text-gray-500">Valuation:</div>
+            <div className="text-gray-500">Current Value:</div>
             <div className="text-right">{formatCurrency(metrics.current_valuation)}</div>
           </>
         )}
         
-        {/* Return Multiple */}
-        {metrics.return_multiple && (
+        {/* Calculate multiple if we have both values */}
+        {metrics.initial_investment && metrics.current_valuation && (
           <>
             <div className="text-gray-500">Multiple:</div>
-            <div className="text-right font-medium">{formatMultiple(metrics.return_multiple)}</div>
-          </>
-        )}
-        
-        {/* Annualized Return */}
-        {metrics.annualized_return && metrics.annualized_return > 0 && (
-          <>
-            <div className="text-gray-500">Ann. Return:</div>
-            <div className="text-right font-medium">{formatPercentage(metrics.annualized_return)}</div>
-          </>
-        )}
-        
-        {/* Exit Information */}
-        {metrics.exit_date && (
-          <>
-            <div className="text-gray-500">Exit Date:</div>
-            <div className="text-right">{formatDate(metrics.exit_date)}</div>
-          </>
-        )}
-        
-        {metrics.exit_amount && (
-          <>
-            <div className="text-gray-500">Exit Amount:</div>
-            <div className="text-right">{formatCurrency(metrics.exit_amount)}</div>
+            <div className="text-right font-medium">
+              {formatMultiple(metrics.current_valuation / metrics.initial_investment)}
+            </div>
           </>
         )}
       </div>

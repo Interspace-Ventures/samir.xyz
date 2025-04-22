@@ -19,16 +19,12 @@ type Portfolio = {
   description?: string | null;
   logoUrl: string;
   website?: string | null;
-  featured: boolean;
   tags: Tag[];
   // Investment and financial data
   investment_date?: Date | null;
   initial_investment?: number | null;
+  original_valuation?: number | null;
   current_valuation?: number | null;
-  return_multiple?: number | null;
-  annualized_return?: number | null;
-  exit_date?: Date | null;
-  exit_amount?: number | null;
   investment_status?: string | null;
 };
 
@@ -61,8 +57,19 @@ export default function PortfolioMetricsPage() {
     (statusFilter === null || item.investment_status === statusFilter)
   );
   
+  // Calculate multiple for each item
+  const itemsWithMultiple = filteredItems.map(item => {
+    const multiple = (item.initial_investment && item.current_valuation)
+      ? item.current_valuation / item.initial_investment
+      : null;
+    return {
+      ...item,
+      calculated_multiple: multiple
+    };
+  });
+  
   // Sort the filtered items
-  const sortedItems = [...filteredItems].sort((a, b) => {
+  const sortedItems = [...itemsWithMultiple].sort((a, b) => {
     if (sortBy === 'name') {
       return sortOrder === 'asc' 
         ? a.name.localeCompare(b.name)
@@ -81,15 +88,15 @@ export default function PortfolioMetricsPage() {
       return sortOrder === 'asc' ? valA - valB : valB - valA;
     }
     
-    if (sortBy === 'return_multiple') {
-      const valA = a.return_multiple || 0;
-      const valB = b.return_multiple || 0;
+    if (sortBy === 'multiple') {
+      const valA = a.calculated_multiple || 0;
+      const valB = b.calculated_multiple || 0;
       return sortOrder === 'asc' ? valA - valB : valB - valA;
     }
     
-    if (sortBy === 'annualized_return') {
-      const valA = a.annualized_return || 0;
-      const valB = b.annualized_return || 0;
+    if (sortBy === 'current_valuation') {
+      const valA = a.current_valuation || 0;
+      const valB = b.current_valuation || 0;
       return sortOrder === 'asc' ? valA - valB : valB - valA;
     }
     
@@ -101,15 +108,17 @@ export default function PortfolioMetricsPage() {
     total_investments: filteredItems.length,
     total_invested: filteredItems.reduce((sum, item) => sum + (item.initial_investment || 0), 0),
     total_current_value: filteredItems.reduce((sum, item) => sum + (item.current_valuation || 0), 0),
-    average_multiple: filteredItems.reduce((sum, item) => sum + (item.return_multiple || 0), 0) / 
-      (filteredItems.length || 1),
-    average_annualized_return: filteredItems.reduce((sum, item) => sum + (item.annualized_return || 0), 0) / 
-      (filteredItems.length || 1),
-    exited_count: filteredItems.filter(item => 
-      item.investment_status?.includes('Exited')
-    ).length,
+    average_multiple: filteredItems.reduce((sum, item) => {
+      if (item.initial_investment && item.current_valuation) {
+        return sum + (item.current_valuation / item.initial_investment);
+      }
+      return sum;
+    }, 0) / (filteredItems.filter(item => item.initial_investment && item.current_valuation).length || 1),
     active_count: filteredItems.filter(item => 
       item.investment_status === 'Active'
+    ).length,
+    exited_count: filteredItems.filter(item => 
+      item.investment_status?.includes('Exited')
     ).length,
     written_off_count: filteredItems.filter(item => 
       item.investment_status === 'Written Off'
