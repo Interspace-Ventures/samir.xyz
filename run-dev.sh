@@ -1,2 +1,4 @@
 #!/bin/bash
-npx next dev --port 3000 --hostname 0.0.0.0
+
+# Run the Next.js development server
+npm run dev
