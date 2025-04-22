@@ -25,23 +25,24 @@ model Portfolio {
   id                  Int       @id @default(autoincrement())
   name                String    // Company name
   category            String    // Portfolio category (e.g., "Fintech", "Health", "Retail", "SaaS")
+  description         String?   @db.VarChar(280) // Short description of the company (limited to 280 chars)
   logoUrl             String    // URL to company logo
   website             String?   // Optional URL to company website
   featured            Boolean   @default(false) // Whether to feature prominently
   order               Int       @default(0)     // Display order (lower numbers appear first)
   
   // Investment and financial data
-  investmentDate      DateTime? // When the investment was made
-  initialInvestment   Float?    // Initial investment amount
-  currentValuation    Float?    // Current valuation of the investment
-  exitDate            DateTime? // Date of exit/acquisition (if applicable)
-  exitAmount          Float?    // Amount received on exit (if applicable)
-  returnMultiple      Float?    // Investment return multiple (e.g., 2.5x)
-  annualizedReturn    Float?    // Annualized percentage return
-  status              String?   // Investment status (e.g., "Active", "Exited", "Written Off")
+  investment_date     DateTime? // When the investment was made
+  initial_investment  Float?    // Initial investment amount
+  current_valuation   Float?    // Current valuation of the investment
+  exit_date           DateTime? // Date of exit/acquisition (if applicable)
+  exit_amount         Float?    // Amount received on exit (if applicable)
+  return_multiple     Float?    // Investment return multiple (e.g., 2.5x)
+  annualized_return   Float?    // Annualized percentage return
+  investment_status   String?   // Investment status (e.g., "Active", "Exited", "Written Off")
   
-  createdAt           DateTime  @default(now()) // When item was added
-  updatedAt           DateTime  @updatedAt      // When item was last updated
+  createdAt           DateTime  @default(now()) // When item was added at database level
+  updatedAt           DateTime  @updatedAt      // When item was last updated at database level
   tags                Tag[]     @relation("PortfolioToTag") // Tags associated with this portfolio item
 }
 
