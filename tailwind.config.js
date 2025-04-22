@@ -8,22 +8,24 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        sans: ['Alexandria', 'sans-serif'],
+        alexandria: ['Alexandria', 'sans-serif'],
       },
       colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+        purple: {
+          primary: '#8c5cf6',
+          dark: '#3D365C',
+          light: '#c084fc',
         },
+        text: {
+          primary: '#ffffff',
+          secondary: '#c084fc',
+          tertiary: '#a1a1aa',
+        },
+        bg: {
+          primary: '#3D365C',
+          secondary: '#8c5cf6',
+        }
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-in-out',
@@ -41,5 +43,6 @@ module.exports = {
       },
     },
   },
+  darkMode: 'class',
   plugins: [],
 };

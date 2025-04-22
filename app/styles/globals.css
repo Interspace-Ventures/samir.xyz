@@ -8,7 +8,12 @@
   }
   
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+    @apply bg-bg-primary text-text-primary;
+  }
+
+  /* Make company logos have white background even in dark mode */
+  .company-logo {
+    @apply bg-white rounded-md p-2 flex items-center justify-center overflow-hidden;
   }
 }
 
@@ -21,6 +26,10 @@
     @apply py-16 md:py-24;
   }
   
+  .section-title {
+    @apply text-3xl font-bold mb-8 text-text-primary;
+  }
+  
   .heading-1 {
     @apply text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl;
   }
@@ -31,5 +40,9 @@
   
   .heading-3 {
     @apply text-2xl font-bold tracking-tight;
+  }
+
+  .card {
+    @apply bg-purple-dark rounded-lg p-6 transition-all duration-300 border border-purple-primary/10 hover:border-purple-primary/30;
   }
 }

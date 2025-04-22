@@ -1,17 +1,19 @@
-import './styles/globals.css';
+import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Alexandria } from 'next/font/google';
 import Providers from './providers';
+import Navigation from './components/navigation';
+import Footer from './components/footer';
 
-const inter = Inter({
+const alexandria = Alexandria({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['400', '500', '700'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Personal Portfolio',
-  description: 'A minimal and clean personal portfolio website',
+  title: 'Interspace Ventures',
+  description: 'A minimal portfolio website showcasing Interspace Ventures investments',
 };
 
 export default function RootLayout({
@@ -20,10 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
-      <body>
+    <html lang="en" className="dark">
+      <body className={`${alexandria.className} bg-bg-primary text-text-primary min-h-screen flex flex-col`}>
         <Providers>
-          <main>{children}</main>
+          <Navigation />
+          <main className="flex-grow">{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>

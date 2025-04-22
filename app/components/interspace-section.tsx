@@ -51,11 +51,11 @@ const fallbackVentures: Venture[] = [
 
 // Color pairs for gradient backgrounds
 const colorPairs = [
-  ['from-violet-500', 'to-purple-700'],
-  ['from-amber-400', 'to-orange-600'],
-  ['from-teal-400', 'to-emerald-600'],
-  ['from-sky-400', 'to-blue-600'],
-  ['from-pink-400', 'to-rose-600'],
+  ['from-purple-dark', 'to-purple-primary'],
+  ['from-purple-primary/80', 'to-purple-light'],
+  ['from-purple-dark/90', 'to-purple-primary/80'],
+  ['from-purple-primary/70', 'to-purple-dark'],
+  ['from-purple-light/90', 'to-purple-primary'],
 ];
 
 const fetchVentures = async (): Promise<Venture[]> => {
@@ -78,66 +78,89 @@ const InterspaceSection = () => {
   const displayVentures = ventures && ventures.length > 0 ? ventures : fallbackVentures;
 
   return (
-    <section id="interspace" className="section">
-      <div className="container">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="heading-2 mb-4">Interspace</h2>
-          <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
-            A creative playground where technology meets art and imagination.
+    <>
+      <div className="mb-8">
+        <div className="flex justify-between items-center">
+          <p className="text-text-secondary max-w-2xl">
+            Creative initiatives, early-stage prototypes, and R&D projects from our studio.
           </p>
-        </motion.div>
+        </div>
+      </div>
 
-        {isLoading ? (
-          <div className="flex justify-center">
-            <div className="animate-pulse">Loading ventures...</div>
-          </div>
-        ) : error ? (
-          <div className="flex justify-center">
-            <div className="text-red-500">Error loading ventures. Please try again later.</div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {displayVentures.map((venture, index) => {
-              // Get a color pair based on the index
-              const colorIndex = index % colorPairs.length;
-              const [fromColor, toColor] = colorPairs[colorIndex];
-              
-              return (
-                <motion.div
-                  key={venture.id}
-                  className={`aspect-square bg-gradient-to-br ${fromColor} ${toColor} rounded-2xl flex items-center justify-center overflow-hidden relative`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                >
-                  <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-white p-6">
-                    <h3 className="heading-3 mb-2">{venture.name}</h3>
-                    <p className="text-center mb-4">{venture.description}</p>
+      {isLoading ? (
+        <div className="flex justify-center py-10">
+          <div className="animate-pulse text-text-secondary">Loading ventures...</div>
+        </div>
+      ) : error ? (
+        <div className="flex justify-center py-10">
+          <div className="text-red-400">Error loading ventures. Please try again later.</div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayVentures.map((venture, index) => {
+            // Get a color pair based on the index
+            const colorIndex = index % colorPairs.length;
+            const [fromColor, toColor] = colorPairs[colorIndex];
+            
+            return (
+              <motion.div
+                key={venture.id}
+                className={`card-venture bg-gradient-to-br ${fromColor} ${toColor} rounded-xl overflow-hidden relative`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="p-6 h-full flex flex-col">
+                  <h3 className="text-xl font-medium text-text-primary mb-2">{venture.name}</h3>
+                  
+                  {venture.industry && (
+                    <div className="mb-2">
+                      <span className="text-xs px-2 py-1 bg-purple-primary/30 rounded-full text-text-secondary">
+                        {venture.industry}
+                      </span>
+                    </div>
+                  )}
+                  
+                  <p className="text-text-secondary text-sm mb-4 flex-grow">{venture.description}</p>
+                  
+                  <div className="flex justify-between items-center mt-auto">
+                    {venture.founded && (
+                      <span className="text-xs text-text-tertiary">Est. {venture.founded}</span>
+                    )}
+                    
                     {venture.website && (
                       <a
                         href={venture.website}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-4 py-2 bg-white/20 rounded-md hover:bg-white/30 transition-colors"
+                        className="text-text-primary text-sm hover:text-text-secondary transition-colors inline-flex items-center"
                       >
-                        Learn More
+                        View Project
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          className="h-4 w-4 ml-1" 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                        >
+                          <path 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round" 
+                            strokeWidth={2} 
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" 
+                          />
+                        </svg>
                       </a>
                     )}
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </section>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 };
 
