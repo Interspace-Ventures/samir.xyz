@@ -18,16 +18,12 @@ type Portfolio = {
   description?: string | null;
   logoUrl: string;
   website?: string | null;
-  featured: boolean;
   tags: Tag[];
   // Investment and financial data
   investment_date?: Date | null;
   initial_investment?: number | null;
+  original_valuation?: number | null;
   current_valuation?: number | null;
-  return_multiple?: number | null;
-  annualized_return?: number | null;
-  exit_date?: Date | null;
-  exit_amount?: number | null;
   investment_status?: string | null;
 };
 
