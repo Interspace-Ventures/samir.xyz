@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
+import InvestmentMetrics from './investment-metrics';
 
 type Tag = {
   id: number;
@@ -13,10 +15,20 @@ type Portfolio = {
   id: number;
   name: string;
   category: string;
+  description?: string | null;
   logoUrl: string;
   website?: string | null;
   featured: boolean;
   tags: Tag[];
+  // Investment and financial data
+  investment_date?: Date | null;
+  initial_investment?: number | null;
+  current_valuation?: number | null;
+  return_multiple?: number | null;
+  annualized_return?: number | null;
+  exit_date?: Date | null;
+  exit_amount?: number | null;
+  investment_status?: string | null;
 };
 
 type Category = {
@@ -76,7 +88,12 @@ export default function CompanySection() {
   return (
     <section className="py-20 bg-black text-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12">Portfolio</h2>
+        <div className="flex justify-between items-center mb-12">
+          <h2 className="text-3xl font-bold">Portfolio</h2>
+          <Link href="/portfolio-metrics" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full text-sm">
+            View Investment Metrics
+          </Link>
+        </div>
         
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 mb-10">
@@ -100,10 +117,10 @@ export default function CompanySection() {
           {filteredItems.map(item => (
             <div 
               key={item.id} 
-              className="relative bg-white rounded-lg p-8 flex items-center justify-center h-48"
+              className="relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
             >
               {/* Company Logo */}
-              <div className="relative h-16 flex items-center justify-center">
+              <div className="relative h-32 bg-white flex items-center justify-center p-4">
                 <Image
                   src={item.logoUrl}
                   alt={item.name}
@@ -113,13 +130,36 @@ export default function CompanySection() {
                 />
               </div>
               
+              {/* Company Details */}
+              <div className="p-4 text-black">
+                <h3 className="font-medium text-lg">{item.name}</h3>
+                <p className="text-sm text-gray-500 mb-2">{item.category}</p>
+                
+                {/* Company Description */}
+                {item.description && (
+                  <p className="text-sm text-gray-700 mb-3 line-clamp-3">
+                    {item.description}
+                  </p>
+                )}
+                
+                {/* Investment Data */}
+                {item.investment_date && (
+                  <div className="mt-3">
+                    <InvestmentMetrics 
+                      data={item} 
+                      showDetailed={true}
+                    />
+                  </div>
+                )}
+              </div>
+              
               {/* Tags */}
               {item.tags.length > 0 && (
-                <div className="absolute top-4 right-4 flex gap-2">
+                <div className="absolute top-2 right-2 flex gap-1">
                   {item.tags.map(tag => (
                     <span 
                       key={tag.id} 
-                      className={`px-2 py-1 text-xs rounded ${
+                      className={`px-2 py-0.5 text-xs rounded ${
                         tag.name === 'Markup' 
                           ? 'bg-purple-600 text-white' 
                           : tag.name === 'Acquired'
@@ -139,11 +179,9 @@ export default function CompanySection() {
                   href={item.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute inset-0 z-10 opacity-0 hover:opacity-100 bg-black bg-opacity-10 transition-opacity duration-300 flex items-center justify-center rounded-lg"
+                  className="absolute bottom-0 left-0 right-0 text-center py-2 bg-black text-white text-sm opacity-80 hover:opacity-100 transition-opacity"
                 >
-                  <span className="bg-white text-black px-4 py-2 rounded-full text-sm font-medium">
-                    Visit Website
-                  </span>
+                  Visit Website →
                 </a>
               )}
             </div>
