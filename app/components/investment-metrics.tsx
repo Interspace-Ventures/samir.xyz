@@ -64,19 +64,19 @@ export default function InvestmentMetrics({ data, showDetailed = true }: Investm
   
   // Determine color based on status
   const getStatusColor = (status: string | null | undefined) => {
-    if (!status) return 'bg-gray-100 text-gray-800';
+    if (!status) return 'bg-purple-dark/50 text-text-secondary';
     
     switch (status) {
       case 'Active':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-purple-primary/20 text-text-secondary';
       case 'Exited Profitably':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-500/20 text-green-300';
       case 'Exited With Loss':
-        return 'bg-orange-100 text-orange-800';
+        return 'bg-orange-500/20 text-orange-300';
       case 'Written Off':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-500/20 text-red-300';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-purple-dark/50 text-text-secondary';
     }
   };
 
@@ -98,14 +98,14 @@ export default function InvestmentMetrics({ data, showDetailed = true }: Investm
         {/* Key Metrics */}
         <div className="grid grid-cols-2 gap-x-3 gap-y-1">
           {/* Investment Date */}
-          <div className="text-gray-500">Invested:</div>
-          <div className="text-right">{formatDate(metrics.investment_date)}</div>
+          <div className="text-text-tertiary">Invested:</div>
+          <div className="text-right text-text-secondary">{formatDate(metrics.investment_date)}</div>
           
           {/* Calculate multiple if we have both values */}
           {metrics.initial_investment && metrics.current_valuation && (
             <>
-              <div className="text-gray-500">Performance:</div>
-              <div className="text-right font-medium">
+              <div className="text-text-tertiary">Performance:</div>
+              <div className="text-right font-medium text-text-primary">
                 {formatMultiple(metrics.current_valuation / metrics.initial_investment)}
               </div>
             </>
@@ -132,38 +132,38 @@ export default function InvestmentMetrics({ data, showDetailed = true }: Investm
       {/* Detailed Metrics */}
       <div className="grid grid-cols-2 gap-x-4 gap-y-1">
         {/* Investment Date */}
-        <div className="text-gray-500">Invested:</div>
-        <div className="text-right">{formatDate(metrics.investment_date)}</div>
+        <div className="text-text-tertiary">Invested:</div>
+        <div className="text-right text-text-secondary">{formatDate(metrics.investment_date)}</div>
         
         {/* Initial Investment */}
         {metrics.initial_investment && (
           <>
-            <div className="text-gray-500">Initial:</div>
-            <div className="text-right">{formatCurrency(metrics.initial_investment)}</div>
+            <div className="text-text-tertiary">Initial:</div>
+            <div className="text-right text-text-secondary">{formatCurrency(metrics.initial_investment)}</div>
           </>
         )}
         
         {/* Original Valuation */}
         {metrics.original_valuation && (
           <>
-            <div className="text-gray-500">Original Value:</div>
-            <div className="text-right">{formatCurrency(metrics.original_valuation)}</div>
+            <div className="text-text-tertiary">Original Value:</div>
+            <div className="text-right text-text-secondary">{formatCurrency(metrics.original_valuation)}</div>
           </>
         )}
         
         {/* Current Valuation */}
         {metrics.current_valuation && (
           <>
-            <div className="text-gray-500">Current Value:</div>
-            <div className="text-right">{formatCurrency(metrics.current_valuation)}</div>
+            <div className="text-text-tertiary">Current Value:</div>
+            <div className="text-right text-text-secondary">{formatCurrency(metrics.current_valuation)}</div>
           </>
         )}
         
         {/* Calculate multiple if we have both values */}
         {metrics.initial_investment && metrics.current_valuation && (
           <>
-            <div className="text-gray-500">Multiple:</div>
-            <div className="text-right font-medium">
+            <div className="text-text-tertiary">Multiple:</div>
+            <div className="text-right font-medium text-text-primary">
               {formatMultiple(metrics.current_valuation / metrics.initial_investment)}
             </div>
           </>

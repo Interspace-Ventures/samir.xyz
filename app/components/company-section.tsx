@@ -82,85 +82,88 @@ export default function CompanySection() {
   }
 
   return (
-    <section className="py-20 bg-black text-white">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl font-bold">Portfolio</h2>
-          <Link href="/portfolio-metrics" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full text-sm">
-            View Investment Metrics
-          </Link>
+    <>
+      <div className="flex justify-between items-center mb-12">
+        <div className="flex items-center">
+          {/* Category Filter Buttons */}
+          <div className="inline-flex flex-wrap gap-2">
+            <button
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                selectedCategory === 'All'
+                  ? 'bg-purple-primary text-white'
+                  : 'bg-purple-dark/50 text-text-secondary hover:bg-purple-dark/70'
+              }`}
+              onClick={() => setSelectedCategory('All')}
+            >
+              All
+            </button>
+            
+            {categories.map(category => (
+              <button
+                key={category.id}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                  selectedCategory === category.name
+                    ? 'bg-purple-primary text-white'
+                    : 'bg-purple-dark/50 text-text-secondary hover:bg-purple-dark/70'
+                }`}
+                onClick={() => setSelectedCategory(category.name)}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
         </div>
         
-        {/* Category Filter */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {categories.map(category => (
-            <button
-              key={category.id}
-              className={`px-6 py-2 rounded-full text-sm font-medium ${
-                selectedCategory === category.name
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-              }`}
-              onClick={() => setSelectedCategory(category.name)}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
+        <Link 
+          href="/portfolio-metrics" 
+          className="bg-purple-primary hover:bg-purple-light text-white px-4 py-2 rounded-md text-sm transition-colors"
+        >
+          View Metrics
+        </Link>
+      </div>
 
-        {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map(item => (
-            <div 
-              key={item.id} 
-              className="relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
-            >
-              {/* Company Logo */}
-              <div className="relative h-32 bg-white flex items-center justify-center p-4">
-                <Image
-                  src={item.logoUrl}
-                  alt={item.name}
-                  width={160}
-                  height={60}
-                  style={{ objectFit: 'contain' }}
-                />
-              </div>
+      {/* Portfolio Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredItems.map(item => (
+          <div 
+            key={item.id} 
+            className="card group"
+          >
+            {/* Company Logo */}
+            <div className="company-logo mb-4 h-20 rounded-md">
+              <Image
+                src={item.logoUrl}
+                alt={item.name}
+                width={120}
+                height={50}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+            
+            {/* Company Details */}
+            <div>
+              <h3 className="font-medium text-lg text-text-primary">{item.name}</h3>
+              <p className="text-sm text-text-secondary mb-2">{item.category}</p>
               
-              {/* Company Details */}
-              <div className="p-4 text-black">
-                <h3 className="font-medium text-lg">{item.name}</h3>
-                <p className="text-sm text-gray-500 mb-2">{item.category}</p>
-                
-                {/* Company Description */}
-                {item.description && (
-                  <p className="text-sm text-gray-700 mb-3 line-clamp-3">
-                    {item.description}
-                  </p>
-                )}
-                
-                {/* Investment Data */}
-                {item.investment_date && (
-                  <div className="mt-3">
-                    <InvestmentMetrics 
-                      data={item} 
-                      showDetailed={true}
-                    />
-                  </div>
-                )}
-              </div>
+              {/* Company Description */}
+              {item.description && (
+                <p className="text-sm text-text-tertiary mb-3 line-clamp-3">
+                  {item.description}
+                </p>
+              )}
               
               {/* Tags */}
               {item.tags.length > 0 && (
-                <div className="absolute top-2 right-2 flex gap-1">
+                <div className="flex flex-wrap gap-1 mb-3">
                   {item.tags.map(tag => (
                     <span 
                       key={tag.id} 
                       className={`px-2 py-0.5 text-xs rounded ${
                         tag.name === 'Markup' 
-                          ? 'bg-purple-600 text-white' 
+                          ? 'bg-purple-primary text-white' 
                           : tag.name === 'Acquired'
-                          ? 'bg-gray-800 text-white'
-                          : 'bg-gray-200 text-gray-800'
+                          ? 'bg-text-secondary/80 text-white'
+                          : 'bg-purple-dark/50 text-text-secondary'
                       }`}
                     >
                       {tag.name}
@@ -169,21 +172,47 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {/* Link overlay if website available */}
-              {item.website && (
+              {/* Investment Data */}
+              {item.investment_date && (
+                <div className="mt-4 pt-3 border-t border-purple-primary/10">
+                  <InvestmentMetrics 
+                    data={item} 
+                    showDetailed={false}
+                  />
+                </div>
+              )}
+            </div>
+            
+            {/* Link overlay if website available */}
+            {item.website && (
+              <div className="mt-4 text-right">
                 <a
                   href={item.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute bottom-0 left-0 right-0 text-center py-2 bg-black text-white text-sm opacity-80 hover:opacity-100 transition-opacity"
+                  className="inline-flex items-center text-text-secondary hover:text-text-primary transition-colors text-sm"
                 >
-                  Visit Website →
+                  Visit Website 
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-4 w-4 ml-1" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" 
+                    />
+                  </svg>
                 </a>
-              )}
-            </div>
-          ))}
-        </div>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
-    </section>
+    </>
   );
 }
