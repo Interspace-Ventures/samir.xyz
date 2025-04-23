@@ -4,24 +4,23 @@ modules = ["nodejs-20", "postgresql-16"]
 channel = "stable-24_05"
 
 [[ports]]
-localPort = 3000
-externalPort = 3000
-
-[[ports]]
-localPort = 3001
-externalPort = 3001
-
-[[ports]]
-localPort = 5000
-externalPort = 80
-
-[[ports]]
 localPort = 8080
 externalPort = 8080
 
-[[ workflows ]]
-name = "NextJS Dev Server"
-targetPort = 3000
-persistent = true
-onBoot = true
-command = "npx next dev"
+[env]
+DATABASE_URL = "$DATABASE_URL"
+
+[commands]
+start = "npx next dev"
+
+[deployment]
+deploymentTarget = "static"
+publicDir = "out"
+build = ["npx next build"]
+
+[run]
+run = "npx next dev -p 3000 -H 0.0.0.0"
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
