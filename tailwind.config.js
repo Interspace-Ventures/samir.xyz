@@ -11,20 +11,14 @@ module.exports = {
         alexandria: ['Alexandria', 'sans-serif'],
       },
       colors: {
-        purple: {
-          primary: '#8c5cf6',
-          dark: '#3D365C',
-          light: '#c084fc',
-        },
-        text: {
-          primary: '#ffffff',
-          secondary: '#c084fc',
-          tertiary: '#a1a1aa',
-        },
-        bg: {
-          primary: '#3D365C',
-          secondary: '#8c5cf6',
-        }
+        'purple-primary': '#8c5cf6',
+        'purple-dark': '#3D365C',
+        'purple-light': '#c084fc',
+        'text-primary': '#ffffff',
+        'text-secondary': '#c084fc',
+        'text-tertiary': '#a1a1aa',
+        'bg-primary': '#3D365C',
+        'bg-secondary': '#8c5cf6',
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-in-out',
