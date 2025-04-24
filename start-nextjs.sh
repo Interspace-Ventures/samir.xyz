@@ -1,3 +1,4 @@
 
 #!/bin/bash
-npx next start -p 3000 -H 0.0.0.0
+export NODE_ENV=development
+npx next dev -p 3000 -H 0.0.0.0
