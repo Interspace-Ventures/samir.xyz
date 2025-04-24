@@ -14,12 +14,12 @@ DATABASE_URL = "$DATABASE_URL"
 start = "npx next dev"
 
 [deployment]
-deploymentTarget = "static"
-publicDir = "out"
+deploymentTarget = "cloudrun"
 build = ["npx next build"]
+run = ["sh", "-c", "./start-nextjs.sh"]
 
 [run]
-run = "npx next dev -p 3000 -H 0.0.0.0"
+run = "./start-nextjs.sh"
 
 [[ports]]
 localPort = 3000
