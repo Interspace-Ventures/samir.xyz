@@ -1,4 +1,8 @@
 
 #!/bin/bash
+echo "Starting Next.js application in development mode..."
+echo "- Clearing Next.js cache..."
+rm -rf .next
 export NODE_ENV=development
-npx next dev -p 3000 -H 0.0.0.0
+echo "- Starting Next.js server on port 8080..."
+npx next dev -p 8080 -H 0.0.0.0

@@ -23,10 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${alexandria.className} bg-bg-primary text-text-primary min-h-screen flex flex-col`}>
+      <body className={alexandria.className}>
         <Providers>
           <Navigation />
-          <main className="flex-grow">{children}</main>
+          <main style={{ flexGrow: 1 }}>{children}</main>
           <Footer />
         </Providers>
       </body>
