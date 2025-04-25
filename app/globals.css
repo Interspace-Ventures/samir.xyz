@@ -41,7 +41,7 @@
 
 @layer base {
   body {
-    @apply bg-[#3D365C] text-white font-alexandria;
+    @apply bg-[#3D365C] text-[#ffffff] font-alexandria;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -59,7 +59,7 @@
   }
   
   .section-title {
-    @apply text-3xl font-bold text-white mb-8;
+    @apply text-3xl font-bold text-[#ffffff] mb-8;
   }
   
   .heading-1 {
@@ -79,7 +79,7 @@
   }
   
   .company-logo {
-    @apply flex items-center justify-center bg-white/10 p-4 rounded-lg h-24;
+    @apply flex items-center justify-center bg-[#ffffff]/10 p-4 rounded-lg h-24;
   }
   
   .card-venture {

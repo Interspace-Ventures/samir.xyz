@@ -12,6 +12,13 @@ cd "$(dirname "$0")/../.." || exit
 echo "Starting Next.js application..."
 echo "  - PORT: ${PORT:-3000}"
 echo "  - HOST: ${HOST:-0.0.0.0}"
+echo "  - Tailwind config updated: $(date)"
+
+# Clear any .next build cache
+rm -rf .next
+
+# Set environment to development
+export NODE_ENV=development
 
 # Run the Next.js development server
 npx next dev -p ${PORT:-3000} -H ${HOST:-0.0.0.0}
