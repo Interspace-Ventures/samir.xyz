@@ -6,9 +6,9 @@ export default function Footer() {
   const version = "1.0.0"; // Version number
   
   return (
-    <footer className="bg-purple-dark py-6 border-t border-purple-primary/20">
+    <footer className="bg-purple-primary py-6 border-t border-purple-primary/20">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-white text-sm">
           <div>
             <p>
               © {currentYear} <a 
