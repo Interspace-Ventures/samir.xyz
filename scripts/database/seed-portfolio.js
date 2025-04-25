@@ -26,7 +26,7 @@ async function main() {
   await createPortfolioItem({
     name: 'AON3D',
     category: 'SaaS',
-    logoUrl: '/companies/aon3d.svg',
+    logoUrl: '/companies/AON3D.png',
     tags: [markupTag.id],
     order: 1
   });
@@ -34,21 +34,21 @@ async function main() {
   await createPortfolioItem({
     name: 'Margin',
     category: 'SaaS',
-    logoUrl: '/companies/margin.svg',
+    logoUrl: '/companies/margin.png',
     order: 2
   });
 
   await createPortfolioItem({
     name: 'Restream',
     category: 'SaaS',
-    logoUrl: '/companies/restream.svg',
+    logoUrl: '/companies/Restream.png',
     order: 3
   });
 
   await createPortfolioItem({
     name: 'Soot',
     category: 'SaaS',
-    logoUrl: '/companies/soot.svg',
+    logoUrl: '/companies/Soot.png',
     tags: [markupTag.id],
     order: 4
   });
@@ -56,7 +56,7 @@ async function main() {
   await createPortfolioItem({
     name: 'Sugar',
     category: 'SaaS',
-    logoUrl: '/companies/sugar.svg',
+    logoUrl: '/companies/Sugar.png',
     tags: [acquiredTag.id],
     order: 5
   });
@@ -64,7 +64,7 @@ async function main() {
   await createPortfolioItem({
     name: 'Techmate',
     category: 'SaaS',
-    logoUrl: '/companies/techmate.svg',
+    logoUrl: '/companies/Techmate.png',
     order: 6
   });
 
@@ -171,35 +171,35 @@ async function main() {
   await createPortfolioItem({
     name: 'Backpack',
     category: 'Fintech',
-    logoUrl: '/companies/backpack.svg',
+    logoUrl: '/companies/Backpack.png',
     order: 20
   });
 
   await createPortfolioItem({
-    name: 'Hash',
+    name: 'Harper',
     category: 'Fintech',
-    logoUrl: '/companies/hash.svg',
+    logoUrl: '/companies/Harper.png',
     order: 21
   });
 
   await createPortfolioItem({
     name: 'Kartera',
     category: 'Fintech',
-    logoUrl: '/companies/kartera.svg',
+    logoUrl: '/companies/Kartera.png',
     order: 22
   });
 
   await createPortfolioItem({
     name: 'Keep',
     category: 'Fintech',
-    logoUrl: '/companies/keep.svg',
+    logoUrl: '/companies/Keep.png',
     order: 23
   });
 
   await createPortfolioItem({
-    name: 'Naridea',
+    name: 'Maridea',
     category: 'Fintech',
-    logoUrl: '/companies/naridea.svg',
+    logoUrl: '/companies/Maridea.png',
     tags: [markupTag.id],
     order: 24
   });
@@ -207,21 +207,21 @@ async function main() {
   await createPortfolioItem({
     name: 'Rely',
     category: 'Fintech',
-    logoUrl: '/companies/rely.svg',
+    logoUrl: '/companies/Rely.png',
     order: 25
   });
 
   await createPortfolioItem({
     name: 'Sundae',
     category: 'Fintech',
-    logoUrl: '/companies/sundae.svg',
+    logoUrl: '/companies/Sundae.png',
     order: 26
   });
 
   await createPortfolioItem({
     name: 'Swan',
     category: 'Fintech',
-    logoUrl: '/companies/swan.svg',
+    logoUrl: '/companies/Swan.png',
     tags: [markupTag.id],
     order: 27
   });
@@ -229,7 +229,7 @@ async function main() {
   await createPortfolioItem({
     name: 'Waldo',
     category: 'Fintech',
-    logoUrl: '/companies/waldo.svg',
+    logoUrl: '/companies/Waldo.png',
     order: 28
   });
 
@@ -271,7 +271,6 @@ async function createPortfolioItem({ name, category, logoUrl, tags = [], order }
       name,
       category,
       logoUrl,
-      order,
       tags: tags.length > 0 ? {
         connect: tags.map(id => ({ id }))
       } : undefined
