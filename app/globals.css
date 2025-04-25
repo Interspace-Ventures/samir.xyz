@@ -41,7 +41,7 @@
 
 @layer base {
   body {
-    @apply bg-bg-primary text-text-primary font-alexandria;
+    @apply bg-[#3D365C] text-white font-alexandria;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -59,7 +59,7 @@
   }
   
   .section-title {
-    @apply text-3xl font-bold text-text-primary mb-8;
+    @apply text-3xl font-bold text-white mb-8;
   }
   
   .heading-1 {
@@ -75,7 +75,7 @@
   }
   
   .card {
-    @apply bg-purple-dark/30 border border-purple-primary/20 p-6 rounded-xl hover:bg-purple-dark/50 transition-all duration-300;
+    @apply bg-[#3D365C]/30 border border-[#8c5cf6]/20 p-6 rounded-xl hover:bg-[#3D365C]/50 transition-all duration-300;
   }
   
   .company-logo {
@@ -83,6 +83,6 @@
   }
   
   .card-venture {
-    @apply aspect-square p-6 hover:shadow-lg hover:shadow-purple-primary/30 transition-all duration-300;
+    @apply aspect-square p-6 hover:shadow-lg hover:shadow-[#8c5cf6]/30 transition-all duration-300;
   }
 }
