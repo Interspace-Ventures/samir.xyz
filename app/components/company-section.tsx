@@ -44,12 +44,23 @@ export default function CompanySection() {
   } = useQuery<Category[]>({
     queryKey: ['categories'],
     queryFn: async () => {
-      const res = await fetch('/api/categories');
-      if (!res.ok) {
-        throw new Error('Failed to fetch categories');
+      try {
+        console.log('Fetching categories...');
+        const res = await fetch('/api/categories');
+        if (!res.ok) {
+          console.error(`Failed to fetch categories: ${res.status} ${res.statusText}`);
+          throw new Error(`Failed to fetch categories: ${res.status}`);
+        }
+        const data = await res.json();
+        console.log(`Fetched ${data.length} categories`);
+        return data;
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+        throw error;
       }
-      return res.json();
-    }
+    },
+    retry: 3,
+    retryDelay: 1000
   });
 
   // Fetch all portfolio items
@@ -60,12 +71,23 @@ export default function CompanySection() {
   } = useQuery<Portfolio[]>({
     queryKey: ['portfolio'],
     queryFn: async () => {
-      const res = await fetch('/api/portfolio');
-      if (!res.ok) {
-        throw new Error('Failed to fetch portfolio items');
+      try {
+        console.log('Fetching portfolio items...');
+        const res = await fetch('/api/portfolio');
+        if (!res.ok) {
+          console.error(`Failed to fetch portfolio items: ${res.status} ${res.statusText}`);
+          throw new Error(`Failed to fetch portfolio items: ${res.status}`);
+        }
+        const data = await res.json();
+        console.log(`Fetched ${data.length} portfolio items`);
+        return data;
+      } catch (error) {
+        console.error('Error fetching portfolio items:', error);
+        throw error;
       }
-      return res.json();
-    }
+    },
+    retry: 3,
+    retryDelay: 1000
   });
 
   // Filter portfolio items by selected category
@@ -74,144 +96,127 @@ export default function CompanySection() {
   );
 
   if (isLoadingCategories || isLoadingPortfolio) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-purple-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-white">Loading portfolio data...</p>
+        </div>
+      </div>
+    );
   }
 
   if (categoriesError || portfolioError) {
-    return <div className="min-h-screen flex items-center justify-center">Error loading data</div>;
+    console.error('Category error:', categoriesError);
+    console.error('Portfolio error:', portfolioError);
+    
+    return (
+      <div className="flex flex-col items-center justify-center py-20">
+        <div className="text-center max-w-lg">
+          <div className="bg-red-100 text-red-800 p-4 rounded-lg mb-4">
+            <h3 className="font-bold text-lg mb-2">Error Loading Data</h3>
+            <p className="mb-2">We were unable to load the portfolio items.</p>
+            <p className="text-sm text-red-700">
+              {categoriesError ? `Categories: ${categoriesError.message}` : ''}
+              {portfolioError ? `Portfolio: ${portfolioError.message}` : ''}
+            </p>
+          </div>
+          <button 
+            onClick={() => window.location.reload()}
+            className="bg-purple-primary hover:bg-purple-dark text-white px-6 py-2 rounded-md text-sm transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
     <>
-      <div className="flex justify-between items-center mb-12">
-        <div className="flex items-center">
-          {/* Category Filter Buttons */}
-          <div className="inline-flex flex-wrap gap-2">
-            <button
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                selectedCategory === 'All'
-                  ? 'bg-purple-primary text-white'
-                  : 'bg-purple-dark/50 text-text-secondary hover:bg-purple-dark/70'
-              }`}
-              onClick={() => setSelectedCategory('All')}
-            >
-              All
-            </button>
-            
-            {categories.map(category => (
-              <button
-                key={category.id}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                  selectedCategory === category.name
-                    ? 'bg-purple-primary text-white'
-                    : 'bg-purple-dark/50 text-text-secondary hover:bg-purple-dark/70'
-                }`}
-                onClick={() => setSelectedCategory(category.name)}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <Link 
-          href="/portfolio-metrics" 
-          className="bg-purple-primary hover:bg-purple-light text-white px-4 py-2 rounded-md text-sm transition-colors"
+      {/* Category Filter Buttons */}
+      <div className="flex flex-wrap gap-3 mb-12">
+        <button
+          className={`px-8 py-3 rounded-md text-sm font-medium transition-all ${
+            selectedCategory === 'All'
+              ? 'bg-purple-primary text-white'
+              : 'bg-[#1C1C1E] text-white hover:bg-gray-800'
+          }`}
+          onClick={() => setSelectedCategory('All')}
         >
-          View Metrics
-        </Link>
+          All
+        </button>
+        
+        {categories.filter(cat => cat.name !== 'All').map(category => (
+          <button
+            key={category.id}
+            className={`px-8 py-3 rounded-md text-sm font-medium transition-all ${
+              selectedCategory === category.name
+                ? 'bg-purple-primary text-white'
+                : 'bg-[#1C1C1E] text-white hover:bg-gray-800'
+            }`}
+            onClick={() => setSelectedCategory(category.name)}
+          >
+            {category.name}
+          </button>
+        ))}
       </div>
 
       {/* Portfolio Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredItems.map(item => (
           <div 
             key={item.id} 
-            className="card group"
+            className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow"
           >
-            {/* Company Logo */}
-            <div className="company-logo mb-4 h-20 rounded-md">
+            {/* Company Logo Container */}
+            <div className="h-44 flex items-center justify-center p-8 bg-white">
               <Image
-                src={item.logoUrl}
+                src={item.logoUrl.startsWith('/') 
+                  ? item.logoUrl 
+                  : `/${item.logoUrl}`}
                 alt={item.name}
-                width={120}
-                height={50}
-                style={{ objectFit: 'contain' }}
+                width={200}
+                height={90}
+                style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
               />
             </div>
             
-            {/* Company Details */}
-            <div>
-              <h3 className="font-medium text-lg text-text-primary">{item.name}</h3>
-              <p className="text-sm text-text-secondary mb-2">{item.category}</p>
-              
-              {/* Company Description */}
-              {item.description && (
-                <p className="text-sm text-text-tertiary mb-3 line-clamp-3">
-                  {item.description}
-                </p>
-              )}
-              
-              {/* Tags */}
-              {item.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1 mb-3">
-                  {item.tags.map(tag => (
-                    <span 
-                      key={tag.id} 
-                      className={`px-2 py-0.5 text-xs rounded ${
-                        tag.name === 'Markup' 
-                          ? 'bg-purple-primary text-white' 
-                          : tag.name === 'Acquired'
-                          ? 'bg-text-secondary/80 text-white'
-                          : 'bg-purple-dark/50 text-text-secondary'
-                      }`}
-                    >
-                      {tag.name}
-                    </span>
-                  ))}
-                </div>
-              )}
-              
-              {/* Investment Data */}
-              {item.investment_date && (
-                <div className="mt-4 pt-3 border-t border-purple-primary/10">
-                  <InvestmentMetrics 
-                    data={item} 
-                    showDetailed={false}
-                  />
-                </div>
-              )}
-            </div>
+            {/* Tag overlay (if present) */}
+            {item.tags.some(tag => tag.name === 'Markup') && (
+              <div className="absolute top-3 right-3">
+                <span className="bg-purple-primary text-white text-xs px-3 py-1 rounded-md font-medium">
+                  Markup
+                </span>
+              </div>
+            )}
             
             {/* Link overlay if website available */}
             {item.website && (
-              <div className="mt-4 text-right">
-                <a
-                  href={item.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-text-secondary hover:text-text-primary transition-colors text-sm"
-                >
-                  Visit Website 
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-4 w-4 ml-1" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" 
-                    />
-                  </svg>
-                </a>
-              </div>
+              <Link 
+                href={item.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 z-10 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity"
+                aria-label={`Visit ${item.name} website`}
+              >
+                <span className="bg-purple-primary text-white px-4 py-2 rounded-md text-sm">
+                  Visit Website
+                </span>
+              </Link>
             )}
           </div>
         ))}
+      </div>
+      
+      {/* Metrics Link */}
+      <div className="mt-12 text-right">
+        <Link 
+          href="/portfolio-metrics" 
+          className="bg-purple-primary hover:bg-purple-light text-white px-8 py-3 rounded-md text-sm font-medium transition-colors"
+        >
+          View All Metrics
+        </Link>
       </div>
     </>
   );
