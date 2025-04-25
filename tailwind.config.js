@@ -1,20 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  safelist: [
-    'text-white',
-    'bg-white',
-    'text-black',
-    'bg-black',
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Alexandria', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        'alexandria': ['Alexandria', 'sans-serif'],
+        'sans': ['Alexandria', 'system-ui', 'sans-serif'],
       },
       colors: {
         'purple-primary': '#8c5cf6',
@@ -25,6 +18,15 @@ module.exports = {
         'text-tertiary': '#a1a1aa',
         'bg-primary': '#3D365C',
         'bg-secondary': '#8c5cf6',
+      },
+      backgroundColor: {
+        'primary': '#3D365C',
+        'secondary': '#8c5cf6',
+      },
+      textColor: {
+        'primary': '#ffffff',
+        'secondary': '#c084fc',
+        'tertiary': '#a1a1aa',
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-in-out',
@@ -44,4 +46,4 @@ module.exports = {
   },
   darkMode: 'class',
   plugins: [],
-};
+}

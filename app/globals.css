@@ -2,87 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Alexandria';
-  src: url('/fonts/Alexandria-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alexandria';
-  src: url('/fonts/Alexandria-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Alexandria';
-  src: url('/fonts/Alexandria-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-}
-
 :root {
   /* Colors */
   --purple-primary: #8c5cf6;
   --purple-light: #a78bfa;
   --purple-dark: #3D365C;
-
-  /* Text colors */
   --text-primary: #ffffff;
   --text-secondary: #c084fc;
   --text-tertiary: #a1a1aa;
-
-  /* Background colors */
   --bg-primary: #3D365C;
   --bg-secondary: #8c5cf6;
 }
 
-@layer base {
-  body {
-    @apply bg-[#3D365C] text-[#ffffff] font-sans;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-bold;
-  }
+/* Base styling */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
 }
 
-@layer components {
-  .container {
-    @apply max-w-7xl mx-auto px-4 md:px-6;
-  }
-  
-  .section {
-    @apply py-12 md:py-20;
-  }
-  
-  .section-title {
-    @apply text-3xl font-bold text-[#ffffff] mb-8;
-  }
-  
-  .heading-1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
-  }
-  
-  .heading-2 {
-    @apply text-3xl md:text-4xl font-bold;
-  }
-  
-  .heading-3 {
-    @apply text-2xl font-bold;
-  }
-  
-  .card {
-    @apply bg-[#3D365C]/30 border border-[#8c5cf6]/20 p-6 rounded-xl hover:bg-[#3D365C]/50 transition-all duration-300;
-  }
-  
-  .company-logo {
-    @apply flex items-center justify-center bg-[#ffffff]/10 p-4 rounded-lg h-24;
-  }
-  
-  .card-venture {
-    @apply aspect-square p-6 hover:shadow-lg hover:shadow-[#8c5cf6]/30 transition-all duration-300;
-  }
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 2rem;
+  height: 0.25rem;
+  background-color: var(--purple-primary);
+  border-radius: 0.125rem;
+}
+
+/* Basic styling */
+body {
+  background-color: #3D365C;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  padding: 3rem 0;
+}
+
+.card {
+  background-color: rgba(61, 54, 92, 0.3);
+  border: 1px solid rgba(140, 92, 246, 0.2);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.3s;
+}
+
+.card:hover {
+  background-color: rgba(61, 54, 92, 0.5);
+}
+
+.company-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  height: 6rem;
+}
+
+.card-venture {
+  aspect-ratio: 1 / 1;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s;
+}
+
+.card-venture:hover {
+  box-shadow: 0 10px 15px -3px rgba(140, 92, 246, 0.3);
 }

@@ -35,8 +35,13 @@ const Navigation = () => {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 w-full z-50"
       style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: '100%',
+        zIndex: 50,
         backgroundColor,
         backdropFilter: backdropBlur
       }}
@@ -44,22 +49,31 @@ const Navigation = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="container" style={{ padding: '1rem 1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link 
             href="/" 
-            className="text-xl font-bold tracking-tight"
+            style={{ fontSize: '1.25rem', fontWeight: 'bold', letterSpacing: '-0.025em' }}
           >
-            <span className="text-text-primary">Interspace</span>
-            <span className="ml-1 text-text-secondary">Ventures</span>
+            <span style={{ color: '#ffffff' }}>Interspace</span>
+            <span style={{ marginLeft: '0.25rem', color: '#c084fc' }}>Ventures</span>
           </Link>
           
           <nav>
-            <ul className="flex space-x-8">
+            <ul style={{ display: 'flex', gap: '2rem' }}>
               <li>
                 <Link 
                   href="#profile" 
-                  className="text-text-primary hover:text-text-secondary transition-colors font-medium text-sm uppercase tracking-wide"
+                  style={{ 
+                    color: '#ffffff', 
+                    fontWeight: 500, 
+                    fontSize: '0.875rem', 
+                    textTransform: 'uppercase', 
+                    letterSpacing: '0.05em',
+                    transition: 'color 0.2s ease'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#c084fc'}
+                  onMouseOut={(e) => e.currentTarget.style.color = '#ffffff'}
                 >
                   Profile
                 </Link>
@@ -67,7 +81,16 @@ const Navigation = () => {
               <li>
                 <Link 
                   href="#portfolio" 
-                  className="text-text-primary hover:text-text-secondary transition-colors font-medium text-sm uppercase tracking-wide"
+                  style={{ 
+                    color: '#ffffff', 
+                    fontWeight: 500, 
+                    fontSize: '0.875rem', 
+                    textTransform: 'uppercase', 
+                    letterSpacing: '0.05em',
+                    transition: 'color 0.2s ease'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#c084fc'}
+                  onMouseOut={(e) => e.currentTarget.style.color = '#ffffff'}
                 >
                   Portfolio
                 </Link>
@@ -75,7 +98,16 @@ const Navigation = () => {
               <li>
                 <Link 
                   href="#ventures" 
-                  className="text-text-primary hover:text-text-secondary transition-colors font-medium text-sm uppercase tracking-wide"
+                  style={{ 
+                    color: '#ffffff', 
+                    fontWeight: 500, 
+                    fontSize: '0.875rem', 
+                    textTransform: 'uppercase', 
+                    letterSpacing: '0.05em',
+                    transition: 'color 0.2s ease'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#c084fc'}
+                  onMouseOut={(e) => e.currentTarget.style.color = '#ffffff'}
                 >
                   Ventures
                 </Link>
