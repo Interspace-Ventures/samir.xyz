@@ -79,38 +79,36 @@ This portfolio website was built to showcase professional achievements in a mode
 
 ### Core Directories
 
-- **`/app`**: Main application source code
-  - `/api`: API routes for database access (categories, companies, portfolio, projects, ventures)
-  - `/components`: Reusable React components (navigation, footer, sections)
-  - `/lib`: Utility functions and shared libraries (prisma client)
-  - `/portfolio`: Portfolio page component
-  - `/portfolio-metrics`: Investment metrics and financial analysis page
-  - `/ventures`: Ventures page component
+- **`/src`**: Main application source code
+  - `/app`: Next.js application routes and pages
+  - `/components`: Reusable React components
+  - `/config`: Application configuration files
+  - `/lib`: Utility functions and shared libraries
+  - `/styles`: Global styles and Tailwind configuration
 
 - **`/public`**: Static assets served directly
-  - `/assets`: General assets
-  - `/companies`: Company logos and images
-  - `/ventures`: Venture-related images
+  - `/attached_assets`: Primary location for all image assets (consolidated)
+  - `/logos/ventures`: Processed venture logo files (automatically generated)
+  - `/icons`: Icon assets for the UI
+  - `/images`: Additional image assets for content
 
-- **`/prisma`**: Database configuration and models
-  - `/schema.prisma`: Database schema definition
-  - `/migrations`: Generated database migrations
+- **`/config`**: Configuration files
+  - Contains modular configuration files and settings
 
-- **`/scripts`**: Development and maintenance tools
-  - `/database`: Database management scripts (seeding, importing, updating)
-  - `/assets`: Asset management scripts (placeholder logos)
-  - `/utils`: Utility scripts (start-app.sh, run-dev.sh)
+- **`/tools`**: Development and maintenance tools
+  - `/scripts`: Helper scripts for automation and asset management
+  - `/archive`: Previously used scripts (preserved for reference)
 
-- **`/attached_assets`**: Original image assets (company logos, etc.)
-  - Contains all PNG files for portfolio companies
-  - Contains examples of design errors for reference
+- **`/docs`**: Project documentation
+  - Contains README, CHANGELOG, and other documentation files
 
 ### Supporting Directories
 
+- **`/out`**: Static HTML export from Next.js build
+  - Contains the pre-rendered HTML, CSS, and assets
+- **`/attached_assets`**: Original asset files (moved to public during startup)
 - **`/node_modules`**: Third-party dependencies (generated)
 - **`/.next`**: Next.js build cache (generated)
-- **`/.git`**: Git version control system files
-- **`/.cache`**: Build and dependency cache
 
 ### Naming Conventions
 
@@ -128,134 +126,79 @@ The project follows consistent naming conventions for better readability and mai
 ### Core Configuration
 
 - **next.config.js** - Main Next.js configuration
-  - Simple configuration for Next.js 15 compatibility
-  - Optimizes for the Replit environment
-  - Sets up server-side rendering
-
-- **package.json** - Project dependencies and scripts
-  - Defines development and production scripts
-  - Lists all project dependencies with versions
-  - Configures Prisma and TypeScript settings
-
-- **tsconfig.json** - TypeScript configuration
-  - Configures TypeScript compilation options
-  - Sets up path aliases for cleaner imports
-  - Enables strict type checking for better code quality
+  - Contains settings for image optimization, CORS headers, and development environment
+  - Configures cross-origin settings for Replit
+  - Sets cache headers for static assets
 
 ### Styling Configuration
 
-- **tailwind.config.js** - Tailwind CSS configuration
-  - Defines custom purple theme colors (#8c5cf6, #3D365C)
-  - Sets up the Alexandria font as default
-  - Configures content paths for Tailwind CSS processing
-  - Establishes responsive breakpoints
+- **tailwind.config.cjs** - Tailwind CSS configuration
+  - Defines custom colors, animation, keyframes, and responsive breakpoints
+  - Includes container configurations
+  - Sets up typography and animation plugins
 
-- **postcss.config.js** - PostCSS configuration
-  - Sets up Tailwind CSS processing
-  - Configures autoprefixer for better browser compatibility
-
-- **app/globals.css** - Global CSS styles
-  - Imports Alexandria font
-  - Sets up Tailwind CSS base, components, and utilities
-  - Defines global styles and dark mode variants
-
-### Database Configuration
-
-- **prisma/schema.prisma** - Prisma ORM configuration
-  - Defines database models and relationships
-  - Sets up PostgreSQL connection
-  - Configures data types and field constraints
-  - Establishes entity relationships (Tags, Projects, Companies, etc.)
+- **postcss.config.cjs** - PostCSS configuration
+  - Configures Tailwind CSS PostCSS plugin with optimized settings
+  - Sets up autoprefixer for better browser compatibility
 
 ### Asset Configuration
 
-- **public/** - Static asset directories
-  - Organizes company logos and images
-  - Structures venture-related assets
-  - Provides direct access to static files
-
-- **attached_assets/** - Source image files
-  - Contains all company logos in PNG format
-  - Includes sample files and error screenshots for reference
+- **src/config/paths.ts** - Centralizes path configurations for consistent asset references
+- **tools/scripts/organize-assets.sh** - Script for normalizing and organizing image assets
 
 ### Configuration Best Practices
 
-1. **Minimal Configuration**: Keep configuration files as simple as possible
-2. **Type Safety**: Leverage TypeScript for type checking throughout the application
-3. **CSS Structure**: Use Tailwind CSS utility classes instead of custom CSS
-4. **Database First**: Keep database schema as the single source of truth
-5. **Environmental Adaptation**: Configure application to work seamlessly in Replit environment
+1. **Keep it Simple**: Avoid creating multiple configuration files for the same tool
+2. **Centralize Settings**: Use a single source of truth for configuration values
+3. **Document Changes**: Add comments for complex configuration options
+4. **Follow Official Patterns**: Adhere to Next.js and Tailwind CSS recommended patterns
+5. **Performance Optimization**: Include specific performance enhancements in the configuration
 
 ## Development Tools & Scripts
 
-### Database Scripts
+### organize-assets.sh
 
-Located in `scripts/database/`, these scripts handle database operations:
+Located in `tools/scripts/organize-assets.sh`, this script handles asset organization and normalization:
 
-- **seed-database.js**: Seeds the database with initial data
-  - Creates sample projects and ventures
-  - Adds tags for filtering
-  - Sets up basic relationships
+- **Purpose**: Ensures consistent image asset locations and naming conventions
+- **When it runs**: Automatically executed during the `start.sh` startup process
+- **What it does**:
+  1. Creates necessary directories for assets
+  2. Copies images from `attached_assets` to `public/attached_assets`
+  3. Normalizes venture logos with consistent naming
+  4. Places logos in `public/logos/ventures` with standardized filenames
 
-- **seed-categories.js**: Initializes portfolio categories
-  - Creates consistent categories for portfolio items
-  - Sets order values for proper sorting
-  - Ensures categories match design requirements
+### check-ventures.sh
 
-- **seed-companies.js / seed-portfolio.js**: Populates portfolio data
-  - Adds company information from screenshots
-  - Creates tag relationships
-  - Links logos to companies
+Located in `tools/check-ventures.sh`, this script verifies venture data:
 
-- **import-investment-data.js**: Imports financial metrics
-  - Reads data from Excel spreadsheet
-  - Updates portfolio items with investment metrics
-  - Converts dates and number formats appropriately
+- **Purpose**: Ensures venture images and data are properly loaded
+- **When to use**: Run manually for debugging venture data
+- **What it does**: Checks for missing venture images and reports any issues
 
-- **update-company-*.js**: Various company data update scripts
-  - Fix company names and websites
-  - Update descriptions
-  - Link company logos to entries
+### cleanup-test-dirs.sh
 
-### Asset Management Scripts
+Located in `tools/scripts/cleanup-test-dirs.sh`, this script cleans up test directories:
 
-Located in `scripts/assets/`:
+- **Purpose**: Safely removes or archives test and debug directories
+- **When to use**: During codebase cleanup to improve maintainability
+- **What it does**: Moves test directories to a backup location for reference
 
-- **create-placeholder-logos.js**: Creates SVG placeholders
-  - Generates branded SVG files for missing logos
-  - Creates consistent styling for placeholder images
-  - Uses company initials for visual identification
+### Archived Scripts
 
-### Utility Scripts
+The `tools/archive` directory contains previous scripts that have been preserved for reference but should not be used:
 
-Located in `scripts/utils/`:
-
-- **start-app.sh**: Handles application startup
-  - Ensures proper environment setup
-  - Configures runtime settings
-  - Starts Next.js application correctly
-
-- **run-dev.sh**: Development environment setup
-  - Configures development-specific settings
-  - Starts application in development mode
-
-### Startup Scripts
-
-Located in the root directory:
-
-- **start-nextjs.sh**: Main application startup script
-  - Configures environment variables for Replit
-  - Sets proper permissions for execution
-  - Ensures application binds to correct port (8080)
-  - Uses appropriate startup flags for Replit environment
+- `check-portfolio-styles.js` - Replaced by improved Tailwind configuration
+- `test-grid-with-fetch.js` - No longer needed with current architecture
+- `update-navbar-shadows.js` - Functionality now handled by proper CSS
 
 ### Best Practices for Scripts
 
-1. **Script Organization**: Organize scripts by purpose in appropriate directories
-2. **Database First**: Handle database seeding and updates through dedicated scripts
-3. **Asset Management**: Use scripts to ensure consistent asset handling
-4. **Environment Adaptation**: Configure scripts to work in both development and production
-5. **Error Handling**: Include proper error messages and exit codes
+1. **Script Organization**: Keep all utility scripts in the `tools` directory
+2. **Documentation**: Document purpose and usage for all scripts
+3. **Maintenance**: Archive rather than delete scripts that might be useful for reference
+4. **Automation**: Automate repetitive tasks through the startup process
+5. **Error Handling**: Include proper error handling and logging in scripts
 
 ## Development Guidelines
 
@@ -346,114 +289,95 @@ When working with this codebase, please adhere to these best practices:
 
 ## Building and Running
 
-The application is configured to run automatically through the Replit "Run" button, which executes `./start-nextjs.sh`.
+The application is configured to run automatically through the "Start application" workflow, which executes `./start.sh`.
 
 ```bash
-# Manual start
-./start-nextjs.sh
+# View application version
+cat version.json
 
-# Development mode
-npx next dev -p 8080
-
-# Build for production
-npx next build
-
-# Database operations
-npx prisma db push     # Push schema changes to database
-node scripts/database/seed-database.js  # Seed database with initial data
-node scripts/database/import-investment-data.js  # Import investment metrics
+# Manual start (if needed)
+./start.sh
 ```
 
-The application will be available at the designated Replit URL or locally at [http://localhost:8080](http://localhost:8080).
-
-### Database Setup
-
-This application uses PostgreSQL with Prisma ORM:
-
-1. The database connection is configured through the DATABASE_URL environment variable
-2. Prisma schema is defined in `prisma/schema.prisma`
-3. The schema includes models for:
-   - Portfolio items (companies with investment metrics)
-   - Projects (work portfolio items)
-   - Ventures (creative projects)
-   - Tags (for filtering)
-   - Categories (for organization)
-
-### Replit Configuration
-
-The application is optimized for the Replit environment:
-
-1. Port 8080 is used instead of the default Next.js port 3000
-2. The `start-nextjs.sh` script handles proper binding to `0.0.0.0` instead of localhost
-3. Environment variables are properly set for the Replit environment
-4. Database connection is configured for the Replit-provided PostgreSQL instance
+The application will be available at the designated Replit URL or locally at [http://localhost:5000](http://localhost:5000).
 
 ## Project Cleanup Notes
 
 The codebase has been significantly optimized to:
 
 1. **Remove Problematic Scripts**: 
-   - Removed scripts with functionality now handled by proper CSS
+   - Removed scripts like `check-portfolio-styles.js`, `test-grid-with-fetch.js`, and `update-navbar-shadows.js` that were directly modifying files or making unnecessary HTTP requests
    - Eliminated code causing hydration errors and unexpected behavior
 
 2. **Optimize Development Process**:
-   - Improved startup scripts for asset management
+   - Improved `start.sh` to automatically run the `organize-assets.sh` script for asset management
    - Optimized environment variables to follow best practices
    - Streamlined the development server startup process
 
 3. **Consolidate Asset Directories**:
-   - Centralized all assets in `attached_assets` for better organization
+   - Centralized all assets in `public/attached_assets` for better organization
+   - Created automatic symlinks and copies for backward compatibility
    - Eliminated redundant asset directories
    - Integrated asset management into the application startup process
 
-4. **Modernize Component Architecture**:
-   - Updated components to use modern React 19 patterns
-   - Added proper error boundaries for better error handling
-   - Converted to multi-page application structure with separate tabs
+3. **Modernize Component Architecture**:
+   - Refactored `ClientWrapper` to use modern React 19 patterns and proper Suspense handling
+   - Simplified `client-theme-provider` for better compatibility
+   - Added proper error boundaries for better error handling instead of error suppression
 
-5. **Improve Configuration**:
-   - Updated configuration files to follow Next.js 15 best practices
-   - Enhanced Tailwind config with optimized responsive design features
-   - Fixed CSS loading and styling issues
+4. **Improve Configuration**:
+   - Updated `next.config.js` to follow Next.js 15 best practices
+   - Added appropriate CORS and cache headers
+   - Improved development performance settings
+   - Consolidated duplicate Tailwind and PostCSS configurations
+   - Enhanced Tailwind config with optimized animations and responsive design features
 
-6. **Better Error Handling**:
+5. **Better Error Handling**:
    - Implemented proper error boundaries to catch and display errors
+   - Removed problematic environment variables like `NEXT_IGNORE_REACT_ERROR`
    - Added better logging for debugging purposes
 
+6. **Asset Management & Project Structure**:
+   - Implemented a single source of truth for assets in `public/attached_assets`
+   - Removed redundant asset directories and eliminated duplicate image files
+   - Added symlinks for backward compatibility to prevent breaking changes
+   - Integrated asset management into application startup for automated organization
+   - Documented asset structure and organization pattern for future maintenance
+   - Cleaned up root directory by moving non-essential files to appropriate locations
+   - Integrated documentation consolidation into the application startup process
+
 7. **CSS and Styling Improvements**:
+   - Removed all `!important` flags from stylesheets for improved maintainability
    - Replaced inline style attributes with Tailwind utility classes throughout the codebase
-   - Standardized the globals.css structure with proper organization
+   - Standardized the globals.css structure with proper layer organization
+   - Established consistent link styling with proper dark/light theme support
+   - Implemented proper CSS variable usage for theme colors
    - Created consistent component-specific styling patterns
-   - Improved color scheme with purple theme (#8c5cf6 and #3D365C)
+   - Added clear code quality guidelines for future development
 
 ## Version History
 
-This project follows a structured versioning system with detailed change tracking in the [CHANGELOG.md](./CHANGELOG.md).
+This project follows a structured versioning system with detailed change tracking in the [docs/CHANGELOG.md](./CHANGELOG.md).
 
 ### Versioning Philosophy
 
 The project follows Semantic Versioning with the following custom guidelines:
 
-- **Major versions (X.0.0)**: Dictated by user requirement changes or significant architectural shifts
-- **Minor versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
-- **Patch versions (0.0.X)**: Individual commits within a single chat session
+- **Major Versions (X.0.0)**: Dictated by user requirement changes or significant architectural shifts
+- **Minor Versions (0.X.0)**: Represent new chat/interaction cycles with the AI assistant
+- **Patch Versions (0.0.X)**: Individual commits within a single chat session
 
 ### Latest Version
 
-Current version: 8.5.2 (2025-04-25)
+Current version: 8.0.0 (2025-04-04)
 
 Key updates in the latest version:
-- **Accurate Project Structure** - Updated README.md with accurate reflection of current codebase structure
-- **Enhanced Configuration Documentation** - Added detailed database configuration information
-- **Improved Script Documentation** - Updated Development Tools & Scripts section with accurate descriptions
-- **Building Instructions** - Added comprehensive building and database setup instructions
-- **Replit Environment** - Added Replit-specific configuration details
-
-Previous version: 8.5.1 (2025-04-25)
-- **Comprehensive Documentation** - Added detailed project structure and guidelines
-- **Development Guidelines** - Added Seven Laws of Artificial Intelligence for code quality
-- **Multi-Page Structure** - Converted website from single-page to multi-page application with separate tabs
-- **Visual Consistency** - Updated footer with "Copyright 2025 Interspace Ventures" and version information
+- **Code Quality Improvements** - Removed all `!important` flags from CSS and replaced inline styles with Tailwind classes
+- **Standardized CSS Structure** - Reorganized globals.css with proper layer organization and consistent theming variables
+- **Enhanced Component Organization** - Improved separation of concerns with component-specific styles
+- **Extended Documentation** - Added comprehensive Code Quality Best Practices section to documentation
+- **Updated Coding Principles** - Added a sixth "Law of AI" focused on maintaining code quality
+- **Coding Best Practices** - Established eight core principles for maintainable, high-quality code
 
 For detailed changes across all versions, see the [CHANGELOG.md](./CHANGELOG.md).
 
