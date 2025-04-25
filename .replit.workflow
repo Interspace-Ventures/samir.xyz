@@ -1,3 +1,7 @@
 [Run]
 Type = "shell"
-Command = ["./start-nextjs.sh"]
+Command = ["bash", "-c", "chmod +x ./start-nextjs.sh && ./start-nextjs.sh"]
+
+[Start Portfolio Website]
+Type = "shell"
+Command = ["bash", "-c", "chmod +x ./start-nextjs.sh && ./start-nextjs.sh"]
