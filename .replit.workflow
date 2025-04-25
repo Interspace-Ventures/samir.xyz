@@ -1,3 +1,3 @@
-run = "./start-nextjs.sh"
-language = "nodejs"
-onBoot = ""
+[Run]
+Type = "shell"
+Command = ["./start-nextjs.sh"]
