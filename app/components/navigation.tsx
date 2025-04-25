@@ -63,7 +63,7 @@ const Navigation = () => {
             <ul style={{ display: 'flex', gap: '2rem' }}>
               <li>
                 <Link 
-                  href="#profile" 
+                  href="/" 
                   style={{ 
                     color: '#ffffff', 
                     fontWeight: 500, 
@@ -80,7 +80,7 @@ const Navigation = () => {
               </li>
               <li>
                 <Link 
-                  href="#portfolio" 
+                  href="/portfolio" 
                   style={{ 
                     color: '#ffffff', 
                     fontWeight: 500, 
@@ -97,7 +97,7 @@ const Navigation = () => {
               </li>
               <li>
                 <Link 
-                  href="#ventures" 
+                  href="/ventures" 
                   style={{ 
                     color: '#ffffff', 
                     fontWeight: 500, 
