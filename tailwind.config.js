@@ -14,8 +14,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Alexandria', 'sans-serif'],
-        alexandria: ['Alexandria', 'sans-serif'],
+        sans: ['Alexandria', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         'purple-primary': '#8c5cf6',

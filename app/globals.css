@@ -41,11 +41,11 @@
 
 @layer base {
   body {
-    @apply bg-[#3D365C] text-[#ffffff] font-alexandria;
+    @apply bg-[#3D365C] text-[#ffffff] font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-alexandria font-bold;
+    @apply font-sans font-bold;
   }
 }
 
