@@ -1,70 +1,157 @@
 /**
  * Update Company Descriptions Script
  * 
- * This script updates descriptions for companies with corrected names
+ * This script updates descriptions for portfolio companies
  * 
- * Run with: `node update-company-descriptions.js`
+ * Run with: `node scripts/database/update-company-descriptions.js`
  */
 
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Updating company descriptions...');
+  console.log('Starting to update company descriptions...');
 
-  // Company descriptions to update
-  const descriptionUpdates = [
+  // Company descriptions
+  const companyDescriptions = [
     {
-      id: 45,
-      name: 'H',
-      description: 'Hedgehog develops innovative financial management tools that help users track cryptocurrency investments, monitor market trends, and optimize their digital asset portfolios through a secure, user-friendly platform.'
+      name: 'AON3D',
+      description: 'Industrial 3D printing solutions for high-performance thermoplastics.',
     },
     {
-      id: 49,
+      name: 'Margin',
+      description: 'Automated portfolio management platform for crypto investing.',
+    },
+    {
+      name: 'Restream',
+      description: 'Multi-platform live streaming solutions for content creators.',
+    },
+    {
+      name: 'Soot',
+      description: 'Carbon footprint tracking and climate action platform.',
+    },
+    {
+      name: 'Sugar',
+      description: 'AI-powered CRM for managing customer relationships.',
+    },
+    {
+      name: 'Waldo',
+      description: 'Mobile app testing automation platform for development teams.',
+    },
+    {
+      name: 'Hedgehog',
+      description: 'Simplified crypto investment platform for everyday investors.',
+    },
+    {
+      name: 'Techmate',
+      description: 'On-demand tech support for homes and small businesses.',
+    },
+    {
+      name: 'Sundae',
+      description: 'Marketplace for selling distressed real estate properties.',
+    },
+    {
+      name: 'Sanzo',
+      description: 'Asian-inspired sparkling water with real fruit and no added sugar.',
+    },
+    {
+      name: 'Rely',
+      description: 'Buy now, pay later solution for Southeast Asian markets.',
+    },
+    {
+      name: 'Playbook',
+      description: 'Design asset management and collaboration platform.',
+    },
+    {
+      name: 'Moku',
+      description: 'Plant-based alternative meat company with sustainable practices.',
+    },
+    {
+      name: 'Lunar',
+      description: 'Digital banking platform for Nordic markets.',
+    },
+    {
+      name: 'Keep',
+      description: 'Smart organization system for home storage and inventory.',
+    },
+    {
+      name: 'Kartera',
+      description: 'Cryptocurrency portfolio tracking and tax reporting platform.',
+    },
+    {
+      name: 'Juneshine',
+      description: 'Hard kombucha brewery with organic, sustainable ingredients.',
+    },
+    {
       name: 'Harper',
-      description: 'Harper provides financial infrastructure solutions that help businesses streamline payment processing, compliance, and banking operations through modern API-based platforms designed for the digital economy.'
+      description: 'Digital health platform for personalized chronic condition management.',
+    },
+    {
+      name: 'GEM',
+      description: 'Plant-based daily vitamin bites made from real foods.',
+    },
+    {
+      name: 'Goodmylk',
+      description: 'Plant-based dairy alternatives made from clean ingredients.',
+    },
+    {
+      name: 'CaliberX',
+      description: 'AI-powered fitness coaching and personalized workout platform.',
+    },
+    {
+      name: 'Backpack',
+      description: 'Modern school management system for K-12 institutions.',
+    },
+    {
+      name: 'Aura',
+      description: 'All-in-one digital security for individuals and families.',
+    },
+    {
+      name: 'Afar',
+      description: 'Remote team building platform for distributed workforces.',
+    },
+    {
+      name: 'Swansea City AFC',
+      description: 'Professional football club based in Swansea, Wales.',
+    },
+    {
+      name: 'Swan',
+      description: 'Banking-as-a-Service platform for embedded finance solutions.',
+    },
+    {
+      name: 'Superplastic',
+      description: 'Digital character studio creating virtual celebrities and NFTs.',
+    },
+    {
+      name: 'The Coffee',
+      description: 'Premium sustainable coffee brand with direct trade practices.',
     }
   ];
 
-  // Update count
-  let updatedCount = 0;
-  let errorCount = 0;
-
-  // Process each description update
-  for (const update of descriptionUpdates) {
+  // Update each company with its description
+  for (const company of companyDescriptions) {
     try {
-      // Find by ID
-      const portfolioItem = await prisma.portfolio.findUnique({
-        where: { id: update.id }
+      const result = await prisma.portfolio.updateMany({
+        where: {
+          name: company.name,
+        },
+        data: {
+          description: company.description,
+        },
       });
 
-      if (portfolioItem) {
-        // Update the description
-        await prisma.portfolio.update({
-          where: { id: portfolioItem.id },
-          data: { description: update.description }
-        });
-        
-        console.log(`Updated ${portfolioItem.name} (ID: ${portfolioItem.id}) with new description`);
-        updatedCount++;
-      } else {
-        console.log(`No portfolio item found with ID ${update.id}`);
-        errorCount++;
-      }
+      console.log(`Updated ${result.count} records for ${company.name}`);
     } catch (error) {
-      console.error(`Error updating ${update.name}:`, error);
-      errorCount++;
+      console.error(`Error updating ${company.name}:`, error);
     }
   }
 
-  console.log(`Company description updates complete.`);
-  console.log(`  Updated: ${updatedCount} companies`);
-  console.log(`  Errors: ${errorCount} companies`);
+  console.log('Company descriptions update completed.');
 }
 
 main()
   .catch((e) => {
-    console.error('Error updating company descriptions:', e);
+    console.error(e);
     process.exit(1);
   })
   .finally(async () => {

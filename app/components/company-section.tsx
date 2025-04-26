@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import InvestmentMetrics from './investment-metrics';
+import PortfolioMetricsSummary from './portfolio-metrics-summary';
 
 type Tag = {
   id: number;
@@ -134,12 +135,15 @@ export default function CompanySection() {
 
   return (
     <>
+      {/* Portfolio Metrics Summary */}
+      <PortfolioMetricsSummary />
+
       {/* Category Filter Buttons */}
-      <div className="flex flex-wrap gap-3 mb-12">
+      <div className="flex justify-center md:justify-start overflow-x-auto whitespace-nowrap py-2 mb-8 -mx-4 px-4 md:mx-0 md:px-0">
         <button
-          className={`px-8 py-3 rounded-md text-sm font-medium transition-all ${
+          className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 mr-2 ${
             selectedCategory === 'All'
-              ? 'bg-purple-primary text-white'
+              ? 'bg-purple-primary text-white shadow-md'
               : 'bg-[#1C1C1E] text-white hover:bg-gray-800'
           }`}
           onClick={() => setSelectedCategory('All')}
@@ -147,77 +151,100 @@ export default function CompanySection() {
           All
         </button>
         
-        {categories.filter(cat => cat.name !== 'All').map(category => (
+        {/* Get unique categories from portfolio items */}
+        {Array.from(new Set(portfolioItems.map(item => item.category)))
+          .filter(cat => cat !== null && cat !== '')
+          .sort()
+          .map((category, index) => (
           <button
-            key={category.id}
-            className={`px-8 py-3 rounded-md text-sm font-medium transition-all ${
-              selectedCategory === category.name
-                ? 'bg-purple-primary text-white'
+            key={index}
+            className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 mr-2 ${
+              selectedCategory === category
+                ? 'bg-purple-primary text-white shadow-md'
                 : 'bg-[#1C1C1E] text-white hover:bg-gray-800'
             }`}
-            onClick={() => setSelectedCategory(category.name)}
+            onClick={() => setSelectedCategory(category)}
           >
-            {category.name}
+            {category}
           </button>
         ))}
       </div>
 
       {/* Portfolio Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredItems.map(item => (
-          <div 
-            key={item.id} 
-            className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-md transition-shadow"
-          >
-            {/* Company Logo Container */}
-            <div className="h-44 flex items-center justify-center p-8 bg-white">
-              <Image
-                src={item.logoUrl.startsWith('/') 
-                  ? item.logoUrl 
-                  : `/${item.logoUrl}`}
-                alt={item.name}
-                width={200}
-                height={90}
-                style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
-              />
-            </div>
-            
-            {/* Tag overlay (if present) */}
-            {item.tags.some(tag => tag.name === 'Markup') && (
-              <div className="absolute top-3 right-3">
-                <span className="bg-purple-primary text-white text-xs px-3 py-1 rounded-md font-medium">
-                  Markup
-                </span>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filteredItems.map(item => {
+          // Only use PNG images
+          const isPNG = item.logoUrl.toLowerCase().endsWith('.png');
+          if (!isPNG) return null;
+          
+          return (
+            <div 
+              key={item.id} 
+              className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+            >
+              {/* Company Logo Container */}
+              <div className="h-32 flex items-center justify-center p-6 bg-white">
+                <Image
+                  src={item.logoUrl.startsWith('/') 
+                    ? item.logoUrl 
+                    : `/${item.logoUrl}`}
+                  alt={item.name}
+                  width={160}
+                  height={80}
+                  style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                />
               </div>
-            )}
-            
-            {/* Link overlay if website available */}
-            {item.website && (
-              <Link 
-                href={item.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute inset-0 z-10 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity"
-                aria-label={`Visit ${item.name} website`}
+              
+              {/* Company Name - Now visible */}
+              <div className="px-4 py-2 bg-gray-50 border-t border-gray-100">
+                <h3 className="text-sm font-medium text-gray-800 truncate">{item.name}</h3>
+              </div>
+              
+              {/* Tag overlay (if present) */}
+              {item.tags.some(tag => tag.name === 'Markup') && (
+                <div className="absolute top-3 right-3">
+                  <span className="bg-purple-primary text-white text-xs px-3 py-1 rounded-md font-medium">
+                    Markup
+                  </span>
+                </div>
+              )}
+              
+              {item.tags.some(tag => tag.name === 'Acquired') && (
+                <div className="absolute top-3 right-3">
+                  <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-md font-medium">
+                    Acquired
+                  </span>
+                </div>
+              )}
+              
+              {/* Hover overlay with description or link */}
+              <div 
+                className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 text-center"
               >
-                <span className="bg-purple-primary text-white px-4 py-2 rounded-md text-sm">
-                  Visit Website
-                </span>
-              </Link>
-            )}
-          </div>
-        ))}
+                {item.description ? (
+                  <p className="text-white text-sm mb-4">{item.description}</p>
+                ) : (
+                  <p className="text-gray-300 text-sm mb-4">{item.name} - {item.category}</p>
+                )}
+                
+                {item.website && (
+                  <Link 
+                    href={item.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-purple-primary hover:bg-purple-600 text-white px-4 py-2 rounded-md text-sm transition-colors mt-2"
+                    aria-label={`Visit ${item.name} website`}
+                  >
+                    Visit Website
+                  </Link>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
       
-      {/* Metrics Link */}
-      <div className="mt-12 text-right">
-        <Link 
-          href="/portfolio-metrics" 
-          className="bg-purple-primary hover:bg-purple-light text-white px-8 py-3 rounded-md text-sm font-medium transition-colors"
-        >
-          View All Metrics
-        </Link>
-      </div>
+      {/* End of Portfolio Section */}
     </>
   );
 }
