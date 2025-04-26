@@ -150,7 +150,7 @@ export default function CompanySection() {
           
           {/* Get unique categories from portfolio items */}
           {Array.from(new Set(portfolioItems.map(item => item.category)))
-            .filter(cat => cat !== null && cat !== '')
+            .filter(cat => cat !== null && cat !== '' && cat !== 'Food') // Filter out 'Food' category
             .sort()
             .map((category, index) => (
             <button
