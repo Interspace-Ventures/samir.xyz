@@ -57,7 +57,7 @@ export default function VenturesGrid() {
       ) : (
         <div className="w-full max-w-[800px] mx-auto">
           {/* Fix grid width to ensure consistent cell sizes */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-3 gap-0">
             {/* Ensure exactly 9 ventures are shown in a 3x3 grid */}
             {ventures.slice(0, 9).map((venture, index) => (
               <div key={venture.id} className="grid-square-item">
