@@ -175,17 +175,13 @@ export default function CompanySection() {
           const isPNG = item.logoUrl.toLowerCase().endsWith('.png');
           if (!isPNG) return null;
           
-          return (
-            <div 
-              key={item.id} 
-              className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-            >
+          // Create the inner content for the card
+          const CardContent = () => (
+            <div className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               {/* Company Logo Container */}
               <div className="h-24 flex items-center justify-center p-5 bg-white">
                 <Image
-                  src={item.logoUrl.startsWith('/') 
-                    ? item.logoUrl 
-                    : `/${item.logoUrl}`}
+                  src={item.logoUrl.startsWith('/') ? item.logoUrl : `/${item.logoUrl}`}
                   alt={item.name}
                   width={140}
                   height={70}
@@ -215,28 +211,33 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {/* Hover overlay with description or link */}
-              <div 
-                className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 text-center"
-              >
+              {/* Hover overlay with description */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 text-center">
                 {item.description ? (
-                  <p className="text-white text-sm mb-4">{item.description}</p>
+                  <p className="text-white text-sm">{item.description}</p>
                 ) : (
-                  <p className="text-gray-300 text-sm mb-4">{item.name} - {item.category}</p>
-                )}
-                
-                {item.website && (
-                  <Link 
-                    href={item.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-purple-primary hover:bg-purple-600 text-white px-4 py-2 rounded-md text-sm transition-colors mt-2"
-                    aria-label={`Visit ${item.name} website`}
-                  >
-                    Visit Website
-                  </Link>
+                  <p className="text-gray-300 text-sm">{item.name} - {item.category}</p>
                 )}
               </div>
+            </div>
+          );
+          
+          // Render either a link wrapper or just the content
+          return (
+            <div key={item.id}>
+              {item.website ? (
+                <Link 
+                  href={item.website}
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="block cursor-pointer"
+                  aria-label={`Visit ${item.name} website`}
+                >
+                  <CardContent />
+                </Link>
+              ) : (
+                <CardContent />
+              )}
             </div>
           );
         })}
