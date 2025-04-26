@@ -145,7 +145,7 @@ export default function CompanySection() {
       <div className="flex justify-start overflow-x-auto scrollbar-thin scrollbar-thumb-purple-primary scrollbar-track-transparent pb-2 mb-8">
         <div className="inline-flex space-x-2 px-0.5">
           <button
-            className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
+            className={`px-6 py-2 text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
               selectedCategory === 'All'
                 ? 'bg-purple-primary text-white shadow-md'
                 : 'bg-zinc-900 text-white hover:bg-zinc-800'
@@ -162,7 +162,7 @@ export default function CompanySection() {
             .map((category, index) => (
             <button
               key={index}
-              className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
+              className={`px-6 py-2 text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
                 selectedCategory === category
                   ? 'bg-purple-primary text-white shadow-md'
                   : 'bg-zinc-900 text-white hover:bg-zinc-800'
@@ -190,7 +190,7 @@ export default function CompanySection() {
           
           // Create the inner content for the card
           const CardContent = () => (
-            <div className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div className="bg-white overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               {/* Company Logo Container */}
               <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
                 {/* Improved logo handling for all path formats */}
@@ -218,7 +218,7 @@ export default function CompanySection() {
               {/* Status overlay (if present) */}
               {item.investment_status === 'Markup' && (
                 <div className="absolute top-3 right-3">
-                  <span className="bg-purple-primary text-white text-xs px-3 py-1 rounded-md font-medium">
+                  <span className="bg-purple-primary text-white text-xs px-3 py-1 font-medium">
                     Markup
                   </span>
                 </div>
@@ -226,14 +226,14 @@ export default function CompanySection() {
               
               {item.investment_status === 'Acquired' && (
                 <div className="absolute top-3 right-3">
-                  <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-md font-medium">
+                  <span className="bg-green-600 text-white text-xs px-3 py-1 font-medium">
                     Acquired
                   </span>
                 </div>
               )}
               
-              {/* Hover overlay with description - fixed rounded corners */}
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center rounded-lg overflow-hidden">
+              {/* Hover overlay with description - rectangular style */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
                 {item.description ? (
                   <p className="text-white text-xs sm:text-sm">{item.description}</p>
                 ) : (

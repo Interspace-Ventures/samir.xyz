@@ -13,7 +13,7 @@
 
   /* Make company logos have white background even in dark mode */
   .company-logo {
-    @apply bg-white rounded-md p-2 flex items-center justify-center overflow-hidden;
+    @apply bg-white p-2 flex items-center justify-center overflow-hidden;
   }
 }
 
@@ -43,6 +43,6 @@
   }
 
   .card {
-    @apply bg-purple-dark rounded-lg p-6 transition-all duration-300 border border-purple-primary/10 hover:border-purple-primary/30;
+    @apply bg-purple-dark p-6 transition-all duration-300 border border-purple-primary/10 hover:border-purple-primary/30;
   }
 }
