@@ -92,3 +92,17 @@ h1, h2, h3, h4, h5, h6 {
 .card-venture:hover {
   box-shadow: 0 10px 15px -3px rgba(140, 92, 246, 0.3);
 }
+
+/* Metric Card Component */
+.metric-card {
+  background-color: #18181b; /* zinc-900 */
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(140, 92, 246, 0.2);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(140, 92, 246, 0.1);
+}

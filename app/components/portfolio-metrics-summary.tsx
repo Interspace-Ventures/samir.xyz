@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import MetricCard from './metric-card';
 
 type PortfolioSummary = {
   total_investments: number;
@@ -104,56 +105,32 @@ export default function PortfolioMetricsSummary() {
   };
   
   return (
-    <div className="mb-8">
-      {/* Metrics Grid - 4 per row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div className="mb-8 max-w-7xl mx-auto">
+      {/* Metrics Grid - Ensuring 4 per row on medium screens for most viewports */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6">
         {/* Total Investments */}
-        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
-          <div className="text-sm text-text-tertiary mb-1"># Investments</div>
-          <div className="text-2xl font-medium text-text-primary">{summary.total_investments}</div>
-        </div>
+        <MetricCard label="# Investments" value={summary.total_investments} />
         
         {/* Markups */}
-        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
-          <div className="text-sm text-text-tertiary mb-1"># Markups</div>
-          <div className="text-2xl font-medium text-text-primary">{summary.markups}</div>
-        </div>
+        <MetricCard label="# Markups" value={summary.markups} />
         
         {/* Acquisitions */}
-        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
-          <div className="text-sm text-text-tertiary mb-1"># Acquisitions</div>
-          <div className="text-2xl font-medium text-text-primary">{summary.acquisitions}</div>
-        </div>
+        <MetricCard label="# Acquisitions" value={summary.acquisitions} />
         
         {/* Busts */}
-        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
-          <div className="text-sm text-text-tertiary mb-1"># Busts</div>
-          <div className="text-2xl font-medium text-text-primary">{summary.busts}</div>
-        </div>
+        <MetricCard label="# Busts" value={summary.busts} />
         
         {/* TVPI */}
-        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
-          <div className="text-sm text-text-tertiary mb-1">TVPI</div>
-          <div className="text-2xl font-medium text-text-primary">{formatMultiple(summary.tvpi)}</div>
-        </div>
+        <MetricCard label="TVPI" value={formatMultiple(summary.tvpi)} />
         
         {/* Gross Multiple */}
-        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
-          <div className="text-sm text-text-tertiary mb-1">Gross Multiple</div>
-          <div className="text-2xl font-medium text-text-primary">{formatMultiple(summary.gross_multiple)}</div>
-        </div>
+        <MetricCard label="Gross Multiple" value={formatMultiple(summary.gross_multiple)} />
         
         {/* Net Multiple */}
-        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
-          <div className="text-sm text-text-tertiary mb-1">Net Multiple</div>
-          <div className="text-2xl font-medium text-text-primary">{formatMultiple(summary.net_multiple)}</div>
-        </div>
+        <MetricCard label="Net Multiple" value={formatMultiple(summary.net_multiple)} />
         
         {/* IRR */}
-        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
-          <div className="text-sm text-text-tertiary mb-1">IRR</div>
-          <div className="text-2xl font-medium text-text-primary">{formatPercentage(summary.irr)}</div>
-        </div>
+        <MetricCard label="IRR" value={formatPercentage(summary.irr)} />
       </div>
     </div>
   );
