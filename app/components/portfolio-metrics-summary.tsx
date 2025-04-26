@@ -35,21 +35,17 @@ export default function PortfolioMetricsSummary() {
       // Calculate summary metrics
       const items = portfolioData.items;
       
-      // Count tags
+      // Count statuses
       let markupCount = 0;
       let acquisitionCount = 0;
       
       items.forEach((item: any) => {
-        // Count tags
-        if (item.tags && Array.isArray(item.tags)) {
-          item.tags.forEach((tag: any) => {
-            if (tag.name === 'Markup') {
-              markupCount++;
-            }
-            if (tag.name === 'Acquired') {
-              acquisitionCount++;
-            }
-          });
+        // Count based on investment_status field
+        if (item.investment_status === 'Markup') {
+          markupCount++;
+        }
+        if (item.investment_status === 'Acquired' || item.investment_status === 'Exited') {
+          acquisitionCount++;
         }
       });
       

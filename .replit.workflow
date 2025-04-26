@@ -1,11 +1,5 @@
-run = ["bash", "start-nextjs.sh"]
-onBoot = false
-
-hidden = []
-
-[nix]
-channel = "stable-23_11"
-
-[deployment]
-run = ["node", "server.js"]
-deploymentTarget = "cloudrun"
+workflow:
+  run:
+    run: npx prisma generate && npx next dev
+    language: nodejs
+    working-dir: "."

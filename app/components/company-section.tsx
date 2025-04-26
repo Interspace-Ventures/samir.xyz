@@ -7,11 +7,6 @@ import { useQuery } from '@tanstack/react-query';
 import InvestmentMetrics from './investment-metrics';
 import PortfolioMetricsSummary from './portfolio-metrics-summary';
 
-type Tag = {
-  id: number;
-  name: string;
-};
-
 type Portfolio = {
   id: number;
   name: string;
@@ -19,13 +14,14 @@ type Portfolio = {
   description?: string | null;
   logoUrl: string;
   website?: string | null;
-  tags: Tag[];
   // Investment and financial data
   investment_date?: Date | null;
   initial_investment?: number | null;
   original_valuation?: number | null;
   current_valuation?: number | null;
   investment_status?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 type Category = {
@@ -202,8 +198,8 @@ export default function CompanySection() {
                 <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
               </div>
               
-              {/* Tag overlay (if present) */}
-              {item.tags.some(tag => tag.name === 'Markup') && (
+              {/* Status overlay (if present) */}
+              {item.investment_status === 'Markup' && (
                 <div className="absolute top-3 right-3">
                   <span className="bg-purple-primary text-white text-xs px-3 py-1 rounded-md font-medium">
                     Markup
@@ -211,7 +207,7 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {item.tags.some(tag => tag.name === 'Acquired') && (
+              {item.investment_status === 'Acquired' && (
                 <div className="absolute top-3 right-3">
                   <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-md font-medium">
                     Acquired

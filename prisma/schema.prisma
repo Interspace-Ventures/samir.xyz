@@ -1,7 +1,3 @@
-// Personal Portfolio Website - Prisma Schema
-// This schema defines the data models for the portfolio website
-// Learn more about Prisma schemas: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,41 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Tag model - Tags that can be associated with portfolio items
-model Tag {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique // Unique tag name (e.g., "Markup", "Acquired")
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  portfolios Portfolio[] @relation("PortfolioToTag") // Portfolio items associated with this tag
-}
-
-// Portfolio model - Stores company portfolio items
 model Portfolio {
-  id                  Int       @id @default(autoincrement())
-  name                String    // Company name
-  category            String    // Portfolio category (e.g., "Fintech", "Health", "Retail", "SaaS")
-  logoUrl             String    // URL to company logo
-  website             String?   // Optional URL to company website
-  description         String?   @db.VarChar(280) // Short description of the company (limited to 280 chars)
-  
-  // Investment and financial data
-  initial_investment  Float?    // Initial investment amount (renamed from investment-amount)
-  investment_date     DateTime? // When the investment was made
-  original_valuation  Float?    // Original valuation at time of investment
-  current_valuation   Float?    // Current valuation of the investment
-  
-  createdAt           DateTime  @default(now()) // When item was added at database level (renamed from last-updated)
-  updatedAt           DateTime  @updatedAt      // When item was last updated at database level
-  investment_status   String?   // Investment status (e.g., "Active", "Exited", "Written Off")
-  tags                Tag[]     @relation("PortfolioToTag") // Tags associated with this portfolio item
-}
-
-// Category model - For grouping portfolio items by category
-model Category {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique // Category name (e.g., "All", "Fintech", "Health", "Retail", "SaaS")
-  order     Int      @default(0) // Display order
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                 Int       @id @default(autoincrement())
+  name               String
+  category           String
+  logoUrl            String
+  website            String?
+  description        String?   @db.VarChar(280)
+  initial_investment Float?
+  investment_date    DateTime?
+  original_valuation Float?
+  current_valuation  Float?
+  investment_status  String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 }
