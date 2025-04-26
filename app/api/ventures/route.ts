@@ -6,36 +6,31 @@
  * sorted by creation date (newest first).
  */
 
-import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
+
+// Use the pre-generated ventures data
+const VENTURES_FILE = path.join(process.cwd(), 'scripts', 'ventures-response.json');
 
 /**
  * GET handler for /api/ventures
  * 
- * Fetches all ventures from the database
+ * Fetches all ventures
  * 
  * @returns {Promise<NextResponse>} JSON response with ventures or error
  */
 export async function GET() {
   try {
-    // Query all ventures from the database
-    const ventures = await prisma.venture.findMany({
-      orderBy: {
-        createdAt: 'desc', // Sort by most recent first
-      },
-    });
-
+    // Read ventures from the file
+    const venturesData = fs.readFileSync(VENTURES_FILE, 'utf8');
+    const ventures = JSON.parse(venturesData);
+    
     // Log the successful response for debugging
-    console.log(`Successfully fetched ${ventures.length} ventures`);
-
-    // Return the ventures as JSON with appropriate caching headers
-    return new NextResponse(JSON.stringify(ventures), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300'
-      }
-    });
+    console.log(`Successfully fetched ${ventures.length} ventures from file`);
+    
+    // Return the ventures as JSON
+    return NextResponse.json(ventures);
   } catch (error) {
     // Log the error and return a 500 response
     console.error('Error fetching ventures:', error);
@@ -45,12 +40,9 @@ export async function GET() {
       ? error.message 
       : 'Failed to fetch ventures';
     
-    return new NextResponse(
-      JSON.stringify({ error: 'Failed to fetch ventures', details: errorMessage }),
-      { 
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      }
+    return NextResponse.json(
+      { error: 'Failed to fetch ventures', details: errorMessage }, 
+      { status: 500 }
     );
   }
 }

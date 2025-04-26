@@ -17,7 +17,8 @@ export default function VenturesPage() {
     <div className="pt-24 pb-16">
       <section className="section">
         <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white">Ventures</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Interspace Ventures Grid</h1>
+          <p className="text-lg text-white/70 mb-12">I create apps and concepts by coding at the speed of thought using Replit.</p>
           <VenturesGrid />
         </div>
       </section>

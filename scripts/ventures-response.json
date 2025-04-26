@@ -1,0 +1,98 @@
+[
+  {
+    "id": 8,
+    "name": "omni",
+    "description": "read anything, anywhere, all offline",
+    "logoUrl": "/ventures/omni.png",
+    "website": "https://omni.iv.xyz",
+    "industry": "Reading",
+    "founded": 2023,
+    "featured": true,
+    "createdAt": "2025-04-26T17:17:10.071Z",
+    "updatedAt": "2025-04-26T17:17:10.071Z"
+  },
+  {
+    "id": 7,
+    "name": "moonshot",
+    "description": "launch your next big idea",
+    "logoUrl": "/ventures/moonshot.png",
+    "website": "https://moonshot.iv.xyz",
+    "industry": "Innovation",
+    "founded": 2024,
+    "featured": true,
+    "createdAt": "2025-04-26T17:17:09.995Z",
+    "updatedAt": "2025-04-26T17:17:09.995Z"
+  },
+  {
+    "id": 6,
+    "name": "predictive",
+    "description": "AI-powered film predictions",
+    "logoUrl": "/ventures/predictive.png",
+    "website": "https://predictive.iv.xyz",
+    "industry": "Entertainment",
+    "founded": 2023,
+    "featured": true,
+    "createdAt": "2025-04-26T17:17:09.918Z",
+    "updatedAt": "2025-04-26T17:17:09.918Z"
+  },
+  {
+    "id": 5,
+    "name": "samir.xyz",
+    "description": "Hey I'm Samir and I drive business impact",
+    "logoUrl": "/ventures/samir.png",
+    "website": "https://samir.xyz",
+    "industry": "Personal",
+    "founded": 2022,
+    "featured": true,
+    "createdAt": "2025-04-26T17:17:09.840Z",
+    "updatedAt": "2025-04-26T17:17:09.840Z"
+  },
+  {
+    "id": 4,
+    "name": "solo",
+    "description": "the first beautifully functional climbing app",
+    "logoUrl": "/ventures/solo.png",
+    "website": "https://solo.iv.xyz",
+    "industry": "Fitness",
+    "founded": 2022,
+    "featured": true,
+    "createdAt": "2025-04-26T17:17:09.761Z",
+    "updatedAt": "2025-04-26T17:17:09.761Z"
+  },
+  {
+    "id": 3,
+    "name": "tbh",
+    "description": "the best vibes of Boerum Hill",
+    "logoUrl": "/ventures/tbh.png",
+    "website": "https://tbh.living",
+    "industry": "Lifestyle",
+    "founded": 2024,
+    "featured": true,
+    "createdAt": "2025-04-26T17:17:09.685Z",
+    "updatedAt": "2025-04-26T17:17:09.685Z"
+  },
+  {
+    "id": 2,
+    "name": "interspace",
+    "description": "Over-engineered takes on fintech, stratfin, tech, AI and politics",
+    "logoUrl": "/ventures/interspace.png",
+    "website": "https://posts.interspace.ventures",
+    "industry": "Media",
+    "founded": 2023,
+    "featured": true,
+    "createdAt": "2025-04-26T17:17:09.610Z",
+    "updatedAt": "2025-04-26T17:17:09.610Z"
+  },
+  {
+    "id": 1,
+    "name": "2 Days Early",
+    "description": "Current and former Chime operator community built by operators for operators",
+    "logoUrl": "/ventures/2de.png",
+    "website": "https://2daysearly.com",
+    "industry": "Community",
+    "founded": 2023,
+    "featured": true,
+    "createdAt": "2025-04-26T17:17:09.458Z",
+    "updatedAt": "2025-04-26T17:17:09.458Z"
+  }
+]
