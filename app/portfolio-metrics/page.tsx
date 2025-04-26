@@ -251,7 +251,7 @@ export default function PortfolioMetricsPage() {
               className={`px-8 py-3 rounded-md text-sm font-medium transition-all ${
                 statusFilter === null 
                   ? 'bg-purple-primary text-white' 
-                  : 'bg-[#1C1C1E] text-white hover:bg-gray-800'
+                  : 'bg-zinc-900 text-white hover:bg-zinc-800'
               }`}
               onClick={() => setStatusFilter(null)}
             >
@@ -264,7 +264,7 @@ export default function PortfolioMetricsPage() {
                 className={`px-8 py-3 rounded-md text-sm font-medium transition-all ${
                   statusFilter === status 
                     ? 'bg-purple-primary text-white' 
-                    : 'bg-[#1C1C1E] text-white hover:bg-gray-800'
+                    : 'bg-zinc-900 text-white hover:bg-zinc-800'
                 }`}
                 onClick={() => setStatusFilter(status as string)}
               >
@@ -303,10 +303,10 @@ export default function PortfolioMetricsPage() {
                   Logo URL
                 </th>
                 <th scope="col" className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Website
+                  Description
                 </th>
                 <th scope="col" className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Description
+                  Website
                 </th>
                 <th 
                   scope="col" 
@@ -366,15 +366,15 @@ export default function PortfolioMetricsPage() {
                   <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600 max-w-[150px] truncate">
                     {item.logoUrl || 'N/A'}
                   </td>
+                  <td className="px-4 py-5 text-sm text-gray-600 max-w-[200px]">
+                    <div className="truncate">{item.description || 'N/A'}</div>
+                  </td>
                   <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600">
                     {item.website ? (
                       <a href={item.website} target="_blank" rel="noopener noreferrer" className="text-purple-primary hover:underline">
                         {item.website.replace(/^https?:\/\/(www\.)?/, '')}
                       </a>
                     ) : 'N/A'}
-                  </td>
-                  <td className="px-4 py-5 text-sm text-gray-600 max-w-[200px]">
-                    <div className="truncate">{item.description || 'N/A'}</div>
                   </td>
                   <td className="px-4 py-5 whitespace-nowrap text-sm font-medium text-gray-900">
                     {item.initial_investment ? formatCurrency(item.initial_investment) : 'N/A'}

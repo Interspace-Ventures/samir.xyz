@@ -70,10 +70,20 @@ export async function GET(request: NextRequest) {
       ],
     });
     
+    // Debug the raw item structure
+    console.log('Sample raw item structure:', JSON.stringify(portfolioItems[0]));
+    
     // Map the database field names to the frontend expected property names
     const mappedItems = portfolioItems.map(item => {
       // Use type assertion to access the kebab-case property
       const rawItem = item as any;
+      
+      // Debug the raw item to see all available fields
+      // console.log(`Item ${item.name} raw data:`, rawItem);
+      
+      // Get the logo URL from whatever field it's available in
+      const logoUrl = item.logoUrl || rawItem['logo-url'] || rawItem.logoUrl || '';
+      console.log(`${item.name} logo URL: ${logoUrl}`);
       
       return {
         id: item.id,
@@ -81,7 +91,7 @@ export async function GET(request: NextRequest) {
         category: item.category,
         description: item.description,
         website: item.website,
-        logoUrl: rawItem['logo-url'], // Map the kebab-case DB field to camelCase for frontend
+        logoUrl: logoUrl, // Use the found logo URL
         investment_date: item.investment_date,
         initial_investment: item.initial_investment,
         original_valuation: item.original_valuation,

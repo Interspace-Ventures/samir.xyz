@@ -9,6 +9,12 @@ const nextConfig = {
     port: parseInt(process.env.PORT || '3000', 10),
     host: '0.0.0.0', // Listen on all available network interfaces
   },
+  
+  // Configure image optimization to properly handle local images
+  images: {
+    domains: ['localhost', '0.0.0.0'],
+    unoptimized: true, // Disable image optimization to resolve issues with local images
+  },
 };
 
 module.exports = nextConfig;

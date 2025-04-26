@@ -88,9 +88,16 @@ export default function CompanySection() {
   });
 
   // Filter portfolio items by selected category
-  const filteredItems = portfolioItems.filter(item => 
-    selectedCategory === 'All' || item.category === selectedCategory
-  );
+  const filteredItems = portfolioItems
+    .filter(item => {
+      // console.log('Filtering item:', item.name, 'Category:', item.category, 'Selected category:', selectedCategory);
+      return selectedCategory === 'All' || item.category === selectedCategory;
+    })
+    // Sort alphabetically by company name, always keep consistent sorting
+    .sort((a, b) => {
+      // Always sort alphabetically
+      return a.name.localeCompare(b.name);
+    });
 
   if (isLoadingCategories || isLoadingPortfolio) {
     return (
@@ -141,7 +148,7 @@ export default function CompanySection() {
             className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
               selectedCategory === 'All'
                 ? 'bg-purple-primary text-white shadow-md'
-                : 'bg-purple-dark text-white hover:bg-purple-primary/80'
+                : 'bg-zinc-900 text-white hover:bg-zinc-800'
             }`}
             onClick={() => setSelectedCategory('All')}
           >
@@ -150,7 +157,7 @@ export default function CompanySection() {
           
           {/* Get unique categories from portfolio items */}
           {Array.from(new Set(portfolioItems.map(item => item.category)))
-            .filter(cat => cat !== null && cat !== '' && cat !== 'Food') // Filter out 'Food' category
+            .filter(cat => cat !== null && cat !== '') // Don't filter out any categories for now
             .sort()
             .map((category, index) => (
             <button
@@ -158,7 +165,7 @@ export default function CompanySection() {
               className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
                 selectedCategory === category
                   ? 'bg-purple-primary text-white shadow-md'
-                  : 'bg-purple-dark text-white hover:bg-purple-primary/80'
+                  : 'bg-zinc-900 text-white hover:bg-zinc-800'
               }`}
               onClick={() => setSelectedCategory(category)}
             >
@@ -169,27 +176,38 @@ export default function CompanySection() {
       </div>
 
       {/* Portfolio Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-6">
         {filteredItems.map(item => {
           // Handle potential missing logoUrl (happens when API field mapping isn't working)
           const logoUrl = item.logoUrl || '';
           
-          // Only use PNG images
-          const isPNG = logoUrl.toLowerCase().endsWith('.png');
-          if (!isPNG) return null;
+          // All our images should be PNG format based on the database check
+          // Let's fix the issue by making sure we can handle different path formats
+          // console.log('Logo URL for', item.name, ':', logoUrl);
+          
+          // If we have issues, try fetching the logo based on company name
+          const fallbackLogoUrl = `/logos/${item.name.toLowerCase().replace(/\s+/g, '-')}.png`;
           
           // Create the inner content for the card
           const CardContent = () => (
             <div className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               {/* Company Logo Container */}
-              <div className="h-24 flex items-center justify-center p-5 bg-white">
-                <Image
-                  src={logoUrl.startsWith('/') ? logoUrl : `/${logoUrl}`}
-                  alt={item.name}
-                  width={140}
-                  height={70}
-                  style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
-                />
+              <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
+                {/* Improved logo handling for all path formats */}
+                {/* Using next/image with proper error handling */}
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src={logoUrl ? 
+                      (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
+                      : fallbackLogoUrl
+                    }
+                    alt={`${item.name} logo`}
+                    width={140}
+                    height={70}
+                    style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                    unoptimized={true}
+                  />
+                </div>
               </div>
               
               {/* Company Name - More compact */}
@@ -214,12 +232,12 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {/* Hover overlay with description */}
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 text-center">
+              {/* Hover overlay with description - fixed rounded corners */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center rounded-lg overflow-hidden">
                 {item.description ? (
-                  <p className="text-white text-sm">{item.description}</p>
+                  <p className="text-white text-xs sm:text-sm">{item.description}</p>
                 ) : (
-                  <p className="text-gray-300 text-sm">{item.name} - {item.category}</p>
+                  <p className="text-gray-300 text-xs sm:text-sm">{item.name} - {item.category}</p>
                 )}
               </div>
             </div>
