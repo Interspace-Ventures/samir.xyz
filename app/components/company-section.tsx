@@ -12,7 +12,7 @@ type Portfolio = {
   name: string;
   category: string;
   description?: string | null;
-  logoUrl: string;
+  logoUrl: string; // Field name in TypeScript remains camelCase
   website?: string | null;
   // Investment and financial data
   investment_date?: Date | null;
@@ -171,8 +171,11 @@ export default function CompanySection() {
       {/* Portfolio Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredItems.map(item => {
+          // Handle potential missing logoUrl (happens when API field mapping isn't working)
+          const logoUrl = item.logoUrl || '';
+          
           // Only use PNG images
-          const isPNG = item.logoUrl.toLowerCase().endsWith('.png');
+          const isPNG = logoUrl.toLowerCase().endsWith('.png');
           if (!isPNG) return null;
           
           // Create the inner content for the card
@@ -181,7 +184,7 @@ export default function CompanySection() {
               {/* Company Logo Container */}
               <div className="h-24 flex items-center justify-center p-5 bg-white">
                 <Image
-                  src={item.logoUrl.startsWith('/') ? item.logoUrl : `/${item.logoUrl}`}
+                  src={logoUrl.startsWith('/') ? logoUrl : `/${logoUrl}`}
                   alt={item.name}
                   width={140}
                   height={70}

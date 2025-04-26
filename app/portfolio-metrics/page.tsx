@@ -6,13 +6,13 @@ import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import InvestmentMetrics from '../components/investment-metrics';
 
-// Define types for our data using kebab-case
+// Define types for our data using kebab-case for DB fields
 type Portfolio = {
   id: number;
   name: string;
   category: string;
   description?: string | null;
-  logoUrl: string;
+  logoUrl: string; // Field name in TypeScript remains camelCase for consistent code
   website?: string | null;
   // Investment and financial data
   investment_date?: Date | null;
@@ -350,7 +350,7 @@ export default function PortfolioMetricsPage() {
                     <div className="flex items-center">
                       <div className="h-10 w-10 flex-shrink-0 mr-3">
                         <Image
-                          src={item.logoUrl.startsWith('/') ? item.logoUrl : `/${item.logoUrl}`}
+                          src={(item.logoUrl || '').startsWith('/') ? (item.logoUrl || '') : `/${item.logoUrl || ''}`}
                           alt={item.name}
                           width={40}
                           height={40}
@@ -364,7 +364,7 @@ export default function PortfolioMetricsPage() {
                     {item.category}
                   </td>
                   <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600 max-w-[150px] truncate">
-                    {item.logoUrl}
+                    {item.logoUrl || 'N/A'}
                   </td>
                   <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600">
                     {item.website ? (
