@@ -9,3 +9,13 @@ workflows:
         - "**/*.{js,jsx,ts,tsx,css}"
         - "next.config.js"
         - "package.json"
+  "Start application":
+    defaultRunner: bash
+    command: npm run dev
+    runOptions:
+      sleep: 500ms
+    restartOn:
+      file-change:
+        - "**/*.{js,jsx,ts,tsx,css}"
+        - "next.config.js"
+        - "package.json"
