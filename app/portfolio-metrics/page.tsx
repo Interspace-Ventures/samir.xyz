@@ -293,6 +293,9 @@ export default function PortfolioMetricsPage() {
                 >
                   Company {getSortIndicator('name')}
                 </th>
+                <th scope="col" className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Tags
+                </th>
                 <th 
                   scope="col" 
                   className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
@@ -303,9 +306,16 @@ export default function PortfolioMetricsPage() {
                 <th 
                   scope="col" 
                   className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  onClick={() => handleSort('current_valuation')}
+                >
+                  Current Value {getSortIndicator('current_valuation')}
+                </th>
+                <th 
+                  scope="col" 
+                  className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                   onClick={() => handleSort('initial_investment')}
                 >
-                  Investment {getSortIndicator('initial_investment')}
+                  Initial Investment {getSortIndicator('initial_investment')}
                 </th>
                 <th 
                   scope="col" 
@@ -313,13 +323,6 @@ export default function PortfolioMetricsPage() {
                   onClick={() => handleSort('return_multiple')}
                 >
                   Multiple {getSortIndicator('return_multiple')}
-                </th>
-                <th 
-                  scope="col" 
-                  className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                  onClick={() => handleSort('annualized_return')}
-                >
-                  IRR {getSortIndicator('annualized_return')}
                 </th>
                 <th scope="col" className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
@@ -346,12 +349,24 @@ export default function PortfolioMetricsPage() {
                       </div>
                     </div>
                   </td>
+                  <td className="px-8 py-5 whitespace-nowrap">
+                    <div className="flex flex-wrap gap-1">
+                      {item.tags.map((tag) => (
+                        <span key={tag.id} className="px-2 py-1 text-xs rounded-md font-medium bg-purple-100 text-purple-800">
+                          {tag.name}
+                        </span>
+                      ))}
+                    </div>
+                  </td>
                   <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-600">
                     {item.investment_date ? new Date(item.investment_date).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'short',
                       day: 'numeric'
                     }) : 'N/A'}
+                  </td>
+                  <td className="px-8 py-5 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {item.current_valuation ? formatCurrency(item.current_valuation) : 'N/A'}
                   </td>
                   <td className="px-8 py-5 whitespace-nowrap text-sm font-medium text-gray-900">
                     {item.initial_investment ? formatCurrency(item.initial_investment) : 'N/A'}
@@ -363,16 +378,6 @@ export default function PortfolioMetricsPage() {
                         item.return_multiple < 1 ? 'text-red-600' : 'text-gray-900'
                       }`}>
                         {item.return_multiple.toFixed(1)}x
-                      </span>
-                    ) : 'N/A'}
-                  </td>
-                  <td className="px-8 py-5 whitespace-nowrap text-sm">
-                    {item.annualized_return ? (
-                      <span className={`font-medium ${
-                        item.annualized_return > 0 ? 'text-green-600' : 
-                        item.annualized_return < 0 ? 'text-red-600' : 'text-gray-900'
-                      }`}>
-                        {(item.annualized_return * 100).toFixed(1)}%
                       </span>
                     ) : 'N/A'}
                   </td>
@@ -398,7 +403,7 @@ export default function PortfolioMetricsPage() {
               
               {filteredItems.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="px-8 py-10 text-center text-gray-500">
+                  <td colSpan={7} className="px-8 py-10 text-center text-gray-500">
                     No investment data matches your filters
                   </td>
                 </tr>

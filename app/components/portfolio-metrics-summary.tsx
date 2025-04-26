@@ -112,58 +112,53 @@ export default function PortfolioMetricsSummary() {
       {/* Metrics Grid - 4 per row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {/* Total Investments */}
-        <div className="bg-purple-primary/20 p-4 rounded-lg">
+        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
           <div className="text-sm text-text-tertiary mb-1"># Investments</div>
           <div className="text-2xl font-medium text-text-primary">{summary.total_investments}</div>
         </div>
         
         {/* Markups */}
-        <div className="bg-purple-primary/20 p-4 rounded-lg">
+        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
           <div className="text-sm text-text-tertiary mb-1"># Markups</div>
           <div className="text-2xl font-medium text-text-primary">{summary.markups}</div>
         </div>
         
         {/* Acquisitions */}
-        <div className="bg-purple-primary/20 p-4 rounded-lg">
+        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
           <div className="text-sm text-text-tertiary mb-1"># Acquisitions</div>
           <div className="text-2xl font-medium text-text-primary">{summary.acquisitions}</div>
         </div>
         
         {/* Busts */}
-        <div className="bg-purple-primary/20 p-4 rounded-lg">
+        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
           <div className="text-sm text-text-tertiary mb-1"># Busts</div>
           <div className="text-2xl font-medium text-text-primary">{summary.busts}</div>
         </div>
         
         {/* TVPI */}
-        <div className="bg-purple-primary/20 p-4 rounded-lg">
+        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
           <div className="text-sm text-text-tertiary mb-1">TVPI</div>
           <div className="text-2xl font-medium text-text-primary">{formatMultiple(summary.tvpi)}</div>
         </div>
         
         {/* Gross Multiple */}
-        <div className="bg-purple-primary/20 p-4 rounded-lg">
+        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
           <div className="text-sm text-text-tertiary mb-1">Gross Multiple</div>
           <div className="text-2xl font-medium text-text-primary">{formatMultiple(summary.gross_multiple)}</div>
         </div>
         
         {/* Net Multiple */}
-        <div className="bg-purple-primary/20 p-4 rounded-lg">
+        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
           <div className="text-sm text-text-tertiary mb-1">Net Multiple</div>
           <div className="text-2xl font-medium text-text-primary">{formatMultiple(summary.net_multiple)}</div>
         </div>
         
         {/* IRR */}
-        <div className="bg-purple-primary/20 p-4 rounded-lg">
+        <div className="bg-purple-dark p-4 rounded-lg border border-purple-primary/20">
           <div className="text-sm text-text-tertiary mb-1">IRR</div>
           <div className="text-2xl font-medium text-text-primary">{formatPercentage(summary.irr)}</div>
         </div>
       </div>
-      
-      {/* Portfolio description */}
-      <p className="text-text-secondary text-base mb-8">
-        I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
-      </p>
     </div>
   );
 }
