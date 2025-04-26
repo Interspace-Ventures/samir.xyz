@@ -139,35 +139,37 @@ export default function CompanySection() {
       <PortfolioMetricsSummary />
 
       {/* Category Filter Buttons */}
-      <div className="flex justify-center md:justify-start overflow-x-auto whitespace-nowrap py-2 mb-8 -mx-4 px-4 md:mx-0 md:px-0">
-        <button
-          className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 mr-2 ${
-            selectedCategory === 'All'
-              ? 'bg-purple-primary text-white shadow-md'
-              : 'bg-[#1C1C1E] text-white hover:bg-gray-800'
-          }`}
-          onClick={() => setSelectedCategory('All')}
-        >
-          All
-        </button>
-        
-        {/* Get unique categories from portfolio items */}
-        {Array.from(new Set(portfolioItems.map(item => item.category)))
-          .filter(cat => cat !== null && cat !== '')
-          .sort()
-          .map((category, index) => (
+      <div className="flex justify-start overflow-x-auto scrollbar-thin scrollbar-thumb-purple-primary scrollbar-track-transparent pb-2 mb-8">
+        <div className="inline-flex space-x-2 px-0.5">
           <button
-            key={index}
-            className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 mr-2 ${
-              selectedCategory === category
+            className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
+              selectedCategory === 'All'
                 ? 'bg-purple-primary text-white shadow-md'
-                : 'bg-[#1C1C1E] text-white hover:bg-gray-800'
+                : 'bg-purple-dark text-white hover:bg-purple-primary/80'
             }`}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => setSelectedCategory('All')}
           >
-            {category}
+            All
           </button>
-        ))}
+          
+          {/* Get unique categories from portfolio items */}
+          {Array.from(new Set(portfolioItems.map(item => item.category)))
+            .filter(cat => cat !== null && cat !== '')
+            .sort()
+            .map((category, index) => (
+            <button
+              key={index}
+              className={`px-6 py-2 rounded-md text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
+                selectedCategory === category
+                  ? 'bg-purple-primary text-white shadow-md'
+                  : 'bg-purple-dark text-white hover:bg-purple-primary/80'
+              }`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Portfolio Grid */}
@@ -183,21 +185,21 @@ export default function CompanySection() {
               className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
             >
               {/* Company Logo Container */}
-              <div className="h-32 flex items-center justify-center p-6 bg-white">
+              <div className="h-24 flex items-center justify-center p-5 bg-white">
                 <Image
                   src={item.logoUrl.startsWith('/') 
                     ? item.logoUrl 
                     : `/${item.logoUrl}`}
                   alt={item.name}
-                  width={160}
-                  height={80}
+                  width={140}
+                  height={70}
                   style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
                 />
               </div>
               
-              {/* Company Name - Now visible */}
-              <div className="px-4 py-2 bg-gray-50 border-t border-gray-100">
-                <h3 className="text-sm font-medium text-gray-800 truncate">{item.name}</h3>
+              {/* Company Name - More compact */}
+              <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
+                <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
               </div>
               
               {/* Tag overlay (if present) */}
