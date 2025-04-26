@@ -44,22 +44,22 @@ export default function VentureCard({ venture, index }: VentureCardProps) {
       href={venture.website || '#'} 
       target="_blank" 
       rel="noreferrer"
-      className={`block w-full h-full relative bg-gradient-to-br ${fromColor} ${toColor} overflow-hidden group cursor-pointer`}
+      className={`block w-full h-full relative overflow-hidden group cursor-pointer`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      {/* Main visible content - full-sized logo in center */}
-      <div className="absolute inset-0 flex items-center justify-center p-6 bg-white/5">
+      {/* Main visible content - full-sized logo that fills entire space */}
+      <div className="absolute inset-0 flex items-center justify-center bg-white/5">
         {venture.logoUrl && (
-          <div className="venture-logo flex items-center justify-center w-[85%] h-[85%]">
+          <div className="venture-logo flex items-center justify-center w-full h-full">
             <Image 
               src={venture.logoUrl} 
               alt={`${venture.name} logo`}
               width={200}
               height={200}
-              className="object-contain w-auto h-auto max-w-full max-h-full transition-transform duration-300 group-hover:scale-95"
+              className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-95"
               priority
             />
           </div>
