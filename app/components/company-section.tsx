@@ -191,28 +191,31 @@ export default function CompanySection() {
           // Create the inner content for the card
           const CardContent = () => (
             <div className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-              {/* Company Logo Container */}
-              <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
-                {/* Improved logo handling for all path formats */}
-                {/* Using next/image with proper error handling */}
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <Image
-                    src={logoUrl ? 
-                      (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
-                      : fallbackLogoUrl
-                    }
-                    alt={`${item.name} logo`}
-                    width={140}
-                    height={70}
-                    style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
-                    unoptimized={true}
-                  />
+              {/* Content container with rounded corners */}
+              <div className="rounded-lg overflow-hidden">
+                {/* Company Logo Container */}
+                <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
+                  {/* Improved logo handling for all path formats */}
+                  {/* Using next/image with proper error handling */}
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src={logoUrl ? 
+                        (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
+                        : fallbackLogoUrl
+                      }
+                      alt={`${item.name} logo`}
+                      width={140}
+                      height={70}
+                      style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                      unoptimized={true}
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              {/* Company Name - More compact */}
-              <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
-                <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
+                
+                {/* Company Name - More compact */}
+                <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
+                  <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
+                </div>
               </div>
               
               {/* Status overlay (if present) */}
@@ -232,13 +235,21 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {/* Hover overlay with description - fixed rounded corners */}
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center rounded-lg overflow-hidden">
-                {item.description ? (
-                  <p className="text-white text-xs sm:text-sm">{item.description}</p>
-                ) : (
-                  <p className="text-gray-300 text-xs sm:text-sm">{item.name} - {item.category}</p>
-                )}
+              {/* Hover overlay with description - improved mask technique */}
+              <div 
+                className="absolute inset-0 z-10 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center"
+                style={{ 
+                  background: 'rgba(0, 0, 0, 0.8)',
+                  borderRadius: '0.5rem', // 8px rounded corners to match parent
+                }}
+              >
+                <div className="p-3 sm:p-4 md:p-5">
+                  {item.description ? (
+                    <p className="text-white text-xs sm:text-sm">{item.description}</p>
+                  ) : (
+                    <p className="text-gray-300 text-xs sm:text-sm">{item.name} - {item.category}</p>
+                  )}
+                </div>
               </div>
             </div>
           );
