@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import InvestmentMetrics from './investment-metrics';
 import PortfolioMetricsSummary from './portfolio-metrics-summary';
-import './company-card.css'; // Import custom CSS for company cards
 
 type Portfolio = {
   id: number;
@@ -212,7 +211,7 @@ export default function CompanySection() {
                 <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
               </div>
               
-              {/* Overlay - using a single div with inline styles for maximum compatibility */}
+              {/* Overlay with clip-path to ensure perfect corners */}
               <div 
                 style={{ 
                   position: 'absolute',
@@ -228,7 +227,7 @@ export default function CompanySection() {
                   opacity: 0,
                   transition: 'opacity 0.3s ease',
                   zIndex: 10,
-                  borderRadius: '8px'
+                  clipPath: 'inset(0 0 0 0 round 8px)'
                 }}
                 className="group-hover:opacity-100"
               >
