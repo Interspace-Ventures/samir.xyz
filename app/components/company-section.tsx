@@ -188,33 +188,56 @@ export default function CompanySection() {
           // If we have issues, try fetching the logo based on company name
           const fallbackLogoUrl = `/logos/${item.name.toLowerCase().replace(/\s+/g, '-')}.png`;
           
-          // Create the inner content for the card
+          // Create the inner content for the card with a completely new approach
           const CardContent = () => (
-            <div className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-              {/* Main card content */}
-              <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
-                {/* Improved logo handling for all path formats */}
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <Image
-                    src={logoUrl ? 
-                      (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
-                      : fallbackLogoUrl
-                    }
-                    alt={`${item.name} logo`}
-                    width={140}
-                    height={70}
-                    style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
-                    unoptimized={true}
-                  />
+            <div 
+              className="bg-white overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              style={{ 
+                borderRadius: '0.5rem',
+                WebkitMaskImage: '-webkit-radial-gradient(white, black)' // This fixes the overflow issue in Safari
+              }}
+            >
+              {/* Card container with styled pseudo-element for overlay */}
+              <div className="relative">
+                {/* Logo container */}
+                <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src={logoUrl ? 
+                        (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
+                        : fallbackLogoUrl
+                      }
+                      alt={`${item.name} logo`}
+                      width={140}
+                      height={70}
+                      style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                      unoptimized={true}
+                    />
+                  </div>
+                </div>
+                
+                {/* Company Name */}
+                <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
+                  <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
+                </div>
+                
+                {/* Overlay with description */}
+                <div 
+                  className="absolute inset-0 bg-black opacity-0 group-hover:opacity-80 transition-opacity duration-300"
+                  style={{ borderRadius: '0.5rem' }}
+                />
+                
+                {/* Description text */}
+                <div className="absolute inset-0 flex items-center justify-center p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  {item.description ? (
+                    <p className="text-white text-xs sm:text-sm text-center">{item.description}</p>
+                  ) : (
+                    <p className="text-gray-300 text-xs sm:text-sm text-center">{item.name} - {item.category}</p>
+                  )}
                 </div>
               </div>
               
-              {/* Company Name - More compact */}
-              <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
-                <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
-              </div>
-              
-              {/* Status overlay (if present) */}
+              {/* Status overlays */}
               {item.investment_status === 'Markup' && (
                 <div className="absolute top-3 right-3 z-20">
                   <span className="bg-purple-primary text-white text-xs px-3 py-1 rounded-md font-medium">
@@ -230,19 +253,6 @@ export default function CompanySection() {
                   </span>
                 </div>
               )}
-              
-              {/* New hover technique: Semi-transparent mask that inherits parent shape */}
-              <div 
-                className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center"
-              >
-                <div className="p-3 sm:p-4 md:p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
-                  {item.description ? (
-                    <p className="text-white text-xs sm:text-sm">{item.description}</p>
-                  ) : (
-                    <p className="text-gray-300 text-xs sm:text-sm">{item.name} - {item.category}</p>
-                  )}
-                </div>
-              </div>
             </div>
           );
           
