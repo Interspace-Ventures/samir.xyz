@@ -1,1 +1,1 @@
-run = ["bash", "start-nextjs.sh"]
+run = ["bash", "-c", "./start-nextjs.sh"]
