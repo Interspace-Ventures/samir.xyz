@@ -1,11 +1,19 @@
-workflows:
-  "/nextjs":
-    defaultRunner: bash
-    command: ./start-nextjs.sh
-    runOptions:
-      sleep: 500ms
-    restartOn:
-      file-change:
-        - "**/*.{js,jsx,ts,tsx,css}"
-        - "next.config.js"
-        - "package.json"
+{
+  "workflows": {
+    "Run": {
+      "commands": [
+        "bash run.sh"
+      ],
+      "restartOn": {
+        "files": [
+          "app/**/*.ts",
+          "app/**/*.tsx",
+          "app/**/*.css",
+          "public/**/*",
+          "*.js",
+          "*.json"
+        ]
+      }
+    }
+  }
+}

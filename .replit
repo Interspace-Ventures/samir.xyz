@@ -4,6 +4,14 @@ modules = ["nodejs-20", "postgresql-16"]
 channel = "stable-24_05"
 
 [[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 3001
+externalPort = 80
+
+[[ports]]
 localPort = 8080
 externalPort = 8080
 
@@ -32,7 +40,3 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "bash scripts/utils/start-app.sh"
-
-[[ports]]
-localPort = 3000
-externalPort = 3000

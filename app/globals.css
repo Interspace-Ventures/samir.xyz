@@ -89,6 +89,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  text-decoration: none; /* Remove underline from anchor */
 }
 
 .card-venture:hover {
@@ -98,10 +99,28 @@ h1, h2, h3, h4, h5, h6 {
 
 .venture-logo {
   transition: transform 0.3s ease;
+  z-index: 2;
 }
 
 .card-venture:hover .venture-logo {
   transform: scale(1.05);
+}
+
+/* Additional hover state styling */
+.card-venture::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-venture:hover::after {
+  opacity: 1;
 }
 
 /* Metric Card Component */
