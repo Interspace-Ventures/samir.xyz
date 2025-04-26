@@ -25,19 +25,19 @@ model Portfolio {
   id                  Int       @id @default(autoincrement())
   name                String    // Company name
   category            String    // Portfolio category (e.g., "Fintech", "Health", "Retail", "SaaS")
-  description         String?   @db.VarChar(280) // Short description of the company (limited to 280 chars)
   logoUrl             String    // URL to company logo
   website             String?   // Optional URL to company website
+  description         String?   @db.VarChar(280) // Short description of the company (limited to 280 chars)
   
   // Investment and financial data
+  initial_investment  Float?    // Initial investment amount (renamed from investment-amount)
   investment_date     DateTime? // When the investment was made
-  initial_investment  Float?    // Initial investment amount
   original_valuation  Float?    // Original valuation at time of investment
   current_valuation   Float?    // Current valuation of the investment
-  investment_status   String?   // Investment status (e.g., "Active", "Exited", "Written Off")
   
-  createdAt           DateTime  @default(now()) // When item was added at database level
+  createdAt           DateTime  @default(now()) // When item was added at database level (renamed from last-updated)
   updatedAt           DateTime  @updatedAt      // When item was last updated at database level
+  investment_status   String?   // Investment status (e.g., "Active", "Exited", "Written Off")
   tags                Tag[]     @relation("PortfolioToTag") // Tags associated with this portfolio item
 }
 

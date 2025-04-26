@@ -3,22 +3,32 @@
  * 
  * This API route handles fetching portfolio items (companies).
  * It retrieves all portfolio items from the database, including their tags,
- * and returns them sorted by order field and then by creation date.
+ * and returns them sorted by creation date.
+ * 
+ * It can also include metrics data when the includeMetrics parameter is true.
  */
 
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
 /**
  * GET handler for /api/portfolio
  * 
  * Fetches all portfolio items from the database with their associated tags
  * 
+ * @param {NextRequest} request - The request object with query parameters
  * @returns {Promise<NextResponse>} JSON response with portfolio items or error
  */
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    // Get the URL to parse query parameters
+    const url = new URL(request.url);
+    const includeMetrics = url.searchParams.get('includeMetrics') === 'true';
+    
     console.log('Attempting to fetch portfolio items from database');
+    console.log(`Include metrics: ${includeMetrics}`);
+    
     // Query all portfolio items from the database with their tags
     const portfolioItems = await prisma.portfolio.findMany({
       include: {
@@ -30,7 +40,36 @@ export async function GET() {
     });
 
     console.log(`Successfully retrieved ${portfolioItems.length} portfolio items`);
-    // Return the portfolio items as JSON
+    
+    // If metrics are requested, format the response accordingly
+    if (includeMetrics) {
+      // Calculate summary metrics
+      const itemsWithInvestmentData = portfolioItems.filter(item => 
+        item.investment_date && item.initial_investment && item.current_valuation
+      );
+      
+      const totalInvested = itemsWithInvestmentData.reduce((sum, item) => 
+        sum + (item.initial_investment || 0), 0
+      );
+      
+      const totalCurrentValue = itemsWithInvestmentData.reduce((sum, item) => 
+        sum + (item.current_valuation || 0), 0
+      );
+      
+      // Return structured response with items and metrics
+      return NextResponse.json({
+        items: portfolioItems,
+        metrics: {
+          total_items: portfolioItems.length,
+          items_with_investment_data: itemsWithInvestmentData.length,
+          total_invested: totalInvested,
+          total_current_value: totalCurrentValue,
+          overall_multiple: totalInvested > 0 ? totalCurrentValue / totalInvested : 0
+        }
+      });
+    }
+    
+    // Default response with just the items
     return NextResponse.json(portfolioItems);
   } catch (error) {
     // Log the error details
