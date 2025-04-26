@@ -188,59 +188,36 @@ export default function CompanySection() {
           // If we have issues, try fetching the logo based on company name
           const fallbackLogoUrl = `/logos/${item.name.toLowerCase().replace(/\s+/g, '-')}.png`;
           
-          // Ultra simple card component with a mask div
+          // Create the inner content for the card
           const CardContent = () => (
-            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden' }} className="bg-white shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group">
-              {/* Logo container */}
+            <div className="bg-white rounded-lg overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              {/* Company Logo Container */}
               <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
-                <Image
-                  src={logoUrl ? 
-                    (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
-                    : fallbackLogoUrl
-                  }
-                  alt={`${item.name} logo`}
-                  width={140}
-                  height={70}
-                  style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
-                  unoptimized={true}
-                />
+                {/* Improved logo handling for all path formats */}
+                {/* Using next/image with proper error handling */}
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src={logoUrl ? 
+                      (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
+                      : fallbackLogoUrl
+                    }
+                    alt={`${item.name} logo`}
+                    width={140}
+                    height={70}
+                    style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                    unoptimized={true}
+                  />
+                </div>
               </div>
               
-              {/* Company Name */}
+              {/* Company Name - More compact */}
               <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
                 <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
               </div>
               
-              {/* Overlay with clip-path to ensure perfect corners */}
-              <div 
-                style={{ 
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '0.75rem',
-                  opacity: 0,
-                  transition: 'opacity 0.3s ease',
-                  zIndex: 10,
-                  clipPath: 'inset(0 0 0 0 round 8px)'
-                }}
-                className="group-hover:opacity-100"
-              >
-                {item.description ? (
-                  <p className="text-white text-xs sm:text-sm text-center">{item.description}</p>
-                ) : (
-                  <p className="text-gray-300 text-xs sm:text-sm text-center">{item.name} - {item.category}</p>
-                )}
-              </div>
-              
-              {/* Status badge */}
+              {/* Status overlay (if present) */}
               {item.investment_status === 'Markup' && (
-                <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', zIndex: 20 }}>
+                <div className="absolute top-3 right-3">
                   <span className="bg-purple-primary text-white text-xs px-3 py-1 rounded-md font-medium">
                     Markup
                   </span>
@@ -248,12 +225,21 @@ export default function CompanySection() {
               )}
               
               {item.investment_status === 'Acquired' && (
-                <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', zIndex: 20 }}>
+                <div className="absolute top-3 right-3">
                   <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-md font-medium">
                     Acquired
                   </span>
                 </div>
               )}
+              
+              {/* Hover overlay with description - with mask */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden" style={{ borderRadius: '0.5rem' }}>
+                {item.description ? (
+                  <p className="text-white text-xs sm:text-sm">{item.description}</p>
+                ) : (
+                  <p className="text-gray-300 text-xs sm:text-sm">{item.name} - {item.category}</p>
+                )}
+              </div>
             </div>
           );
           
