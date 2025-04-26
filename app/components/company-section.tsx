@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import InvestmentMetrics from './investment-metrics';
 import PortfolioMetricsSummary from './portfolio-metrics-summary';
+import './company-card.css'; // Import custom CSS for company cards
 
 type Portfolio = {
   id: number;
@@ -188,58 +189,59 @@ export default function CompanySection() {
           // If we have issues, try fetching the logo based on company name
           const fallbackLogoUrl = `/logos/${item.name.toLowerCase().replace(/\s+/g, '-')}.png`;
           
-          // Create the inner content for the card with a completely new approach
+          // Ultra simple card component with a mask div
           const CardContent = () => (
-            <div 
-              className="bg-white overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-              style={{ 
-                borderRadius: '0.5rem',
-                WebkitMaskImage: '-webkit-radial-gradient(white, black)' // This fixes the overflow issue in Safari
-              }}
-            >
-              {/* Card container with styled pseudo-element for overlay */}
-              <div className="relative">
-                {/* Logo container */}
-                <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <Image
-                      src={logoUrl ? 
-                        (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
-                        : fallbackLogoUrl
-                      }
-                      alt={`${item.name} logo`}
-                      width={140}
-                      height={70}
-                      style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
-                      unoptimized={true}
-                    />
-                  </div>
-                </div>
-                
-                {/* Company Name */}
-                <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
-                  <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
-                </div>
-                
-                {/* Overlay with description */}
-                <div 
-                  className="absolute inset-0 bg-black opacity-0 group-hover:opacity-80 transition-opacity duration-300"
-                  style={{ borderRadius: '0.5rem' }}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden' }} className="bg-white shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group">
+              {/* Logo container */}
+              <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
+                <Image
+                  src={logoUrl ? 
+                    (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
+                    : fallbackLogoUrl
+                  }
+                  alt={`${item.name} logo`}
+                  width={140}
+                  height={70}
+                  style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                  unoptimized={true}
                 />
-                
-                {/* Description text */}
-                <div className="absolute inset-0 flex items-center justify-center p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  {item.description ? (
-                    <p className="text-white text-xs sm:text-sm text-center">{item.description}</p>
-                  ) : (
-                    <p className="text-gray-300 text-xs sm:text-sm text-center">{item.name} - {item.category}</p>
-                  )}
-                </div>
               </div>
               
-              {/* Status overlays */}
+              {/* Company Name */}
+              <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
+                <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
+              </div>
+              
+              {/* Overlay - using a single div with inline styles for maximum compatibility */}
+              <div 
+                style={{ 
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0.75rem',
+                  opacity: 0,
+                  transition: 'opacity 0.3s ease',
+                  zIndex: 10,
+                  borderRadius: '8px'
+                }}
+                className="group-hover:opacity-100"
+              >
+                {item.description ? (
+                  <p className="text-white text-xs sm:text-sm text-center">{item.description}</p>
+                ) : (
+                  <p className="text-gray-300 text-xs sm:text-sm text-center">{item.name} - {item.category}</p>
+                )}
+              </div>
+              
+              {/* Status badge */}
               {item.investment_status === 'Markup' && (
-                <div className="absolute top-3 right-3 z-20">
+                <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', zIndex: 20 }}>
                   <span className="bg-purple-primary text-white text-xs px-3 py-1 rounded-md font-medium">
                     Markup
                   </span>
@@ -247,7 +249,7 @@ export default function CompanySection() {
               )}
               
               {item.investment_status === 'Acquired' && (
-                <div className="absolute top-3 right-3 z-20">
+                <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem', zIndex: 20 }}>
                   <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-md font-medium">
                     Acquired
                   </span>
