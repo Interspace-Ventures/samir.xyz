@@ -55,15 +55,23 @@ export default function VenturesGrid() {
           <div className="text-red-400">Error loading ventures. Please try again later.</div>
         </div>
       ) : (
-        // Modified grid - 3x3 on desktop, 2 columns on tablet, 1 column on mobile
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {ventures.map((venture, index) => (
-            <VentureCard 
-              key={venture.id} 
-              venture={venture} 
-              index={index} 
-            />
-          ))}
+        <div className="w-full max-w-[800px] mx-auto">
+          {/* Fix grid width to ensure consistent cell sizes */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            {/* Ensure exactly 9 ventures are shown in a 3x3 grid */}
+            {ventures.slice(0, 9).map((venture, index) => (
+              <div key={venture.id} className="grid-square-item">
+                <VentureCard 
+                  venture={venture} 
+                  index={index} 
+                />
+              </div>
+            ))}
+            {/* Add empty placeholders if less than 9 ventures to maintain 3x3 grid */}
+            {ventures.length < 9 && Array(9 - ventures.length).fill(0).map((_, index) => (
+              <div key={`empty-${index}`} className="grid-square-item bg-zinc-900/30"></div>
+            ))}
+          </div>
         </div>
       )}
     </>
