@@ -2,7 +2,7 @@
  * Portfolio API Route
  * 
  * This API route handles fetching portfolio items (companies).
- * It retrieves all portfolio items from the database, including their tags,
+ * It retrieves all portfolio items from the database
  * and returns them sorted by creation date.
  * 
  * It can also include metrics data when the includeMetrics parameter is true.
@@ -15,7 +15,7 @@ import { NextRequest } from 'next/server';
 /**
  * GET handler for /api/portfolio
  * 
- * Fetches all portfolio items from the database with their associated tags
+ * Fetches all portfolio items from the database
  * 
  * @param {NextRequest} request - The request object with query parameters
  * @returns {Promise<NextResponse>} JSON response with portfolio items or error
@@ -29,11 +29,8 @@ export async function GET(request: NextRequest) {
     console.log('Attempting to fetch portfolio items from database');
     console.log(`Include metrics: ${includeMetrics}`);
     
-    // Query all portfolio items from the database with their tags
+    // Query all portfolio items from the database
     const portfolioItems = await prisma.portfolio.findMany({
-      include: {
-        tags: true, // Include the related tags for each portfolio item
-      },
       orderBy: [
         { createdAt: 'desc' }, // Sort by creation date (newest first)
       ],

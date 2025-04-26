@@ -7,11 +7,6 @@ import { useQuery } from '@tanstack/react-query';
 import InvestmentMetrics from '../components/investment-metrics';
 
 // Define types for our data using kebab-case
-type Tag = {
-  id: number;
-  name: string;
-};
-
 type Portfolio = {
   id: number;
   name: string;
@@ -19,7 +14,6 @@ type Portfolio = {
   description?: string | null;
   logoUrl: string;
   website?: string | null;
-  tags: Tag[];
   // Investment and financial data
   investment_date?: Date | null;
   initial_investment?: number | null;
@@ -30,6 +24,9 @@ type Portfolio = {
   calculated_multiple?: number | null;
   return_multiple?: number | null;
   annualized_return?: number | null;
+  // Meta data
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export default function PortfolioMetricsPage() {
@@ -288,128 +285,130 @@ export default function PortfolioMetricsPage() {
               <tr>
                 <th 
                   scope="col" 
-                  className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  ID
+                </th>
+                <th 
+                  scope="col" 
+                  className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                   onClick={() => handleSort('name')}
                 >
-                  Company {getSortIndicator('name')}
+                  Name {getSortIndicator('name')}
                 </th>
-                <th scope="col" className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Tags
+                <th scope="col" className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Category
                 </th>
-                <th 
-                  scope="col" 
-                  className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                  onClick={() => handleSort('investment_date')}
-                >
-                  Date {getSortIndicator('investment_date')}
+                <th scope="col" className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Logo URL
                 </th>
-                <th 
-                  scope="col" 
-                  className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                  onClick={() => handleSort('current_valuation')}
-                >
-                  Current Value {getSortIndicator('current_valuation')}
+                <th scope="col" className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Website
+                </th>
+                <th scope="col" className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Description
                 </th>
                 <th 
                   scope="col" 
-                  className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                   onClick={() => handleSort('initial_investment')}
                 >
-                  Initial Investment {getSortIndicator('initial_investment')}
+                  Investment Amount {getSortIndicator('initial_investment')}
                 </th>
                 <th 
                   scope="col" 
-                  className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                  onClick={() => handleSort('return_multiple')}
+                  className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  onClick={() => handleSort('investment_date')}
                 >
-                  Multiple {getSortIndicator('return_multiple')}
+                  Investment Date {getSortIndicator('investment_date')}
                 </th>
-                <th scope="col" className="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                <th 
+                  scope="col" 
+                  className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Original Valuation
+                </th>
+                <th 
+                  scope="col" 
+                  className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  onClick={() => handleSort('current_valuation')}
+                >
+                  Current Valuation {getSortIndicator('current_valuation')}
+                </th>
+                <th scope="col" className="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Last Updated
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {sortedItems.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-50">
-                  <td className="px-8 py-5 whitespace-nowrap">
+                  <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-500">
+                    {item.id}
+                  </td>
+                  <td className="px-4 py-5 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="h-12 w-12 flex-shrink-0 mr-4">
+                      <div className="h-10 w-10 flex-shrink-0 mr-3">
                         <Image
                           src={item.logoUrl.startsWith('/') ? item.logoUrl : `/${item.logoUrl}`}
                           alt={item.name}
-                          width={48}
-                          height={48}
+                          width={40}
+                          height={40}
                           className="rounded-md bg-white p-1"
                         />
                       </div>
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">{item.name}</div>
-                        <div className="text-xs text-gray-500 mt-1">{item.category}</div>
-                      </div>
+                      <div className="text-sm font-medium text-gray-900">{item.name}</div>
                     </div>
                   </td>
-                  <td className="px-8 py-5 whitespace-nowrap">
-                    <div className="flex flex-wrap gap-1">
-                      {item.tags.map((tag) => (
-                        <span key={tag.id} className="px-2 py-1 text-xs rounded-md font-medium bg-purple-100 text-purple-800">
-                          {tag.name}
-                        </span>
-                      ))}
-                    </div>
+                  <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600">
+                    {item.category}
                   </td>
-                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-600">
+                  <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600 max-w-[150px] truncate">
+                    {item.logoUrl}
+                  </td>
+                  <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600">
+                    {item.website ? (
+                      <a href={item.website} target="_blank" rel="noopener noreferrer" className="text-purple-primary hover:underline">
+                        {item.website.replace(/^https?:\/\/(www\.)?/, '')}
+                      </a>
+                    ) : 'N/A'}
+                  </td>
+                  <td className="px-4 py-5 text-sm text-gray-600 max-w-[200px]">
+                    <div className="truncate">{item.description || 'N/A'}</div>
+                  </td>
+                  <td className="px-4 py-5 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {item.initial_investment ? formatCurrency(item.initial_investment) : 'N/A'}
+                  </td>
+                  <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600">
                     {item.investment_date ? new Date(item.investment_date).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'short',
                       day: 'numeric'
                     }) : 'N/A'}
                   </td>
-                  <td className="px-8 py-5 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <td className="px-4 py-5 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {item.original_valuation ? formatCurrency(item.original_valuation) : 'N/A'}
+                  </td>
+                  <td className="px-4 py-5 whitespace-nowrap text-sm font-medium text-gray-900">
                     {item.current_valuation ? formatCurrency(item.current_valuation) : 'N/A'}
                   </td>
-                  <td className="px-8 py-5 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {item.initial_investment ? formatCurrency(item.initial_investment) : 'N/A'}
-                  </td>
-                  <td className="px-8 py-5 whitespace-nowrap text-sm">
-                    {item.return_multiple ? (
-                      <span className={`font-medium ${
-                        item.return_multiple > 1 ? 'text-green-600' : 
-                        item.return_multiple < 1 ? 'text-red-600' : 'text-gray-900'
-                      }`}>
-                        {item.return_multiple.toFixed(1)}x
-                      </span>
-                    ) : 'N/A'}
-                  </td>
-                  <td className="px-8 py-5 whitespace-nowrap">
-                    {item.investment_status && (
-                      <span className={`px-3 py-1 text-xs rounded-md font-medium ${
-                        item.investment_status === 'Active' 
-                          ? 'bg-blue-100 text-blue-800' 
-                          : item.investment_status === 'Exited Profitably'
-                          ? 'bg-green-100 text-green-800'
-                          : item.investment_status === 'Exited With Loss'
-                          ? 'bg-orange-100 text-orange-800'
-                          : item.investment_status === 'Written Off'
-                          ? 'bg-red-100 text-red-800'
-                          : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {item.investment_status}
-                      </span>
-                    )}
+                  <td className="px-4 py-5 whitespace-nowrap text-sm text-gray-600">
+                    {new Date(item.updatedAt).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric'
+                    })}
                   </td>
                 </tr>
               ))}
-              
-              {filteredItems.length === 0 && (
-                <tr>
-                  <td colSpan={7} className="px-8 py-10 text-center text-gray-500">
-                    No investment data matches your filters
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
+        </div>
+        
+        <div className="mt-10 flex justify-center">
+          <Link href="/portfolio" className="text-white bg-purple-primary hover:bg-purple-dark px-8 py-3 rounded-md transition-colors">
+            Return to Portfolio Grid
+          </Link>
         </div>
       </div>
     </div>

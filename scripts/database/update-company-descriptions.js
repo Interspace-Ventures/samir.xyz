@@ -10,143 +10,77 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Starting to update company descriptions...');
+  console.log('Updating company descriptions...');
 
-  // Company descriptions
-  const companyDescriptions = [
-    {
-      name: 'AON3D',
-      description: 'Industrial 3D printing solutions for high-performance thermoplastics.',
-    },
-    {
-      name: 'Margin',
-      description: 'Automated portfolio management platform for crypto investing.',
-    },
-    {
-      name: 'Restream',
-      description: 'Multi-platform live streaming solutions for content creators.',
-    },
-    {
-      name: 'Soot',
-      description: 'Carbon footprint tracking and climate action platform.',
-    },
-    {
-      name: 'Sugar',
-      description: 'AI-powered CRM for managing customer relationships.',
-    },
-    {
-      name: 'Waldo',
-      description: 'Mobile app testing automation platform for development teams.',
-    },
-    {
-      name: 'Hedgehog',
-      description: 'Simplified crypto investment platform for everyday investors.',
-    },
-    {
-      name: 'Techmate',
-      description: 'On-demand tech support for homes and small businesses.',
-    },
-    {
-      name: 'Sundae',
-      description: 'Marketplace for selling distressed real estate properties.',
-    },
-    {
-      name: 'Sanzo',
-      description: 'Asian-inspired sparkling water with real fruit and no added sugar.',
-    },
-    {
-      name: 'Rely',
-      description: 'Buy now, pay later solution for Southeast Asian markets.',
-    },
-    {
-      name: 'Playbook',
-      description: 'Design asset management and collaboration platform.',
-    },
-    {
-      name: 'Moku',
-      description: 'Plant-based alternative meat company with sustainable practices.',
-    },
-    {
-      name: 'Lunar',
-      description: 'Digital banking platform for Nordic markets.',
-    },
-    {
-      name: 'Keep',
-      description: 'Smart organization system for home storage and inventory.',
-    },
-    {
-      name: 'Kartera',
-      description: 'Cryptocurrency portfolio tracking and tax reporting platform.',
-    },
-    {
-      name: 'Juneshine',
-      description: 'Hard kombucha brewery with organic, sustainable ingredients.',
-    },
-    {
-      name: 'Harper',
-      description: 'Digital health platform for personalized chronic condition management.',
-    },
-    {
-      name: 'GEM',
-      description: 'Plant-based daily vitamin bites made from real foods.',
-    },
-    {
-      name: 'Goodmylk',
-      description: 'Plant-based dairy alternatives made from clean ingredients.',
-    },
-    {
-      name: 'CaliberX',
-      description: 'AI-powered fitness coaching and personalized workout platform.',
-    },
-    {
-      name: 'Backpack',
-      description: 'Modern school management system for K-12 institutions.',
-    },
-    {
-      name: 'Aura',
-      description: 'All-in-one digital security for individuals and families.',
-    },
-    {
-      name: 'Afar',
-      description: 'Remote team building platform for distributed workforces.',
-    },
-    {
-      name: 'Swansea City AFC',
-      description: 'Professional football club based in Swansea, Wales.',
-    },
-    {
-      name: 'Swan',
-      description: 'Banking-as-a-Service platform for embedded finance solutions.',
-    },
-    {
-      name: 'Superplastic',
-      description: 'Digital character studio creating virtual celebrities and NFTs.',
-    },
-    {
-      name: 'The Coffee',
-      description: 'Premium sustainable coffee brand with direct trade practices.',
-    }
-  ];
+  const companyDescriptions = {
+    'Afar': 'Low sugar high protein savory snack bars.',
+    'AON3D': 'Industrial 3D printing solutions for high-performance thermoplastics.',
+    'Aura': 'Digital mental health platform offering mindfulness meditation, life coaching, and therapy.',
+    'Backpack': 'Modern 529 college savings platform making education investing accessible.',
+    'GEM': 'Real food daily bites made from algae, plants, and probiotics to optimize your daily nutrition.',
+    'Goodmylk': 'Plant-based dairy alternatives made from simple, wholesome ingredients.',
+    'Harper': 'Digital-first insurance platform for modern businesses.',
+    'Hedgehog': 'Digital health platform for personalized wellness and preventive care.',
+    'Juneshine': 'Premium hard kombucha brewed with real organic ingredients and probiotics.',
+    'Kartera': 'Digital asset management platform for institutional investors.',
+    'Keep': 'All-in-one banking for any business.',
+    'Margin': 'Increasing profitability by measuring cost & revenue of every user action.',
+    'Maridea': 'Wealth management platform for high-net-worth individuals.',
+    'Playbook': 'Platform enabling fitness creators to build, manage and grow their digital business.',
+    'RPM': 'At-home fitness programming combining functional movement with high-intensity training.',
+    'Rely': 'AI-powered transaction and transition management platform for real estate.',
+    'Restream': 'Multi-platform streaming solution for content creators and businesses.',
+    'Sanzo': 'Asian-inspired sparkling water made with real fruit and no added sugar.',
+    'Soot': 'Visual-first filing system powered by AI.',
+    'Sugar': 'Property management platform streamlining operations and resident experience.',
+    'Sundae': 'Marketplace for distressed property sales connecting sellers with investors.',
+    'Superplastic': 'Digital-first luxury brand creating synthetic celebrities and collectible art toys.',
+    'Swan': 'Bitcoin savings and investment platform for long-term wealth building.'
+  };
 
-  // Update each company with its description
-  for (const company of companyDescriptions) {
+  // Track successfully updated companies
+  const updatedCompanies = [];
+  const notFoundCompanies = [];
+
+  // Update each company
+  for (const [name, description] of Object.entries(companyDescriptions)) {
     try {
-      const result = await prisma.portfolio.updateMany({
+      // Find the company by name
+      const company = await prisma.portfolio.findFirst({
         where: {
-          name: company.name,
-        },
-        data: {
-          description: company.description,
-        },
+          name: {
+            equals: name,
+            mode: 'insensitive' // Case insensitive search
+          }
+        }
       });
 
-      console.log(`Updated ${result.count} records for ${company.name}`);
+      if (company) {
+        // Update the description
+        await prisma.portfolio.update({
+          where: { id: company.id },
+          data: { description }
+        });
+        
+        updatedCompanies.push(name);
+        console.log(`✅ Updated description for "${name}"`);
+      } else {
+        notFoundCompanies.push(name);
+        console.log(`❌ Company not found: "${name}"`);
+      }
     } catch (error) {
-      console.error(`Error updating ${company.name}:`, error);
+      console.error(`Error updating "${name}":`, error);
     }
   }
 
-  console.log('Company descriptions update completed.');
+  // Summary
+  console.log(`\n✅ Successfully updated ${updatedCompanies.length} companies:`);
+  updatedCompanies.forEach(name => console.log(`  - ${name}`));
+  
+  if (notFoundCompanies.length > 0) {
+    console.log(`\n❌ Could not find ${notFoundCompanies.length} companies:`);
+    notFoundCompanies.forEach(name => console.log(`  - ${name}`));
+  }
 }
 
 main()
