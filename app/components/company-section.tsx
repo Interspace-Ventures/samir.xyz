@@ -210,23 +210,23 @@ export default function CompanySection() {
                 </div>
               </div>
               
-              {/* Company Name - More compact */}
+              {/* No company name shown in default state */}
               <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-100">
-                <h3 className="text-xs font-medium text-gray-800 truncate">{item.name}</h3>
+                <div className="h-4"></div>
               </div>
               
               {/* Status overlay (if present) */}
               {item.investment_status === 'Markup' && (
-                <div className="absolute top-3 right-3">
-                  <span className="bg-purple-primary text-white text-xs px-3 py-1 font-medium">
+                <div className="absolute top-1 right-1">
+                  <span className="bg-purple-primary text-white text-xs px-2 py-0.5 font-medium">
                     Markup
                   </span>
                 </div>
               )}
               
               {item.investment_status === 'Acquired' && (
-                <div className="absolute top-3 right-3">
-                  <span className="bg-green-600 text-white text-xs px-3 py-1 font-medium">
+                <div className="absolute top-1 right-1">
+                  <span className="bg-green-600 text-white text-xs px-2 py-0.5 font-medium">
                     Acquired
                   </span>
                 </div>
@@ -235,9 +235,15 @@ export default function CompanySection() {
               {/* Hover overlay with description - rectangular style */}
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
                 {item.description ? (
-                  <p className="text-white text-xs sm:text-sm">{item.description}</p>
+                  <div>
+                    <h4 className="text-white text-xs font-bold mb-1">{item.name}</h4>
+                    <p className="text-gray-200 text-[10px]">{item.description}</p>
+                  </div>
                 ) : (
-                  <p className="text-gray-300 text-xs sm:text-sm">{item.name} - {item.category}</p>
+                  <div>
+                    <h4 className="text-white text-xs font-bold mb-1">{item.name}</h4>
+                    <p className="text-gray-300 text-[10px]">{item.category}</p>
+                  </div>
                 )}
               </div>
             </div>
