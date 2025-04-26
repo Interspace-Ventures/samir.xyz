@@ -85,12 +85,23 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-venture {
   aspect-ratio: 1 / 1;
-  padding: 1.5rem;
-  transition: box-shadow 0.3s;
+  padding: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .card-venture:hover {
-  box-shadow: 0 10px 15px -3px rgba(140, 92, 246, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px -3px rgba(140, 92, 246, 0.4);
+}
+
+.venture-logo {
+  transition: transform 0.3s ease;
+}
+
+.card-venture:hover .venture-logo {
+  transform: scale(1.05);
 }
 
 /* Metric Card Component */
