@@ -232,8 +232,8 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {/* Hover overlay with description - with mask */}
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden" style={{ borderRadius: '0.5rem' }}>
+              {/* Hover overlay with description - fixed rounded corners */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center rounded-lg overflow-hidden">
                 {item.description ? (
                   <p className="text-white text-xs sm:text-sm">{item.description}</p>
                 ) : (
