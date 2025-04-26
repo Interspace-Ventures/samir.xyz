@@ -25,14 +25,32 @@ export async function GET() {
       },
     });
 
-    // Return the ventures as JSON
-    return NextResponse.json(ventures);
+    // Log the successful response for debugging
+    console.log(`Successfully fetched ${ventures.length} ventures`);
+
+    // Return the ventures as JSON with appropriate caching headers
+    return new NextResponse(JSON.stringify(ventures), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300'
+      }
+    });
   } catch (error) {
     // Log the error and return a 500 response
     console.error('Error fetching ventures:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch ventures' },
-      { status: 500 }
+    
+    // Provide more detailed error message when possible
+    const errorMessage = error instanceof Error 
+      ? error.message 
+      : 'Failed to fetch ventures';
+    
+    return new NextResponse(
+      JSON.stringify({ error: 'Failed to fetch ventures', details: errorMessage }),
+      { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
     );
   }
 }

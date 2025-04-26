@@ -22,3 +22,16 @@ model Portfolio {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 }
+
+model Venture {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  logoUrl     String    @map("logo-url")
+  website     String?
+  industry    String?
+  founded     Int?
+  featured    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
