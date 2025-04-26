@@ -8,7 +8,7 @@ type Venture = {
   id: number;
   name: string;
   description: string;
-  logoUrl?: string | null;
+  logoUrl?: string | null; // Field name in TypeScript remains camelCase for consistent code
   website?: string | null;
   industry?: string | null;
   founded?: number | null;

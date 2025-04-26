@@ -14,38 +14,34 @@ async function main() {
   try {
     console.log('Checking database contents...');
     
-    // Check categories
-    const categories = await prisma.category.findMany();
-    console.log(`\nCategories (${categories.length}):`);
-    console.table(categories);
+    // Check unique categories from portfolio items
+    const portfolioItems = await prisma.portfolio.findMany();
+    const uniqueCategories = [...new Set(portfolioItems.map(item => item.category))];
+    
+    console.log(`\nUnique Categories (${uniqueCategories.length}):`);
+    console.table(uniqueCategories);
     
     // Check portfolio items
-    const portfolioCount = await prisma.portfolio.count();
-    console.log(`\nPortfolio items count: ${portfolioCount}`);
+    console.log(`\nPortfolio items count: ${portfolioItems.length}`);
     
-    if (portfolioCount > 0) {
+    if (portfolioItems.length > 0) {
       // Get a sample of portfolio items
-      const sampleItems = await prisma.portfolio.findMany({
-        take: 3,
-        include: {
-          tags: true,
-        }
-      });
+      const sampleItems = portfolioItems.slice(0, 3);
       
       console.log('\nSample portfolio items:');
       sampleItems.forEach(item => {
         console.log(`- ${item.name} (${item.category})`);
         console.log(`  Logo: ${item.logoUrl}`);
-        console.log(`  Tags: ${item.tags.map(t => t.name).join(', ') || 'none'}`);
         console.log(`  Website: ${item.website || 'none'}`);
+        if (item.description) {
+          console.log(`  Description: ${item.description}`);
+        }
+        if (item.investment_status) {
+          console.log(`  Status: ${item.investment_status}`);
+        }
         console.log('');
       });
     }
-    
-    // Check tags
-    const tags = await prisma.tag.findMany();
-    console.log(`\nTags (${tags.length}):`);
-    console.table(tags);
     
     console.log('\nDatabase check completed.');
   } catch (error) {

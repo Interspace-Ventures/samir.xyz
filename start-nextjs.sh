@@ -6,4 +6,4 @@ npx prisma generate
 
 # Start the Next.js development server
 echo "Starting Next.js development server..."
-npx next dev
+npx next dev -p 3000

@@ -11,7 +11,7 @@ model Portfolio {
   id                 Int       @id @default(autoincrement())
   name               String
   category           String
-  logoUrl            String
+  logoUrl            String    @map("logo-url")
   website            String?
   description        String?   @db.VarChar(280)
   initial_investment Float?

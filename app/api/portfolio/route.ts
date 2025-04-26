@@ -12,6 +12,40 @@ import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
+// Define a type for the raw database item (with kebab-case field)
+type DatabasePortfolioItem = {
+  id: number;
+  name: string;
+  category: string;
+  description: string | null;
+  website: string | null;
+  'logo-url': string; // Kebab-case field from database
+  investment_date: Date | null;
+  initial_investment: number | null;
+  original_valuation: number | null;
+  current_valuation: number | null;
+  investment_status: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Define a type for the frontend-friendly version (with camelCase)
+type PortfolioItem = {
+  id: number;
+  name: string;
+  category: string;
+  description: string | null;
+  website: string | null;
+  logoUrl: string; // Renamed to camelCase for frontend
+  investment_date: Date | null;
+  initial_investment: number | null;
+  original_valuation: number | null;
+  current_valuation: number | null;
+  investment_status: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 /**
  * GET handler for /api/portfolio
  * 
@@ -35,13 +69,35 @@ export async function GET(request: NextRequest) {
         { createdAt: 'desc' }, // Sort by creation date (newest first)
       ],
     });
+    
+    // Map the database field names to the frontend expected property names
+    const mappedItems = portfolioItems.map(item => {
+      // Use type assertion to access the kebab-case property
+      const rawItem = item as any;
+      
+      return {
+        id: item.id,
+        name: item.name,
+        category: item.category,
+        description: item.description,
+        website: item.website,
+        logoUrl: rawItem['logo-url'], // Map the kebab-case DB field to camelCase for frontend
+        investment_date: item.investment_date,
+        initial_investment: item.initial_investment,
+        original_valuation: item.original_valuation,
+        current_valuation: item.current_valuation,
+        investment_status: item.investment_status,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt
+      };
+    });
 
     console.log(`Successfully retrieved ${portfolioItems.length} portfolio items`);
     
     // If metrics are requested, format the response accordingly
     if (includeMetrics) {
       // Calculate summary metrics
-      const itemsWithInvestmentData = portfolioItems.filter(item => 
+      const itemsWithInvestmentData = mappedItems.filter(item => 
         item.investment_date && item.initial_investment && item.current_valuation
       );
       
@@ -55,9 +111,9 @@ export async function GET(request: NextRequest) {
       
       // Return structured response with items and metrics
       return NextResponse.json({
-        items: portfolioItems,
+        items: mappedItems,
         metrics: {
-          total_items: portfolioItems.length,
+          total_items: mappedItems.length,
           items_with_investment_data: itemsWithInvestmentData.length,
           total_invested: totalInvested,
           total_current_value: totalCurrentValue,
@@ -67,7 +123,7 @@ export async function GET(request: NextRequest) {
     }
     
     // Default response with just the items
-    return NextResponse.json(portfolioItems);
+    return NextResponse.json(mappedItems);
   } catch (error) {
     // Log the error details
     console.error('Error fetching portfolio items:', error);
