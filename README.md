@@ -1,10 +1,11 @@
 # samir.xyz
 
 > Hey I'm Samir - I drive business impact at fintechs
+>
+> This app was built at the speed of thought by Interspace Ventures using Replit. It was engineered to be responsive, minimal, functional and unique.
 
 ## Table of Contents
-- [Overview](#overview)
-  - [License](#license)
+- [License](#license)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
   - [Core Directories](#core-directories)
@@ -27,16 +28,6 @@
 - [Version History](#version-history)
   - [Versioning Philosophy](#versioning-philosophy)
   - [Latest Version](#latest-version)
-
-## Overview
-
-This portfolio website for Samir showcases how he drives business impact at fintechs, presented in a modern, technologically advanced presentation. The platform emphasizes:
-
-- Interactive user experience with responsive design
-- Clean, consistent visual design patterns
-- Optimized performance for quick loading
-- Robust error handling and stability
-- Maintainable, modular codebase architecture
 
 ### License
 
