@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,27 +14,24 @@ model Portfolio {
   id                 Int       @id @default(autoincrement())
   name               String
   category           String
+  description        String?
   logoUrl            String    @map("logo-url")
   website            String?
-  description        String?   @db.VarChar(280)
-  initial_investment Float?
   investment_date    DateTime?
+  initial_investment Float?
   original_valuation Float?
   current_valuation  Float?
   investment_status  String?
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
+
+  @@map("portfolio")
 }
 
-model Venture {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String
-  logoUrl     String    @map("logo-url")
-  website     String?
-  industry    String?
-  founded     Int?
-  featured    Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  order Int    @default(0)
+
+  @@map("category")
 }

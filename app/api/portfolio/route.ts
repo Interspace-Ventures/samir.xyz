@@ -4,11 +4,9 @@
  * This API route handles fetching portfolio items (companies).
  * It retrieves all portfolio items from the database
  * and returns them sorted by creation date.
- * 
- * It can also include metrics data when the includeMetrics parameter is true.
  */
 
-import { prisma } from '@/lib/prisma';
+import { prisma } from '../../lib/prisma';
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
@@ -20,23 +18,6 @@ type DatabasePortfolioItem = {
   description: string | null;
   website: string | null;
   'logo-url': string; // Kebab-case field from database
-  investment_date: Date | null;
-  initial_investment: number | null;
-  original_valuation: number | null;
-  current_valuation: number | null;
-  investment_status: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-// Define a type for the frontend-friendly version (with camelCase)
-type PortfolioItem = {
-  id: number;
-  name: string;
-  category: string;
-  description: string | null;
-  website: string | null;
-  logoUrl: string; // Renamed to camelCase for frontend
   investment_date: Date | null;
   initial_investment: number | null;
   original_valuation: number | null;
@@ -61,7 +42,6 @@ export async function GET(request: NextRequest) {
     const includeMetrics = url.searchParams.get('includeMetrics') === 'true';
     
     console.log('Attempting to fetch portfolio items from database');
-    console.log(`Include metrics: ${includeMetrics}`);
     
     // Query all portfolio items from the database
     const portfolioItems = await prisma.portfolio.findMany({
@@ -70,28 +50,21 @@ export async function GET(request: NextRequest) {
       ],
     });
     
-    // Debug the raw item structure
-    console.log('Sample raw item structure:', JSON.stringify(portfolioItems[0]));
-    
     // Map the database field names to the frontend expected property names
     const mappedItems = portfolioItems.map(item => {
       // Use type assertion to access the kebab-case property
       const rawItem = item as any;
       
-      // Debug the raw item to see all available fields
-      // console.log(`Item ${item.name} raw data:`, rawItem);
-      
       // Get the logo URL from whatever field it's available in
-      const logoUrl = item.logoUrl || rawItem['logo-url'] || rawItem.logoUrl || '';
-      console.log(`${item.name} logo URL: ${logoUrl}`);
+      const logoUrl = item.logoUrl || rawItem['logo-url'] || '';
       
       return {
         id: item.id,
         name: item.name,
         category: item.category,
         description: item.description,
+        logoUrl: logoUrl,
         website: item.website,
-        logoUrl: logoUrl, // Use the found logo URL
         investment_date: item.investment_date,
         initial_investment: item.initial_investment,
         original_valuation: item.original_valuation,
@@ -101,7 +74,7 @@ export async function GET(request: NextRequest) {
         updatedAt: item.updatedAt
       };
     });
-
+    
     console.log(`Successfully retrieved ${portfolioItems.length} portfolio items`);
     
     // If metrics are requested, format the response accordingly
@@ -138,14 +111,12 @@ export async function GET(request: NextRequest) {
     // Log the error details
     console.error('Error fetching portfolio items:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    const errorStack = error instanceof Error ? error.stack : '';
-    console.error('Error message:', errorMessage);
-    console.error('Error stack:', errorStack);
     
+    // Return error response
     return NextResponse.json(
       { 
         error: 'Failed to fetch portfolio items',
-        details: errorMessage 
+        details: errorMessage
       },
       { status: 500 }
     );
