@@ -1,6 +1,6 @@
-# Portfolio Website
+# samir.xyz
 
-> Personal portfolio website showcasing professional achievements and ventures.
+> Hey I'm Samir - I drive business impact at fintechs
 
 ## Table of Contents
 - [Project Structure](#project-structure)
@@ -36,7 +36,7 @@
 
 ## Overview
 
-This portfolio website was built to showcase professional achievements in a modern, technologically advanced presentation. The platform emphasizes:
+This portfolio website for Samir showcases how he drives business impact at fintechs, presented in a modern, technologically advanced presentation. The platform emphasizes:
 
 - Interactive user experience with responsive design
 - Clean, consistent visual design patterns
@@ -47,63 +47,63 @@ This portfolio website was built to showcase professional achievements in a mode
 ## Tech Stack
 
 ### Core Framework & Runtime
-- **Bun Runtime**: Fast JavaScript/TypeScript runtime (critical for this project)
-- **Next.js (v15.2.3)**: Framework for server-side rendering and client-side hydration
-- **TypeScript (v5.8.2)**: Typed superset of JavaScript for safe development
+- **Next.js (v15.3.1)**: Framework for server-side rendering and client-side hydration
+- **TypeScript (v5.8.3)**: Typed superset of JavaScript for safe development
+- **Node.js**: JavaScript runtime environment
 
 ### Frontend Libraries
-- **React (v19.0.0)**: Library for building dynamic user interface components
-- **React DOM (v19.0.0)**: DOM-specific methods for React
-- **@tanstack/react-query (v5.69.0)**: Data fetching and state management
-- **react-hydration-provider (v2.1.0)**: Hydration safety utilities for React
-- **next-themes (v0.4.6)**: Theme management for Next.js
+- **React (v19.1.0)**: Library for building dynamic user interface components
+- **React DOM (v19.1.0)**: DOM-specific methods for React
+- **@tanstack/react-query (v5.74.4)**: Data fetching and state management
+- **framer-motion (v12.7.4)**: Animation library for React
+- **zod (v3.24.3)**: TypeScript-first schema validation library
 
 ### Styling & UI
-- **Tailwind CSS (v4.0.15)**: Utility-first CSS framework for responsive styling
-- **@tailwindcss/typography (v0.5.16)**: Typography plugin for Tailwind CSS
-- **tailwind-merge (v3.0.2)**: Utility for merging Tailwind CSS classes
-- **tailwindcss-animate (v1.0.7)**: Animation utilities for Tailwind CSS
-- **@svgr/webpack (v8.1.0)**: Transform SVGs into React components
+- **Tailwind CSS (v3.3.0)**: Utility-first CSS framework for responsive styling
+- **class-variance-authority (v0.7.1)**: Utility for creating variant components
+- **tailwind-merge (v3.2.0)**: Utility for merging Tailwind CSS classes
+- **clsx (v2.1.1)**: Utility for conditionally joining classNames
+- **lucide-react (v0.501.0)**: Icon library for React
+
+### Data Management
+- **Prisma (v6.6.0)**: Next-generation ORM for Node.js and TypeScript
+- **@prisma/client (v6.6.0)**: Auto-generated client for database access
+- **xlsx (v0.18.5)**: Library for parsing Excel files
 
 ### CSS Processing
 - **postcss (v8.5.3)**: Tool for transforming CSS with JavaScript
-- **@tailwindcss/postcss (v4.0.15)**: PostCSS plugin for Tailwind
 - **autoprefixer (v10.4.21)**: PostCSS plugin to parse CSS and add vendor prefixes
-- **critters (v0.0.23)**: Critical CSS inlining tool
-
-### Development & Deployment
-- **http-server (v14.1.1)**: Simple HTTP server for static content
-- **vercel (v41.4.1)**: Deployment platform integration
 
 ## Project Structure
 
 ### Core Directories
 
 - **`/app`**: Main application source code
-  - `/api`: API routes for database access (categories, companies, portfolio, projects, ventures)
+  - `/api`: API routes for database access (categories, companies, portfolio, ventures)
   - `/components`: Reusable React components (navigation, footer, sections)
   - `/lib`: Utility functions and shared libraries (prisma client)
   - `/portfolio`: Portfolio page component
   - `/portfolio-metrics`: Investment metrics and financial analysis page
   - `/ventures`: Ventures page component
+  - `/ventures-new`: Updated ventures page component with enhanced features
 
 - **`/public`**: Static assets served directly
-  - `/assets`: General assets
   - `/companies`: Company logos and images
+  - `/images`: General image assets
+  - `/logos`: Company and venture logos
   - `/ventures`: Venture-related images
 
 - **`/prisma`**: Database configuration and models
   - `/schema.prisma`: Database schema definition
-  - `/migrations`: Generated database migrations
 
 - **`/scripts`**: Development and maintenance tools
-  - `/database`: Database management scripts (seeding, importing, updating)
-  - `/assets`: Asset management scripts (placeholder logos)
-  - `/utils`: Utility scripts (start-app.sh, run-dev.sh)
+  - Various database management scripts for seeding, updating, and fixing data
+  - Scripts for managing assets such as company logos
+  - Scripts for testing API endpoints and database connections
 
 - **`/attached_assets`**: Original image assets (company logos, etc.)
-  - Contains all PNG files for portfolio companies
-  - Contains examples of design errors for reference
+  - Contains all original PNG files for portfolio companies and ventures
+  - Contains screenshots and error examples for reference
 
 ### Supporting Directories
 
