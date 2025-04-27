@@ -4,47 +4,91 @@
 
 :root {
   /* Colors */
-  --purple-primary: #8c5cf6;
-  --purple-light: #a78bfa;
+  --purple-primary: #7f55dc;
+  --purple-light: #c084fc;
   --purple-dark: #3D365C;
   --text-primary: #ffffff;
   --text-secondary: #c084fc;
   --text-tertiary: #a1a1aa;
   --bg-primary: #3D365C;
-  --bg-secondary: #8c5cf6;
+  --bg-secondary: #c084fc;
+  --metric-card-hover: #7f55dc;
+  --portfolio-metrics-card: #7f55dc;
+  --link-color: #c085fc;
 }
 
-/* Base styling */
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: var(--text-primary);
-  position: relative;
-  display: inline-block;
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  /* Basic styling */
+  body {
+    @apply bg-bg-primary text-text-primary;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Default link styling */
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+
+  a:hover {
+    color: var(--purple-light);
+    text-decoration: underline;
+  }
+
+  /* Make company logos have white background even in dark mode */
+  .company-logo {
+    @apply bg-white p-2 flex items-center justify-center overflow-hidden;
+  }
 }
 
-.section-title::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -0.5rem;
-  width: 2rem;
-  height: 0.25rem;
-  background-color: var(--purple-primary);
-  border-radius: 0.125rem;
-}
+@layer components {
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section {
+    @apply py-16 md:py-24;
+  }
+  
+  /* Base styling */
+  .section-title {
+    @apply text-3xl font-bold mb-8 text-text-primary;
+    position: relative;
+    display: inline-block;
+  }
 
-/* Basic styling */
-body {
-  background-color: #3D365C;
-  color: #ffffff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  .section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5rem;
+    width: 2rem;
+    height: 0.25rem;
+    background-color: var(--purple-primary);
+    border-radius: 0.125rem;
+  }
+  
+  .heading-1 {
+    @apply text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl;
+  }
+  
+  .heading-2 {
+    @apply text-3xl font-bold tracking-tight sm:text-4xl;
+  }
+  
+  .heading-3 {
+    @apply text-2xl font-bold tracking-tight;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -63,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .card {
   background-color: rgba(61, 54, 92, 0.3);
-  border: 1px solid rgba(140, 92, 246, 0.2);
+  border: 1px solid rgba(127, 85, 220, 0.2);
   padding: 1.5rem;
   border-radius: 0; /* Removed rounded corners */
   transition: background-color 0.3s;
@@ -109,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-venture:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px -3px rgba(140, 92, 246, 0.4);
+  box-shadow: 0 10px 20px -3px rgba(127, 85, 220, 0.4);
 }
 
 .venture-logo {
@@ -140,14 +184,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Metric Card Component */
 .metric-card {
-  background-color: #18181b; /* zinc-900 */
+  background-color: rgba(127, 85, 220, 0.1); /* Using portfolio-metrics-card with transparency */
   padding: 0.75rem 1rem;
   border-radius: 0; /* Removed rounded corners */
-  border: 1px solid rgba(140, 92, 246, 0.2);
+  border: 1px solid var(--portfolio-metrics-card, rgba(127, 85, 220, 0.2));
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .metric-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(140, 92, 246, 0.1);
+  box-shadow: 0 4px 12px var(--metric-card-hover);
 }

@@ -1,6 +1,14 @@
 'use client';
 
-import CompanySection from '../components/company-section';
+// Dynamically import CompanySection with loading state
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+// Use dynamic import to fix chunk loading error
+const CompanySection = dynamic(() => import('../components/company-section'), {
+  loading: () => <div className="py-10 text-center">Loading portfolio data...</div>,
+  ssr: false // Disable server-side rendering to prevent hydration issues
+});
 
 export default function PortfolioPage() {
   return (
@@ -14,7 +22,9 @@ export default function PortfolioPage() {
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
           
-          <CompanySection />
+          <Suspense fallback={<div className="py-10 text-center">Loading portfolio data...</div>}>
+            <CompanySection />
+          </Suspense>
         </div>
       </section>
     </div>

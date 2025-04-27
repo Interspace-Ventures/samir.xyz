@@ -3,16 +3,15 @@ import Link from 'next/link';
 
 const ProfileSection = () => {
   return (
-    <section id="profile" className="container py-16">
-      <motion.div
-        className="max-w-3xl mx-auto"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+    <section id="profile" className="section">
+      <div className="container max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Hey - I'm Samir
           </h1>
           <p className="text-xl md:text-2xl font-medium mb-8 text-purple-primary">
@@ -86,8 +85,8 @@ const ProfileSection = () => {
               </Link>.
             </p>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };
