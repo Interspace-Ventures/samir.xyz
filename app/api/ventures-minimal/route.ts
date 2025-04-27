@@ -20,7 +20,6 @@ export async function GET() {
         logoUrl: true,
         description: true, // We'll truncate this in the component if needed
         website: true,
-        status: true, // Include status field for "Pre-launch" tag
       },
       orderBy: {
         name: 'asc',
