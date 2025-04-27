@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+'use client';
+
 import { useState, useEffect } from 'react';
 import VentureCard from './venture-card';
 
@@ -13,28 +14,30 @@ export type Venture = {
   featured: boolean;
 };
 
-const fetchVentures = async (): Promise<Venture[]> => {
-  const response = await fetch('/api/ventures');
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-};
-
 export default function VenturesGrid() {
-  const [mounted, setMounted] = useState(false);
-  
-  // Use useEffect to set mounted to true after component mounts
+  const [ventures, setVentures] = useState<Venture[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
   useEffect(() => {
-    setMounted(true);
+    async function fetchVentures() {
+      try {
+        const response = await fetch('/api/ventures');
+        if (!response.ok) {
+          throw new Error('Failed to fetch ventures');
+        }
+        const data = await response.json();
+        setVentures(data);
+        setIsLoading(false);
+      } catch (err) {
+        console.error('Error fetching ventures:', err);
+        setError(err instanceof Error ? err : new Error('Unknown error'));
+        setIsLoading(false);
+      }
+    }
+    
+    fetchVentures();
   }, []);
-  
-  const { data: ventures = [], isLoading, error } = useQuery<Venture[]>({
-    queryKey: ['ventures'],
-    queryFn: fetchVentures,
-    retry: 1,
-    enabled: mounted, // Only run the query after component is mounted
-  });
 
   return (
     <>
@@ -48,8 +51,8 @@ export default function VenturesGrid() {
         </div>
       ) : (
         <div className="w-full mx-auto">
-          {/* Using predefined ventures-grid class for 2x4 on desktop, 4x2 on mobile */}
-          <div className="ventures-grid">
+          {/* Fixed grid layout: 2x4 on desktop, 4x2 on mobile */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {/* Show exactly 8 ventures in grid */}
             {[...ventures]
               .slice(0, 8)

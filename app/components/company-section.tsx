@@ -148,7 +148,7 @@ export default function CompanySection() {
             className={`px-6 py-2 text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
               selectedCategory === 'All'
                 ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
-                : 'bg-[#1c0c64] text-white hover:bg-[#2a1384] border border-[#7f55dc]'
+                : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
             }`}
             onClick={() => setSelectedCategory('All')}
           >
@@ -165,7 +165,7 @@ export default function CompanySection() {
               className={`px-6 py-2 text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
                 selectedCategory === category
                   ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
-                  : 'bg-[#1c0c64] text-white hover:bg-[#2a1384] border border-[#7f55dc]'
+                  : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
               }`}
               onClick={() => setSelectedCategory(category)}
             >
@@ -229,8 +229,8 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {/* Hover overlay with description - matching purple gradient style */}
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-br from-purple-900/90 to-purple-800/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
+              {/* Hover overlay with description - matching our new dark purple color */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-br from-[#2d0c6a]/90 to-[#381490]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
                 {item.description ? (
                   <div>
                     <h4 className="text-white text-xs font-bold mb-1">{item.name}</h4>

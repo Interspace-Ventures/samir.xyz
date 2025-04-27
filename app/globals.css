@@ -25,7 +25,7 @@
   
   /* Background Colors */
   --bg-primary: #2d0c6a; /* Dark purple background */
-  --bg-primary-rgb: 61, 54, 92;
+  --bg-primary-rgb: 45, 12, 106;
   
   /* Utility Colors */
   --black-rgb: 0, 0, 0;
@@ -165,10 +165,21 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
-@media (max-width: 768px) {
-  .ventures-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+/* Only apply 2-column layout on very small screens (actual mobile devices, under 480px) */
+@media (max-width: 480px) {
+  .ventures-grid,
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(4, 1fr) !important;
+  }
+}
+
+/* Ensure desktop always shows 4 columns */
+@media (min-width: 481px) {
+  .ventures-grid,
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
   }
 }
 

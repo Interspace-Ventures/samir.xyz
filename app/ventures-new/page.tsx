@@ -12,7 +12,7 @@ type Venture = {
   featured: boolean;
 };
 
-export default function VenturesPage() {
+export default function VenturesNewPage() {
   const [ventures, setVentures] = useState<Venture[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +38,7 @@ export default function VenturesPage() {
   }, []);
 
   return (
-    <div className="pt-16 pb-16 bg-[#2d0c6a]">
+    <div className="pt-16 pb-16">
       <section className="section">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mb-6">
@@ -57,21 +57,21 @@ export default function VenturesPage() {
               <div className="text-red-400">{error}</div>
             </div>
           ) : (
-            <div className="w-full mx-auto mb-12">
-              {/* Always use 4 columns on all desktop screens */}
-              <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2">
-                {ventures.slice(0, 8).map((venture) => (
-                  <div key={venture.id} className="relative aspect-square">
+            <div className="w-full mx-auto">
+              {/* Using the predefined ventures-grid class for the correct layout */}
+              <div className="ventures-grid">
+                {ventures.slice(0, 8).map((venture, index) => (
+                  <div key={venture.id} className="grid-square-item">
                     <a 
                       href={venture.website || '#'} 
                       target="_blank" 
                       rel="noreferrer"
-                      className="block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer"
+                      className="card-venture block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer"
                     >
                       {/* Main visible content - logo fills entire space */}
                       <div className="absolute inset-0 flex items-center justify-center bg-white/5">
                         {venture.logoUrl && (
-                          <div className="flex items-center justify-center w-full h-full transition-transform duration-300">
+                          <div className="venture-logo flex items-center justify-center w-full h-full">
                             <Image 
                               src={venture.logoUrl} 
                               alt={`${venture.name} logo`}
@@ -102,7 +102,7 @@ export default function VenturesPage() {
                     .map((_, index) => (
                       <div 
                         key={`empty-${index}`} 
-                        className="relative aspect-square bg-[#2d0c6a]/70 border border-white/10"
+                        className="grid-square-item bg-zinc-900/30"
                       ></div>
                     ))
                 }

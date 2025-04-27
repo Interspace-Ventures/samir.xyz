@@ -12,12 +12,7 @@ const nextConfig = {
   images: {
     domains: ['localhost', '0.0.0.0'],
     unoptimized: true, // Disable image optimization to resolve issues with local images
-  },
-  
-  // Disable telemetry
-  telemetry: {
-    disabled: true,
-  },
+  }
 };
 
 module.exports = nextConfig;

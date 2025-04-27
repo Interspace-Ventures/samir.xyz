@@ -14,6 +14,24 @@ This project uses a custom implementation of Semantic Versioning:
 
 ## [Unreleased]
 
+## [8.5.3] - 2025-04-27
+### Changed
+- Updated ventures grid layout to display 4 columns on desktop viewports (2 rows of 4)
+- Maintained 2 columns on mobile viewports (4 rows of 2)
+- Added user agent detection for better mobile/desktop detection
+- Made CSS media queries more robust with !important flags for grid layout
+- Changed page background color to #2d0c6a across the site
+- Updated filter categories in company-section to use #2d0c6a background
+- Improved hover overlay gradient with new color scheme
+- Updated profile section text to include Hudson River Trading experience
+- Changed "I drive impact at startups" to be bold and text-secondary color
+
+### Fixed
+- Set viewport breakpoint to 480px for mobile devices (was 768px)
+- Fixed inconsistency between CSS variables and Tailwind config
+- Harmonized background colors throughout the application
+- Added proper spacing in profile text (comma after "algorithmic market maker")
+
 ## [8.5.2] - 2025-04-25
 ### Documentation
 - Updated README.md with accurate project structure reflecting current codebase
