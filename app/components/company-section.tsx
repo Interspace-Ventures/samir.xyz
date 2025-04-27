@@ -229,8 +229,8 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {/* Hover overlay with description - rectangular style */}
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
+              {/* Hover overlay with description - matching purple gradient style */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-br from-purple-900/90 to-purple-800/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
                 {item.description ? (
                   <div>
                     <h4 className="text-white text-xs font-bold mb-1">{item.name}</h4>

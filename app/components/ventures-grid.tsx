@@ -38,14 +38,6 @@ export default function VenturesGrid() {
 
   return (
     <>
-      <div className="mb-8">
-        <div className="flex justify-between items-center">
-          <p className="text-text-secondary max-w-2xl">
-            I create apps and concepts by coding at the speed of thought using Replit.
-          </p>
-        </div>
-      </div>
-
       {isLoading ? (
         <div className="flex justify-center py-10">
           <div className="animate-pulse text-text-secondary">Loading ventures...</div>
@@ -55,11 +47,11 @@ export default function VenturesGrid() {
           <div className="text-red-400">Error loading ventures. Please try again later.</div>
         </div>
       ) : (
-        <div className="w-full max-w-[800px] mx-auto">
-          {/* Fix grid width to ensure consistent cell sizes */}
-          <div className="grid grid-cols-3 gap-0">
-            {/* Ensure exactly 9 ventures are shown in a 3x3 grid */}
-            {ventures.slice(0, 9).map((venture, index) => (
+        <div className="w-full max-w-[1000px] mx-auto">
+          {/* 2 rows of 4 columns grid */}
+          <div className="grid grid-cols-4 gap-6">
+            {/* Ensure exactly 8 ventures are shown in a 2x4 grid */}
+            {[...ventures].sort((a, b) => a.name.localeCompare(b.name)).slice(0, 8).map((venture, index) => (
               <div key={venture.id} className="grid-square-item">
                 <VentureCard 
                   venture={venture} 
@@ -67,8 +59,8 @@ export default function VenturesGrid() {
                 />
               </div>
             ))}
-            {/* Add empty placeholders if less than 9 ventures to maintain 3x3 grid */}
-            {ventures.length < 9 && Array(9 - ventures.length).fill(0).map((_, index) => (
+            {/* Add empty placeholders if less than 8 ventures to maintain 2x4 grid */}
+            {ventures.length < 8 && Array(8 - ventures.length).fill(0).map((_, index) => (
               <div key={`empty-${index}`} className="grid-square-item bg-zinc-900/30"></div>
             ))}
           </div>

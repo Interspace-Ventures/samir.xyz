@@ -4,11 +4,11 @@ import VenturesGrid from '../components/ventures-grid';
 
 export default function VenturesPage() {
   return (
-    <div className="pt-24 pb-16">
+    <div className="pt-16 pb-16">
       <section className="section">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white text-center">Interspace Ventures</h1>
-          <p className="text-lg text-white/70 mb-12 text-center max-w-2xl mx-auto">I create apps and concepts by coding at the speed of thought using Replit.</p>
+        <div className="container max-w-6xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Interspace Ventures</h1>
+          <p className="text-lg text-text-tertiary mb-8 max-w-3xl">I create apps and concepts by coding at the speed of thought using Replit.</p>
           
           {/* Always display as 3x3 grid */}
           <div>
