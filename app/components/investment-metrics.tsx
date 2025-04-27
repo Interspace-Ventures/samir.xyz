@@ -64,7 +64,7 @@ export default function InvestmentMetrics({ data, showDetailed = true }: Investm
   
   // Determine color based on status
   const getStatusColor = (status: string | null | undefined) => {
-    if (!status) return 'bg-purple-dark/50 text-text-secondary';
+    if (!status) return 'bg-bg-primary/50 text-text-secondary';
     
     switch (status) {
       case 'Active':
@@ -76,7 +76,7 @@ export default function InvestmentMetrics({ data, showDetailed = true }: Investm
       case 'Written Off':
         return 'bg-red-500/20 text-red-300';
       default:
-        return 'bg-purple-dark/50 text-text-secondary';
+        return 'bg-bg-primary/50 text-text-secondary';
     }
   };
 

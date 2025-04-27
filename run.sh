@@ -1,7 +1,4 @@
 #!/bin/bash
-
-# Kill any running Next.js instances
-pkill -f next-server || true
-
-# Start Next.js
-exec npx next dev -p 8080 -H 0.0.0.0
+# Start the Next.js application
+echo "Starting Next.js application..."
+npx next dev -p 3000 --hostname 0.0.0.0

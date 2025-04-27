@@ -127,7 +127,7 @@ export default function CompanySection() {
           </div>
           <button 
             onClick={() => window.location.reload()}
-            className="bg-purple-primary hover:bg-purple-dark text-white px-6 py-2 rounded-md text-sm transition-colors"
+            className="bg-purple-primary hover:bg-bg-primary text-white px-6 py-2 rounded-md text-sm transition-colors"
           >
             Try Again
           </button>
