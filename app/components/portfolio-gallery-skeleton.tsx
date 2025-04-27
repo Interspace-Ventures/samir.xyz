@@ -11,8 +11,8 @@ export default function PortfolioGallerySkeleton() {
     <div className="mt-8">
       <div className="mb-6">
         {/* Category tabs skeleton - matches actual filter buttons */}
-        <div className="flex overflow-x-auto scrollbar-thin pb-2 mb-4">
-          <div className="inline-flex space-x-2 px-0.5">
+        <div className="flex justify-between sm:justify-start overflow-x-auto scrollbar-thin pb-2 mb-4 w-full">
+          <div className="inline-flex space-x-2 px-0.5 w-full sm:w-auto">
             {/* All button placeholder */}
             <div className="h-10 w-20 bg-purple-primary/70 rounded px-6 py-2"></div>
             

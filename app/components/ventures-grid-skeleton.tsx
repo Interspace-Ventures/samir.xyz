@@ -20,9 +20,9 @@ export default function VenturesGridSkeleton() {
           >
             {/* Match the dark background with slight transparency */}
             <div className="absolute inset-0 bg-black/20 border border-purple-900/20 overflow-hidden">
-              {/* Center empty placeholder instead of mini logos */}
+              {/* No logo placeholders to ensure consistency between mobile and desktop */}
               <div className="absolute inset-0 flex items-center justify-center">
-                {/* Empty div - no logo placeholders to prevent mini-logo look */}
+                {/* Intentionally empty - we don't want mini circle placeholders */}
               </div>
               
               {/* Shimmer effect overlay */}

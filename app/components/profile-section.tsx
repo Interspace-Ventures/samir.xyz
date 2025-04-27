@@ -39,7 +39,7 @@ const ProfileSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h1 className="text-4xl md:text-5xl font-bold mb-1 text-white">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 text-white whitespace-nowrap">
                   Hey - I'm Samir
                 </h1>
               </motion.div>
@@ -51,7 +51,7 @@ const ProfileSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <p className="text-xl md:text-2xl font-bold mb-0 text-text-secondary">
+                <p className="text-lg sm:text-xl md:text-2xl font-bold mb-0 text-text-secondary whitespace-nowrap">
                   I drive impact at startups
                 </p>
               </motion.div>

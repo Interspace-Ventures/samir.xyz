@@ -16,9 +16,9 @@ export default function Loading() {
                   key={`venture-skeleton-${index}`}
                   className="aspect-square bg-white/5 rounded-md border border-purple-900/30 relative overflow-hidden animate-pulse"
                 >
-                  {/* Center logo placeholder */}
+                  {/* No mini circle placeholders for consistent loading behavior */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white/10"></div>
+                    {/* Intentionally empty - using just the shimmer background */}
                   </div>
                   
                   {/* Shimmer effect */}

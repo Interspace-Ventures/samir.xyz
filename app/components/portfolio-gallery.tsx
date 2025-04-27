@@ -191,8 +191,8 @@ export default function PortfolioGallery() {
   return (
     <>
       {/* Category Filter Buttons */}
-      <div className="flex justify-start overflow-x-auto scrollbar-thin scrollbar-thumb-purple-primary scrollbar-track-transparent pb-2 mb-8">
-        <div className="inline-flex space-x-2 px-0.5">
+      <div className="flex justify-between sm:justify-start overflow-x-auto scrollbar-thin scrollbar-thumb-purple-primary scrollbar-track-transparent pb-2 mb-8 w-full">
+        <div className="inline-flex space-x-2 px-0.5 w-full sm:w-auto">
           <button
             className={`px-6 py-2 text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
               selectedCategory === 'All'
