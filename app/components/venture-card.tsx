@@ -44,7 +44,7 @@ export default function VentureCard({ venture, index }: VentureCardProps) {
       href={venture.website || '#'} 
       target="_blank" 
       rel="noreferrer"
-      className={`block w-full h-full relative overflow-hidden group cursor-pointer`}
+      className={`block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

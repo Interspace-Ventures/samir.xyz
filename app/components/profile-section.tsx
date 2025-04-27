@@ -4,7 +4,7 @@ import Link from 'next/link';
 const ProfileSection = () => {
   return (
     <section id="profile" className="section">
-      <div className="container max-w-6xl">
+      <div className="container max-w-6xl px-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,12 +77,14 @@ const ProfileSection = () => {
                 className="text-text-secondary hover:text-white transition-colors"
               >
                 Interspace
-              </a> newsletter. I also create over-engineered apps and ideas at <Link 
-                href="/ventures" 
+              </a> newsletter. I also create apps and concepts by coding at the speed of thought using <a
+                href="https://replit.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-text-secondary hover:text-white transition-colors"
               >
-                Interspace Ventures
-              </Link>.
+                Replit
+              </a>.
             </p>
           </div>
         </motion.div>

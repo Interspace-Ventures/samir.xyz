@@ -48,20 +48,22 @@ export default function VenturesGrid() {
         </div>
       ) : (
         <div className="w-full mx-auto">
-          {/* 2 rows of 4 columns grid (on desktop) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {/* Fixed 2 rows of 4 columns grid */}
+          <div className="grid grid-rows-2 grid-cols-4 md:grid-rows-2 md:grid-cols-4 sm:grid-rows-4 sm:grid-cols-2 gap-6">
             {/* Show exactly 8 ventures in a 2x4 grid */}
-            {[...ventures].slice(0, 8).map((venture, index) => (
-              <div key={venture.id} className="grid-square-item">
-                <VentureCard 
-                  venture={venture} 
-                  index={index} 
-                />
-              </div>
-            ))}
+            {[...ventures]
+              .slice(0, 8)
+              .map((venture, index) => (
+                <div key={venture.id} className="aspect-square relative">
+                  <VentureCard 
+                    venture={venture} 
+                    index={index} 
+                  />
+                </div>
+              ))}
             {/* Add empty placeholders if less than 8 ventures to maintain 2x4 grid */}
             {ventures.length < 8 && Array(8 - ventures.length).fill(0).map((_, index) => (
-              <div key={`empty-${index}`} className="grid-square-item bg-zinc-900/30"></div>
+              <div key={`empty-${index}`} className="aspect-square bg-zinc-900/30"></div>
             ))}
           </div>
         </div>

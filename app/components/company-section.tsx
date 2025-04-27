@@ -147,8 +147,8 @@ export default function CompanySection() {
           <button
             className={`px-6 py-2 text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
               selectedCategory === 'All'
-                ? 'bg-purple-primary text-white shadow-md'
-                : 'bg-zinc-900 text-white hover:bg-zinc-800'
+                ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
+                : 'bg-[#1c0c64] text-white hover:bg-[#2a1384] border border-[#7f55dc]'
             }`}
             onClick={() => setSelectedCategory('All')}
           >
@@ -164,8 +164,8 @@ export default function CompanySection() {
               key={index}
               className={`px-6 py-2 text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
                 selectedCategory === category
-                  ? 'bg-purple-primary text-white shadow-md'
-                  : 'bg-zinc-900 text-white hover:bg-zinc-800'
+                  ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
+                  : 'bg-[#1c0c64] text-white hover:bg-[#2a1384] border border-[#7f55dc]'
               }`}
               onClick={() => setSelectedCategory(category)}
             >

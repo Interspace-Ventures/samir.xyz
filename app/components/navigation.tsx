@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
@@ -49,14 +50,20 @@ const Navigation = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container" style={{ padding: '1rem 1.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link 
-            href="/" 
-            style={{ fontSize: '1.25rem', fontWeight: 'bold', letterSpacing: '-0.025em' }}
-          >
-            <span style={{ color: '#ffffff' }}>Interspace</span>
-            <span style={{ marginLeft: '0.25rem', color: '#c084fc' }}>Ventures</span>
+      <div className="container max-w-6xl px-0">
+        <div className="flex items-center justify-between py-3">
+          <Link href="/">
+            <div className="flex items-center space-x-2">
+              <Image 
+                src="/favicon.png"
+                alt="S logo"
+                width={24}
+                height={24}
+                className="rounded"
+                priority
+              />
+              <span className="text-white font-bold text-xl tracking-tight">samir.xyz</span>
+            </div>
           </Link>
           
           <nav>
