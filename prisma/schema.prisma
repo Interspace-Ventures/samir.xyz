@@ -11,42 +11,43 @@ model Portfolio {
   id                 Int       @id @default(autoincrement())
   name               String
   category           String
-  logoUrl            String    @map("logo-url")
   website            String?
-  description        String?   @db.VarChar(280)
-  initial_investment Float?
-  investment_date    DateTime?
-  original_valuation Float?
-  current_valuation  Float?
-  investment_status  String?
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
+  current_valuation  Float?
+  initial_investment Float?
+  investment_date    DateTime?
+  investment_status  String?
+  description        String?   @db.VarChar(280)
+  original_valuation Float?
+  logoUrl            String    @map("logo-url")
 }
 
 model Venture {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   description String
-  logoUrl     String    @map("logo-url")
+  logoUrl     String   @map("logo-url")
   website     String?
   industry    String?
   founded     Int?
-  featured    Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  status      String?
 }
 
 model Project {
   id          String   @id @default(cuid())
   name        String
   description String?
-  tags        Tag[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  tags        Tag[]    @relation("ProjectToTag")
 }
 
 model Tag {
   id       String    @id @default(cuid())
   name     String    @unique
-  projects Project[]
+  projects Project[] @relation("ProjectToTag")
 }
