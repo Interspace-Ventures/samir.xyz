@@ -130,7 +130,7 @@ export default function VenturesNewPage() {
                 </div>
               </div>
             </div>
-          </div>}
+          </div>
         </div>
       </section>
     </div>
