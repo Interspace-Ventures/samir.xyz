@@ -1,14 +1,19 @@
 'use client';
 
-// Dynamically import components with loading states
+// Import components directly for initial render
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import MetricsSummaryStandalone from '../components/metrics-summary-standalone';
+import MetricsSkeleton from '../components/metrics-skeleton';
+import PortfolioGallerySkeleton from '../components/portfolio-gallery-skeleton';
 
-// Use dynamic import for portfolio gallery with lower priority
+// Use dynamic imports for data components with no loading indicator (using Suspense instead)
+const MetricsSummaryStandalone = dynamic(() => import('../components/metrics-summary-standalone'), {
+  ssr: false,
+  loading: () => null // No loading indicator since we're using Suspense
+});
+
 const PortfolioGallery = dynamic(() => import('../components/portfolio-gallery'), {
-  loading: () => <div className="py-10 text-center">Loading portfolio gallery...</div>,
-  ssr: false // Disable server-side rendering to prevent hydration issues
+  ssr: false,
+  loading: () => null // No loading indicator since we're using Suspense
 });
 
 export default function PortfolioPage() {
@@ -23,13 +28,27 @@ export default function PortfolioPage() {
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
           
-          {/* Load metrics summary immediately */}
-          <MetricsSummaryStandalone />
+          {/* Show skeleton immediately while loading metrics in background */}
+          <div className="metrics-container">
+            <div className="content-layer">
+              <MetricsSummaryStandalone />
+            </div>
+            
+            <div className="skeleton-layer">
+              <MetricsSkeleton />
+            </div>
+          </div>
           
-          {/* Load portfolio gallery separately */}
-          <Suspense fallback={<div className="py-6 text-center">Loading portfolio gallery...</div>}>
-            <PortfolioGallery />
-          </Suspense>
+          {/* Show gallery skeleton immediately while loading content in background */}
+          <div className="portfolio-container">
+            <div className="content-layer">
+              <PortfolioGallery />
+            </div>
+            
+            <div className="skeleton-layer">
+              <PortfolioGallerySkeleton />
+            </div>
+          </div>
         </div>
       </section>
     </div>

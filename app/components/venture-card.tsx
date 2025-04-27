@@ -66,12 +66,22 @@ export default function VentureCard({ venture, index }: VentureCardProps) {
             />
           </div>
         )}
+        
+        {/* Status tag - only for Pre-launch ventures */}
+        {venture.status === 'Pre-launch' && (
+          <div className="absolute top-1 right-1">
+            <span className="bg-purple-600 text-white text-xs px-2 py-0.5 font-medium">
+              Pre-launch
+            </span>
+          </div>
+        )}
       </div>
       
       {/* Hover overlay with name - description format (top-aligned) */}
       <div className="absolute inset-0 p-3 bg-gradient-to-br from-purple-primary/90 to-bg-primary/90 flex flex-col justify-start pt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out z-10 overflow-hidden">
-        <div className="text-white text-sm font-semibold mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          {venture.name} - <span className="font-normal">{venture.description}</span>
+        <div className="text-white text-xs font-semibold mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+          <div className="font-bold">{venture.name}</div>
+          <div className="font-normal text-[10px] mt-1 line-clamp-6">{venture.description}</div>
         </div>
         {/* Always show line separator without animation for consistent display */}
         <div className="w-8 h-0.5 bg-white/40 mb-1 opacity-100 group-hover:opacity-100"></div>

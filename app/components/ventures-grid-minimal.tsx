@@ -10,6 +10,7 @@ type MinimalVenture = {
   name: string;
   logoUrl: string;
   website: string;
+  status?: string | null;
 };
 
 /**
@@ -40,24 +41,19 @@ export default function VenturesGridMinimal() {
     }
   }, [data]);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center py-6">
-        <div className="animate-pulse text-text-secondary">Loading ventures...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center py-6">
-        <div className="text-red-400">Unable to load ventures</div>
-      </div>
-    );
+  // Just log error but return empty div - parent component handles loading states with skeleton
+  if (isLoading || error) {
+    // Log error to console if present, but don't show to user
+    if (error) {
+      console.error('Error loading ventures:', error);
+    }
+    
+    // Return empty div - parent component will show skeleton
+    return <></>;
   }
 
   return (
-    <div className="w-full mx-auto mb-12">
+    <div className="w-full mx-auto mb-6">
       {/* Always use 4 columns on all desktop screens */}
       <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2">
         <AnimatePresence>
@@ -92,6 +88,15 @@ export default function VenturesGridMinimal() {
                       unoptimized={true}
                     />
                   </div>
+                  
+                  {/* Status tag - only for Pre-launch ventures */}
+                  {venture.status === 'Pre-launch' && (
+                    <div className="absolute top-1 right-1">
+                      <span className="bg-purple-600 text-white text-xs px-2 py-0.5 font-medium">
+                        Pre-launch
+                      </span>
+                    </div>
+                  )}
                 </div>
                 
                 {/* Hover overlay with gradient */}

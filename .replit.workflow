@@ -1,33 +1,17 @@
-run = "npm run dev"
+run = "bash run.sh"
 language = "nodejs"
-entrypoint = "run.sh"
-onBoot = "chmod +x run.sh"
-hidden = ["node_modules", ".next"]
+deploymentTarget = "cloudrun"
 
-[env]
-PATH = "/home/runner/$REPL_SLUG/node_modules/.bin:/home/runner/$REPL_SLUG/.config/npm/node_global/bin"
+entrypoint = "."
 
-[packager]
-language = "nodejs"
-
-[packager.features]
-packageSearch = true
-guessImports = true
-
-[languages.javascript]
-pattern = "**/*.{js,jsx,ts,tsx}"
-
-[languages.javascript.languageServer]
-start = [ "typescript-language-server", "--stdio" ]
-
-[languages.html]
-pattern = "**/*.html"
-
-[languages.css]
-pattern = "**/*.css"
+[nix]
+channel = "stable-23_05"
 
 [deployment]
 build = ["npm", "run", "build"]
+run = ["npm", "start"]
 deploymentTarget = "cloudrun"
-ignorePorts = false
-run = ["node", ".next/standalone/server.js"]
+
+[[ports]]
+localPort = 8080
+externalPort = 80
