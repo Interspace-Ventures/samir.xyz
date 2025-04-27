@@ -47,11 +47,11 @@ export default function VenturesGrid() {
           <div className="text-red-400">Error loading ventures. Please try again later.</div>
         </div>
       ) : (
-        <div className="w-full max-w-[1000px] mx-auto">
-          {/* 2 rows of 4 columns grid */}
-          <div className="grid grid-cols-4 gap-6">
-            {/* Ensure exactly 8 ventures are shown in a 2x4 grid */}
-            {[...ventures].sort((a, b) => a.name.localeCompare(b.name)).slice(0, 8).map((venture, index) => (
+        <div className="w-full mx-auto">
+          {/* 2 rows of 4 columns grid (on desktop) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {/* Show exactly 8 ventures in a 2x4 grid */}
+            {[...ventures].slice(0, 8).map((venture, index) => (
               <div key={venture.id} className="grid-square-item">
                 <VentureCard 
                   venture={venture} 

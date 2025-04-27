@@ -15,7 +15,7 @@ export default function Footer() {
                 href="https://interspace.ventures" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Interspace Ventures
               </a>
@@ -28,7 +28,7 @@ export default function Footer() {
                 href="https://replit.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Replit
               </a> at the speed of thought

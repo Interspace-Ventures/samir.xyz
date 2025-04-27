@@ -24,7 +24,7 @@ const ProfileSection = () => {
                 href="https://cash.app" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Cash App
               </a> where we're expanding financial access to help users do more with their money.
@@ -35,28 +35,28 @@ const ProfileSection = () => {
                 href="https://unit.co" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Unit
               </a>, which embeds financial features into products. Before that, I built and led the Strategic Finance function at <a 
                 href="https://chime.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Chime
               </a>. Earlier, I was the first finance hire at <a 
                 href="https://sift.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Sift
               </a>. I got my start in investment banking in the Financial Institutions Group at <a 
                 href="https://jpmorgan.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 JP Morgan
               </a> covering market structure and asset management.
@@ -67,19 +67,19 @@ const ProfileSection = () => {
                 href="https://x.com/heysamir" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Twitter
               </a> and in the <a 
                 href="https://posts.interspace.ventures" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Interspace
               </a> newsletter. I also create over-engineered apps and ideas at <Link 
                 href="/ventures" 
-                className="text-purple-light hover:text-white transition-colors"
+                className="text-text-secondary hover:text-white transition-colors"
               >
                 Interspace Ventures
               </Link>.

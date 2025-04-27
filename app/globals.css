@@ -3,18 +3,24 @@
 @tailwind utilities;
 
 :root {
-  /* Colors */
-  --purple-primary: #7f55dc;
-  --purple-light: #c084fc;
-  --purple-dark: #3D365C;
-  --text-primary: #ffffff;
-  --text-secondary: #c084fc;
-  --text-tertiary: #a1a1aa;
-  --bg-primary: #3D365C;
-  --bg-secondary: #c084fc;
-  --metric-card-hover: #7f55dc;
-  --portfolio-metrics-card: #7f55dc;
-  --link-color: #c085fc;
+  /* Primary Colors */
+  --primary: #7f55dc; /* Main purple */
+  --primary-rgb: 127, 85, 220;
+  
+  /* Text Colors */
+  --text-primary: #ffffff; /* White text */
+  --text-primary-rgb: 255, 255, 255;
+  --text-secondary: #c084fc; /* Light purple text */
+  --text-secondary-rgb: 192, 132, 252;
+  --text-tertiary: #a1a1aa; /* Gray text */
+  --text-tertiary-rgb: 161, 161, 170;
+  
+  /* Background Colors */
+  --bg-primary: #3D365C; /* Dark purple background */
+  --bg-primary-rgb: 61, 54, 92;
+  
+  /* Utility Colors */
+  --black-rgb: 0, 0, 0;
 }
 
 @layer base {
@@ -35,13 +41,13 @@
 
   /* Default link styling */
   a {
-    color: var(--link-color);
+    color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s ease-in-out;
   }
 
   a:hover {
-    color: var(--purple-light);
+    color: var(--text-secondary);
     text-decoration: underline;
   }
 
@@ -74,7 +80,7 @@
     bottom: -0.5rem;
     width: 2rem;
     height: 0.25rem;
-    background-color: var(--purple-primary);
+    background-color: var(--primary);
     border-radius: 0.125rem;
   }
   
@@ -106,22 +112,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card {
-  background-color: rgba(61, 54, 92, 0.3);
-  border: 1px solid rgba(127, 85, 220, 0.2);
+  background-color: rgba(var(--bg-primary-rgb), 0.3);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   padding: 1.5rem;
   border-radius: 0; /* Removed rounded corners */
   transition: background-color 0.3s;
 }
 
 .card:hover {
-  background-color: rgba(61, 54, 92, 0.5);
+  background-color: rgba(var(--bg-primary-rgb), 0.5);
 }
 
 .company-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--text-primary-rgb), 0.1);
   padding: 1rem;
   border-radius: 0; /* Removed rounded corners */
   height: 6rem;
@@ -153,7 +159,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-venture:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px -3px rgba(127, 85, 220, 0.4);
+  box-shadow: 0 10px 20px -3px rgba(var(--primary-rgb), 0.4);
 }
 
 .venture-logo {
@@ -173,7 +179,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(var(--black-rgb), 0.1);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -184,14 +190,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Metric Card Component */
 .metric-card {
-  background-color: rgba(127, 85, 220, 0.1); /* Using portfolio-metrics-card with transparency */
+  background-color: rgba(var(--primary-rgb), 0.1);
   padding: 0.75rem 1rem;
   border-radius: 0; /* Removed rounded corners */
-  border: 1px solid var(--portfolio-metrics-card, rgba(127, 85, 220, 0.2));
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .metric-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--metric-card-hover);
+  box-shadow: 0 4px 12px var(--primary);
 }

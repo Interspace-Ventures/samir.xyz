@@ -10,20 +10,22 @@ module.exports = {
         'sans': ['Alexandria', 'system-ui', 'sans-serif'],
       },
       colors: {
-        'purple-primary': '#7f55dc',
-        'purple-dark': '#3D365C',
-        'purple-light': '#c084fc',
+        /* Main brand color */
+        'primary': '#7f55dc',
+        
+        /* Text colors */
         'text-primary': '#ffffff',
         'text-secondary': '#c084fc',
         'text-tertiary': '#a1a1aa',
+        
+        /* Background colors */
         'bg-primary': '#3D365C',
-        'bg-secondary': '#c084fc',
-        'metric-card-hover': '#7f55dc',
-        'portfolio-metrics-card': '#7f55dc',
-        'link-color': '#c085fc',
+        
+        /* Legacy colors maintained for compatibility */
+        'purple-primary': '#7f55dc', // Same as primary
       },
       backgroundColor: {
-        'primary': '#3D365C',
+        'primary': '#7f55dc',
         'secondary': '#c084fc',
       },
       textColor: {

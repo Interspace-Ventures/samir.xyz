@@ -67,15 +67,12 @@ export default function VentureCard({ venture, index }: VentureCardProps) {
       </div>
       
       {/* Hover overlay with name - description format (top-aligned) */}
-      <div className="absolute inset-0 p-3 bg-gradient-to-br from-purple-primary/90 to-purple-dark/90 flex flex-col justify-start pt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out z-10 overflow-hidden">
+      <div className="absolute inset-0 p-3 bg-gradient-to-br from-purple-primary/90 to-bg-primary/90 flex flex-col justify-start pt-4 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out z-10 overflow-hidden">
         <div className="text-white text-sm font-semibold mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          {venture.name}
+          {venture.name} - <span className="font-normal">{venture.description}</span>
         </div>
         {/* Always show line separator without animation for consistent display */}
         <div className="w-8 h-0.5 bg-white/40 mb-1 opacity-100 group-hover:opacity-100"></div>
-        <p className="text-white/90 text-[10px] leading-tight transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75 line-clamp-6">
-          {venture.description}
-        </p>
       </div>
     </motion.a>
   );

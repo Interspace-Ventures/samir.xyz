@@ -194,7 +194,7 @@ export default function PortfolioMetricsPage() {
           </div>
           <button 
             onClick={() => window.location.reload()}
-            className="bg-purple-primary hover:bg-purple-dark text-white px-6 py-2 rounded-md text-sm transition-colors"
+            className="bg-purple-primary hover:bg-bg-primary text-white px-6 py-2 rounded-md text-sm transition-colors"
           >
             Try Again
           </button>
@@ -406,7 +406,7 @@ export default function PortfolioMetricsPage() {
         </div>
         
         <div className="mt-10 flex justify-center">
-          <Link href="/portfolio" className="text-white bg-purple-primary hover:bg-purple-dark px-8 py-3 rounded-md transition-colors">
+          <Link href="/portfolio" className="text-white bg-purple-primary hover:bg-bg-primary px-8 py-3 rounded-md transition-colors">
             Return to Portfolio Grid
           </Link>
         </div>
