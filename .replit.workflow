@@ -1,1 +1,1 @@
-run = "./run.sh"
+run = "npx next dev"

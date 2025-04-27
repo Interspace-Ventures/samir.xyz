@@ -19,13 +19,9 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     // Query all companies from the database with their tags
-    const companies = await prisma.company.findMany({
-      include: {
-        tags: true, // Include the related tags for each company
-      },
+    const companies = await prisma.portfolio.findMany({
       orderBy: [
-        { order: 'asc' },     // Sort by order field first (lower numbers appear first)
-        { createdAt: 'desc' }, // Then sort by creation date (newest first)
+        { createdAt: 'desc' }, // Sort by creation date (newest first)
       ],
     });
 
