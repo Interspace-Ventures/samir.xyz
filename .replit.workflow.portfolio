@@ -1,1 +1,1 @@
-run = ["bash", "start-portfolio.sh"]
+run = "bash start.sh"

@@ -95,14 +95,14 @@ const Navigation = () => {
               </div>
             </Link>
             
-            {/* Desktop Navigation */}
-            <nav className="hidden md:block">
-              <ul className="flex gap-8">
+            {/* Desktop Navigation - Always visible except on very small screens */}
+            <nav className="hidden sm:block">
+              <ul className="flex items-center">
                 {menuItems.map((item) => (
-                  <li key={item.href}>
+                  <li key={item.href} className="px-2 lg:px-4">
                     <Link 
                       href={item.href}
-                      className="text-white font-medium text-sm uppercase tracking-wider transition-colors duration-200 hover:text-purple-300"
+                      className="text-white font-medium text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-purple-300"
                     >
                       {item.label}
                     </Link>
@@ -111,9 +111,9 @@ const Navigation = () => {
               </ul>
             </nav>
             
-            {/* Mobile menu button */}
+            {/* Mobile menu button - Only visible on very small screens */}
             <button 
-              className="md:hidden text-white p-2"
+              className="sm:hidden text-white p-2"
               onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
@@ -131,21 +131,12 @@ const Navigation = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            className="fixed inset-0 bg-purple-900 z-40 flex flex-col"
+            className="fixed inset-0 bg-purple-900 z-40 flex flex-col pt-14"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="flex justify-end p-4">
-              <button 
-                onClick={closeMobileMenu}
-                className="text-white p-2"
-                aria-label="Close menu"
-              >
-                <X size={24} />
-              </button>
-            </div>
             <nav className="flex flex-col items-center justify-center flex-grow">
               <ul className="flex flex-col gap-8 text-center">
                 {menuItems.map((item) => (
