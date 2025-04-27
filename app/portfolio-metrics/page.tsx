@@ -248,10 +248,10 @@ export default function PortfolioMetricsPage() {
         <div className="flex flex-wrap justify-between items-center mb-10">
           <div className="flex flex-wrap gap-3 mb-4 md:mb-0">
             <button
-              className={`px-8 py-3 rounded-md text-sm font-medium transition-all ${
+              className={`px-8 py-3 text-sm font-medium transition-all ${
                 statusFilter === null 
-                  ? 'bg-purple-primary text-white' 
-                  : 'bg-zinc-900 text-white hover:bg-zinc-800'
+                  ? 'bg-purple-primary text-white shadow-md border border-purple-primary' 
+                  : 'bg-[#1c0c64] text-white hover:bg-[#2a1384] border border-[#7f55dc]'
               }`}
               onClick={() => setStatusFilter(null)}
             >
@@ -261,10 +261,10 @@ export default function PortfolioMetricsPage() {
             {statusOptions.map((status, index) => (
               <button
                 key={index}
-                className={`px-8 py-3 rounded-md text-sm font-medium transition-all ${
+                className={`px-8 py-3 text-sm font-medium transition-all ${
                   statusFilter === status 
-                    ? 'bg-purple-primary text-white' 
-                    : 'bg-zinc-900 text-white hover:bg-zinc-800'
+                    ? 'bg-purple-primary text-white shadow-md border border-purple-primary' 
+                    : 'bg-[#1c0c64] text-white hover:bg-[#2a1384] border border-[#7f55dc]'
                 }`}
                 onClick={() => setStatusFilter(status as string)}
               >

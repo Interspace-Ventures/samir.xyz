@@ -12,8 +12,12 @@ const alexandria = Alexandria({
 });
 
 export const metadata: Metadata = {
-  title: 'Interspace Ventures',
-  description: 'A minimal portfolio website showcasing Interspace Ventures investments',
+  title: 'samir.xyz',
+  description: 'I create apps and concepts by coding at the speed of thought using Replit',
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  }
 };
 
 export default function RootLayout({
