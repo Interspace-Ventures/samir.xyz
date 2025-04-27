@@ -19,7 +19,7 @@ module.exports = {
         'text-tertiary': '#a1a1aa',
         
         /* Background colors */
-        'bg-primary': '#3D365C',
+        'bg-primary': '#2d0c6a',
         
         /* Legacy colors maintained for compatibility */
         'purple-primary': '#7f55dc', // Same as primary

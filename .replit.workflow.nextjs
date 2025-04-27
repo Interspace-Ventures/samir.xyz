@@ -6,28 +6,16 @@ hidden = ["node_modules", ".next"]
 
 [env]
 PATH = "/home/runner/$REPL_SLUG/node_modules/.bin:/home/runner/$REPL_SLUG/.config/npm/node_global/bin"
+PORT = "3000"
 
 [packager]
 language = "nodejs"
 
-[packager.features]
-packageSearch = true
-guessImports = true
+[nix]
+channel = "stable-22_11"
 
 [languages.javascript]
 pattern = "**/*.{js,jsx,ts,tsx}"
 
 [languages.javascript.languageServer]
 start = [ "typescript-language-server", "--stdio" ]
-
-[languages.html]
-pattern = "**/*.html"
-
-[languages.css]
-pattern = "**/*.css"
-
-[deployment]
-build = ["npm", "run", "build"]
-deploymentTarget = "cloudrun"
-ignorePorts = false
-run = ["node", ".next/standalone/server.js"]

@@ -14,7 +14,7 @@ const ProfileSection = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Hey - I'm Samir
           </h1>
-          <p className="text-xl md:text-2xl font-medium mb-8 text-purple-primary">
+          <p className="text-xl md:text-2xl font-bold mb-8 text-text-secondary">
             I drive impact at startups
           </p>
           
@@ -31,7 +31,14 @@ const ProfileSection = () => {
             </p>
             
             <p>
-              Prior to that, I drove financial partnerships at <a 
+              Prior to that, I led Strategic Finance at <a 
+                href="https://hudsonrivertrading.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-text-secondary hover:text-white transition-colors"
+              >
+                Hudson River Trading
+              </a>, an algorithmic market maker, and drove financial partnerships at <a 
                 href="https://unit.co" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -70,14 +77,14 @@ const ProfileSection = () => {
                 className="text-text-secondary hover:text-white transition-colors"
               >
                 Twitter
-              </a> and in the <a 
+              </a> and on <a 
                 href="https://posts.interspace.ventures" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-text-secondary hover:text-white transition-colors"
               >
                 Interspace
-              </a> newsletter. I also create apps and concepts by coding at the speed of thought using <a
+              </a>. I also create apps and concepts by coding at the speed of thought using <a
                 href="https://replit.com"
                 target="_blank"
                 rel="noopener noreferrer"

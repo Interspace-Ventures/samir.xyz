@@ -38,7 +38,7 @@ const ventures = [
     id: 5,
     name: 'samir.xyz',
     description: 'personal site',
-    logoUrl: '/ventures/samir.png',
+    logoUrl: '/ventures/Perspectives Favicon.png',
     website: 'https://samir.xyz',
     featured: true
   },
