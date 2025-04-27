@@ -48,8 +48,8 @@ export default function VenturesGrid() {
         </div>
       ) : (
         <div className="w-full mx-auto">
-          {/* 2 rows of 4 on larger screens, 4 rows of 2 on mobile */}
-          <div className="grid grid-rows-4 grid-cols-2 sm:grid-rows-4 sm:grid-cols-2 md:grid-rows-2 md:grid-cols-4 gap-6">
+          {/* Using predefined ventures-grid class for 2x4 on desktop, 4x2 on mobile */}
+          <div className="ventures-grid">
             {/* Show exactly 8 ventures in grid */}
             {[...ventures]
               .slice(0, 8)
