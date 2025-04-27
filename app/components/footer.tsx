@@ -8,9 +8,9 @@ export default function Footer() {
   return (
     <footer className="bg-purple-primary py-6 border-t border-purple-primary/20">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center gap-4 text-white text-sm">
-          <div>
-            <p>
+        <div className="flex flex-col items-center gap-4 text-white text-sm text-center">
+          <div className="w-full text-center">
+            <p className="text-center">
               Copyright {currentYear} <a 
                 href="https://interspace.ventures" 
                 target="_blank" 
@@ -22,8 +22,8 @@ export default function Footer() {
             </p>
           </div>
           
-          <div>
-            <p>
+          <div className="w-full text-center">
+            <p className="text-center">
               Version {version} | Built with <a 
                 href="https://replit.com" 
                 target="_blank" 

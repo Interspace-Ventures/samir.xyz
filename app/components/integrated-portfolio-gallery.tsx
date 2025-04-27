@@ -70,8 +70,8 @@ export default function IntegratedPortfolioGallery() {
     return (
       <div className="py-4">
         {/* Category tabs skeleton */}
-        <div className="flex overflow-x-auto pb-2 mb-6 pt-1">
-          <div className="inline-flex space-x-1.5">
+        <div className="flex justify-between sm:justify-start overflow-x-auto pb-2 mb-6 pt-1 w-full">
+          <div className="inline-flex space-x-1.5 w-full sm:w-auto">
             {/* Main category button skeleton */}
             <div className="h-8 w-16 bg-purple-primary/40 animate-pulse"></div>
             
@@ -105,8 +105,8 @@ export default function IntegratedPortfolioGallery() {
   return (
     <div className="py-4">
       {/* Category Filter Buttons */}
-      <div className="flex justify-start overflow-x-auto pb-2 mb-6 pt-1">
-        <div className="inline-flex space-x-1.5">
+      <div className="flex justify-between sm:justify-start overflow-x-auto pb-2 mb-6 pt-1 w-full">
+        <div className="inline-flex space-x-1.5 w-full sm:w-auto">
           <button
             className={`px-3 py-1.5 text-xs font-medium transition-all duration-300 ${
               selectedCategory === 'All'
