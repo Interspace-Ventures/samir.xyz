@@ -70,16 +70,16 @@ export default function IntegratedPortfolioGallery() {
     return (
       <div className="py-4">
         {/* Category tabs skeleton */}
-        <div className="flex overflow-x-auto pb-4 mb-8 pt-1">
-          <div className="inline-flex space-x-2">
+        <div className="flex overflow-x-auto pb-2 mb-6 pt-1">
+          <div className="inline-flex space-x-1.5">
             {/* Main category button skeleton */}
-            <div className="h-10 w-20 bg-purple-primary/40 px-6 py-2 animate-pulse"></div>
+            <div className="h-8 w-16 bg-purple-primary/40 animate-pulse"></div>
             
             {/* Other category buttons skeleton */}
-            {Array(4).fill(0).map((_, i) => (
+            {Array(6).fill(0).map((_, i) => (
               <div 
                 key={`cat-skeleton-${i}`} 
-                className="h-10 w-24 bg-[#2d0c6a]/70 animate-pulse"
+                className="h-8 w-16 bg-[#2d0c6a]/70 animate-pulse"
               ></div>
             ))}
           </div>
@@ -105,10 +105,10 @@ export default function IntegratedPortfolioGallery() {
   return (
     <div className="py-4">
       {/* Category Filter Buttons */}
-      <div className="flex justify-start overflow-x-auto pb-4 mb-8 pt-1">
-        <div className="inline-flex space-x-2">
+      <div className="flex justify-start overflow-x-auto pb-2 mb-6 pt-1">
+        <div className="inline-flex space-x-1.5">
           <button
-            className={`px-6 py-2 text-sm font-medium transition-all duration-300 ${
+            className={`px-3 py-1.5 text-xs font-medium transition-all duration-300 ${
               selectedCategory === 'All'
                 ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
                 : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
@@ -121,7 +121,7 @@ export default function IntegratedPortfolioGallery() {
           {uniqueCategories.map((category, index) => (
             <button
               key={`${category}-${index}`}
-              className={`px-6 py-2 text-sm font-medium transition-all duration-300 ${
+              className={`px-3 py-1.5 text-xs font-medium transition-all duration-300 whitespace-nowrap ${
                 selectedCategory === category
                   ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
                   : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
