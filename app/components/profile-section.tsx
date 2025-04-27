@@ -9,14 +9,14 @@ const ProfileSection = () => {
         {/* Main content area */}
         <div className="mb-6">
           {/* 2x2 Grid for profile image and header */}
-          <div className="grid md:grid-cols-[min-content_1fr] grid-cols-1 gap-x-5 gap-y-2">
-            {/* Column 1, Row 1: Profile Image */}
+          <div className="flex flex-row gap-5">
+            {/* Profile Image */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="hidden md:block row-span-2 self-start"
+              className="flex-shrink-0"
             >
               <div className="w-24 h-24 overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 p-1">
                 <Image 
@@ -30,29 +30,32 @@ const ProfileSection = () => {
               </div>
             </motion.div>
 
-            {/* Column 2, Row 1: Hey I'm Samir */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold mb-1 text-white">
-                Hey - I'm Samir
-              </h1>
-            </motion.div>
+            {/* Title and Subtitle Container */}
+            <div className="flex flex-col justify-center">
+              {/* Hey I'm Samir */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-4xl md:text-5xl font-bold mb-1 text-white">
+                  Hey - I'm Samir
+                </h1>
+              </motion.div>
 
-            {/* Column 2, Row 2: Subtitle */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <p className="text-xl md:text-2xl font-bold mb-6 text-text-secondary">
-                I drive impact at startups
-              </p>
-            </motion.div>
+              {/* Subtitle */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <p className="text-xl md:text-2xl font-bold mb-0 text-text-secondary">
+                  I drive impact at startups
+                </p>
+              </motion.div>
+            </div>
           </div>
 
           {/* Bio text - full width */}
@@ -61,7 +64,7 @@ const ProfileSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-4"
+            className="mt-8"
           >
             <div className="space-y-4 text-text-tertiary">
               <p>

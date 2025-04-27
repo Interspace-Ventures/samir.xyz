@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
@@ -34,7 +34,42 @@ type Category = {
  * for faster loading times.
  */
 export default function PortfolioGallery() {
+  // Use useState with a key to ensure proper re-rendering when the category changes
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  // Use a counter to force re-render when category changes
+  const [renderKey, setRenderKey] = useState<number>(0);
+  
+  // Function to update category and force re-render
+  const updateCategory = (category: string) => {
+    setSelectedCategory(category);
+    setRenderKey(prev => prev + 1); // Increment to force re-render
+  };
+  
+  // Debug/indicator element ID
+  const debugId = `portfolio-filter-${Math.random().toString(36).substring(7)}`;
+  
+  // Effect to debug category changes and ensure component is rendering correctly
+  useEffect(() => {
+    console.log(`Selected category changed to: ${selectedCategory} (render key: ${renderKey})`);
+    console.log(`Component instance ID: ${debugId}`);
+    
+    // Add a hidden debug element to verify the component is properly updating
+    const debugElement = document.createElement('div');
+    debugElement.id = debugId;
+    debugElement.setAttribute('data-category', selectedCategory);
+    debugElement.setAttribute('data-render-key', renderKey.toString());
+    debugElement.style.display = 'none';
+    
+    // Remove any previous debug elements from this component
+    document.querySelectorAll(`[id^="portfolio-filter-"]`).forEach(el => el.remove());
+    document.body.appendChild(debugElement);
+    
+    return () => {
+      // Clean up on unmount
+      const element = document.getElementById(debugId);
+      if (element) element.remove();
+    };
+  }, [selectedCategory, renderKey, debugId]);
   
   // Fetch all categories
   const { 
@@ -90,16 +125,27 @@ export default function PortfolioGallery() {
     retryDelay: 1000
   });
 
-  // Filter portfolio items by selected category
-  const filteredItems = portfolioItems
-    .filter(item => {
-      return selectedCategory === 'All' || item.category === selectedCategory;
-    })
-    // Sort alphabetically by company name, always keep consistent sorting
-    .sort((a, b) => {
-      // Always sort alphabetically
-      return a.name.localeCompare(b.name);
-    });
+  // Use useMemo to memoize filtered items and recompute when selectedCategory or portfolioItems change
+  const filteredItems = useMemo(() => {
+    // Perform filtering calculation
+    const filtered = portfolioItems
+      .filter(item => {
+        // Make sure we have valid categories to filter
+        console.log(`Filtering item: ${item.name}, Category: ${item.category}, Selected: ${selectedCategory}`);
+        return selectedCategory === 'All' || item.category === selectedCategory;
+      })
+      // Sort alphabetically by company name, always keep consistent sorting
+      .sort((a, b) => {
+        // Always sort alphabetically
+        return a.name.localeCompare(b.name);
+      });
+      
+    // Log filtered items count for debugging
+    console.log(`Filtered items: ${filtered.length} of ${portfolioItems.length}`);
+    console.log(`Current selected category: ${selectedCategory}`);
+    
+    return filtered;
+  }, [selectedCategory, portfolioItems, renderKey]); // Include renderKey to force recalculation
 
   // Use a skeleton loader during both loading and error states
   if (isLoadingCategories || isLoadingPortfolio || categoriesError || portfolioError) {
@@ -153,7 +199,10 @@ export default function PortfolioGallery() {
                 ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
                 : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
             }`}
-            onClick={() => setSelectedCategory('All')}
+            onClick={() => {
+              console.log("Clicked 'All' category");
+              updateCategory('All'); // Use the updateCategory function
+            }}
           >
             All
           </button>
@@ -164,13 +213,16 @@ export default function PortfolioGallery() {
             .sort()
             .map((category, index) => (
             <button
-              key={index}
+              key={`${category}-${index}-${renderKey}`} // Add renderKey to force re-render
               className={`px-6 py-2 text-sm font-medium transform transition-all duration-300 hover:scale-105 ${
                 selectedCategory === category
                   ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
                   : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
               }`}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => {
+                console.log(`Clicked '${category}' category`);
+                updateCategory(category); // Use the updateCategory function
+              }}
             >
               {category}
             </button>

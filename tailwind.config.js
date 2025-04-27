@@ -3,6 +3,19 @@ module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'bg-purple-primary',
+    'text-purple-primary',
+    'border-purple-primary',
+    'animate-shimmer',
+    'animate-pulse',
+    'bg-white/5',
+    'bg-white/10',
+    'text-white',
+    'bg-[#2d0c6a]',
+    'bg-[#381490]',
+    'border-[#7f55dc]'
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -23,6 +36,18 @@ module.exports = {
         
         /* Legacy colors maintained for compatibility */
         'purple-primary': '#7f55dc', // Same as primary
+        'purple': {
+          '100': '#eae3fa',
+          '200': '#d5c7f6',
+          '300': '#c0abf1',
+          '400': '#ab8fed',
+          '500': '#9673e8',
+          '600': '#7f55dc',
+          '700': '#6339c7',
+          '800': '#4a20a9',
+          '900': '#2d0c6a',
+        },
+        'white': '#ffffff',
       },
       backgroundColor: {
         'primary': '#7f55dc',
@@ -50,12 +75,18 @@ module.exports = {
         },
         'shimmer': {
           '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(250%)' },
+          '100%': { transform: 'translateX(100%)' },
         },
         'pulse': {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.5' },
         },
+      },
+      borderWidth: {
+        DEFAULT: '1px',
+      },
+      borderColor: {
+        'purple-primary': '#7f55dc',
       },
     },
   },

@@ -1,6 +1,25 @@
 'use client';
 
+import { staticMetrics, PortfolioSummary } from '@/lib/static-metrics';
+import MetricCard from '../components/metric-card';
+
+/**
+ * Portfolio Page Loading Component
+ * 
+ * Shows static metrics data immediately while loading the portfolio content
+ * Uses elegant skeleton loaders without loading text
+ */
 export default function Loading() {
+  // Format multiple with x suffix - same as in metrics component
+  const formatMultiple = (multiple: number) => {
+    return `${multiple.toFixed(1)}x`;
+  };
+  
+  // Format percentage with % symbol - same as in metrics component
+  const formatPercentage = (value: number) => {
+    return `${value}%`;
+  };
+  
   return (
     <div className="pt-16 pb-16">
       <section className="section">
@@ -12,19 +31,18 @@ export default function Loading() {
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
           
-          {/* Metrics Skeleton */}
-          <div className="w-full mb-10 overflow-hidden">
+          {/* Static Metrics - Show immediately without loading */}
+          <div className="mb-12 max-w-7xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6">
-              {/* Generate 8 skeleton metric cards */}
-              {Array(8).fill(0).map((_, index) => (
-                <div
-                  key={`metric-skeleton-${index}`}
-                  className="relative bg-white/5 p-4 rounded-lg border border-purple-900/30 animate-pulse"
-                >
-                  <div className="h-3 w-16 bg-purple-300/20 rounded mb-2"></div>
-                  <div className="h-7 w-20 bg-purple-300/30 rounded"></div>
-                </div>
-              ))}
+              {/* Display static metrics */}
+              <MetricCard label="# Investments" value={staticMetrics.total_investments} />
+              <MetricCard label="# Markups" value={staticMetrics.markups} />
+              <MetricCard label="# Acquisitions" value={staticMetrics.acquisitions} />
+              <MetricCard label="# Busts" value={staticMetrics.busts} />
+              <MetricCard label="TVPI" value={formatMultiple(staticMetrics.tvpi)} />
+              <MetricCard label="Gross Multiple" value={formatMultiple(staticMetrics.gross_multiple)} />
+              <MetricCard label="Net Multiple" value={formatMultiple(staticMetrics.net_multiple)} />
+              <MetricCard label="IRR" value={formatPercentage(staticMetrics.irr)} />
             </div>
           </div>
           
