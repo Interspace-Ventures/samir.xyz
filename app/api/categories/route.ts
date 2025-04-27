@@ -6,7 +6,7 @@
  * and returns them as an array of objects with id, name, and order.
  */
 
-import { prisma } from '../../lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
 /**

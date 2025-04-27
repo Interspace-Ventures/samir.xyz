@@ -1,36 +1,22 @@
 'use client';
 
 // Import components directly for initial render
-import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import MetricsSkeleton from '../components/metrics-skeleton';
 import PortfolioGallerySkeleton from '../components/portfolio-gallery-skeleton';
 
-// Use dynamic imports for data components with loading handled by parent
-const PortfolioMetrics = dynamic(() => import('../components/portfolio-metrics'), {
+// Use dynamic imports for data components with no loading indicator (using Suspense instead)
+const MetricsSummaryStandalone = dynamic(() => import('../components/metrics-summary-standalone'), {
   ssr: false,
-  loading: () => null
+  loading: () => null // No loading indicator since we're using Suspense
 });
 
-const PortfolioGalleryModular = dynamic(() => import('../components/portfolio-gallery-modular'), {
+const PortfolioGallery = dynamic(() => import('../components/portfolio-gallery'), {
   ssr: false,
-  loading: () => null
+  loading: () => null // No loading indicator since we're using Suspense
 });
 
 export default function PortfolioPage() {
-  // State to track loading status of each section
-  const [metricsLoaded, setMetricsLoaded] = useState(false);
-  const [galleryLoaded, setGalleryLoaded] = useState(false);
-
-  // Use effect for cleanup on unmount
-  useEffect(() => {
-    return () => {
-      // Reset loading states when component unmounts
-      setMetricsLoaded(false);
-      setGalleryLoaded(false);
-    };
-  }, []);
-
   return (
     <div className="pt-16 pb-16">
       <section className="section">
@@ -44,12 +30,10 @@ export default function PortfolioPage() {
           
           {/* Show skeleton immediately while loading metrics in background */}
           <div className="metrics-container">
-            {/* Content loads in the background */}
             <div className="content-layer">
-              <PortfolioMetrics />
+              <MetricsSummaryStandalone />
             </div>
             
-            {/* Skeleton shows immediately, hides when content loads */}
             <div className="skeleton-layer">
               <MetricsSkeleton />
             </div>
@@ -57,12 +41,10 @@ export default function PortfolioPage() {
           
           {/* Show gallery skeleton immediately while loading content in background */}
           <div className="portfolio-container">
-            {/* Content loads in the background */}
             <div className="content-layer">
-              <PortfolioGalleryModular />
+              <PortfolioGallery />
             </div>
             
-            {/* Skeleton shows immediately, hides when content loads */}
             <div className="skeleton-layer">
               <PortfolioGallerySkeleton />
             </div>
