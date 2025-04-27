@@ -64,26 +64,54 @@ export default function MetricsSummaryStandalone() {
   };
   
   if (isLoading) {
+    // Return skeleton loader instead of loading text
     return (
-      <div className="w-full py-3 text-center">
-        <div className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-        <span className="ml-2 text-text-secondary text-sm">Loading metrics...</span>
+      <div className="w-full mb-10 overflow-hidden">
+        <div className="flex flex-col md:flex-row md:flex-wrap gap-4">
+          {/* Generate 4 skeleton metric cards */}
+          {Array(4).fill(0).map((_, index) => (
+            <div 
+              key={`skeleton-${index}`}
+              className="flex-1 min-w-[200px] bg-white/5 p-4 rounded-lg border border-purple-900/30 animate-pulse"
+            >
+              <div className="h-3 w-16 bg-purple-300/20 rounded mb-2"></div>
+              <div className="h-7 w-20 bg-purple-300/30 rounded"></div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Skeleton for detailed metrics */}
+        <div className="mt-6 flex flex-col md:flex-row md:flex-wrap gap-4">
+          {Array(4).fill(0).map((_, index) => (
+            <div 
+              key={`skeleton-detailed-${index}`}
+              className="flex-1 min-w-[150px] bg-white/5 p-3 rounded-lg border border-purple-900/30 animate-pulse"
+            >
+              <div className="h-2 w-12 bg-purple-300/20 rounded mb-2"></div>
+              <div className="h-5 w-14 bg-purple-300/30 rounded"></div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
   
-  if (error) {
+  if (error || !summary) {
+    // Instead of error text, show skeleton loaders
     return (
-      <div className="w-full py-3 text-center text-red-500 text-sm">
-        <p>Unable to load metrics</p>
-      </div>
-    );
-  }
-  
-  if (!summary) {
-    return (
-      <div className="w-full py-3 text-center text-text-secondary text-sm">
-        <p>No metrics available</p>
+      <div className="w-full mb-10 overflow-hidden">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6">
+          {/* Generate 8 skeleton metric cards */}
+          {Array(8).fill(0).map((_, index) => (
+            <div 
+              key={`skeleton-error-${index}`}
+              className="relative bg-white/5 p-4 rounded-lg border border-purple-900/30 animate-pulse"
+            >
+              <div className="h-3 w-16 bg-purple-300/20 rounded mb-2"></div>
+              <div className="h-7 w-20 bg-purple-300/30 rounded"></div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

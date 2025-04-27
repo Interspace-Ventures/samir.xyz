@@ -101,38 +101,42 @@ export default function PortfolioGallery() {
       return a.name.localeCompare(b.name);
     });
 
-  if (isLoadingCategories || isLoadingPortfolio) {
-    return (
-      <div className="flex items-center justify-center py-10">
-        <div className="text-center">
-          <div className="w-8 h-8 border-3 border-purple-primary border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-          <p className="text-white">Loading portfolio gallery...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (categoriesError || portfolioError) {
-    console.error('Category error:', categoriesError);
-    console.error('Portfolio error:', portfolioError);
+  // Use a skeleton loader during both loading and error states
+  if (isLoadingCategories || isLoadingPortfolio || categoriesError || portfolioError) {
+    // Log errors to console for debugging but don't show to user
+    if (categoriesError || portfolioError) {
+      console.error('Category error:', categoriesError);
+      console.error('Portfolio error:', portfolioError);
+    }
     
+    // Always show the skeleton loader instead of text or error messages
     return (
-      <div className="flex flex-col items-center justify-center py-10">
-        <div className="text-center max-w-lg">
-          <div className="bg-red-100 text-red-800 p-4 rounded-lg mb-4">
-            <h3 className="font-bold text-lg mb-2">Error Loading Data</h3>
-            <p className="mb-2">We were unable to load the portfolio items.</p>
-            <p className="text-sm text-red-700">
-              {categoriesError ? `Categories: ${categoriesError.message}` : ''}
-              {portfolioError ? `Portfolio: ${portfolioError.message}` : ''}
-            </p>
+      <div className="mt-8">
+        <div className="mb-6">
+          {/* Category tabs skeleton */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {Array(5).fill(0).map((_, index) => (
+              <div 
+                key={`category-skeleton-${index}`}
+                className="h-8 w-24 bg-white/5 rounded-full animate-pulse"
+              ></div>
+            ))}
           </div>
-          <button 
-            onClick={() => window.location.reload()}
-            className="bg-purple-primary hover:bg-bg-primary text-white px-6 py-2 rounded-md text-sm transition-colors"
-          >
-            Try Again
-          </button>
+        </div>
+
+        {/* Portfolio grid skeleton */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {Array(12).fill(0).map((_, index) => (
+            <div
+              key={`portfolio-skeleton-${index}`}
+              className="bg-white/5 border border-purple-900/30 rounded-lg overflow-hidden animate-pulse"
+            >
+              {/* Company logo placeholder */}
+              <div className="aspect-video p-6 flex items-center justify-center">
+                <div className="w-20 h-12 rounded-md bg-white/10"></div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );

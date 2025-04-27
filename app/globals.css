@@ -236,3 +236,47 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px var(--primary);
 }
+
+/* Skeleton Loading Animations */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Skeleton loader and content container layout */
+.metrics-container,
+.portfolio-container,
+.ventures-container {
+  position: relative;
+}
+
+.skeleton-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+}
+
+.content-layer {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+/* When content is loaded, hide skeleton and show content */
+.content-layer:not(:empty) {
+  opacity: 1;
+}
+
+.content-layer:not(:empty) ~ .skeleton-layer {
+  opacity: 0;
+}
