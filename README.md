@@ -3,6 +3,8 @@
 > Hey I'm Samir - I drive business impact at fintechs
 
 ## Table of Contents
+- [Overview](#overview)
+- [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
   - [Core Directories](#core-directories)
   - [Supporting Directories](#supporting-directories)
@@ -10,24 +12,17 @@
 - [Configuration](#configuration)
   - [Core Configuration](#core-configuration)
   - [Styling Configuration](#styling-configuration)
+  - [Database Configuration](#database-configuration)
   - [Asset Configuration](#asset-configuration)
   - [Configuration Best Practices](#configuration-best-practices)
 - [Development Tools & Scripts](#development-tools--scripts)
-  - [organize-assets.sh](#organize-assetssh)
-  - [check-ventures.sh](#check-venturessh)
-  - [cleanup-test-dirs.sh](#cleanup-test-dirssh)
-  - [Archived Scripts](#archived-scripts)
-  - [Best Practices for Scripts](#best-practices-for-scripts)
-- [Development Guidelines](#development-guidelines)
-  - [Component Structure](#component-structure)
-  - [Styling Approach](#styling-approach)
-  - [Performance Optimization](#performance-optimization)
-  - [Error Handling](#error-handling)
-  - [Code Quality Best Practices](#code-quality-best-practices)
 - [Artificial Intelligence Model Instructions](#artificial-intelligence-model-instructions)
   - [Model Context](#model-context)
   - [Seven Laws of Artificial Intelligence](#seven-laws-of-artificial-intelligence)
-- [Building and Running](#building-and-running)
+  - [Maximal Quality Minimalism Development Framework](#maximal-quality-minimalism-development-framework)
+- [Build + Run](#build--run)
+  - [Database Setup](#database-setup)
+  - [Replit Configuration](#replit-configuration)
 - [Project Cleanup Notes](#project-cleanup-notes)
 - [Version History](#version-history)
   - [Versioning Philosophy](#versioning-philosophy)
@@ -249,61 +244,7 @@ Located in the root directory:
   - Ensures application binds to correct port (8080)
   - Uses appropriate startup flags for Replit environment
 
-### Best Practices for Scripts
 
-1. **Script Organization**: Organize scripts by purpose in appropriate directories
-2. **Database First**: Handle database seeding and updates through dedicated scripts
-3. **Asset Management**: Use scripts to ensure consistent asset handling
-4. **Environment Adaptation**: Configure scripts to work in both development and production
-5. **Error Handling**: Include proper error messages and exit codes
-
-## Development Guidelines
-
-### Component Structure
-
-- Keep components simple and focused on a single responsibility
-- Use the ClientWrapper for client-side only components
-- Prefer server components when possible
-- Follow established component patterns for consistency
-
-### Styling Approach
-
-- Use Tailwind CSS utilities for styling components
-- Avoid inline styles or custom CSS when possible
-- Follow the project's design system for consistency
-- Maintain responsive design throughout the application
-
-### Performance Optimization
-
-- Utilize Next.js image optimization
-- Implement proper code splitting
-- Minimize client-side JavaScript
-- Follow asset optimization best practices
-
-### Error Handling
-
-- Use proper error boundaries to catch and display errors
-- Implement informative error messages for better debugging
-- Avoid error suppression in favor of proper error handling
-- Log errors appropriately for debugging
-
-### Code Quality Best Practices
-
-- **No shortcuts that compromise quality** - Never use bad coding practices to solve problems quickly. Quality must never be sacrificed for speed.
-  
-- **No `!important` flags in CSS** - CSS should be structured with proper specificity hierarchies, not forced with `!important` flags which create maintenance problems.
-  
-- **No inline styles** - All styling should be managed through Tailwind utility classes or component-specific stylesheets, never with inline style attributes.
-  
-- **Consistent component architecture** - All components should follow the same patterns and architecture for maintainability.
-  
-- **Proper separation of concerns** - Keep component logic, styling, and markup appropriately separated following industry best practices.
-  
-- **10x engineer mindset** - Write clean, optimized, maintainable code that follows all industry best practices, enabling future developers to easily understand and extend the codebase.
-  
-- **Global vs. component-specific styles** - Keep global styles (in globals.css) truly global, with component-specific styles contained within their respective component files.
-  
-- **Accessibility standards** - Maintain proper accessibility practices throughout the codebase including proper semantic HTML, ARIA attributes, and keyboard navigation support.
 
 ## Artificial Intelligence Model Instructions
 
@@ -344,7 +285,25 @@ When working with this codebase, please adhere to these best practices:
    - Documenting architectural decisions and their implications
    - Never introducing technical debt knowingly — always factor in the time to do things properly
 
-## Building and Running
+### Maximal Quality Minimalism Development Framework
+
+- **No shortcuts that compromise quality** - Never use bad coding practices to solve problems quickly. Quality must never be sacrificed for speed.
+  
+- **No `!important` flags in CSS** - CSS should be structured with proper specificity hierarchies, not forced with `!important` flags which create maintenance problems.
+  
+- **No inline styles** - All styling should be managed through Tailwind utility classes or component-specific stylesheets, never with inline style attributes.
+  
+- **Consistent component architecture** - All components should follow the same patterns and architecture for maintainability.
+  
+- **Proper separation of concerns** - Keep component logic, styling, and markup appropriately separated following industry best practices.
+  
+- **10x engineer mindset** - Write clean, optimized, maintainable code that follows all industry best practices, enabling future developers to easily understand and extend the codebase.
+  
+- **Global vs. component-specific styles** - Keep global styles (in globals.css) truly global, with component-specific styles contained within their respective component files.
+  
+- **Accessibility standards** - Maintain proper accessibility practices throughout the codebase including proper semantic HTML, ARIA attributes, and keyboard navigation support.
+
+## Build + Run
 
 The application is configured to run automatically through the Replit "Run" button, which executes `./start-nextjs.sh`.
 
@@ -372,12 +331,11 @@ This application uses PostgreSQL with Prisma ORM:
 
 1. The database connection is configured through the DATABASE_URL environment variable
 2. Prisma schema is defined in `prisma/schema.prisma`
-3. The schema includes models for:
-   - Portfolio items (companies with investment metrics)
-   - Projects (work portfolio items)
-   - Ventures (creative projects)
-   - Tags (for filtering)
-   - Categories (for organization)
+3. The schema includes the following models:
+   - **Portfolio**: Companies with investment information (initial investment, valuation, etc.)
+   - **Venture**: Creative projects and venture investments
+   - **Project**: Additional portfolio projects (legacy model)
+   - **Tag**: For project categorization (legacy model)
 
 ### Replit Configuration
 
@@ -388,43 +346,33 @@ The application is optimized for the Replit environment:
 3. Environment variables are properly set for the Replit environment
 4. Database connection is configured for the Replit-provided PostgreSQL instance
 
-## Project Cleanup Notes
+## Recent Improvements
 
-The codebase has been significantly optimized to:
+The project has been continuously improved through version 8.5.3 (see [CHANGELOG.md](./CHANGELOG.md) for full details):
 
-1. **Remove Problematic Scripts**: 
-   - Removed scripts with functionality now handled by proper CSS
-   - Eliminated code causing hydration errors and unexpected behavior
+1. **Responsive Design Enhancements**:
+   - Updated ventures grid to display 4 columns on desktop viewports
+   - Maintained 2 columns on mobile viewports for better readability
+   - Set viewport breakpoint to 480px for mobile devices
+   - Enhanced mobile/desktop detection with user agent detection
 
-2. **Optimize Development Process**:
-   - Improved startup scripts for asset management
-   - Optimized environment variables to follow best practices
-   - Streamlined the development server startup process
+2. **Styling Improvements**:
+   - Changed page background color to #2d0c6a across the site
+   - Updated filter categories with consistent styling
+   - Improved hover overlay gradient with new color scheme
+   - Eliminated CSS inconsistencies between browser and webview
 
-3. **Consolidate Asset Directories**:
-   - Centralized all assets in `attached_assets` for better organization
-   - Eliminated redundant asset directories
-   - Integrated asset management into the application startup process
+3. **Content Updates**:
+   - Updated profile section text to include Hudson River Trading experience
+   - Changed subtitle to "I drive business impact at fintechs" with bold styling
+   - Harmonized all text content for consistent brand messaging
+   - Fixed various text spacing issues and inconsistencies
 
-4. **Modernize Component Architecture**:
-   - Updated components to use modern React 19 patterns
-   - Added proper error boundaries for better error handling
-   - Converted to multi-page application structure with separate tabs
-
-5. **Improve Configuration**:
-   - Updated configuration files to follow Next.js 15 best practices
-   - Enhanced Tailwind config with optimized responsive design features
-   - Fixed CSS loading and styling issues
-
-6. **Better Error Handling**:
-   - Implemented proper error boundaries to catch and display errors
-   - Added better logging for debugging purposes
-
-7. **CSS and Styling Improvements**:
-   - Replaced inline style attributes with Tailwind utility classes throughout the codebase
-   - Standardized the globals.css structure with proper organization
-   - Created consistent component-specific styling patterns
-   - Improved color scheme with purple theme (#8c5cf6 and #3D365C)
+4. **Architecture Modernization**:
+   - Converted from single-page to multi-page application with separate tabs
+   - Updated to Next.js 15 with enhanced server-side rendering
+   - Implemented React 19 patterns throughout the codebase
+   - Optimized database models for streamlined data access
 
 ## Version History
 
@@ -440,20 +388,21 @@ The project follows Semantic Versioning with the following custom guidelines:
 
 ### Latest Version
 
-Current version: 8.5.2 (2025-04-25)
+Current version: 8.5.3 (2025-04-27)
 
 Key updates in the latest version:
+- **Improved Layout** - Updated ventures grid to 4 columns on desktop, 2 columns on mobile
+- **Enhanced Styling** - Changed page background color to #2d0c6a throughout the site
+- **Updated Content** - Added Hudson River Trading experience to profile section
+- **Fixed Responsiveness** - Set viewport breakpoint to 480px for mobile devices
+- **Visual Consistency** - Harmonized background colors and improved filter categories
+
+Previous version: 8.5.2 (2025-04-25)
 - **Accurate Project Structure** - Updated README.md with accurate reflection of current codebase structure
 - **Enhanced Configuration Documentation** - Added detailed database configuration information
 - **Improved Script Documentation** - Updated Development Tools & Scripts section with accurate descriptions
 - **Building Instructions** - Added comprehensive building and database setup instructions
 - **Replit Environment** - Added Replit-specific configuration details
-
-Previous version: 8.5.1 (2025-04-25)
-- **Comprehensive Documentation** - Added detailed project structure and guidelines
-- **Development Guidelines** - Added Seven Laws of Artificial Intelligence for code quality
-- **Multi-Page Structure** - Converted website from single-page to multi-page application with separate tabs
-- **Visual Consistency** - Updated footer with "Copyright 2025 Interspace Ventures" and version information
 
 For detailed changes across all versions, see the [CHANGELOG.md](./CHANGELOG.md).
 
