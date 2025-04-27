@@ -1,12 +1,13 @@
 'use client';
 
-// Dynamically import CompanySection with loading state
+// Dynamically import components with loading states
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import MetricsSummaryStandalone from '../components/metrics-summary-standalone';
 
-// Use dynamic import to fix chunk loading error
-const CompanySection = dynamic(() => import('../components/company-section'), {
-  loading: () => <div className="py-10 text-center">Loading portfolio data...</div>,
+// Use dynamic import for portfolio gallery with lower priority
+const PortfolioGallery = dynamic(() => import('../components/portfolio-gallery'), {
+  loading: () => <div className="py-10 text-center">Loading portfolio gallery...</div>,
   ssr: false // Disable server-side rendering to prevent hydration issues
 });
 
@@ -22,8 +23,12 @@ export default function PortfolioPage() {
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
           
-          <Suspense fallback={<div className="py-10 text-center">Loading portfolio data...</div>}>
-            <CompanySection />
+          {/* Load metrics summary immediately */}
+          <MetricsSummaryStandalone />
+          
+          {/* Load portfolio gallery separately */}
+          <Suspense fallback={<div className="py-6 text-center">Loading portfolio gallery...</div>}>
+            <PortfolioGallery />
           </Suspense>
         </div>
       </section>

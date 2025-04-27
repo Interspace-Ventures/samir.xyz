@@ -4,17 +4,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import InvestmentMetrics from './investment-metrics';
-import MetricsSummaryStandalone from './metrics-summary-standalone';
 
 type Portfolio = {
   id: number;
   name: string;
   category: string;
   description?: string | null;
-  logoUrl: string; // Field name in TypeScript remains camelCase
+  logoUrl: string;
   website?: string | null;
-  // Investment and financial data
   investment_date?: Date | null;
   initial_investment?: number | null;
   original_valuation?: number | null;
@@ -30,7 +27,13 @@ type Category = {
   order: number;
 };
 
-export default function CompanySection() {
+/**
+ * Portfolio Gallery Component
+ * 
+ * This component only loads and displays the portfolio gallery (without metrics)
+ * for faster loading times.
+ */
+export default function PortfolioGallery() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   
   // Fetch all categories
@@ -90,7 +93,6 @@ export default function CompanySection() {
   // Filter portfolio items by selected category
   const filteredItems = portfolioItems
     .filter(item => {
-      // console.log('Filtering item:', item.name, 'Category:', item.category, 'Selected category:', selectedCategory);
       return selectedCategory === 'All' || item.category === selectedCategory;
     })
     // Sort alphabetically by company name, always keep consistent sorting
@@ -101,10 +103,10 @@ export default function CompanySection() {
 
   if (isLoadingCategories || isLoadingPortfolio) {
     return (
-      <div className="flex items-center justify-center py-20">
+      <div className="flex items-center justify-center py-10">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-purple-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white">Loading portfolio data...</p>
+          <div className="w-8 h-8 border-3 border-purple-primary border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <p className="text-white">Loading portfolio gallery...</p>
         </div>
       </div>
     );
@@ -115,7 +117,7 @@ export default function CompanySection() {
     console.error('Portfolio error:', portfolioError);
     
     return (
-      <div className="flex flex-col items-center justify-center py-20">
+      <div className="flex flex-col items-center justify-center py-10">
         <div className="text-center max-w-lg">
           <div className="bg-red-100 text-red-800 p-4 rounded-lg mb-4">
             <h3 className="font-bold text-lg mb-2">Error Loading Data</h3>
@@ -138,9 +140,6 @@ export default function CompanySection() {
 
   return (
     <>
-      {/* Portfolio Metrics Summary - Using the standalone component */}
-      <MetricsSummaryStandalone />
-
       {/* Category Filter Buttons */}
       <div className="flex justify-start overflow-x-auto scrollbar-thin scrollbar-thumb-purple-primary scrollbar-track-transparent pb-2 mb-8">
         <div className="inline-flex space-x-2 px-0.5">
@@ -157,7 +156,7 @@ export default function CompanySection() {
           
           {/* Get unique categories from portfolio items */}
           {Array.from(new Set(portfolioItems.map(item => item.category)))
-            .filter(cat => cat !== null && cat !== '') // Don't filter out any categories for now
+            .filter(cat => cat !== null && cat !== '')
             .sort()
             .map((category, index) => (
             <button
@@ -178,12 +177,8 @@ export default function CompanySection() {
       {/* Portfolio Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-6">
         {filteredItems.map(item => {
-          // Handle potential missing logoUrl (happens when API field mapping isn't working)
+          // Handle potential missing logoUrl
           const logoUrl = item.logoUrl || '';
-          
-          // All our images should be PNG format based on the database check
-          // Let's fix the issue by making sure we can handle different path formats
-          // console.log('Logo URL for', item.name, ':', logoUrl);
           
           // If we have issues, try fetching the logo based on company name
           const fallbackLogoUrl = `/logos/${item.name.toLowerCase().replace(/\s+/g, '-')}.png`;
@@ -194,7 +189,6 @@ export default function CompanySection() {
               {/* Company Logo Container */}
               <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
                 {/* Improved logo handling for all path formats */}
-                {/* Using next/image with proper error handling */}
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image
                     src={logoUrl ? 
@@ -209,8 +203,6 @@ export default function CompanySection() {
                   />
                 </div>
               </div>
-              
-              {/* Removed the area where text used to be */}
               
               {/* Status overlay (if present) */}
               {item.investment_status === 'Markup' && (
@@ -229,7 +221,7 @@ export default function CompanySection() {
                 </div>
               )}
               
-              {/* Hover overlay with description - matching our new dark purple color */}
+              {/* Hover overlay with description */}
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-br from-[#2d0c6a]/90 to-[#381490]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
                 {item.description ? (
                   <div>
@@ -266,8 +258,6 @@ export default function CompanySection() {
           );
         })}
       </div>
-      
-      {/* End of Portfolio Section */}
     </>
   );
 }
