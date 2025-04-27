@@ -119,7 +119,7 @@ export default function VenturesNewPage() {
                     >
                       <div className="absolute inset-0 bg-black/20 border border-purple-900/20 overflow-hidden">
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-20 h-20 rounded-full bg-white/10 animate-pulse"></div>
+                          {/* No mini circle placeholder for consistent experience */}
                         </div>
 
                         {/* Shimmer effect */}

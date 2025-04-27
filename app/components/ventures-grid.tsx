@@ -57,9 +57,9 @@ export default function VenturesGrid() {
               key={`venture-skeleton-${index}`}
               className="aspect-square bg-white/5 rounded-md border border-purple-900/30 relative overflow-hidden"
             >
-              {/* Center logo placeholder with shimmer effect */}
-              <div className="absolute inset-0 flex items-center justify-center animate-pulse">
-                <div className="w-16 h-16 rounded-full bg-white/10"></div>
+              {/* Empty container without mini circle placeholder */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                {/* Intentionally empty for consistent loading behavior */}
               </div>
               
               {/* Subtle gradient overlay */}
