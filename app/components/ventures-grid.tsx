@@ -48,9 +48,9 @@ export default function VenturesGrid() {
         </div>
       ) : (
         <div className="w-full mx-auto">
-          {/* Fixed 2 rows of 4 columns grid */}
-          <div className="grid grid-rows-2 grid-cols-4 md:grid-rows-2 md:grid-cols-4 sm:grid-rows-4 sm:grid-cols-2 gap-6">
-            {/* Show exactly 8 ventures in a 2x4 grid */}
+          {/* 2 rows of 4 on larger screens, 4 rows of 2 on mobile */}
+          <div className="grid grid-rows-4 grid-cols-2 sm:grid-rows-4 sm:grid-cols-2 md:grid-rows-2 md:grid-cols-4 gap-6">
+            {/* Show exactly 8 ventures in grid */}
             {[...ventures]
               .slice(0, 8)
               .map((venture, index) => (
@@ -61,7 +61,7 @@ export default function VenturesGrid() {
                   />
                 </div>
               ))}
-            {/* Add empty placeholders if less than 8 ventures to maintain 2x4 grid */}
+            {/* Add empty placeholders if less than 8 ventures to maintain grid layout */}
             {ventures.length < 8 && Array(8 - ventures.length).fill(0).map((_, index) => (
               <div key={`empty-${index}`} className="aspect-square bg-zinc-900/30"></div>
             ))}
