@@ -4,6 +4,7 @@
 
 ## Table of Contents
 - [Overview](#overview)
+  - [License](#license)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
   - [Core Directories](#core-directories)
@@ -23,11 +24,9 @@
 - [Build + Run](#build--run)
   - [Database Setup](#database-setup)
   - [Replit Configuration](#replit-configuration)
-- [Project Cleanup Notes](#project-cleanup-notes)
 - [Version History](#version-history)
   - [Versioning Philosophy](#versioning-philosophy)
   - [Latest Version](#latest-version)
-- [License](#license)
 
 ## Overview
 
@@ -38,6 +37,11 @@ This portfolio website for Samir showcases how he drives business impact at fint
 - Optimized performance for quick loading
 - Robust error handling and stability
 - Maintainable, modular codebase architecture
+
+### License
+
+This project is provided as open source software and can be freely modified and distributed. 
+Developed with the assistance of Replit's AI tools and hosted on the Replit platform.
 
 ## Tech Stack
 
@@ -346,33 +350,7 @@ The application is optimized for the Replit environment:
 3. Environment variables are properly set for the Replit environment
 4. Database connection is configured for the Replit-provided PostgreSQL instance
 
-## Recent Improvements
 
-The project has been continuously improved through version 8.5.3 (see [CHANGELOG.md](./CHANGELOG.md) for full details):
-
-1. **Responsive Design Enhancements**:
-   - Updated ventures grid to display 4 columns on desktop viewports
-   - Maintained 2 columns on mobile viewports for better readability
-   - Set viewport breakpoint to 480px for mobile devices
-   - Enhanced mobile/desktop detection with user agent detection
-
-2. **Styling Improvements**:
-   - Changed page background color to #2d0c6a across the site
-   - Updated filter categories with consistent styling
-   - Improved hover overlay gradient with new color scheme
-   - Eliminated CSS inconsistencies between browser and webview
-
-3. **Content Updates**:
-   - Updated profile section text to include Hudson River Trading experience
-   - Changed subtitle to "I drive business impact at fintechs" with bold styling
-   - Harmonized all text content for consistent brand messaging
-   - Fixed various text spacing issues and inconsistencies
-
-4. **Architecture Modernization**:
-   - Converted from single-page to multi-page application with separate tabs
-   - Updated to Next.js 15 with enhanced server-side rendering
-   - Implemented React 19 patterns throughout the codebase
-   - Optimized database models for streamlined data access
 
 ## Version History
 
@@ -405,8 +383,3 @@ Previous version: 8.5.2 (2025-04-25)
 - **Replit Environment** - Added Replit-specific configuration details
 
 For detailed changes across all versions, see the [CHANGELOG.md](./CHANGELOG.md).
-
-## License
-
-This project is provided as open source software and can be freely modified and distributed. 
-Developed with the assistance of Replit's AI tools and hosted on the Replit platform.
