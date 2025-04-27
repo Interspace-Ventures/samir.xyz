@@ -101,10 +101,33 @@ export default function CompanySection() {
 
   if (isLoadingCategories || isLoadingPortfolio) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-purple-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white">Loading portfolio data...</p>
+      <div className="py-8">
+        {/* Portfolio Metrics Summary - Using the standalone component */}
+        <MetricsSummaryStandalone />
+        
+        {/* Category skeleton */}
+        <div className="flex flex-wrap gap-2 mb-6 mt-10">
+          {Array(5).fill(0).map((_, index) => (
+            <div 
+              key={`category-skeleton-${index}`}
+              className="h-8 w-24 bg-white/5 rounded-full animate-pulse"
+            ></div>
+          ))}
+        </div>
+        
+        {/* Portfolio grid skeleton */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {Array(8).fill(0).map((_, index) => (
+            <div
+              key={`portfolio-skeleton-${index}`}
+              className="bg-white/5 border border-purple-900/30 rounded-lg overflow-hidden animate-pulse"
+            >
+              {/* Company logo placeholder */}
+              <div className="aspect-video p-6 flex items-center justify-center">
+                <div className="w-20 h-12 rounded-md bg-white/10"></div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );

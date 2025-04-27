@@ -3,52 +3,50 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import MetricCard from './metric-card';
-
-type PortfolioSummary = {
-  total_investments: number;
-  markups: number;
-  acquisitions: number;
-  busts: number;
-  tvpi: number;
-  gross_multiple: number;
-  net_multiple: number;
-  irr: number;
-};
+import { staticMetrics, PortfolioSummary } from '@/lib/static-metrics';
 
 /**
  * Standalone Portfolio Metrics Summary Component
  * 
- * This component fetches and displays portfolio metrics independently
- * from the main portfolio gallery for faster initial loading.
+ * This component displays portfolio metrics from static data immediately
+ * and then updates with fresh data from the API once loaded.
+ * This approach eliminates the initial loading state for metrics.
  */
 export default function MetricsSummaryStandalone() {
-  const [summary, setSummary] = useState<PortfolioSummary | null>(null);
+  // Initialize with static metrics for immediate rendering
+  const [summary, setSummary] = useState<PortfolioSummary>(staticMetrics);
   
-  // Fetch just the metrics data with a smaller payload
-  const { data: metricsData, isLoading, error } = useQuery({
+  // Fetch fresh metrics data with a smaller payload
+  const { data: metricsData, error } = useQuery<PortfolioSummary>({
     queryKey: ['portfolio-metrics'],
     queryFn: async () => {
       const response = await fetch('/api/metrics');
       if (!response.ok) {
         throw new Error('Failed to fetch portfolio metrics');
       }
-      return response.json();
+      const data = await response.json();
+      return data as PortfolioSummary;
     },
-    retry: 2
+    retry: 2,
+    // Only refetch when component mounts but not on other events
+    refetchOnMount: true,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: 5 * 60 * 1000 // Consider data fresh for 5 minutes
   });
   
   useEffect(() => {
     if (metricsData) {
-      // Use the metrics directly or calculate them if needed
+      // Update with fresh data from API
       setSummary({
-        total_investments: metricsData.total_investments || 23, // Fallback value
-        markups: metricsData.markups || 8,
-        acquisitions: metricsData.acquisitions || 3,
-        busts: metricsData.busts || 4,
-        tvpi: metricsData.tvpi || 1.44,
-        gross_multiple: metricsData.gross_multiple || 1.22,
-        net_multiple: metricsData.net_multiple || 1.12,
-        irr: metricsData.irr || 10
+        total_investments: metricsData.total_investments || staticMetrics.total_investments,
+        markups: metricsData.markups || staticMetrics.markups,
+        acquisitions: metricsData.acquisitions || staticMetrics.acquisitions,
+        busts: metricsData.busts || staticMetrics.busts,
+        tvpi: metricsData.tvpi || staticMetrics.tvpi,
+        gross_multiple: metricsData.gross_multiple || staticMetrics.gross_multiple,
+        net_multiple: metricsData.net_multiple || staticMetrics.net_multiple,
+        irr: metricsData.irr || staticMetrics.irr
       });
     }
   }, [metricsData]);
@@ -62,39 +60,6 @@ export default function MetricsSummaryStandalone() {
   const formatPercentage = (value: number) => {
     return `${value}%`;
   };
-  
-  if (isLoading) {
-    // Return skeleton loader instead of loading text
-    return (
-      <div className="w-full mb-10 overflow-hidden">
-        <div className="flex flex-col md:flex-row md:flex-wrap gap-4">
-          {/* Generate 4 skeleton metric cards */}
-          {Array(4).fill(0).map((_, index) => (
-            <div 
-              key={`skeleton-${index}`}
-              className="flex-1 min-w-[200px] bg-white/5 p-4 rounded-lg border border-purple-900/30 animate-pulse"
-            >
-              <div className="h-3 w-16 bg-purple-300/20 rounded mb-2"></div>
-              <div className="h-7 w-20 bg-purple-300/30 rounded"></div>
-            </div>
-          ))}
-        </div>
-        
-        {/* Skeleton for detailed metrics */}
-        <div className="mt-6 flex flex-col md:flex-row md:flex-wrap gap-4">
-          {Array(4).fill(0).map((_, index) => (
-            <div 
-              key={`skeleton-detailed-${index}`}
-              className="flex-1 min-w-[150px] bg-white/5 p-3 rounded-lg border border-purple-900/30 animate-pulse"
-            >
-              <div className="h-2 w-12 bg-purple-300/20 rounded mb-2"></div>
-              <div className="h-5 w-14 bg-purple-300/30 rounded"></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
   
   if (error || !summary) {
     // Instead of error text, show skeleton loaders
