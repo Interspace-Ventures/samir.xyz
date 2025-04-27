@@ -14,7 +14,7 @@ const ventures = [
     id: 2,
     name: 'interspace',
     description: 'future explorers community',
-    logoUrl: '/ventures/2DE Interspace.png', // Using the same logo for now
+    logoUrl: '/ventures/Interspace Square - 2025.png',
     website: 'https://posts.interspace.ventures',
     featured: true
   },
@@ -38,7 +38,7 @@ const ventures = [
     id: 5,
     name: 'samir.xyz',
     description: 'personal site',
-    logoUrl: '/ventures/samir.xyz dark.png',
+    logoUrl: '/ventures/samir.png',
     website: 'https://samir.xyz',
     featured: true
   },
