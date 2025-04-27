@@ -1,0 +1,47 @@
+/* Portfolio Page Styles */
+
+/* Container positioning for content/skeleton layers */
+.metrics-container,
+.portfolio-container {
+  position: relative;
+}
+
+/* Content layer sits underneath initially */
+.content-layer {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  /* Use this when content is loaded */
+  &:has(*) {
+    opacity: 1;
+    z-index: 10;
+  }
+}
+
+/* Skeleton layer sits on top initially */
+.skeleton-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  /* Hide when content layer has children */
+  .content-layer:has(*) ~ & {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+/* Shimmer animation for skeleton loaders */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
+}
