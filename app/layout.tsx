@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className={`${alexandria.className} bg-bg-primary text-text-primary flex flex-col min-h-screen`}>
         <Providers>
           <Navigation />
-          <main className="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">{children}</main>
+          <main className="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">{children}</main>
           <Footer />
         </Providers>
       </body>
