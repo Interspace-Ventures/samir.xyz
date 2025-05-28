@@ -75,9 +75,8 @@ const Navigation = () => {
           backgroundColor,
           backdropFilter: backdropBlur
         }}
-        initial={{ y: -100 }}
+        initial={{ y: 0 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
       >
         <div className="container max-w-6xl px-4">
           <div className="flex items-center justify-between py-3">
