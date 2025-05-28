@@ -68,12 +68,12 @@ export default function VenturesGridDetailed() {
             >
               <a 
                 href={
-                  ['Moonshot', 'Omni', 'Predictive', 'Solo'].includes(venture.name) 
+                  ['moonshot', 'omni', 'predictive', 'solo'].includes(venture.name) 
                     ? '/launching-soon' 
                     : venture.website || '#'
                 } 
                 target={
-                  ['Moonshot', 'Omni', 'Predictive', 'Solo'].includes(venture.name) 
+                  ['moonshot', 'omni', 'predictive', 'solo'].includes(venture.name) 
                     ? '_self' 
                     : '_blank'
                 }
