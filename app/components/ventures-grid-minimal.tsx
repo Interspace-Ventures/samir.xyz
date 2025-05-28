@@ -66,8 +66,16 @@ export default function VenturesGridMinimal() {
               className="relative aspect-square"
             >
               <a 
-                href={venture.website || '#'} 
-                target="_blank" 
+                href={
+                  ['Moonshot', 'Omni', 'Predictive', 'Solo'].includes(venture.name) 
+                    ? '/launching-soon' 
+                    : venture.website || '#'
+                } 
+                target={
+                  ['Moonshot', 'Omni', 'Predictive', 'Solo'].includes(venture.name) 
+                    ? '_self' 
+                    : '_blank'
+                }
                 rel="noreferrer"
                 className="block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer"
               >
