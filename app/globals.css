@@ -34,6 +34,7 @@
 @layer base {
   html {
     @apply scroll-smooth;
+    font-size: 18px; /* Increased from default 16px for better readability on high-res displays */
   }
   
   /* Basic styling */
