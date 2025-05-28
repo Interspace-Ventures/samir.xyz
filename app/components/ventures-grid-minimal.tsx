@@ -82,23 +82,18 @@ export default function VenturesGridMinimal() {
                 {/* Main visible content - logo fills entire space */}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300">
                   <div className="relative w-full h-full flex items-center justify-center p-6">
-                    <Image
-                      src={venture.logoUrl}
-                      alt={`${venture.name} logo`}
-                      width={120}
-                      height={120}
-                      className="venture-logo object-contain filter group-hover:brightness-110 z-10"
-                      style={{ 
-                        width: '120px',
-                        height: '120px',
-                        maxWidth: '80%',
-                        maxHeight: '80%'
-                      }}
-                      priority={index < 8}
-                      placeholder="blur"
-                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5xZtlvZd8C2kd+YUqjNLS2i7yJKY4xZaVVoKkJp3k2f3k3a5k7bfCXq0ooT/Z"
-                      unoptimized={true}
-                    />
+                    <div className="w-[120px] h-[120px] max-w-[80%] max-h-[80%] relative">
+                      <Image
+                        src={venture.logoUrl}
+                        alt={`${venture.name} logo`}
+                        fill
+                        className="venture-logo object-contain filter group-hover:brightness-110"
+                        priority={index < 8}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5xZtlvZd8C2kd+YUqjNLS2i7yJKY4xZaVVoKkJp3k2f3k3a5k7bfCXq0ooT/Z"
+                        unoptimized={true}
+                      />
+                    </div>
                   </div>
                   
                   {/* Status tag - only for Pre-launch ventures */}
