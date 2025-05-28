@@ -21,8 +21,8 @@ export default function LaunchingSoon() {
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
             className="flex justify-center"
           >
-            <div className="bg-purple-primary/20 p-6 rounded-full">
-              <Rocket className="w-16 h-16 text-purple-primary" />
+            <div className="bg-[#7f55dc]/20 p-6 rounded-full">
+              <Rocket className="w-16 h-16 text-[#7f55dc]" />
             </div>
           </motion.div>
 
@@ -55,7 +55,7 @@ export default function LaunchingSoon() {
           >
             <Link
               href="/ventures"
-              className="inline-flex items-center space-x-2 bg-purple-primary hover:bg-purple-600 text-white px-6 py-3 font-medium transition-colors duration-200"
+              className="inline-flex items-center space-x-2 bg-[#7f55dc] hover:bg-[#6d47c7] text-white px-6 py-3 font-medium transition-colors duration-200"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to Ventures</span>
@@ -72,7 +72,7 @@ export default function LaunchingSoon() {
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="w-2 h-2 bg-purple-primary rounded-full"
+                className="w-2 h-2 bg-[#7f55dc] rounded-full"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.5, 1, 0.5],
