@@ -87,12 +87,14 @@ export default function VenturesGridMinimal() {
                       alt={`${venture.name} logo`}
                       width={120}
                       height={120}
-                      className="venture-logo max-w-full max-h-full object-contain filter group-hover:brightness-110 z-10"
+                      className="venture-logo object-contain filter group-hover:brightness-110 z-10"
                       style={{ 
-                        objectFit: 'contain',
+                        width: '120px',
+                        height: '120px',
                         maxWidth: '80%',
-                        maxHeight: '80%',
+                        maxHeight: '80%'
                       }}
+                      priority={index < 4}
                       unoptimized={true}
                     />
                   </div>

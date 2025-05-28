@@ -89,7 +89,14 @@ export default function VenturesGridDetailed() {
                         alt={`${venture.name} logo`}
                         width={200}
                         height={200}
-                        className="object-contain w-full h-full"
+                        className="object-contain"
+                        style={{ 
+                          width: '200px',
+                          height: '200px',
+                          maxWidth: '80%',
+                          maxHeight: '80%'
+                        }}
+                        priority={index < 4}
                         unoptimized={true}
                       />
                     </div>
