@@ -136,11 +136,11 @@ export default function IntegratedPortfolioGallery() {
 
       {/* Portfolio Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
-        {filteredItems.map(item => {
+        {filteredItems.map((item, index) => {
           const logoUrl = item.logoUrl || '';
           const fallbackLogoUrl = `/logos/${item.name.toLowerCase().replace(/\s+/g, '-')}.png`;
           
-          const CardContent = () => (
+          const CardContent = ({ itemIndex }: { itemIndex: number }) => (
             <div className="bg-white overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300">
               {/* Company Logo Container */}
               <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
@@ -154,6 +154,9 @@ export default function IntegratedPortfolioGallery() {
                     width={140}
                     height={70}
                     style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                    priority={itemIndex < 8}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5xZtlvZd8C2kd+YUqjNLS2i7yJKY4xZaVVoKkJp3k2f3k3a5k7bfCXq0ooT/Z"
                     unoptimized={true}
                   />
                 </div>
@@ -202,10 +205,10 @@ export default function IntegratedPortfolioGallery() {
                   rel="noopener noreferrer" 
                   className="block cursor-pointer"
                 >
-                  <CardContent />
+                  <CardContent itemIndex={index} />
                 </Link>
               ) : (
-                <CardContent />
+                <CardContent itemIndex={index} />
               )}
             </div>
           );
