@@ -106,9 +106,9 @@ export default function IntegratedPortfolioGallery() {
     <div className="py-4">
       {/* Category Filter Buttons */}
       <div className="flex justify-between sm:justify-start overflow-x-auto pb-2 mb-6 pt-1 w-full">
-        <div className="inline-flex space-x-1.5 w-full sm:w-auto">
+        <div className="inline-flex space-x-1 w-full sm:w-auto">
           <button
-            className={`px-3 py-1.5 text-xs font-medium transition-all duration-300 ${
+            className={`px-2 py-1 text-xs font-medium transition-all duration-300 ${
               selectedCategory === 'All'
                 ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
                 : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
@@ -121,7 +121,7 @@ export default function IntegratedPortfolioGallery() {
           {uniqueCategories.map((category, index) => (
             <button
               key={`${category}-${index}`}
-              className={`px-3 py-1.5 text-xs font-medium transition-all duration-300 whitespace-nowrap ${
+              className={`px-2 py-1 text-xs font-medium transition-all duration-300 whitespace-nowrap ${
                 selectedCategory === category
                   ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
                   : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
