@@ -10,6 +10,7 @@ type MinimalVenture = {
   name: string;
   logoUrl: string;
   website: string;
+  description?: string | null;
   status?: string | null;
 };
 
