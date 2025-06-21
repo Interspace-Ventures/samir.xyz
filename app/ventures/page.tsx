@@ -23,7 +23,7 @@ export default function VenturesPage() {
     // Set a small timeout to prioritize the initial minimal view rendering
     const timer = setTimeout(() => {
       setShowDetails(true);
-    }, 1500);
+    }, 800);
     
     return () => clearTimeout(timer);
   }, []);
