@@ -125,10 +125,10 @@ export default function IntegratedPortfolioGallery() {
           {uniqueCategories.map((category) => (
             <button
               key={category}
-              className={`px-2 py-1 text-xs font-medium transition-all duration-300 whitespace-nowrap ${
+              className={`px-3 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] ${
                 selectedCategory === category
-                  ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
-                  : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
+                  ? 'bg-purple-500 text-white'
+                  : 'bg-white text-black hover:bg-yellow-300'
               }`}
               onClick={() => setSelectedCategory(category)}
             >
@@ -146,7 +146,7 @@ export default function IntegratedPortfolioGallery() {
             const fallbackLogoUrl = `/logos/${item.name.toLowerCase().replace(/\s+/g, '-')}.png`;
             
             const CardContent = ({ itemIndex }: { itemIndex: number }) => (
-              <div className="bg-white overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="neo-card overflow-hidden relative group hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
                 {/* Company Logo Container */}
                 <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
                   <div className="relative w-[140px] h-[70px] max-w-full max-h-full">
