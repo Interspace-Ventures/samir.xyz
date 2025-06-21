@@ -18,7 +18,7 @@ const ProfileSection = () => {
               transition={{ duration: 0.6 }}
               className="flex-shrink-0"
             >
-              <div className="w-24 h-24 overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 p-1">
+              <div className="neo-card w-24 h-24 overflow-hidden bg-white p-1">
                 <Image 
                   src="/images/samir.png" 
                   alt="Samir's profile picture"
@@ -31,31 +31,22 @@ const ProfileSection = () => {
             </motion.div>
 
             {/* Title and Subtitle Container */}
-            <div className="flex flex-col justify-center">
-              {/* Hey I'm Samir */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-1 text-white pr-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex-1"
+            >
+              <div className="content-card">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-2">
                   Hey - I'm Samir
                 </h1>
-              </motion.div>
-
-              {/* Subtitle */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                <p className="text-base sm:text-xl md:text-2xl font-bold mb-0 text-white pr-2">
+                <p className="text-base sm:text-xl md:text-2xl font-bold">
                   I drive impact at startups
                 </p>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
 
           {/* Bio text - full width in card */}
@@ -66,7 +57,7 @@ const ProfileSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-8"
           >
-            <div className="neo-card bg-[#2a313a] p-6 space-y-4 text-white">
+            <div className="content-card space-y-4">
               <p>
                 Today, I am leading Strategic Finance for the Financial Partnerships team at <a 
                   href="https://cash.app" 

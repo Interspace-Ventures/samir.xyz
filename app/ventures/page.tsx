@@ -35,7 +35,7 @@ export default function VenturesPage() {
           <div className="mb-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ventures</h1>
           </div>
-          <p className="text-lg text-white mb-10 max-w-3xl bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 font-medium">
+          <p className="content-card mb-10 max-w-3xl font-medium">
             I create apps and concepts by coding at the speed of thought using Replit.
           </p>
           
