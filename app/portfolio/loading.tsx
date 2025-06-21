@@ -1,73 +1,39 @@
-'use client';
-
-import { staticMetrics, PortfolioSummary } from '@/lib/static-metrics';
-import MetricCard from '../components/metric-card';
-
 /**
  * Portfolio Page Loading Component
  * 
- * Shows static metrics data immediately while loading the portfolio content
- * Uses elegant skeleton loaders without loading text
+ * Shows skeleton loading specific to the portfolio page layout
  */
-export default function Loading() {
-  // Format multiple with x suffix - same as in metrics component
-  const formatMultiple = (multiple: number) => {
-    return `${multiple.toFixed(1)}x`;
-  };
-  
-  // Format percentage with % symbol - same as in metrics component
-  const formatPercentage = (value: number) => {
-    return `${value}%`;
-  };
-  
+export default function PortfolioLoading() {
   return (
     <div className="pt-16 pb-16">
       <section className="section">
         <div className="container max-w-6xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Portfolio</h1>
+          {/* Title skeleton */}
+          <div className="h-12 bg-gray-700 rounded w-48 mb-6 animate-pulse"></div>
           
-          {/* Investment Philosophy */}
-          <p className="text-lg text-text-tertiary mb-8 max-w-3xl">
-            I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
-          </p>
-          
-          {/* Static Metrics - Show immediately without loading */}
-          <div className="mb-12 max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6">
-              {/* Display static metrics */}
-              <MetricCard label="# Investments" value={staticMetrics.total_investments} />
-              <MetricCard label="# Markups" value={staticMetrics.markups} />
-              <MetricCard label="# Acquisitions" value={staticMetrics.acquisitions} />
-              <MetricCard label="# Busts" value={staticMetrics.busts} />
-              <MetricCard label="TVPI" value={formatMultiple(staticMetrics.tvpi)} />
-              <MetricCard label="Gross Multiple" value={formatMultiple(staticMetrics.gross_multiple)} />
-              <MetricCard label="Net Multiple" value={formatMultiple(staticMetrics.net_multiple)} />
-              <MetricCard label="IRR" value={formatPercentage(staticMetrics.irr)} />
-            </div>
+          {/* Description skeleton */}
+          <div className="space-y-2 mb-8">
+            <div className="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
+            <div className="h-4 bg-gray-700 rounded w-1/2 animate-pulse"></div>
           </div>
           
-          {/* Portfolio Gallery Skeleton */}
+          {/* Metrics skeleton */}
+          <div className="mb-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div key={index} className="bg-gray-800 p-4 rounded animate-pulse">
+                <div className="h-8 bg-gray-700 rounded mb-2"></div>
+                <div className="h-4 bg-gray-700 rounded w-2/3"></div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Portfolio grid skeleton */}
           <div className="mt-8">
-            {/* Category tabs skeleton */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {Array(5).fill(0).map((_, index) => (
-                <div 
-                  key={`category-skeleton-${index}`}
-                  className="h-8 w-24 bg-white/5 rounded-full animate-pulse"
-                ></div>
-              ))}
-            </div>
-            
-            {/* Portfolio grid skeleton */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {Array(12).fill(0).map((_, index) => (
-                <div
-                  key={`portfolio-skeleton-${index}`}
-                  className="bg-white/5 border border-purple-900/30 rounded-lg overflow-hidden animate-pulse"
-                >
-                  {/* Company logo placeholder */}
-                  <div className="aspect-video p-6 flex items-center justify-center">
-                    <div className="w-20 h-12 rounded-md bg-white/10"></div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
+              {Array.from({ length: 12 }).map((_, index) => (
+                <div key={index} className="bg-white overflow-hidden relative shadow-sm animate-pulse">
+                  <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
+                    <div className="w-[140px] h-[70px] bg-gray-200 rounded-sm max-w-full max-h-full"></div>
                   </div>
                 </div>
               ))}

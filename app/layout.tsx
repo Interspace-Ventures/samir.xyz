@@ -13,7 +13,7 @@ const alexandria = Alexandria({
 
 export const metadata: Metadata = {
   title: 'samir.xyz',
-  description: 'I create apps and concepts by coding at the speed of thought using Replit',
+  description: 'I drive business impact at fintechs',
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',

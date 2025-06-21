@@ -102,6 +102,7 @@ const Navigation = () => {
                     <Link 
                       href={item.href}
                       className="text-white font-medium text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-purple-300"
+                      prefetch={true}
                     >
                       {item.label}
                     </Link>
@@ -149,6 +150,7 @@ const Navigation = () => {
                       href={item.href} 
                       className="text-white text-2xl font-medium uppercase tracking-wide"
                       onClick={closeMobileMenu}
+                      prefetch={true}
                     >
                       {item.label}
                     </Link>
