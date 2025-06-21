@@ -12,6 +12,7 @@ type MinimalVenture = {
   website: string;
   description?: string | null;
   status?: string | null;
+  category?: string | null;
 };
 
 /**
