@@ -86,28 +86,28 @@ export default function MetricsSummaryStandalone() {
       {/* Metrics Grid - Ensuring 4 per row on medium screens for most viewports */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6">
         {/* Total Investments */}
-        <MetricCard label="# Investments" value={summary.total_investments} />
+        <MetricCard label="# Investments" value={summary.total_investments} index={0} />
         
         {/* Markups */}
-        <MetricCard label="# Markups" value={summary.markups} />
+        <MetricCard label="# Markups" value={summary.markups} index={1} />
         
         {/* Acquisitions */}
-        <MetricCard label="# Acquisitions" value={summary.acquisitions} />
+        <MetricCard label="# Acquisitions" value={summary.acquisitions} index={2} />
         
         {/* Busts */}
-        <MetricCard label="# Busts" value={summary.busts} />
+        <MetricCard label="# Busts" value={summary.busts} index={3} />
         
         {/* TVPI */}
-        <MetricCard label="TVPI" value={formatMultiple(summary.tvpi)} />
+        <MetricCard label="TVPI" value={formatMultiple(summary.tvpi)} index={4} />
         
         {/* Gross Multiple */}
-        <MetricCard label="Gross Multiple" value={formatMultiple(summary.gross_multiple)} />
+        <MetricCard label="Gross Multiple" value={formatMultiple(summary.gross_multiple)} index={5} />
         
         {/* Net Multiple */}
-        <MetricCard label="Net Multiple" value={formatMultiple(summary.net_multiple)} />
+        <MetricCard label="Net Multiple" value={formatMultiple(summary.net_multiple)} index={6} />
         
         {/* IRR */}
-        <MetricCard label="IRR" value={formatPercentage(summary.irr)} />
+        <MetricCard label="IRR" value={formatPercentage(summary.irr)} index={7} />
       </div>
     </div>
   );
