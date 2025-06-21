@@ -244,10 +244,30 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
 }
 
-/* Remove any default image borders */
+/* Remove any default image borders and force clean styling */
 img {
   border: none !important;
   outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Force clean venture grid styling */
+.ventures-grid img,
+.ventures-grid > div,
+.ventures-grid a,
+[class*="aspect-square"] img,
+[class*="aspect-square"] > *,
+motion-div img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Override any Tailwind or component library borders */
+.grid > div > a > img,
+.grid div img {
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 /* Additional hover state styling */
