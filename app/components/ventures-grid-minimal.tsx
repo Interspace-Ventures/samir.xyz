@@ -79,10 +79,10 @@ export default function VenturesGridMinimal() {
                     : '_blank'
                 }
                 rel="noreferrer"
-                className="block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer"
+                className="block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer neo-card hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
               >
                 {/* Main visible content - logo fills entire space */}
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300">
+                <div className="absolute inset-0 bg-purple-500/20 group-hover:bg-purple-500/40 transition-colors duration-300">
                   <div className="relative w-full h-full flex items-center justify-center p-6">
                     <div className="w-[120px] h-[120px] relative">
                       <Image
@@ -101,9 +101,9 @@ export default function VenturesGridMinimal() {
                   
                   {/* Status tag - only for Pre-launch ventures */}
                   {venture.status === 'Pre-launch' && (
-                    <div className="absolute top-1 right-1">
-                      <span className="bg-purple-600 text-white text-xs px-2 py-0.5 font-medium">
-                        Pre-launch
+                    <div className="absolute top-2 left-2 z-30">
+                      <span className="bg-purple-primary text-white text-xs px-3 py-1 font-bold border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                        Coming Soon
                       </span>
                     </div>
                   )}
