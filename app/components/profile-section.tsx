@@ -51,7 +51,7 @@ const ProfileSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <p className="text-base sm:text-xl md:text-2xl font-bold mb-0 text-text-secondary pr-2">
+                <p className="text-base sm:text-xl md:text-2xl font-bold mb-0 text-white pr-2">
                   I drive impact at startups
                 </p>
               </motion.div>
