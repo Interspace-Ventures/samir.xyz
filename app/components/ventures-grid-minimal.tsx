@@ -57,7 +57,7 @@ export default function VenturesGridMinimal() {
   return (
     <div className="w-full mx-auto mb-6">
       {/* Always use 4 columns on all desktop screens */}
-      <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2">
+      <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2" style={{ border: 'none' }}>
         <AnimatePresence>
           {ventures.map((venture, index) => (
             <motion.div
@@ -69,8 +69,13 @@ export default function VenturesGridMinimal() {
                 delay: index * 0.12,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="relative aspect-square overflow-hidden rounded-none"
-              style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
+              className="relative aspect-square overflow-hidden"
+              style={{ 
+                border: 'none !important', 
+                outline: 'none !important', 
+                boxShadow: 'none !important',
+                background: 'transparent'
+              }}
             >
               <a 
                 href={
@@ -85,7 +90,11 @@ export default function VenturesGridMinimal() {
                 }
                 rel="noreferrer"
                 className="relative group block w-full h-full hover:scale-105 transition-transform duration-300"
-                style={{ border: 'none', outline: 'none' }}
+                style={{ 
+                  border: 'none !important', 
+                  outline: 'none !important',
+                  boxShadow: 'none !important'
+                }}
               >
                 <Image
                   src={venture.logoUrl}
@@ -97,7 +106,11 @@ export default function VenturesGridMinimal() {
                   loading="eager"
                   unoptimized={true}
                   placeholder="empty"
-                  style={{ border: 'none' }}
+                  style={{ 
+                    border: 'none !important',
+                    outline: 'none !important',
+                    boxShadow: 'none !important'
+                  }}
                 />
                 
                 {/* Status tag - only for Pre-launch ventures */}
