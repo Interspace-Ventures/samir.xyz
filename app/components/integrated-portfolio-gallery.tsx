@@ -159,10 +159,9 @@ export default function IntegratedPortfolioGallery() {
                       fill
                       className="object-contain"
                       sizes="(max-width: 640px) 120px, 140px"
-                      priority={itemIndex < 8}
-                      placeholder="blur"
-                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjcwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAliIGhlaWdodD0iMTAwJSIgZmlsbD0iI2Y5ZmFmYiIvPjwvc3ZnPg=="
-                      unoptimized={true}
+                      priority={itemIndex < 6}
+                      loading={itemIndex < 6 ? "eager" : "lazy"}
+                      unoptimized={false}
                     />
                   </div>
                 </div>

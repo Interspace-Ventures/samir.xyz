@@ -79,10 +79,10 @@ export default function VenturesGridMinimal() {
                     : '_blank'
                 }
                 rel="noreferrer"
-                className="block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer neo-card hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
+                className="block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 bg-white"
               >
                 {/* Main visible content - logo fills entire space */}
-                <div className="absolute inset-0 bg-purple-500/20 group-hover:bg-purple-500/40 transition-colors duration-300">
+                <div className="absolute inset-0 bg-white group-hover:bg-gray-50 transition-colors duration-300">
                   <div className="relative w-full h-full flex items-center justify-center p-6">
                     <div className="w-[120px] h-[120px] relative">
                       <Image
@@ -91,10 +91,9 @@ export default function VenturesGridMinimal() {
                         fill
                         className="venture-logo object-contain filter group-hover:brightness-110"
                         sizes="120px"
-                        priority={index < 8}
-                        placeholder="blur"
-                        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjlmYWZiIi8+PC9zdmc+"
-                        unoptimized={true}
+                        priority={index < 4}
+                        loading={index < 4 ? "eager" : "lazy"}
+                        unoptimized={false}
                       />
                     </div>
                   </div>
@@ -102,16 +101,16 @@ export default function VenturesGridMinimal() {
                   {/* Status tag - only for Pre-launch ventures */}
                   {venture.status === 'Pre-launch' && (
                     <div className="absolute top-2 left-2 z-30">
-                      <span className="bg-purple-primary text-white text-xs px-3 py-1 font-bold border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                      <span className="bg-[#7f54dc] text-white text-xs px-3 py-1 font-bold border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                         Coming Soon
                       </span>
                     </div>
                   )}
                 </div>
                 
-                {/* Hover overlay with gradient */}
+                {/* Hover overlay with subtle effect */}
                 <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-tr from-purple-900/80 to-indigo-800/60" 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-black" 
                 />
               </a>
             </motion.div>
