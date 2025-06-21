@@ -110,9 +110,17 @@ export default function IntegratedPortfolioGallery() {
   return (
     <div className="py-4">
       {/* Category Filter Buttons */}
-      <div className="flex justify-between sm:justify-start overflow-x-auto pb-2 mb-6 pt-1 w-full">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="flex justify-between sm:justify-start overflow-x-auto pb-2 mb-6 pt-1 w-full"
+      >
         <div className="inline-flex space-x-1 w-full sm:w-auto">
-          <button
+          <motion.button
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
             className={`px-3 py-2 text-xs font-bold transition-all duration-300 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] ${
               selectedCategory === 'All'
                 ? 'bg-[#7f54dc] text-white'
@@ -121,10 +129,13 @@ export default function IntegratedPortfolioGallery() {
             onClick={() => setSelectedCategory('All')}
           >
             All
-          </button>
-          {uniqueCategories.map((category) => (
-            <button
+          </motion.button>
+          {uniqueCategories.map((category, index) => (
+            <motion.button
               key={category}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 + (index * 0.05) }}
               className={`px-3 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] ${
                 selectedCategory === category
                   ? 'bg-[#7f54dc] text-white'
@@ -133,10 +144,10 @@ export default function IntegratedPortfolioGallery() {
               onClick={() => setSelectedCategory(category)}
             >
               {category}
-            </button>
+            </motion.button>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Portfolio Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
