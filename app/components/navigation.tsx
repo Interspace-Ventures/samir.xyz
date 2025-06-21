@@ -65,7 +65,7 @@ const Navigation = () => {
   return (
     <>
       <motion.header
-        className="fixed top-0 left-0 right-0 w-full z-50 bg-yellow-400 border-b-4 border-black shadow-[0_4px_0px_0px_rgba(0,0,0,1)]"
+        className="fixed top-0 left-0 right-0 w-full z-50 bg-purple-primary border-b-4 border-black shadow-[0_4px_0px_0px_rgba(0,0,0,1)]"
         initial={{ y: 0 }}
         animate={{ y: 0 }}
       >
@@ -81,7 +81,7 @@ const Navigation = () => {
                   className="rounded"
                   priority
                 />
-                <span className="text-black font-bold text-xl tracking-tight">samir.xyz</span>
+                <span className="text-white font-bold text-xl tracking-tight">samir.xyz</span>
               </div>
             </Link>
             
@@ -92,7 +92,7 @@ const Navigation = () => {
                   <li key={item.href} className="px-2 lg:px-4">
                     <Link 
                       href={item.href}
-                      className="text-black font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:bg-black hover:text-yellow-400 px-3 py-2 border-2 border-black bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]"
+                      className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:bg-white hover:text-purple-primary px-3 py-2 border-2 border-black bg-purple-600 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]"
                       prefetch={true}
                     >
                       {item.label}
@@ -104,7 +104,7 @@ const Navigation = () => {
             
             {/* Mobile menu button - Only visible on very small screens */}
             <button 
-              className="sm:hidden text-white p-2"
+              className="sm:hidden text-white p-2 border-2 border-black bg-purple-600 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]"
               onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
@@ -122,7 +122,7 @@ const Navigation = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            className="fixed inset-0 bg-purple-900 z-40 flex flex-col pt-14"
+            className="fixed inset-0 bg-purple-primary border-4 border-black z-40 flex flex-col pt-14"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -139,7 +139,7 @@ const Navigation = () => {
                   >
                     <Link 
                       href={item.href} 
-                      className="text-white text-2xl font-medium uppercase tracking-wide"
+                      className="text-white text-2xl font-bold uppercase tracking-wide border-2 border-black bg-purple-600 px-6 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-white hover:text-purple-600"
                       onClick={closeMobileMenu}
                       prefetch={true}
                     >

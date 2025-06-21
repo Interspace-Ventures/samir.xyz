@@ -38,11 +38,12 @@ module.exports = {
         'purple-primary': '#7f55dc', // Same as primary
         
         /* Neobrutalism colors */
-        'bg-primary': '#f0f0f0',
+        'bg-primary': '#332452',
         'bg-secondary': '#ffffff',
-        'text-primary': '#000000',
-        'text-secondary': '#333333',
+        'text-primary': '#ffffff',
+        'text-secondary': '#2a313a',
         'text-tertiary': '#666666',
+        'header': '#2a313a',
         'purple': {
           '100': '#eae3fa',
           '200': '#d5c7f6',
