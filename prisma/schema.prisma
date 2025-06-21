@@ -30,6 +30,7 @@ model Venture {
   logoUrl     String   @map("logo-url")
   website     String?
   industry    String?
+  category    String?
   founded     Int?
   featured    Boolean  @default(false)
   createdAt   DateTime @default(now())

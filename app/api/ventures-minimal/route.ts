@@ -20,6 +20,8 @@ export async function GET() {
         logoUrl: true,
         description: true, // We'll truncate this in the component if needed
         website: true,
+        status: true,
+        category: true,
       },
       orderBy: {
         name: 'asc',
