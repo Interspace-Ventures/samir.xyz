@@ -35,14 +35,14 @@ export async function GET() {
     // Return hardcoded and calculated metrics
     // These are the standard metrics used across the portfolio analytics
     const metrics = {
-      total_investments: portfolioItems.length + 4, // Adding busts
-      markups: markupCount,
+      total_investments: 37,
+      markups: 16,
       acquisitions: acquisitionCount,
-      busts: 4, // Hardcoded value as requested by design
-      tvpi: 1.44, // Hardcoded value for consistency
-      gross_multiple: 1.22, // Hardcoded value for consistency
-      net_multiple: 1.12, // Hardcoded value for consistency
-      irr: 10 // Hardcoded value for consistency
+      busts: 5,
+      tvpi: 1.5,
+      gross_multiple: 1.9,
+      net_multiple: 1.7,
+      irr: 12
     };
     
     console.log('Successfully retrieved metrics summary data');
