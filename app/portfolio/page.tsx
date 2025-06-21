@@ -15,7 +15,7 @@ export default function PortfolioPage() {
     <div className="pt-20 pb-16">
       <section className="section">
         <div className="container max-w-6xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white border-4 border-black bg-header px-6 py-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] inline-block transform -rotate-1">Portfolio</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white border-4 border-black bg-[#2a313a] px-6 py-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] inline-block transform -rotate-1">Portfolio</h1>
           
           {/* Investment Philosophy */}
           <p className="text-lg text-black mb-8 max-w-3xl bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 font-medium">

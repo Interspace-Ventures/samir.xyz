@@ -9,7 +9,7 @@ export default function VenturesLoading() {
       <section className="section">
         <div className="container max-w-6xl">
           {/* Title skeleton */}
-          <div className="h-12 bg-purple-300 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-48 mb-6 animate-pulse"></div>
+          <div className="h-12 bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-48 mb-6 animate-pulse"></div>
           
           {/* Description skeleton */}
           <div className="space-y-2 mb-8">
