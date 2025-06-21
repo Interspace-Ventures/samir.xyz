@@ -13,7 +13,7 @@ const nextConfig = {
     domains: ['localhost', '0.0.0.0'],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 86400,
-    unoptimized: false,
+    unoptimized: process.env.NODE_ENV === 'development',
   }
 };
 
