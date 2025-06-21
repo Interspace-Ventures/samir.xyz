@@ -35,9 +35,9 @@ export default function VenturesPage() {
           <div className="mb-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ventures</h1>
           </div>
-          <p className="content-card mb-10 max-w-3xl font-medium">
+          <div className="content-card mb-10 font-medium">
             I create apps and concepts by coding at the speed of thought using Replit.
-          </p>
+          </div>
           
           {/* Single ventures container with proper min-height to prevent layout shifts */}
           <div className="ventures-container" style={{ minHeight: '480px' }}>
