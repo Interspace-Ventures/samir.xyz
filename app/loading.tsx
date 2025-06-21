@@ -1,20 +1,15 @@
-'use client';
-
 /**
- * Application Loading Component
+ * Global Loading Component
  * 
- * Shows a clean, minimalist loading state without text
- * Uses a subtle animated gradient for a modern loading experience
+ * Shows a clean, minimal loading state for route transitions
+ * Provides immediate feedback when navigating between pages
  */
 export default function Loading() {
   return (
-    <div className="flex items-center justify-center min-h-[50vh]">
-      <div className="w-20 h-20 relative">
-        {/* Animated gradient pulse instead of a spinner */}
-        <div className="absolute inset-0 bg-purple-500/20 rounded-lg animate-pulse"></div>
-        <div className="absolute inset-2 bg-purple-600/30 rounded-lg animate-pulse" style={{animationDelay: '150ms'}}></div>
-        <div className="absolute inset-4 bg-purple-700/40 rounded-lg animate-pulse" style={{animationDelay: '300ms'}}></div>
-        <div className="absolute inset-6 bg-purple-800/50 rounded-lg animate-pulse" style={{animationDelay: '450ms'}}></div>
+    <div className="pt-16 pb-16 flex items-center justify-center min-h-[60vh]">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="w-8 h-8 border-2 border-purple-primary border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-text-tertiary text-sm">Loading...</p>
       </div>
     </div>
   );

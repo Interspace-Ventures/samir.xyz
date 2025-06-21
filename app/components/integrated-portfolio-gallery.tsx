@@ -48,7 +48,9 @@ export default function IntegratedPortfolioGallery() {
       const res = await fetch('/api/portfolio');
       if (!res.ok) throw new Error(`Failed to fetch portfolio items: ${res.status}`);
       return res.json();
-    }
+    },
+    staleTime: 1000 * 60 * 10, // 10 minutes
+    gcTime: 1000 * 60 * 15, // 15 minutes
   });
 
   // Get all unique categories from the portfolio items

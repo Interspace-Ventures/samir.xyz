@@ -1,31 +1,27 @@
-'use client';
-
-export default function Loading() {
+/**
+ * Ventures Page Loading Component
+ * 
+ * Shows skeleton loading specific to the ventures page layout
+ */
+export default function VenturesLoading() {
   return (
     <div className="pt-16 pb-16">
       <section className="section">
         <div className="container max-w-6xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ventures</h1>
+          {/* Title skeleton */}
+          <div className="h-12 bg-gray-700 rounded w-48 mb-6 animate-pulse"></div>
           
-          <div className="w-full mx-auto mb-12">
-            {/* Always use 4 columns on desktop, 2 on mobile */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {/* Generate 8 skeleton venture cards */}
-              {Array(8).fill(0).map((_, index) => (
-                <div
-                  key={`venture-skeleton-${index}`}
-                  className="aspect-square bg-white/5 rounded-md border border-purple-900/30 relative overflow-hidden animate-pulse"
-                >
-                  {/* No mini circle placeholders for consistent loading behavior */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    {/* Intentionally empty - using just the shimmer background */}
-                  </div>
-                  
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 to-transparent"></div>
-                </div>
-              ))}
-            </div>
+          {/* Description skeleton */}
+          <div className="space-y-2 mb-8">
+            <div className="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
+            <div className="h-4 bg-gray-700 rounded w-1/2 animate-pulse"></div>
+          </div>
+          
+          {/* Ventures grid skeleton */}
+          <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div key={index} className="relative aspect-square bg-gray-800 rounded animate-pulse"></div>
+            ))}
           </div>
         </div>
       </section>
