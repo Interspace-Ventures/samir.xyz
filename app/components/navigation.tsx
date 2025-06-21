@@ -139,7 +139,7 @@ const Navigation = () => {
                   >
                     <Link 
                       href={item.href} 
-                      className="text-white text-2xl font-bold uppercase tracking-wide border-2 border-black bg-[#7f54dc] px-6 py-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-white hover:text-[#7f54dc]"
+                      className="text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
                       onClick={closeMobileMenu}
                       prefetch={true}
                     >
