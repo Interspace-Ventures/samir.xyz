@@ -20,7 +20,7 @@ export default function PortfolioLoading() {
           {/* Metrics skeleton */}
           <div className="mb-12 grid grid-cols-2 md:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, index) => (
-              <div key={index} className="neo-card bg-[#7f54dc] p-4 animate-pulse">
+              <div key={index} className="neo-card bg-purple-600 p-4 animate-pulse">
                 <div className="h-8 bg-purple-300 border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] mb-2"></div>
                 <div className="h-4 bg-purple-300 border border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] w-2/3"></div>
               </div>
