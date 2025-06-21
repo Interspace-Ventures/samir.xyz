@@ -115,8 +115,8 @@ export default function IntegratedPortfolioGallery() {
           <button
             className={`px-3 py-2 text-xs font-bold transition-all duration-300 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] ${
               selectedCategory === 'All'
-                ? 'bg-purple-500 text-white'
-                : 'bg-white text-black hover:bg-yellow-300'
+                ? 'bg-purple-primary text-white'
+                : 'bg-white text-black hover:bg-purple-200'
             }`}
             onClick={() => setSelectedCategory('All')}
           >
@@ -127,8 +127,8 @@ export default function IntegratedPortfolioGallery() {
               key={category}
               className={`px-3 py-2 text-xs font-bold transition-all duration-300 whitespace-nowrap border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] ${
                 selectedCategory === category
-                  ? 'bg-purple-500 text-white'
-                  : 'bg-white text-black hover:bg-yellow-300'
+                  ? 'bg-purple-primary text-white'
+                  : 'bg-white text-black hover:bg-purple-200'
               }`}
               onClick={() => setSelectedCategory(category)}
             >
