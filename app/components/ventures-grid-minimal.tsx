@@ -87,16 +87,17 @@ export default function VenturesGridMinimal() {
               >
                 {/* Company Logo Container */}
                 <div className="h-full flex items-center justify-center p-6 bg-white">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
                     <Image
                       src={venture.logoUrl}
                       alt={`${venture.name} logo`}
                       fill
                       className="object-contain"
                       sizes="(max-width: 640px) 80px, 96px"
-                      priority={index < 4}
-                      loading={index < 4 ? "eager" : "lazy"}
-                      unoptimized={false}
+                      priority={index < 8}
+                      loading="eager"
+                      unoptimized={true}
+                      placeholder="empty"
                     />
                   </div>
                 </div>
