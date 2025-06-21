@@ -95,12 +95,8 @@ export default function IntegratedPortfolioGallery() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
           {Array.from({ length: 16 }).map((_, index) => (
             <div key={index} className="bg-white overflow-hidden relative shadow-sm animate-pulse">
-              <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-gray-100">
-                <div className="w-[140px] h-[70px] bg-gray-200 rounded max-w-full max-h-full"></div>
-              </div>
-              <div className="p-4">
-                <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+              <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
+                <div className="w-[140px] h-[70px] bg-gray-200 rounded-sm max-w-full max-h-full"></div>
               </div>
             </div>
           ))}
