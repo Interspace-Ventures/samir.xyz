@@ -19,7 +19,7 @@ export default function VenturesGridSkeleton() {
             className="relative aspect-square"
           >
             {/* Match the dark background with slight transparency */}
-            <div className="absolute inset-0 bg-black/20 border border-purple-900/20 overflow-hidden">
+            <div className="absolute inset-0 bg-black/20 overflow-hidden">
               {/* No logo placeholders to ensure consistency between mobile and desktop */}
               <div className="absolute inset-0 flex items-center justify-center">
                 {/* Intentionally empty - we don't want mini circle placeholders */}
