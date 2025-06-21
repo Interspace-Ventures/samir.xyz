@@ -18,7 +18,7 @@ const ProfileSection = () => {
               transition={{ duration: 0.6 }}
               className="flex-shrink-0"
             >
-              <div className="neo-card w-24 h-24 overflow-hidden bg-white p-1">
+              <div className="w-24 h-24 overflow-hidden bg-white p-1 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                 <Image 
                   src="/images/samir.png" 
                   alt="Samir's profile picture"
@@ -38,11 +38,11 @@ const ProfileSection = () => {
               transition={{ duration: 0.6 }}
               className="flex-1"
             >
-              <div className="content-card h-24 flex flex-col justify-center">
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">
+              <div className="h-24 flex flex-col justify-center bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 text-[#7f54dc]">
                   Hey - I'm Samir
                 </h1>
-                <p className="text-sm sm:text-base md:text-lg font-bold">
+                <p className="text-sm sm:text-base md:text-lg font-bold text-white">
                   I drive impact at startups
                 </p>
               </div>
