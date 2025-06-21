@@ -144,16 +144,16 @@ export default function IntegratedPortfolioGallery() {
             <div className="bg-white overflow-hidden relative group shadow-sm hover:shadow-lg transition-all duration-300">
               {/* Company Logo Container */}
               <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
-                <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-[140px] h-[70px] max-w-full max-h-full">
                   <Image
                     src={logoUrl ? 
                       (logoUrl.startsWith('/') ? logoUrl : `/logos/${logoUrl.split('/').pop()}`) 
                       : fallbackLogoUrl
                     }
                     alt={`${item.name} logo`}
-                    width={140}
-                    height={70}
-                    style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 640px) 120px, 140px"
                     priority={itemIndex < 8}
                     placeholder="blur"
                     blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5xZtlvZd8C2kd+YUqjNLS2i7yJKY4xZaVVoKkJp3k2f3k3a5k7bfCXq0ooT/Z"
