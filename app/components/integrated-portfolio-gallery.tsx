@@ -113,10 +113,10 @@ export default function IntegratedPortfolioGallery() {
       <div className="flex justify-between sm:justify-start overflow-x-auto pb-2 mb-6 pt-1 w-full">
         <div className="inline-flex space-x-1 w-full sm:w-auto">
           <button
-            className={`px-2 py-1 text-xs font-medium transition-all duration-300 ${
+            className={`px-3 py-2 text-xs font-bold transition-all duration-300 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] ${
               selectedCategory === 'All'
-                ? 'bg-purple-primary text-white shadow-md border border-purple-primary'
-                : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
+                ? 'bg-purple-500 text-white'
+                : 'bg-white text-black hover:bg-yellow-300'
             }`}
             onClick={() => setSelectedCategory('All')}
           >

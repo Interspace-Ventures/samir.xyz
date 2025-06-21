@@ -29,13 +29,13 @@ export default function VenturesPage() {
   }, []);
 
   return (
-    <div className="pt-16 pb-8 bg-[#2d0c6a]">
+    <div className="pt-20 pb-16">
       <section className="section">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mb-6">
-            <h1 className="text-4xl font-bold text-white">Interspace Ventures</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white border-4 border-black bg-header px-6 py-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] inline-block transform rotate-1">Ventures</h1>
           </div>
-          <p className="text-lg text-text-tertiary mb-10 max-w-3xl">
+          <p className="text-lg text-black mb-10 max-w-3xl bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 font-medium">
             I create apps and concepts by coding at the speed of thought using Replit.
           </p>
           

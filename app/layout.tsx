@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${alexandria.className} bg-gray-100 text-black flex flex-col min-h-screen`}>
+      <body className={`${alexandria.className} bg-bg-primary text-text-primary flex flex-col min-h-screen`}>
         <Providers>
           <Navigation />
           <main className="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">{children}</main>
