@@ -83,36 +83,34 @@ export default function VenturesGridMinimal() {
                     : '_blank'
                 }
                 rel="noreferrer"
-                className="relative group block w-full h-full bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 overflow-hidden"
+                className="relative group block w-full h-full overflow-hidden hover:scale-105 transition-transform duration-300"
               >
-                {/* Company Logo Container */}
-                <div className="h-full flex items-center justify-center p-6 bg-white">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
-                    <Image
-                      src={venture.logoUrl}
-                      alt={`${venture.name} logo`}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 640px) 80px, 96px"
-                      priority={index < 8}
-                      loading="eager"
-                      unoptimized={true}
-                      placeholder="empty"
-                    />
-                  </div>
+                {/* Clean Image Container */}
+                <div className="relative w-full h-full">
+                  <Image
+                    src={venture.logoUrl}
+                    alt={`${venture.name} logo`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 50vw, 25vw"
+                    priority={index < 8}
+                    loading="eager"
+                    unoptimized={true}
+                    placeholder="empty"
+                  />
                 </div>
                 
                 {/* Status tag - only for Pre-launch ventures */}
                 {venture.status === 'Pre-launch' && (
                   <div className="absolute top-2 right-2 z-20">
-                    <span className="bg-[#7f54dc] text-white text-xs px-2 py-1 font-bold rounded border border-black">
+                    <span className="bg-[#7f54dc] text-white text-xs px-2 py-1 font-bold rounded shadow-lg">
                       Coming Soon
                     </span>
                   </div>
                 )}
                 
                 {/* Hover overlay with description */}
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-br from-[#2d0c6a]/90 to-[#381490]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 text-center">
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 text-center">
                   {venture.description ? (
                     <div>
                       <h4 className="text-white text-sm font-bold mb-1">{venture.name}</h4>
