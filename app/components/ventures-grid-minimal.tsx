@@ -69,7 +69,8 @@ export default function VenturesGridMinimal() {
                 delay: index * 0.12,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="relative aspect-square"
+              className="relative aspect-square overflow-hidden rounded-none"
+              style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
             >
               <a 
                 href={
@@ -83,22 +84,21 @@ export default function VenturesGridMinimal() {
                     : '_blank'
                 }
                 rel="noreferrer"
-                className="relative group block w-full h-full overflow-hidden hover:scale-105 transition-transform duration-300"
+                className="relative group block w-full h-full hover:scale-105 transition-transform duration-300"
+                style={{ border: 'none', outline: 'none' }}
               >
-                {/* Clean Image Container */}
-                <div className="relative w-full h-full">
-                  <Image
-                    src={venture.logoUrl}
-                    alt={`${venture.name} logo`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 50vw, 25vw"
-                    priority={index < 8}
-                    loading="eager"
-                    unoptimized={true}
-                    placeholder="empty"
-                  />
-                </div>
+                <Image
+                  src={venture.logoUrl}
+                  alt={`${venture.name} logo`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                  priority={index < 8}
+                  loading="eager"
+                  unoptimized={true}
+                  placeholder="empty"
+                  style={{ border: 'none' }}
+                />
                 
                 {/* Status tag - only for Pre-launch ventures */}
                 {venture.status === 'Pre-launch' && (
