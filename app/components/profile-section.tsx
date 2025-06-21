@@ -39,7 +39,7 @@ const ProfileSection = () => {
               className="flex-1"
             >
               <div className="h-24 flex flex-col justify-center bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4">
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 text-[#7f54dc]">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 text-[#9d7bea]">
                   Hey - I'm Samir
                 </h1>
                 <p className="text-sm sm:text-base md:text-lg font-bold text-white">
