@@ -83,39 +83,47 @@ export default function VenturesGridMinimal() {
                     : '_blank'
                 }
                 rel="noreferrer"
-                className="block w-full h-full absolute inset-0 overflow-hidden group cursor-pointer border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 bg-white"
+                className="neo-card overflow-hidden relative group hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 block w-full h-full"
               >
-                {/* Main visible content - logo fills entire space */}
-                <div className="absolute inset-0 bg-white group-hover:bg-gray-50 transition-colors duration-300">
-                  <div className="relative w-full h-full flex items-center justify-center p-6">
-                    <div className="w-[120px] h-[120px] relative">
-                      <Image
-                        src={venture.logoUrl}
-                        alt={`${venture.name} logo`}
-                        fill
-                        className="venture-logo object-contain filter group-hover:brightness-110"
-                        sizes="120px"
-                        priority={index < 4}
-                        loading={index < 4 ? "eager" : "lazy"}
-                        unoptimized={false}
-                      />
-                    </div>
+                {/* Company Logo Container - matching Portfolio structure */}
+                <div className="h-full flex items-center justify-center p-6 bg-white">
+                  <div className="relative w-[120px] h-[120px] max-w-full max-h-full">
+                    <Image
+                      src={venture.logoUrl}
+                      alt={`${venture.name} logo`}
+                      fill
+                      className="object-contain"
+                      sizes="120px"
+                      priority={index < 4}
+                      loading={index < 4 ? "eager" : "lazy"}
+                      unoptimized={false}
+                    />
                   </div>
-                  
-                  {/* Status tag - only for Pre-launch ventures */}
-                  {venture.status === 'Pre-launch' && (
-                    <div className="absolute top-2 left-2 z-30">
-                      <span className="bg-[#7f54dc] text-white text-xs px-3 py-1 font-bold border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                        Coming Soon
-                      </span>
+                </div>
+                
+                {/* Status tag - only for Pre-launch ventures */}
+                {venture.status === 'Pre-launch' && (
+                  <div className="absolute top-1 right-1">
+                    <span className="bg-[#7f54dc] text-white text-xs px-2 py-0.5 font-medium rounded">
+                      Coming Soon
+                    </span>
+                  </div>
+                )}
+                
+                {/* Hover overlay with description - matching Portfolio structure */}
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-br from-[#2d0c6a]/90 to-[#381490]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
+                  {venture.description ? (
+                    <div>
+                      <h4 className="text-white text-xs font-bold mb-1">{venture.name}</h4>
+                      <p className="text-gray-200 text-[10px]">{venture.description}</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <h4 className="text-white text-xs font-bold mb-1">{venture.name}</h4>
+                      <p className="text-gray-300 text-[10px]">{venture.category || 'Venture'}</p>
                     </div>
                   )}
                 </div>
-                
-                {/* Hover overlay with subtle effect */}
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-black" 
-                />
               </a>
             </motion.div>
           ))}
