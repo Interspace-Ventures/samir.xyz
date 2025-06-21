@@ -38,11 +38,11 @@ const ProfileSection = () => {
               transition={{ duration: 0.6 }}
               className="flex-1"
             >
-              <div className="content-card">
-                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-2">
+              <div className="content-card h-24 flex flex-col justify-center">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">
                   Hey - I'm Samir
                 </h1>
-                <p className="text-base sm:text-xl md:text-2xl font-bold">
+                <p className="text-sm sm:text-base md:text-lg font-bold">
                   I drive impact at startups
                 </p>
               </div>
