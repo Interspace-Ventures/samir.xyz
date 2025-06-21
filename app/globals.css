@@ -44,6 +44,18 @@
   --black-rgb: 0, 0, 0;
 }
 
+@layer components {
+  /* Content card styling for text blocks */
+  .content-card {
+    background: #2a313a !important;
+    color: white !important;
+    border: 2px solid black !important;
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1) !important;
+    padding: 1.5rem !important;
+    font-size: 1.125rem !important;
+  }
+}
+
 @layer base {
   html {
     @apply scroll-smooth;

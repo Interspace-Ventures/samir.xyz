@@ -18,7 +18,7 @@ export default function PortfolioPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Portfolio</h1>
           
           {/* Investment Philosophy */}
-          <p className="text-lg text-white mb-8 max-w-3xl bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-4 font-medium">
+          <p className="content-card mb-8 max-w-3xl font-medium">
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </p>
           
