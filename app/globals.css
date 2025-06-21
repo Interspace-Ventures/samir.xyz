@@ -244,6 +244,12 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
 }
 
+/* Remove any default image borders */
+img {
+  border: none !important;
+  outline: none !important;
+}
+
 /* Additional hover state styling */
 .card-venture::after {
   content: '';
