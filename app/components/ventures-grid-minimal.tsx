@@ -59,7 +59,7 @@ export default function VenturesGridMinimal() {
   return (
     <div className="w-full mx-auto mb-6">
       {/* Always use 4 columns on all desktop screens */}
-      <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2" style={{ border: 'none' }}>
+      <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2">
         <AnimatePresence>
           {ventures.map((venture, index) => (
             <motion.div
@@ -71,13 +71,7 @@ export default function VenturesGridMinimal() {
                 delay: index * 0.12,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="relative aspect-square overflow-hidden"
-              style={{ 
-                border: 'none !important', 
-                outline: 'none !important', 
-                boxShadow: 'none !important',
-                background: 'transparent'
-              }}
+              className="relative aspect-square overflow-hidden bg-white/5 rounded-lg"
             >
               <a 
                 href={
@@ -92,27 +86,19 @@ export default function VenturesGridMinimal() {
                 }
                 rel="noreferrer"
                 className="relative group block w-full h-full hover:scale-105 transition-transform duration-300"
-                style={{ 
-                  border: 'none !important', 
-                  outline: 'none !important',
-                  boxShadow: 'none !important'
-                }}
               >
                 <Image
                   src={venture.logoUrl}
                   alt={`${venture.name} logo`}
                   fill
-                  className="object-cover"
+                  className="object-contain p-4"
                   sizes="(max-width: 640px) 50vw, 25vw"
-                  priority={index < 8}
-                  loading="eager"
-                  unoptimized={true}
-                  placeholder="empty"
-                  style={{ 
-                    border: 'none !important',
-                    outline: 'none !important',
-                    boxShadow: 'none !important'
-                  }}
+                  priority={index < 4}
+                  loading={index < 4 ? "eager" : "lazy"}
+                  unoptimized={false}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMC4xIiBvZmZzZXQ9IjAlIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwLjAyIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg=="
+
                 />
                 
                 {/* Status tag - only for Pre-launch ventures */}
@@ -149,7 +135,7 @@ export default function VenturesGridMinimal() {
               .map((_, index) => (
                 <div 
                   key={`empty-${index}`} 
-                  className="relative aspect-square bg-[#2d0c6a]/70 border border-white/10"
+                  className="relative aspect-square bg-white/5 rounded-lg"
                 ></div>
               ))
           }
