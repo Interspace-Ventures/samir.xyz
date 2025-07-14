@@ -87,14 +87,14 @@ export default function VenturesGridDetailed() {
                       <Image 
                         src={venture.logoUrl} 
                         alt={`${venture.name} logo`}
-                        width={200}
-                        height={200}
-                        className="object-contain"
+                        width={160}
+                        height={160}
+                        className="object-contain p-3"
                         style={{ 
-                          width: '200px',
-                          height: '200px',
-                          maxWidth: '80%',
-                          maxHeight: '80%'
+                          width: '160px',
+                          height: '160px',
+                          maxWidth: '90%',
+                          maxHeight: '90%'
                         }}
                         priority={index < 4}
                         placeholder="empty"
