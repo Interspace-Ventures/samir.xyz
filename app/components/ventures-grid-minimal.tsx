@@ -91,7 +91,7 @@ export default function VenturesGridMinimal() {
                   src={venture.logoUrl}
                   alt={`${venture.name} logo`}
                   fill
-                  className="object-contain p-4"
+                  className="object-contain p-2"
                   sizes="(max-width: 640px) 50vw, 25vw"
                   priority={index < 4}
                   loading={index < 4 ? "eager" : "lazy"}
