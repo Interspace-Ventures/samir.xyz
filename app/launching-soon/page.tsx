@@ -1,20 +1,44 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
 export default function LaunchingSoon() {
   return (
-    <div className="pt-16 pb-8 bg-[#2d0c6a]">
+    <div className="pt-20 pb-16">
       <section className="section">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mb-6">
-            <h1 className="text-4xl font-bold text-white">Launching Soon</h1>
+            <motion.h1 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="text-4xl md:text-5xl font-bold mb-6 text-white"
+            >
+              Launching Soon
+            </motion.h1>
           </div>
-          <p className="text-lg text-text-tertiary mb-10 max-w-3xl">
-            Something exciting is coming. We're putting the finishing touches on this venture.
-          </p>
-          <a
-            href="/ventures"
-            className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 font-medium transition-colors duration-200"
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="content-card mb-10 font-medium"
           >
-            ← Back to Ventures
-          </a>
+            Something exciting is coming. We're putting the finishing touches on this venture.
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <a
+              href="/ventures"
+              className="inline-flex items-center space-x-2 bg-[#7f54dc] hover:bg-[#6a3fd4] text-white px-6 py-3 font-medium transition-colors duration-200 rounded-lg"
+            >
+              ← Back to Ventures
+            </a>
+          </motion.div>
         </div>
       </section>
     </div>
