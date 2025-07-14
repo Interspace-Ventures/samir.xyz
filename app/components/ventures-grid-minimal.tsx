@@ -71,7 +71,7 @@ export default function VenturesGridMinimal() {
                 delay: index * 0.12,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="relative aspect-square overflow-hidden bg-white/5 rounded-lg"
+              className="relative aspect-square overflow-hidden"
             >
               <a 
                 href={
@@ -91,13 +91,12 @@ export default function VenturesGridMinimal() {
                   src={venture.logoUrl}
                   alt={`${venture.name} logo`}
                   fill
-                  className="object-contain p-4"
+                  className="object-contain"
                   sizes="(max-width: 640px) 50vw, 25vw"
                   priority={index < 4}
                   loading={index < 4 ? "eager" : "lazy"}
-                  unoptimized={false}
-                  placeholder="blur"
-                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMC4xIiBvZmZzZXQ9IjAlIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwLjAyIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg=="
+                  unoptimized={true}
+                  placeholder="empty"
 
                 />
                 
@@ -135,7 +134,7 @@ export default function VenturesGridMinimal() {
               .map((_, index) => (
                 <div 
                   key={`empty-${index}`} 
-                  className="relative aspect-square bg-white/5 rounded-lg"
+                  className="relative aspect-square"
                 ></div>
               ))
           }
