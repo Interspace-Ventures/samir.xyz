@@ -93,8 +93,8 @@ export default function VenturesGridDetailed() {
                         style={{ 
                           width: '180px',
                           height: '180px',
-                          maxWidth: '95%',
-                          maxHeight: '95%'
+                          maxWidth: '100%',
+                          maxHeight: '100%'
                         }}
                         priority={index < 4}
                         placeholder="empty"
