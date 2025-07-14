@@ -71,7 +71,7 @@ export default function VenturesGridMinimal() {
                 delay: index * 0.12,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="relative aspect-square overflow-hidden"
+              className="relative aspect-square overflow-hidden rounded-lg border border-white/20 bg-white/5 text-white shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <a 
                 href={
@@ -85,7 +85,7 @@ export default function VenturesGridMinimal() {
                     : '_blank'
                 }
                 rel="noreferrer"
-                className="relative group block w-full h-full hover:scale-105 transition-transform duration-300"
+                className="relative group block w-full h-full transition-transform duration-300"
               >
                 <Image
                   src={venture.logoUrl}
@@ -134,7 +134,7 @@ export default function VenturesGridMinimal() {
               .map((_, index) => (
                 <div 
                   key={`empty-${index}`} 
-                  className="relative aspect-square"
+                  className="relative aspect-square rounded-lg border border-white/20 bg-white/5 opacity-50"
                 ></div>
               ))
           }
