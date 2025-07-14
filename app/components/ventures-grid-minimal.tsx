@@ -71,7 +71,7 @@ export default function VenturesGridMinimal() {
                 delay: index * 0.12,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="relative aspect-square overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
+              className="relative aspect-square overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
             >
               <a 
                 href={
@@ -133,7 +133,7 @@ export default function VenturesGridMinimal() {
               .map((_, index) => (
                 <div 
                   key={`empty-${index}`} 
-                  className="relative aspect-square shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white/10"
+                  className="relative aspect-square shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-white/10"
                 ></div>
               ))
           }
