@@ -49,7 +49,7 @@ export default function VenturesPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="content-card mb-10 font-medium"
           >
-            I create apps and concepts by coding at the speed of thought using Replit.
+            I develop apps and design concepts by building at the speed of thought using AI.
           </motion.div>
           
           {/* Single ventures container with proper min-height to prevent layout shifts */}
