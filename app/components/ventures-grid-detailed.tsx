@@ -64,7 +64,7 @@ export default function VenturesGridDetailed() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="relative aspect-square"
+              className="relative aspect-square bg-white/5 rounded-lg overflow-hidden"
             >
               <a 
                 href={
@@ -89,17 +89,17 @@ export default function VenturesGridDetailed() {
                         alt={`${venture.name} logo`}
                         width={200}
                         height={200}
-                        className="object-contain"
+                        className="object-contain p-4"
                         style={{ 
                           width: '200px',
                           height: '200px',
                           maxWidth: '80%',
                           maxHeight: '80%'
                         }}
-                        priority={index < 8}
+                        priority={index < 4}
                         placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5xZtlvZd8C2kd+YUqjNLS2i7yJKY4xZaVVoKkJp3k2f3k3a5k7bfCXq0ooT/Z"
-                        unoptimized={true}
+                        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMC4xIiBvZmZzZXQ9IjAlIi8+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwLjAyIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg=="
+                        unoptimized={false}
                       />
                     </div>
                   )}
@@ -124,7 +124,7 @@ export default function VenturesGridDetailed() {
               .map((_, index) => (
                 <div 
                   key={`empty-${index}`} 
-                  className="relative aspect-square bg-[#2d0c6a]/70 border border-white/10"
+                  className="relative aspect-square bg-white/5 rounded-lg"
                 ></div>
               ))
           }
