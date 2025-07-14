@@ -110,7 +110,7 @@ const ProfileSection = () => {
               
               <p>
                 Outside of work, I write over-engineered takes on stratfin, fintech, AI and politics on <a 
-                  href="https://x.com/heysamir" 
+                  href="https://x.com/heysamir_" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-[#7f54dc] hover:text-white transition-colors underline"
