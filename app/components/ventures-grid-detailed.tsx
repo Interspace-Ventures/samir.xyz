@@ -64,7 +64,7 @@ export default function VenturesGridDetailed() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="relative aspect-square overflow-hidden rounded-lg border border-white/20 bg-white/5 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              className="relative aspect-square overflow-hidden border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
             >
               <a 
                 href={
@@ -123,7 +123,7 @@ export default function VenturesGridDetailed() {
               .map((_, index) => (
                 <div 
                   key={`empty-${index}`} 
-                  className="relative aspect-square rounded-lg border border-white/20 bg-white/5 opacity-50"
+                  className="relative aspect-square border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white/10"
                 ></div>
               ))
           }
