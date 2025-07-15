@@ -39,15 +39,15 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           </div>
         )}
         
-        <CardContent className="p-6 h-full">
-          {/* Logo Container - Full card, centered */}
+        <CardContent className="p-6 h-full relative">
+          {/* Logo Container - Always visible */}
           <div className="flex items-center justify-center h-full min-h-[120px] w-full">
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
               width={IMAGE_CONFIG.LOGO_SIZE.WIDTH}
               height={IMAGE_CONFIG.LOGO_SIZE.HEIGHT}
-              className="object-contain max-w-full max-h-full"
+              className="object-contain max-w-full max-h-full transition-all duration-300"
               style={{ width: 'auto', height: 'auto' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
@@ -56,28 +56,32 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
             />
           </div>
           
-          {/* Hover Content - Only visible on hover */}
-          <div className="absolute inset-0 bg-white bg-opacity-95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 z-20">
-            <div className="text-center space-y-3">
-              {portfolio.description && (
-                <p className="text-sm text-gray-700 max-w-xs leading-relaxed">
+          {/* Hover Overlay - Shows tagline at bottom */}
+          <div className="absolute inset-0 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 z-10">
+            {/* Logo remains visible on hover */}
+            <div className="flex items-center justify-center flex-1 mb-4">
+              <Image
+                src={portfolio.logoUrl}
+                alt={`${portfolio.name} logo`}
+                width={IMAGE_CONFIG.LOGO_SIZE.WIDTH}
+                height={IMAGE_CONFIG.LOGO_SIZE.HEIGHT}
+                className="object-contain max-w-full max-h-full filter brightness-0 invert"
+                style={{ width: 'auto', height: 'auto' }}
+                priority={isPriority}
+                loading={isPriority ? 'eager' : 'lazy'}
+                unoptimized={false}
+                placeholder={IMAGE_CONFIG.PLACEHOLDER}
+              />
+            </div>
+            
+            {/* Tagline at bottom */}
+            {portfolio.description && (
+              <div className="text-center">
+                <p className="text-white text-sm font-medium leading-relaxed max-w-xs">
                   {portfolio.description}
                 </p>
-              )}
-              
-              {portfolio.website && (
-                <Link
-                  href={portfolio.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-gray-500 hover:text-black transition-colors text-sm"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <ExternalLink size={14} className="mr-2" />
-                  Visit Website
-                </Link>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
