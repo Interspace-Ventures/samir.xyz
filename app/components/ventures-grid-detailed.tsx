@@ -89,12 +89,10 @@ export default function VenturesGridDetailed() {
                         alt={`${venture.name} logo`}
                         width={180}
                         height={180}
-                        className="object-contain p-1"
+                        className="object-cover"
                         style={{ 
-                          width: '180px',
-                          height: '180px',
-                          maxWidth: '100%',
-                          maxHeight: '100%'
+                          width: '100%',
+                          height: '100%'
                         }}
                         priority={index < 4}
                         placeholder="empty"
