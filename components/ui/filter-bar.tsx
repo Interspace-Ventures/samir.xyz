@@ -55,11 +55,7 @@ export function FilterBar({
         ))}
       </div>
       
-      {totalCount !== undefined && filteredCount !== undefined && (
-        <div className="text-sm text-gray-600">
-          Showing {filteredCount} of {totalCount} items
-        </div>
-      )}
+
     </motion.div>
   );
 }

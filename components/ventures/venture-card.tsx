@@ -40,6 +40,7 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
                 width={IMAGE_CONFIG.VENTURE_LOGO_SIZE.WIDTH}
                 height={IMAGE_CONFIG.VENTURE_LOGO_SIZE.HEIGHT}
                 className="object-cover max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
+                style={{ width: 'auto', height: 'auto' }}
                 priority={isPriority}
                 loading={isPriority ? 'eager' : 'lazy'}
                 unoptimized={false}
