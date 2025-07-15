@@ -39,15 +39,15 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           </div>
         )}
         
-        <CardContent className="p-6 h-full relative">
-          {/* Logo Container - Always visible */}
-          <div className="flex items-center justify-center h-full min-h-[120px] w-full">
+        <CardContent className="p-6 h-full relative flex flex-col">
+          {/* Logo Container - Top section */}
+          <div className="flex items-center justify-center flex-1 mb-4">
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
               width={IMAGE_CONFIG.LOGO_SIZE.WIDTH}
               height={IMAGE_CONFIG.LOGO_SIZE.HEIGHT}
-              className="object-contain max-w-full max-h-full transition-all duration-300"
+              className="object-contain max-w-full max-h-full group-hover:filter group-hover:brightness-0 group-hover:invert transition-all duration-300"
               style={{ width: 'auto', height: 'auto' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
@@ -56,33 +56,17 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
             />
           </div>
           
-          {/* Hover Overlay - Shows tagline at bottom */}
-          <div className="absolute inset-0 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 z-10">
-            {/* Logo remains visible on hover */}
-            <div className="flex items-center justify-center flex-1 mb-4">
-              <Image
-                src={portfolio.logoUrl}
-                alt={`${portfolio.name} logo`}
-                width={IMAGE_CONFIG.LOGO_SIZE.WIDTH}
-                height={IMAGE_CONFIG.LOGO_SIZE.HEIGHT}
-                className="object-contain max-w-full max-h-full filter brightness-0 invert"
-                style={{ width: 'auto', height: 'auto' }}
-                priority={isPriority}
-                loading={isPriority ? 'eager' : 'lazy'}
-                unoptimized={false}
-                placeholder={IMAGE_CONFIG.PLACEHOLDER}
-              />
+          {/* Tagline - Bottom section, hidden by default */}
+          {portfolio.description && (
+            <div className="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <p className="text-white text-sm font-medium leading-relaxed">
+                {portfolio.description}
+              </p>
             </div>
-            
-            {/* Tagline at bottom */}
-            {portfolio.description && (
-              <div className="text-center">
-                <p className="text-white text-sm font-medium leading-relaxed max-w-xs">
-                  {portfolio.description}
-                </p>
-              </div>
-            )}
-          </div>
+          )}
+          
+          {/* Dark overlay - Only visible on hover */}
+          <div className="absolute inset-0 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
         </CardContent>
       </Card>
     </motion.div>
