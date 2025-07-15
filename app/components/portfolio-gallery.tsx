@@ -39,37 +39,11 @@ export default function PortfolioGallery() {
   // Use a counter to force re-render when category changes
   const [renderKey, setRenderKey] = useState<number>(0);
   
-  // Function to update category and force re-render
+  // Clean category update function
   const updateCategory = (category: string) => {
     setSelectedCategory(category);
-    setRenderKey(prev => prev + 1); // Increment to force re-render
+    setRenderKey(prev => prev + 1);
   };
-  
-  // Debug/indicator element ID
-  const debugId = `portfolio-filter-${Math.random().toString(36).substring(7)}`;
-  
-  // Effect to debug category changes and ensure component is rendering correctly
-  useEffect(() => {
-    console.log(`Selected category changed to: ${selectedCategory} (render key: ${renderKey})`);
-    console.log(`Component instance ID: ${debugId}`);
-    
-    // Add a hidden debug element to verify the component is properly updating
-    const debugElement = document.createElement('div');
-    debugElement.id = debugId;
-    debugElement.setAttribute('data-category', selectedCategory);
-    debugElement.setAttribute('data-render-key', renderKey.toString());
-    debugElement.style.display = 'none';
-    
-    // Remove any previous debug elements from this component
-    document.querySelectorAll(`[id^="portfolio-filter-"]`).forEach(el => el.remove());
-    document.body.appendChild(debugElement);
-    
-    return () => {
-      // Clean up on unmount
-      const element = document.getElementById(debugId);
-      if (element) element.remove();
-    };
-  }, [selectedCategory, renderKey, debugId]);
   
   // Fetch all categories
   const { 
@@ -79,20 +53,11 @@ export default function PortfolioGallery() {
   } = useQuery<Category[]>({
     queryKey: ['categories'],
     queryFn: async () => {
-      try {
-        console.log('Fetching categories...');
-        const res = await fetch('/api/categories');
-        if (!res.ok) {
-          console.error(`Failed to fetch categories: ${res.status} ${res.statusText}`);
-          throw new Error(`Failed to fetch categories: ${res.status}`);
-        }
-        const data = await res.json();
-        console.log(`Fetched ${data.length} categories`);
-        return data;
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-        throw error;
+      const res = await fetch('/api/categories');
+      if (!res.ok) {
+        throw new Error(`Failed to fetch categories: ${res.status}`);
       }
+      return res.json();
     },
     retry: 3,
     retryDelay: 1000
@@ -106,20 +71,11 @@ export default function PortfolioGallery() {
   } = useQuery<Portfolio[]>({
     queryKey: ['portfolio'],
     queryFn: async () => {
-      try {
-        console.log('Fetching portfolio items...');
-        const res = await fetch('/api/portfolio');
-        if (!res.ok) {
-          console.error(`Failed to fetch portfolio items: ${res.status} ${res.statusText}`);
-          throw new Error(`Failed to fetch portfolio items: ${res.status}`);
-        }
-        const data = await res.json();
-        console.log(`Fetched ${data.length} portfolio items`);
-        return data;
-      } catch (error) {
-        console.error('Error fetching portfolio items:', error);
-        throw error;
+      const res = await fetch('/api/portfolio');
+      if (!res.ok) {
+        throw new Error(`Failed to fetch portfolio items: ${res.status}`);
       }
+      return res.json();
     },
     retry: 3,
     retryDelay: 1000
@@ -128,23 +84,9 @@ export default function PortfolioGallery() {
   // Use useMemo to memoize filtered items and recompute when selectedCategory or portfolioItems change
   const filteredItems = useMemo(() => {
     // Perform filtering calculation
-    const filtered = portfolioItems
-      .filter(item => {
-        // Make sure we have valid categories to filter
-        console.log(`Filtering item: ${item.name}, Category: ${item.category}, Selected: ${selectedCategory}`);
-        return selectedCategory === 'All' || item.category === selectedCategory;
-      })
-      // Sort alphabetically by company name, always keep consistent sorting
-      .sort((a, b) => {
-        // Always sort alphabetically
-        return a.name.localeCompare(b.name);
-      });
-      
-    // Log filtered items count for debugging
-    console.log(`Filtered items: ${filtered.length} of ${portfolioItems.length}`);
-    console.log(`Current selected category: ${selectedCategory}`);
-    
-    return filtered;
+    return portfolioItems
+      .filter(item => selectedCategory === 'All' || item.category === selectedCategory)
+      .sort((a, b) => a.name.localeCompare(b.name));
   }, [selectedCategory, portfolioItems, renderKey]); // Include renderKey to force recalculation
 
   // Use a skeleton loader during both loading and error states
@@ -255,7 +197,7 @@ export default function PortfolioGallery() {
                     width={140}
                     height={70}
                     style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
-                    unoptimized={true}
+                    unoptimized={false}
                   />
                 </div>
               </div>
