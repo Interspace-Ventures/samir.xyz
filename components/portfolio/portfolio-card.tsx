@@ -29,10 +29,19 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       variants={staggerItem}
       className={className}
     >
-      <Card variant="neobrutalism" interactive className="h-full group">
-        <CardContent className="p-4">
-          {/* Logo Container */}
-          <div className="flex items-center justify-center bg-gray-50 p-4 mb-4 h-20">
+      <Card variant="neobrutalism" interactive className="h-full group relative overflow-hidden">
+        {/* Status Badge - positioned at top right */}
+        {portfolio.investment_status && (
+          <div className="absolute top-3 right-3 z-10">
+            <span className="bg-purple-500 text-white text-xs px-2 py-1 font-medium">
+              {portfolio.investment_status}
+            </span>
+          </div>
+        )}
+        
+        <CardContent className="p-6 h-full">
+          {/* Logo Container - Full card, centered */}
+          <div className="flex items-center justify-center h-full min-h-[120px] w-full">
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
@@ -47,34 +56,28 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
             />
           </div>
           
-          {/* Content */}
-          <div className="space-y-3">
-            <div className="flex items-start justify-between">
-              <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                {portfolio.name}
-              </CardTitle>
+          {/* Hover Content - Only visible on hover */}
+          <div className="absolute inset-0 bg-white bg-opacity-95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 z-20">
+            <div className="text-center space-y-3">
+              {portfolio.description && (
+                <p className="text-sm text-gray-700 max-w-xs leading-relaxed">
+                  {portfolio.description}
+                </p>
+              )}
+              
               {portfolio.website && (
                 <Link
                   href={portfolio.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary transition-colors"
+                  className="inline-flex items-center text-gray-500 hover:text-black transition-colors text-sm"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <ExternalLink size={16} />
+                  <ExternalLink size={14} className="mr-2" />
+                  Visit Website
                 </Link>
               )}
             </div>
-            
-            <div className="text-sm text-primary font-medium">
-              {portfolio.category}
-            </div>
-            
-            {portfolio.description && (
-              <CardDescription lines={3}>
-                {portfolio.description}
-              </CardDescription>
-            )}
           </div>
         </CardContent>
       </Card>
