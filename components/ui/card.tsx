@@ -37,7 +37,7 @@ export function Card({
   };
   
   const interactiveClasses = interactive 
-    ? 'cursor-pointer hover:shadow-[0_10px_20px_-3px_rgba(140,92,246,0.4)] hover:-translate-y-1' 
+    ? 'cursor-pointer hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]' 
     : '';
 
   const cardClasses = cn(

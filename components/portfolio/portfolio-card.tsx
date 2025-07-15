@@ -39,6 +39,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               width={IMAGE_CONFIG.LOGO_SIZE.WIDTH}
               height={IMAGE_CONFIG.LOGO_SIZE.HEIGHT}
               className="object-contain max-w-full max-h-full"
+              style={{ width: 'auto', height: 'auto' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
               unoptimized={false}
