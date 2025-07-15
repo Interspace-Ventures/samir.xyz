@@ -363,6 +363,44 @@ motion-div img {
   justify-content: center;
 }
 
+/* Portfolio card hover effects */
+.portfolio-card-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-card-hover .hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.portfolio-card-hover:hover .hover-overlay {
+  opacity: 1;
+}
+
+.portfolio-card-hover .logo-normal {
+  transition: all 0.3s ease;
+}
+
+.portfolio-card-hover:hover .logo-normal {
+  filter: brightness(0) invert(1);
+}
+
+.portfolio-card-hover .tagline {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.portfolio-card-hover:hover .tagline {
+  opacity: 1;
+}
+
 /* Clean image styling */
 img {
   border: none;

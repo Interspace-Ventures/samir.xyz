@@ -29,15 +29,18 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       variants={staggerItem}
       className={className}
     >
-      <Card variant="neobrutalism" interactive className="h-full group relative overflow-hidden">
+      <Card variant="neobrutalism" interactive className="h-full portfolio-card-hover">
         {/* Status Badge - positioned at top right */}
         {portfolio.investment_status && (
-          <div className="absolute top-3 right-3 z-10">
+          <div className="absolute top-3 right-3 z-20">
             <span className="bg-purple-500 text-white text-xs px-2 py-1 font-medium">
               {portfolio.investment_status}
             </span>
           </div>
         )}
+        
+        {/* Dark overlay - Only visible on hover */}
+        <div className="hover-overlay"></div>
         
         <CardContent className="p-6 h-full relative flex flex-col">
           {/* Logo Container - Top section */}
@@ -47,7 +50,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               alt={`${portfolio.name} logo`}
               width={IMAGE_CONFIG.LOGO_SIZE.WIDTH}
               height={IMAGE_CONFIG.LOGO_SIZE.HEIGHT}
-              className="object-contain max-w-full max-h-full group-hover:filter group-hover:brightness-0 group-hover:invert transition-all duration-300"
+              className="object-contain max-w-full max-h-full logo-normal"
               style={{ width: 'auto', height: 'auto' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
@@ -58,15 +61,12 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           
           {/* Tagline - Bottom section, hidden by default */}
           {portfolio.description && (
-            <div className="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="text-center tagline">
               <p className="text-white text-sm font-medium leading-relaxed">
                 {portfolio.description}
               </p>
             </div>
           )}
-          
-          {/* Dark overlay - Only visible on hover */}
-          <div className="absolute inset-0 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
         </CardContent>
       </Card>
     </motion.div>
