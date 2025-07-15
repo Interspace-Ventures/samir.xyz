@@ -228,7 +228,7 @@ export default function CompanySection() {
                     width={140}
                     height={70}
                     style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
-                    unoptimized={true}
+                    unoptimized={false}
                   />
                 </div>
               </div>

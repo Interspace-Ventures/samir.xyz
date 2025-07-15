@@ -21,10 +21,8 @@ type DetailedVenture = {
  * after the initial minimal grid has rendered.
  */
 export default function VenturesGridDetailed() {
-  const [ventures, setVentures] = useState<DetailedVenture[]>([]);
-  
-  // Fetch full ventures data
-  const { data, isLoading, error } = useQuery({
+  // Fetch ventures data with optimized caching
+  const { data: ventures = [], isLoading, error } = useQuery({
     queryKey: ['ventures-detailed'],
     queryFn: async () => {
       const response = await fetch('/api/ventures-detailed');
@@ -33,14 +31,10 @@ export default function VenturesGridDetailed() {
       }
       return response.json();
     },
-    retry: 2
+    retry: 2,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 10, // 10 minutes
   });
-
-  useEffect(() => {
-    if (data) {
-      setVentures(data);
-    }
-  }, [data]);
 
   // Just log error but return empty div - parent component handles loading states with skeleton
   if (isLoading || error) {
@@ -96,7 +90,7 @@ export default function VenturesGridDetailed() {
                         }}
                         priority={index < 4}
                         placeholder="empty"
-                        unoptimized={true}
+                        unoptimized={false}
                       />
                     </div>
                   )}

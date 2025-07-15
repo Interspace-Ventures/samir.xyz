@@ -5,19 +5,14 @@ import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import VenturesGridSkeleton from '../components/ventures-grid-skeleton';
 
-// Import the components with dynamic loading but no fallback (we use our own skeleton)
-const VenturesGridMinimal = dynamic(() => import('../components/ventures-grid-minimal'), {
+// Import the detailed ventures component with optimized loading
+const VenturesGridDetailed = dynamic(() => import('../components/ventures-grid-detailed'), {
   ssr: false,
-  loading: () => null // No loading indicator since we're using our own skeleton
-});
-
-const DetailedVenturesSection = dynamic(() => import('../components/ventures-grid-detailed'), {
-  ssr: false,
-  loading: () => null // No loading indicator since we're using our own skeleton
+  loading: () => null
 });
 
 export default function VenturesPage() {
-  const [showDetails] = useState(true); // Always show detailed view
+
 
   return (
     <div className="pt-20 pb-16">
@@ -46,7 +41,7 @@ export default function VenturesPage() {
           <div className="ventures-container" style={{ minHeight: '480px' }}>
             {/* Content layer - shows detailed content */}
             <div className="content-layer">
-              <DetailedVenturesSection />
+              <VenturesGridDetailed />
             </div>
             
             {/* Single skeleton layer that's always the same regardless of content type */}

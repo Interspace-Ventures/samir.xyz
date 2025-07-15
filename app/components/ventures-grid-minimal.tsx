@@ -95,7 +95,7 @@ export default function VenturesGridMinimal() {
                   sizes="(max-width: 640px) 50vw, 25vw"
                   priority={index < 4}
                   loading={index < 4 ? "eager" : "lazy"}
-                  unoptimized={true}
+                  unoptimized={false}
                   placeholder="empty"
                 />
                 
