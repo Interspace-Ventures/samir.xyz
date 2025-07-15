@@ -17,17 +17,7 @@ const DetailedVenturesSection = dynamic(() => import('../components/ventures-gri
 });
 
 export default function VenturesPage() {
-  const [showDetails, setShowDetails] = useState(false);
-
-  // After main content loads, begin loading detailed view in background
-  useEffect(() => {
-    // Set a small timeout to prioritize the initial minimal view rendering
-    const timer = setTimeout(() => {
-      setShowDetails(true);
-    }, 800);
-    
-    return () => clearTimeout(timer);
-  }, []);
+  const [showDetails] = useState(true); // Always show detailed view
 
   return (
     <div className="pt-20 pb-16">
@@ -54,9 +44,9 @@ export default function VenturesPage() {
           
           {/* Single ventures container with proper min-height to prevent layout shifts */}
           <div className="ventures-container" style={{ minHeight: '480px' }}>
-            {/* Content layer - shows either minimal or detailed content */}
+            {/* Content layer - shows detailed content */}
             <div className="content-layer">
-              {showDetails ? <DetailedVenturesSection /> : <VenturesGridMinimal />}
+              <DetailedVenturesSection />
             </div>
             
             {/* Single skeleton layer that's always the same regardless of content type */}
