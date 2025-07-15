@@ -350,6 +350,19 @@ motion-div img {
   transform: translateX(-2px) translateY(-2px);
 }
 
+/* Portfolio card aspect ratio and layout */
+.portfolio-card {
+  aspect-ratio: 1;
+  min-height: 180px;
+}
+
+.portfolio-card .card-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Clean image styling */
 img {
   border: none;
