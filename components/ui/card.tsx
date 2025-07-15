@@ -1,71 +1,172 @@
-import * as React from "react"
-import { cn } from "../../lib/utils"
+/**
+ * Card Component System
+ * 
+ * Reusable card components with consistent neobrutalism styling.
+ * Provides a foundation for portfolio and venture cards.
+ */
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white",
-      className
-    )}
-    {...props}
-  />
-))
-Card.displayName = "Card"
+import React from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '../../lib/utils';
+import { THEME } from '../../lib/constants';
+import { hoverLift } from '../../lib/utils/animations';
 
-const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex flex-col space-y-1.5 p-6", className)} {...props} />
-))
-CardHeader.displayName = "CardHeader"
+interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+  variant?: 'default' | 'neobrutalism' | 'minimal';
+  interactive?: boolean;
+  onClick?: () => void;
+  animate?: boolean;
+}
 
-const CardTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={cn("text-2xl font-bold leading-none tracking-tight text-black", className)}
-    {...props}
-  />
-))
-CardTitle.displayName = "CardTitle"
+export function Card({
+  children,
+  className,
+  variant = 'neobrutalism',
+  interactive = false,
+  onClick,
+  animate = true,
+}: CardProps) {
+  const baseClasses = 'relative overflow-hidden transition-all duration-300';
+  
+  const variantClasses = {
+    default: 'bg-white border border-gray-200 rounded-lg shadow-sm',
+    neobrutalism: `bg-white border-2 border-black shadow-[${THEME.SHADOWS.CARD}]`,
+    minimal: 'bg-white border border-gray-100',
+  };
+  
+  const interactiveClasses = interactive 
+    ? 'cursor-pointer hover:shadow-[0_10px_20px_-3px_rgba(140,92,246,0.4)] hover:-translate-y-1' 
+    : '';
 
-const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn("text-sm text-gray-600", className)}
-    {...props}
-  />
-))
-CardDescription.displayName = "CardDescription"
+  const cardClasses = cn(
+    baseClasses,
+    variantClasses[variant],
+    interactiveClasses,
+    className
+  );
 
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
-))
-CardContent.displayName = "CardContent"
+  if (animate) {
+    return (
+      <motion.div
+        className={cardClasses}
+        onClick={onClick}
+        whileHover={interactive ? hoverLift : undefined}
+        transition={{ duration: 0.2 }}
+      >
+        {children}
+      </motion.div>
+    );
+  }
 
-const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
-    {...props}
-  />
-))
-CardFooter.displayName = "CardFooter"
+  return (
+    <div className={cardClasses} onClick={onClick}>
+      {children}
+    </div>
+  );
+}
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+interface CardHeaderProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function CardHeader({ children, className }: CardHeaderProps) {
+  return (
+    <div className={cn('p-4 pb-2', className)}>
+      {children}
+    </div>
+  );
+}
+
+interface CardContentProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function CardContent({ children, className }: CardContentProps) {
+  return (
+    <div className={cn('p-4 pt-0', className)}>
+      {children}
+    </div>
+  );
+}
+
+interface CardFooterProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function CardFooter({ children, className }: CardFooterProps) {
+  return (
+    <div className={cn('p-4 pt-2 border-t border-gray-100', className)}>
+      {children}
+    </div>
+  );
+}
+
+interface CardImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+  aspectRatio?: 'square' | 'video' | 'auto';
+  priority?: boolean;
+}
+
+export function CardImage({
+  src,
+  alt,
+  className,
+  aspectRatio = 'auto',
+  priority = false,
+}: CardImageProps) {
+  const aspectClasses = {
+    square: 'aspect-square',
+    video: 'aspect-video',
+    auto: '',
+  };
+
+  return (
+    <div className={cn('relative overflow-hidden', aspectClasses[aspectRatio], className)}>
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover"
+        loading={priority ? 'eager' : 'lazy'}
+      />
+    </div>
+  );
+}
+
+interface CardTitleProps {
+  children: React.ReactNode;
+  className?: string;
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+}
+
+export function CardTitle({ children, className, level = 3 }: CardTitleProps) {
+  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+  
+  return (
+    <Tag className={cn('font-semibold text-gray-900', className)}>
+      {children}
+    </Tag>
+  );
+}
+
+interface CardDescriptionProps {
+  children: React.ReactNode;
+  className?: string;
+  lines?: number;
+}
+
+export function CardDescription({ children, className, lines }: CardDescriptionProps) {
+  const lineClampClasses = lines ? `line-clamp-${lines}` : '';
+  
+  return (
+    <p className={cn('text-gray-600 text-sm', lineClampClasses, className)}>
+      {children}
+    </p>
+  );
+}

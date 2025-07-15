@@ -1,25 +1,26 @@
 'use client';
 
-// Import components for optimized rendering
-import { motion } from 'framer-motion';
-import MetricsSummaryStandalone from '../components/metrics-summary-standalone';
-import IntegratedPortfolioGallery from '../components/integrated-portfolio-gallery';
-
 /**
  * Portfolio Page Component
  * 
- * Uses static metrics data for instant rendering of metrics summary
- * and a simplified portfolio gallery with direct filtering.
+ * Refactored portfolio page using the new component architecture.
+ * Provides clean, performant portfolio display with consistent styling.
  */
+
+import { motion } from 'framer-motion';
+import { PortfolioGrid } from '../../components/portfolio/portfolio-grid';
+import MetricsSummaryStandalone from '../components/metrics-summary-standalone';
+import { fadeInUp } from '../../lib/utils/animations';
+
 export default function PortfolioPage() {
   return (
     <div className="pt-20 pb-16">
       <section className="section">
         <div className="container max-w-6xl">
           <motion.h1 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
             className="text-4xl md:text-5xl font-bold mb-6 text-white"
           >
             Portfolio
@@ -27,23 +28,36 @@ export default function PortfolioPage() {
           
           {/* Investment Philosophy */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.1 }}
             className="content-card mb-8 font-medium"
           >
             I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
           </motion.div>
           
           {/* Metrics load instantly with static data */}
-          <div className="mb-12">
+          <motion.div 
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.2 }}
+            className="mb-12"
+          >
             <MetricsSummaryStandalone />
-          </div>
+          </motion.div>
           
-          {/* Use the simplified, direct integrated portfolio gallery */}
-          <div className="mt-8">
-            <IntegratedPortfolioGallery />
-          </div>
+          {/* Use the new optimized portfolio grid */}
+          <motion.div 
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.3 }}
+            className="mt-8"
+          >
+            <PortfolioGrid />
+          </motion.div>
         </div>
       </section>
     </div>
