@@ -372,7 +372,7 @@ motion-div img {
 .portfolio-card-hover .hover-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 1;
@@ -390,14 +390,16 @@ motion-div img {
   filter: brightness(0) invert(1);
 }
 
-.portfolio-card-hover .tagline {
+.portfolio-card-hover .tagline,
+.portfolio-card-hover .tagline-title {
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 2;
   position: relative;
 }
 
-.portfolio-card-hover:hover .tagline {
+.portfolio-card-hover:hover .tagline,
+.portfolio-card-hover:hover .tagline-title {
   opacity: 1;
 }
 

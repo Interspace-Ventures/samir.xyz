@@ -78,10 +78,13 @@ export function FilterButton({
       className={cn(
         'px-4 py-2 border-2 border-black font-medium transition-all duration-200',
         active
-          ? 'bg-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+          ? 'text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
           : 'bg-white text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]',
         className
       )}
+      style={{
+        backgroundColor: active ? '#7f54dc' : undefined
+      }}
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
