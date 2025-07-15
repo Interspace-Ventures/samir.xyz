@@ -59,6 +59,13 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
             />
           </div>
           
+          {/* Title - Only visible on hover */}
+          <div className="text-center tagline-title mb-2">
+            <h3 className="text-white text-lg font-bold">
+              {portfolio.name}
+            </h3>
+          </div>
+          
           {/* Tagline - Bottom section, hidden by default */}
           {portfolio.description && (
             <div className="text-center tagline">

@@ -87,9 +87,9 @@ export function PortfolioGrid({ className }: PortfolioGridProps) {
       >
         <Grid
           columns={{
-            mobile: 1,
-            tablet: 2,
-            desktop: 3,
+            mobile: 2,
+            tablet: 3,
+            desktop: 4,
           }}
           animate={false}
         >
