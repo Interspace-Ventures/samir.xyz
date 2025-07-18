@@ -29,7 +29,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       variants={staggerItem}
       className={className}
     >
-      <Card variant="neobrutalism" interactive className="h-full portfolio-card-hover">
+      <Card variant="neobrutalism" interactive className="aspect-square portfolio-card-hover">
         {/* Status Badge - positioned at top right */}
         {portfolio.investment_status && (
           <div className="absolute top-3 right-3 z-20">
