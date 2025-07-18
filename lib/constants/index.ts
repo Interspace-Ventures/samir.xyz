@@ -51,8 +51,8 @@ export const GRID_CONFIG = {
 // Image Configuration
 export const IMAGE_CONFIG = {
   LOGO_SIZE: {
-    WIDTH: 140,
-    HEIGHT: 70,
+    WIDTH: 120,
+    HEIGHT: 60,
   },
   VENTURE_LOGO_SIZE: {
     WIDTH: 120,

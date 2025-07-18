@@ -363,11 +363,6 @@ motion-div img {
   justify-content: center;
 }
 
-/* Ensure portfolio cards maintain square aspect ratio */
-.portfolio-card-hover {
-  aspect-ratio: 1;
-}
-
 /* Portfolio card hover effects */
 .portfolio-card-hover {
   position: relative;
@@ -379,7 +374,7 @@ motion-div img {
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
   z-index: 1;
 }
 
@@ -388,7 +383,7 @@ motion-div img {
 }
 
 .portfolio-card-hover .logo-normal {
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .portfolio-card-hover:hover .logo-normal {
@@ -398,7 +393,7 @@ motion-div img {
 .portfolio-card-hover .tagline,
 .portfolio-card-hover .tagline-title {
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
   z-index: 2;
   position: relative;
 }
@@ -406,6 +401,19 @@ motion-div img {
 .portfolio-card-hover:hover .tagline,
 .portfolio-card-hover:hover .tagline-title {
   opacity: 1;
+}
+
+/* Force square aspect ratio using padding-bottom technique */
+.portfolio-card-hover.w-full.h-0 {
+  padding-bottom: 100% !important;
+}
+
+.portfolio-card-hover .absolute.inset-0 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
 }
 
 /* Clean image styling */

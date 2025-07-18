@@ -29,7 +29,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       variants={staggerItem}
       className={className}
     >
-      <Card variant="neobrutalism" interactive className="aspect-square portfolio-card-hover">
+      <Card variant="neobrutalism" interactive className="w-full h-0 pb-[100%] relative portfolio-card-hover">
         {/* Status Badge - positioned at top right */}
         {portfolio.investment_status && (
           <div className="absolute top-3 right-3 z-20">
@@ -42,20 +42,20 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
         {/* Dark overlay - Only visible on hover */}
         <div className="hover-overlay"></div>
         
-        <CardContent className="p-6 h-full relative flex flex-col">
+        <CardContent className="p-6 absolute inset-0 flex flex-col">
           {/* Logo Container - Top section */}
           <div className="flex items-center justify-center flex-1 mb-4">
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
-              width={IMAGE_CONFIG.LOGO_SIZE.WIDTH}
-              height={IMAGE_CONFIG.LOGO_SIZE.HEIGHT}
+              width={120}
+              height={60}
               className="object-contain max-w-full max-h-full logo-normal"
-              style={{ width: 'auto', height: 'auto' }}
+              style={{ width: 'auto', height: 'auto', maxWidth: '120px', maxHeight: '60px' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
-              unoptimized={false}
-              placeholder={IMAGE_CONFIG.PLACEHOLDER}
+              unoptimized={true}
+              placeholder="empty"
             />
           </div>
           
