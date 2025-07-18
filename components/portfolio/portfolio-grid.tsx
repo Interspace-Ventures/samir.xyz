@@ -91,6 +91,7 @@ export function PortfolioGrid({ className }: PortfolioGridProps) {
             tablet: 3,
             desktop: 4,
           }}
+          gap="1rem"
           animate={false}
         >
           {filteredData.map((portfolio, index) => (
