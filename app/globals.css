@@ -363,6 +363,11 @@ motion-div img {
   justify-content: center;
 }
 
+/* Ensure portfolio cards maintain square aspect ratio */
+.portfolio-card-hover {
+  aspect-ratio: 1;
+}
+
 /* Portfolio card hover effects */
 .portfolio-card-hover {
   position: relative;
