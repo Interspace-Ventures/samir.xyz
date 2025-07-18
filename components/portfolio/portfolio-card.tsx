@@ -29,7 +29,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       variants={staggerItem}
       className={className}
     >
-      <Card variant="neobrutalism" interactive className="w-full h-0 pb-[100%] relative portfolio-card-hover">
+      <Card variant="neobrutalism" interactive className="w-full aspect-square portfolio-card-hover">
         {/* Status Badge - positioned at top right */}
         {portfolio.investment_status && (
           <div className="absolute top-3 right-3 z-20">
@@ -42,7 +42,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
         {/* Dark overlay - Only visible on hover */}
         <div className="hover-overlay"></div>
         
-        <CardContent className="p-6 absolute inset-0 flex flex-col">
+        <CardContent className="p-4 h-full flex flex-col">
           {/* Logo Container - Top section */}
           <div className="flex items-center justify-center flex-1 mb-4">
             <Image
@@ -61,7 +61,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           
           {/* Title - Only visible on hover */}
           <div className="text-center tagline-title mb-2">
-            <h3 className="text-white text-lg font-bold">
+            <h3 className="text-white text-sm md:text-base lg:text-lg font-bold">
               {portfolio.name}
             </h3>
           </div>
@@ -69,7 +69,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           {/* Tagline - Bottom section, hidden by default */}
           {portfolio.description && (
             <div className="text-center tagline">
-              <p className="text-white text-sm font-medium leading-relaxed">
+              <p className="text-white text-xs md:text-sm font-medium leading-relaxed">
                 {portfolio.description}
               </p>
             </div>

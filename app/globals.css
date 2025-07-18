@@ -403,17 +403,39 @@ motion-div img {
   opacity: 1;
 }
 
-/* Force square aspect ratio using padding-bottom technique */
-.portfolio-card-hover.w-full.h-0 {
-  padding-bottom: 100% !important;
+/* Ensure consistent square aspect ratio across all viewports */
+.portfolio-card-hover {
+  aspect-ratio: 1 !important;
+  width: 100% !important;
 }
 
-.portfolio-card-hover .absolute.inset-0 {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .portfolio-card-hover .tagline-title h3 {
+    font-size: 0.875rem; /* 14px */
+  }
+  
+  .portfolio-card-hover .tagline p {
+    font-size: 0.75rem; /* 12px */
+  }
+  
+  .portfolio-card-hover {
+    min-height: 150px;
+  }
+}
+
+/* Tablet responsive adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .portfolio-card-hover {
+    min-height: 180px;
+  }
+}
+
+/* Desktop responsive adjustments */
+@media (min-width: 1025px) {
+  .portfolio-card-hover {
+    min-height: 200px;
+  }
 }
 
 /* Clean image styling */
