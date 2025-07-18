@@ -36,11 +36,7 @@ export function Grid({
 }: GridProps) {
   const gridClasses = cn(
     'grid w-full',
-    {
-      [`grid-cols-${columns.mobile}`]: columns.mobile,
-      [`md:grid-cols-${columns.tablet}`]: columns.tablet,
-      [`lg:grid-cols-${columns.desktop}`]: columns.desktop,
-    },
+    `grid-cols-${columns.mobile} md:grid-cols-${columns.tablet} lg:grid-cols-${columns.desktop}`,
     className
   );
 
