@@ -29,31 +29,30 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
       variants={staggerItem}
       className={className}
     >
-      <Card variant="neobrutalism" interactive className="h-full group aspect-square">
-        <CardContent className="p-4 h-full flex flex-col">
+      <Card variant="neobrutalism" interactive className="w-full aspect-square group venture-card-hover">
+        <CardContent className="p-3 h-full flex flex-col">
           {/* Logo Container */}
-          <div className="flex items-center justify-center bg-gray-50 p-4 mb-4 flex-1">
+          <div className="flex items-center justify-center bg-gray-50 p-3 mb-3 flex-1">
             {venture.logoUrl && (
               <Image
                 src={venture.logoUrl}
                 alt={`${venture.name} logo`}
-                width={IMAGE_CONFIG.VENTURE_LOGO_SIZE.WIDTH}
-                height={IMAGE_CONFIG.VENTURE_LOGO_SIZE.HEIGHT}
-                className="object-cover max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
-                style={{ width: 'auto', height: 'auto' }}
+                width={80}
+                height={40}
+                className="object-contain max-w-full max-h-full transition-transform duration-200 group-hover:scale-105"
+                style={{ width: 'auto', height: 'auto', maxWidth: '80px', maxHeight: '40px' }}
                 priority={isPriority}
                 loading={isPriority ? 'eager' : 'lazy'}
-                unoptimized={false}
-                placeholder={IMAGE_CONFIG.PLACEHOLDER}
-                sizes="(max-width: 640px) 50vw, 25vw"
+                unoptimized={true}
+                placeholder="empty"
               />
             )}
           </div>
           
           {/* Content */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <div className="flex items-start justify-between">
-              <CardTitle className="text-base group-hover:text-primary transition-colors">
+              <CardTitle className="text-sm md:text-base group-hover:text-primary transition-colors">
                 {venture.name}
               </CardTitle>
               {venture.website && (
@@ -64,7 +63,7 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
                   className="text-gray-400 hover:text-primary transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <ExternalLink size={14} />
+                  <ExternalLink size={12} />
                 </Link>
               )}
             </div>

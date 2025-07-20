@@ -55,8 +55,8 @@ export const IMAGE_CONFIG = {
     HEIGHT: 60,
   },
   VENTURE_LOGO_SIZE: {
-    WIDTH: 120,
-    HEIGHT: 120,
+    WIDTH: 80,
+    HEIGHT: 40,
   },
   PLACEHOLDER: 'empty',
   SIZES: {

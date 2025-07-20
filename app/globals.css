@@ -438,6 +438,31 @@ motion-div img {
   }
 }
 
+/* Venture card styling */
+.venture-card-hover {
+  aspect-ratio: 1 !important;
+  width: 100% !important;
+}
+
+/* Venture card responsive adjustments */
+@media (max-width: 768px) {
+  .venture-card-hover {
+    min-height: 150px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .venture-card-hover {
+    min-height: 180px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .venture-card-hover {
+    min-height: 200px;
+  }
+}
+
 /* Clean image styling */
 img {
   border: none;

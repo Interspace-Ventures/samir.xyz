@@ -68,6 +68,7 @@ export function VenturesGrid({ className }: VenturesGridProps) {
             tablet: 3,
             desktop: 4,
           }}
+          gap="1rem"
           animate={false}
         >
           {venturesData.map((venture, index) => (
