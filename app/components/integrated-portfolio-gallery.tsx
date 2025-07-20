@@ -157,7 +157,20 @@ export default function IntegratedPortfolioGallery() {
             const fallbackLogoUrl = `/logos/${item.name.toLowerCase().replace(/\s+/g, '-')}.png`;
             
             const CardContent = ({ itemIndex }: { itemIndex: number }) => (
-              <div className="neo-card overflow-hidden relative group hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
+              <div 
+                className="neo-card overflow-hidden relative group transition-all duration-300 hover:transform hover:-translate-x-0.5 hover:-translate-y-0.5" 
+                style={{
+                  boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+                  border: '2px solid black',
+                  backgroundColor: '#ffffff'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '12px 12px 0px 0px rgba(0,0,0,1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '4px 4px 0px 0px rgba(0,0,0,1)';
+                }}
+              >
                 {/* Company Logo Container */}
                 <div className="h-20 sm:h-24 flex items-center justify-center p-3 sm:p-4 bg-white">
                   <div className="relative w-[140px] h-[70px] max-w-full max-h-full">
@@ -179,23 +192,23 @@ export default function IntegratedPortfolioGallery() {
                 
                 {/* Status badges */}
                 {item.investment_status === 'Markup' && (
-                  <div className="absolute top-1 right-1">
-                    <span className="bg-[#7f54dc] text-white text-xs px-2 py-1 font-bold border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="absolute top-1 right-1 z-20">
+                    <span className="status-badge status-badge-markup">
                       Markup
                     </span>
                   </div>
                 )}
                 
                 {item.investment_status === 'Acquired' && (
-                  <div className="absolute top-1 right-1">
-                    <span className="bg-gray-600 text-white text-xs px-2 py-1 font-bold border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="absolute top-1 right-1 z-20">
+                    <span className="status-badge status-badge-acquired">
                       Acquired
                     </span>
                   </div>
                 )}
                 
                 {/* Hover overlay with description */}
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-br from-[#2d0c6a]/90 to-[#381490]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden">
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 md:p-5 text-center overflow-hidden" style={{background: 'linear-gradient(to bottom right, rgba(45, 12, 106, 0.9), rgba(56, 20, 144, 0.9))'}}>
                   {item.description ? (
                     <div>
                       <h4 className="text-white text-xs font-bold mb-1">{item.name}</h4>

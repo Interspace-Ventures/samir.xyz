@@ -42,13 +42,13 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               className="absolute top-2 right-2 z-10 pointer-events-none"
             >
               <span 
-                className={`status-badge ${
-                  portfolio.investment_status.toLowerCase() === 'markup' 
-                    ? 'status-badge-markup' 
-                    : portfolio.investment_status.toLowerCase() === 'acquired'
-                    ? 'status-badge-acquired'
-                    : 'status-badge-markup'
-                }`}
+                className="text-white text-xs px-2 py-1 font-bold border-2 border-black"
+                style={{
+                  backgroundColor: portfolio.investment_status.toLowerCase() === 'markup' ? '#7f54dc' : '#6b7280',
+                  color: '#ffffff',
+                  boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
+                  display: 'inline-block'
+                }}
               >
                 {portfolio.investment_status}
               </span>
@@ -72,7 +72,10 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           
           {/* Hover Overlay Content */}
           <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none bg-black/90 backdrop-blur-[2px]"
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to bottom right, rgba(45, 12, 106, 0.9), rgba(56, 20, 144, 0.9))'
+            }}
           >
             <h3 className="text-white text-sm md:text-base lg:text-lg font-bold text-center mb-2">
               {portfolio.name}
