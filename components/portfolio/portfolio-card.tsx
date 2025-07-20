@@ -32,8 +32,16 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       <Card variant="neobrutalism" interactive className="portfolio-card-hover">
         {/* Status Badge - positioned at top right */}
         {portfolio.investment_status && (
-          <div className="absolute top-3 right-3 z-20">
-            <span className="bg-purple-500 text-white text-xs px-2 py-1 font-medium">
+          <div className="absolute top-2 right-2 z-20">
+            <span className={`text-white text-xs px-2 py-1 font-medium border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${
+              portfolio.investment_status.toLowerCase() === 'markup' 
+                ? 'bg-purple-500' 
+                : portfolio.investment_status.toLowerCase() === 'acquired'
+                ? 'bg-gray-500'
+                : portfolio.investment_status.toLowerCase() === 'active'
+                ? 'bg-blue-500'
+                : 'bg-purple-500'
+            }`}>
               {portfolio.investment_status}
             </span>
           </div>
