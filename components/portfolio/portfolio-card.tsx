@@ -66,16 +66,16 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           )}
         </div>
         
-        <CardContent className="p-3 flex flex-col">
+        <CardContent className="p-4 flex flex-col h-full">
           {/* Logo Container - Main section */}
-          <div className="flex items-center justify-center min-h-[100px] py-4">
+          <div className="flex items-center justify-center flex-1 py-2">
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
-              width={200}
-              height={100}
+              width={160}
+              height={80}
               className="object-contain logo-normal"
-              style={{ width: 'auto', height: 'auto', maxWidth: '200px', maxHeight: '100px' }}
+              style={{ width: 'auto', height: 'auto', maxWidth: '160px', maxHeight: '80px' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
               unoptimized={true}
