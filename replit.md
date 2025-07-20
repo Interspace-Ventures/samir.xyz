@@ -31,6 +31,8 @@ Preferred communication style: Simple, everyday language.
 - **Neobrutalist Utilities**: Built reusable neobrutalist component utilities (`lib/utils/neobrutalist.ts`) for consistent styling
 - **CSS Cleanup**: Removed duplicate animations, !important declarations, and hard-coded values from globals.css
 - **Component Refactoring**: Updated all card components to use utility classes instead of inline styles for better maintainability
+- **Status Badge Fix**: Fixed Markup/Acquired badges to properly display purple (#7f54dc) and gray (#6b7280) backgrounds with white text
+- **Hover Overlay Consistency**: Unified hover overlay effects across Portfolio and Ventures cards with consistent purple gradient
 
 ## System Architecture
 
