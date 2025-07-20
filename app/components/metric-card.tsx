@@ -21,7 +21,16 @@ export default function MetricCard({ label, value, index = 0 }: MetricCardProps)
         delay: index * 0.1,
         ease: [0.25, 0.46, 0.45, 0.94]
       }}
-      className="bg-purple-600 p-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300"
+      className="bg-purple-600 p-4"
+      style={{
+        boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
+      }}
+      whileHover={{
+        x: -2,
+        y: -2,
+        boxShadow: '0 0 0 2px #000, 6px 6px 0px 0px #000',
+      }}
+      transition={{ duration: 0.2 }}
     >
       <div className="text-xs sm:text-sm text-white/80 mb-2 font-bold uppercase tracking-wider">{label}</div>
       <div className="text-xl sm:text-2xl font-bold text-white">{value}</div>
