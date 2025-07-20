@@ -39,41 +39,41 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           </div>
         )}
         
-        {/* Dark overlay - Only visible on hover */}
-        <div className="hover-overlay"></div>
+        {/* Dark overlay with centered content - Only visible on hover */}
+        <div className="hover-overlay">
+          {/* Title - Only visible on hover */}
+          <div className="text-center tagline-title mb-2">
+            <h3 className="text-white text-sm md:text-base lg:text-lg font-bold">
+              {portfolio.name}
+            </h3>
+          </div>
+          
+          {/* Tagline - Only visible on hover */}
+          {portfolio.description && (
+            <div className="text-center tagline">
+              <p className="text-white text-xs md:text-sm font-medium leading-relaxed px-2">
+                {portfolio.description}
+              </p>
+            </div>
+          )}
+        </div>
         
-        <CardContent className="p-2 flex flex-col">
+        <CardContent className="p-3 flex flex-col">
           {/* Logo Container - Main section */}
-          <div className="flex items-center justify-center min-h-[60px]">
+          <div className="flex items-center justify-center min-h-[80px] py-3">
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
-              width={100}
-              height={50}
+              width={140}
+              height={70}
               className="object-contain logo-normal"
-              style={{ width: 'auto', height: 'auto', maxWidth: '100px', maxHeight: '50px' }}
+              style={{ width: 'auto', height: 'auto', maxWidth: '140px', maxHeight: '70px' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
               unoptimized={true}
               placeholder="empty"
             />
           </div>
-          
-          {/* Title - Only visible on hover */}
-          <div className="text-center tagline-title mt-2">
-            <h3 className="text-white text-sm md:text-base lg:text-lg font-bold">
-              {portfolio.name}
-            </h3>
-          </div>
-          
-          {/* Tagline - Bottom section, hidden by default */}
-          {portfolio.description && (
-            <div className="text-center tagline">
-              <p className="text-white text-xs md:text-sm font-medium leading-relaxed">
-                {portfolio.description}
-              </p>
-            </div>
-          )}
         </CardContent>
       </Card>
     </motion.div>
