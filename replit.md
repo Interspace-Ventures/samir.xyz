@@ -10,6 +10,8 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (2025-07-20)
 
+- **Database Category Consolidation**: Merged "Health" and "Retail" categories into "Commerce", moved Aura & Playbook to "SaaS"
+
 - **Performance Optimization**: Fixed portfolio API slowness by removing excessive console.log statements (7x speed improvement: 1.3s → 0.18s)
 - **Hover Effects Fixed**: Redesigned portfolio card hover behavior using inline styles for proper shadow alignment
 - **Component Fixes**: Removed duplicate CardHeader declarations and invalid 'interactive' prop errors
