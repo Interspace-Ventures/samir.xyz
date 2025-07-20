@@ -29,59 +29,36 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
       variants={staggerItem}
       className={className}
     >
-      <Card variant="neobrutalism" interactive className="group venture-card-hover">
-        <CardContent className="p-2 flex flex-col">
-          {/* Logo Container */}
-          <div className="flex items-center justify-center bg-gray-50 p-4 mb-2 min-h-[80px]">
-            {venture.logoUrl && (
-              <Image
-                src={venture.logoUrl}
-                alt={`${venture.name} logo`}
-                width={120}
-                height={60}
-                className="object-contain transition-transform duration-200 group-hover:scale-105"
-                style={{ width: 'auto', height: 'auto', maxWidth: '120px', maxHeight: '60px' }}
-                priority={isPriority}
-                loading={isPriority ? 'eager' : 'lazy'}
-                unoptimized={true}
-                placeholder="empty"
-              />
-            )}
-          </div>
-          
-          {/* Content */}
-          <div className="space-y-1">
-            <div className="flex items-start justify-between">
-              <CardTitle className="text-sm md:text-base group-hover:text-primary transition-colors">
-                {venture.name}
-              </CardTitle>
-              {venture.website && (
-                <Link
-                  href={venture.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <ExternalLink size={12} />
-                </Link>
-              )}
-            </div>
-            
-            {venture.status && (
-              <div className="text-xs text-primary font-medium">
-                {venture.status}
-              </div>
-            )}
-            
+      <Link
+        href={venture.website || '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group h-[120px] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 cursor-pointer relative overflow-hidden block"
+      >
+        {/* Logo fills entire card */}
+        {venture.logoUrl && (
+          <Image
+            src={venture.logoUrl}
+            alt={`${venture.name} logo`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 50vw, 25vw"
+            priority={isPriority}
+            loading={isPriority ? 'eager' : 'lazy'}
+            unoptimized={true}
+          />
+        )}
+        
+        {/* Optional overlay for name on hover */}
+        <div className="absolute inset-0 bg-black/0 hover:bg-black/80 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
+          <div className="text-white text-center p-4">
+            <h3 className="font-bold text-lg mb-1">{venture.name}</h3>
             {venture.description && (
-              <CardDescription lines={2} className="text-xs">
-                {venture.description}
-              </CardDescription>
+              <p className="text-sm text-white/90">{venture.description}</p>
             )}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </Link>
     </motion.div>
   );
 }

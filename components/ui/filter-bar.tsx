@@ -75,17 +75,18 @@ export function FilterButton({
   className,
 }: FilterButtonProps) {
   return (
-    <Button
-      variant={active ? "default" : "neutral"}
-      size="sm"
+    <button
       onClick={onClick}
       className={cn(
-        'font-bold',
-        active && 'bg-[#7f54dc] hover:bg-[#6339c7]',
+        'px-4 py-2 font-bold text-sm transition-all duration-200',
+        'border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
+        'hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]',
+        'hover:translate-x-[-2px] hover:translate-y-[-2px]',
+        active ? 'bg-[#7f54dc] text-white hover:bg-[#6339c7]' : 'bg-white text-black hover:bg-gray-50',
         className
       )}
     >
       {children}
-    </Button>
+    </button>
   );
 }
