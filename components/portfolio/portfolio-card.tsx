@@ -31,18 +31,37 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
     >
       <div className="group portfolio-card-hover bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 cursor-pointer relative overflow-hidden">
         <div className="p-4 h-full flex flex-col relative">
-          {/* Status Badge - Always visible */}
+          {/* Status Badge - Always visible with !important styles */}
           {portfolio.investment_status && (
-            <div className="absolute top-2 right-2 z-50">
-              <span className={`text-white text-xs px-2 py-1 font-medium border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${
-                portfolio.investment_status.toLowerCase() === 'markup' 
-                  ? 'bg-purple-500' 
-                  : portfolio.investment_status.toLowerCase() === 'acquired'
-                  ? 'bg-gray-700'
-                  : portfolio.investment_status.toLowerCase() === 'active'
-                  ? 'bg-blue-500'
-                  : 'bg-purple-500'
-              }`}>
+            <div 
+              className="absolute top-2 right-2"
+              style={{ 
+                zIndex: 999,
+                position: 'absolute',
+                top: '8px',
+                right: '8px'
+              }}
+            >
+              <span 
+                className="text-white text-xs px-2 py-1 font-medium border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                style={{
+                  backgroundColor: portfolio.investment_status.toLowerCase() === 'markup' 
+                    ? '#8b5cf6' 
+                    : portfolio.investment_status.toLowerCase() === 'acquired'
+                    ? '#374151'
+                    : portfolio.investment_status.toLowerCase() === 'active'
+                    ? '#3b82f6'
+                    : '#8b5cf6',
+                  color: 'white',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  padding: '4px 8px',
+                  border: '1px solid black',
+                  boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
+                  display: 'block',
+                  zIndex: 999
+                }}
+              >
                 {portfolio.investment_status}
               </span>
             </div>
