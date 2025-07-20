@@ -33,7 +33,22 @@ export default function VenturesPage() {
             I develop apps and design concepts by building at the speed of thought using AI.
           </div>
           
-          {loading && <p className="text-white">Loading ventures...</p>}
+          {loading && (
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 w-full">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="aspect-square bg-white border-2 border-black relative overflow-hidden"
+                  style={{
+                    boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
+                  }}
+                >
+                  <div className="w-full h-full bg-gray-200 animate-pulse" />
+                </div>
+              ))}
+            </div>
+          )}
+          
           {error && <p className="text-red-500">Error: {error}</p>}
           
           {!loading && !error && (
