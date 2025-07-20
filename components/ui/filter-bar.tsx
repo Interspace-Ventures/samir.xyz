@@ -9,6 +9,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import { fadeInUp } from '../../lib/utils/animations';
+import { Button } from '../ui/button';
 import type { Category } from '../../lib/types';
 
 interface FilterBarProps {
@@ -74,26 +75,17 @@ export function FilterButton({
   className,
 }: FilterButtonProps) {
   return (
-    <motion.button
+    <Button
+      variant={active ? "default" : "neutral"}
+      size="sm"
+      onClick={onClick}
       className={cn(
-        'px-4 py-2 border-2 border-black font-bold text-sm transition-all duration-200',
-        'shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
-        'hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]',
-        'active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]',
-        'hover:translate-x-[-1px] hover:translate-y-[-1px]',
-        active
-          ? 'text-white'
-          : 'bg-white text-black hover:bg-gray-50',
+        'font-bold',
+        active && 'bg-[#7f54dc] hover:bg-[#6339c7]',
         className
       )}
-      style={{
-        backgroundColor: active ? '#7f54dc' : undefined
-      }}
-      onClick={onClick}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
     >
       {children}
-    </motion.button>
+    </Button>
   );
 }
