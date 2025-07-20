@@ -28,7 +28,7 @@ export function Card({
   onClick,
   animate = true,
 }: CardProps) {
-  const baseClasses = 'relative overflow-hidden transition-all duration-300 w-full';
+  const baseClasses = 'relative overflow-hidden transition-all duration-300 w-full h-auto';
   
   const variantClasses = {
     default: 'bg-white border border-gray-200 rounded-lg shadow-sm',

@@ -403,66 +403,24 @@ motion-div img {
   opacity: 1;
 }
 
-/* Remove forced aspect ratios - let cards size to content */
+/* Let cards size naturally to their content */
 .portfolio-card-hover,
 .venture-card-hover {
   width: 100%;
   height: auto;
 }
 
-/* Mobile responsive adjustments */
-@media (max-width: 768px) {
-  .portfolio-card-hover .tagline-title h3 {
-    font-size: 0.875rem; /* 14px */
-  }
-  
-  .portfolio-card-hover .tagline p {
-    font-size: 0.75rem; /* 12px */
-  }
-  
-  .portfolio-card-hover {
-    min-height: 150px;
-  }
+/* Remove all forced min-heights and aspect ratios */
+.portfolio-card-hover {
+  min-height: unset !important;
 }
 
-/* Tablet responsive adjustments */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .portfolio-card-hover {
-    min-height: 180px;
-  }
-}
-
-/* Desktop responsive adjustments */
-@media (min-width: 1025px) {
-  .portfolio-card-hover {
-    min-height: 200px;
-  }
-}
-
-/* Venture card styling */
 .venture-card-hover {
-  aspect-ratio: 1 !important;
-  width: 100% !important;
+  aspect-ratio: unset !important;
+  min-height: unset !important;
 }
 
-/* Venture card responsive adjustments */
-@media (max-width: 768px) {
-  .venture-card-hover {
-    min-height: 150px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .venture-card-hover {
-    min-height: 180px;
-  }
-}
-
-@media (min-width: 1025px) {
-  .venture-card-hover {
-    min-height: 200px;
-  }
-}
+/* Clean styling for all cards */
 
 /* Clean image styling */
 img {
