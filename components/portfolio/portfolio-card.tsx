@@ -74,8 +74,8 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               alt={`${portfolio.name} logo`}
               width={160}
               height={80}
-              className="object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert z-20 relative"
-              style={{ width: 'auto', height: 'auto', maxWidth: '160px', maxHeight: '80px' }}
+              className="object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert relative"
+              style={{ width: 'auto', height: 'auto', maxWidth: '160px', maxHeight: '80px', zIndex: 15 }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
               unoptimized={true}
