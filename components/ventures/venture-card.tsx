@@ -33,7 +33,7 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
         href={venture.website || '#'}
         target="_blank"
         rel="noopener noreferrer"
-        className="group h-[120px] bg-white relative overflow-hidden block cursor-pointer"
+        className="group aspect-square bg-white relative overflow-hidden block cursor-pointer"
         style={{
           boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
           transition: 'transform 0.2s ease, box-shadow 0.2s ease',
