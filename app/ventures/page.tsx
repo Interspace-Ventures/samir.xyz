@@ -9,19 +9,13 @@ export default function VenturesPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log('VenturesPage - Fetching data...');
     fetch('/api/ventures-detailed')
-      .then(res => {
-        console.log('Response status:', res.status);
-        return res.json();
-      })
+      .then(res => res.json())
       .then(data => {
-        console.log('Ventures data received:', data);
         setVentures(data);
         setLoading(false);
       })
       .catch(err => {
-        console.error('Error fetching ventures:', err);
         setError(err.message);
         setLoading(false);
       });
@@ -43,16 +37,25 @@ export default function VenturesPage() {
           {error && <p className="text-red-500">Error: {error}</p>}
           
           {!loading && !error && (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 w-full">
               {ventures.map((venture) => (
                 <a
                   key={venture.id}
                   href={venture.website || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group h-[120px] bg-white relative overflow-hidden block cursor-pointer"
+                  className="group aspect-square bg-white relative overflow-hidden block cursor-pointer"
                   style={{
                     boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                    e.currentTarget.style.boxShadow = '0 0 0 2px #000, 6px 6px 0px 0px #000';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translate(0, 0)';
+                    e.currentTarget.style.boxShadow = '0 0 0 2px #000, 4px 4px 0px 0px #000';
                   }}
                 >
                   {venture.logoUrl && (

@@ -10,16 +10,16 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (2025-07-20)
 
+- **Bio Update**: Updated role to "Global Strategic Partnerships Finance at Block" covering Cash App, Square, Tidal, and Proto ecosystems
+- **Ventures Gallery Fix**: Fixed broken ventures display by copying logos to public/attached_assets folder
+- **Venture Cards Styling**: Made venture cards square (aspect-square) distinct from rectangular portfolio cards
 - **Database Category Consolidation**: Merged "Health" and "Retail" categories into "Commerce", moved Aura & Playbook to "SaaS"
-
 - **Performance Optimization**: Fixed portfolio API slowness by removing excessive console.log statements (7x speed improvement: 1.3s → 0.18s)
 - **Hover Effects Fixed**: Redesigned portfolio card hover behavior using inline styles for proper shadow alignment
 - **Component Fixes**: Removed duplicate CardHeader declarations and invalid 'interactive' prop errors
-- **Venture Cards Redesign**: Icons now fill entire card with overlay text on hover for cleaner look
 - **Filter Button Styling**: Implemented proper neobrutalism.dev button styling with white text when active
 - **Shadow Consistency**: Standardized 4px shadows with smooth transitions across all card types
 - **Background Fix**: Set proper background color #332452 across the site
-- **Previous Changes**: Neobrutalism.dev migration, 10x Engineer refactor with type safety
 
 ## System Architecture
 
