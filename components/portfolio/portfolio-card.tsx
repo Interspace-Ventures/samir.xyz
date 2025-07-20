@@ -10,7 +10,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardTitle } from '../ui/card';
+
 import { IMAGE_CONFIG, PERFORMANCE } from '../../lib/constants';
 import { staggerItem } from '../../lib/utils/animations';
 import type { Portfolio } from '../../lib/types';
@@ -29,8 +29,8 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       variants={staggerItem}
       className={className}
     >
-      <Card variant="neobrutalism" interactive className="portfolio-card-hover group">
-        <CardContent className="p-4 relative h-full flex flex-col">
+      <div className="group portfolio-card-hover bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 cursor-pointer relative overflow-hidden">
+        <div className="p-4 h-full flex flex-col relative">
           {/* Status Badge - Always visible */}
           {portfolio.investment_status && (
             <div className="absolute top-2 right-2 z-50">
@@ -55,7 +55,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               alt={`${portfolio.name} logo`}
               width={160}
               height={80}
-              className="object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert"
+              className="object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert z-20 relative"
               style={{ width: 'auto', height: 'auto', maxWidth: '160px', maxHeight: '80px' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
@@ -75,8 +75,8 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               </p>
             )}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </motion.div>
   );
 }

@@ -379,6 +379,7 @@ motion-div img {
 /* Enforce consistent card heights */
 .portfolio-card-hover {
   min-height: 180px !important;
+  width: 100%;
 }
 
 .venture-card-hover {
