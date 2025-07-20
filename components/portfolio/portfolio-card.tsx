@@ -29,7 +29,12 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       variants={staggerItem}
       className={className}
     >
-      <div className="group portfolio-card-hover bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 cursor-pointer relative overflow-hidden">
+      <a 
+        href={portfolio.website || '#'} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="group portfolio-card-hover bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 cursor-pointer relative overflow-hidden block"
+      >
         <div className="p-4 h-full flex flex-col relative">
           {/* Status Badge - Only show Markup and Acquired */}
           {portfolio.investment_status && portfolio.investment_status.toLowerCase() !== 'active' && (
@@ -101,7 +106,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
             )}
           </div>
         </div>
-      </div>
+      </a>
     </motion.div>
   );
 }
