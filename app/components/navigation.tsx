@@ -92,7 +92,7 @@ const Navigation = () => {
                   <li key={item.href} className="px-2 lg:px-4">
                     <Link 
                       href={item.href}
-                      className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:bg-white hover:text-[#2a313a] px-3 py-2 border-2 border-black bg-[#7f54dc] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]"
+                      className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
                       prefetch={true}
                     >
                       {item.label}

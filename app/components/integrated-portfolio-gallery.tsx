@@ -180,7 +180,7 @@ export default function IntegratedPortfolioGallery() {
                 {/* Status badges */}
                 {item.investment_status === 'Markup' && (
                   <div className="absolute top-1 right-1">
-                    <span className="bg-purple-primary text-white text-xs px-2 py-0.5 font-medium rounded">
+                    <span className="bg-[#7f54dc] text-white text-xs px-2 py-1 font-bold border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                       Markup
                     </span>
                   </div>
@@ -188,7 +188,7 @@ export default function IntegratedPortfolioGallery() {
                 
                 {item.investment_status === 'Acquired' && (
                   <div className="absolute top-1 right-1">
-                    <span className="bg-green-600 text-white text-xs px-2 py-0.5 font-medium rounded">
+                    <span className="bg-gray-600 text-white text-xs px-2 py-1 font-bold border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                       Acquired
                     </span>
                   </div>
