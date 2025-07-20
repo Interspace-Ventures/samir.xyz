@@ -14,6 +14,7 @@ Preferred communication style: Simple, everyday language.
 - **Ventures Gallery Fix**: Fixed broken ventures display by copying logos to public/attached_assets folder
 - **Venture Cards Styling**: Made venture cards square (aspect-square) distinct from rectangular portfolio cards
 - **Ventures Skeleton Loader**: Added neobrutalism.dev skeleton loading animation instead of text
+- **Pre-launch Links**: Ventures with "Pre-launch" status now link to /launching-soon page (moonshot, omni, predictive, solo)
 - **Database Category Consolidation**: Merged "Health" and "Retail" categories into "Commerce", moved Aura & Playbook to "SaaS"
 - **Performance Optimization**: Fixed portfolio API slowness by removing excessive console.log statements (7x speed improvement: 1.3s → 0.18s)
 - **Hover Effects Fixed**: Redesigned portfolio card hover behavior using inline styles for proper shadow alignment

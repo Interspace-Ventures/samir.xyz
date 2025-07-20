@@ -69,9 +69,9 @@ export default function VenturesPage() {
               {ventures && ventures.length > 0 && ventures.map((venture) => (
                 <a
                   key={venture.id}
-                  href={venture.website || '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={venture.status === 'Pre-launch' ? '/launching-soon' : (venture.website || '#')}
+                  target={venture.status === 'Pre-launch' ? '_self' : '_blank'}
+                  rel={venture.status === 'Pre-launch' ? '' : 'noopener noreferrer'}
                   className="group aspect-square bg-white relative overflow-hidden block cursor-pointer"
                   style={{
                     boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
