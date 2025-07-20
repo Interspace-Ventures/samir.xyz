@@ -33,51 +33,22 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
         href={portfolio.website || '#'} 
         target="_blank" 
         rel="noopener noreferrer"
-        className="group h-[120px] bg-white relative overflow-hidden block cursor-pointer"
-        style={{
-          boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
-          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translate(-2px, -2px)';
-          e.currentTarget.style.boxShadow = '0 0 0 2px #000, 6px 6px 0px 0px #000';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translate(0, 0)';
-          e.currentTarget.style.boxShadow = '0 0 0 2px #000, 4px 4px 0px 0px #000';
-        }}
+        className="group h-[120px] bg-white relative overflow-hidden block cursor-pointer neobrutalist-shadow transition-all duration-200 hover:neobrutalist-shadow-hover hover:neobrutalist-transform-hover"
       >
         <div className="p-4 h-full flex flex-col relative">
           {/* Status Badge - Only show Markup and Acquired */}
           {portfolio.investment_status && portfolio.investment_status.toLowerCase() !== 'active' && (
             <div 
-              className="absolute top-2 right-2"
-              style={{ 
-                zIndex: 10,
-                position: 'absolute',
-                top: '8px',
-                right: '8px',
-                pointerEvents: 'none'
-              }}
+              className="absolute top-2 right-2 z-10 pointer-events-none"
             >
               <span 
-                className="text-white text-xs px-2 py-1 font-medium border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                style={{
-                  backgroundColor: portfolio.investment_status.toLowerCase() === 'markup' 
-                    ? '#8b5cf6' 
+                className={`status-badge ${
+                  portfolio.investment_status.toLowerCase() === 'markup' 
+                    ? 'status-badge-markup' 
                     : portfolio.investment_status.toLowerCase() === 'acquired'
-                    ? '#374151'
-                    : '#8b5cf6',
-                  color: 'white',
-                  fontSize: '12px',
-                  fontWeight: 500,
-                  padding: '4px 8px',
-                  border: '1px solid black',
-                  boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
-                  display: 'block',
-                  zIndex: 10,
-                  pointerEvents: 'none'
-                }}
+                    ? 'status-badge-acquired'
+                    : 'status-badge-markup'
+                }`}
               >
                 {portfolio.investment_status}
               </span>
@@ -91,8 +62,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               alt={`${portfolio.name} logo`}
               width={160}
               height={80}
-              className="object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert relative"
-              style={{ width: 'auto', height: 'auto', maxWidth: '160px', maxHeight: '80px', zIndex: 5 }}
+              className="object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert relative w-auto h-auto max-w-[160px] max-h-[80px] z-[5]"
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
               unoptimized={true}
@@ -102,11 +72,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           
           {/* Hover Overlay Content */}
           <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none"
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.9)',
-              backdropFilter: 'blur(2px)'
-            }}
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none bg-black/90 backdrop-blur-[2px]"
           >
             <h3 className="text-white text-sm md:text-base lg:text-lg font-bold text-center mb-2">
               {portfolio.name}

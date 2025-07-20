@@ -196,7 +196,7 @@ export default function PortfolioGallery() {
                     alt={`${item.name} logo`}
                     width={140}
                     height={70}
-                    style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '80%' }}
+                    className="object-contain max-h-full max-w-[80%]"
                     unoptimized={false}
                   />
                 </div>

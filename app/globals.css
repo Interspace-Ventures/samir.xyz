@@ -62,12 +62,39 @@
 @layer components {
   /* Content card styling for text blocks */
   .content-card {
-    background: #2a313a !important;
-    color: white !important;
-    border: 2px solid black !important;
-    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1) !important;
-    padding: 1.5rem !important;
-    font-size: 1.125rem !important;
+    background: #2a313a;
+    color: white;
+    border: 2px solid black;
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+    padding: 1.5rem;
+    font-size: 1.125rem;
+  }
+  
+  /* Neobrutalist card utilities */
+  .neobrutalist-shadow {
+    box-shadow: 0 0 0 2px #000, 4px 4px 0px 0px #000;
+  }
+  
+  .neobrutalist-shadow-hover {
+    box-shadow: 0 0 0 2px #000, 6px 6px 0px 0px #000;
+  }
+  
+  .neobrutalist-transform-hover {
+    transform: translate(-2px, -2px);
+  }
+  
+  /* Status badge styling */
+  .status-badge {
+    @apply text-white text-xs px-2 py-1 font-medium border border-black;
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+  }
+  
+  .status-badge-markup {
+    background-color: #8b5cf6;
+  }
+  
+  .status-badge-acquired {
+    background-color: #374151;
   }
 }
 
@@ -207,23 +234,23 @@ img {
   box-shadow: none;
 }
 
-/* Force clean venture grid styling */
+/* Clean venture grid styling */
 .ventures-grid img,
 .ventures-grid > div,
 .ventures-grid a,
 [class*="aspect-square"] img,
 [class*="aspect-square"] > *,
 motion-div img {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 /* Override any Tailwind or component library borders */
 .grid > div > a > img,
 .grid div img {
-  border: 0 !important;
-  box-shadow: none !important;
+  border: 0;
+  box-shadow: none;
 }
 
 /* Additional hover state styling */
@@ -258,16 +285,6 @@ motion-div img {
 }
 
 /* Skeleton Loading Animations */
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(250%);
-  }
-}
-
-/* Shimmer animation for skeletons */
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
@@ -383,13 +400,13 @@ motion-div img {
 
 /* Enforce consistent card heights */
 .portfolio-card-hover {
-  min-height: 120px !important;
+  min-height: 120px;
   width: 100%;
 }
 
 .venture-card-hover {
-  aspect-ratio: unset !important;
-  min-height: unset !important;
+  aspect-ratio: unset;
+  min-height: unset;
 }
 
 /* Clean styling for all cards */
