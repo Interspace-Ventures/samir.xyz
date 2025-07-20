@@ -36,7 +36,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
             <div 
               className="absolute top-2 right-2"
               style={{ 
-                zIndex: 30,
+                zIndex: 10,
                 position: 'absolute',
                 top: '8px',
                 right: '8px',
@@ -58,7 +58,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
                   border: '1px solid black',
                   boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
                   display: 'block',
-                  zIndex: 30,
+                  zIndex: 10,
                   pointerEvents: 'none'
                 }}
               >
@@ -85,7 +85,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           
           {/* Hover Overlay Content */}
           <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none"
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-30 pointer-events-none"
             style={{
               backgroundColor: 'rgba(0, 0, 0, 0.9)',
               backdropFilter: 'blur(2px)'
