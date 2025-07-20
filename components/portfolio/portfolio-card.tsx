@@ -31,8 +31,8 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
     >
       <div className="group portfolio-card-hover bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 cursor-pointer relative overflow-hidden">
         <div className="p-4 h-full flex flex-col relative">
-          {/* Status Badge - Always visible with !important styles */}
-          {portfolio.investment_status && (
+          {/* Status Badge - Only show Markup and Acquired */}
+          {portfolio.investment_status && portfolio.investment_status.toLowerCase() !== 'active' && (
             <div 
               className="absolute top-2 right-2"
               style={{ 
@@ -49,8 +49,6 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
                     ? '#8b5cf6' 
                     : portfolio.investment_status.toLowerCase() === 'acquired'
                     ? '#374151'
-                    : portfolio.investment_status.toLowerCase() === 'active'
-                    ? '#3b82f6'
                     : '#8b5cf6',
                   color: 'white',
                   fontSize: '12px',
