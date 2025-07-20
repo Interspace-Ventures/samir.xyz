@@ -64,13 +64,11 @@ export function VenturesGrid({ className }: VenturesGridProps) {
       >
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
           {venturesData.map((venture, index) => (
-            <div key={venture.id} className="card-container">
-              <VentureCard
-                venture={venture}
-                index={index}
-                className="card-content"
-              />
-            </div>
+            <VentureCard
+              key={venture.id}
+              venture={venture}
+              index={index}
+            />
           ))}
         </div>
       </motion.div>
