@@ -4,10 +4,10 @@ const prisma = new PrismaClient();
 
 async function updateSamirLogo() {
   try {
-    // Update samir.xyz to use the specific samirxyz.png logo
+    // Update samir.xyz to use the new gradient logo
     const result = await prisma.venture.updateMany({
       where: { name: 'samir.xyz' },
-      data: { logoUrl: '/attached_assets/samirxyz.png' }
+      data: { logoUrl: '/attached_assets/samirxyz_1752986277365.png' }
     });
     console.log(`Updated samir.xyz logo: ${result.count} records`);
 
