@@ -36,10 +36,11 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
             <div 
               className="absolute top-2 right-2"
               style={{ 
-                zIndex: 999,
+                zIndex: 30,
                 position: 'absolute',
                 top: '8px',
-                right: '8px'
+                right: '8px',
+                pointerEvents: 'none'
               }}
             >
               <span 
@@ -57,7 +58,8 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
                   border: '1px solid black',
                   boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
                   display: 'block',
-                  zIndex: 999
+                  zIndex: 30,
+                  pointerEvents: 'none'
                 }}
               >
                 {portfolio.investment_status}
@@ -82,7 +84,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           </div>
           
           {/* Hover Overlay Content */}
-          <div className="absolute inset-0 bg-black bg-opacity-85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-10">
+          <div className="absolute inset-0 bg-black bg-opacity-85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none">
             <h3 className="text-white text-sm md:text-base lg:text-lg font-bold text-center mb-2">
               {portfolio.name}
             </h3>
