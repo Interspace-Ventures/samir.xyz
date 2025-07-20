@@ -2,45 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Neobrutalism global styles */
-.neo-card {
-  @apply border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
 }
 
-.neo-button {
-  @apply border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] font-bold;
-}
-
-.neo-input {
-  @apply border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] bg-white;
-}
-
+/* Custom project colors and utilities */
 :root {
-  /* 
-   * Color System
-   * 
-   * Each color has two formats:
-   * 1. Hex format (#RRGGBB) - Used for standard color properties
-   * 2. RGB format (R, G, B) - Used specifically for rgba() functions with alpha transparency
-   */
-  
-  /* Primary Colors */
-  --primary: #7f55dc; /* Main purple */
-  --primary-rgb: 127, 85, 220;
-  
-  /* Text Colors */
-  --text-primary: #ffffff; /* White text */
-  --text-primary-rgb: 255, 255, 255;
-  --text-secondary: #c084fc; /* Light purple text */
-  --text-secondary-rgb: 192, 132, 252;
-  --text-tertiary: #a1a1aa; /* Gray text */
-  --text-tertiary-rgb: 161, 161, 170;
-  
-  /* Background Colors */
-  --bg-primary: #2d0c6a; /* Dark purple background */
-  --bg-primary-rgb: 45, 12, 106;
-  
-  /* Utility Colors */
+  /* Project-specific colors */
+  --purple-primary: 127, 85, 220;
+  --text-primary: 255, 255, 255;
+  --text-secondary: 192, 132, 252;
+  --text-tertiary: 161, 161, 170;
+  --bg-primary: 45, 12, 106;
   --black-rgb: 0, 0, 0;
 }
 
@@ -62,17 +77,7 @@
     font-size: 18px; /* Increased from default 16px for better readability on high-res displays */
   }
   
-  /* Basic styling */
-  body {
-    @apply bg-bg-primary text-text-primary;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-  }
+  /* Basic styling - merged with body styling above to avoid conflicts */
   
   /* Prevent horizontal overflow on all elements */
   * {

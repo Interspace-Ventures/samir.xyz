@@ -76,10 +76,11 @@ export function FilterButton({
   return (
     <motion.button
       className={cn(
-        'px-4 py-2 border-2 border-black font-medium transition-all duration-200',
+        'px-4 py-2 border-2 border-black font-bold text-sm transition-all duration-200',
         'shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
         'hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]',
-        'hover:translate-x-[-2px] hover:translate-y-[-2px]',
+        'active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]',
+        'hover:translate-x-[-1px] hover:translate-y-[-1px]',
         active
           ? 'text-white'
           : 'bg-white text-black hover:bg-gray-50',

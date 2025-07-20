@@ -8,16 +8,14 @@ This is a modern personal portfolio website built with Next.js that showcases pr
 
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (2025-07-15)
+## Recent Changes (2025-07-20)
 
-- **10x Engineer Refactor**: Comprehensive codebase restructure following clean architecture principles
-- **Type Safety & Architecture**: Created centralized type definitions, constants, and utilities in `/lib` directory
-- **Component System**: Built reusable UI component library with consistent neobrutalism styling
-- **Data Layer**: Optimized React Query hooks with proper error handling and caching strategies
-- **Performance Optimization**: Enabled Next.js image optimization and implemented proper lazy loading
-- **Code Quality**: Removed all `!important` CSS declarations, console.log statements, and technical debt
-- **Animation System**: Centralized Framer Motion animations with consistent timing and easing
-- **Filtering Logic**: Extracted reusable filter hooks for consistent behavior across components
+- **Neobrutalism.dev Migration**: Successfully migrated from custom neobrutalism to official neobrutalism.dev components
+- **Component Updates**: Updated Button and Card components to use neobrutalism.dev styling with full variant support
+- **Enhanced Shadows**: Increased portfolio card shadow depth (8px → 12px on hover) for stronger visual impact
+- **CSS Configuration**: Updated Tailwind config to support shadcn/ui color system and CSS custom properties
+- **Filter Improvements**: Enhanced filter buttons with bold fonts and consistent neobrutalism styling
+- **Previous Changes (2025-07-15)**: 10x Engineer refactor with type safety, component system, and performance optimizations
 
 ## System Architecture
 
