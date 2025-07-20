@@ -80,7 +80,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               width={160}
               height={80}
               className="object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert relative"
-              style={{ width: 'auto', height: 'auto', maxWidth: '160px', maxHeight: '80px', zIndex: 15 }}
+              style={{ width: 'auto', height: 'auto', maxWidth: '160px', maxHeight: '80px', zIndex: 5 }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
               unoptimized={true}
@@ -90,7 +90,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           
           {/* Hover Overlay Content */}
           <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-30 pointer-events-none"
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none"
             style={{
               backgroundColor: 'rgba(0, 0, 0, 0.9)',
               backdropFilter: 'blur(2px)'
