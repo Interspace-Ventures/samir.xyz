@@ -33,7 +33,19 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
         href={portfolio.website || '#'} 
         target="_blank" 
         rel="noopener noreferrer"
-        className="group h-[120px] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300 cursor-pointer relative overflow-hidden block"
+        className="group h-[120px] bg-white border-2 border-black relative overflow-hidden block cursor-pointer"
+        style={{
+          boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+          transition: 'transform 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translate(-2px, -2px)';
+          e.currentTarget.style.boxShadow = '6px 6px 0px 0px rgba(0,0,0,1)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translate(0, 0)';
+          e.currentTarget.style.boxShadow = '4px 4px 0px 0px rgba(0,0,0,1)';
+        }}
       >
         <div className="p-4 h-full flex flex-col relative">
           {/* Status Badge - Only show Markup and Acquired */}
