@@ -42,16 +42,16 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
         {/* Dark overlay - Only visible on hover */}
         <div className="hover-overlay"></div>
         
-        <CardContent className="p-3 flex flex-col">
+        <CardContent className="p-2 flex flex-col">
           {/* Logo Container - Main section */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center min-h-[60px]">
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
-              width={120}
-              height={60}
-              className="object-contain max-w-full max-h-full logo-normal"
-              style={{ width: 'auto', height: 'auto', maxWidth: '120px', maxHeight: '60px' }}
+              width={100}
+              height={50}
+              className="object-contain logo-normal"
+              style={{ width: 'auto', height: 'auto', maxWidth: '100px', maxHeight: '50px' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
               unoptimized={true}

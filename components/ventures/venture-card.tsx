@@ -30,17 +30,17 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
       className={className}
     >
       <Card variant="neobrutalism" interactive className="group venture-card-hover">
-        <CardContent className="p-3 flex flex-col">
+        <CardContent className="p-2 flex flex-col">
           {/* Logo Container */}
-          <div className="flex items-center justify-center bg-gray-50 p-2 mb-2">
+          <div className="flex items-center justify-center bg-gray-50 p-2 mb-1 min-h-[40px]">
             {venture.logoUrl && (
               <Image
                 src={venture.logoUrl}
                 alt={`${venture.name} logo`}
-                width={80}
-                height={40}
-                className="object-contain max-w-full max-h-full transition-transform duration-200 group-hover:scale-105"
-                style={{ width: 'auto', height: 'auto', maxWidth: '80px', maxHeight: '40px' }}
+                width={70}
+                height={35}
+                className="object-contain transition-transform duration-200 group-hover:scale-105"
+                style={{ width: 'auto', height: 'auto', maxWidth: '70px', maxHeight: '35px' }}
                 priority={isPriority}
                 loading={isPriority ? 'eager' : 'lazy'}
                 unoptimized={true}
