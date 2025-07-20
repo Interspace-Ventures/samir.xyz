@@ -75,21 +75,16 @@ export interface GridItemProps {
 
 // Animation Types
 export interface AnimationVariants {
-  hidden: {
-    opacity: number;
-    y?: number;
-    x?: number;
-    scale?: number;
-  };
-  visible: {
-    opacity: number;
+  [key: string]: {
+    opacity?: number;
     y?: number;
     x?: number;
     scale?: number;
     transition?: {
-      duration: number;
-      ease: string;
+      duration?: number;
+      ease?: string;
       delay?: number;
+      staggerChildren?: number;
     };
   };
 }
