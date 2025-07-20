@@ -376,6 +376,10 @@ motion-div img {
   opacity: 0;
   transition: opacity 0.2s ease;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .portfolio-card-hover:hover .hover-overlay {
