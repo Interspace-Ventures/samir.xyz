@@ -25,6 +25,7 @@ export function VenturesGrid({ className }: VenturesGridProps) {
   console.log('VenturesGrid - isLoading:', isLoading);
   console.log('VenturesGrid - error:', error);
   console.log('VenturesGrid - venturesData:', venturesData);
+  console.log('VenturesGrid - venturesData length:', venturesData?.length);
 
   // Loading state
   if (isLoading) {
@@ -68,13 +69,16 @@ export function VenturesGrid({ className }: VenturesGridProps) {
         animate="visible"
       >
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
-          {venturesData.map((venture, index) => (
-            <VentureCard
-              key={venture.id}
-              venture={venture}
-              index={index}
-            />
-          ))}
+          {venturesData.map((venture, index) => {
+            console.log(`Rendering venture ${index}:`, venture);
+            return (
+              <VentureCard
+                key={venture.id}
+                venture={venture}
+                index={index}
+              />
+            );
+          })}
         </div>
       </motion.div>
       
