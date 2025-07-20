@@ -23,27 +23,40 @@ module.exports = {
         'sans': ['Alexandria', 'system-ui', 'sans-serif'],
       },
       colors: {
-        /* Main brand color */
-        'primary': '#7f55dc',
-        
-        /* Text colors */
-        'text-primary': '#ffffff',
-        'text-secondary': '#c084fc',
-        'text-tertiary': '#a1a1aa',
-        
-        /* Background colors */
-        'bg-primary': '#2d0c6a',
-        
-        /* Legacy colors maintained for compatibility */
-        'purple-primary': '#7f55dc', // Same as primary
-        
-        /* Neobrutalism colors */
-        'bg-primary': '#332452',
-        'bg-secondary': '#ffffff',
-        'text-primary': '#ffffff',
-        'text-secondary': '#2a313a',
-        'text-tertiary': '#666666',
-        'header': '#2a313a',
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        'purple-primary': '#7f55dc',
         'purple': {
           '100': '#eae3fa',
           '200': '#d5c7f6',
@@ -55,7 +68,11 @@ module.exports = {
           '800': '#4a20a9',
           '900': '#2d0c6a',
         },
-        'white': '#ffffff',
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       backgroundColor: {
         'primary': '#7f55dc',

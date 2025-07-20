@@ -1,71 +1,84 @@
 /**
- * Card Component System
+ * Card Component - Neobrutalism.dev
  * 
- * Reusable card components with consistent neobrutalism styling.
- * Provides a foundation for portfolio and venture cards.
+ * Based on neobrutalism.dev card component with shadcn/ui foundation
  */
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { cn } from '../../lib/utils';
-import { THEME } from '../../lib/constants';
-import { hoverLift } from '../../lib/utils/animations';
+import * as React from "react"
+import { cn } from "../../lib/utils"
 
-interface CardProps {
-  children: React.ReactNode;
-  className?: string;
-  variant?: 'default' | 'neobrutalism' | 'minimal';
-  interactive?: boolean;
-  onClick?: () => void;
-  animate?: boolean;
-}
+const Card = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "border-2 border-black bg-white p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
+      className
+    )}
+    {...props}
+  />
+))
+Card.displayName = "Card"
 
-export function Card({
-  children,
-  className,
-  variant = 'neobrutalism',
-  interactive = false,
-  onClick,
-  animate = true,
-}: CardProps) {
-  const baseClasses = 'relative overflow-hidden transition-all duration-300 w-full h-full';
-  
-  const variantClasses = {
-    default: 'bg-white border border-gray-200 rounded-lg shadow-sm',
-    neobrutalism: `bg-white border-2 border-black shadow-[${THEME.SHADOWS.CARD}]`,
-    minimal: 'bg-white border border-gray-100',
-  };
-  
-  const interactiveClasses = interactive 
-    ? 'cursor-pointer hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]' 
-    : '';
+const CardHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    {...props}
+  />
+))
+CardHeader.displayName = "CardHeader"
 
-  const cardClasses = cn(
-    baseClasses,
-    variantClasses[variant],
-    interactiveClasses,
-    className
-  );
+const CardTitle = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h3
+    ref={ref}
+    className={cn("font-bold leading-none tracking-tight", className)}
+    {...props}
+  />
+))
+CardTitle.displayName = "CardTitle"
 
-  if (animate) {
-    return (
-      <motion.div
-        className={cardClasses}
-        onClick={onClick}
-        whileHover={interactive ? hoverLift : undefined}
-        transition={{ duration: 0.2 }}
-      >
-        {children}
-      </motion.div>
-    );
-  }
+const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+))
+CardDescription.displayName = "CardDescription"
 
-  return (
-    <div className={cardClasses} onClick={onClick}>
-      {children}
-    </div>
-  );
-}
+const CardContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+))
+CardContent.displayName = "CardContent"
+
+const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center p-6 pt-0", className)}
+    {...props}
+  />
+))
+CardFooter.displayName = "CardFooter"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
 
 interface CardHeaderProps {
   children: React.ReactNode;
