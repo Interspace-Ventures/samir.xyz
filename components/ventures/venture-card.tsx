@@ -50,7 +50,12 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
         )}
         
         {/* Optional overlay for name on hover */}
-        <div className="absolute inset-0 bg-black/0 hover:bg-black/80 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
+        <div 
+          className="absolute inset-0 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100"
+          style={{
+            background: 'linear-gradient(to bottom right, rgba(45, 12, 106, 0.9), rgba(56, 20, 144, 0.9))'
+          }}
+        >
           <div className="text-white text-center p-4">
             <h3 className="font-bold text-lg mb-1">{venture.name}</h3>
             {venture.description && (
