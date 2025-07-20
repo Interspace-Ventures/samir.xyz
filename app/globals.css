@@ -374,12 +374,13 @@ motion-div img {
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
   opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 1;
+  transition: opacity 0.3s ease;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 .portfolio-card-hover:hover .hover-overlay {
@@ -404,8 +405,8 @@ motion-div img {
 
 /* Ensure status badges stay visible and on top */
 .portfolio-card-hover .status-badge {
-  z-index: 30;
-  position: relative;
+  z-index: 30 !important;
+  position: absolute !important;
 }
 
 .portfolio-card-hover:hover .tagline,
@@ -420,9 +421,11 @@ motion-div img {
   height: auto;
 }
 
-/* Remove all forced min-heights and aspect ratios */
+/* Enforce consistent card heights and layout */
 .portfolio-card-hover {
-  min-height: unset !important;
+  min-height: 180px !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .venture-card-hover {
