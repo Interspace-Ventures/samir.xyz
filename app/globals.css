@@ -363,55 +363,10 @@ motion-div img {
   justify-content: center;
 }
 
-/* Portfolio card hover effects */
+/* Portfolio card hover effects - simplified */
 .portfolio-card-hover {
   position: relative;
   overflow: hidden;
-}
-
-.portfolio-card-hover .hover-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.portfolio-card-hover:hover .hover-overlay {
-  opacity: 1;
-}
-
-.portfolio-card-hover .logo-normal {
-  transition: all 0.2s ease;
-}
-
-.portfolio-card-hover:hover .logo-normal {
-  filter: brightness(0) invert(1);
-}
-
-.portfolio-card-hover .tagline,
-.portfolio-card-hover .tagline-title {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 2;
-  position: relative;
-}
-
-/* Ensure status badges stay visible and on top */
-.portfolio-card-hover .status-badge {
-  z-index: 30 !important;
-  position: absolute !important;
-}
-
-.portfolio-card-hover:hover .tagline,
-.portfolio-card-hover:hover .tagline-title {
-  opacity: 1;
 }
 
 /* Let cards size naturally to their content */
@@ -421,11 +376,9 @@ motion-div img {
   height: auto;
 }
 
-/* Enforce consistent card heights and layout */
+/* Enforce consistent card heights */
 .portfolio-card-hover {
   min-height: 180px !important;
-  display: flex !important;
-  flex-direction: column !important;
 }
 
 .venture-card-hover {
