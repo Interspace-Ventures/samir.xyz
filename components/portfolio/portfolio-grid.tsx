@@ -87,11 +87,11 @@ export function PortfolioGrid({ className }: PortfolioGridProps) {
       >
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
           {filteredData.map((portfolio, index) => (
-            <div key={portfolio.id} className="w-full aspect-square">
+            <div key={portfolio.id} className="card-container">
               <PortfolioCard
                 portfolio={portfolio}
                 index={index}
-                className="w-full h-full"
+                className="card-content"
               />
             </div>
           ))}
