@@ -64,11 +64,11 @@ export function VenturesGrid({ className }: VenturesGridProps) {
       >
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
           {venturesData.map((venture, index) => (
-            <div key={venture.id} className="w-full aspect-square">
+            <div key={venture.id} className="card-container">
               <VentureCard
                 venture={venture}
                 index={index}
-                className="w-full h-full"
+                className="card-content"
               />
             </div>
           ))}

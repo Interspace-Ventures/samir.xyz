@@ -29,7 +29,7 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
       variants={staggerItem}
       className={`w-full h-full ${className || ''}`}
     >
-      <Card variant="neobrutalism" interactive className="w-full h-full group venture-card-hover">
+      <Card variant="neobrutalism" interactive className="group venture-card-hover">
         <CardContent className="p-3 h-full flex flex-col">
           {/* Logo Container */}
           <div className="flex items-center justify-center bg-gray-50 p-3 mb-3 flex-1">
