@@ -402,6 +402,12 @@ motion-div img {
   position: relative;
 }
 
+/* Ensure status badges stay visible and on top */
+.portfolio-card-hover .status-badge {
+  z-index: 30;
+  position: relative;
+}
+
 .portfolio-card-hover:hover .tagline,
 .portfolio-card-hover:hover .tagline-title {
   opacity: 1;

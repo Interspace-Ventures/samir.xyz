@@ -32,12 +32,12 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
       <Card variant="neobrutalism" interactive className="portfolio-card-hover">
         {/* Status Badge - positioned at top right */}
         {portfolio.investment_status && (
-          <div className="absolute top-2 right-2 z-20">
+          <div className="absolute top-2 right-2 z-30 status-badge">
             <span className={`text-white text-xs px-2 py-1 font-medium border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${
               portfolio.investment_status.toLowerCase() === 'markup' 
                 ? 'bg-purple-500' 
                 : portfolio.investment_status.toLowerCase() === 'acquired'
-                ? 'bg-gray-500'
+                ? 'bg-gray-700'
                 : portfolio.investment_status.toLowerCase() === 'active'
                 ? 'bg-blue-500'
                 : 'bg-purple-500'
@@ -72,10 +72,10 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
-              width={180}
-              height={90}
+              width={200}
+              height={100}
               className="object-contain logo-normal"
-              style={{ width: 'auto', height: 'auto', maxWidth: '180px', maxHeight: '90px' }}
+              style={{ width: 'auto', height: 'auto', maxWidth: '200px', maxHeight: '100px' }}
               priority={isPriority}
               loading={isPriority ? 'eager' : 'lazy'}
               unoptimized={true}
