@@ -84,7 +84,13 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           </div>
           
           {/* Hover Overlay Content */}
-          <div className="absolute inset-0 bg-black bg-opacity-85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none">
+          <div 
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none"
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+              backdropFilter: 'blur(2px)'
+            }}
+          >
             <h3 className="text-white text-sm md:text-base lg:text-lg font-bold text-center mb-2">
               {portfolio.name}
             </h3>
