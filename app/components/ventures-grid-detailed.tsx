@@ -52,7 +52,7 @@ export default function VenturesGridDetailed() {
       {/* Always use 4 columns on all desktop screens */}
       <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2">
         <AnimatePresence>
-          {ventures.slice(0, 8).map((venture, index) => (
+          {ventures.slice(0, 8).map((venture: DetailedVenture, index: number) => (
             <motion.div
               key={venture.id}
               initial={{ opacity: 0 }}

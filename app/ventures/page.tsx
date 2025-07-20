@@ -3,10 +3,20 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+interface Venture {
+  id: number;
+  name: string;
+  description: string;
+  logoUrl?: string | null;
+  website?: string | null;
+  featured: boolean;
+  status?: string | null;
+}
+
 export default function VenturesPage() {
-  const [ventures, setVentures] = useState([]);
+  const [ventures, setVentures] = useState<Venture[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/ventures-detailed')
