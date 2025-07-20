@@ -85,23 +85,17 @@ export function PortfolioGrid({ className }: PortfolioGridProps) {
         initial="hidden"
         animate="visible"
       >
-        <Grid
-          columns={{
-            mobile: 2,
-            tablet: 3,
-            desktop: 4,
-          }}
-          gap="1rem"
-          animate={false}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
           {filteredData.map((portfolio, index) => (
-            <PortfolioCard
-              key={portfolio.id}
-              portfolio={portfolio}
-              index={index}
-            />
+            <div key={portfolio.id} className="w-full aspect-square">
+              <PortfolioCard
+                portfolio={portfolio}
+                index={index}
+                className="w-full h-full"
+              />
+            </div>
           ))}
-        </Grid>
+        </div>
       </motion.div>
       
       {filteredData.length === 0 && (

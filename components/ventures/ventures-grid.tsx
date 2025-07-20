@@ -62,23 +62,17 @@ export function VenturesGrid({ className }: VenturesGridProps) {
         initial="hidden"
         animate="visible"
       >
-        <Grid
-          columns={{
-            mobile: 2,
-            tablet: 3,
-            desktop: 4,
-          }}
-          gap="1rem"
-          animate={false}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
           {venturesData.map((venture, index) => (
-            <VentureCard
-              key={venture.id}
-              venture={venture}
-              index={index}
-            />
+            <div key={venture.id} className="w-full aspect-square">
+              <VentureCard
+                venture={venture}
+                index={index}
+                className="w-full h-full"
+              />
+            </div>
           ))}
-        </Grid>
+        </div>
       </motion.div>
       
       {venturesData.length === 0 && (

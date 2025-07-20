@@ -407,6 +407,15 @@ motion-div img {
 .portfolio-card-hover {
   aspect-ratio: 1 !important;
   width: 100% !important;
+  height: auto !important;
+}
+
+/* Force square aspect ratio for all card variants */
+.portfolio-card-hover,
+.venture-card-hover {
+  aspect-ratio: 1 !important;
+  width: 100% !important;
+  height: auto !important;
 }
 
 /* Mobile responsive adjustments */
