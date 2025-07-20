@@ -60,8 +60,7 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const includeMetrics = url.searchParams.get('includeMetrics') === 'true';
     
-    console.log('Attempting to fetch portfolio items from database');
-    console.log(`Include metrics: ${includeMetrics}`);
+    // Removed console logs for performance
     
     // Query all portfolio items from the database
     const portfolioItems = await prisma.portfolio.findMany({
@@ -70,8 +69,7 @@ export async function GET(request: NextRequest) {
       ],
     });
     
-    // Debug the raw item structure
-    console.log('Sample raw item structure:', JSON.stringify(portfolioItems[0]));
+    // Removed debug logging for performance
     
     // Map the database field names to the frontend expected property names
     const mappedItems = portfolioItems.map(item => {
@@ -83,7 +81,6 @@ export async function GET(request: NextRequest) {
       
       // Get the logo URL from whatever field it's available in
       const logoUrl = item.logoUrl || rawItem['logo-url'] || rawItem.logoUrl || '';
-      console.log(`${item.name} logo URL: ${logoUrl}`);
       
       return {
         id: item.id,
@@ -102,7 +99,7 @@ export async function GET(request: NextRequest) {
       };
     });
 
-    console.log(`Successfully retrieved ${portfolioItems.length} portfolio items`);
+    // Successfully retrieved portfolio items
     
     // If metrics are requested, format the response accordingly
     if (includeMetrics) {
@@ -135,12 +132,8 @@ export async function GET(request: NextRequest) {
     // Default response with just the items
     return NextResponse.json(mappedItems);
   } catch (error) {
-    // Log the error details
-    console.error('Error fetching portfolio items:', error);
+    // Get error details without logging
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    const errorStack = error instanceof Error ? error.stack : '';
-    console.error('Error message:', errorMessage);
-    console.error('Error stack:', errorStack);
     
     return NextResponse.json(
       { 

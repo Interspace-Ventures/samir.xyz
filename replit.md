@@ -10,12 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (2025-07-20)
 
-- **Neobrutalism.dev Migration**: Successfully migrated from custom neobrutalism to official neobrutalism.dev components
-- **Component Updates**: Updated Button and Card components to use neobrutalism.dev styling with full variant support
-- **Enhanced Shadows**: Increased portfolio card shadow depth (8px → 12px on hover) for stronger visual impact
-- **CSS Configuration**: Updated Tailwind config to support shadcn/ui color system and CSS custom properties
-- **Filter Improvements**: Enhanced filter buttons with bold fonts and consistent neobrutalism styling
-- **Previous Changes (2025-07-15)**: 10x Engineer refactor with type safety, component system, and performance optimizations
+- **Performance Optimization**: Fixed portfolio API slowness by removing excessive console.log statements (7x speed improvement: 1.3s → 0.18s)
+- **Hover Effects Fixed**: Redesigned portfolio card hover behavior using inline styles for proper shadow alignment
+- **Component Fixes**: Removed duplicate CardHeader declarations and invalid 'interactive' prop errors
+- **Venture Cards Redesign**: Icons now fill entire card with overlay text on hover for cleaner look
+- **Filter Button Styling**: Implemented proper neobrutalism.dev button styling with white text when active
+- **Shadow Consistency**: Standardized 4px shadows with smooth transitions across all card types
+- **Background Fix**: Set proper background color #332452 across the site
+- **Previous Changes**: Neobrutalism.dev migration, 10x Engineer refactor with type safety
 
 ## System Architecture
 
