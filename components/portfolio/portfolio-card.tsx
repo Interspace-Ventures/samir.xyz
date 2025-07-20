@@ -27,7 +27,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
   return (
     <motion.div
       variants={staggerItem}
-      className={`w-full h-full ${className || ''}`}
+      className={className}
     >
       <Card variant="neobrutalism" interactive className="portfolio-card-hover">
         {/* Status Badge - positioned at top right */}
@@ -42,9 +42,9 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
         {/* Dark overlay - Only visible on hover */}
         <div className="hover-overlay"></div>
         
-        <CardContent className="p-4 h-full flex flex-col">
-          {/* Logo Container - Top section */}
-          <div className="flex items-center justify-center flex-1 mb-4">
+        <CardContent className="p-3 flex flex-col">
+          {/* Logo Container - Main section */}
+          <div className="flex items-center justify-center">
             <Image
               src={portfolio.logoUrl}
               alt={`${portfolio.name} logo`}
@@ -60,7 +60,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           </div>
           
           {/* Title - Only visible on hover */}
-          <div className="text-center tagline-title mb-2">
+          <div className="text-center tagline-title mt-2">
             <h3 className="text-white text-sm md:text-base lg:text-lg font-bold">
               {portfolio.name}
             </h3>
