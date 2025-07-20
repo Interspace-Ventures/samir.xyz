@@ -10,13 +10,26 @@ export default function VenturesPage() {
 
   useEffect(() => {
     fetch('/api/ventures-detailed')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then(data => {
-        setVentures(data);
+        // Ensure data is an array
+        if (Array.isArray(data)) {
+          setVentures(data);
+        } else {
+          console.error('Expected array but got:', data);
+          setVentures([]);
+        }
         setLoading(false);
       })
       .catch(err => {
+        console.error('Error fetching ventures:', err);
         setError(err.message);
+        setVentures([]);
         setLoading(false);
       });
   }, []);
@@ -53,7 +66,7 @@ export default function VenturesPage() {
           
           {!loading && !error && (
             <div className="grid grid-cols-3 md:grid-cols-4 gap-4 w-full">
-              {ventures.map((venture) => (
+              {ventures && ventures.length > 0 && ventures.map((venture) => (
                 <a
                   key={venture.id}
                   href={venture.website || '#'}
@@ -95,7 +108,7 @@ export default function VenturesPage() {
             </div>
           )}
           
-          {ventures.length === 0 && !loading && (
+          {(!ventures || ventures.length === 0) && !loading && !error && (
             <p className="text-gray-500 text-center py-12">No ventures found.</p>
           )}
         </div>
