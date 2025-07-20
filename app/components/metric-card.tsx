@@ -29,8 +29,8 @@ export default function MetricCard({ label, value, index = 0 }: MetricCardProps)
         x: -2,
         y: -2,
         boxShadow: '0 0 0 2px #000, 6px 6px 0px 0px #000',
+        transition: { duration: 0.2 }
       }}
-      transition={{ duration: 0.2 }}
     >
       <div className="text-xs sm:text-sm text-white/80 mb-2 font-bold uppercase tracking-wider">{label}</div>
       <div className="text-xl sm:text-2xl font-bold text-white">{value}</div>
