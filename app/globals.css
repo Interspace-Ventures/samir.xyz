@@ -85,16 +85,16 @@
   
   /* Status badge styling */
   .status-badge {
-    @apply text-white text-xs px-2 py-1 font-medium border border-black;
+    @apply text-white text-xs px-2 py-1 font-bold border-2 border-black;
     box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
   }
   
   .status-badge-markup {
-    background-color: #8b5cf6;
+    background-color: #7f54dc;
   }
   
   .status-badge-acquired {
-    background-color: #374151;
+    background-color: #6b7280;
   }
 }
 
@@ -244,6 +244,19 @@ motion-div img {
   border: none;
   outline: none;
   box-shadow: none;
+}
+
+/* Ensure hover overlays are visible */
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1 !important;
+}
+
+/* Portfolio and venture card hover overlays */
+.neo-card .group-hover\:opacity-100,
+.neobrutalist-shadow .group-hover\:opacity-100,
+[class*="aspect-square"] .group-hover\:opacity-100 {
+  z-index: 20;
+  pointer-events: none;
 }
 
 /* Override any Tailwind or component library borders */
