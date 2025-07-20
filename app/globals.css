@@ -87,14 +87,17 @@
   .status-badge {
     @apply text-white text-xs px-2 py-1 font-bold border-2 border-black;
     box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+    display: inline-block;
   }
   
   .status-badge-markup {
-    background-color: #7f54dc;
+    background-color: #7f54dc !important;
+    color: #ffffff !important;
   }
   
   .status-badge-acquired {
-    background-color: #6b7280;
+    background-color: #6b7280 !important;
+    color: #ffffff !important;
   }
 }
 
