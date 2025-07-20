@@ -21,6 +21,11 @@ interface VenturesGridProps {
 export function VenturesGrid({ className }: VenturesGridProps) {
   const { data: venturesData = [], isLoading, error } = useVenturesData();
 
+  // Debug logging
+  console.log('VenturesGrid - isLoading:', isLoading);
+  console.log('VenturesGrid - error:', error);
+  console.log('VenturesGrid - venturesData:', venturesData);
+
   // Loading state
   if (isLoading) {
     return (
