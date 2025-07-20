@@ -33,19 +33,7 @@ export function VentureCard({ venture, index, className }: VentureCardProps) {
         href={venture.website || '#'}
         target="_blank"
         rel="noopener noreferrer"
-        className="group aspect-square bg-white relative overflow-hidden block cursor-pointer"
-        style={{
-          boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
-          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translate(-2px, -2px)';
-          e.currentTarget.style.boxShadow = '0 0 0 2px #000, 6px 6px 0px 0px #000';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translate(0, 0)';
-          e.currentTarget.style.boxShadow = '0 0 0 2px #000, 4px 4px 0px 0px #000';
-        }}
+        className="group aspect-square bg-white relative overflow-hidden block cursor-pointer neobrutalist-shadow transition-all duration-200 hover:neobrutalist-shadow-hover hover:neobrutalist-transform-hover"
       >
         {/* Logo fills entire card */}
         {venture.logoUrl && (

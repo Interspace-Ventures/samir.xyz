@@ -22,6 +22,11 @@ Preferred communication style: Simple, everyday language.
 - **Filter Button Styling**: Implemented proper neobrutalism.dev button styling with white text when active
 - **Shadow Consistency**: Standardized 4px shadows with smooth transitions across all card types
 - **Background Fix**: Set proper background color #332452 across the site
+- **Code Quality Improvements**: Major refactoring to remove all !important CSS, eliminate inline styles, and create reusable design tokens
+- **Design System**: Created centralized design tokens (`lib/constants/design-tokens.ts`) for colors, shadows, transitions, and breakpoints
+- **Neobrutalist Utilities**: Built reusable neobrutalist component utilities (`lib/utils/neobrutalist.ts`) for consistent styling
+- **CSS Cleanup**: Removed duplicate animations, !important declarations, and hard-coded values from globals.css
+- **Component Refactoring**: Updated all card components to use utility classes instead of inline styles for better maintainability
 
 ## System Architecture
 
@@ -29,6 +34,9 @@ Preferred communication style: Simple, everyday language.
 - **Framework**: Next.js 15.3.1 with App Router
 - **Language**: TypeScript for type safety with centralized type definitions
 - **Styling**: Tailwind CSS with custom neobrutalism component system
+  - Design tokens in `lib/constants/design-tokens.ts` (colors, shadows, transitions, breakpoints)
+  - Neobrutalist utilities in `lib/utils/neobrutalist.ts` for consistent card and grid styling
+  - CSS utility classes for reusable components (neobrutalist-shadow, status-badge, etc.)
 - **Animations**: Framer Motion with centralized animation utilities
 - **Font**: Alexandria Google Font for consistent typography
 - **Component Library**: Reusable UI components with consistent API patterns
