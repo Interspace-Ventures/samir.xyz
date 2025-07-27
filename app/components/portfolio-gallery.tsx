@@ -142,7 +142,7 @@ export default function PortfolioGallery() {
                 : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
             }`}
             onClick={() => {
-              console.log("Clicked 'All' category");
+
               updateCategory('All'); // Use the updateCategory function
             }}
           >
@@ -162,7 +162,7 @@ export default function PortfolioGallery() {
                   : 'bg-[#2d0c6a] text-white hover:bg-[#381490] border border-[#7f55dc]'
               }`}
               onClick={() => {
-                console.log(`Clicked '${category}' category`);
+
                 updateCategory(category); // Use the updateCategory function
               }}
             >

@@ -10,7 +10,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    console.log('Fetching portfolio metrics summary data...');
+
     
     // Get minimal data needed for metrics calculation
     const portfolioItems = await prisma.portfolio.findMany({
@@ -45,7 +45,7 @@ export async function GET() {
       irr: 13
     };
     
-    console.log('Successfully retrieved metrics summary data');
+
     return NextResponse.json(metrics);
   } catch (error) {
     console.error('Error fetching metrics summary:', error);

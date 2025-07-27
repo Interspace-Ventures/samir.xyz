@@ -42,14 +42,14 @@ export default function CompanySection() {
     queryKey: ['categories'],
     queryFn: async () => {
       try {
-        console.log('Fetching categories...');
+
         const res = await fetch('/api/categories');
         if (!res.ok) {
           console.error(`Failed to fetch categories: ${res.status} ${res.statusText}`);
           throw new Error(`Failed to fetch categories: ${res.status}`);
         }
         const data = await res.json();
-        console.log(`Fetched ${data.length} categories`);
+
         return data;
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -69,14 +69,14 @@ export default function CompanySection() {
     queryKey: ['portfolio'],
     queryFn: async () => {
       try {
-        console.log('Fetching portfolio items...');
+
         const res = await fetch('/api/portfolio');
         if (!res.ok) {
           console.error(`Failed to fetch portfolio items: ${res.status} ${res.statusText}`);
           throw new Error(`Failed to fetch portfolio items: ${res.status}`);
         }
         const data = await res.json();
-        console.log(`Fetched ${data.length} portfolio items`);
+
         return data;
       } catch (error) {
         console.error('Error fetching portfolio items:', error);

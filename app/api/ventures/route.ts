@@ -9,7 +9,7 @@ import { prisma } from '@/lib/prisma';
  */
 export async function GET() {
   try {
-    console.log('Fetching ventures data from database...');
+
     
     // Only show active ventures (using actual database names)
     const activeVentures = ['2 Days Early', 'interspace', 'tbh', 'moonshot'];
@@ -25,10 +25,10 @@ export async function GET() {
       },
     });
     
-    console.log(`Successfully retrieved ${ventures.length} ventures`);
+
     return NextResponse.json(ventures);
   } catch (error) {
-    console.error('Error fetching ventures data:', error);
+
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     
     return NextResponse.json(

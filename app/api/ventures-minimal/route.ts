@@ -10,7 +10,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    console.log('Fetching minimal ventures data...');
+
     
     // Only show active ventures (using actual database names)
     const activeVentures = ['2 Days Early', 'interspace', 'tbh', 'moonshot'];
@@ -36,7 +36,7 @@ export async function GET() {
       },
     });
     
-    console.log(`Successfully retrieved ${ventures.length} ventures (minimal data)`);
+
     return NextResponse.json(ventures);
   } catch (error) {
     console.error('Error fetching minimal ventures data:', error);
