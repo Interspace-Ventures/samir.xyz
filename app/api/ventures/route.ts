@@ -11,8 +11,8 @@ export async function GET() {
   try {
     console.log('Fetching ventures data from database...');
     
-    // Only show active ventures
-    const activeVentures = ['2DE', 'Interspace', 'TBH', 'Moonshot'];
+    // Only show active ventures (using actual database names)
+    const activeVentures = ['2 Days Early', 'interspace', 'tbh', 'moonshot'];
     
     const ventures = await prisma.venture.findMany({
       where: {

@@ -12,8 +12,8 @@ export async function GET() {
   try {
     console.log('Fetching minimal ventures data...');
     
-    // Only show active ventures
-    const activeVentures = ['2DE', 'Interspace', 'TBH', 'Moonshot'];
+    // Only show active ventures (using actual database names)
+    const activeVentures = ['2 Days Early', 'interspace', 'tbh', 'moonshot'];
     
     // Get only the essential fields needed for minimal display
     const ventures = await prisma.venture.findMany({
