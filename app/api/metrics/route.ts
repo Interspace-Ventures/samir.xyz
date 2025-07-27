@@ -38,11 +38,11 @@ export async function GET() {
       total_investments: 37,
       markups: 16,
       acquisitions: acquisitionCount,
-      busts: 5,
+      busts: 7,
       tvpi: 1.5,
       gross_multiple: 1.9,
       net_multiple: 1.7,
-      irr: 12
+      irr: 13
     };
     
     console.log('Successfully retrieved metrics summary data');

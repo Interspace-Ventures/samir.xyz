@@ -43,11 +43,25 @@ export function PortfolioGrid({ className }: PortfolioGridProps) {
         <div className="mb-8">
           <div className="flex gap-2 mb-4">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-10 w-20 bg-gray-200 animate-pulse" />
+              <div key={i} className="h-10 w-20 bg-purple-200/20 border border-purple-900/30 animate-pulse rounded" />
             ))}
           </div>
         </div>
-        <GridSkeleton itemCount={8} />
+        {/* Simple skeleton grid like ventures */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <div
+              key={`portfolio-skeleton-${index}`}
+              className="h-[120px] bg-white/5 border border-purple-900/30 relative overflow-hidden animate-pulse"
+              style={{
+                boxShadow: '4px 4px 0px 0px rgba(0,0,0,0.1)',
+              }}
+            >
+              {/* Subtle shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

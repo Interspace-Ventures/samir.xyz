@@ -8,7 +8,7 @@ This is a modern personal portfolio website built with Next.js that showcases pr
 
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (2025-07-20)
+## Recent Changes (2025-07-27)
 
 - **TypeScript Compilation Fixes**: Fixed deployment error by adding proper type annotations for 'venture' and 'index' parameters in map function (ventures-grid-detailed.tsx line 55)
 - **Animation Types Update**: Updated AnimationVariants interface to be compatible with Framer Motion's Variants type by adding index signature
@@ -33,6 +33,9 @@ Preferred communication style: Simple, everyday language.
 - **Component Refactoring**: Updated all card components to use utility classes instead of inline styles for better maintainability
 - **Status Badge Fix**: Fixed Markup/Acquired badges to properly display purple (#7f54dc) and gray (#6b7280) backgrounds with white text
 - **Hover Overlay Consistency**: Unified hover overlay effects across Portfolio and Ventures cards with consistent purple gradient
+- **Metrics Update**: Updated portfolio metrics to reflect current state - Busts: 7, IRR: 13%
+- **Portfolio Cleanup**: Removed The Food Company from gallery display as it's busted
+- **Skeleton Loader Simplification**: Made portfolio loading skeletons cleaner and simpler like ventures page with subtle shimmer effects
 
 ## System Architecture
 
