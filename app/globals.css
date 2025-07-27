@@ -99,6 +99,20 @@
     background-color: #6b7280 !important;
     color: #ffffff !important;
   }
+  
+  /* Shimmer animation for skeletons */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
+  }
 }
 
 @layer base {

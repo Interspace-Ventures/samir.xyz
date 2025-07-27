@@ -62,8 +62,13 @@ export async function GET(request: NextRequest) {
     
     // Removed console logs for performance
     
-    // Query all portfolio items from the database
+    // Query all portfolio items from the database (exclude busted companies from display)
     const portfolioItems = await prisma.portfolio.findMany({
+      where: {
+        NOT: {
+          name: 'The Food Company'
+        }
+      },
       orderBy: [
         { createdAt: 'desc' }, // Sort by creation date (newest first)
       ],

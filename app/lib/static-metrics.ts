@@ -24,9 +24,9 @@ export const staticMetrics: PortfolioSummary = {
   total_investments: 37,
   markups: 16,
   acquisitions: 3,
-  busts: 5,
+  busts: 7,
   tvpi: 1.5,
   gross_multiple: 1.9,
   net_multiple: 1.7,
-  irr: 12
+  irr: 13
 };
