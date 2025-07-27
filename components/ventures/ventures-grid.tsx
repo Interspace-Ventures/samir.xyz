@@ -28,11 +28,11 @@ export function VenturesGrid({ className }: VenturesGridProps) {
     return (
       <div className={className}>
         <GridSkeleton
-          itemCount={8}
+          itemCount={4}
           columns={{
             mobile: 2,
-            tablet: 3,
-            desktop: 4,
+            tablet: 2,
+            desktop: 2,
           }}
         />
       </div>
@@ -64,7 +64,7 @@ export function VenturesGrid({ className }: VenturesGridProps) {
         initial="hidden"
         animate="visible"
       >
-        <div className="grid grid-cols-3 md:grid-cols-4 gap-4 w-full">
+        <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl mx-auto">
           {venturesData.map((venture, index) => (
             <VentureCard
               key={venture.id}
