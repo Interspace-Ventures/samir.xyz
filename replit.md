@@ -36,6 +36,7 @@ Preferred communication style: Simple, everyday language.
 - **Metrics Update**: Updated portfolio metrics to reflect current state - Busts: 7, IRR: 13%
 - **Portfolio Cleanup**: Removed The Food Company from gallery display as it's busted
 - **Skeleton Loader Simplification**: Made portfolio loading skeletons cleaner and simpler like ventures page with subtle shimmer effects
+- **Ventures Display Update**: Limited ventures display to only active ventures: 2DE, Interspace, TBH, and Moonshot (removed Solo, Omni, samir.xyz, and Predictive)
 
 ## System Architecture
 

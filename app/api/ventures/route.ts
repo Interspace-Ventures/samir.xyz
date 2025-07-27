@@ -11,7 +11,15 @@ export async function GET() {
   try {
     console.log('Fetching ventures data from database...');
     
+    // Only show active ventures
+    const activeVentures = ['2DE', 'Interspace', 'TBH', 'Moonshot'];
+    
     const ventures = await prisma.venture.findMany({
+      where: {
+        name: {
+          in: activeVentures
+        }
+      },
       orderBy: {
         name: 'asc',
       },
