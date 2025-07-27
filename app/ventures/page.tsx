@@ -57,8 +57,8 @@ export default function VenturesPage() {
           </div>
           
           {loading && (
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 w-full">
-              {Array.from({ length: 8 }).map((_, index) => (
+            <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl mx-auto">
+              {Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={index}
                   className="aspect-square bg-white border-2 border-black relative overflow-hidden"
@@ -75,7 +75,7 @@ export default function VenturesPage() {
           {error && <p className="text-red-500">Error: {error}</p>}
           
           {!loading && !error && (
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 w-full">
+            <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl mx-auto">
               {ventures && ventures.length > 0 && ventures.map((venture) => (
                 <a
                   key={venture.id}

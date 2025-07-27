@@ -50,9 +50,9 @@ export default function VenturesGrid() {
     return (
       <div className="w-full mx-auto">
         {/* Use the same grid layout for the skeleton as the actual content */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {/* Generate 8 skeleton venture cards */}
-          {Array(8).fill(0).map((_, index) => (
+        <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto">
+          {/* Generate 4 skeleton venture cards */}
+          {Array(4).fill(0).map((_, index) => (
             <div
               key={`venture-skeleton-${index}`}
               className="aspect-square bg-white/5 rounded-md border border-purple-900/30 relative overflow-hidden"
@@ -73,11 +73,11 @@ export default function VenturesGrid() {
   
   return (
     <div className="w-full mx-auto">
-      {/* Fixed grid layout: 2x4 on desktop, 4x2 on mobile */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-        {/* Show exactly 8 ventures in grid */}
+      {/* Fixed grid layout: 2x2 on both mobile and desktop */}
+      <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto">
+        {/* Show exactly 4 ventures in grid */}
         {[...ventures]
-          .slice(0, 8)
+          .slice(0, 4)
           .map((venture, index) => (
             <div key={venture.id} className="aspect-square relative">
               <VentureCard 
@@ -86,8 +86,8 @@ export default function VenturesGrid() {
               />
             </div>
           ))}
-        {/* Add empty placeholders if less than 8 ventures to maintain grid layout */}
-        {ventures.length < 8 && Array(8 - ventures.length).fill(0).map((_, index) => (
+        {/* Add empty placeholders if less than 4 ventures to maintain grid layout */}
+        {ventures.length < 4 && Array(4 - ventures.length).fill(0).map((_, index) => (
           <div key={`empty-${index}`} className="aspect-square bg-zinc-900/30"></div>
         ))}
       </div>
