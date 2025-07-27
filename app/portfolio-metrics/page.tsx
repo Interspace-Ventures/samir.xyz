@@ -43,14 +43,14 @@ export default function PortfolioMetricsPage() {
     queryKey: ['portfolio'],
     queryFn: async () => {
       try {
-        console.log('Fetching portfolio items for metrics page...');
+
         const res = await fetch('/api/portfolio');
         if (!res.ok) {
           console.error(`Failed to fetch portfolio items: ${res.status} ${res.statusText}`);
           throw new Error(`Failed to fetch portfolio items: ${res.status}`);
         }
         const data = await res.json();
-        console.log(`Fetched ${data.length} portfolio items for metrics page`);
+
         return data;
       } catch (error) {
         console.error('Error fetching portfolio items for metrics page:', error);
