@@ -10,8 +10,8 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    // Only show active ventures
-    const activeVentures = ['2DE', 'Interspace', 'TBH', 'Moonshot'];
+    // Only show active ventures (using actual database names)
+    const activeVentures = ['2 Days Early', 'interspace', 'tbh', 'moonshot'];
     
     // Get full data for detailed ventures display
     const ventures = await prisma.venture.findMany({
