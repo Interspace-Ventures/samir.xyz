@@ -100,11 +100,11 @@ export default function MetricsSummaryStandalone() {
         {/* TVPI */}
         <MetricCard label="TVPI" value={formatMultiple(summary.tvpi)} index={4} />
         
-        {/* Gross Multiple */}
-        <MetricCard label="Gross Multiple" value={formatMultiple(summary.gross_multiple)} index={5} />
+        {/* Gross MOIC */}
+        <MetricCard label="Gross MOIC" value={formatMultiple(summary.gross_multiple)} index={5} />
         
-        {/* Net Multiple */}
-        <MetricCard label="Net Multiple" value={formatMultiple(summary.net_multiple)} index={6} />
+        {/* Net MOIC */}
+        <MetricCard label="Net MOIC" value={formatMultiple(summary.net_multiple)} index={6} />
         
         {/* IRR */}
         <MetricCard label="IRR" value={formatPercentage(summary.irr)} index={7} />
