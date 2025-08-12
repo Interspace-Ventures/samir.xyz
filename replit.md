@@ -33,10 +33,19 @@ Preferred communication style: Simple, everyday language.
 - **Component Refactoring**: Updated all card components to use utility classes instead of inline styles for better maintainability
 - **Status Badge Fix**: Fixed Markup/Acquired badges to properly display purple (#7f54dc) and gray (#6b7280) backgrounds with white text
 - **Hover Overlay Consistency**: Unified hover overlay effects across Portfolio and Ventures cards with consistent purple gradient
-- **Metrics Update**: Updated portfolio metrics to reflect current state - Busts: 7, IRR: 13%
+- **Metrics Update**: Updated portfolio metrics to reflect current state - Busts: 8, IRR: 13%, # Investments: 42
 - **Portfolio Cleanup**: Removed The Food Company from gallery display as it's busted
 - **Skeleton Loader Simplification**: Made portfolio loading skeletons cleaner and simpler like ventures page with subtle shimmer effects
 - **Ventures Display Update**: Limited ventures display to only active ventures: 2DE, Interspace, TBH, and Moonshot (removed Solo, Omni, samir.xyz, and Predictive)
+
+## Recent Changes (2025-01-12)
+
+- **Portfolio Update**: Removed Superplastic from portfolio (deal went bust)
+- **Metrics Updates**: 
+  - Changed # Busts from 7 to 8
+  - Changed # Investments from 37 to 42
+  - Changed "Gross Multiple" label to "Gross MOIC"
+  - Changed "Net Multiple" label to "Net MOIC"
 
 ## System Architecture
 

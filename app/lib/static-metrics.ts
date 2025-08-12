@@ -21,10 +21,10 @@ export type PortfolioSummary = {
  * This allows for instant rendering of metrics before API data is fetched
  */
 export const staticMetrics: PortfolioSummary = {
-  total_investments: 37,
+  total_investments: 42,
   markups: 16,
   acquisitions: 3,
-  busts: 7,
+  busts: 8,
   tvpi: 1.5,
   gross_multiple: 1.9,
   net_multiple: 1.7,
