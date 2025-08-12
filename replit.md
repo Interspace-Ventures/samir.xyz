@@ -43,9 +43,13 @@ Preferred communication style: Simple, everyday language.
 - **Portfolio Update**: Removed Superplastic from portfolio (deal went bust)
 - **Metrics Updates**: 
   - Changed # Busts from 7 to 8
-  - Changed # Investments from 37 to 42
+  - Changed # Investments from 37 to 44 (added Perplexity and Replit)
   - Changed "Gross Multiple" label to "Gross MOIC"
   - Changed "Net Multiple" label to "Net MOIC"
+- **New AI Companies Added**:
+  - **Perplexity**: AI-powered search engine valued at $18B
+  - **Replit**: AI-powered cloud development platform valued at $1.16B
+- **Database Logging**: Disabled query logging in Prisma to clean up console output
 
 ## System Architecture
 
