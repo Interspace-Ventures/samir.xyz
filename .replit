@@ -2,7 +2,7 @@ modules = ["nodejs-20", "postgresql-16"]
 
 [nix]
 channel = "stable-25_05"
-packages = ["jq"]
+packages = ["imagemagick"]
 
 [[ports]]
 localPort = 3000
