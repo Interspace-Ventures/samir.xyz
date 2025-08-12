@@ -18,7 +18,7 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient };
 export const prisma =
   globalForPrisma.prisma ||
   new PrismaClient({
-    log: ['error'], // Only log errors, not queries
+    log: [], // Disable all logging
   });
 
 // Save PrismaClient to the global object in non-production environments
