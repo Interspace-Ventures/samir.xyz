@@ -46,10 +46,12 @@ Preferred communication style: Simple, everyday language.
   - Changed # Investments from 37 to 44 (added Perplexity and Replit)
   - Changed "Gross Multiple" label to "Gross MOIC"
   - Changed "Net Multiple" label to "Net MOIC"
-- **New AI Companies Added**:
-  - **Perplexity**: AI-powered search engine valued at $18B
-  - **Replit**: AI-powered cloud development platform valued at $1.16B
+- **New Companies Added**:
+  - **Perplexity**: AI-powered search engine valued at $18B (AI category)
+  - **Replit**: AI-powered cloud development platform valued at $1.16B (AI category)
+  - **Fizz**: Credit-building debit card for Gen Z students (Fintech category)
 - **Database Logging**: Disabled query logging in Prisma to clean up console output
+- **Total Investments**: Updated from 37 to 45
 
 ## System Architecture
 
