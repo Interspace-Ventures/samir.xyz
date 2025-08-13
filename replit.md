@@ -43,9 +43,10 @@ Preferred communication style: Simple, everyday language.
 - **Portfolio Update**: Removed Superplastic from portfolio (deal went bust)
 - **Metrics Updates**: 
   - Changed # Busts from 7 to 8
-  - Changed # Investments from 37 to 44 (added Perplexity and Replit)
-  - Changed "Gross Multiple" label to "Gross MOIC"
-  - Changed "Net Multiple" label to "Net MOIC"
+  - Changed # Investments from 37 to 44 (added Perplexity, Replit, and Fizz)
+  - Changed "Gross Multiple" label to "Gross MOIC" (1.7x)
+  - Changed "Net Multiple" label to "Net MOIC" (1.5x)
+  - Changed IRR from 13% to 12%
 - **New Companies Added**:
   - **Perplexity**: AI-powered search engine valued at $18B (AI category)
   - **Replit**: AI-powered cloud development platform valued at $1.16B (AI category)
