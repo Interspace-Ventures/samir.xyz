@@ -38,6 +38,16 @@ Preferred communication style: Simple, everyday language.
 - **Skeleton Loader Simplification**: Made portfolio loading skeletons cleaner and simpler like ventures page with subtle shimmer effects
 - **Ventures Display Update**: Limited ventures display to only active ventures: 2DE, Interspace, TBH, and Moonshot (removed Solo, Omni, samir.xyz, and Predictive)
 
+## Recent Changes (2025-08-13)
+
+- **Logo Updates**:
+  - Updated Replit logo with cleaner wordmark version
+  - Updated Perplexity logo with official branding
+  - Updated Fizz logo and adjusted size to be smaller within card
+  - All logos maintain consistent 500x250 dimensions with proper scaling
+- **Perplexity Status**: Added "Markup" status badge to Perplexity (shows purple badge)
+- **Category Updates**: Moved Soot from SaaS to AI category
+
 ## Recent Changes (2025-01-12)
 
 - **Portfolio Update**: Removed Superplastic from portfolio (deal went bust)
