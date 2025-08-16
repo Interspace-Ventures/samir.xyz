@@ -158,58 +158,44 @@ export default function VenturesPage() {
                 stiffness: 300
               }}
               className="fixed bottom-0 left-0 right-0 z-50"
+              style={{ backgroundColor: '#332452' }}
             >
               <div 
-                className="border-t-4 border-l-4 border-r-4 border-black mx-auto max-w-sm"
+                className="w-full border-4 border-black relative"
                 style={{
-                  background: 'linear-gradient(to bottom, #45297d, #332452)',
-                  borderTopLeftRadius: '12px',
-                  borderTopRightRadius: '12px',
-                  boxShadow: '0 -6px 0px 0px rgba(0,0,0,1)',
+                  backgroundColor: '#2a313a',
+                  boxShadow: '0 -4px 0px 0px rgba(0,0,0,1)',
                 }}
               >
-                {/* Handle */}
-                <div className="flex justify-center pt-2 pb-1">
-                  <div 
-                    className="w-10 h-1 bg-white/30 rounded-full"
-                  />
-                </div>
+                {/* Close button */}
+                <button
+                  onClick={() => setShowComingSoon(false)}
+                  className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-white border-2 border-black hover:bg-gray-100 transition-colors"
+                  style={{
+                    boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
+                  }}
+                  aria-label="Close"
+                >
+                  <span className="text-black font-bold text-lg">×</span>
+                </button>
                 
                 {/* Content */}
-                <div className="px-6 pb-6 pt-2">
-                  <h2 className="text-xl font-bold text-white mb-2">
+                <div className="px-8 py-8 max-w-2xl mx-auto">
+                  <h2 className="text-2xl font-bold text-white mb-3">
                     {selectedVenture}
                   </h2>
-                  <div className="bg-[#7f54dc] border-2 border-black p-3 mb-3" 
+                  <div className="bg-[#332452] border-2 border-black p-4" 
                     style={{
-                      boxShadow: '3px 3px 0px 0px rgba(0,0,0,1)',
+                      boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
                     }}
                   >
-                    <p className="text-base font-semibold text-white">
+                    <p className="text-lg font-semibold text-white">
                       Launching Soon
                     </p>
-                    <p className="text-sm mt-1 text-white/90">
-                      Something exciting is coming. Stay tuned!
+                    <p className="text-sm mt-2 text-white/80">
+                      We're putting the finishing touches on something extraordinary. Stay tuned for the big reveal!
                     </p>
                   </div>
-                  
-                  <button
-                    onClick={() => setShowComingSoon(false)}
-                    className="w-full bg-white text-black font-bold py-2.5 px-4 border-2 border-black transition-all duration-200"
-                    style={{
-                      boxShadow: '3px 3px 0px 0px rgba(0,0,0,1)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                      e.currentTarget.style.boxShadow = '5px 5px 0px 0px rgba(0,0,0,1)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translate(0, 0)';
-                      e.currentTarget.style.boxShadow = '3px 3px 0px 0px rgba(0,0,0,1)';
-                    }}
-                  >
-                    Got it
-                  </button>
                 </div>
               </div>
             </motion.div>
