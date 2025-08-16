@@ -35,8 +35,8 @@ export async function GET() {
     // Return hardcoded and calculated metrics
     // These are the standard metrics used across the portfolio analytics
     const metrics = {
-      total_investments: 44,
-      markups: 16,
+      total_investments: 42,
+      markups: 17,
       acquisitions: acquisitionCount,
       busts: 8,
       tvpi: 1.5,
