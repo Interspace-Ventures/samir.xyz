@@ -87,7 +87,6 @@ export default function VenturesPage() {
                       e.preventDefault();
                       setSelectedVenture(venture.name);
                       setShowComingSoon(true);
-                      setTimeout(() => setShowComingSoon(false), 3000); // Auto hide after 3 seconds
                     } else if (venture.website) {
                       window.open(venture.website, '_blank', 'noopener,noreferrer');
                     }
@@ -134,30 +133,88 @@ export default function VenturesPage() {
         </div>
       </section>
       
-      {/* Coming Soon Popup */}
+      {/* Coming Soon Drawer */}
       <AnimatePresence>
         {showComingSoon && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50"
-          >
-            <div 
-              className="bg-white text-black px-8 py-4 border-4 border-black font-bold"
-              style={{
-                boxShadow: '8px 8px 0px 0px rgba(0,0,0,1)',
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 z-40"
+              onClick={() => setShowComingSoon(false)}
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ 
+                type: 'spring',
+                damping: 30,
+                stiffness: 300
               }}
+              className="fixed bottom-0 left-0 right-0 z-50"
             >
-              <p className="text-lg">
-                {selectedVenture} - Launching Soon! 🚀
-              </p>
-              <p className="text-sm font-medium mt-1">
-                Something exciting is coming...
-              </p>
-            </div>
-          </motion.div>
+              <div 
+                className="bg-white border-t-4 border-l-4 border-r-4 border-black mx-auto max-w-md"
+                style={{
+                  borderTopLeftRadius: '16px',
+                  borderTopRightRadius: '16px',
+                  boxShadow: '0 -8px 0px 0px rgba(0,0,0,1)',
+                }}
+              >
+                {/* Handle */}
+                <div className="flex justify-center pt-3 pb-2">
+                  <div 
+                    className="w-12 h-1.5 bg-black rounded-full"
+                    style={{ opacity: 0.3 }}
+                  />
+                </div>
+                
+                {/* Content */}
+                <div className="px-8 pb-8 pt-4">
+                  <h2 className="text-2xl font-bold text-black mb-2">
+                    {selectedVenture}
+                  </h2>
+                  <div className="bg-purple-100 border-2 border-black p-4 mb-4" 
+                    style={{
+                      boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+                    }}
+                  >
+                    <p className="text-lg font-semibold text-black">
+                      Launching Soon! 
+                    </p>
+                    <p className="text-sm mt-2 text-gray-700">
+                      We're putting the finishing touches on something extraordinary. 
+                      Stay tuned for the big reveal!
+                    </p>
+                  </div>
+                  
+                  <button
+                    onClick={() => setShowComingSoon(false)}
+                    className="w-full bg-black text-white font-bold py-3 px-6 border-2 border-black transition-all duration-200"
+                    style={{
+                      boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                      e.currentTarget.style.boxShadow = '6px 6px 0px 0px rgba(0,0,0,1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translate(0, 0)';
+                      e.currentTarget.style.boxShadow = '4px 4px 0px 0px rgba(0,0,0,1)';
+                    }}
+                  >
+                    Got it!
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>
