@@ -47,13 +47,16 @@ Preferred communication style: Simple, everyday language.
   - All logos maintain consistent 500x250 dimensions with proper scaling
 - **Perplexity Status**: Added "Markup" status badge to Perplexity (shows purple badge)
 - **Category Updates**: Moved Soot from SaaS to AI category
+- **Portfolio Metrics**: 
+  - Updated total investments from 44 to 42 (corrected for 2 double investments)
+  - Updated markups count to 17 companies
 
 ## Recent Changes (2025-01-12)
 
 - **Portfolio Update**: Removed Superplastic from portfolio (deal went bust)
 - **Metrics Updates**: 
   - Changed # Busts from 7 to 8
-  - Changed # Investments from 37 to 44 (added Perplexity, Replit, and Fizz)
+  - Changed # Investments from 37 to 42 (added Perplexity, Replit, and Fizz, corrected for double investments)
   - Changed "Gross Multiple" label to "Gross MOIC" (1.7x)
   - Changed "Net Multiple" label to "Net MOIC" (1.5x)
   - Changed IRR from 13% to 12%
