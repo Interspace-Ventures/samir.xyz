@@ -158,12 +158,12 @@ export default function VenturesPage() {
                 stiffness: 300
               }}
               className="fixed bottom-0 left-0 right-0 z-50"
-              style={{ backgroundColor: '#332452' }}
+              style={{ backgroundColor: '#2a313a' }}
             >
               <div 
                 className="w-full border-4 border-black relative"
                 style={{
-                  backgroundColor: '#2a313a',
+                  backgroundColor: '#332452',
                   boxShadow: '0 -4px 0px 0px rgba(0,0,0,1)',
                 }}
               >
@@ -184,7 +184,7 @@ export default function VenturesPage() {
                   <h2 className="text-2xl font-bold text-white mb-3">
                     {selectedVenture}
                   </h2>
-                  <div className="bg-[#332452] border-2 border-black p-4" 
+                  <div className="bg-[#2a313a] border-2 border-black p-4" 
                     style={{
                       boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
                     }}
