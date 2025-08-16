@@ -170,13 +170,13 @@ export default function VenturesPage() {
                 {/* Close button */}
                 <button
                   onClick={() => setShowComingSoon(false)}
-                  className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-white border-2 border-black hover:bg-gray-100 transition-colors"
+                  className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center bg-[#7f54dc] hover:bg-[#6a3fd4] border-2 border-black transition-colors"
                   style={{
                     boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
                   }}
                   aria-label="Close"
                 >
-                  <span className="text-black font-bold text-lg">×</span>
+                  <span className="text-white font-bold text-xl">×</span>
                 </button>
                 
                 {/* Content */}
