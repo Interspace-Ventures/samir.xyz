@@ -160,56 +160,55 @@ export default function VenturesPage() {
               className="fixed bottom-0 left-0 right-0 z-50"
             >
               <div 
-                className="bg-white border-t-4 border-l-4 border-r-4 border-black mx-auto max-w-md"
+                className="border-t-4 border-l-4 border-r-4 border-black mx-auto max-w-sm"
                 style={{
-                  borderTopLeftRadius: '16px',
-                  borderTopRightRadius: '16px',
-                  boxShadow: '0 -8px 0px 0px rgba(0,0,0,1)',
+                  background: 'linear-gradient(to bottom, #45297d, #332452)',
+                  borderTopLeftRadius: '12px',
+                  borderTopRightRadius: '12px',
+                  boxShadow: '0 -6px 0px 0px rgba(0,0,0,1)',
                 }}
               >
                 {/* Handle */}
-                <div className="flex justify-center pt-3 pb-2">
+                <div className="flex justify-center pt-2 pb-1">
                   <div 
-                    className="w-12 h-1.5 bg-black rounded-full"
-                    style={{ opacity: 0.3 }}
+                    className="w-10 h-1 bg-white/30 rounded-full"
                   />
                 </div>
                 
                 {/* Content */}
-                <div className="px-8 pb-8 pt-4">
-                  <h2 className="text-2xl font-bold text-black mb-2">
+                <div className="px-6 pb-6 pt-2">
+                  <h2 className="text-xl font-bold text-white mb-2">
                     {selectedVenture}
                   </h2>
-                  <div className="bg-purple-100 border-2 border-black p-4 mb-4" 
+                  <div className="bg-[#7f54dc] border-2 border-black p-3 mb-3" 
                     style={{
-                      boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+                      boxShadow: '3px 3px 0px 0px rgba(0,0,0,1)',
                     }}
                   >
-                    <p className="text-lg font-semibold text-black">
-                      Launching Soon! 
+                    <p className="text-base font-semibold text-white">
+                      Launching Soon
                     </p>
-                    <p className="text-sm mt-2 text-gray-700">
-                      We're putting the finishing touches on something extraordinary. 
-                      Stay tuned for the big reveal!
+                    <p className="text-sm mt-1 text-white/90">
+                      Something exciting is coming. Stay tuned!
                     </p>
                   </div>
                   
                   <button
                     onClick={() => setShowComingSoon(false)}
-                    className="w-full bg-black text-white font-bold py-3 px-6 border-2 border-black transition-all duration-200"
+                    className="w-full bg-white text-black font-bold py-2.5 px-4 border-2 border-black transition-all duration-200"
                     style={{
-                      boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+                      boxShadow: '3px 3px 0px 0px rgba(0,0,0,1)',
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                      e.currentTarget.style.boxShadow = '6px 6px 0px 0px rgba(0,0,0,1)';
+                      e.currentTarget.style.boxShadow = '5px 5px 0px 0px rgba(0,0,0,1)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'translate(0, 0)';
-                      e.currentTarget.style.boxShadow = '4px 4px 0px 0px rgba(0,0,0,1)';
+                      e.currentTarget.style.boxShadow = '3px 3px 0px 0px rgba(0,0,0,1)';
                     }}
                   >
-                    Got it!
+                    Got it
                   </button>
                 </div>
               </div>
