@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Venture {
   id: number;
@@ -17,6 +18,8 @@ export default function VenturesPage() {
   const [ventures, setVentures] = useState<Venture[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showComingSoon, setShowComingSoon] = useState(false);
+  const [selectedVenture, setSelectedVenture] = useState<string>('');
 
   useEffect(() => {
     fetch('/api/ventures-detailed')
@@ -77,11 +80,18 @@ export default function VenturesPage() {
           {!loading && !error && (
             <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl mx-auto">
               {ventures && ventures.length > 0 && ventures.map((venture) => (
-                <a
+                <div
                   key={venture.id}
-                  href={venture.status === 'Pre-launch' ? '/launching-soon' : (venture.website || '#')}
-                  target={venture.status === 'Pre-launch' ? '_self' : '_blank'}
-                  rel={venture.status === 'Pre-launch' ? '' : 'noopener noreferrer'}
+                  onClick={(e) => {
+                    if (venture.status === 'Pre-launch') {
+                      e.preventDefault();
+                      setSelectedVenture(venture.name);
+                      setShowComingSoon(true);
+                      setTimeout(() => setShowComingSoon(false), 3000); // Auto hide after 3 seconds
+                    } else if (venture.website) {
+                      window.open(venture.website, '_blank', 'noopener,noreferrer');
+                    }
+                  }}
                   className="group aspect-square bg-white relative overflow-hidden block cursor-pointer"
                   style={{
                     boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
@@ -113,7 +123,7 @@ export default function VenturesPage() {
                       )}
                     </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           )}
@@ -123,6 +133,33 @@ export default function VenturesPage() {
           )}
         </div>
       </section>
+      
+      {/* Coming Soon Popup */}
+      <AnimatePresence>
+        {showComingSoon && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50"
+          >
+            <div 
+              className="bg-white text-black px-8 py-4 border-4 border-black font-bold"
+              style={{
+                boxShadow: '8px 8px 0px 0px rgba(0,0,0,1)',
+              }}
+            >
+              <p className="text-lg">
+                {selectedVenture} - Launching Soon! 🚀
+              </p>
+              <p className="text-sm font-medium mt-1">
+                Something exciting is coming...
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
