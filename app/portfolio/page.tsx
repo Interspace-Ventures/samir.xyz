@@ -16,7 +16,7 @@ export default function PortfolioPage() {
   return (
     <div className="pt-20 pb-16">
       <section className="section">
-        <div className="container max-w-6xl">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <motion.h1 
             variants={fadeInUp}
             initial="hidden"

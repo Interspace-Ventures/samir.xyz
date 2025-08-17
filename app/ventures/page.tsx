@@ -50,19 +50,17 @@ export default function VenturesPage() {
   return (
     <div className="pt-20 pb-16">
       <section className="section">
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Ventures
           </h1>
           
-          <div className="w-full max-w-5xl mx-auto">
-            <div className="content-card mb-10 font-medium">
-              I develop apps and design concepts by building at the speed of thought using AI.
-            </div>
+          <div className="content-card mb-10 font-medium">
+            I develop apps and design concepts by building at the speed of thought using AI.
           </div>
           
           {loading && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full">
               {Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={index}
@@ -80,7 +78,7 @@ export default function VenturesPage() {
           {error && <p className="text-red-500">Error: {error}</p>}
           
           {!loading && !error && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full">
               {ventures && ventures.length > 0 && ventures.map((venture) => (
                 <div
                   key={venture.id}
