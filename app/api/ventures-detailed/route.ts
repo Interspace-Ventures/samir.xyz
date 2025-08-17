@@ -8,8 +8,17 @@
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
+// Cache the ventures data for 60 seconds
+let venturesCache: { data: any; timestamp: number } | null = null;
+const CACHE_DURATION = 60 * 1000; // 60 seconds
+
 export async function GET() {
   try {
+    // Check if cache is valid
+    if (venturesCache && Date.now() - venturesCache.timestamp < CACHE_DURATION) {
+      return NextResponse.json(venturesCache.data);
+    }
+    
     // Only show active ventures (using actual database names)
     const activeVentures = ['2 Days Early', 'Interspace', 'tbh', 'Moonshot'];
     
@@ -32,6 +41,9 @@ export async function GET() {
         name: 'asc',
       },
     });
+    
+    // Update cache
+    venturesCache = { data: ventures, timestamp: Date.now() };
     
     return NextResponse.json(ventures);
   } catch (error) {
