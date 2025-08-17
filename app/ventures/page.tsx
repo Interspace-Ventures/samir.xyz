@@ -50,7 +50,7 @@ export default function VenturesPage() {
   return (
     <div className="pt-20 pb-16">
       <section className="section">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Ventures
           </h1>
