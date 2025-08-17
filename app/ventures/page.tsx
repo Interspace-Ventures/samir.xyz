@@ -63,13 +63,14 @@ export default function VenturesPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full">
               {Array.from({ length: 4 }).map((_, index) => (
                 <div
-                  key={index}
-                  className="aspect-square bg-white border-2 border-black relative overflow-hidden"
+                  key={`venture-skeleton-${index}`}
+                  className="aspect-square bg-white/5 border-2 border-black relative overflow-hidden animate-pulse"
                   style={{
-                    boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px #000',
+                    boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px rgba(0,0,0,0.2)',
                   }}
                 >
-                  <div className="w-full h-full bg-gray-200 animate-pulse" />
+                  {/* Subtle shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer" />
                 </div>
               ))}
             </div>

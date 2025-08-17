@@ -41,24 +41,30 @@ export function PortfolioGrid({ className }: PortfolioGridProps) {
     return (
       <div className={className}>
         <div className="mb-8">
-          <div className="flex gap-2 mb-4">
+          <div className="flex gap-2 mb-4 flex-wrap">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-10 w-20 bg-purple-200/20 border border-purple-900/30 animate-pulse rounded" />
+              <div 
+                key={`filter-skeleton-${i}`} 
+                className="h-10 w-20 bg-white/5 border-2 border-black animate-pulse"
+                style={{
+                  boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px rgba(0,0,0,0.2)',
+                }}
+              />
             ))}
           </div>
         </div>
-        {/* Simple skeleton grid like ventures */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
+        {/* Simple skeleton grid matching venture style */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
           {Array.from({ length: 8 }).map((_, index) => (
             <div
               key={`portfolio-skeleton-${index}`}
-              className="h-[120px] bg-white/5 border border-purple-900/30 relative overflow-hidden animate-pulse"
+              className="h-[120px] bg-white/5 border-2 border-black relative overflow-hidden animate-pulse"
               style={{
-                boxShadow: '4px 4px 0px 0px rgba(0,0,0,0.1)',
+                boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px rgba(0,0,0,0.2)',
               }}
             >
               {/* Subtle shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer" />
             </div>
           ))}
         </div>
