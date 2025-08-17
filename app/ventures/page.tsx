@@ -55,8 +55,10 @@ export default function VenturesPage() {
             Ventures
           </h1>
           
-          <div className="content-card mb-10 font-medium">
-            I develop apps and design concepts by building at the speed of thought using AI.
+          <div className="w-full max-w-3xl mx-auto">
+            <div className="content-card mb-10 font-medium">
+              I develop apps and design concepts by building at the speed of thought using AI.
+            </div>
           </div>
           
           {loading && (
