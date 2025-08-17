@@ -70,7 +70,7 @@ const Navigation = () => {
         animate={{ y: 0 }}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between py-3 px-4">
+          <div className="flex items-center justify-between py-3 px-4 sm:px-6">
             <Link href="/" onClick={closeMobileMenu}>
               <div className="flex items-center space-x-2">
                 <Image 
