@@ -5,7 +5,7 @@ import Image from 'next/image';
 const ProfileSection = () => {
   return (
     <section id="profile" className="section">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main content area */}
         <div className="mb-6">
           {/* 2x2 Grid for profile image and header */}
