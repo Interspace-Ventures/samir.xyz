@@ -55,14 +55,14 @@ export default function VenturesPage() {
             Ventures
           </h1>
           
-          <div className="w-full max-w-3xl mx-auto">
+          <div className="w-full max-w-5xl mx-auto">
             <div className="content-card mb-10 font-medium">
               I develop apps and design concepts by building at the speed of thought using AI.
             </div>
           </div>
           
           {loading && (
-            <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
               {Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={index}
@@ -80,7 +80,7 @@ export default function VenturesPage() {
           {error && <p className="text-red-500">Error: {error}</p>}
           
           {!loading && !error && (
-            <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-5xl mx-auto">
               {ventures && ventures.length > 0 && ventures.map((venture) => (
                 <div
                   key={venture.id}
