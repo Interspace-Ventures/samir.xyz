@@ -14,11 +14,16 @@ import { PrismaClient } from '@prisma/client';
 // Define a global type for PrismaClient
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-// Create a singleton instance of PrismaClient
+// Create a singleton instance of PrismaClient with optimized settings
 export const prisma =
   globalForPrisma.prisma ||
   new PrismaClient({
     log: [], // Disable all logging
+    datasources: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
   });
 
 // Save PrismaClient to the global object in non-production environments

@@ -50,7 +50,7 @@ export default function VenturesPage() {
   return (
     <div className="pt-20 pb-16">
       <section className="section">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             Ventures
           </h1>
@@ -111,7 +111,8 @@ export default function VenturesPage() {
                       alt={`${venture.name} logo`}
                       fill
                       className="object-cover"
-                      unoptimized={true}
+                      priority={true}
+                      sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   )}
                   <div className="absolute inset-0 bg-black/0 hover:bg-black/80 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
