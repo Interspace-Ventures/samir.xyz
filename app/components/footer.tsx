@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const version = "v8.5.0"; // Version number
+  const version = "2025.1"; // Updated version format: Year.Release
   
   return (
     <footer className="bg-purple-primary py-6 border-t border-purple-primary/20">
@@ -24,7 +24,14 @@ export default function Footer() {
           
           <div className="w-full text-center">
             <p className="text-center">
-              Version {version} | Built with <a 
+              <a 
+                href="https://github.com/samir" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-text-secondary hover:text-white transition-colors"
+              >
+                v{version}
+              </a> | Built with <a 
                 href="https://replit.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
