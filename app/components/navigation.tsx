@@ -69,7 +69,7 @@ const Navigation = () => {
         initial={{ y: 0 }}
         animate={{ y: 0 }}
       >
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-3">
             <Link href="/" onClick={closeMobileMenu}>
               <div className="flex items-center space-x-2">
@@ -88,8 +88,8 @@ const Navigation = () => {
             {/* Desktop Navigation - Always visible except on very small screens */}
             <nav className="hidden sm:block">
               <ul className="flex items-center">
-                {menuItems.map((item) => (
-                  <li key={item.href} className="px-2 lg:px-4">
+                {menuItems.map((item, index) => (
+                  <li key={item.href} className={index === 0 ? 'pl-0 pr-4' : index === menuItems.length - 1 ? 'pl-4 pr-0' : 'px-4'}>
                     <Link 
                       href={item.href}
                       className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
