@@ -66,14 +66,17 @@ export default function MetricsSummaryStandalone() {
     return (
       <div className="w-full mb-10 overflow-hidden">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6">
-          {/* Generate 8 skeleton metric cards */}
+          {/* Generate 8 skeleton metric cards with consistent style */}
           {Array(8).fill(0).map((_, index) => (
             <div 
-              key={`skeleton-error-${index}`}
-              className="relative bg-white/5 p-4 rounded-lg border border-purple-900/30 animate-pulse"
+              key={`metric-skeleton-${index}`}
+              className="relative bg-white/5 p-4 border-2 border-black animate-pulse"
+              style={{
+                boxShadow: '0 0 0 2px #000, 4px 4px 0px 0px rgba(0,0,0,0.2)',
+              }}
             >
-              <div className="h-3 w-16 bg-purple-300/20 rounded mb-2"></div>
-              <div className="h-7 w-20 bg-purple-300/30 rounded"></div>
+              <div className="h-3 w-16 bg-white/10 mb-2"></div>
+              <div className="h-7 w-20 bg-white/10"></div>
             </div>
           ))}
         </div>
