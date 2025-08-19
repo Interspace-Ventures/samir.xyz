@@ -42,7 +42,7 @@ const ProfileSection = () => {
                 <h1 className="text-base sm:text-2xl md:text-3xl font-bold mb-0.5 sm:mb-1 text-[#9d7bea]">
                   Hey - I'm Samir
                 </h1>
-                <p className="text-[11px] sm:text-base md:text-lg font-bold text-white">
+                <p className="text-xs sm:text-base md:text-lg font-bold text-white">
                   I drive impact at startups
                 </p>
               </div>
