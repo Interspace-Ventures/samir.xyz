@@ -39,7 +39,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           {/* Status Badge - Only show Markup and Acquired */}
           {portfolio.investment_status && portfolio.investment_status.toLowerCase() !== 'active' && (
             <div 
-              className="absolute top-2 right-2 z-10 pointer-events-none"
+              className="absolute top-2 right-2 sm:right-3 z-10 pointer-events-none"
             >
               <span 
                 className="text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 font-bold border sm:border-2 border-black"
