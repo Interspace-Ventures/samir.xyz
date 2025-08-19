@@ -77,11 +77,11 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               background: 'linear-gradient(to bottom right, rgba(45, 12, 106, 0.9), rgba(56, 20, 144, 0.9))'
             }}
           >
-            <h3 className="text-white text-sm md:text-base lg:text-lg font-bold text-center mb-2 px-2">
+            <h3 className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-bold text-center mb-1 sm:mb-2 px-2">
               {portfolio.name}
             </h3>
             {portfolio.description && (
-              <p className="text-white text-xs md:text-sm font-medium leading-relaxed text-center px-3 sm:px-4">
+              <p className="text-white text-[10px] sm:text-xs md:text-sm font-medium leading-tight sm:leading-relaxed text-center px-3 sm:px-4">
                 {portfolio.description}
               </p>
             )}
