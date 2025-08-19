@@ -33,13 +33,13 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
         href={portfolio.website || '#'} 
         target="_blank" 
         rel="noopener noreferrer"
-        className="group h-[120px] bg-white relative overflow-hidden block cursor-pointer neobrutalist-shadow transition-all duration-200 hover:neobrutalist-shadow-hover hover:neobrutalist-transform-hover"
+        className="group h-[120px] bg-white relative overflow-hidden block cursor-pointer neobrutalist-shadow transition-all duration-200 hover:neobrutalist-shadow-hover hover:neobrutalist-transform-hover overflow-hidden"
       >
         <div className="p-4 h-full flex flex-col relative">
           {/* Status Badge - Only show Markup and Acquired */}
           {portfolio.investment_status && portfolio.investment_status.toLowerCase() !== 'active' && (
             <div 
-              className="absolute top-2 right-2 sm:right-3 z-10 pointer-events-none"
+              className="absolute top-1 right-1 sm:top-2 sm:right-3 z-10 pointer-events-none"
             >
               <span 
                 className="text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 font-bold border sm:border-2 border-black"
@@ -72,16 +72,16 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           
           {/* Hover Overlay Content */}
           <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none"
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center z-20 pointer-events-none overflow-hidden"
             style={{
               background: 'linear-gradient(to bottom right, rgba(45, 12, 106, 0.9), rgba(56, 20, 144, 0.9))'
             }}
           >
-            <h3 className="text-white text-sm md:text-base lg:text-lg font-bold text-center mb-2">
+            <h3 className="text-white text-sm md:text-base lg:text-lg font-bold text-center mb-2 px-2">
               {portfolio.name}
             </h3>
             {portfolio.description && (
-              <p className="text-white text-xs md:text-sm font-medium leading-relaxed text-center px-4">
+              <p className="text-white text-xs md:text-sm font-medium leading-relaxed text-center px-3 sm:px-4">
                 {portfolio.description}
               </p>
             )}
