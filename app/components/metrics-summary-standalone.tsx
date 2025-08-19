@@ -65,7 +65,7 @@ export default function MetricsSummaryStandalone() {
     // Instead of error text, show skeleton loaders
     return (
       <div className="w-full mb-10 overflow-hidden">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
           {/* Generate 8 skeleton metric cards with consistent style */}
           {Array(8).fill(0).map((_, index) => (
             <div 
@@ -87,7 +87,7 @@ export default function MetricsSummaryStandalone() {
   return (
     <div className="mb-8 max-w-7xl mx-auto">
       {/* Metrics Grid - Ensuring 4 per row on medium screens for most viewports */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
         {/* Total Investments */}
         <MetricCard label="Investments" value={summary.total_investments} index={0} />
         
@@ -95,7 +95,7 @@ export default function MetricsSummaryStandalone() {
         <MetricCard label="Markups" value={summary.markups} index={1} />
         
         {/* Acquisitions */}
-        <MetricCard label="Acquisitions" value={summary.acquisitions} index={2} />
+        <MetricCard label="Acquired" value={summary.acquisitions} index={2} />
         
         {/* Busts */}
         <MetricCard label="Busts" value={summary.busts} index={3} />
