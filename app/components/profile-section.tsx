@@ -9,14 +9,14 @@ const ProfileSection = () => {
         {/* Main content area */}
         <div className="mb-6">
           {/* 2x2 Grid for profile image and header */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
+          <div className="flex flex-row gap-3 sm:gap-5">
             {/* Profile Image */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="flex-shrink-0 mx-auto sm:mx-0"
+              className="flex-shrink-0"
             >
               <div className="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden bg-white p-1 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                 <Image 
@@ -38,11 +38,11 @@ const ProfileSection = () => {
               transition={{ duration: 0.6 }}
               className="flex-1"
             >
-              <div className="min-h-[80px] sm:h-24 flex flex-col justify-center bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-3 sm:p-4">
-                <h1 className="text-lg sm:text-2xl md:text-3xl font-bold mb-1 text-[#9d7bea]">
+              <div className="h-20 sm:h-24 flex flex-col justify-center bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] px-3 sm:px-4 py-2 sm:py-4">
+                <h1 className="text-base sm:text-2xl md:text-3xl font-bold mb-0.5 sm:mb-1 text-[#9d7bea]">
                   Hey - I'm Samir
                 </h1>
-                <p className="text-xs sm:text-base md:text-lg font-bold text-white">
+                <p className="text-[11px] sm:text-base md:text-lg font-bold text-white">
                   I drive impact at startups
                 </p>
               </div>
