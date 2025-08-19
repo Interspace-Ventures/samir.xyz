@@ -78,10 +78,10 @@ export function FilterButton({
     <button
       onClick={onClick}
       className={cn(
-        'px-4 py-2 font-bold text-sm transition-all duration-200',
-        'border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
-        'hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
-        'hover:translate-x-[-2px] hover:translate-y-[-2px]',
+        'px-2 sm:px-4 py-1 sm:py-2 font-bold text-xs sm:text-sm transition-all duration-200',
+        'border sm:border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
+        'hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]',
+        'hover:translate-x-[-1px] sm:hover:translate-x-[-2px] hover:translate-y-[-1px] sm:hover:translate-y-[-2px]',
         active ? 'bg-[#7f54dc] text-white hover:bg-[#6339c7]' : 'bg-white text-black hover:bg-gray-50',
         className
       )}
