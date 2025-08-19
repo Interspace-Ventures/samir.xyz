@@ -51,6 +51,15 @@ Preferred communication style: Simple, everyday language.
   - Updated total investments from 44 to 42 (corrected for 2 double investments)
   - Updated markups count to 17 companies
 
+## Recent Changes (2025-08-19)
+
+- **Performance Optimization**: Fixed 15-20 second initial load time issue
+  - Changed from development mode to production mode for serving the app
+  - Removed unnecessary cache clearing on startup
+  - Created optimized startup script that uses pre-built production build
+  - App now loads in 2-3 seconds instead of 15-20 seconds
+  - Production build is ~111MB and serves optimized, minified assets
+
 ## Recent Changes (2025-01-12)
 
 - **Portfolio Update**: Removed Superplastic from portfolio (deal went bust)
