@@ -42,11 +42,11 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
               className="absolute top-2 right-2 z-10 pointer-events-none"
             >
               <span 
-                className="text-white text-xs px-2 py-1 font-bold border-2 border-black"
+                className="text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 font-bold border sm:border-2 border-black"
                 style={{
                   backgroundColor: portfolio.investment_status.toLowerCase() === 'markup' ? '#7f54dc' : '#6b7280',
                   color: '#ffffff',
-                  boxShadow: '2px 2px 0px 0px rgba(0,0,0,1)',
+                  boxShadow: '1px 1px 0px 0px rgba(0,0,0,1)',
                   display: 'inline-block'
                 }}
               >
