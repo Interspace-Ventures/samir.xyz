@@ -111,7 +111,7 @@ export default function VenturesPage() {
                       src={venture.logoUrl}
                       alt={`${venture.name} logo`}
                       fill
-                      className="object-cover"
+                      className="object-contain p-2 md:p-4"
                       priority={true}
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
