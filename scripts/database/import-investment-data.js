@@ -1,100 +1,119 @@
 /**
  * Investment Data Import Script
  * 
- * This script reads investment data from an Excel file and updates
+ * This script reads investment data from a CSV file and updates
  * the corresponding portfolio items in the database.
+ * 
+ * IMPORTANT: The xlsx library was removed due to critical CVEs.
+ * Please convert your Excel file to CSV format before running this script.
+ * You can do this in Excel/Google Sheets: File -> Save As -> CSV
  * 
  * Run with: `node import-investment-data.js`
  */
 
 const { PrismaClient } = require('@prisma/client');
-const XLSX = require('xlsx');
+const fs = require('fs');
 const path = require('path');
 
 const prisma = new PrismaClient();
 
+function parseCSV(content) {
+  const lines = content.split('\n').filter(line => line.trim());
+  const rows = [];
+  
+  for (const line of lines) {
+    const row = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        row.push(current.trim());
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    row.push(current.trim());
+    rows.push(row);
+  }
+  
+  return rows;
+}
+
 async function main() {
-  console.log('Importing investment data from Excel...');
+  console.log('Importing investment data from CSV...');
 
   try {
-    // Path to the Excel file
-    const excelFilePath = path.join(__dirname, 'attached_assets', 'Interspace Cash Flow Analysis - Angel Investments.xlsx');
+    const csvFilePath = path.join(__dirname, 'attached_assets', 'investment-data.csv');
     
-    // Read the Excel file with raw data to inspect its structure
-    const workbook = XLSX.readFile(excelFilePath);
-    
-    // Check all sheets in the workbook
-    console.log('Available sheets:', workbook.SheetNames);
-    
-    // Try to find a sheet with company investment data
-    let sheetName = workbook.SheetNames[0]; // Default to first sheet
-    
-    // Look for sheets that might contain company data
-    for (const name of workbook.SheetNames) {
-      if (name.toLowerCase().includes('company') || 
-          name.toLowerCase().includes('investment') || 
-          name.toLowerCase().includes('portfolio')) {
-        sheetName = name;
-        break;
-      }
+    if (!fs.existsSync(csvFilePath)) {
+      console.error(`CSV file not found: ${csvFilePath}`);
+      console.log('\nTo use this script:');
+      console.log('1. Open your Excel file in Excel or Google Sheets');
+      console.log('2. Save/Export as CSV format');
+      console.log('3. Place the CSV file at: scripts/database/attached_assets/investment-data.csv');
+      console.log('4. Run this script again');
+      return;
     }
     
-    console.log(`Using sheet: ${sheetName}`);
-    const worksheet = workbook.Sheets[sheetName];
+    const csvContent = fs.readFileSync(csvFilePath, 'utf-8');
+    const rows = parseCSV(csvContent);
     
-    // Get the range of the worksheet
-    const range = XLSX.utils.decode_range(worksheet['!ref']);
-    console.log('Worksheet range:', worksheet['!ref']);
+    console.log(`Found ${rows.length} rows of data`);
     
-    // Log some cells to understand the structure
-    for (let R = range.s.r; R <= Math.min(range.e.r, 10); ++R) {
-      let row = [];
-      for (let C = range.s.c; C <= range.e.c; ++C) {
-        const cellAddress = XLSX.utils.encode_cell({r: R, c: C});
-        const cell = worksheet[cellAddress];
-        row.push(cell ? cell.v : undefined);
-      }
-      console.log(`Row ${R}:`, row);
+    if (rows.length < 2) {
+      console.log('Not enough data rows found');
+      return;
     }
     
-    // Convert the sheet to JSON with headers option to better handle unnamed columns
-    const data = XLSX.utils.sheet_to_json(worksheet, { header: 'A' });
+    const headers = rows[0];
+    console.log('Headers:', headers);
     
-    console.log(`Found ${data.length} rows of data`);
+    const companyIdx = headers.findIndex(h => 
+      h.toLowerCase().includes('company') || h.toLowerCase().includes('name')
+    );
+    const investmentDateIdx = headers.findIndex(h => 
+      h.toLowerCase().includes('date') && h.toLowerCase().includes('invest')
+    );
+    const initialInvestmentIdx = headers.findIndex(h => 
+      h.toLowerCase().includes('initial') || h.toLowerCase().includes('investment')
+    );
+    const currentValuationIdx = headers.findIndex(h => 
+      h.toLowerCase().includes('current') || h.toLowerCase().includes('valuation')
+    );
+    const returnMultipleIdx = headers.findIndex(h => 
+      h.toLowerCase().includes('return') || h.toLowerCase().includes('multiple')
+    );
     
-    // Define the column mapping based on inspection of the first rows
-    const columnMapping = {
-      // Based on the observed data from Angel Investments sheet (row 1 contains headers)
-      B: "company",
-      C: "investment_date",
-      E: "initial_investment",
-      M: "current_valuation",
-      K: "return_multiple",
-      // We don't have exit_date directly, will need to calculate or determine based on other data
-      // We don't have exit_amount directly, will need to calculate or determine based on other data
-      // I: "net_multiple" - Not directly used, but can help determine status
-    };
+    console.log('Column indices:', {
+      company: companyIdx,
+      investmentDate: investmentDateIdx,
+      initialInvestment: initialInvestmentIdx,
+      currentValuation: currentValuationIdx,
+      returnMultiple: returnMultipleIdx
+    });
     
-    // Skip header rows - row 2 is the first data row (Excel rows start at 1, but array index starts at 0)
-    const dataRows = data.slice(2);
+    const dataRows = rows.slice(1);
     
-    // Process each row
     for (const row of dataRows) {
-      // Extract company name
-      const companyName = row.B;
+      const companyName = companyIdx >= 0 ? row[companyIdx] : null;
       
-      if (!companyName || typeof companyName !== 'string') {
-        continue; // Skip rows without a valid company name
+      if (!companyName || typeof companyName !== 'string' || !companyName.trim()) {
+        continue;
       }
       
       console.log(`Processing data for: "${companyName}"`);
       
-      // Find the corresponding portfolio item
       const portfolioItem = await prisma.portfolio.findFirst({
         where: {
           name: {
             contains: companyName,
-            mode: 'insensitive' // Case-insensitive search
+            mode: 'insensitive'
           }
         }
       });
@@ -104,56 +123,43 @@ async function main() {
         continue;
       }
       
-      // Log the full row data for debugging
-      console.log('Row data keys:', Object.keys(row).join(', '));
+      const returnMultiple = returnMultipleIdx >= 0 ? getNumberValue(row[returnMultipleIdx]) : null;
       
-      // Determine investment status based on various metrics
       let status = 'Active';
-      
-      // If return multiple is 0 or very close to 0, it's likely written off
-      if (row.K !== undefined && row.K <= 0.01) {
+      if (returnMultiple !== null && returnMultiple <= 0.01) {
         status = 'Written Off';
-      }
-      
-      // If net multiple > 1, it's likely exited profitably
-      if (row.J !== undefined && row.J > 1) {
+      } else if (returnMultiple !== null && returnMultiple > 1) {
         status = 'Exited Profitably';
-      } else if (row.J !== undefined && row.J < 1 && row.J > 0) {
+      } else if (returnMultiple !== null && returnMultiple < 1 && returnMultiple > 0) {
         status = 'Exited With Loss';
       }
       
-      // Calculate annualized return if available
-      // Using the simplified formula: (Current Value / Initial Investment)^(1/years) - 1
+      const investDate = investmentDateIdx >= 0 ? getDateValue(row[investmentDateIdx]) : null;
       let annualizedReturn = null;
-      const investDate = getDateValue(row.C);
-      if (row.K > 0 && investDate) {
+      if (returnMultiple && returnMultiple > 0 && investDate) {
         const now = new Date();
         const yearsDiff = (now - investDate) / (1000 * 60 * 60 * 24 * 365);
         if (yearsDiff > 0) {
-          annualizedReturn = Math.pow(row.K, 1/yearsDiff) - 1;
+          annualizedReturn = Math.pow(returnMultiple, 1/yearsDiff) - 1;
         }
       }
       
-      // Format dates properly for database
-      const formattedInvestmentDate = investDate;
-      const formattedExitDate = status.includes('Exited') ? new Date() : null;
+      const initialInvestment = initialInvestmentIdx >= 0 ? getNumberValue(row[initialInvestmentIdx]) : null;
       
-      // Extract financial data from appropriate columns
       const investmentData = {
-        investment_date: formattedInvestmentDate,
-        initial_investment: getNumberValue(row.E),
-        current_valuation: getNumberValue(row.M),
-        return_multiple: getNumberValue(row.K),
+        investment_date: investDate,
+        initial_investment: initialInvestment,
+        current_valuation: currentValuationIdx >= 0 ? getNumberValue(row[currentValuationIdx]) : null,
+        return_multiple: returnMultiple,
         annualized_return: annualizedReturn,
-        exit_date: formattedExitDate,
-        exit_amount: status.includes('Exited') && row.E ? getNumberValue(row.E) * getNumberValue(row.K) : null,
+        exit_date: status.includes('Exited') ? new Date() : null,
+        exit_amount: status.includes('Exited') && initialInvestment && returnMultiple 
+          ? initialInvestment * returnMultiple : null,
         investment_status: status
       };
       
-      // Log the data being updated
       console.log('Updating with data:', investmentData);
       
-      // Update the portfolio item with investment data
       await prisma.portfolio.update({
         where: { id: portfolioItem.id },
         data: investmentData
@@ -169,35 +175,30 @@ async function main() {
   }
 }
 
-// Helper function to convert Excel date values to JavaScript Date objects
 function getDateValue(value) {
   if (!value) return null;
   
-  // If already a Date object
   if (value instanceof Date) return value;
   
-  // If it's a number (Excel date serial number)
   if (typeof value === 'number') {
-    // Excel dates are stored as days since 1900-01-01
-    // To convert to JavaScript date, we need to adjust for the date system difference
-    const excelEpoch = new Date(1899, 11, 30); // December 30, 1899
+    const excelEpoch = new Date(1899, 11, 30);
     const millisecondsPerDay = 24 * 60 * 60 * 1000;
     return new Date(excelEpoch.getTime() + (value * millisecondsPerDay));
   }
   
-  // If it's a string, try to parse it
   try {
-    return new Date(value);
+    const date = new Date(value);
+    return isNaN(date.getTime()) ? null : date;
   } catch (e) {
     return null;
   }
 }
 
-// Helper function to convert values to numbers
 function getNumberValue(value) {
   if (value === undefined || value === null || value === '') return null;
   
-  const num = Number(value);
+  const cleaned = String(value).replace(/[,$%]/g, '');
+  const num = Number(cleaned);
   return isNaN(num) ? null : num;
 }
 
