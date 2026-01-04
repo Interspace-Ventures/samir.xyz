@@ -57,7 +57,6 @@ Developed with the assistance of Replit's AI tools and hosted on the Replit plat
 ### Data Management
 - **Prisma (v6.6.0)**: Next-generation ORM for Node.js and TypeScript
 - **@prisma/client (v6.6.0)**: Auto-generated client for database access
-- **xlsx (v0.18.5)**: Library for parsing Excel files
 
 ### CSS Processing
 - **postcss (v8.5.3)**: Tool for transforming CSS with JavaScript
