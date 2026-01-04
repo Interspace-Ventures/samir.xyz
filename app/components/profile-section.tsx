@@ -109,7 +109,7 @@ const ProfileSection = () => {
               </p>
               
               <p>
-                Outside of work, I write over-engineered takes on stratfin, fintech, AI and politics on <a 
+                Outside of work, I write over-engineered takes on stratfin, fintech and AI on <a 
                   href="https://x.com/heysamir_" 
                   target="_blank" 
                   rel="noopener noreferrer"
