@@ -1,4 +1,4 @@
 - [Run/workflow service quirk](run-workflow-quirk.md) — agent restart/configureWorkflow can fail with RUN_COMMAND_NOT_FOUND; user's Run button still works, bash can't keep a server alive.
 - [Querying the database](db-access.md) — `prisma db execute` returns no rows; run a Node script with PrismaClient from the project dir to read data.
 - [Ventures active allowlists](ventures-allowlists.md) — which ventures show is controlled by hardcoded allowlists across three API routes, not just the DB.
-- [Deploy security scan](deploy-security-scan.md) — publish failing right after "Security Scan Complete" = committed `.next/` leaking auto-gen preview keys; untrack `.next`.
+- [Deploy security scan](deploy-security-scan.md) — Next.js publish fails at "Security Scan Complete" = gitleaks flags auto-gen preview keys in rebuilt `.next`; fix = post-build strip step, not history scrub.

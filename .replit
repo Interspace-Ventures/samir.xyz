@@ -27,8 +27,8 @@ DATABASE_URL = "$DATABASE_URL"
 start = "npx next dev"
 
 [deployment]
-deploymentTarget = "cloudrun"
-build = ["sh", "-c", "npx prisma generate && npx next build"]
+deploymentTarget = "autoscale"
+build = ["sh", "-c", "npx prisma generate && npx next build && node scripts/strip-preview-keys.mjs"]
 run = ["sh", "-c", "npx next start -p 3001 --hostname 0.0.0.0"]
 
 [run]
