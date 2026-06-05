@@ -12,7 +12,7 @@ export async function GET() {
 
     
     // Only show active ventures (using actual database names)
-    const activeVentures = ['2 Days Early', 'interspace', 'tbh', 'moonshot'];
+    const activeVentures = ['2 Days Early', 'Interspace', 'Verse', 'Spacebase', 'Orbit'];
     
     const ventures = await prisma.venture.findMany({
       where: {
