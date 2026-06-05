@@ -59,7 +59,8 @@ const Navigation = () => {
   const menuItems = [
     { href: '/', label: 'Profile' },
     { href: '/portfolio', label: 'Portfolio' },
-    { href: '/ventures', label: 'Ventures' }
+    { href: '/ventures', label: 'Ventures' },
+    { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true }
   ];
 
   return (
@@ -90,13 +91,24 @@ const Navigation = () => {
               <ul className="flex items-center">
                 {menuItems.map((item, index) => (
                   <li key={item.href} className={index === 0 ? 'pl-0 pr-4' : index === menuItems.length - 1 ? 'pl-4 pr-0' : 'px-4'}>
-                    <Link 
-                      href={item.href}
-                      className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
-                      prefetch={true}
-                    >
-                      {item.label}
-                    </Link>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link 
+                        href={item.href}
+                        className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
+                        prefetch={true}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -137,14 +149,26 @@ const Navigation = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
                   >
-                    <Link 
-                      href={item.href} 
-                      className="text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
-                      onClick={closeMobileMenu}
-                      prefetch={true}
-                    >
-                      {item.label}
-                    </Link>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
+                        onClick={closeMobileMenu}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link 
+                        href={item.href} 
+                        className="text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
+                        onClick={closeMobileMenu}
+                        prefetch={true}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </motion.li>
                 ))}
               </ul>
