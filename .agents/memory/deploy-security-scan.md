@@ -1,24 +1,31 @@
 ---
-name: Deploy security scan blocks on Next.js preview keys in build output
-description: Why a Next.js publish fails right after "Security Scan Complete" and the post-build fix that actually works
+name: Deploy security scan blocks on Next.js preview keys committed in git history
+description: Why a Next.js publish fails right after "Security Scan Complete" and the safe (non-destructive) way to unblock it
 ---
 
 # Deploy fails at the security-scan step (Next.js)
 
-**Symptom:** A publish build fails. The build logs show only `Deployment` → `Build` → `Running Security Scan` → `Security Scan Complete`, then status `failed` — no compilation errors.
+**Symptom:** A publish build fails. The build logs show only `Deployment` → `Build` → `Running Security Scan` → `Security Scan Complete`, then status `failed` — no `next build` / compilation output at all.
 
-**Cause:** Replit's deploy security scan (gitleaks) flags the auto-generated `previewModeSigningKey` / `previewModeEncryptionKey` inside `.next/prerender-manifest.json` as HIGH "generic-api-key" secrets. These are NOT real secrets — Next.js regenerates them on **every** `next build`.
+**The scan runs BEFORE the build, on the SOURCE (including git history).** Proven by:
+- The failed build's logs contain *no* compile output — only the 4 scan lines, ~40s, then fail. If the scan read build output, `next build` would have run first and produced logs. It didn't. So the scan gates the build and inspects source.
+- The working tree / HEAD is clean (`.next` is gitignored and untracked), yet the scan still fails. The only place the flagged strings exist is **git history** (old commits that committed `.next/prerender-manifest.json`). Confirmed with a local gitleaks run: a single historical commit on that file yields 2 `generic-api-key` leaks (`previewModeSigningKey` / `previewModeEncryptionKey`).
+- These are NOT real secrets — Next.js regenerates them on every `next build`. They're false positives.
+- Many Next.js apps deploy fine on Replit precisely because they never committed `.next`. This repo did (the original mistake), so gitleaks-over-history finds them.
 
-**The scan inspects the BUILD OUTPUT, not just committed source.** Proven by two facts:
-- The last successful publish (a "Published your App" commit) itself had `.next/prerender-manifest.json` committed with these keys and still passed — so committed keys were never the blocker.
-- After removing `.next` from the working tree AND from HEAD, a fresh publish STILL failed at the scan, because `next build` regenerates `.next/prerender-manifest.json` with new keys during the deploy.
+**Why "tightened over time":** older builds (pre-2026) passed with the same committed keys because the deploy security-scan phase was added/enabled later.
 
-So the scanner was simply **tightened over time** (older builds passed with the same keys present). 
+**What does NOT fix it:**
+- A post-build strip step (e.g. blanking the keys after `next build`). The scan runs *before* the build, so a post-build script never executes in time. (An earlier attempt added `scripts/strip-preview-keys.mjs` + a build-command suffix — both reverted as useless.)
+- Removing `.next` from the working tree / HEAD alone — history still holds the keys.
 
-**What does NOT fix it:** removing `.next` from the working tree, or scrubbing `.next` from git history. The deploy rebuilds `.next` every time, so the keys always come back in the output the scanner reads.
+**Fix that works (recommended, safe, non-destructive):** these are false positives, so let publishing proceed past them. Per Replit docs, either:
+- Turn OFF "Block publishing of critical vulnerabilities" in the deployment's **Advanced** settings (Publishing tool), or
+- Review and **dismiss** the finding in the **Project Security Center**, then publish.
+This is a **UI action by the user** — `deployConfig` has no parameter for it (like deployment geography, it's UI-only).
 
-**Fix that works:** add a post-build step to the deployment build command that blanks the preview keys before the scan runs. A tiny node script (`scripts/strip-preview-keys.mjs`) sets `preview.previewModeId/previewModeSigningKey/previewModeEncryptionKey` to `""` in `.next/prerender-manifest.json`. Wire it via `deployConfig` build = `npx prisma generate && npx next build && node scripts/strip-preview-keys.mjs`. Blanking is safe for sites that don't use Next.js Preview/Draft Mode.
+**Permanent root-cause fix (heavier, destructive):** scrub `.next` from git history so the scanner never sees the keys. This rewrites every commit SHA (affects saved checkpoints/rollback) and the main agent is blocked from destructive git — it must run as a separate background Project Task in an isolated env. Only do this if the user wants the history genuinely cleaned; for just unblocking a publish, the UI toggle above is enough.
 
-**Bash sandbox limit:** destructive git (filter-branch, rm, commit, reset, …) is blocked even inside a task agent, so a history rewrite isn't executable here anyway — but per above it wouldn't have helped.
+**Diagnostic trick:** gitleaks isn't installed, but you can `curl` the static linux binary from its GitHub releases into `/tmp` and run it. `gitleaks detect --source . --no-git` scans the working tree (fast); `--log-opts="-1 <sha> -- <path>"` scans a single historical commit. A full-history scan over hundreds of commits will exceed the 2-min bash timeout.
 
-**`.replit` schema gotcha (separate issue seen here):** legacy `[commands]` and a `[run]` *table* (TOML `[run]` makes `run` a table; schema wants a top-level string/array) cause "Unable to validate dotreplit schema" in the publish UI even though `deployConfig`/`getDeploymentInfo` still succeed (they only validate `[deployment]`). `.replit` cannot be edited by any agent (write/edit both blocked) and no tool owns `[commands]` — the user must remove those lines manually.
+**`.replit` schema gotcha (separate issue seen here):** legacy `[commands]` and a `[run]` *table* (TOML `[run]` makes `run` a table; schema wants a top-level string) cause "Unable to validate dotreplit schema" in the publish UI even though `deployConfig`/`getDeploymentInfo` still succeed (they only validate `[deployment]`). `.replit` cannot be edited by any agent (write/edit both blocked) and no tool owns `[commands]` — the user must remove those lines manually.
