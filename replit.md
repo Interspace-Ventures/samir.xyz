@@ -10,6 +10,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (2026-06-05)
 
+- **Deployment Build Failure Fixed**: Publish was failing at the security-scan step. The Next.js build output folder `.next/` had been committed to git (before it was added to `.gitignore`), and `.next/prerender-manifest.json` contained auto-generated Next.js preview keys that the scanner flags as hard-coded secrets. Removed the tracked `.next/` build artifacts so the publish can pass; `.next` stays ignored going forward.
 - **Investment Status Updates**:
   - Marked Moku as a bust (new "Bust" status); busted companies are now excluded from the portfolio gallery by status in `/api/portfolio` (in addition to the existing name-based exclusion)
   - Marked Rely, Percents, Replit, Keep, and Instaswitch as Markups
