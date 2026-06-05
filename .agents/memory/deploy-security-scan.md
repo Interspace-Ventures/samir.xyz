@@ -19,13 +19,16 @@ description: Why a Next.js publish fails right after "Security Scan Complete" an
 - A post-build strip step (e.g. blanking the keys after `next build`). The scan runs *before* the build, so a post-build script never executes in time. (An earlier attempt added `scripts/strip-preview-keys.mjs` + a build-command suffix — both reverted as useless.)
 - Removing `.next` from the working tree / HEAD alone — history still holds the keys.
 
-**Fix that works (recommended, safe, non-destructive):** these are false positives, so let publishing proceed past them. Per Replit docs, either:
-- Turn OFF "Block publishing of critical vulnerabilities" in the deployment's **Advanced** settings (Publishing tool), or
-- Review and **dismiss** the finding in the **Project Security Center**, then publish.
-This is a **UI action by the user** — `deployConfig` has no parameter for it (like deployment geography, it's UI-only).
+**Two ways to fix it:**
 
-**Permanent root-cause fix (heavier, destructive):** scrub `.next` from git history so the scanner never sees the keys. This rewrites every commit SHA (affects saved checkpoints/rollback) and the main agent is blocked from destructive git — it must run as a separate background Project Task in an isolated env. Only do this if the user wants the history genuinely cleaned; for just unblocking a publish, the UI toggle above is enough.
+1. **Non-destructive (quick unblock):** these are false positives, so let publishing proceed past them — turn OFF "Block publishing of critical vulnerabilities" in the deployment's **Advanced** settings, or **dismiss** the finding in the **Project Security Center**, then publish. This is a **UI action by the user** — `deployConfig` has no parameter for it.
 
-**Diagnostic trick:** gitleaks isn't installed, but you can `curl` the static linux binary from its GitHub releases into `/tmp` and run it. `gitleaks detect --source . --no-git` scans the working tree (fast); `--log-opts="-1 <sha> -- <path>"` scans a single historical commit. A full-history scan over hundreds of commits will exceed the 2-min bash timeout.
+2. **Permanent root-cause fix (destructive — scrub history):** rewrite history to drop `.next` from every commit so the scanner never sees the keys. This changes every commit SHA (resets checkpoints/rollback). **The agent CANNOT do this** — destructive git (`filter-branch`, `filter-repo`, `rm`, `reset`, `commit`, …) is blocked for the main agent. The reliable path is to have the **user run it in the Replit Shell** (the Shell is NOT subject to the agent's git guard). Built-in command that needs no install:
+   `git filter-branch --force --prune-empty --index-filter 'git rm -rf --cached --ignore-unmatch .next' --tag-name-filter cat -- --all`
+   then clean refs/gc, then optionally `git push origin --force --all`. `git filter-repo` is faster but needs `python3`, which is NOT on PATH in this Node repl — so filter-branch is the dependable choice here.
+
+**Verify the scrub:** `git log --all -- .next` and a full-history gitleaks run must come back clean. gitleaks full-history is fast (~4s for ~1200 diff-bearing commits), so just run `gitleaks detect --no-banner --redact` from the repo root — don't bother with single-commit `--log-opts`. After a successful scrub the only remaining `previewModeSigningKey` hits are the literal *term* in documentation prose (this file / replit.md / an old strip-script commit); gitleaks does NOT flag those (it keys on high-entropy values, not the word).
+
+**Diagnostic trick:** gitleaks isn't installed — `curl` the static linux binary from its GitHub releases and run it. NOTE: `/tmp` gets wiped between turns here, so re-download it each session; long-running background builds also get SIGTERM'd (143), so prefer short foreground commands.
 
 **`.replit` schema gotcha (separate issue seen here):** legacy `[commands]` and a `[run]` *table* (TOML `[run]` makes `run` a table; schema wants a top-level string) cause "Unable to validate dotreplit schema" in the publish UI even though `deployConfig`/`getDeploymentInfo` still succeed (they only validate `[deployment]`). `.replit` cannot be edited by any agent (write/edit both blocked) and no tool owns `[commands]` — the user must remove those lines manually.
