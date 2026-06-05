@@ -59,14 +59,14 @@ const ProfileSection = () => {
           >
             <div className="content-card space-y-4">
               <p>
-                Today, I am leading Global Strategic Partnerships Finance for the Financial Partnerships team at <a 
+                Today, I'm heads-down over-engineering something new. Most recently, I led Global Strategic Partnerships Finance for the Financial Partnerships team at <a 
                   href="https://block.xyz" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-[#7f54dc] hover:text-white transition-colors underline"
                 >
                   Block
-                </a> where we're expanding financial access for Cash App users, Square sellers, Tidal artists & Proto miners.
+                </a>, where we expanded financial access for Cash App users, Square sellers, Tidal artists & Proto miners.
               </p>
               
               <p>

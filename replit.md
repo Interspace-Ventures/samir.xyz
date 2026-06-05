@@ -8,6 +8,18 @@ This is a modern personal portfolio website built with Next.js that showcases pr
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (2026-06-05)
+
+- **Investment Status Updates**:
+  - Marked Moku as a bust (new "Bust" status); busted companies are now excluded from the portfolio gallery by status in `/api/portfolio` (in addition to the existing name-based exclusion)
+  - Marked Rely, Percents, Replit, Keep, and Instaswitch as Markups
+  - Updated portfolio metrics to reflect the changes: Markups 16 → 21, Busts 8 → 9 (in both `app/api/metrics/route.ts` and `app/lib/static-metrics.ts`)
+- **Homepage Bio**: Updated to reflect that Samir is no longer at Block — now "over-engineering something new" while keeping Block (and prior roles) as past credentials
+- **New Ventures Added** (Verse, Spacebase, Orbit):
+  - Added to the `Venture` table and to the active-ventures allowlist in `app/api/ventures-detailed/route.ts`
+  - Verse (https://verse.audio) and Spacebase (https://spacebase.nyc) are live; Orbit has no public URL yet and uses the "Pre-launch" launching-soon drawer
+  - Generated clean wordmark PNG logos (`public/attached_assets/{verse,spacebase,orbit}.png`) for visual consistency (PNG, since Next.js Image blocks SVG by default)
+
 ## Recent Changes (2025-07-27)
 
 - **TypeScript Compilation Fixes**: Fixed deployment error by adding proper type annotations for 'venture' and 'index' parameters in map function (ventures-grid-detailed.tsx line 55)

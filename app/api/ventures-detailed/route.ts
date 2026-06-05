@@ -20,7 +20,7 @@ export async function GET() {
     }
     
     // Only show active ventures (using actual database names)
-    const activeVentures = ['2 Days Early', 'Interspace'];
+    const activeVentures = ['2 Days Early', 'Interspace', 'Verse', 'Spacebase', 'Orbit'];
     
     // Get full data for detailed ventures display
     const ventures = await prisma.venture.findMany({
