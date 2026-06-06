@@ -36,17 +36,17 @@ export default function AdvisoryPrinciples() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-[#2a313a] border-2 border-black p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
+              className="bg-[#2a313a] border-2 border-black p-4 lg:p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
             >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 shrink-0 flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <Icon className="w-5 h-5 text-white" aria-hidden="true" />
+              <div className="flex items-center gap-2.5 mb-2.5">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 shrink-0 flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <Icon className="w-4 h-4 lg:w-5 lg:h-5 text-white" aria-hidden="true" />
                 </div>
-                <h3 className="text-base font-bold text-white leading-tight">
+                <h3 className="text-sm lg:text-base font-bold text-white leading-tight">
                   {p.title}
                 </h3>
               </div>
-              <p className="text-sm text-white/75 leading-relaxed">{p.body}</p>
+              <p className="text-xs lg:text-sm text-white/75 leading-relaxed">{p.body}</p>
             </motion.div>
           );
         })}
