@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Wrench, TrendingUp, Compass } from 'lucide-react';
+import { Wrench, TrendingUp, Compass, Check } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 
 interface AdvisoryPackagesProps {
@@ -13,19 +13,33 @@ const packages = [
     icon: Wrench,
     name: 'Build',
     type: 'Project-based',
-    body: "I'll build landing pages and marketing websites for fintech companies.",
+    points: [
+      'Landing pages',
+      'Marketing websites',
+      'Sponsored posts',
+    ],
   },
   {
     icon: TrendingUp,
     name: 'Grow',
     type: 'Project-based',
-    body: "I'll help with fundraising strategy, strategic partnerships, and product unit economics.",
+    points: [
+      'Fundraising strategy',
+      'Strategic partnerships',
+      'Product unit economics',
+    ],
   },
   {
     icon: Compass,
     name: 'Advise',
     type: 'Ongoing',
-    body: "I'll help with organizational strategy, product advisory, network access, capital intros, customer intros, and more.",
+    points: [
+      'Organizational strategy',
+      'Product advisory',
+      'Network access',
+      'Capital intros',
+      'Customer intros',
+    ],
   },
 ];
 
@@ -55,10 +69,20 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
                 </span>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-2">{pkg.name}</h3>
-              <p className="text-sm text-white/75 leading-relaxed mb-6 flex-grow">
-                {pkg.body}
-              </p>
+              <h3 className="text-2xl font-bold text-white mb-4">{pkg.name}</h3>
+              <ul className="space-y-2 mb-6 flex-grow">
+                {pkg.points.map((point) => (
+                  <li key={point} className="flex items-start gap-2">
+                    <Check
+                      className="w-4 h-4 mt-0.5 shrink-0 text-[#c9b6ff]"
+                      aria-hidden="true"
+                    />
+                    <span className="text-sm text-white/80 leading-snug">
+                      {point}
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
               <div className="flex flex-col gap-2">
                 <Button
