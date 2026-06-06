@@ -18,7 +18,10 @@ const STAGES = [
 ];
 
 const fillClass =
-  'inline-block bg-transparent border-b-2 border-white/30 text-[#c9b6ff] font-semibold text-left align-baseline px-1 pb-1 focus:outline-none focus:border-[#c9b6ff] placeholder:text-white/30 placeholder:font-normal placeholder:italic transition-colors';
+  'inline-block bg-transparent border-b-2 border-white/30 text-[#c9b6ff] font-semibold text-left align-baseline px-0.5 pb-0.5 focus:outline-none focus:border-[#c9b6ff] placeholder:text-white/30 placeholder:font-normal placeholder:italic transition-colors';
+
+const autoSize = (value: string, placeholder: string) =>
+  Math.max(value.length, placeholder.length) + 1;
 
 export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryContactProps) {
   const [form, setForm] = useState({
@@ -107,13 +110,14 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
           <div className="text-white text-lg sm:text-xl">
             <p className="mb-6 text-2xl sm:text-3xl font-bold">Hey Samir,</p>
             <p className="leading-[2.9]">
-              my name is{' '}
+              My name is{' '}
             <input
               type="text"
               required
               value={form.name}
               onChange={update('name')}
-              className={`${fillClass} w-36`}
+              size={autoSize(form.name, 'your name')}
+              className={fillClass}
               placeholder="your name"
               aria-label="Your name"
             />
@@ -122,7 +126,8 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               type="text"
               value={form.company}
               onChange={update('company')}
-              className={`${fillClass} w-36`}
+              size={autoSize(form.company, 'company')}
+              className={fillClass}
               placeholder="company"
               aria-label="Your company"
             />
@@ -130,7 +135,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
             <select
               value={form.stage}
               onChange={update('stage')}
-              className={`${fillClass} w-40`}
+              className={fillClass}
               aria-label="Company stage"
             >
               <option value="" className="text-black">
@@ -147,8 +152,9 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               type="text"
               value={form.website}
               onChange={update('website')}
-              className={`${fillClass} w-32`}
-              placeholder="yoursite.com"
+              size={autoSize(form.website, 'company.xyz')}
+              className={fillClass}
+              placeholder="company.xyz"
               aria-label="Your website"
             />
             ). I&apos;m looking for advisory for{' '}
@@ -156,7 +162,8 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               type="text"
               value={form.comments}
               onChange={update('comments')}
-              className={`${fillClass} w-64`}
+              size={autoSize(form.comments, 'what you need')}
+              className={fillClass}
               placeholder="what you need"
               aria-label="What you need advisory for"
             />
@@ -166,7 +173,8 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               required
               value={form.email}
               onChange={update('email')}
-              className={`${fillClass} w-56`}
+              size={autoSize(form.email, 'you@email.com')}
+              className={fillClass}
               placeholder="you@email.com"
               aria-label="Your email"
             />
