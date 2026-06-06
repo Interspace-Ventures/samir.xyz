@@ -59,7 +59,12 @@ const ProfileSection = () => {
           >
             <div className="content-card space-y-4">
               <p>
-                Today, I'm heads-down over-engineering something new. Most recently, I led Global Strategic Partnerships Finance for the Financial Partnerships team at <a 
+                Today, I'm building <Link
+                  href="/advisory"
+                  className="text-[#7f54dc] hover:text-white transition-colors underline"
+                >
+                  Interspace Ventures
+                </Link>. Most recently, I led Global Strategic Partnerships Finance for the Financial Partnerships team at <a 
                   href="https://block.xyz" 
                   target="_blank" 
                   rel="noopener noreferrer"

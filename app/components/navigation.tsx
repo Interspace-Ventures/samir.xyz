@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Menu, X, ExternalLink } from 'lucide-react';
+import { Menu, X, ExternalLink, User, Handshake, Briefcase, Rocket, Newspaper } from 'lucide-react';
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -57,11 +57,11 @@ const Navigation = () => {
   };
 
   const menuItems = [
-    { href: '/', label: 'Profile' },
-    { href: '/advisory', label: 'Advisory' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/ventures', label: 'Ventures' },
-    { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true }
+    { href: '/', label: 'Profile', icon: User },
+    { href: '/advisory', label: 'Advisory', icon: Handshake },
+    { href: '/portfolio', label: 'Portfolio', icon: Briefcase },
+    { href: '/ventures', label: 'Ventures', icon: Rocket },
+    { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true, icon: Newspaper }
   ];
 
   return (
@@ -156,19 +156,21 @@ const Navigation = () => {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
+                        className="inline-flex items-center gap-3 text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
                         onClick={closeMobileMenu}
                       >
+                        <item.icon className="w-6 h-6 text-white" aria-hidden="true" />
                         {item.label}
                         <ExternalLink className="w-5 h-5" aria-hidden="true" />
                       </a>
                     ) : (
                       <Link 
                         href={item.href} 
-                        className="text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
+                        className="inline-flex items-center gap-3 text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
                         onClick={closeMobileMenu}
                         prefetch={true}
                       >
+                        <item.icon className="w-6 h-6 text-white" aria-hidden="true" />
                         {item.label}
                       </Link>
                     )}
