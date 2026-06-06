@@ -1,9 +1,7 @@
-import Link from 'next/link';
-import { CURRENT_VERSION } from '../lib/changelog';
+import ChangelogDrawer from './changelog-drawer';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const version = CURRENT_VERSION;
   
   return (
     <footer className="bg-purple-primary py-6 border-t border-purple-primary/20">
@@ -24,12 +22,7 @@ export default function Footer() {
           
           <div className="w-full text-center">
             <p className="text-center">
-              <Link
-                href="/changelog"
-                className="text-text-secondary hover:text-white transition-colors"
-              >
-                v{version}
-              </Link> | Built with <a 
+              <ChangelogDrawer /> | Built with <a 
                 href="https://replit.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
