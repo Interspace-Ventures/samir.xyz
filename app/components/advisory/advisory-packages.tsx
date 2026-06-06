@@ -64,7 +64,7 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
                 <div className="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                   <Icon className="w-5 h-5 lg:w-6 lg:h-6 text-white" aria-hidden="true" />
                 </div>
-                <span className="text-[9px] lg:text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-1.5 py-1 lg:px-2">
+                <span className="hidden lg:inline-block text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-2 py-1">
                   {pkg.type}
                 </span>
               </div>
@@ -83,6 +83,10 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
                   </li>
                 ))}
               </ul>
+
+              <span className="lg:hidden self-start text-[9px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-1.5 py-1 mb-2">
+                {pkg.type}
+              </span>
 
               <div className="flex flex-col gap-2">
                 <Button
