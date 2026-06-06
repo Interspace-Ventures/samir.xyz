@@ -117,9 +117,9 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               required
               value={form.name}
               onChange={update('name')}
-              size={autoSize(form.name, 'your name')}
+              size={autoSize(form.name, 'Dee Hock')}
               className={fillClass}
-              placeholder="your name"
+              placeholder="Dee Hock"
               aria-label="Your name"
             />
             , and I run{' '}
@@ -127,9 +127,9 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               type="text"
               value={form.company}
               onChange={update('company')}
-              size={autoSize(form.company, 'company')}
+              size={autoSize(form.company, 'Visa')}
               className={fillClass}
-              placeholder="company"
+              placeholder="Visa"
               aria-label="Your company"
             />
             , a{' '}
@@ -137,16 +137,16 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               value={form.stage}
               onChange={(v) => setForm((prev) => ({ ...prev, stage: v }))}
               options={STAGES}
-              placeholder="stage"
+              placeholder="Growth"
             />{' '}
             stage fintech (
             <input
               type="text"
               value={form.website}
               onChange={update('website')}
-              size={autoSize(form.website, 'company.xyz')}
+              size={autoSize(form.website, 'visa.com')}
               className={fillClass}
-              placeholder="company.xyz"
+              placeholder="visa.com"
               aria-label="Your website"
             />
             ). I&apos;m looking for advisory for{' '}
@@ -154,9 +154,9 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               type="text"
               value={form.comments}
               onChange={update('comments')}
-              size={autoSize(form.comments, 'what you need')}
+              size={autoSize(form.comments, 'how to launch a new payment protocol')}
               className={fillClass}
-              placeholder="what you need"
+              placeholder="how to launch a new payment protocol"
               aria-label="What you need advisory for"
             />
             . Let&apos;s connect, my email is{' '}
@@ -165,9 +165,9 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               required
               value={form.email}
               onChange={update('email')}
-              size={autoSize(form.email, 'you@email.com')}
+              size={autoSize(form.email, 'dee@visa.com')}
               className={fillClass}
-              placeholder="you@email.com"
+              placeholder="dee@visa.com"
               aria-label="Your email"
             />
               .

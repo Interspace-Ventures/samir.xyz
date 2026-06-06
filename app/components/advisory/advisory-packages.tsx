@@ -60,17 +60,13 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               className="bg-[#2a313a] border-2 border-black p-4 lg:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
             >
-              <div className="flex items-center justify-between gap-3 mb-4 lg:mb-5">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 shrink-0 flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                    <Icon className="w-5 h-5 lg:w-6 lg:h-6 text-white" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-xl lg:text-2xl font-bold text-white">{pkg.name}</h3>
-                </div>
-                <span className="hidden lg:inline-block shrink-0 text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-2 py-1">
-                  {pkg.type}
-                </span>
+              <div className="flex items-center gap-3 mb-3">
+                <Icon className="w-7 h-7 lg:w-8 lg:h-8 shrink-0 text-[#7f54dc]" aria-hidden="true" />
+                <h3 className="text-xl lg:text-2xl font-bold text-white">{pkg.name}</h3>
               </div>
+              <span className="self-start text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-2 py-1 mb-4 lg:mb-5">
+                {pkg.type}
+              </span>
               <ul className="space-y-2 mb-5 lg:mb-6 flex-grow">
                 {pkg.points.map((point) => (
                   <li key={point} className="flex items-start gap-2">
@@ -84,10 +80,6 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
                   </li>
                 ))}
               </ul>
-
-              <span className="lg:hidden block text-center text-[9px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-1.5 py-1 mb-2">
-                {pkg.type}
-              </span>
 
               <div className="flex flex-col gap-2">
                 <Button
