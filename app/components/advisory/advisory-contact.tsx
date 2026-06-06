@@ -22,7 +22,7 @@ const fillClass =
   'inline-block bg-transparent border-b-2 border-white/30 text-[#c9b6ff] font-semibold text-left align-baseline leading-tight px-0.5 pb-0.5 focus:outline-none focus:border-[#c9b6ff] placeholder:text-white/30 placeholder:font-normal placeholder:italic transition-colors';
 
 const autoSize = (value: string, placeholder: string) =>
-  Math.max(value.length, placeholder.length) + 1;
+  Math.max(value.length, placeholder.length);
 
 export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryContactProps) {
   const [form, setForm] = useState({
