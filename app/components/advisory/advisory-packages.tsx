@@ -36,8 +36,7 @@ const packages = [
     points: [
       'Organizational strategy',
       'Product advisory',
-      'Network access',
-      'Capital intros',
+      'Capital access',
       'Customer intros',
     ],
   },
