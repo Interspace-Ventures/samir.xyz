@@ -8,6 +8,17 @@ This is a modern personal portfolio website built with Next.js that showcases pr
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (2026-06-06)
+
+- **Added/fixed 7 portfolio deals**: Backpack, Kartera, Lunar (Hard Seltzer), Metadata, Parrot Finance, Playbook, Waldo.
+  - 6 of the 7 already existed in the Postgres `Portfolio` table with correct black-on-transparent logos in `public/logos/`; only **Parrot Finance** was new.
+  - **Parrot Finance** inserted: Fintech, Markup, website parrotfinance.io. Generated `public/logos/parrot.png` from their official `logo.svg` — rendered high-res, colorized to solid black (alpha preserved), trimmed and centered on a 500×250 transparent canvas to match the other logos.
+  - **Lunar** category corrected SaaS → **Commerce** (it's the hard seltzer brand).
+  - **Playbook** status set to **Markup**.
+  - **Backpack** website updated to `backpack529.com` (per user; DB previously had backpackpay.com — its own description confirms it's the 529 college-savings company).
+- **Fixed a portfolio visibility bug** (`app/api/portfolio/route.ts`): the SQL filter `NOT: { investment_status: 'Bust' }` silently dropped every row where `investment_status IS NULL` (in SQL, `NOT(NULL = 'Bust')` is NULL → excluded). This had been hiding 9 legitimate companies (Backpack, Kartera, Lunar, Metadata, Waldo, Goodmylk, Hedgehog, Juno, Sundae). Now fetches all rows and filters in JS, so NULL-status companies display. API went from 26 → 35 companies; Moku (Bust) and The Food Company stay excluded.
+- **Metrics updated** (`app/lib/static-metrics.ts` + `app/api/metrics/route.ts`): `total_investments` 42 → 43 (Parrot added), `markups` 21 → 23 (Playbook + Parrot).
+
 ## Recent Changes (2026-06-05)
 
 - **Deployment Build Failure (security scan) — diagnosed**: Publish fails at the security-scan step. The build logs show only `Deployment` → `Build` → `Running Security Scan` → `Security Scan Complete` → `failed`, with NO `next build` output — proving the scan runs *before* the build and inspects the source, including git history. The scanner (gitleaks) flags the auto-generated `previewModeSigningKey` / `previewModeEncryptionKey` from `.next/prerender-manifest.json`, which were committed to git history in the past. These are throwaway keys (regenerated on every `next build`) — a false positive, not a real secret. The working tree is clean (`.next` is gitignored/untracked), so the keys come only from old commits.

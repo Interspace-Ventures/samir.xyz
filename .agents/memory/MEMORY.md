@@ -1,4 +1,5 @@
 - [Run/workflow service quirk](run-workflow-quirk.md) — agent restart/configureWorkflow can fail with RUN_COMMAND_NOT_FOUND; user's Run button still works, bash can't keep a server alive.
-- [Querying the database](db-access.md) — `prisma db execute` returns no rows; run a Node script with PrismaClient from the project dir to read data.
+- [Querying the database](db-access.md) — `prisma db execute` returns no rows; run a Node script with PrismaClient, or use the `executeSql` code-execution callback (works for SELECT/UPDATE/INSERT).
+- [Portfolio visibility filter](portfolio-visibility-filter.md) — `/api/portfolio` hides companies via SQL `NOT investment_status='Bust'`, which also drops NULL-status rows; filter in JS instead. Includes B&W logo recipe.
 - [Ventures active allowlists](ventures-allowlists.md) — which ventures show is controlled by hardcoded allowlists across three API routes, not just the DB.
 - [Deploy security scan](deploy-security-scan.md) — Next.js publish fails at "Security Scan Complete" = gitleaks (pre-build) flags preview keys committed in git history; safe fix = turn off "Block publishing of critical vulnerabilities"/dismiss in Security Center (UI), not a post-build strip.

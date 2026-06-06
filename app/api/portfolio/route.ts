@@ -62,14 +62,13 @@ export async function GET(request: NextRequest) {
     
     // Removed console logs for performance
     
-    // Query all portfolio items from the database (exclude busted companies from display)
+    // Query all portfolio items from the database.
+    // NOTE: We intentionally do NOT filter in SQL here. A SQL/Prisma
+    // `NOT: { investment_status: 'Bust' }` clause silently drops rows where
+    // investment_status IS NULL (since NOT(NULL = 'Bust') is NULL, not true),
+    // which was hiding every company that has no status set. We filter in JS
+    // below instead so NULL-status companies still display.
     const portfolioItems = await prisma.portfolio.findMany({
-      where: {
-        AND: [
-          { NOT: { name: 'The Food Company' } },
-          { NOT: { investment_status: 'Bust' } }
-        ]
-      },
       orderBy: [
         { createdAt: 'desc' }, // Sort by creation date (newest first)
       ],
@@ -105,12 +104,17 @@ export async function GET(request: NextRequest) {
       };
     });
 
-    // Successfully retrieved portfolio items
-    
+    // Exclude busted companies and the placeholder company from display.
+    // Done in JS (not SQL) so that companies with a NULL investment_status
+    // are still shown — see note on the findMany query above.
+    const visibleItems = mappedItems.filter(item =>
+      item.name !== 'The Food Company' && item.investment_status !== 'Bust'
+    );
+
     // If metrics are requested, format the response accordingly
     if (includeMetrics) {
       // Calculate summary metrics
-      const itemsWithInvestmentData = mappedItems.filter(item => 
+      const itemsWithInvestmentData = visibleItems.filter(item => 
         item.investment_date && item.initial_investment && item.current_valuation
       );
       
@@ -124,9 +128,9 @@ export async function GET(request: NextRequest) {
       
       // Return structured response with items and metrics
       return NextResponse.json({
-        items: mappedItems,
+        items: visibleItems,
         metrics: {
-          total_items: mappedItems.length,
+          total_items: visibleItems.length,
           items_with_investment_data: itemsWithInvestmentData.length,
           total_invested: totalInvested,
           total_current_value: totalCurrentValue,
@@ -136,7 +140,7 @@ export async function GET(request: NextRequest) {
     }
     
     // Default response with just the items
-    return NextResponse.json(mappedItems);
+    return NextResponse.json(visibleItems);
   } catch (error) {
     // Get error details without logging
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
