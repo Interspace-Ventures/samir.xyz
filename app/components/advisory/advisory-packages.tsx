@@ -95,12 +95,6 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
                 >
                   Let&apos;s talk
                 </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => onSelect(`${pkg.name}: Ask a Question`)}
-                >
-                  Ask a Question
-                </Button>
               </div>
             </motion.div>
           );
