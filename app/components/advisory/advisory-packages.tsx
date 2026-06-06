@@ -84,7 +84,7 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
                 ))}
               </ul>
 
-              <span className="lg:hidden self-start text-[9px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-1.5 py-1 mb-2">
+              <span className="lg:hidden block text-center text-[9px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-1.5 py-1 mb-2">
                 {pkg.type}
               </span>
 
