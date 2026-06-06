@@ -74,7 +74,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
   };
 
   return (
-    <section id="contact" className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-24">
+    <section id="contact" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-24">
       <h2 className="text-3xl font-bold text-white mb-8">Let&apos;s talk</h2>
 
       {status === 'success' ? (
