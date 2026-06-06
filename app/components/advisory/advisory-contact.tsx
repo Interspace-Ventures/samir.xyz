@@ -18,11 +18,37 @@ const STAGES = [
   'Other',
 ];
 
-const fillClass =
-  'inline-block bg-transparent border-b-2 border-white/30 text-[#c9b6ff] font-semibold text-left align-baseline leading-tight px-0.5 pb-0.5 focus:outline-none focus:border-[#c9b6ff] placeholder:text-white/30 placeholder:font-normal placeholder:italic transition-colors';
+type FillInputProps = {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  ariaLabel: string;
+  type?: string;
+  required?: boolean;
+};
 
-const autoSize = (value: string, placeholder: string) =>
-  Math.max(value.length, placeholder.length);
+function FillInput({ value, onChange, placeholder, ariaLabel, type = 'text', required }: FillInputProps) {
+  return (
+    <span className="inline-grid max-w-full align-baseline">
+      <span
+        aria-hidden="true"
+        className={`col-start-1 row-start-1 invisible whitespace-pre leading-tight px-0.5 ${value ? 'font-semibold' : 'font-normal italic'}`}
+      >
+        {value || placeholder}
+      </span>
+      <input
+        type={type}
+        required={required}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        aria-label={ariaLabel}
+        size={1}
+        className="col-start-1 row-start-1 w-full min-w-0 bg-transparent border-b-2 border-white/30 text-[#c9b6ff] font-semibold leading-tight px-0.5 pb-0.5 focus:outline-none focus:border-[#c9b6ff] placeholder:text-white/30 placeholder:font-normal placeholder:italic transition-colors"
+      />
+    </span>
+  );
+}
 
 export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryContactProps) {
   const [form, setForm] = useState({
@@ -112,25 +138,19 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
             <p className="mb-6 text-xl sm:text-2xl font-bold">Hey Samir,</p>
             <p className="leading-[2.9]">
               My name is{' '}
-            <input
-              type="text"
+            <FillInput
               required
               value={form.name}
               onChange={update('name')}
-              size={autoSize(form.name, 'Dee Hock')}
-              className={fillClass}
               placeholder="Dee Hock"
-              aria-label="Your name"
+              ariaLabel="Your name"
             />
             , and I run{' '}
-            <input
-              type="text"
+            <FillInput
               value={form.company}
               onChange={update('company')}
-              size={autoSize(form.company, 'Visa')}
-              className={fillClass}
               placeholder="Visa"
-              aria-label="Your company"
+              ariaLabel="Your company"
             />
             , a{' '}
             <StageSelect
@@ -140,35 +160,27 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               placeholder="Growth"
             />{' '}
             stage fintech (
-            <input
-              type="text"
+            <FillInput
               value={form.website}
               onChange={update('website')}
-              size={autoSize(form.website, 'visa.com')}
-              className={fillClass}
               placeholder="visa.com"
-              aria-label="Your website"
+              ariaLabel="Your website"
             />
             ). I&apos;m looking for advisory for{' '}
-            <input
-              type="text"
+            <FillInput
               value={form.comments}
               onChange={update('comments')}
-              size={autoSize(form.comments, 'how to launch a new payment protocol')}
-              className={fillClass}
               placeholder="how to launch a new payment protocol"
-              aria-label="What you need advisory for"
+              ariaLabel="What you need advisory for"
             />
             . Let&apos;s connect, my email is{' '}
-            <input
+            <FillInput
               type="email"
               required
               value={form.email}
               onChange={update('email')}
-              size={autoSize(form.email, 'dee@visa.com')}
-              className={fillClass}
               placeholder="dee@visa.com"
-              aria-label="Your email"
+              ariaLabel="Your email"
             />
               .
             </p>
