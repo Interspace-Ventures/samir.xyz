@@ -49,7 +49,7 @@ export default function AdvisoryComparison() {
         {/* What I don't */}
         <div className="bg-[#242a31] p-6">
           <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white/40 mb-4">
-            What I don&apos;t
+            What I don&apos;t do
           </h3>
           <ul className="space-y-3">
             {dontList.map((item) => (
