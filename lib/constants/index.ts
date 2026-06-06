@@ -69,8 +69,8 @@ export const IMAGE_CONFIG = {
 // Styling Constants
 export const THEME = {
   COLORS: {
-    PRIMARY: '#8c5cf6',
-    PRIMARY_RGB: '140, 92, 246',
+    PRIMARY: '#7f55dc',
+    PRIMARY_RGB: '127, 85, 220',
     SECONDARY: '#3D365C',
     BACKGROUND: '#ffffff',
     TEXT: '#1f2937',
@@ -78,7 +78,7 @@ export const THEME = {
   },
   SHADOWS: {
     CARD: '6px 6px 0px 0px rgba(0,0,0,1)',
-    CARD_HOVER: '0 10px 20px -3px rgba(140, 92, 246, 0.4)',
+    CARD_HOVER: '0 10px 20px -3px rgba(127, 85, 220, 0.4)',
   },
   SPACING: {
     CARD_GAP: '1.5rem',

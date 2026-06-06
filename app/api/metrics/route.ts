@@ -1,61 +1,27 @@
 /**
  * Portfolio Metrics API Route
- * 
- * This API route provides just the portfolio metrics summary data
- * with minimal processing for faster loading.
+ *
+ * Returns the headline portfolio figures. Curated numbers that cannot be
+ * derived from the database (TVPI, MOIC, IRR, etc.) come from a single source
+ * of truth in `app/lib/static-metrics.ts`; the acquisition count is derived
+ * live from the database.
  */
 
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { staticMetrics } from '../../lib/static-metrics';
 
 export async function GET() {
   try {
-
-    
-    // Get minimal data needed for metrics calculation
-    const portfolioItems = await prisma.portfolio.findMany({
-      select: {
-        investment_status: true,
-      },
+    const acquisitions = await prisma.portfolio.count({
+      where: { investment_status: { in: ['Acquired', 'Exited'] } },
     });
-    
-    // Count statuses
-    let markupCount = 0;
-    let acquisitionCount = 0;
-    
-    portfolioItems.forEach((item: any) => {
-      if (item.investment_status === 'Markup') {
-        markupCount++;
-      }
-      if (item.investment_status === 'Acquired' || item.investment_status === 'Exited') {
-        acquisitionCount++;
-      }
-    });
-    
-    // Return hardcoded and calculated metrics
-    // These are the standard metrics used across the portfolio analytics
-    const metrics = {
-      total_investments: 43,
-      markups: 23,
-      acquisitions: acquisitionCount,
-      busts: 9,
-      tvpi: 1.5,
-      gross_multiple: 1.7,
-      net_multiple: 1.5,
-      irr: 12
-    };
-    
 
-    return NextResponse.json(metrics);
+    return NextResponse.json({ ...staticMetrics, acquisitions });
   } catch (error) {
     console.error('Error fetching metrics summary:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    
     return NextResponse.json(
-      { 
-        error: 'Failed to fetch metrics data',
-        details: errorMessage 
-      },
+      { error: 'Failed to fetch metrics data' },
       { status: 500 }
     );
   }

@@ -1,8 +1,10 @@
 /**
- * Static Portfolio Metrics Data
- * 
- * This file contains pre-computed portfolio metrics for faster initial loading.
- * These values match the standard metrics used across the portfolio analytics.
+ * Portfolio Metrics: single source of truth
+ *
+ * These are the curated headline figures (TVPI, MOIC, IRR, totals) that cannot
+ * be derived from the database. The frontend uses them for instant rendering,
+ * and the /api/metrics route returns them too (deriving the acquisition count
+ * live from the DB), so the numbers only ever live in one place.
  */
 
 export type PortfolioSummary = {

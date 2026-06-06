@@ -5,3 +5,5 @@
 - [Deploy security scan](deploy-security-scan.md) — Next.js publish fails at "Security Scan Complete" = gitleaks (pre-build) flags preview keys committed in git history; safe fix = turn off "Block publishing of critical vulnerabilities"/dismiss in Security Center (UI), not a post-build strip.
 
 - [Next.js portfolio quirks](nextjs-portfolio.md) — bundled-postcss audit noise, framer-motion v12 Variants, Next 16 images.domains removal, why Prisma 7 / Tailwind 4 are held.
+- [Metrics source of truth](metrics-source-of-truth.md) — curated headline figures live only in app/lib/static-metrics.ts; metrics API spreads it and derives only acquisitions live. Don't re-hardcode.
+- [Two component dirs](component-dirs.md) — repo half-migrated; both app/components and components exist. Grep for imports before deleting/editing anything in app/components.
