@@ -1,65 +1,32 @@
-'use client';
-
 /**
- * Portfolio Page Component
- * 
- * Refactored portfolio page using the new component architecture.
- * Provides clean, performant portfolio display with consistent styling.
+ * Portfolio Page (server)
+ *
+ * Prefetches portfolio + categories on the server and hydrates them into React
+ * Query, so the client grid renders with data already present (no first-visit
+ * loading flash).
  */
 
-import { motion } from 'framer-motion';
-import { PortfolioGrid } from '../../components/portfolio/portfolio-grid';
-import MetricsSummaryStandalone from '../components/metrics-summary-standalone';
-import { fadeInUp } from '../../lib/utils/animations';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { getVisiblePortfolio, getCategories } from '@/lib/server-data';
+import PortfolioContent from './portfolio-content';
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const queryClient = new QueryClient();
+
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ['portfolio'],
+      queryFn: getVisiblePortfolio,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ['categories'],
+      queryFn: getCategories,
+    }),
+  ]);
+
   return (
-    <div className="pt-20 pb-16">
-      <section className="section">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h1 
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            className="text-4xl md:text-5xl font-bold mb-6 text-white"
-          >
-            Portfolio
-          </motion.h1>
-          
-          {/* Investment Philosophy */}
-          <motion.div 
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.1 }}
-            className="content-card mb-8 font-medium"
-          >
-            I have advised and invested in ambitious teams building innovative products who focus on unit economics optimized business models since 2019.
-          </motion.div>
-          
-          {/* Metrics load instantly with static data */}
-          <motion.div 
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.2 }}
-            className="mb-12"
-          >
-            <MetricsSummaryStandalone />
-          </motion.div>
-          
-          {/* Use the new optimized portfolio grid */}
-          <motion.div 
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.3 }}
-            className="mt-8"
-          >
-            <PortfolioGrid />
-          </motion.div>
-        </div>
-      </section>
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <PortfolioContent />
+    </HydrationBoundary>
   );
 }

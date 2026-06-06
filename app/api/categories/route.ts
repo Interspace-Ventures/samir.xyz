@@ -6,7 +6,7 @@
  * and returns them as an array of objects with id, name, and order.
  */
 
-import { prisma } from '@/lib/prisma';
+import { getCategories } from '@/lib/server-data';
 import { NextResponse } from 'next/server';
 
 /**
@@ -18,24 +18,7 @@ import { NextResponse } from 'next/server';
  */
 export async function GET() {
   try {
-    // Query distinct categories from the Portfolio table
-    const portfolioItems = await prisma.portfolio.findMany({
-      select: {
-        category: true
-      },
-      distinct: ['category'],
-      orderBy: {
-        category: 'asc'
-      }
-    });
-    
-    // Transform the result into the expected format
-    // (maintaining compatibility with the previous format)
-    const categories = portfolioItems.map((item, index) => ({
-      id: index + 1,
-      name: item.category,
-      order: index + 1
-    }));
+    const categories = await getCategories();
 
     // Return the categories as JSON
     return NextResponse.json(categories);

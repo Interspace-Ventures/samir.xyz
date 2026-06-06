@@ -5,31 +5,15 @@
  * `?includeMetrics=true` to also receive aggregate investment figures.
  */
 
-import { prisma } from '@/lib/prisma';
+import { getVisiblePortfolio } from '@/lib/server-data';
 import { NextResponse, type NextRequest } from 'next/server';
-
-// Companies hidden from the public gallery (placeholders, wound-down deals, etc.)
-const HIDDEN_COMPANIES = ['The Food Company'];
 
 export async function GET(request: NextRequest) {
   try {
     const includeMetrics =
       new URL(request.url).searchParams.get('includeMetrics') === 'true';
 
-    // Prisma maps `logoUrl` from the `logo-url` column, so the rows are already
-    // in the shape the frontend expects.
-    const portfolioItems = await prisma.portfolio.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
-
-    // Filter in JS rather than SQL: a `NOT investment_status = 'Bust'` clause
-    // drops rows where the status IS NULL (NOT(NULL) is NULL, not true), which
-    // would hide every company that has no status set.
-    const visibleItems = portfolioItems.filter(
-      (item) =>
-        item.investment_status !== 'Bust' &&
-        !HIDDEN_COMPANIES.includes(item.name)
-    );
+    const visibleItems = await getVisiblePortfolio();
 
     if (!includeMetrics) {
       return NextResponse.json(visibleItems);
