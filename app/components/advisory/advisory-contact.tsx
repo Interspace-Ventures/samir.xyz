@@ -10,11 +10,11 @@ interface AdvisoryContactProps {
 }
 
 const STAGES = [
-  'Idea / Pre-seed',
-  'Seed',
-  'Series A',
-  'Series B+',
-  'Growth / Later',
+  'Idea',
+  'Pre-seed / Seed',
+  'Series A / B',
+  'Series C+',
+  'Pre-IPO',
   'Other',
 ];
 
