@@ -26,7 +26,7 @@ export default function AdvisoryPrinciples() {
     <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h2 className="text-3xl font-bold text-white mb-8">Principles</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {principles.map((p, index) => {
           const Icon = p.icon;
           return (
