@@ -81,7 +81,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
           <div className="w-14 h-14 mx-auto flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] mb-4">
             <CircleCheck className="w-8 h-8 text-white" aria-hidden="true" />
           </div>
-          <h3 className="text-xl font-bold text-white mb-2">Thanks &mdash; got it.</h3>
+          <h3 className="text-xl font-bold text-white mb-2">Thanks, got it.</h3>
           <p className="text-white/70">
             Your message is in. I&apos;ll get back to you shortly.
           </p>

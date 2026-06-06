@@ -7,7 +7,7 @@ const principles = [
   {
     icon: Handshake,
     title: 'Operator to operator',
-    body: "Every recommendation comes from doing the work \u2014 not reading about it. I've sat in your seat, so I know exactly what you're going through.",
+    body: "Every recommendation comes from doing the work, not reading about it. I've sat in your seat, so I know exactly what you're going through.",
   },
   {
     icon: Microscope,
@@ -17,7 +17,7 @@ const principles = [
   {
     icon: Scale,
     title: 'Aligned',
-    body: 'I only earn when you get value. Pricing is entirely ROI-based \u2014 your wins are my wins.',
+    body: 'I only earn when you get value. Pricing is entirely ROI-based, so your wins are my wins.',
   },
 ];
 

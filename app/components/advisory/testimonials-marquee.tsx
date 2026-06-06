@@ -10,7 +10,7 @@ interface Testimonial {
   logo?: string;
 }
 
-// Placeholder testimonials \u2014 swap in real quotes, names, titles and company
+// Placeholder testimonials: swap in real quotes, names, titles and company
 // logos as they come in. Add a `logo` path (e.g. '/logos/acme.png') to render
 // the company mark instead of the company name text.
 const testimonials: Testimonial[] = [
@@ -30,7 +30,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      'The over-engineering is real \u2014 in the best way. Every recommendation came with the receipts to back it up.',
+      'The over-engineering is real, in the best way. Every recommendation came with the receipts to back it up.',
     name: 'Placeholder Name',
     title: 'VP Finance',
     company: 'Lending Co.',

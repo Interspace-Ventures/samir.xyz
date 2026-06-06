@@ -22,7 +22,7 @@ export default function AdvisoryHero() {
         <p className="text-lg md:text-xl text-white/85 max-w-2xl mb-9 leading-relaxed">
           Operator-built strategic finance for fintechs. I help you sharpen unit
           economics, raise capital, and land the partnerships that change your
-          trajectory &mdash; real outcomes, not reports.
+          trajectory. Real outcomes, not reports.
         </p>
 
         <a
