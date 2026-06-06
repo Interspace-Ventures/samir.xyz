@@ -3,3 +3,5 @@ node_modules
 .env
 # Next.js build output
 .next
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo
