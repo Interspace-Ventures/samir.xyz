@@ -60,6 +60,7 @@ const Navigation = () => {
     { href: '/', label: 'Profile' },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/ventures', label: 'Ventures' },
+    { href: '/advisory', label: 'Advisory' },
     { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true }
   ];
 

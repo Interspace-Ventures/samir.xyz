@@ -52,3 +52,14 @@ model Tag {
   name     String    @unique
   projects Project[] @relation("ProjectToTag")
 }
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  stage     String?
+  comments  String?
+  interest  String?
+  createdAt DateTime @default(now())
+}

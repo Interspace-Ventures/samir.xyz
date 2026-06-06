@@ -8,6 +8,19 @@ This is a modern personal portfolio website built with Next.js that showcases pr
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (2026-06-06) — Advisory Page
+
+- **New `/advisory` page** for Samir's strategic finance advisory practice, built with the existing neobrutalist design system (bg `#332452`, accent `#7f54dc`, `#2a313a` cards, black borders + 4px shadows, amber CTAs). Page is a client component (`app/advisory/page.tsx`) holding shared `interest` state. Five sections in `app/components/advisory/`:
+  - **Hero** — eyebrow badge, "Not your fractional CFO." headline, and a "Not / Yes" contrast row differentiating Strategic Finance from CFO-as-a-service / FP&A / month-end close / bookkeeping.
+  - **Principles** — 3 cards: Operator-to-operator, Data-driven & over-engineered, Aligned (ROI-based pricing).
+  - **Testimonials marquee** — CSS auto-scroll (pauses on hover) with **placeholder** quotes; each entry supports an optional company `logo` path (drop in `/logos/...`), otherwise shows the company name. Swap in real testimonials when supplied.
+  - **Packages** — Build (project-based, fintech landing/marketing sites), Grow (project-based, fundraising/partnerships/unit economics), Advise (ongoing, org strategy/product advisory/network/capital+customer intros). Each card has TWO CTAs ("Get Started" + "Ask a Question") that set `interest = "{Package} — {label}"` and smooth-scroll to the contact form, so Samir sees both the source package and the intent.
+  - **Contact form** — Name, email, company, stage (select), comments; shows a clearable interest chip; POSTs to `/api/contact`; success state on submit.
+- **Persistence**: new `ContactSubmission` Prisma model (id/name/email/company?/stage?/comments?/interest?/createdAt), pushed to Neon Postgres. New `app/api/contact/route.ts` validates name + email (format-checked), persists via Prisma, returns 400 on bad input and a generic 500 (internal error details logged server-side only, not leaked to clients).
+- **Nav**: added "Advisory" to `menuItems` (desktop + mobile auto-render; clamp font sizing keeps the 5-item bar uncrowded).
+- **Marquee CSS**: added `@keyframes marquee` + `.animate-marquee` + `.marquee-paused:hover` to `app/globals.css`; the existing `prefers-reduced-motion` block tames it for reduced-motion users.
+- Verified: `npx tsc --noEmit` and `npx next build` pass (`/advisory` + `/api/contact` compile); API manually tested (valid → `{success:true}`, missing/invalid email → 400); test row cleaned up.
+
 ## Recent Changes (2026-06-06) — Full Refresh
 
 - **Next.js 15 → 16 upgrade** (now 16.2.7, Turbopack default): `npx tsc --noEmit` and `npx next build` both pass; all pages return 200. Removed the deprecated `images.domains` key from `next.config.js` (removed in Next 16). All logos are local (`public/`), so no `images.remotePatterns` needed — verified 0 remote `logo-url` values in both DB tables.
