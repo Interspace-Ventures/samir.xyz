@@ -31,7 +31,7 @@ export default function AdvisoryHero() {
           className="inline-flex items-center gap-2 bg-black text-white font-bold uppercase tracking-wide text-sm px-6 py-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-800 hover:no-underline active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
         >
           <ArrowRight className="w-4 h-4" aria-hidden="true" />
-          Start a conversation
+          Let&apos;s talk
         </a>
       </motion.div>
     </section>
