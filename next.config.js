@@ -3,6 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+
+  allowedDevOrigins: ['*.replit.dev', '*.repl.co', '*.janeway.replit.dev', '*.worf.replit.dev'],
   
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react'],

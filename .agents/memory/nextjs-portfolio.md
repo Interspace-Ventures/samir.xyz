@@ -11,6 +11,10 @@ description: Durable gotchas for upgrading/maintaining the samir.xyz Next.js por
 ## framer-motion v12 stricter types
 v12.40 tightened animation types — a custom `AnimationVariants` interface no longer satisfies motion props. Use framer-motion's own `Variants` type in `lib/utils/animations.ts` (and cast generated variants `as Variants` if needed).
 
+## Next 16 blocks cross-origin dev resources (breaks Replit mobile/preview)
+Next 16 blocks cross-origin requests to `/_next/*` dev resources by default. Viewing the dev server through Replit's preview domain (e.g. `*.janeway.replit.dev`) — common on mobile — yields a blank page because HMR/dev scripts are refused. Fix: set `allowedDevOrigins` in `next.config.js` to the Replit hosts, e.g. `['*.replit.dev', '*.repl.co', '*.janeway.replit.dev', '*.worf.replit.dev']`, then restart. Dev-only; no effect on production builds.
+**Symptom:** workflow log shows "⚠ Blocked cross-origin request to Next.js dev resource".
+
 ## Next 16 config
 `images.domains` was removed in Next 16 — use `images.remotePatterns` only if remote image URLs exist. This repo's logos are all local under `public/`, and DB `logo-url` values are all relative, so no remotePatterns are needed.
 
