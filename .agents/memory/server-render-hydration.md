@@ -1,35 +1,23 @@
 ---
 name: Server-render + React Query hydration for page data
-description: How /portfolio, /portfolio-metrics, /ventures avoid the first-visit loading flash.
+description: Why the main pages fetch on the server, and the gotchas that keep the loading flash gone.
 ---
 
-The neobrutalist pages used to be client components that fetched their data from API
-routes on mount, which showed a skeleton/spinner for ~half a second on the first visit
-to each tab. The fix: fetch the data on the server so it is already in the HTML.
+**Decision:** the data-driven pages render their data on the server (in an async
+`page.tsx`) instead of fetching client-side on mount. The shared Prisma reads live in
+one module that both the server pages and the API routes import, so server HTML and
+client API responses can never drift in shape.
 
-**Pattern (the durable decision):**
-- All Prisma reads for these pages live in ONE shared module `app/lib/server-data.ts`
-  (`getVisiblePortfolio`, `getCategories`, `getActiveVentures`). Both the server pages
-  AND the API routes import from it, so server-rendered HTML and client API responses
-  are guaranteed identically shaped.
-- React Query pages (`/portfolio`, `/portfolio-metrics`): the `page.tsx` is an async
-  server component that `prefetchQuery` into a fresh `QueryClient`, then wraps a `'use
-  client'` content component in `<HydrationBoundary state={dehydrate(qc)}>`. The client
-  hooks reuse the SAME query keys (`['portfolio']`, `['categories']`) so they read
-  hydrated data instead of refetching.
-- Plain-fetch page (`/ventures`): the `page.tsx` server-fetches and passes data as a
-  prop to a `'use client'` content component (no React Query there).
+**Why:** client-only fetching showed a skeleton for ~half a second on the first visit
+to each tab. With the data already in the HTML, the loading state is never `true` on
+first render, so no flash.
 
-**Why:** moving the fetch to the server removes the client round-trip on first paint.
-The flash only appeared when `isLoading` was true (no data yet); with hydrated/prop data
-it is false on first render, so the skeleton never shows.
-
-**How to apply / gotchas:**
-- The prefetch query key MUST exactly match the client hook's key, or hydration misses
-  and it refetches (flash returns). Keys are currently string literals, not centralized.
-- Hydration relies on the client QueryClient default `staleTime` (5 min in
-  `app/providers.tsx`) so hydrated data is treated as fresh and not refetched on mount.
-- Date fields serialize to ISO strings across the RSC/dehydrate boundary; UI always
-  wraps them in `new Date(...)`, which tolerates both Date and string. Keep it that way.
-- Prisma `Float?`/`DateTime?`/`String` fields are RSC-serializable; a `Decimal` field
-  would break dehydrate/prop-passing, so avoid Decimal in these models.
+**How to apply / gotchas (the non-obvious parts):**
+- For React Query pages, the server prefetch query key MUST exactly match the client
+  hook's key, or hydration misses and it refetches (flash returns). Keys are plain
+  string literals today, not centralized, so this is easy to break.
+- Hydration depends on the client QueryClient default `staleTime` (5 min) treating the
+  hydrated data as fresh; lowering it would reintroduce an on-mount refetch.
+- Dates cross the dehydrate/RSC boundary as ISO strings, so UI must wrap them in
+  `new Date(...)` (tolerates both Date and string). A Prisma `Decimal` field would
+  break dehydrate/prop serialization entirely; keep these models Float/Date/String.
