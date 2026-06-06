@@ -20,6 +20,7 @@ Preferred communication style: Simple, everyday language.
 - **Nav**: added "Advisory" to `menuItems` (desktop + mobile auto-render; clamp font sizing keeps the 5-item bar uncrowded).
 - **Marquee CSS**: added `@keyframes marquee` + `.animate-marquee` + `.marquee-paused:hover` to `app/globals.css`; the existing `prefers-reduced-motion` block tames it for reduced-motion users.
 - Verified: `npx tsc --noEmit` and `npx next build` pass (`/advisory` + `/api/contact` compile); API manually tested (valid → `{success:true}`, missing/invalid email → 400); test row cleaned up.
+- **Refinements (per Samir's feedback)**: hero now leads with the motto **"Advisory that drives impact."** (focus on what's different, not what it's not). The "what I do / what I don't" content moved out of the hero into a secondary side-by-side comparison table (`advisory-comparison.tsx`, "The difference"). Dropped amber/yellow entirely — all CTAs are now **black** (`Button` `reverse` variant + black hero/contact buttons); palette is purple/black/gray only. "How I work" renamed to **"Principles"** and made denser (1×3, icon inline with title). Packages stay 1×3 side-by-side. **Nav crowding fixed**: desktop menu now switches at `md` (was `sm`, which showed all 5 items before they fit), with tighter item padding and a non-shrinking logo.
 
 ## Recent Changes (2026-06-06) — Full Refresh
 

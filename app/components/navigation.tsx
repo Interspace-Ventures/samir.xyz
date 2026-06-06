@@ -73,7 +73,7 @@ const Navigation = () => {
       >
         <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-3">
-            <Link href="/" onClick={closeMobileMenu}>
+            <Link href="/" onClick={closeMobileMenu} className="shrink-0 mr-4">
               <div className="flex items-center space-x-2">
                 <Image 
                   src="/favicon.png"
@@ -87,11 +87,11 @@ const Navigation = () => {
               </div>
             </Link>
             
-            {/* Desktop Navigation - Always visible except on very small screens */}
-            <nav className="hidden sm:block">
+            {/* Desktop Navigation - Always visible except on small screens */}
+            <nav className="hidden md:block">
               <ul className="flex items-center">
                 {menuItems.map((item, index) => (
-                  <li key={item.href} className={index === 0 ? 'pl-0 pr-4' : index === menuItems.length - 1 ? 'pl-4 pr-0' : 'px-4'}>
+                  <li key={item.href} className={index === 0 ? 'pl-0 pr-3' : index === menuItems.length - 1 ? 'pl-3 pr-0' : 'px-3'}>
                     {item.external ? (
                       <a
                         href={item.href}
@@ -116,9 +116,9 @@ const Navigation = () => {
               </ul>
             </nav>
             
-            {/* Mobile menu button - Only visible on very small screens */}
+            {/* Mobile menu button - Only visible on small screens */}
             <button 
-              className="sm:hidden text-white p-2 border-2 border-black bg-[#7f54dc] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]"
+              className="md:hidden text-white p-2 border-2 border-black bg-[#7f54dc] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]"
               onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >

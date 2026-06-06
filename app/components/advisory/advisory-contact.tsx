@@ -195,7 +195,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="inline-flex items-center gap-2 bg-amber-300 text-black font-bold uppercase tracking-wide text-sm px-6 py-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-amber-400 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 bg-black text-white font-bold uppercase tracking-wide text-sm px-6 py-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-800 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {status === 'submitting' ? 'Sending…' : 'Send message'}
             <Send className="w-4 h-4" aria-hidden="true" />

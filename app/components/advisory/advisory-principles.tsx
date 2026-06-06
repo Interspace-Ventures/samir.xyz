@@ -24,9 +24,9 @@ const principles = [
 export default function AdvisoryPrinciples() {
   return (
     <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-bold text-white mb-8">How I work</h2>
+      <h2 className="text-3xl font-bold text-white mb-8">Principles</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {principles.map((p, index) => {
           const Icon = p.icon;
           return (
@@ -36,12 +36,16 @@ export default function AdvisoryPrinciples() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-[#2a313a] border-2 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
+              className="bg-[#2a313a] border-2 border-black p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
             >
-              <div className="w-12 h-12 flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] mb-5">
-                <Icon className="w-6 h-6 text-white" aria-hidden="true" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 shrink-0 flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <Icon className="w-5 h-5 text-white" aria-hidden="true" />
+                </div>
+                <h3 className="text-base font-bold text-white leading-tight">
+                  {p.title}
+                </h3>
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">{p.title}</h3>
               <p className="text-sm text-white/75 leading-relaxed">{p.body}</p>
             </motion.div>
           );
