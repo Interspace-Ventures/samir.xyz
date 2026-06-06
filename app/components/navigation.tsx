@@ -58,9 +58,9 @@ const Navigation = () => {
 
   const menuItems = [
     { href: '/', label: 'Profile' },
+    { href: '/advisory', label: 'Advisory' },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/ventures', label: 'Ventures' },
-    { href: '/advisory', label: 'Advisory' },
     { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true }
   ];
 
