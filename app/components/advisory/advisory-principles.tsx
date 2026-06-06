@@ -16,7 +16,7 @@ const principles = [
   },
   {
     icon: Scale,
-    title: 'Aligned',
+    title: 'Aligned and outcome-driven',
     body: 'I only earn when you get value. Pricing is entirely ROI-based, so your wins are my wins.',
   },
 ];
