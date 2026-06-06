@@ -58,6 +58,7 @@ model ContactSubmission {
   name      String
   email     String
   company   String?
+  website   String?
   stage     String?
   comments  String?
   interest  String?

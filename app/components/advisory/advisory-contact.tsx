@@ -17,15 +17,15 @@ const STAGES = [
   'Other',
 ];
 
-const inputClass =
-  'w-full bg-white text-black border-2 border-black px-4 py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:outline-none focus:shadow-[3px_3px_0px_0px_rgba(127,84,220,1)] placeholder:text-gray-400';
-const labelClass = 'block text-sm font-bold text-white mb-1';
+const fillClass =
+  'inline-block bg-transparent border-b-2 border-white/40 text-white font-semibold text-center align-baseline px-1 pb-0.5 focus:outline-none focus:border-[#c9b6ff] placeholder:text-white/30 placeholder:font-normal';
 
 export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryContactProps) {
   const [form, setForm] = useState({
     name: '',
     email: '',
     company: '',
+    website: '',
     stage: '',
     comments: '',
   });
@@ -61,7 +61,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
         throw new Error(data.error || 'Something went wrong.');
       }
       setStatus('success');
-      setForm({ name: '', email: '', company: '', stage: '', comments: '' });
+      setForm({ name: '', email: '', company: '', website: '', stage: '', comments: '' });
       onClearInterest();
     } catch (err) {
       setStatus('error');
@@ -71,10 +71,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
 
   return (
     <section id="contact" className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-24">
-      <h2 className="text-3xl font-bold text-white mb-2">Let&apos;s talk</h2>
-      <p className="text-white/70 mb-8">
-        Tell me a bit about what you&apos;re building and where you need a hand.
-      </p>
+      <h2 className="text-3xl font-bold text-white mb-8">Let&apos;s talk</h2>
 
       {status === 'success' ? (
         <div className="bg-[#2a313a] border-2 border-black p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-center">
@@ -107,87 +104,75 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label htmlFor="name" className={labelClass}>
-                Name <span className="text-[#c9b6ff]">*</span>
-              </label>
-              <input
-                id="name"
-                type="text"
-                required
-                value={form.name}
-                onChange={update('name')}
-                className={inputClass}
-                placeholder="Jane Doe"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className={labelClass}>
-                Email <span className="text-[#c9b6ff]">*</span>
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={update('email')}
-                className={inputClass}
-                placeholder="jane@company.com"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label htmlFor="company" className={labelClass}>
-                Company
-              </label>
-              <input
-                id="company"
-                type="text"
-                value={form.company}
-                onChange={update('company')}
-                className={inputClass}
-                placeholder="Company name"
-              />
-            </div>
-            <div>
-              <label htmlFor="stage" className={labelClass}>
-                Stage
-              </label>
-              <select
-                id="stage"
-                value={form.stage}
-                onChange={update('stage')}
-                className={inputClass}
-              >
-                <option value="">Select a stage</option>
-                {STAGES.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="comments" className={labelClass}>
-              Comments
-            </label>
-            <textarea
-              id="comments"
-              rows={4}
+          <p className="text-white text-lg sm:text-xl leading-[2.6]">
+            Hey Samir, my name is{' '}
+            <input
+              type="text"
+              required
+              value={form.name}
+              onChange={update('name')}
+              className={`${fillClass} w-36`}
+              placeholder="your name"
+              aria-label="Your name"
+            />
+            , and I run{' '}
+            <input
+              type="text"
+              value={form.company}
+              onChange={update('company')}
+              className={`${fillClass} w-36`}
+              placeholder="company"
+              aria-label="Your company"
+            />
+            , a{' '}
+            <select
+              value={form.stage}
+              onChange={update('stage')}
+              className={`${fillClass} w-40`}
+              aria-label="Company stage"
+            >
+              <option value="" className="text-black">
+                stage
+              </option>
+              {STAGES.map((s) => (
+                <option key={s} value={s} className="text-black">
+                  {s}
+                </option>
+              ))}
+            </select>{' '}
+            stage fintech (
+            <input
+              type="text"
+              value={form.website}
+              onChange={update('website')}
+              className={`${fillClass} w-32`}
+              placeholder="yoursite.com"
+              aria-label="Your website"
+            />
+            ). I&apos;m looking for advisory for{' '}
+            <input
+              type="text"
               value={form.comments}
               onChange={update('comments')}
-              className={`${inputClass} resize-y`}
-              placeholder="What are you working on, and where do you need help?"
+              className={`${fillClass} w-64`}
+              placeholder="what you need"
+              aria-label="What you need advisory for"
             />
-          </div>
+            . Let&apos;s connect, my email is{' '}
+            <input
+              type="email"
+              required
+              value={form.email}
+              onChange={update('email')}
+              className={`${fillClass} w-56`}
+              placeholder="you@email.com"
+              aria-label="Your email"
+            />
+            .
+          </p>
 
           {status === 'error' && (
-            <p className="text-sm font-bold text-red-300 bg-red-900/30 border-2 border-red-400/40 px-3 py-2">
+            <p role="alert" className="text-sm font-bold text-red-300 bg-red-900/30 border-2 border-red-400/40 px-3 py-2">
               {errorMsg}
             </p>
           )}

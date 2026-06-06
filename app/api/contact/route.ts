@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
     const name = clean(body.name);
     const email = clean(body.email);
     const company = clean(body.company);
+    const website = clean(body.website);
     const stage = clean(body.stage);
     const comments = clean(body.comments);
     const interest = clean(body.interest);
@@ -45,6 +46,7 @@ export async function POST(request: NextRequest) {
         name,
         email,
         company: company || null,
+        website: website || null,
         stage: stage || null,
         comments: comments || null,
         interest: interest || null,
