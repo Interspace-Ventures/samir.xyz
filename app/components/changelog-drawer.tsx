@@ -26,7 +26,7 @@ export default function ChangelogDrawer() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="text-text-secondary hover:text-white transition-colors"
+        className="text-text-secondary hover:text-white transition-colors underline underline-offset-2 decoration-dotted cursor-pointer"
       >
         v{CURRENT_VERSION}
       </button>
