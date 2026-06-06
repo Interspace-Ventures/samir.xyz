@@ -40,7 +40,7 @@ export function PortfolioCard({ portfolio, index, className }: PortfolioCardProp
           {portfolio.investment_status && portfolio.investment_status.toLowerCase() !== 'active' && (
             <div 
               className="absolute top-0 z-10 pointer-events-none"
-              style={{ left: '0.5px' }}
+              style={{ left: '0.75px' }}
             >
               <span 
                 className="text-white text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 font-bold border sm:border-2 border-black"
