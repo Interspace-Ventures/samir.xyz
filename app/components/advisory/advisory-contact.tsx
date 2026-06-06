@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Send, CircleCheck, X } from 'lucide-react';
+import StageSelect from './stage-select';
 
 interface AdvisoryContactProps {
   interest: string;
@@ -132,21 +133,12 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               aria-label="Your company"
             />
             , a{' '}
-            <select
+            <StageSelect
               value={form.stage}
-              onChange={update('stage')}
-              className={fillClass}
-              aria-label="Company stage"
-            >
-              <option value="" className="text-black">
-                stage
-              </option>
-              {STAGES.map((s) => (
-                <option key={s} value={s} className="text-black">
-                  {s}
-                </option>
-              ))}
-            </select>{' '}
+              onChange={(v) => setForm((prev) => ({ ...prev, stage: v }))}
+              options={STAGES}
+              placeholder="stage"
+            />{' '}
             stage fintech (
             <input
               type="text"
