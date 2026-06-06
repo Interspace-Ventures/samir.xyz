@@ -109,7 +109,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
           )}
 
           <div className="text-white text-lg sm:text-xl">
-            <p className="mb-6 text-2xl sm:text-3xl font-bold">Hey Samir,</p>
+            <p className="mb-6 text-xl sm:text-2xl font-bold">Hey Samir,</p>
             <p className="leading-[2.9]">
               My name is{' '}
             <input
