@@ -12,7 +12,7 @@ export default function AdvisoryHero() {
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <span className="inline-block bg-[#7f54dc] text-white text-xs font-bold uppercase tracking-[0.2em] px-3 py-1 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] mb-6">
-          Strategic Finance Advisory
+          Fintech Strategic Finance Advisory
         </span>
 
         <h1 className="text-4xl md:text-6xl font-bold text-white leading-[1.05] mb-6">
