@@ -85,15 +85,14 @@ export default function ChangelogDrawer() {
                         <span className="text-sm text-white/50">{release.date}</span>
                         <span className="text-base font-bold text-white">{release.title}</span>
                       </div>
-                      <ul className="space-y-2">
+                      <ul className="space-y-2.5">
                         {release.changes.map((change) => (
-                          <li key={change} className="flex items-start gap-3">
-                            <span
-                              className="mt-2 w-1.5 h-1.5 shrink-0 bg-[#c9b6ff]"
-                              aria-hidden="true"
-                            />
+                          <li key={change.text} className="flex items-start gap-3">
+                            <span className="shrink-0 mt-0.5 text-xs font-bold text-[#c9b6ff] tabular-nums w-24">
+                              {change.date}
+                            </span>
                             <span className="text-sm text-white/80 leading-relaxed">
-                              {change}
+                              {change.text}
                             </span>
                           </li>
                         ))}

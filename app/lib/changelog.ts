@@ -11,11 +11,16 @@
  *   PATCH: fixes and small polish
  */
 
+export interface Change {
+  date: string;
+  text: string;
+}
+
 export interface Release {
   version: string;
   date: string;
   title: string;
-  changes: string[];
+  changes: Change[];
 }
 
 export const CHANGELOG: Release[] = [
@@ -24,9 +29,9 @@ export const CHANGELOG: Release[] = [
     date: 'June 6, 2026',
     title: 'Advisory practice',
     changes: [
-      'Launched the Advisory page for the strategic finance practice',
-      'Added a fill-in-the-blank contact form that saves every enquiry',
-      'Added Advisory to the main navigation',
+      { date: 'June 6, 2026', text: 'Launched the Advisory page for the strategic finance practice' },
+      { date: 'June 6, 2026', text: 'Added a fill-in-the-blank contact form that saves every enquiry' },
+      { date: 'June 6, 2026', text: 'Added Advisory to the main navigation' },
     ],
   },
   {
@@ -34,11 +39,11 @@ export const CHANGELOG: Release[] = [
     date: 'June 6, 2026',
     title: 'Platform refresh',
     changes: [
-      'Upgraded to Next.js 16 with Turbopack',
-      'Updated React, Prisma, Framer Motion and other core libraries',
-      'Added seven portfolio companies, including Parrot Finance',
-      'Fixed a bug that was hiding companies with no investment status',
-      'Refreshed metrics and removed unused files and dependencies',
+      { date: 'June 6, 2026', text: 'Upgraded to Next.js 16 with Turbopack' },
+      { date: 'June 6, 2026', text: 'Updated React, Prisma, Framer Motion and other core libraries' },
+      { date: 'June 6, 2026', text: 'Added seven portfolio companies, including Parrot Finance' },
+      { date: 'June 6, 2026', text: 'Fixed a bug that was hiding companies with no investment status' },
+      { date: 'June 6, 2026', text: 'Refreshed metrics and removed unused files and dependencies' },
     ],
   },
   {
@@ -46,9 +51,9 @@ export const CHANGELOG: Release[] = [
     date: 'June 5, 2026',
     title: 'New ventures and status updates',
     changes: [
-      'Added Verse, Spacebase and Orbit to the ventures showcase',
-      'Updated investment statuses and markup counts',
-      'Refreshed the homepage bio',
+      { date: 'June 5, 2026', text: 'Added Verse, Spacebase and Orbit to the ventures showcase' },
+      { date: 'June 5, 2026', text: 'Updated investment statuses and markup counts' },
+      { date: 'June 5, 2026', text: 'Refreshed the homepage bio' },
     ],
   },
   {
@@ -56,8 +61,8 @@ export const CHANGELOG: Release[] = [
     date: 'August 19, 2025',
     title: 'Performance',
     changes: [
-      'Switched to a production build for serving the site',
-      'Cut initial load time from around 20 seconds to 2 to 3 seconds',
+      { date: 'August 19, 2025', text: 'Switched to a production build for serving the site' },
+      { date: 'August 19, 2025', text: 'Cut initial load time from around 20 seconds to 2 to 3 seconds' },
     ],
   },
   {
@@ -65,8 +70,8 @@ export const CHANGELOG: Release[] = [
     date: 'August 13, 2025',
     title: 'Branding polish',
     changes: [
-      'Updated the Replit, Perplexity and Fizz logos',
-      'Tidied up portfolio categories and status badges',
+      { date: 'August 13, 2025', text: 'Updated the Replit, Perplexity and Fizz logos' },
+      { date: 'August 13, 2025', text: 'Tidied up portfolio categories and status badges' },
     ],
   },
   {
@@ -74,9 +79,9 @@ export const CHANGELOG: Release[] = [
     date: 'July 27, 2025',
     title: 'Design system',
     changes: [
-      'Rebuilt the site on a neobrutalist design system',
-      'Added reusable design tokens and component styles',
-      'Improved animations and loading states',
+      { date: 'July 27, 2025', text: 'Rebuilt the site on a neobrutalist design system' },
+      { date: 'July 27, 2025', text: 'Added reusable design tokens and component styles' },
+      { date: 'July 27, 2025', text: 'Improved animations and loading states' },
     ],
   },
   {
@@ -84,9 +89,9 @@ export const CHANGELOG: Release[] = [
     date: 'January 12, 2025',
     title: 'Launch',
     changes: [
-      'First public version of the portfolio',
-      'Portfolio gallery with category filters',
-      'Ventures showcase and profile',
+      { date: 'January 12, 2025', text: 'First public version of the portfolio' },
+      { date: 'January 12, 2025', text: 'Portfolio gallery with category filters' },
+      { date: 'January 12, 2025', text: 'Ventures showcase and profile' },
     ],
   },
 ];
