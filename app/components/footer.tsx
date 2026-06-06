@@ -1,9 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { CURRENT_VERSION } from '../lib/changelog';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const version = "2025.1"; // Updated version format: Year.Release
+  const version = CURRENT_VERSION;
   
   return (
     <footer className="bg-purple-primary py-6 border-t border-purple-primary/20">
@@ -24,14 +24,12 @@ export default function Footer() {
           
           <div className="w-full text-center">
             <p className="text-center">
-              <a 
-                href="https://github.com/heyinterspace/samir.xyz" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <Link
+                href="/changelog"
                 className="text-text-secondary hover:text-white transition-colors"
               >
                 v{version}
-              </a> | Built with <a 
+              </Link> | Built with <a 
                 href="https://replit.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
