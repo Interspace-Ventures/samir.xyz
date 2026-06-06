@@ -96,7 +96,7 @@ const Navigation = () => {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
+                        className="inline-flex items-center gap-1 text-white font-bold text-[clamp(0.7rem,1.6vw,0.875rem)] uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
                       >
                         {item.label}
                         <ExternalLink className="w-3 h-3" aria-hidden="true" />
@@ -104,7 +104,7 @@ const Navigation = () => {
                     ) : (
                       <Link 
                         href={item.href}
-                        className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
+                        className="text-white font-bold text-[clamp(0.7rem,1.6vw,0.875rem)] uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
                         prefetch={true}
                       >
                         {item.label}
