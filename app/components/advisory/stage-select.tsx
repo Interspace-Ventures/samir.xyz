@@ -44,7 +44,7 @@ export default function StageSelect({
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className={`inline-flex items-center gap-1 bg-transparent border-b-2 px-0.5 pb-0.5 font-semibold transition-colors focus:outline-none ${
+        className={`inline-flex items-center gap-1 bg-transparent border-b-2 leading-tight px-0.5 pb-0.5 font-semibold transition-colors focus:outline-none ${
           open ? 'border-[#c9b6ff]' : 'border-white/30'
         } ${value ? 'text-[#c9b6ff]' : 'text-white/30 font-normal italic'}`}
       >
