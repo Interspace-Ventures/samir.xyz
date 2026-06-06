@@ -48,7 +48,7 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
     <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h2 className="text-3xl font-bold text-white mb-8">Packages</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-5">
         {packages.map((pkg, index) => {
           const Icon = pkg.icon;
           return (
@@ -58,26 +58,26 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-[#2a313a] border-2 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
+              className="bg-[#2a313a] border-2 border-black p-4 lg:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
             >
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-12 h-12 flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <Icon className="w-6 h-6 text-white" aria-hidden="true" />
+              <div className="flex items-center justify-between mb-4 lg:mb-5">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center bg-[#7f54dc] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <Icon className="w-5 h-5 lg:w-6 lg:h-6 text-white" aria-hidden="true" />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-2 py-1">
+                <span className="text-[9px] lg:text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-1.5 py-1 lg:px-2">
                   {pkg.type}
                 </span>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-4">{pkg.name}</h3>
-              <ul className="space-y-2 mb-6 flex-grow">
+              <h3 className="text-xl lg:text-2xl font-bold text-white mb-3 lg:mb-4">{pkg.name}</h3>
+              <ul className="space-y-2 mb-5 lg:mb-6 flex-grow">
                 {pkg.points.map((point) => (
                   <li key={point} className="flex items-start gap-2">
                     <Check
-                      className="w-4 h-4 mt-0.5 shrink-0 text-[#c9b6ff]"
+                      className="w-3.5 h-3.5 lg:w-4 lg:h-4 mt-0.5 shrink-0 text-[#c9b6ff]"
                       aria-hidden="true"
                     />
-                    <span className="text-sm text-white/80 leading-snug">
+                    <span className="text-xs lg:text-sm text-white/80 leading-snug">
                       {point}
                     </span>
                   </li>
