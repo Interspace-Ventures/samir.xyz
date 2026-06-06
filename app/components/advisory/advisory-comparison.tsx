@@ -19,8 +19,8 @@ const dontList = [
 
 export default function AdvisoryComparison() {
   return (
-    <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-bold text-white mb-8">The difference</h2>
+    <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-12">
+      <h2 className="text-xl font-bold text-white mb-4">The difference</h2>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
