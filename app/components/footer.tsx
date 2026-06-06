@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="w-full text-center">
             <p className="text-center">
               <a 
-                href="https://github.com/samir" 
+                href="https://github.com/heyinterspace/samir.xyz" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-text-secondary hover:text-white transition-colors"
