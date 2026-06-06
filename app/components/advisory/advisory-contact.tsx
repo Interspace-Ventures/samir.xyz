@@ -18,7 +18,7 @@ const STAGES = [
 ];
 
 const fillClass =
-  'inline-block bg-transparent border-b-2 border-white/40 text-white font-semibold text-center align-baseline px-1 pb-0.5 focus:outline-none focus:border-[#c9b6ff] placeholder:text-white/30 placeholder:font-normal';
+  'inline-block bg-transparent border-b-2 border-white/30 text-[#c9b6ff] font-semibold text-left align-baseline px-1 pb-1 focus:outline-none focus:border-[#c9b6ff] placeholder:text-white/30 placeholder:font-normal placeholder:italic transition-colors';
 
 export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryContactProps) {
   const [form, setForm] = useState({
@@ -104,8 +104,10 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
             </div>
           )}
 
-          <p className="text-white text-lg sm:text-xl leading-[2.6]">
-            Hey Samir, my name is{' '}
+          <div className="text-white text-lg sm:text-xl">
+            <p className="mb-6 text-2xl sm:text-3xl font-bold">Hey Samir,</p>
+            <p className="leading-[2.9]">
+              my name is{' '}
             <input
               type="text"
               required
@@ -168,8 +170,9 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
               placeholder="you@email.com"
               aria-label="Your email"
             />
-            .
-          </p>
+              .
+            </p>
+          </div>
 
           {status === 'error' && (
             <p role="alert" className="text-sm font-bold text-red-300 bg-red-900/30 border-2 border-red-400/40 px-3 py-2">
