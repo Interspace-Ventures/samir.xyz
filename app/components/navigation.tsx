@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ExternalLink } from 'lucide-react';
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -96,9 +96,10 @@ const Navigation = () => {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
+                        className="inline-flex items-center gap-1 text-white font-bold text-xs sm:text-sm lg:text-sm uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
                       >
                         {item.label}
+                        <ExternalLink className="w-3 h-3" aria-hidden="true" />
                       </a>
                     ) : (
                       <Link 
@@ -154,10 +155,11 @@ const Navigation = () => {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
+                        className="inline-flex items-center gap-2 text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
                         onClick={closeMobileMenu}
                       >
                         {item.label}
+                        <ExternalLink className="w-5 h-5" aria-hidden="true" />
                       </a>
                     ) : (
                       <Link 

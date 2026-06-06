@@ -8,6 +8,18 @@ This is a modern personal portfolio website built with Next.js that showcases pr
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (2026-06-06) — Full Refresh
+
+- **Next.js 15 → 16 upgrade** (now 16.2.7, Turbopack default): `npx tsc --noEmit` and `npx next build` both pass; all pages return 200. Removed the deprecated `images.domains` key from `next.config.js` (removed in Next 16). All logos are local (`public/`), so no `images.remotePatterns` needed — verified 0 remote `logo-url` values in both DB tables.
+- **lucide-react 0.5 → 1** major bump; plus safe minor/patch updates: React 19.2, framer-motion 12.40, @tanstack/react-query 5.101, prisma + @prisma/client 6.19, typescript 5.9, tailwindcss 3.4.x, postcss/autoprefixer/tailwind-merge.
+- **framer-motion 12.40 type fix**: stricter v12 types broke the custom `AnimationVariants` interface, so `lib/utils/animations.ts` now uses framer-motion's own `Variants` type.
+- **Security**: `npm audit` went from 6 vulns (3 high / 3 moderate) → **2 moderate**. The remaining two are inside Next.js's *own bundled* postcss 8.4.31 — npm's only "fix" is downgrading Next to v9 (absurd), and even the latest Next ships them. Acceptable, unavoidable, build-tooling-only residual.
+- **Held as too risky for this pass** (recommend separate focused efforts): **Prisma 7** (ORM/runtime/config migration) and **Tailwind 4** (CSS-first config rewrite that could destabilize the neobrutalist design). Staying on fully-supported 6.x / 3.4.x lines.
+- **Cleanup**: removed dead files (`app/ventures/page.backup.tsx`, `package-lock.json.backup`, `test-server.js`, `neobrutalism-setup.css`, `app/ventures-new/`, `backup_workflows/`) and the unused `zod` dependency — all confirmed unreferenced.
+- **Logos**: new blue→magenta gradient PNGs for verse/spacebase/orbit (`public/attached_assets/`) matching the Interspace/2DE ethos.
+- **Nav**: added an `ExternalLink` indicator next to the Interspace nav item (desktop + mobile).
+- **Design polish** (on-brand, no redesign): added accessible keyboard `:focus-visible` rings (purple `#c9b6ff`) and a `prefers-reduced-motion` block to `app/globals.css`; gave the portfolio MetricCard a subtle `from-purple-500 to-purple-700` gradient for depth.
+
 ## Recent Changes (2026-06-06)
 
 - **Added/fixed 7 portfolio deals**: Backpack, Kartera, Lunar (Hard Seltzer), Metadata, Parrot Finance, Playbook, Waldo.

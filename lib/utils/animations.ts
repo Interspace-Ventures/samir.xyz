@@ -5,11 +5,11 @@
  * Provides consistent animation behavior across the application.
  */
 
+import type { Variants } from 'framer-motion';
 import { ANIMATION_DURATIONS, ANIMATION_EASING } from '../constants';
-import type { AnimationVariants } from '../types';
 
 // Base animation variants
-export const fadeInUp: AnimationVariants = {
+export const fadeInUp: Variants = {
   hidden: {
     opacity: 0,
     y: 20,
@@ -24,7 +24,7 @@ export const fadeInUp: AnimationVariants = {
   },
 };
 
-export const fadeIn: AnimationVariants = {
+export const fadeIn: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -37,7 +37,7 @@ export const fadeIn: AnimationVariants = {
   },
 };
 
-export const scaleIn: AnimationVariants = {
+export const scaleIn: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.8,
@@ -52,7 +52,7 @@ export const scaleIn: AnimationVariants = {
   },
 };
 
-export const slideInFromLeft: AnimationVariants = {
+export const slideInFromLeft: Variants = {
   hidden: {
     opacity: 0,
     x: -20,
@@ -67,7 +67,7 @@ export const slideInFromLeft: AnimationVariants = {
   },
 };
 
-export const slideInFromRight: AnimationVariants = {
+export const slideInFromRight: Variants = {
   hidden: {
     opacity: 0,
     x: 20,
@@ -92,7 +92,7 @@ export const staggerContainer = {
   },
 };
 
-export const staggerItem: AnimationVariants = {
+export const staggerItem: Variants = {
   hidden: {
     opacity: 0,
     y: 20,
@@ -143,7 +143,7 @@ export function createStaggerAnimation(
 export function createFadeAnimation(
   delay: number = 0,
   duration: number = ANIMATION_DURATIONS.NORMAL
-): AnimationVariants {
+): Variants {
   return {
     hidden: { opacity: 0 },
     visible: {
@@ -162,7 +162,7 @@ export function createSlideAnimation(
   distance: number = 20,
   delay: number = 0,
   duration: number = ANIMATION_DURATIONS.NORMAL
-): AnimationVariants {
+): Variants {
   const axis = direction === 'up' || direction === 'down' ? 'y' : 'x';
   const value = direction === 'up' || direction === 'left' ? distance : -distance;
 
@@ -180,5 +180,5 @@ export function createSlideAnimation(
         ease: ANIMATION_EASING.EASE_OUT,
       },
     },
-  };
+  } as Variants;
 }
