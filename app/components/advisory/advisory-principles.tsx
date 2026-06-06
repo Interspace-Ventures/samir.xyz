@@ -6,7 +6,7 @@ import { Handshake, Microscope, Scale } from 'lucide-react';
 const principles = [
   {
     icon: Handshake,
-    title: 'Fintech operator, every stage',
+    title: 'From an operator, to operators',
     body: "A decade in fintech, from pre-seed to scale. Every recommendation comes from doing the work in your shoes, not reading about it.",
   },
   {
