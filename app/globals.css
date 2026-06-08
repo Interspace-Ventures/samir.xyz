@@ -35,6 +35,10 @@
     border-color: hsl(var(--border));
   }
   
+  html {
+    background-color: #000000;
+  }
+
   body {
     background-color: #332452;
     color: #ffffff;
