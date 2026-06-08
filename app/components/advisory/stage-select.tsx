@@ -58,7 +58,7 @@ export default function StageSelect({
       {open && (
         <ul
           role="listbox"
-          className="absolute left-0 top-full mt-2 z-20 min-w-full w-max bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] py-1"
+          className="absolute left-0 top-full mt-2 z-20 min-w-full w-max bg-[#2a313a] sl-solid border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] py-1"
         >
           {options.map((option) => (
             <li key={option} role="option" aria-selected={value === option}>

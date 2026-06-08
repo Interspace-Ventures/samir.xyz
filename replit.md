@@ -16,9 +16,16 @@ strategic finance advisory practice. The public GitHub repo is
 
 - **Framework**: Next.js 16 (App Router, Turbopack), TypeScript.
 - **Database**: PostgreSQL (Neon) via Prisma ORM.
-- **Styling**: Tailwind CSS + a custom neobrutalist system.
+- **Styling**: Tailwind CSS + a custom neobrutalist system, refined with the
+  "Structured Liquidity" language from structured.glass.
   - Background `#332452`, purple accent `#7f55dc` (`purple-primary` in
     `tailwind.config`), `#2a313a` cards, black borders with 4px shadows.
+  - Rigid containment (sharp corners, black borders, flat offset shadows) plus a
+    liquid-glass material: dark surfaces are translucent, backdrop-blurred, and
+    saturated with a specular top highlight. The glass is applied site-wide by
+    overriding the `bg-[#2a313a]`/`bg-[#242a31]` utilities in `app/globals.css`
+    (`--sl-glass-*` tokens). Overlays that must stay opaque (mobile menu,
+    dropdowns) add the `.sl-solid` opt-out class.
   - Design tokens in `lib/constants/design-tokens.ts`; CSS variables and the
     marquee/reduced-motion rules in `app/globals.css`.
 - **Data fetching**: TanStack React Query.

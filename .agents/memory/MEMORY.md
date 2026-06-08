@@ -7,4 +7,5 @@
 - [Next.js portfolio quirks](nextjs-portfolio.md) — bundled-postcss audit noise, framer-motion v12 Variants, Next 16 images.domains removal, why Prisma 7 / Tailwind 4 are held.
 - [Metrics source of truth](metrics-source-of-truth.md) — curated headline figures live only in app/lib/static-metrics.ts; metrics API spreads it and derives only acquisitions live. Don't re-hardcode.
 - [Two component dirs](component-dirs.md) — repo half-migrated; both app/components and components exist. Grep for imports before deleting/editing anything in app/components.
+- [Structured Liquidity theme](structured-liquidity-theme.md) — liquid-glass layer applied site-wide by overriding the `bg-[#2a313a]` utility in globals.css; overlays opt out with `.sl-solid`; accent stays brand `#7f54dc`.
 - [Server-render + hydration](server-render-hydration.md) — page data fetched in async server page.tsx (shared app/lib/server-data.ts) + React Query dehydrate/HydrationBoundary (or props) to kill first-visit loading flash.

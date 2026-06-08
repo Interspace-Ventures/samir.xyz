@@ -136,7 +136,7 @@ const Navigation = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            className="fixed inset-0 bg-[#2a313a] border-4 border-black z-40 flex flex-col pt-14"
+            className="fixed inset-0 bg-[#2a313a] sl-solid border-4 border-black z-40 flex flex-col pt-14"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

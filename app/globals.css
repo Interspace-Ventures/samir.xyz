@@ -57,12 +57,30 @@
   --text-tertiary: 161, 161, 170;
   --bg-primary: 45, 12, 106;
   --black-rgb: 0, 0, 0;
+
+  /* Structured Liquidity (structured.glass): liquid-glass material tokens.
+     Rigid containment (sharp corners, black borders, flat offset shadows)
+     is kept as-is. These tokens add the translucent, blurred, saturated
+     glass fill and the specular top highlight that defines the language. */
+  --sl-glass-surface: rgba(42, 49, 58, 0.66);
+  --sl-glass-surface-alt: rgba(36, 42, 49, 0.66);
+  --sl-glass-blur: 16px;
+  --sl-glass-saturate: 160%;
+  --sl-glass-specular: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.025) 42%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 @layer components {
   /* Content card styling for text blocks */
   .content-card {
-    background: #2a313a;
+    background-color: var(--sl-glass-surface);
+    background-image: var(--sl-glass-specular);
+    backdrop-filter: blur(var(--sl-glass-blur)) saturate(var(--sl-glass-saturate));
+    -webkit-backdrop-filter: blur(var(--sl-glass-blur)) saturate(var(--sl-glass-saturate));
     color: white;
     border: 2px solid black;
     box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
@@ -208,6 +226,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .card {
   background-color: rgba(45, 12, 106, 0.3);
+  background-image: var(--sl-glass-specular);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
   border: 1px solid rgba(127, 85, 220, 0.2);
   padding: 1.5rem;
   border-radius: 0; /* Removed rounded corners */
@@ -472,6 +493,39 @@ textarea:focus-visible {
   outline: 3px solid #c9b6ff;
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+/* ----------------------------------------------------------------------------
+   Structured Liquidity (structured.glass): liquid-glass surfaces site-wide.
+   Every dark panel uses `bg-[#2a313a]` (cards, nav, drawers, advisory,
+   ventures, dropdowns). Overriding that single arbitrary utility turns every
+   surface into translucent, backdrop-blurred, saturated glass with a specular
+   top highlight, while the inline black borders + flat offset shadows keep the
+   rigid containment intact. `bg-[#242a31]` (the comparison "don't" column) gets
+   the matching alternate glass.
+   --------------------------------------------------------------------------*/
+.bg-\[\#2a313a\] {
+  background-color: var(--sl-glass-surface);
+  background-image: var(--sl-glass-specular);
+  backdrop-filter: blur(var(--sl-glass-blur)) saturate(var(--sl-glass-saturate));
+  -webkit-backdrop-filter: blur(var(--sl-glass-blur)) saturate(var(--sl-glass-saturate));
+}
+
+.bg-\[\#242a31\] {
+  background-color: var(--sl-glass-surface-alt);
+  background-image: var(--sl-glass-specular);
+  backdrop-filter: blur(var(--sl-glass-blur)) saturate(var(--sl-glass-saturate));
+  -webkit-backdrop-filter: blur(var(--sl-glass-blur)) saturate(var(--sl-glass-saturate));
+}
+
+/* Opaque opt-out: overlays/menus that must fully obscure what's behind them
+   (mobile fullscreen menu, floating dropdowns) keep a solid surface so their
+   content stays readable. Declared after the glass overrides so it wins. */
+.sl-solid {
+  background-color: #2a313a;
+  background-image: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Testimonials marquee: seamless horizontal auto-scroll, pause on hover. */
