@@ -13,7 +13,8 @@ const packages = [
     icon: Wrench,
     name: 'Build',
     type: 'Project-based',
-    tagline: 'Ship the assets that get you in front of customers.',
+    tagline:
+      'I create your design assets from scratch to acquire users, and I expand your reach with hand-built content to a highly leverageable network.',
     points: [
       'Landing pages',
       'Marketing websites',
@@ -25,23 +26,26 @@ const packages = [
     icon: TrendingUp,
     name: 'Grow',
     type: 'Project-based',
-    tagline: 'Sharpen the strategy that scales your business.',
+    tagline:
+      'I help build your fundraising narrative and open up capital access, and I recommend the strategic partnerships and customer introductions that level up your business.',
     points: [
       'Fundraising strategy',
+      'Capital access',
       'Strategic partnerships',
-      'Product unit economics',
+      'Customer intros',
     ],
   },
   {
     icon: Compass,
     name: 'Advise',
     type: 'Ongoing',
-    tagline: 'An ongoing partner for your hardest calls.',
+    tagline:
+      'I draw on operating experience to help you build strategic finance teams, develop sustainable financial products, and build out unit economics and profitability metrics.',
     points: [
       'Organizational strategy',
       'Product advisory',
-      'Capital access',
-      'Customer intros',
+      'Product unit economics',
+      'Pricing and profitability metrics',
     ],
   },
 ];
