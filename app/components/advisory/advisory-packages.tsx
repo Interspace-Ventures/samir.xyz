@@ -60,7 +60,7 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
               className="bg-[#2a313a] border-2 border-black p-4 lg:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
             >
               <div className="flex items-center gap-3 mb-3">
-                <Icon className="w-7 h-7 lg:w-8 lg:h-8 shrink-0 text-[#7f54dc]" aria-hidden="true" />
+                <Icon className="w-7 h-7 lg:w-8 lg:h-8 shrink-0 text-white" aria-hidden="true" />
                 <h3 className="text-xl lg:text-2xl font-bold text-white">{pkg.name}</h3>
               </div>
               <span className="self-start text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-2 py-1 mb-4 lg:mb-5">
