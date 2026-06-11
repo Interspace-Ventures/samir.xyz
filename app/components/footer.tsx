@@ -25,6 +25,7 @@ export default function Footer() {
           >
             Replit
           </a>
+          .
         </p>
       </div>
     </footer>
