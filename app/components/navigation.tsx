@@ -67,12 +67,12 @@ const Navigation = () => {
   return (
     <>
       <motion.header
-        className="fixed top-0 left-0 right-0 w-full z-50 bg-[#2a313a] border-b-4 border-black shadow-[0_4px_0px_0px_rgba(0,0,0,1)]"
+        className="fixed top-0 left-0 right-0 z-50 px-4 pt-4"
         initial={{ y: 0 }}
         animate={{ y: 0 }}
       >
-        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-3">
+        <div className="max-w-4xl mx-auto bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div className="flex items-center justify-between py-3 px-4 sm:px-6">
             <Link href="/" onClick={closeMobileMenu} className="shrink-0 mr-4">
               <div className="flex items-center space-x-2">
                 <Image 
