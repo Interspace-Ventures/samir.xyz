@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import LogoMarquee from './logo-marquee';
 
 export default function AdvisoryHero() {
   return (
@@ -33,6 +34,8 @@ export default function AdvisoryHero() {
           <ArrowRight className="w-4 h-4" aria-hidden="true" />
           Let&apos;s talk
         </a>
+
+        <LogoMarquee />
       </motion.div>
     </section>
   );

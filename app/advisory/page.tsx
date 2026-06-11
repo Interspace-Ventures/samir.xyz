@@ -7,7 +7,6 @@ import AdvisoryPrinciples from '../components/advisory/advisory-principles';
 import TestimonialsMarquee from '../components/advisory/testimonials-marquee';
 import AdvisoryPackages from '../components/advisory/advisory-packages';
 import AdvisoryContact from '../components/advisory/advisory-contact';
-import LogoMarquee from '../components/advisory/logo-marquee';
 
 export default function AdvisoryPage() {
   const [interest, setInterest] = useState('');
@@ -23,14 +22,13 @@ export default function AdvisoryPage() {
   };
 
   return (
-    <div className="pt-20 pb-12">
+    <div className="pt-20 pb-16">
       <AdvisoryHero />
       <AdvisoryComparison />
       <AdvisoryPrinciples />
       <TestimonialsMarquee />
       <AdvisoryPackages onSelect={handleSelect} />
       <AdvisoryContact interest={interest} onClearInterest={() => setInterest('')} />
-      <LogoMarquee />
     </div>
   );
 }

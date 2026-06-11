@@ -1,15 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-
 interface LogoItem {
   name: string;
   src: string;
 }
 
 // Companies Samir has worked at or has connections to, plus the fintech
-// portfolio companies. Every logo is rendered in a single color (white) on the
-// dark glass bar for a clean, uniform "Structured Liquidity" look.
+// portfolio companies. Every logo is rendered in a single color (white) for a
+// clean, uniform "Structured Liquidity" look.
 const logos: LogoItem[] = [
   { name: 'Adyen', src: '/logos/worked/adyen.png' },
   { name: 'Block', src: '/logos/worked/block.png' },
@@ -55,39 +53,20 @@ export default function LogoMarquee() {
   // Duplicated so the CSS marquee can loop seamlessly. The second copy is
   // presentational only and hidden from assistive tech.
   const loop = [...logos, ...logos];
-  const barRef = useRef<HTMLDivElement>(null);
-
-  // The bar is fixed to the viewport bottom, so reserve matching space at the
-  // document bottom while this page is mounted. This keeps the global footer
-  // from being hidden behind the bar when scrolled all the way down.
-  useEffect(() => {
-    const el = barRef.current;
-    if (!el) return;
-
-    const apply = () => {
-      document.body.style.paddingBottom = `${el.offsetHeight}px`;
-    };
-    apply();
-
-    const observer = new ResizeObserver(apply);
-    observer.observe(el);
-
-    return () => {
-      observer.disconnect();
-      document.body.style.paddingBottom = '';
-    };
-  }, []);
 
   return (
-    <div
-      ref={barRef}
-      className="fixed bottom-0 left-0 right-0 z-40 bg-[#2a313a] border-t-2 border-black"
-      aria-label="Companies Samir has worked with and fintech portfolio companies"
-    >
-      <div className="logo-marquee-paused relative overflow-hidden py-4">
+    <div className="mt-10">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50 mb-4">
+        The best founders and operators trust Interspace for high-impact advisory
+      </p>
+
+      <div
+        className="logo-marquee-paused relative overflow-hidden -mx-4 sm:-mx-6 lg:-mx-8"
+        aria-label="Companies Samir has worked with and fintech portfolio companies"
+      >
         {/* edge fades */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-[#2a313a] to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-[#2a313a] to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-[#332452] to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-[#332452] to-transparent" />
 
         <div className="animate-logo-marquee flex w-max items-center">
           {loop.map((logo, i) => (
