@@ -60,7 +60,7 @@ export default function LogoMarquee() {
   return (
     <div className="mt-10">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50 mb-4">
-        The best founders and operators trust Interspace for high-impact advisory
+        The best founders and operators trust Interspace
       </p>
 
       <div
