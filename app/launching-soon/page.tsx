@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function LaunchingSoon() {
   return (
-    <div className="pt-20 pb-16">
+    <div className="pt-8 pb-16">
       <section className="section">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mb-6">

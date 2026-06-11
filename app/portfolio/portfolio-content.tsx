@@ -15,7 +15,7 @@ import { fadeInUp } from '../../lib/utils/animations';
 
 export default function PortfolioContent() {
   return (
-    <div className="pt-20 pb-16">
+    <div className="pt-8 pb-16">
       <section className="section">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h1

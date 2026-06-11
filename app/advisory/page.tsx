@@ -22,7 +22,7 @@ export default function AdvisoryPage() {
   };
 
   return (
-    <div className="pt-20 pb-16">
+    <div className="pt-8 pb-16">
       <AdvisoryHero />
       <AdvisoryComparison />
       <AdvisoryPrinciples />

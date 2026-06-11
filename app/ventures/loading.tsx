@@ -5,7 +5,7 @@
  */
 export default function VenturesLoading() {
   return (
-    <div className="pt-16 pb-16">
+    <div className="pt-8 pb-16">
       <section className="section">
         <div className="container max-w-6xl">
           {/* Title skeleton */}

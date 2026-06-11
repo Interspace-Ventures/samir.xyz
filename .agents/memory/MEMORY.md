@@ -9,4 +9,5 @@
 - [Two component dirs](component-dirs.md) — repo half-migrated; both app/components and components exist. Grep for imports before deleting/editing anything in app/components.
 - [Structured Liquidity theme](structured-liquidity-theme.md) — liquid-glass layer applied site-wide by overriding the `bg-[#2a313a]` utility in globals.css; overlays opt out with `.sl-solid`; accent stays brand `#7f54dc`.
 - [Fixed bottom bar footer clearance](fixed-bottom-bar-footer-clearance.md) — always-visible bottom bar must be fixed (not sticky-as-last-child); clear the global footer via document.body paddingBottom.
+- [Navbar/body alignment](navbar-content-alignment.md) — use a sticky in-flow header + overflow-x:clip, NOT position:fixed + scrollbar-gutter (the gutter shifts the whole layout off-center).
 - [Server-render + hydration](server-render-hydration.md) — page data fetched in async server page.tsx (shared app/lib/server-data.ts) + React Query dehydrate/HydrationBoundary (or props) to kill first-visit loading flash.

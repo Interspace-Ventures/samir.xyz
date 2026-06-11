@@ -18,7 +18,7 @@ export default function VenturesContent({ ventures }: { ventures: Venture[] }) {
   const [selectedVenture, setSelectedVenture] = useState<string>('');
 
   return (
-    <div className="pt-20 pb-16">
+    <div className="pt-8 pb-16">
       <section className="section">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">

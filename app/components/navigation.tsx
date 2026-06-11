@@ -67,7 +67,7 @@ const Navigation = () => {
   return (
     <>
       <motion.header
-        className="fixed top-0 left-0 right-0 z-50 pt-4"
+        className="sticky top-0 z-50 pt-4"
         initial={{ y: 0 }}
         animate={{ y: 0 }}
       >

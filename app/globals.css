@@ -48,7 +48,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 }
 
@@ -141,11 +141,6 @@
   html {
     @apply scroll-smooth;
     font-size: 18px; /* Increased from default 16px for better readability on high-res displays */
-    /* Always reserve the scrollbar gutter so the page width is constant whether
-       or not a scrollbar is present. This keeps the fixed navbar (which is
-       positioned against the viewport) aligned with the in-flow body content,
-       and prevents layout shift when navigating between short and tall pages. */
-    scrollbar-gutter: stable;
   }
   
   /* Basic styling - merged with body styling above to avoid conflicts */
@@ -155,11 +150,14 @@
     box-sizing: border-box;
   }
   
-  /* Ensure containers don't exceed the content width. Use 100% (not 100vw, which
-     includes the scrollbar) so centered content lines up with the fixed navbar. */
+  /* Keep the page from exceeding the viewport width. Use overflow-x: clip (not
+     hidden) so neither html nor body becomes a scroll container. That keeps the
+     viewport itself the scroll container, which the sticky navbar relies on to
+     stick correctly and to share the exact same centered width as the in-flow
+     body content (no scrollbar-gutter hack and no fixed-vs-flow offset). */
   html, body {
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   /* Default link styling */
