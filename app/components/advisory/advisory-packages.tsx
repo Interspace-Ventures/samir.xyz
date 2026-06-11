@@ -90,7 +90,7 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
               <div className="flex flex-col gap-2">
                 <Button
                   variant="reverse"
-                  onClick={() => onSelect(`${pkg.name}: Let's talk`)}
+                  onClick={() => onSelect(pkg.name)}
                 >
                   Let&apos;s talk
                 </Button>
