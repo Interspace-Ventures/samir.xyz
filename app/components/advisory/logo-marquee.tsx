@@ -8,8 +8,8 @@ interface LogoItem {
 }
 
 // Companies Samir has worked at or has connections to, plus the fintech
-// portfolio companies. Logos render on white chips at a uniform height so the
-// marquee reads as a clean, consistent logo wall.
+// portfolio companies. Every logo is rendered in a single color (white) on the
+// dark glass bar for a clean, uniform "Structured Liquidity" look.
 const logos: LogoItem[] = [
   { name: 'Adyen', src: '/logos/worked/adyen.png' },
   { name: 'Block', src: '/logos/worked/block.png' },
@@ -34,17 +34,17 @@ const logos: LogoItem[] = [
   { name: 'Waldo', src: '/logos/waldo.png' },
 ];
 
-function LogoChip({ logo, ariaHidden }: { logo: LogoItem; ariaHidden?: boolean }) {
+function LogoSlot({ logo, ariaHidden }: { logo: LogoItem; ariaHidden?: boolean }) {
   return (
     <div
       aria-hidden={ariaHidden}
-      className="shrink-0 bg-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] h-12 px-4 flex items-center justify-center"
+      className="shrink-0 w-40 flex items-center justify-center"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={logo.src}
         alt={ariaHidden ? '' : `${logo.name} logo`}
-        className="h-6 w-auto max-w-[110px] object-contain"
+        className="h-6 w-auto max-w-[112px] object-contain brightness-0 invert opacity-80"
         loading="lazy"
       />
     </div>
@@ -81,17 +81,17 @@ export default function LogoMarquee() {
   return (
     <div
       ref={barRef}
-      className="fixed bottom-0 left-0 right-0 z-40 bg-[#2a313a] sl-solid border-t-2 border-black"
+      className="fixed bottom-0 left-0 right-0 z-40 bg-[#2a313a] border-t-2 border-black"
       aria-label="Companies Samir has worked with and fintech portfolio companies"
     >
-      <div className="marquee-paused relative overflow-hidden py-3">
+      <div className="logo-marquee-paused relative overflow-hidden py-4">
         {/* edge fades */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-[#2a313a] to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-[#2a313a] to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-[#2a313a] to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-[#2a313a] to-transparent" />
 
-        <div className="animate-marquee flex gap-5 w-max items-center px-2">
+        <div className="animate-logo-marquee flex w-max items-center">
           {loop.map((logo, i) => (
-            <LogoChip key={`${logo.name}-${i}`} logo={logo} ariaHidden={i >= logos.length} />
+            <LogoSlot key={`${logo.name}-${i}`} logo={logo} ariaHidden={i >= logos.length} />
           ))}
         </div>
       </div>
