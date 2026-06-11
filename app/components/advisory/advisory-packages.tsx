@@ -17,7 +17,8 @@ const packages = [
     points: [
       'Landing pages',
       'Marketing websites',
-      'Sponsored posts',
+      'Sponsored newsletter posts to 1K subscribers',
+      'Promoted tweets to 4K fintech nerds',
     ],
   },
   {
