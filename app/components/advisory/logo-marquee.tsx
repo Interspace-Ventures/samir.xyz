@@ -6,46 +6,46 @@ interface LogoItem {
 }
 
 // Companies Samir has worked at or has connections to, plus the fintech
-// portfolio companies. Every logo is rendered in a single color (white) for a
-// clean, uniform "Structured Liquidity" look.
+// portfolio companies. Logos are pre-trimmed to their content bounds (see
+// public/logos/marquee) and rendered in a single color (white) at a uniform
+// height, so the row reads as a clean, evenly sized logo wall.
 const logos: LogoItem[] = [
-  { name: 'Adyen', src: '/logos/worked/adyen.png' },
-  { name: 'Block', src: '/logos/worked/block.png' },
-  { name: 'Chime', src: '/logos/worked/chime.png' },
-  { name: 'Stripe', src: '/logos/worked/stripe.png' },
-  { name: 'Unit', src: '/logos/worked/unit.png' },
-  { name: 'Visa', src: '/logos/worked/visa.png' },
-  { name: 'HRT', src: '/logos/worked/hrt.png' },
-  { name: 'Backpack', src: '/logos/backpack.png' },
-  { name: 'Fizz', src: '/attached_assets/Fizz_smaller.png' },
-  { name: 'Grace', src: '/logos/grace.png' },
-  { name: 'Instaswitch', src: '/logos/instaswitch.png' },
-  { name: 'Juno', src: '/logos/juno.png' },
-  { name: 'Kartera', src: '/logos/kartera.png' },
-  { name: 'Keep', src: '/logos/keep.png' },
-  { name: 'Maridea', src: '/logos/maridea.png' },
-  { name: 'Parrot Finance', src: '/logos/parrot.png' },
-  { name: 'Percents', src: '/logos/percents.png' },
-  { name: 'Rely', src: '/logos/rely.png' },
-  { name: 'Sundae', src: '/logos/sundae.png' },
-  { name: 'Swan', src: '/logos/swan.png' },
-  { name: 'Waldo', src: '/logos/waldo.png' },
+  { name: 'Adyen', src: '/logos/marquee/adyen.png' },
+  { name: 'Block', src: '/logos/marquee/block.png' },
+  { name: 'Chime', src: '/logos/marquee/chime.png' },
+  { name: 'Stripe', src: '/logos/marquee/stripe.png' },
+  { name: 'Unit', src: '/logos/marquee/unit.png' },
+  { name: 'Visa', src: '/logos/marquee/visa.png' },
+  { name: 'HRT', src: '/logos/marquee/hrt.png' },
+  { name: 'Backpack', src: '/logos/marquee/backpack.png' },
+  { name: 'Fizz', src: '/logos/marquee/fizz.png' },
+  { name: 'Grace', src: '/logos/marquee/grace.png' },
+  { name: 'Instaswitch', src: '/logos/marquee/instaswitch.png' },
+  { name: 'Juno', src: '/logos/marquee/juno.png' },
+  { name: 'Kartera', src: '/logos/marquee/kartera.png' },
+  { name: 'Keep', src: '/logos/marquee/keep.png' },
+  { name: 'Maridea', src: '/logos/marquee/maridea.png' },
+  { name: 'Parrot Finance', src: '/logos/marquee/parrot.png' },
+  { name: 'Percents', src: '/logos/marquee/percents.png' },
+  { name: 'Rely', src: '/logos/marquee/rely.png' },
+  { name: 'Sundae', src: '/logos/marquee/sundae.png' },
+  { name: 'Swan', src: '/logos/marquee/swan.png' },
+  { name: 'Waldo', src: '/logos/marquee/waldo.png' },
 ];
 
-function LogoSlot({ logo, ariaHidden }: { logo: LogoItem; ariaHidden?: boolean }) {
+function Logo({ logo, ariaHidden }: { logo: LogoItem; ariaHidden?: boolean }) {
   return (
-    <div
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       aria-hidden={ariaHidden}
-      className="shrink-0 w-40 flex items-center justify-center"
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={logo.src}
-        alt={ariaHidden ? '' : `${logo.name} logo`}
-        className="h-6 w-auto max-w-[112px] object-contain brightness-0 invert opacity-80"
-        loading="lazy"
-      />
-    </div>
+      src={logo.src}
+      alt={ariaHidden ? '' : `${logo.name} logo`}
+      // Uniform horizontal margin on every item keeps the duplicated track
+      // perfectly symmetric, so translateX(-50%) loops seamlessly. Sizing by
+      // height only (no width cap) keeps every logo the same visual height.
+      className="shrink-0 mx-6 h-7 w-auto object-contain brightness-0 invert opacity-80"
+      loading="lazy"
+    />
   );
 }
 
@@ -70,7 +70,7 @@ export default function LogoMarquee() {
 
         <div className="animate-logo-marquee flex w-max items-center">
           {loop.map((logo, i) => (
-            <LogoSlot key={`${logo.name}-${i}`} logo={logo} ariaHidden={i >= logos.length} />
+            <Logo key={`${logo.name}-${i}`} logo={logo} ariaHidden={i >= logos.length} />
           ))}
         </div>
       </div>
