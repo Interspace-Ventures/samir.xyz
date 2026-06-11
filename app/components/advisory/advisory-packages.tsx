@@ -13,6 +13,7 @@ const packages = [
     icon: Wrench,
     name: 'Build',
     type: 'Project-based',
+    tagline: 'Ship the assets that get you in front of customers.',
     points: [
       'Landing pages',
       'Marketing websites',
@@ -23,6 +24,7 @@ const packages = [
     icon: TrendingUp,
     name: 'Grow',
     type: 'Project-based',
+    tagline: 'Sharpen the strategy that scales your business.',
     points: [
       'Fundraising strategy',
       'Strategic partnerships',
@@ -33,6 +35,7 @@ const packages = [
     icon: Compass,
     name: 'Advise',
     type: 'Ongoing',
+    tagline: 'An ongoing partner for your hardest calls.',
     points: [
       'Organizational strategy',
       'Product advisory',
@@ -63,9 +66,12 @@ export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
                 <Icon className="w-7 h-7 lg:w-8 lg:h-8 shrink-0 text-white" aria-hidden="true" />
                 <h3 className="text-xl lg:text-2xl font-bold text-white">{pkg.name}</h3>
               </div>
-              <span className="self-start text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-2 py-1 mb-4 lg:mb-5">
+              <span className="self-start text-[10px] font-bold uppercase tracking-wider text-black bg-[#c9b6ff] border-2 border-black px-2 py-1 mb-3">
                 {pkg.type}
               </span>
+              <p className="text-xs lg:text-sm text-white/70 leading-snug mb-4 lg:mb-5">
+                {pkg.tagline}
+              </p>
               <ul className="space-y-2 mb-5 lg:mb-6 flex-grow">
                 {pkg.points.map((point) => (
                   <li key={point} className="flex items-start gap-2">
