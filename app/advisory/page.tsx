@@ -28,7 +28,11 @@ export default function AdvisoryPage() {
       <AdvisoryPrinciples />
       <TestimonialsMarquee />
       <AdvisoryPackages onSelect={handleSelect} />
-      <AdvisoryContact interest={interest} onClearInterest={() => setInterest('')} />
+      <AdvisoryContact
+        interest={interest}
+        onSelectInterest={setInterest}
+        onClearInterest={() => setInterest('')}
+      />
     </div>
   );
 }

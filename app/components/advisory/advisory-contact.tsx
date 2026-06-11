@@ -7,7 +7,10 @@ import StageSelect from './stage-select';
 interface AdvisoryContactProps {
   interest: string;
   onClearInterest: () => void;
+  onSelectInterest: (value: string) => void;
 }
+
+const SUBJECTS = ['Build', 'Grow', 'Scale'];
 
 const STAGES = [
   'Idea',
@@ -50,7 +53,7 @@ function FillInput({ value, onChange, placeholder, ariaLabel, type = 'text', req
   );
 }
 
-export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryContactProps) {
+export default function AdvisoryContact({ interest, onClearInterest, onSelectInterest }: AdvisoryContactProps) {
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -119,7 +122,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
           className="bg-[#2a313a] border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
         >
           {/* Compose window header */}
-          <div className="flex items-center gap-2 border-b-2 border-black bg-[#242a31] px-4 py-2.5">
+          <div className="flex items-center gap-2 border-b-2 border-black bg-[#242a31] px-4 py-2">
             <Mail className="w-4 h-4 text-[#c9b6ff]" aria-hidden="true" />
             <span className="text-sm font-bold text-white">New message</span>
             <span className="ml-auto flex items-center gap-2.5" aria-hidden="true">
@@ -130,13 +133,13 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
           </div>
 
           {/* To */}
-          <div className="flex items-center gap-3 border-b border-white/10 px-4 py-2.5">
+          <div className="flex items-center gap-3 border-b border-white/10 px-4 py-2">
             <span className="w-16 shrink-0 text-sm text-white/45">To</span>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#242a31] py-1 pl-1 pr-3">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#7f54dc] text-xs font-bold text-white">
                 S
               </span>
-              <span className="text-sm text-white/90">Samir Goel</span>
+              <span className="text-sm text-white/90">Samir</span>
             </span>
             <span className="ml-auto text-sm text-white/35" aria-hidden="true">
               Cc Bcc
@@ -144,28 +147,24 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
           </div>
 
           {/* Subject */}
-          <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
+          <div className="flex items-center gap-3 border-b border-white/10 px-4 py-2.5">
             <span className="w-16 shrink-0 text-sm text-white/45">Subject</span>
-            <span className="truncate text-sm font-semibold text-white">
-              {interest ? `Advisory inquiry: ${interest}` : 'Advisory inquiry'}
+            <span className="text-sm font-semibold text-white">
+              I&apos;m here to{' '}
+              <StageSelect
+                value={interest}
+                onChange={onSelectInterest}
+                options={SUBJECTS}
+                placeholder="Build"
+              />
             </span>
-            {interest && (
-              <button
-                type="button"
-                onClick={onClearInterest}
-                className="ml-auto shrink-0 text-white/50 transition-colors hover:text-white"
-                aria-label="Clear selection"
-              >
-                <X className="h-4 w-4" aria-hidden="true" />
-              </button>
-            )}
           </div>
 
           {/* Body */}
-          <div className="px-4 py-6 sm:px-6">
+          <div className="px-4 py-5 sm:px-6">
           <div className="text-white text-base sm:text-xl">
-            <p className="mb-4 sm:mb-6 text-lg sm:text-2xl font-bold">Hey Samir,</p>
-            <p className="leading-[2.4] sm:leading-[2.9]">
+            <p className="mb-3 sm:mb-4 text-lg sm:text-2xl font-bold">Hey Samir,</p>
+            <p className="leading-[2.0] sm:leading-[2.4]">
               My name is{' '}
             <FillInput
               required
@@ -223,7 +222,7 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
           </div>
 
           {/* Compose footer */}
-          <div className="flex items-center justify-between gap-3 border-t-2 border-black bg-[#242a31] px-4 py-3">
+          <div className="flex items-center justify-between gap-3 border-t-2 border-black bg-[#242a31] px-4 py-2.5">
             <span className="text-xs text-white/40">Goes straight to my inbox.</span>
             <button
               type="submit"
