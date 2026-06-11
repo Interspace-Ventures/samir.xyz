@@ -89,7 +89,7 @@ export default function TestimonialsMarquee() {
   return (
     <section className="py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-white mb-8">What people say</h2>
+        <h2 className="text-3xl font-bold text-white mb-8">What founders and operators say</h2>
       </div>
 
       <div className="marquee-paused relative overflow-hidden">
