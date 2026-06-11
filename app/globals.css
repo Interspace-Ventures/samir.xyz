@@ -554,28 +554,6 @@ textarea:focus-visible {
   animation-play-state: paused;
 }
 
-/* Logo marquee: slower, seamless loop. Every item carries the same horizontal
-   margin (mx-6), so the duplicated track is symmetric and exactly 2x one set;
-   translateX(-50%) lands on a whole set boundary (no sub-pixel jitter on
-   repeat), regardless of each logo's intrinsic width. */
-@keyframes logo-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-logo-marquee {
-  animation: logo-marquee 90s linear infinite;
-  will-change: transform;
-}
-
-.logo-marquee-paused:hover .animate-logo-marquee {
-  animation-play-state: paused;
-}
-
 /* Respect users who prefer less motion: tame entrance + hover animations. */
 @media (prefers-reduced-motion: reduce) {
   *,
