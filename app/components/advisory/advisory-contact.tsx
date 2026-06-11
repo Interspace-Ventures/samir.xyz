@@ -134,9 +134,9 @@ export default function AdvisoryContact({ interest, onClearInterest }: AdvisoryC
             </div>
           )}
 
-          <div className="text-white text-lg sm:text-xl">
-            <p className="mb-6 text-xl sm:text-2xl font-bold">Hey Samir,</p>
-            <p className="leading-[2.9]">
+          <div className="text-white text-base sm:text-xl">
+            <p className="mb-4 sm:mb-6 text-lg sm:text-2xl font-bold">Hey Samir,</p>
+            <p className="leading-[2.4] sm:leading-[2.9]">
               My name is{' '}
             <FillInput
               required
