@@ -39,10 +39,10 @@ const ProfileSection = () => {
               className="flex-1"
             >
               <div className="h-20 sm:h-24 flex flex-col justify-center bg-[#2a313a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] px-3 sm:px-4 py-2 sm:py-4">
-                <h1 className="text-base sm:text-2xl md:text-3xl font-bold mb-0.5 sm:mb-1 text-[#9d7bea]">
+                <h1 className="text-[clamp(1rem,4vw,1.875rem)] leading-tight font-bold mb-0.5 sm:mb-1 text-[#9d7bea]">
                   Hey - I'm Samir
                 </h1>
-                <p className="text-xs sm:text-base md:text-lg font-bold text-white">
+                <p className="text-[clamp(0.75rem,2.6vw,1.125rem)] leading-tight font-bold text-white">
                   I drive impact at startups
                 </p>
               </div>
