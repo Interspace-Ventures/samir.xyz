@@ -150,13 +150,14 @@ export default function AdvisoryContact({ interest, onClearInterest, onSelectInt
           <div className="flex items-center gap-3 border-b border-white/10 px-4 py-2.5">
             <span className="w-16 shrink-0 text-sm text-white/45">Subject</span>
             <span className="text-sm font-semibold text-white">
-              I&apos;m here to{' '}
+              Let&apos;s{' '}
               <StageSelect
                 value={interest}
                 onChange={onSelectInterest}
                 options={SUBJECTS}
                 placeholder="Build"
-              />
+              />{' '}
+              together
             </span>
           </div>
 
