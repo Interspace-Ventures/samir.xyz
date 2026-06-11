@@ -29,7 +29,7 @@ const logos: LogoItem[] = [
   { name: 'Keep', src: '/logos/marquee/keep.png' },
   { name: 'Maridea', src: '/logos/marquee/maridea.png' },
   { name: 'Parrot Finance', src: '/logos/marquee/parrot.png' },
-  { name: 'Percents', src: '/logos/marquee/percents.png' },
+  { name: 'Percents', src: '/logos/marquee/percents.png', heightClass: 'h-5' },
   { name: 'Rely', src: '/logos/marquee/rely.png' },
   { name: 'Sundae', src: '/logos/marquee/sundae.png' },
   { name: 'Swan', src: '/logos/marquee/swan.png' },
