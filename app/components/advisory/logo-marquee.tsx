@@ -3,6 +3,9 @@
 interface LogoItem {
   name: string;
   src: string;
+  // Optional per-logo height override (defaults to h-7) for optical balancing of
+  // logos that read heavier/larger at the shared height.
+  heightClass?: string;
 }
 
 // Companies Samir has worked at or has connections to, plus the fintech
@@ -11,7 +14,7 @@ interface LogoItem {
 // height, so the row reads as a clean, evenly sized logo wall.
 const logos: LogoItem[] = [
   { name: 'Adyen', src: '/logos/marquee/adyen.png' },
-  { name: 'Block', src: '/logos/marquee/block.png' },
+  { name: 'Block', src: '/logos/marquee/block.png', heightClass: 'h-5' },
   { name: 'Chime', src: '/logos/marquee/chime.png' },
   { name: 'Stripe', src: '/logos/marquee/stripe.png' },
   { name: 'Unit', src: '/logos/marquee/unit.png' },
@@ -43,7 +46,7 @@ function Logo({ logo, ariaHidden }: { logo: LogoItem; ariaHidden?: boolean }) {
       // Uniform horizontal margin on every item keeps the duplicated track
       // perfectly symmetric, so translateX(-50%) loops seamlessly. Sizing by
       // height only (no width cap) keeps every logo the same visual height.
-      className="shrink-0 mx-6 h-7 w-auto object-contain brightness-0 invert opacity-80"
+      className={`shrink-0 mx-6 ${logo.heightClass ?? 'h-7'} w-auto object-contain brightness-0 invert opacity-80`}
       loading="lazy"
     />
   );
