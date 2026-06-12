@@ -7,7 +7,7 @@ const doList = [
   'Unit economics',
   'Fundraising strategy',
   'Strategic partnerships',
-  'Org & product strategy',
+  'Organization and product strategy',
 ];
 
 const dontList = [
