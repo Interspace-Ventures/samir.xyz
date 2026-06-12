@@ -12,7 +12,7 @@ import { prisma } from './prisma';
 export const HIDDEN_COMPANIES = ['The Food Company'];
 
 // Ventures shown on the public Ventures page (by their DB names).
-const ACTIVE_VENTURES = ['2 Days Early', 'Interspace', 'Verse', 'Spacebase', 'Orbit'];
+const ACTIVE_VENTURES = ['2 Days Early', 'Interspace', 'Verse'];
 
 export async function getVisiblePortfolio() {
   // Prisma maps `logoUrl` from the `logo-url` column, so rows are already in the
