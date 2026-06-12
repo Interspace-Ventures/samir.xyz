@@ -68,7 +68,7 @@ export default function StageSelect({
                   onChange(option);
                   setOpen(false);
                 }}
-                className={`block w-full text-left whitespace-nowrap px-3 py-2 text-base font-normal transition-colors ${
+                className={`block w-full text-left whitespace-nowrap px-3 py-2 text-sm font-normal transition-colors ${
                   value === option
                     ? 'bg-[#7f54dc] text-white'
                     : 'text-white hover:bg-[#7f54dc]'

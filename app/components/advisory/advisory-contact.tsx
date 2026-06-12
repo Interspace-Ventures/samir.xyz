@@ -163,8 +163,8 @@ export default function AdvisoryContact({ interest, onClearInterest, onSelectInt
 
           {/* Body */}
           <div className="px-4 py-5 sm:px-6">
-          <div className="text-white text-base sm:text-xl">
-            <p className="mb-3 sm:mb-4 text-lg sm:text-2xl font-bold">Hey Samir,</p>
+          <div className="text-white text-sm sm:text-lg">
+            <p className="mb-3 sm:mb-4 text-base sm:text-xl font-bold">Hey Samir,</p>
             <p className="leading-[2.0] sm:leading-[2.4]">
               My name is{' '}
             <FillInput
