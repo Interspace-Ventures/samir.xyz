@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 interface Testimonial {
@@ -52,9 +52,12 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-function TestimonialCard({ t }: { t: Testimonial }) {
+function TestimonialCard({ t, ariaHidden }: { t: Testimonial; ariaHidden?: boolean }) {
   return (
-    <div className="w-[300px] sm:w-[360px] shrink-0 snap-start bg-[#2a313a] border-2 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
+    <div
+      aria-hidden={ariaHidden || undefined}
+      className="w-[300px] sm:w-[360px] shrink-0 snap-start bg-[#2a313a] border-2 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between"
+    >
       <div>
         <Quote className="w-7 h-7 text-[#7f54dc] mb-3" aria-hidden="true" />
         <p className="text-sm text-white/90 leading-relaxed mb-5">
@@ -84,28 +87,73 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
+// Render the list three times so the carousel can loop seamlessly in both
+// directions: the viewport sits in the middle copy and silently snaps back by
+// one copy whenever it drifts into a neighbouring copy.
+const COPIES = 3;
+
 export default function TestimonialsMarquee() {
   const trackRef = useRef<HTMLDivElement>(null);
+
+  // Distance between the start of one copy and the start of the next. Measured
+  // from the DOM so card widths, gaps and padding are all accounted for.
+  const getStride = (el: HTMLDivElement) => {
+    const cards = el.children;
+    const first = cards[0] as HTMLElement | undefined;
+    const next = cards[testimonials.length] as HTMLElement | undefined;
+    if (!first || !next) return 0;
+    return next.offsetLeft - first.offsetLeft;
+  };
+
+  // Keep scrollLeft within the middle copy's range [stride, 2 * stride). Because
+  // every copy is identical, snapping by whole strides is invisible.
+  const normalize = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const stride = getStride(el);
+    if (stride <= 0) return;
+    let left = el.scrollLeft;
+    while (left >= stride * 2) left -= stride;
+    while (left < stride) left += stride;
+    if (Math.abs(left - el.scrollLeft) > 0.5) el.scrollLeft = left;
+  };
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    const recenter = () => {
+      const stride = getStride(el);
+      if (stride > 0) el.scrollLeft = stride;
+    };
+    // Wait a frame so layout (fonts, gaps) has settled before measuring.
+    const raf = requestAnimationFrame(recenter);
+
+    let settleTimer: ReturnType<typeof setTimeout>;
+    const onScroll = () => {
+      clearTimeout(settleTimer);
+      // Normalize once the smooth animation or touch momentum has stopped.
+      settleTimer = setTimeout(normalize, 100);
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', recenter);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(settleTimer);
+      el.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', recenter);
+    };
+  }, []);
 
   const scrollByPage = (direction: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    // 1px tolerance absorbs sub-pixel rounding at either end of the track.
-    const atEnd = el.scrollLeft >= maxScroll - 1;
-    const atStart = el.scrollLeft <= 1;
-    // Wrap around: paging forward from the end loops back to the first card,
-    // and paging back from the start loops to the last card.
-    if (direction === 1 && atEnd) {
-      el.scrollTo({ left: 0, behavior: 'smooth' });
-      return;
-    }
-    if (direction === -1 && atStart) {
-      el.scrollTo({ left: maxScroll, behavior: 'smooth' });
-      return;
-    }
-    // Move roughly one viewport of cards at a time so paging feels deliberate.
-    el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: 'smooth' });
+    // Move roughly one viewport of cards at a time, but never more than one
+    // copy, so we always stay within the loop buffer.
+    const stride = getStride(el);
+    let distance = el.clientWidth * 0.8;
+    if (stride > 0) distance = Math.min(distance, stride - 1);
+    el.scrollBy({ left: direction * distance, behavior: 'smooth' });
   };
 
   return (
@@ -142,9 +190,13 @@ export default function TestimonialsMarquee() {
           ref={trackRef}
           className="flex gap-5 py-2 overflow-x-auto scroll-smooth snap-x px-4 sm:px-6 lg:px-8 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={i} t={t} />
-          ))}
+          {Array.from({ length: COPIES }).flatMap((_, copy) =>
+            testimonials.map((t, i) => (
+              // Only the middle copy is canonical for assistive tech; the
+              // cloned copies that exist purely for seamless looping are hidden.
+              <TestimonialCard key={`${copy}-${i}`} t={t} ariaHidden={copy !== 1} />
+            ))
+          )}
         </div>
       </div>
     </section>
