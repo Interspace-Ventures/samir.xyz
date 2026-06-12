@@ -62,7 +62,7 @@ export default function VenturesContent({ ventures }: { ventures: Venture[] }) {
                       src={venture.logoUrl}
                       alt={`${venture.name} logo`}
                       fill
-                      className="object-contain p-2 md:p-4"
+                      className="object-cover"
                       priority={true}
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
