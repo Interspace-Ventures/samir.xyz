@@ -7,7 +7,7 @@ const principles = [
   {
     icon: Handshake,
     title: 'From an operator, for operators',
-    body: "A decade in fintech, from pre-seed to scale. Every call comes from doing the work in your shoes.",
+    body: "I've spent a decade in fintech, from pre-seed to scale, so every call comes from doing the work in your shoes.",
   },
   {
     icon: Microscope,
