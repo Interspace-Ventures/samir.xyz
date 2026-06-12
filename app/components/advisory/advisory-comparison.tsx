@@ -6,7 +6,7 @@ import { Check, X } from 'lucide-react';
 const doList = [
   'Unit economics and profitability margin analysis',
   'Fundraising narrative and strategy',
-  'Strategic partnerships',
+  'Strategic partnerships & negotiations',
   'Organization and product strategy',
 ];
 
