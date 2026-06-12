@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 interface Testimonial {
@@ -86,38 +86,24 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 
 export default function TestimonialsMarquee() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
-  const updateButtons = useCallback(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    // 1px tolerance avoids the next button staying enabled due to sub-pixel
-    // rounding at the far end of the track.
-    setCanScrollLeft(el.scrollLeft > 1);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
-  }, []);
-
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    updateButtons();
-    el.addEventListener('scroll', updateButtons, { passive: true });
-    window.addEventListener('resize', updateButtons);
-    // Cards can reflow as fonts/content settle, so recompute button state
-    // whenever the track's content size changes.
-    const observer = new ResizeObserver(updateButtons);
-    observer.observe(el);
-    return () => {
-      el.removeEventListener('scroll', updateButtons);
-      window.removeEventListener('resize', updateButtons);
-      observer.disconnect();
-    };
-  }, [updateButtons]);
 
   const scrollByPage = (direction: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    // 1px tolerance absorbs sub-pixel rounding at either end of the track.
+    const atEnd = el.scrollLeft >= maxScroll - 1;
+    const atStart = el.scrollLeft <= 1;
+    // Wrap around: paging forward from the end loops back to the first card,
+    // and paging back from the start loops to the last card.
+    if (direction === 1 && atEnd) {
+      el.scrollTo({ left: 0, behavior: 'smooth' });
+      return;
+    }
+    if (direction === -1 && atStart) {
+      el.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      return;
+    }
     // Move roughly one viewport of cards at a time so paging feels deliberate.
     el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: 'smooth' });
   };
@@ -131,18 +117,16 @@ export default function TestimonialsMarquee() {
           <button
             type="button"
             onClick={() => scrollByPage(-1)}
-            disabled={!canScrollLeft}
             aria-label="Previous testimonials"
-            className="grid place-items-center w-9 h-9 bg-[#2a313a] text-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-[#7f54dc] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] disabled:opacity-30 disabled:pointer-events-none"
+            className="grid place-items-center w-9 h-9 bg-[#2a313a] text-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-[#7f54dc] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]"
           >
             <ChevronLeft className="w-5 h-5" aria-hidden="true" />
           </button>
           <button
             type="button"
             onClick={() => scrollByPage(1)}
-            disabled={!canScrollRight}
             aria-label="Next testimonials"
-            className="grid place-items-center w-9 h-9 bg-[#2a313a] text-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-[#7f54dc] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] disabled:opacity-30 disabled:pointer-events-none"
+            className="grid place-items-center w-9 h-9 bg-[#2a313a] text-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-[#7f54dc] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]"
           >
             <ChevronRight className="w-5 h-5" aria-hidden="true" />
           </button>
