@@ -1,6 +1,7 @@
 'use client';
 
-import { Quote } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 interface Testimonial {
   quote: string;
@@ -53,7 +54,7 @@ const testimonials: Testimonial[] = [
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <div className="w-[300px] sm:w-[360px] shrink-0 bg-[#2a313a] border-2 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
+    <div className="w-[300px] sm:w-[360px] shrink-0 snap-start bg-[#2a313a] border-2 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
       <div>
         <Quote className="w-7 h-7 text-[#7f54dc] mb-3" aria-hidden="true" />
         <p className="text-sm text-white/90 leading-relaxed mb-5">
@@ -84,21 +85,80 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 }
 
 export default function TestimonialsMarquee() {
-  const loop = [...testimonials, ...testimonials];
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateButtons = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    // 1px tolerance avoids the next button staying enabled due to sub-pixel
+    // rounding at the far end of the track.
+    setCanScrollLeft(el.scrollLeft > 1);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    updateButtons();
+    el.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+    // Cards can reflow as fonts/content settle, so recompute button state
+    // whenever the track's content size changes.
+    const observer = new ResizeObserver(updateButtons);
+    observer.observe(el);
+    return () => {
+      el.removeEventListener('scroll', updateButtons);
+      window.removeEventListener('resize', updateButtons);
+      observer.disconnect();
+    };
+  }, [updateButtons]);
+
+  const scrollByPage = (direction: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    // Move roughly one viewport of cards at a time so paging feels deliberate.
+    el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: 'smooth' });
+  };
 
   return (
     <section className="py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-white mb-8">What founders and operators say</h2>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 mb-8">
+        <h2 className="text-3xl font-bold text-white">What founders and operators say</h2>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={() => scrollByPage(-1)}
+            disabled={!canScrollLeft}
+            aria-label="Previous testimonials"
+            className="grid place-items-center w-9 h-9 bg-[#2a313a] text-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-[#7f54dc] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] disabled:opacity-30 disabled:pointer-events-none"
+          >
+            <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollByPage(1)}
+            disabled={!canScrollRight}
+            aria-label="Next testimonials"
+            className="grid place-items-center w-9 h-9 bg-[#2a313a] text-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:bg-[#7f54dc] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] disabled:opacity-30 disabled:pointer-events-none"
+          >
+            <ChevronRight className="w-5 h-5" aria-hidden="true" />
+          </button>
+        </div>
       </div>
 
-      <div className="marquee-paused relative overflow-hidden">
+      <div className="relative overflow-hidden">
         {/* edge fades */}
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-[#332452] to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-[#332452] to-transparent" />
 
-        <div className="animate-marquee flex gap-5 w-max py-2">
-          {loop.map((t, i) => (
+        <div
+          ref={trackRef}
+          className="flex gap-5 py-2 overflow-x-auto scroll-smooth snap-x px-4 sm:px-6 lg:px-8 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {testimonials.map((t, i) => (
             <TestimonialCard key={i} t={t} />
           ))}
         </div>

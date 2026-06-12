@@ -536,21 +536,25 @@ textarea:focus-visible {
   -webkit-backdrop-filter: none;
 }
 
-/* Testimonials marquee: seamless horizontal auto-scroll, pause on hover. */
-@keyframes marquee {
-  0% {
+/* Logo marquee: slower, seamless loop. Every item carries the same horizontal
+   margin (mx-6), so the duplicated track is symmetric and exactly 2x one set;
+   translateX(-50%) lands on a whole set boundary (no sub-pixel jitter on
+   repeat), regardless of each logo's intrinsic width. */
+@keyframes logo-marquee {
+  from {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(calc(-50% - 0.625rem));
+  to {
+    transform: translateX(-50%);
   }
 }
 
-.animate-marquee {
-  animation: marquee 45s linear infinite;
+.animate-logo-marquee {
+  animation: logo-marquee 90s linear infinite;
+  will-change: transform;
 }
 
-.marquee-paused:hover .animate-marquee {
+.logo-marquee-paused:hover .animate-logo-marquee {
   animation-play-state: paused;
 }
 
