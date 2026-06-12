@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 
 const doList = [
-  'Unit economics',
+  'Unit economics and profitability margin analysis',
   'Fundraising strategy',
   'Strategic partnerships',
   'Organization and product strategy',
