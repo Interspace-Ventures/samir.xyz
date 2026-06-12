@@ -21,7 +21,7 @@ const logos: LogoItem[] = [
   { name: 'Visa', src: '/logos/marquee/visa.png' },
   { name: 'HRT', src: '/logos/marquee/hrt.png' },
   { name: 'Backpack', src: '/logos/marquee/backpack.png' },
-  { name: 'Fizz', src: '/logos/marquee/fizz.png' },
+  { name: 'Mine', src: '/logos/marquee/mine.png' },
   { name: 'Grace', src: '/logos/marquee/grace.png' },
   { name: 'Instaswitch', src: '/logos/marquee/instaswitch.png' },
   { name: 'Juno', src: '/logos/marquee/juno.png' },
