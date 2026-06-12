@@ -157,7 +157,7 @@ export default function TestimonialsMarquee() {
   };
 
   return (
-    <section className="py-12">
+    <section id="endorsements" className="py-12 scroll-mt-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 mb-8">
         <h2 className="text-3xl font-bold text-white">What founders and operators say</h2>
 
