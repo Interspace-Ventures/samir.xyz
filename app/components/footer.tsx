@@ -32,8 +32,6 @@ const socialLinks = [
   },
 ];
 
-const headingClass =
-  'text-white text-xs font-bold uppercase tracking-[0.18em] mb-4';
 const linkClass =
   'text-text-secondary hover:text-white transition-colors text-sm';
 
@@ -46,7 +44,6 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-10 sm:gap-16">
           {/* Navigate */}
           <nav aria-label="Footer">
-            <h3 className={headingClass}>Navigate</h3>
             <ul className="flex flex-col gap-1.5">
               {footerNav.map((item) => (
                 <li key={item.href}>
@@ -72,7 +69,6 @@ export default function Footer() {
           {/* About + Connect stacked in the wider right column */}
           <div className="flex flex-col gap-8">
             <div>
-            <h3 className={headingClass}>About</h3>
             <p className="text-text-secondary text-sm leading-relaxed">
               &copy; {currentYear} <ChangelogDrawer />. samir.xyz is an{' '}
               <a
@@ -98,7 +94,6 @@ export default function Footer() {
 
             {/* Connect / social row */}
             <div>
-              <h3 className={headingClass}>Connect</h3>
               <div className="flex flex-wrap gap-3">
                 {socialLinks.map((link) => (
                   <a
