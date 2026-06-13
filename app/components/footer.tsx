@@ -68,8 +68,7 @@ export default function Footer() {
 
           {/* About + Connect stacked in the wider right column */}
           <div className="flex flex-col gap-8">
-            <div>
-            <p className="text-text-secondary text-sm leading-relaxed">
+            <div className="text-text-secondary text-sm leading-relaxed">
               &copy; {currentYear} <ChangelogDrawer />. samir.xyz is an{' '}
               <a
                 href="https://interspace.ventures"
@@ -89,7 +88,6 @@ export default function Footer() {
                 Replit
               </a>
               .
-            </p>
             </div>
 
             {/* Connect / social row */}

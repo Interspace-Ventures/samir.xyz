@@ -11,3 +11,4 @@
 - [Fixed bottom bar footer clearance](fixed-bottom-bar-footer-clearance.md) — always-visible bottom bar must be fixed (not sticky-as-last-child); clear the global footer via document.body paddingBottom.
 - [Navbar/body alignment](navbar-content-alignment.md) — use a sticky in-flow header + overflow-x:clip, NOT position:fixed + scrollbar-gutter (the gutter shifts the whole layout off-center).
 - [Server-render + hydration](server-render-hydration.md) — page data fetched in async server page.tsx (shared app/lib/server-data.ts) + React Query dehydrate/HydrationBoundary (or props) to kill first-visit loading flash.
+- [Dev-compile vs prod perf](dev-compile-vs-prod-perf.md) — "slow page loads" are usually Next.js dev on-demand compilation (first hit only); warm dev + production are fast. Measure twice before optimizing.
