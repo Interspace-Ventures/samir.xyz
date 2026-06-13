@@ -1,4 +1,13 @@
+import Link from 'next/link';
 import ChangelogDrawer from './changelog-drawer';
+
+const footerNav = [
+  { href: '/', label: 'Profile' },
+  { href: '/advisory', label: 'Advisory' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/ventures', label: 'Ventures' },
+  { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true },
+];
 
 const socialLinks = [
   {
@@ -23,54 +32,100 @@ const socialLinks = [
   },
 ];
 
+const headingClass =
+  'text-white text-xs font-bold uppercase tracking-[0.18em] mb-4';
+const linkClass =
+  'text-text-secondary hover:text-white transition-colors text-sm';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black py-6 border-t border-white/10">
+    <footer className="bg-black py-10 border-t border-white/10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center gap-5 mb-4">
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={link.name}
-              className="text-text-secondary hover:text-white transition-colors"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-5 h-5"
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+          {/* Navigate */}
+          <nav aria-label="Footer">
+            <h3 className={headingClass}>Navigate</h3>
+            <ul className="flex flex-col gap-2.5">
+              {footerNav.map((item) => (
+                <li key={item.href}>
+                  {item.external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={linkClass}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link href={item.href} className={linkClass} prefetch={true}>
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* About / normal footer text */}
+          <div>
+            <h3 className={headingClass}>About</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
+              &copy; {currentYear} <ChangelogDrawer />. samir.xyz is an{' '}
+              <a
+                href="https://interspace.ventures"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-[#7f54dc] transition-colors"
               >
-                <path d={link.path} />
-              </svg>
-            </a>
-          ))}
+                Interspace Venture
+              </a>
+              . Built at the speed of thought with{' '}
+              <a
+                href="https://replit.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-[#7f54dc] transition-colors"
+              >
+                Replit
+              </a>
+              .
+            </p>
+          </div>
+
+          {/* Connect / social column */}
+          <div>
+            <h3 className={headingClass}>Connect</h3>
+            <div className="flex flex-col gap-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-3 w-fit"
+                  aria-label={link.name}
+                >
+                  <span className="flex items-center justify-center w-9 h-9 bg-[#7f54dc] border-2 border-black text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-150 group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-4 h-4"
+                    >
+                      <path d={link.path} />
+                    </svg>
+                  </span>
+                  <span className="text-text-secondary group-hover:text-white transition-colors text-sm">
+                    {link.name}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-        <p className="text-white text-sm text-center">
-          &copy; {currentYear} <ChangelogDrawer />. samir.xyz is an{' '}
-          <a
-            href="https://interspace.ventures"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-text-secondary hover:text-white transition-colors"
-          >
-            Interspace Venture
-          </a>
-          . Built at the speed of thought with{' '}
-          <a
-            href="https://replit.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-text-secondary hover:text-white transition-colors"
-          >
-            Replit
-          </a>
-          .
-        </p>
       </div>
     </footer>
   );
