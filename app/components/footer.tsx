@@ -43,11 +43,11 @@ export default function Footer() {
   return (
     <footer className="bg-black py-10 border-t border-white/10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-10 sm:gap-16">
           {/* Navigate */}
           <nav aria-label="Footer">
             <h3 className={headingClass}>Navigate</h3>
-            <ul className="flex flex-col gap-2.5">
+            <ul className="flex flex-col gap-1.5">
               {footerNav.map((item) => (
                 <li key={item.href}>
                   {item.external ? (
@@ -69,8 +69,9 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* About / normal footer text */}
-          <div>
+          {/* About + Connect stacked in the wider right column */}
+          <div className="flex flex-col gap-8">
+            <div>
             <h3 className={headingClass}>About</h3>
             <p className="text-text-secondary text-sm leading-relaxed">
               &copy; {currentYear} <ChangelogDrawer />. samir.xyz is an{' '}
@@ -93,22 +94,21 @@ export default function Footer() {
               </a>
               .
             </p>
-          </div>
+            </div>
 
-          {/* Connect / social column */}
-          <div>
-            <h3 className={headingClass}>Connect</h3>
-            <div className="flex flex-col gap-3">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 w-fit"
-                  aria-label={link.name}
-                >
-                  <span className="flex items-center justify-center w-9 h-9 bg-[#7f54dc] border-2 border-black text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-150 group-hover:translate-x-[2px] group-hover:translate-y-[2px] group-hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+            {/* Connect / social row */}
+            <div>
+              <h3 className={headingClass}>Connect</h3>
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-10 h-10 bg-[#7f54dc] border-2 border-black text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                    aria-label={link.name}
+                  >
                     <svg
                       aria-hidden="true"
                       viewBox="0 0 24 24"
@@ -117,12 +117,9 @@ export default function Footer() {
                     >
                       <path d={link.path} />
                     </svg>
-                  </span>
-                  <span className="text-text-secondary group-hover:text-white transition-colors text-sm">
-                    {link.name}
-                  </span>
-                </a>
-              ))}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
