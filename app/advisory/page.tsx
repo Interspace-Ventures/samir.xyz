@@ -7,6 +7,7 @@ import AdvisoryPrinciples from '../components/advisory/advisory-principles';
 import TestimonialsMarquee from '../components/advisory/testimonials-marquee';
 import AdvisoryPackages from '../components/advisory/advisory-packages';
 import AdvisoryContact from '../components/advisory/advisory-contact';
+import { FEATURE_TESTIMONIALS } from '../lib/feature-flags';
 
 export default function AdvisoryPage() {
   const [interest, setInterest] = useState('');
@@ -26,7 +27,7 @@ export default function AdvisoryPage() {
       <AdvisoryHero />
       <AdvisoryComparison />
       <AdvisoryPrinciples />
-      <TestimonialsMarquee />
+      {FEATURE_TESTIMONIALS && <TestimonialsMarquee />}
       <AdvisoryPackages onSelect={handleSelect} />
       <AdvisoryContact
         interest={interest}
