@@ -22,7 +22,8 @@ export default function AdvisoryHero() {
         </h1>
 
         <p className="text-lg md:text-xl text-white/85 max-w-2xl mb-9 leading-relaxed">
-          Operator-built strategic finance, specialized in fintech. I&apos;ve
+          Operator-built strategic finance advisory, specialized in fintech.
+          I&apos;ve
           spent a decade in the space at every stage, from pre-seed to scale, and
           I bring that rare experience to your hardest calls: unit economics,
           fundraising, and the partnerships that change your trajectory.
