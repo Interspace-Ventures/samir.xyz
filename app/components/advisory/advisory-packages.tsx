@@ -37,7 +37,7 @@ const packages = [
   },
   {
     icon: Compass,
-    name: 'Advise',
+    name: 'Scale',
     type: 'Ongoing',
     tagline:
       'I draw on operating experience to help you build strategic finance teams, develop sustainable financial products, and build out unit economics and profitability metrics.',
