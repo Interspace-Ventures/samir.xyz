@@ -18,7 +18,7 @@ const STAGES = [
   'Series A / B',
   'Series C+',
   'Pre-IPO',
-  'Other',
+  'Growth',
 ];
 
 type FillInputProps = {
