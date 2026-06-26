@@ -60,7 +60,7 @@ const ProfileSection = () => {
             <div className="content-card space-y-4">
               <p>
                 Today, I'm building <Link
-                  href="/advisory"
+                  href="/"
                   className="text-[#7f54dc] hover:text-white transition-colors underline"
                 >
                   Interspace Ventures

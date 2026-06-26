@@ -2,10 +2,12 @@
 
 ## Overview
 
-Samir's personal portfolio site. A Next.js (App Router) site with a neobrutalist
-design that showcases his bio, investment portfolio, personal ventures, and a
-strategic finance advisory practice. The public GitHub repo is
-`heyinterspace/samir.xyz`, so the codebase is kept clean.
+Interspace Ventures is Samir's brand entry point. A Next.js (App Router) site
+with a neobrutalist design. The home page (`/`) is the strategic finance
+advisory practice, with his bio/profile, investment portfolio, and personal
+ventures as supporting pages. Primary domain is `interspace.ventures` (pointed
+at the advisory home). The public GitHub repo is `heyinterspace/samir.xyz`, so
+the codebase is kept clean.
 
 ## User Preferences
 
@@ -34,13 +36,17 @@ strategic finance advisory practice. The public GitHub repo is
 
 ## Pages
 
-- **/** (Home): profile and bio.
+- **/** (Home): the Interspace Ventures strategic finance advisory practice
+  (hero, principles, testimonials marquee, packages, contact form). Client
+  component holding a shared `interest` state; package CTAs set the interest and
+  scroll to the form. This is the brand entry point and the target of the
+  `interspace.ventures` domain.
+- **/profile**: Samir's profile and bio (formerly the home page).
+- **/advisory**: permanent redirect (308) to `/`, kept so old links/bookmarks
+  still work.
 - **/portfolio**: filterable grid of portfolio companies plus headline metrics.
 - **/portfolio-metrics**: detailed investment metrics.
 - **/ventures**: personal ventures (self-contained page).
-- **/advisory**: strategic finance advisory practice (hero, principles,
-  testimonials marquee, packages, contact form). Client component holding a
-  shared `interest` state; package CTAs set the interest and scroll to the form.
 
 The navigation and footer live in the root layout (`app/layout.tsx`), so they
 appear on every page. The footer includes a slide-up changelog drawer.

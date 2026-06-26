@@ -57,8 +57,8 @@ const Navigation = () => {
   };
 
   const menuItems = [
-    { href: '/', label: 'Profile', icon: User },
-    { href: '/advisory', label: 'Advisory', icon: Handshake },
+    { href: '/profile', label: 'Profile', icon: User },
+    { href: '/', label: 'Advisory', icon: Handshake },
     { href: '/portfolio', label: 'Portfolio', icon: Briefcase },
     { href: '/ventures', label: 'Ventures', icon: Rocket },
     { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true, icon: Newspaper }
@@ -83,7 +83,7 @@ const Navigation = () => {
                   className="rounded"
                   priority
                 />
-                <span className="text-white font-bold text-xl tracking-tight">samir.xyz</span>
+                <span className="text-white font-bold text-xl tracking-tight">Interspace Ventures</span>
               </div>
             </Link>
             

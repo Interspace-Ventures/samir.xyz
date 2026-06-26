@@ -2,8 +2,8 @@ import Link from 'next/link';
 import ChangelogDrawer from './changelog-drawer';
 
 const footerNav = [
-  { href: '/', label: 'Profile' },
-  { href: '/advisory', label: 'Advisory' },
+  { href: '/profile', label: 'Profile' },
+  { href: '/', label: 'Advisory' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/ventures', label: 'Ventures' },
   { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true },
@@ -69,7 +69,7 @@ export default function Footer() {
           {/* About + Connect stacked in the wider right column */}
           <div className="flex flex-col gap-8">
             <div className="text-text-secondary text-sm leading-relaxed">
-              &copy; {currentYear} <ChangelogDrawer />. samir.xyz is an{' '}
+              &copy; {currentYear} <ChangelogDrawer />. Interspace Ventures is an{' '}
               <a
                 href="https://interspace.ventures"
                 target="_blank"

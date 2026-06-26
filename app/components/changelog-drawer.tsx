@@ -59,7 +59,7 @@ export default function ChangelogDrawer() {
                   <div>
                     <h2 className="text-2xl sm:text-3xl font-bold text-white">Changelog</h2>
                     <p className="text-white/70 text-sm mt-1">
-                      What&apos;s new on samir.xyz, newest first.
+                      What&apos;s new on Interspace Ventures, newest first.
                     </p>
                   </div>
                   <button

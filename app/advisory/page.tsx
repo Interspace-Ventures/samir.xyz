@@ -1,39 +1,8 @@
-'use client';
+import { permanentRedirect } from 'next/navigation';
 
-import { useState } from 'react';
-import AdvisoryHero from '../components/advisory/advisory-hero';
-import AdvisoryComparison from '../components/advisory/advisory-comparison';
-import AdvisoryPrinciples from '../components/advisory/advisory-principles';
-import TestimonialsMarquee from '../components/advisory/testimonials-marquee';
-import AdvisoryPackages from '../components/advisory/advisory-packages';
-import AdvisoryContact from '../components/advisory/advisory-contact';
-import { FEATURE_TESTIMONIALS } from '../lib/feature-flags';
-
-export default function AdvisoryPage() {
-  const [interest, setInterest] = useState('');
-
-  const handleSelect = (value: string) => {
-    setInterest(value);
-    requestAnimationFrame(() => {
-      document.getElementById('contact')?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    });
-  };
-
-  return (
-    <div className="pt-8 pb-16">
-      <AdvisoryHero />
-      <AdvisoryComparison />
-      <AdvisoryPrinciples />
-      {FEATURE_TESTIMONIALS && <TestimonialsMarquee />}
-      <AdvisoryPackages onSelect={handleSelect} />
-      <AdvisoryContact
-        interest={interest}
-        onSelectInterest={setInterest}
-        onClearInterest={() => setInterest('')}
-      />
-    </div>
-  );
+// Advisory is now the site's home page. Keep this route as a permanent redirect
+// so existing links and bookmarks to /advisory still work and search engines
+// treat the move as permanent.
+export default function AdvisoryRedirect() {
+  permanentRedirect('/');
 }

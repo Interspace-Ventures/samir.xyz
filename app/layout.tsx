@@ -12,7 +12,7 @@ const alexandria = Alexandria({
 });
 
 export const metadata: Metadata = {
-  title: 'samir.xyz',
+  title: 'Interspace Ventures',
   description: 'I drive business impact at fintechs',
   icons: {
     icon: '/favicon.png',
