@@ -76,14 +76,14 @@ const Navigation = () => {
             <Link href="/" onClick={closeMobileMenu} className="shrink-0 mr-4">
               <div className="flex items-center space-x-2">
                 <Image 
-                  src="/favicon.png"
-                  alt="S logo"
+                  src="/attached_assets/Interspace Square - 2025.png"
+                  alt="Interspace Ventures logo"
                   width={24}
                   height={24}
                   className="rounded"
                   priority
                 />
-                <span className="text-white font-bold text-xl tracking-tight">Interspace Ventures</span>
+                <span className="text-white font-bold text-lg tracking-tight">Interspace Ventures</span>
               </div>
             </Link>
             
