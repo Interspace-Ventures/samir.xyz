@@ -57,11 +57,11 @@ const Navigation = () => {
   };
 
   const menuItems = [
-    { href: '/profile', label: 'Profile', icon: User },
+    { href: '/profile', label: 'About', icon: User },
     { href: '/', label: 'Advisory', icon: Handshake },
     { href: '/portfolio', label: 'Portfolio', icon: Briefcase },
     { href: '/ventures', label: 'Ventures', icon: Rocket },
-    { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true, icon: Newspaper }
+    { href: 'https://posts.interspace.ventures', label: 'Newsletter', external: true, icon: Newspaper }
   ];
 
   return (
