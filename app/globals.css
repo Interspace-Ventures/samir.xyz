@@ -578,7 +578,9 @@ textarea:focus-visible {
 .cosmic-footer {
   position: relative;
   overflow: hidden;
-  background-color: #05040c;
+  /* Matches the page background so the footer dissolves out of the page above
+     it instead of reading as a separate block. */
+  background-color: #332452;
 }
 
 /* Two star layers: small dense stars plus a few larger, brighter ones. */

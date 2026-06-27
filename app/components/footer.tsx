@@ -39,8 +39,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="cosmic-footer border-t border-[#7f54dc]/30">
-      {/* Painterly nebula scene + readability overlay, behind all content. */}
+    <footer className="cosmic-footer">
+      {/* Painterly nebula scene + readability overlay, behind all content. The
+          top blends from the page background (#332452) so the footer grows out
+          of the page; the bottom deepens into dark purple for text contrast. */}
       <div aria-hidden="true" className="absolute inset-0 z-0">
         <Image
           src="/images/footer-cosmos.png"
@@ -49,7 +51,7 @@ export default function Footer() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#05040c]/50 via-[#05040c]/70 to-[#05040c]/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#332452] via-[#332452]/0 to-[#1d1336]/80" />
       </div>
       <div aria-hidden="true" className="cosmic-stars" />
 
