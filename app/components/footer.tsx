@@ -39,8 +39,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black py-10 border-t border-white/10">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="cosmic-footer py-10 border-t border-[#7f54dc]/30">
+      <div aria-hidden="true" className="cosmic-stars" />
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-10 sm:gap-16">
           {/* Navigate */}
           <nav aria-label="Footer">
@@ -99,7 +100,7 @@ export default function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 bg-[#7f54dc] border-2 border-black text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                    className="flex items-center justify-center w-10 h-10 bg-[#7f54dc] border-2 border-black text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:bg-[#9069e8] hover:shadow-[0_0_14px_2px_rgba(127,84,220,0.55)]"
                     aria-label={link.name}
                   >
                     <svg

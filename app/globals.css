@@ -569,3 +569,85 @@ textarea:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Galactic footer: a deep-space gradient base, a soft brand-purple nebula
+   glow, and two parallax starfields drawn with radial-gradients. Layers sit
+   behind the content (pointer-events: none) so links stay clickable.
+   --------------------------------------------------------------------------- */
+.cosmic-footer {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      120% 140% at 50% -20%,
+      rgba(127, 84, 220, 0.28) 0%,
+      rgba(51, 36, 82, 0.55) 32%,
+      rgba(7, 6, 16, 0.96) 70%,
+      #05040c 100%
+    );
+}
+
+/* Nebula bloom drifting across the top edge. */
+.cosmic-footer::before {
+  content: '';
+  position: absolute;
+  inset: -40% -10% auto -10%;
+  height: 160%;
+  background:
+    radial-gradient(40% 60% at 22% 30%, rgba(127, 84, 220, 0.35) 0%, transparent 60%),
+    radial-gradient(36% 54% at 80% 18%, rgba(86, 122, 246, 0.28) 0%, transparent 62%);
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 0;
+  animation: nebula-drift 26s ease-in-out infinite alternate;
+}
+
+/* Two star layers: small dense stars plus a few larger, brighter ones. */
+.cosmic-footer .cosmic-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(255, 255, 255, 0.9) 50%, transparent 51%),
+    radial-gradient(1px 1px at 28% 68%, rgba(255, 255, 255, 0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 44% 38%, rgba(255, 255, 255, 0.85) 50%, transparent 51%),
+    radial-gradient(1px 1px at 62% 14%, rgba(255, 255, 255, 0.65) 50%, transparent 51%),
+    radial-gradient(1px 1px at 73% 82%, rgba(255, 255, 255, 0.8) 50%, transparent 51%),
+    radial-gradient(1px 1px at 88% 46%, rgba(255, 255, 255, 0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 6% 88%, rgba(255, 255, 255, 0.6) 50%, transparent 51%),
+    radial-gradient(1px 1px at 54% 92%, rgba(255, 255, 255, 0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 36% 8%, rgba(255, 255, 255, 0.6) 50%, transparent 51%);
+  animation: stars-twinkle 5.5s ease-in-out infinite alternate;
+}
+
+.cosmic-footer .cosmic-stars::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.6px 1.6px at 18% 54%, rgba(207, 191, 255, 0.95) 50%, transparent 51%),
+    radial-gradient(1.6px 1.6px at 67% 36%, rgba(180, 205, 255, 0.9) 50%, transparent 51%),
+    radial-gradient(2px 2px at 84% 72%, rgba(255, 255, 255, 0.95) 50%, transparent 51%),
+    radial-gradient(1.6px 1.6px at 40% 76%, rgba(207, 191, 255, 0.85) 50%, transparent 51%);
+  animation: stars-twinkle 7s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes nebula-drift {
+  from {
+    transform: translate3d(-3%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, 2%, 0) scale(1.08);
+  }
+}
+
+@keyframes stars-twinkle {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
