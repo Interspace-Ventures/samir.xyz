@@ -45,7 +45,7 @@ export default function Footer() {
           of the page; the bottom deepens into dark purple for text contrast. */}
       <div aria-hidden="true" className="absolute inset-0 z-0">
         <Image
-          src="/images/footer-cosmos.png"
+          src="/images/footer-sky.png"
           alt=""
           fill
           sizes="100vw"
