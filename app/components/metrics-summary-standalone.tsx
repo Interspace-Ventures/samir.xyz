@@ -126,7 +126,7 @@ export default function MetricsSummaryStandalone() {
           value={summary.total_investments}
           index={0}
           {...buildChange(summary.total_investments, previousMetrics.total_investments, false)}
-          tooltip="Up from 43 last year. Four new investments added to the portfolio."
+          tooltip="New checks written since the last snapshot (Campus in '26, plus '25 adds like Replit, Hadrius, Highbeam, Grace) with none dropped. I count JuneShine and Sanzo as two checks each."
         />
 
         {/* Markups */}
@@ -135,7 +135,7 @@ export default function MetricsSummaryStandalone() {
           value={summary.markups}
           index={1}
           {...buildChange(summary.markups, previousMetrics.markups, false)}
-          tooltip="Down from 24. Some earlier markups have softened as valuations reset."
+          tooltip="Six names that had been paper markups slid to write-downs or back to cost over the year (Moku, Hedgehog, Juno, Superplastic among them)."
         />
 
         {/* Acquisitions */}
@@ -144,7 +144,7 @@ export default function MetricsSummaryStandalone() {
           value={summary.acquisitions}
           index={2}
           {...buildChange(summary.acquisitions, previousMetrics.acquisitions, false)}
-          tooltip="Unchanged from last year. Two companies have been acquired."
+          tooltip="Same two exits on the books (Sugar, Toucan). No new acquisitions this year."
         />
 
         {/* Busts */}
@@ -153,7 +153,7 @@ export default function MetricsSummaryStandalone() {
           value={summary.busts}
           index={3}
           {...buildChange(summary.busts, previousMetrics.busts, true)}
-          tooltip="Down from 9, though 3 more are currently dying."
+          tooltip="Three 2025 busts (Moku, Superplastic, CaliberX) were offset by you reviving Goodmylk, Lunar and The Food Company, plus I split the worst survivors into a separate 'dying' bucket rather than full bust."
         />
 
         {/* TVPI */}
@@ -162,7 +162,7 @@ export default function MetricsSummaryStandalone() {
           value={formatMultiple(summary.tvpi)}
           index={4}
           {...buildChange(summary.tvpi, previousMetrics.tvpi, false)}
-          tooltip="Down from 1.5x. Total value to paid-in has compressed this year."
+          tooltip="About $30k of 2025 write-downs (Moku, Juno, Hedgehog, Superplastic) outweighed the AI-name markups (Perplexity, Replit, Rely)."
         />
 
         {/* Gross MOIC */}
@@ -171,7 +171,7 @@ export default function MetricsSummaryStandalone() {
           value={formatMultiple(summary.gross_multiple)}
           index={5}
           {...buildChange(summary.gross_multiple, previousMetrics.gross_multiple, false)}
-          tooltip="Down from 1.7x after some marks were written down."
+          tooltip="Fell more than net because, with fewer gains left, there is less carry to add back, so gross and net converged."
         />
 
         {/* Net MOIC */}
@@ -180,7 +180,7 @@ export default function MetricsSummaryStandalone() {
           value={formatMultiple(summary.net_multiple)}
           index={6}
           {...buildChange(summary.net_multiple, previousMetrics.net_multiple, false)}
-          tooltip="Down from 1.5x after fees and write-downs."
+          tooltip="Same as TVPI. They are equal because you have had no material distributions (DPI is about 0)."
         />
 
         {/* IRR */}
@@ -189,7 +189,7 @@ export default function MetricsSummaryStandalone() {
           value={formatPercentage(summary.irr)}
           index={7}
           {...buildChange(summary.irr, previousMetrics.irr, false, 'points')}
-          tooltip="Down from 12%. Returns have slowed as holding periods extend."
+          tooltip="Write-downs hit recent value and a big slug of fresh 2025 capital sits at cost (1.0x), dragging the time-weighted return. The clock also advanced a year on flat positions."
         />
       </div>
     </div>

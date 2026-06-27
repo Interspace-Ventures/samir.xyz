@@ -71,7 +71,7 @@ export default function MetricCard({
         <div
           role="tooltip"
           id={tooltipId}
-          className="sl-solid pointer-events-none absolute left-1/2 top-full z-30 mt-3 w-56 max-w-[80vw] -translate-x-1/2 border-2 border-black bg-[#2a313a] p-3 text-left text-xs font-medium leading-snug text-white opacity-0 shadow-[4px_4px_0_0_rgba(0,0,0,0.45)] transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 group-focus:opacity-100"
+          className="sl-solid pointer-events-none absolute left-1/2 top-full z-30 mt-3 w-72 max-w-[85vw] -translate-x-1/2 border-2 border-black bg-[#2a313a] p-3 text-left text-xs font-medium leading-snug text-white opacity-0 shadow-[4px_4px_0_0_rgba(0,0,0,0.45)] transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 group-focus:opacity-100"
         >
           {change && (
             <span className={`mb-1 block text-[11px] font-bold uppercase tracking-wide ${changeColor}`}>
