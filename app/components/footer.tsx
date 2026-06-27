@@ -55,7 +55,7 @@ export default function Footer() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to bottom, #332452 0%, #332452 12%, rgba(51,36,82,0.78) 26%, rgba(51,36,82,0.4) 40%, rgba(51,36,82,0.12) 54%, rgba(51,36,82,0) 66%, rgba(24,16,44,0.5) 88%, rgba(24,16,44,0.85) 100%)',
+              'linear-gradient(to bottom, #332452 0%, #332452 8%, rgba(51,36,82,0.8) 20%, rgba(51,36,82,0.45) 33%, rgba(51,36,82,0.12) 47%, rgba(51,36,82,0) 62%, rgba(24,16,44,0.5) 86%, rgba(24,16,44,0.85) 100%)',
           }}
         />
       </div>
