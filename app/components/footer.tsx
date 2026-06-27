@@ -49,13 +49,19 @@ export default function Footer() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-top"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#332452] via-[#332452]/0 to-[#1d1336]/80" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to bottom, #332452 0%, #332452 12%, rgba(51,36,82,0.78) 26%, rgba(51,36,82,0.4) 40%, rgba(51,36,82,0.12) 54%, rgba(51,36,82,0) 66%, rgba(24,16,44,0.5) 88%, rgba(24,16,44,0.85) 100%)',
+          }}
+        />
       </div>
       <div aria-hidden="true" className="cosmic-stars" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-14">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr_1fr_1.3fr]">
           {/* Brand + social */}
           <div>
