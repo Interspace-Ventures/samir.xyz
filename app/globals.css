@@ -571,36 +571,14 @@ textarea:focus-visible {
 }
 
 /* ---------------------------------------------------------------------------
-   Galactic footer: a deep-space gradient base, a soft brand-purple nebula
-   glow, and two parallax starfields drawn with radial-gradients. Layers sit
-   behind the content (pointer-events: none) so links stay clickable.
+   Galactic footer: a painterly nebula photo provides the base scene; two
+   twinkling starfields (radial-gradients) drift on top for life. Decorative
+   layers sit behind the content (pointer-events: none) so links stay clickable.
    --------------------------------------------------------------------------- */
 .cosmic-footer {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(
-      120% 140% at 50% -20%,
-      rgba(127, 84, 220, 0.28) 0%,
-      rgba(51, 36, 82, 0.55) 32%,
-      rgba(7, 6, 16, 0.96) 70%,
-      #05040c 100%
-    );
-}
-
-/* Nebula bloom drifting across the top edge. */
-.cosmic-footer::before {
-  content: '';
-  position: absolute;
-  inset: -40% -10% auto -10%;
-  height: 160%;
-  background:
-    radial-gradient(40% 60% at 22% 30%, rgba(127, 84, 220, 0.35) 0%, transparent 60%),
-    radial-gradient(36% 54% at 80% 18%, rgba(86, 122, 246, 0.28) 0%, transparent 62%);
-  filter: blur(26px);
-  pointer-events: none;
-  z-index: 0;
-  animation: nebula-drift 26s ease-in-out infinite alternate;
+  background-color: #05040c;
 }
 
 /* Two star layers: small dense stars plus a few larger, brighter ones. */
@@ -632,15 +610,6 @@ textarea:focus-visible {
     radial-gradient(2px 2px at 84% 72%, rgba(255, 255, 255, 0.95) 50%, transparent 51%),
     radial-gradient(1.6px 1.6px at 40% 76%, rgba(207, 191, 255, 0.85) 50%, transparent 51%);
   animation: stars-twinkle 7s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes nebula-drift {
-  from {
-    transform: translate3d(-3%, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(4%, 2%, 0) scale(1.08);
-  }
 }
 
 @keyframes stars-twinkle {

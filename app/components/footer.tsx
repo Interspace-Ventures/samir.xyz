@@ -1,12 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import ChangelogDrawer from './changelog-drawer';
 
 const footerNav = [
-  { href: '/profile', label: 'Profile' },
+  { href: '/profile', label: 'About' },
   { href: '/', label: 'Advisory' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/ventures', label: 'Ventures' },
-  { href: 'https://posts.interspace.ventures', label: 'Interspace', external: true },
 ];
 
 const socialLinks = [
@@ -39,83 +39,132 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="cosmic-footer py-10 border-t border-[#7f54dc]/30">
+    <footer className="cosmic-footer border-t border-[#7f54dc]/30">
+      {/* Painterly nebula scene + readability overlay, behind all content. */}
+      <div aria-hidden="true" className="absolute inset-0 z-0">
+        <Image
+          src="/images/footer-cosmos.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#05040c]/50 via-[#05040c]/70 to-[#05040c]/95" />
+      </div>
       <div aria-hidden="true" className="cosmic-stars" />
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-10 sm:gap-16">
-          {/* Navigate */}
+
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr_1fr_1.3fr]">
+          {/* Brand + social */}
+          <div>
+            <Link href="/" className="inline-flex items-center gap-2">
+              <Image
+                src="/attached_assets/Interspace Square - 2025.png"
+                alt="Interspace Ventures logo"
+                width={28}
+                height={28}
+                className="rounded"
+              />
+              <span className="text-white font-bold text-lg tracking-tight">
+                Interspace Ventures
+              </span>
+            </Link>
+            <p className="mt-4 max-w-xs text-text-secondary text-sm leading-relaxed">
+              Operator-built strategic finance advisory, specialized in fintech.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-10 h-10 bg-[#7f54dc] border-2 border-black text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:bg-[#9069e8] hover:shadow-[0_0_14px_2px_rgba(127,84,220,0.55)]"
+                  aria-label={link.name}
+                >
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-4 h-4"
+                  >
+                    <path d={link.path} />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Explore */}
           <nav aria-label="Footer">
-            <ul className="flex flex-col gap-1.5">
+            <h3 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              Explore
+            </h3>
+            <ul className="flex flex-col gap-2.5">
               {footerNav.map((item) => (
                 <li key={item.href}>
-                  {item.external ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={linkClass}
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link href={item.href} className={linkClass} prefetch={true}>
-                      {item.label}
-                    </Link>
-                  )}
+                  <Link href={item.href} className={linkClass} prefetch={true}>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
 
-          {/* About + Connect stacked in the wider right column */}
-          <div className="flex flex-col gap-8">
-            <div className="text-text-secondary text-sm leading-relaxed">
-              &copy; {currentYear} <ChangelogDrawer />. Interspace Ventures is an{' '}
-              <a
-                href="https://interspace.ventures"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-[#7f54dc] transition-colors"
+          {/* Stay in touch */}
+          <div>
+            <h3 className="text-white font-bold text-xs uppercase tracking-wider mb-4">
+              Stay in touch
+            </h3>
+            <p className="mb-5 text-text-secondary text-sm leading-relaxed">
+              Over-engineered takes on fintech, stratfin, tech, AI and politics,
+              straight to your inbox.
+            </p>
+            <a
+              href="https://posts.interspace.ventures"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#7f54dc] border-2 border-black text-white font-bold text-sm uppercase tracking-wider px-4 py-2.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:bg-[#9069e8]"
+            >
+              Subscribe
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-4 h-4"
               >
-                Interspace Venture
-              </a>
-              . Built at the speed of thought with{' '}
-              <a
-                href="https://replit.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-[#7f54dc] transition-colors"
-              >
-                Replit
-              </a>
-              .
-            </div>
-
-            {/* Connect / social row */}
-            <div>
-              <div className="flex flex-wrap gap-3">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 bg-[#7f54dc] border-2 border-black text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:bg-[#9069e8] hover:shadow-[0_0_14px_2px_rgba(127,84,220,0.55)]"
-                    aria-label={link.name}
-                  >
-                    <svg
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path d={link.path} />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
           </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-12 pt-6 border-t border-white/10 text-text-secondary text-sm leading-relaxed">
+          &copy; {currentYear} <ChangelogDrawer />. Interspace Ventures is an{' '}
+          <a
+            href="https://interspace.ventures"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#7f54dc] transition-colors"
+          >
+            Interspace Venture
+          </a>
+          . Built at the speed of thought with{' '}
+          <a
+            href="https://replit.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#7f54dc] transition-colors"
+          >
+            Replit
+          </a>
+          .
         </div>
       </div>
     </footer>
