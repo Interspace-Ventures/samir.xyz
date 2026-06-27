@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import MetricCard from './metric-card';
-import { staticMetrics, PortfolioSummary } from '@/lib/static-metrics';
+import { staticMetrics, previousMetrics, PortfolioSummary } from '@/lib/static-metrics';
 
 /**
  * Standalone Portfolio Metrics Summary Component
@@ -39,26 +39,58 @@ export default function MetricsSummaryStandalone() {
     if (metricsData) {
       // Update with fresh data from API
       setSummary({
-        total_investments: metricsData.total_investments || staticMetrics.total_investments,
-        markups: metricsData.markups || staticMetrics.markups,
-        acquisitions: metricsData.acquisitions || staticMetrics.acquisitions,
-        busts: metricsData.busts || staticMetrics.busts,
-        tvpi: metricsData.tvpi || staticMetrics.tvpi,
-        gross_multiple: metricsData.gross_multiple || staticMetrics.gross_multiple,
-        net_multiple: metricsData.net_multiple || staticMetrics.net_multiple,
-        irr: metricsData.irr || staticMetrics.irr
+        total_investments: metricsData.total_investments ?? staticMetrics.total_investments,
+        markups: metricsData.markups ?? staticMetrics.markups,
+        acquisitions: metricsData.acquisitions ?? staticMetrics.acquisitions,
+        busts: metricsData.busts ?? staticMetrics.busts,
+        tvpi: metricsData.tvpi ?? staticMetrics.tvpi,
+        gross_multiple: metricsData.gross_multiple ?? staticMetrics.gross_multiple,
+        net_multiple: metricsData.net_multiple ?? staticMetrics.net_multiple,
+        irr: metricsData.irr ?? staticMetrics.irr
       });
     }
   }, [metricsData]);
 
-  // Format multiple with x suffix
+  // Format multiple with x suffix (up to 2 decimals, no trailing zeros)
   const formatMultiple = (multiple: number) => {
-    return `${multiple.toFixed(1)}x`;
+    return `${parseFloat(multiple.toFixed(2))}x`;
   };
   
   // Format percentage with % symbol
   const formatPercentage = (value: number) => {
     return `${value}%`;
+  };
+
+  // Build a year-over-year change descriptor for a metric. `lowerIsBetter`
+  // flips the semantic color (e.g. fewer busts is a good thing). `mode`
+  // controls whether the change reads as a relative percent or raw points
+  // (IRR is itself a percentage, so we show points there).
+  const buildChange = (
+    now: number,
+    prev: number,
+    lowerIsBetter: boolean,
+    mode: 'percent' | 'points' = 'percent'
+  ) => {
+    const diff = now - prev;
+    let text: string;
+    if (mode === 'points') {
+      const pts = parseFloat(diff.toFixed(1));
+      text = `${pts > 0 ? '+' : ''}${pts} pts`;
+    } else {
+      const pct = prev === 0 ? 0 : parseFloat(((diff / prev) * 100).toFixed(1));
+      text = `${pct > 0 ? '+' : ''}${pct}%`;
+    }
+
+    const direction: 'up' | 'down' | 'flat' =
+      diff > 0 ? 'up' : diff < 0 ? 'down' : 'flat';
+
+    let changeType: 'positive' | 'negative' | 'neutral' = 'neutral';
+    if (diff !== 0) {
+      const improved = lowerIsBetter ? diff < 0 : diff > 0;
+      changeType = improved ? 'positive' : 'negative';
+    }
+
+    return { change: text, direction, changeType };
   };
   
   if (error || !summary) {
@@ -89,28 +121,76 @@ export default function MetricsSummaryStandalone() {
       {/* Metrics Grid - Ensuring 4 per row on medium screens for most viewports */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
         {/* Total Investments */}
-        <MetricCard label="Investments" value={summary.total_investments} index={0} />
-        
+        <MetricCard
+          label="Investments"
+          value={summary.total_investments}
+          index={0}
+          {...buildChange(summary.total_investments, previousMetrics.total_investments, false)}
+          tooltip="Up from 43 last year. Four new investments added to the portfolio."
+        />
+
         {/* Markups */}
-        <MetricCard label="Markups" value={summary.markups} index={1} />
-        
+        <MetricCard
+          label="Markups"
+          value={summary.markups}
+          index={1}
+          {...buildChange(summary.markups, previousMetrics.markups, false)}
+          tooltip="Down from 24. Some earlier markups have softened as valuations reset."
+        />
+
         {/* Acquisitions */}
-        <MetricCard label="Acquired" value={summary.acquisitions} index={2} />
-        
+        <MetricCard
+          label="Acquired"
+          value={summary.acquisitions}
+          index={2}
+          {...buildChange(summary.acquisitions, previousMetrics.acquisitions, false)}
+          tooltip="Unchanged from last year. Two companies have been acquired."
+        />
+
         {/* Busts */}
-        <MetricCard label="Busts" value={summary.busts} index={3} />
-        
+        <MetricCard
+          label="Busts"
+          value={summary.busts}
+          index={3}
+          {...buildChange(summary.busts, previousMetrics.busts, true)}
+          tooltip="Down from 9, though 3 more are currently dying."
+        />
+
         {/* TVPI */}
-        <MetricCard label="TVPI" value={formatMultiple(summary.tvpi)} index={4} />
-        
+        <MetricCard
+          label="TVPI"
+          value={formatMultiple(summary.tvpi)}
+          index={4}
+          {...buildChange(summary.tvpi, previousMetrics.tvpi, false)}
+          tooltip="Down from 1.5x. Total value to paid-in has compressed this year."
+        />
+
         {/* Gross MOIC */}
-        <MetricCard label="Gross MOIC" value={formatMultiple(summary.gross_multiple)} index={5} />
-        
+        <MetricCard
+          label="Gross MOIC"
+          value={formatMultiple(summary.gross_multiple)}
+          index={5}
+          {...buildChange(summary.gross_multiple, previousMetrics.gross_multiple, false)}
+          tooltip="Down from 1.7x after some marks were written down."
+        />
+
         {/* Net MOIC */}
-        <MetricCard label="Net MOIC" value={formatMultiple(summary.net_multiple)} index={6} />
-        
+        <MetricCard
+          label="Net MOIC"
+          value={formatMultiple(summary.net_multiple)}
+          index={6}
+          {...buildChange(summary.net_multiple, previousMetrics.net_multiple, false)}
+          tooltip="Down from 1.5x after fees and write-downs."
+        />
+
         {/* IRR */}
-        <MetricCard label="IRR" value={formatPercentage(summary.irr)} index={7} />
+        <MetricCard
+          label="IRR"
+          value={formatPercentage(summary.irr)}
+          index={7}
+          {...buildChange(summary.irr, previousMetrics.irr, false, 'points')}
+          tooltip="Down from 12%. Returns have slowed as holding periods extend."
+        />
       </div>
     </div>
   );

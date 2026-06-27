@@ -23,6 +23,21 @@ export type PortfolioSummary = {
  * This allows for instant rendering of metrics before API data is fetched
  */
 export const staticMetrics: PortfolioSummary = {
+  total_investments: 47,
+  markups: 18,
+  acquisitions: 2,
+  busts: 7,
+  tvpi: 1.35,
+  gross_multiple: 1.41,
+  net_multiple: 1.35,
+  irr: 7.5
+};
+
+/**
+ * Last year's figures, kept so the UI can show the year-over-year change next
+ * to each headline metric. These are a fixed historical snapshot, not derived.
+ */
+export const previousMetrics: PortfolioSummary = {
   total_investments: 43,
   markups: 24,
   acquisitions: 2,
