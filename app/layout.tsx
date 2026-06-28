@@ -4,6 +4,7 @@ import { Alexandria } from 'next/font/google';
 import Providers from './providers';
 import Navigation from './components/navigation';
 import Footer from './components/footer';
+import { featureFlags } from './lib/feature-flags';
 
 const alexandria = Alexandria({
   subsets: ['latin'],
@@ -31,7 +32,7 @@ export default function RootLayout({
         <Providers>
           <Navigation />
           <main className="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">{children}</main>
-          <Footer />
+          {featureFlags.showFooter && <Footer />}
         </Providers>
       </body>
     </html>

@@ -15,3 +15,12 @@ export const FEATURE_TESTIMONIALS = envFlag(
   process.env.NEXT_PUBLIC_FEATURE_TESTIMONIALS,
   false
 );
+
+/**
+ * Grouped flags. Kept deliberately simple (plain booleans) so they are easy to
+ * toggle while a design is still being worked out.
+ */
+export const featureFlags = {
+  // Footer is hidden for now while the design is still being figured out.
+  showFooter: false,
+} as const;
