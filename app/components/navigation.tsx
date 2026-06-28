@@ -106,7 +106,7 @@ const Navigation = () => {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white font-bold text-[clamp(0.6rem,1.3vw,0.75rem)] uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
+                        className="inline-flex items-center gap-1 text-white font-bold text-[clamp(0.6rem,1.3vw,0.75rem)] uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc] no-underline hover:no-underline"
                       >
                         {item.label}
                         <ExternalLink className="w-3 h-3" aria-hidden="true" />
@@ -114,7 +114,7 @@ const Navigation = () => {
                     ) : (
                       <Link 
                         href={item.href}
-                        className={`relative inline-block font-bold text-[clamp(0.6rem,1.3vw,0.75rem)] uppercase tracking-wider transition-colors duration-200 ${isActive(item.href) ? 'text-[#7f54dc]' : 'text-white hover:text-[#7f54dc]'}`}
+                        className={`relative inline-block font-bold text-[clamp(0.6rem,1.3vw,0.75rem)] uppercase tracking-wider transition-colors duration-200 no-underline hover:no-underline ${isActive(item.href) ? 'text-[#7f54dc]' : 'text-white hover:text-[#7f54dc]'}`}
                         aria-current={isActive(item.href) ? 'page' : undefined}
                         prefetch={true}
                       >
@@ -172,7 +172,7 @@ const Navigation = () => {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
+                        className="inline-flex items-center gap-3 text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200 no-underline hover:no-underline"
                         onClick={closeMobileMenu}
                       >
                         <item.icon className="w-6 h-6 text-white" aria-hidden="true" />
@@ -182,7 +182,7 @@ const Navigation = () => {
                     ) : (
                       <Link 
                         href={item.href} 
-                        className={`inline-flex items-center gap-3 text-2xl font-bold uppercase tracking-wide transition-colors duration-200 ${isActive(item.href) ? 'text-[#7f54dc]' : 'text-white hover:text-[#7f54dc]'}`}
+                        className={`inline-flex items-center gap-3 text-2xl font-bold uppercase tracking-wide transition-colors duration-200 no-underline hover:no-underline ${isActive(item.href) ? 'text-[#7f54dc]' : 'text-white hover:text-[#7f54dc]'}`}
                         onClick={closeMobileMenu}
                         aria-current={isActive(item.href) ? 'page' : undefined}
                         prefetch={true}
