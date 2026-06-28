@@ -30,7 +30,7 @@ export default function VenturesContent({ ventures }: { ventures: Venture[] }) {
           </div>
 
           {ventures && ventures.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 w-full">
               {ventures.map((venture) => (
                 <div
                   key={venture.id}

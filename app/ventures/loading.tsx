@@ -18,8 +18,8 @@ export default function VenturesLoading() {
           </div>
           
           {/* Ventures grid skeleton */}
-          <div className="grid grid-cols-4 gap-6 max-sm:grid-cols-2">
-            {Array.from({ length: 8 }).map((_, index) => (
+          <div className="grid grid-cols-3 gap-6 max-sm:grid-cols-2">
+            {Array.from({ length: 5 }).map((_, index) => (
               <div key={index} className="relative aspect-square neo-card bg-purple-400 animate-pulse"></div>
             ))}
           </div>
