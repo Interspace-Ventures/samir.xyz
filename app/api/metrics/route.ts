@@ -1,28 +1,15 @@
 /**
  * Portfolio Metrics API Route
  *
- * Returns the headline portfolio figures. Curated numbers that cannot be
- * derived from the database (TVPI, MOIC, IRR, etc.) come from a single source
- * of truth in `app/lib/static-metrics.ts`; the acquisition count is derived
- * live from the database.
+ * Returns the headline portfolio figures. These are curated business numbers
+ * (TVPI, MOIC, IRR, totals, markups, busts, acquisitions) that cannot be
+ * reliably derived from the database, so they live in a single source of truth
+ * at `app/lib/static-metrics.ts`. This route just returns them.
  */
 
-import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { staticMetrics } from '../../lib/static-metrics';
 
 export async function GET() {
-  try {
-    const acquisitions = await prisma.portfolio.count({
-      where: { investment_status: { in: ['Acquired', 'Exited'] } },
-    });
-
-    return NextResponse.json({ ...staticMetrics, acquisitions });
-  } catch (error) {
-    console.error('Error fetching metrics summary:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch metrics data' },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json(staticMetrics);
 }

@@ -25,7 +25,7 @@ export type PortfolioSummary = {
 export const staticMetrics: PortfolioSummary = {
   total_investments: 47,
   markups: 18,
-  acquisitions: 2,
+  acquisitions: 3,
   busts: 7,
   tvpi: 1.35,
   gross_multiple: 1.41,

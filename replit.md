@@ -62,9 +62,11 @@ appear on every page. The footer includes a slide-up changelog drawer.
 ## Important Conventions and Gotchas
 
 - **Metrics single source of truth**: curated headline figures (TVPI, MOIC, IRR,
-  totals, markups, busts) are NOT DB-derivable and live only in
-  `app/lib/static-metrics.ts`. `/api/metrics` spreads that and derives only the
-  acquisitions count live from the DB. Do not re-hardcode metric values.
+  totals, markups, busts, acquisitions) are NOT DB-derivable and live only in
+  `app/lib/static-metrics.ts`. `/api/metrics` just returns that. (Acquisitions
+  used to be counted live from the DB, but that undercounted real exits like
+  Toucan that are not portfolio rows, so it is curated now.) Do not re-hardcode
+  metric values or reintroduce the live acquisitions count.
 - **Portfolio visibility**: companies are filtered in JS, not SQL. A SQL
   `NOT investment_status = 'Bust'` filter silently drops NULL-status rows, so the
   route fetches all rows and filters out hidden companies and busts in code.

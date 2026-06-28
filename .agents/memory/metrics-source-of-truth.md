@@ -8,8 +8,10 @@ markups, busts) are curated business numbers that cannot be derived from the
 database. They live in ONE place: `app/lib/static-metrics.ts`.
 
 - The frontend imports `staticMetrics` for instant render.
-- `app/api/metrics/route.ts` spreads `staticMetrics` and only the `acquisitions`
-  count is derived live from the DB (prisma count of status in Acquired/Exited).
+- `app/api/metrics/route.ts` just returns `staticMetrics`. (Acquisitions USED to
+  be derived live from the DB via a prisma count of status in Acquired/Exited,
+  but that undercounted: real exits like Toucan are not portfolio rows, so the
+  count is now curated alongside the rest. Don't reintroduce the live count.)
 
 **Why:** these values were previously duplicated (hardcoded both in the metrics
 API route and in static-metrics), so they drifted. Keeping them in one module

@@ -144,7 +144,7 @@ export default function MetricsSummaryStandalone() {
           value={summary.acquisitions}
           index={2}
           {...buildChange(summary.acquisitions, previousMetrics.acquisitions, false)}
-          tooltip="Same two exits on the books (Sugar, Toucan). No new acquisitions this year."
+          tooltip="RPM Training joined Sugar and Toucan on the exits list, bringing the total to three."
         />
 
         {/* Busts */}
