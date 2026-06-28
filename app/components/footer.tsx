@@ -40,12 +40,14 @@ export default function Footer() {
 
   return (
     <footer className="cosmic-footer">
-      {/* Painterly nebula scene + readability overlay, behind all content. The
-          top blends from the page background (#332452) so the footer grows out
-          of the page; the bottom deepens into dark purple for text contrast. */}
-      <div aria-hidden="true" className="absolute inset-0 z-0">
+      {/* Painterly cloud scene + readability overlay, behind all content. Full
+          width Ghibli clouds sit right at the top edge; a page-colored fade holds
+          the body background (#332452) at the very top and dissolves it into the
+          cloud tops, so the page flows seamlessly into the footer. The bottom
+          deepens into dark purple for text contrast. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <Image
-          src="/images/footer-sky.png"
+          src="/images/footer-clouds-top.png"
           alt=""
           fill
           sizes="100vw"
@@ -55,7 +57,7 @@ export default function Footer() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to bottom, #332452 0%, #332452 8%, rgba(51,36,82,0.8) 20%, rgba(51,36,82,0.45) 33%, rgba(51,36,82,0.12) 47%, rgba(51,36,82,0) 62%, rgba(24,16,44,0.5) 86%, rgba(24,16,44,0.85) 100%)',
+              'linear-gradient(to bottom, #332452 0%, rgba(51,36,82,0.9) 9%, rgba(51,36,82,0.5) 20%, rgba(51,36,82,0.15) 33%, rgba(51,36,82,0) 48%, rgba(24,16,44,0.5) 85%, rgba(24,16,44,0.85) 100%)',
           }}
         />
       </div>
