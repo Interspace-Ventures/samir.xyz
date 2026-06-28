@@ -53,7 +53,16 @@ const packages = [
 export default function AdvisoryPackages({ onSelect }: AdvisoryPackagesProps) {
   return (
     <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-bold text-white mb-8">Toolkit</h2>
+      <h2 className="text-3xl font-bold text-white mb-4">Toolkit</h2>
+
+      <p className="text-sm lg:text-base text-white/70 leading-relaxed mb-8 max-w-3xl">
+        We start with a call to get the initial context, set goals, and figure out
+        the toolkit that makes sense, how often we interact, the deliverables, and
+        pricing. I price on a 10x ROI basis, so if I charge $5K it is because I
+        think you will get at least $50K of value from the project. I am open to
+        project-based, outcome-driven, and ongoing engagements depending on what the
+        project needs.
+      </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-5">
         {packages.map((pkg, index) => {
