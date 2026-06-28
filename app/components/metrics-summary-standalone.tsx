@@ -74,10 +74,10 @@ export default function MetricsSummaryStandalone() {
     const diff = now - prev;
     let text: string;
     if (mode === 'points') {
-      const pts = parseFloat(diff.toFixed(1));
+      const pts = parseFloat(diff.toFixed(0));
       text = `${pts > 0 ? '+' : ''}${pts} pts`;
     } else {
-      const pct = prev === 0 ? 0 : parseFloat(((diff / prev) * 100).toFixed(1));
+      const pct = prev === 0 ? 0 : parseFloat(((diff / prev) * 100).toFixed(0));
       text = `${pct > 0 ? '+' : ''}${pct}%`;
     }
 
@@ -135,7 +135,7 @@ export default function MetricsSummaryStandalone() {
           value={summary.markups}
           index={1}
           {...buildChange(summary.markups, previousMetrics.markups, false)}
-          tooltip="Six names that had been paper markups slid to write-downs or back to cost over the year (Moku, Hedgehog, Juno, Superplastic among them)."
+          tooltip="Six names that had been paper markups slid to write-downs or back to cost over the year."
         />
 
         {/* Acquisitions */}
@@ -153,7 +153,7 @@ export default function MetricsSummaryStandalone() {
           value={summary.busts}
           index={3}
           {...buildChange(summary.busts, previousMetrics.busts, true)}
-          tooltip="Three 2025 busts (Moku, Superplastic, CaliberX) were offset by you reviving Goodmylk, Lunar and The Food Company, plus I split the worst survivors into a separate 'dying' bucket rather than full bust."
+          tooltip="Three 2025 busts were offset by a few names I revived, plus I split the worst survivors into a separate 'dying' bucket rather than full bust."
         />
 
         {/* TVPI */}
@@ -162,7 +162,7 @@ export default function MetricsSummaryStandalone() {
           value={formatMultiple(summary.tvpi)}
           index={4}
           {...buildChange(summary.tvpi, previousMetrics.tvpi, false)}
-          tooltip="About $30k of 2025 write-downs (Moku, Juno, Hedgehog, Superplastic) outweighed the AI-name markups (Perplexity, Replit, Rely)."
+          tooltip="About $30k of 2025 write-downs outweighed the AI-name markups."
         />
 
         {/* Gross MOIC */}
@@ -180,7 +180,7 @@ export default function MetricsSummaryStandalone() {
           value={formatMultiple(summary.net_multiple)}
           index={6}
           {...buildChange(summary.net_multiple, previousMetrics.net_multiple, false)}
-          tooltip="Same as TVPI. They are equal because you have had no material distributions (DPI is about 0)."
+          tooltip="Same as TVPI. They are equal because I have had no material distributions (DPI is about 0)."
         />
 
         {/* IRR */}
@@ -189,7 +189,7 @@ export default function MetricsSummaryStandalone() {
           value={formatPercentage(summary.irr)}
           index={7}
           {...buildChange(summary.irr, previousMetrics.irr, false, 'points')}
-          tooltip="Write-downs hit recent value and a big slug of fresh 2025 capital sits at cost (1.0x), dragging the time-weighted return. The clock also advanced a year on flat positions."
+          tooltip="Write-downs hit recent value and a big slug of fresh 2025 capital sits at cost (1x), dragging the time-weighted return. The clock also advanced a year on flat positions."
         />
       </div>
     </div>

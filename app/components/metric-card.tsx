@@ -23,16 +23,12 @@ export default function MetricCard({
   value,
   index = 0,
   change,
-  changeType = 'neutral',
   direction = 'flat',
   tooltip,
 }: MetricCardProps) {
-  const changeColor =
-    changeType === 'positive'
-      ? 'text-emerald-200'
-      : changeType === 'negative'
-        ? 'text-rose-200'
-        : 'text-white/70';
+  // Change badges are intentionally uncolored (always white), regardless of
+  // whether the year-over-year move was good or bad.
+  const changeColor = 'text-white';
 
   const Arrow =
     direction === 'up' ? ArrowUpRight : direction === 'down' ? ArrowDownRight : Minus;
@@ -55,7 +51,7 @@ export default function MetricCard({
       <div className="text-[11px] sm:text-xs text-white/80 mb-2 font-bold uppercase tracking-wide whitespace-nowrap">
         {label}
       </div>
-      <div className="flex items-end justify-between gap-2">
+      <div className="flex items-baseline justify-between gap-2">
         <div className="text-xl sm:text-2xl font-bold text-white">{value}</div>
         {change && (
           <div
