@@ -4,12 +4,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X, ExternalLink, User, Handshake, Briefcase, Rocket, Newspaper } from 'lucide-react';
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href.startsWith('http')) return false;
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
   
   const backgroundColor = useTransform(
     scrollY,
@@ -105,10 +114,17 @@ const Navigation = () => {
                     ) : (
                       <Link 
                         href={item.href}
-                        className="text-white font-bold text-[clamp(0.6rem,1.3vw,0.75rem)] uppercase tracking-wider transition-colors duration-200 hover:text-[#7f54dc]"
+                        className={`relative inline-block font-bold text-[clamp(0.6rem,1.3vw,0.75rem)] uppercase tracking-wider transition-colors duration-200 ${isActive(item.href) ? 'text-[#7f54dc]' : 'text-white hover:text-[#7f54dc]'}`}
+                        aria-current={isActive(item.href) ? 'page' : undefined}
                         prefetch={true}
                       >
                         {item.label}
+                        {isActive(item.href) && (
+                          <span
+                            aria-hidden="true"
+                            className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#7f54dc]"
+                          />
+                        )}
                       </Link>
                     )}
                   </li>
@@ -166,11 +182,12 @@ const Navigation = () => {
                     ) : (
                       <Link 
                         href={item.href} 
-                        className="inline-flex items-center gap-3 text-white text-2xl font-bold uppercase tracking-wide hover:text-[#7f54dc] transition-colors duration-200"
+                        className={`inline-flex items-center gap-3 text-2xl font-bold uppercase tracking-wide transition-colors duration-200 ${isActive(item.href) ? 'text-[#7f54dc]' : 'text-white hover:text-[#7f54dc]'}`}
                         onClick={closeMobileMenu}
+                        aria-current={isActive(item.href) ? 'page' : undefined}
                         prefetch={true}
                       >
-                        <item.icon className="w-6 h-6 text-white" aria-hidden="true" />
+                        <item.icon className={`w-6 h-6 ${isActive(item.href) ? 'text-[#7f54dc]' : 'text-white'}`} aria-hidden="true" />
                         {item.label}
                       </Link>
                     )}
